@@ -88,9 +88,10 @@ export class SpatialCanvas3D {
       topLight.position.set(0, 25, 10);
       this.scene.add(topLight);
 
-      // 5. Root Transform Group
+      // 5. Root Transform Group (Deep Background Placement)
       this.rootGroup = new THREE.Group();
       this.scene.add(this.rootGroup);
+      this.updateRootGroupPosition();
 
       // Build Sculptures
       this.buildParticleMonogram();
@@ -414,53 +415,39 @@ export class SpatialCanvas3D {
       const angle = (i / count) * Math.PI * 2;
       const x = Math.cos(angle) * radius;
       const z = Math.sin(angle) * radius;
-      const y = Math.sin(angle * 2.0) * 2.2;
+      const y = Math.sin(angle * 2.0) * 1.8;
 
       const group = new THREE.Group();
       group.position.set(x, y, z);
 
-      // Polished gold & titanium pearl bead
-      const beadGeo = new THREE.SphereGeometry(0.85, 24, 24);
+      // Delicate gold & titanium ambient pearl bead (purely ambient, zero text overlap)
+      const beadGeo = new THREE.SphereGeometry(0.42, 16, 16);
       const beadMat = new THREE.MeshStandardMaterial({
         color: 0xd4af37,
         metalness: 0.95,
-        roughness: 0.15,
-        emissive: 0x443510,
-        emissiveIntensity: 0.6,
+        roughness: 0.25,
+        emissive: 0x221808,
+        emissiveIntensity: 0.4,
       });
       const pearl = new THREE.Mesh(beadGeo, beadMat);
       group.add(pearl);
 
       // Outer delicate hairline halo
-      const haloGeo = new THREE.TorusGeometry(1.35, 0.03, 16, 48);
+      const haloGeo = new THREE.TorusGeometry(0.72, 0.02, 12, 32);
       const haloMat = new THREE.MeshBasicMaterial({
         color: 0xfff0c8,
         transparent: true,
-        opacity: 0.65,
+        opacity: 0.35,
       });
       const halo = new THREE.Mesh(haloGeo, haloMat);
       halo.rotation.x = Math.PI / 2;
       group.add(halo);
-
-      // Invisible hit target
-      const hitGeo = new THREE.SphereGeometry(2.5, 8, 8);
-      const hitMat = new THREE.MeshBasicMaterial({ visible: false });
-      const hitBox = new THREE.Mesh(hitGeo, hitMat);
-      hitBox.userData = { index: i, discipline: disc };
-      group.add(hitBox);
-
-      // Ultra-clean Swiss typographic label
-      const sprite = this.createLuxuryNodeSprite(disc.number, disc.title);
-      sprite.position.set(0, 2.5, 0);
-      group.add(sprite);
 
       this.rootGroup.add(group);
       this.pillarNodes.push({
         group,
         pearl,
         halo,
-        sprite,
-        hitBox,
         disc,
         basePos: new THREE.Vector3(x, y, z),
         angle,
@@ -468,97 +455,48 @@ export class SpatialCanvas3D {
     });
   }
 
-  createLuxuryNodeSprite(number, text) {
-    const canvas = document.createElement('canvas');
-    canvas.width = 512;
-    canvas.height = 120;
-    const ctx = canvas.getContext('2d');
-
-    // Minimalist solid dark pill
-    ctx.fillStyle = 'rgba(7, 7, 10, 0.90)';
-    ctx.roundRect(8, 8, 496, 104, 18);
-    ctx.fill();
-
-    // Delicate gold hairline border
-    ctx.strokeStyle = 'rgba(212, 175, 55, 0.55)';
-    ctx.lineWidth = 2.5;
-    ctx.roundRect(8, 8, 496, 104, 18);
-    ctx.stroke();
-
-    // Refined typography
-    ctx.font = '600 32px "Plus Jakarta Sans", sans-serif';
-    ctx.fillStyle = '#f5f5f7';
-    ctx.fillText(`${number} · ${text}`, 30, 68);
-
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.minFilter = THREE.LinearFilter;
-    const material = new THREE.SpriteMaterial({
-      map: texture,
-      transparent: true,
-      depthWrite: false,
-    });
-    const sprite = new THREE.Sprite(material);
-    sprite.scale.set(6.8, 1.6, 1);
-    return sprite;
+  // ─────────────────────────────────────────────────────────────
+  // Deep Background Layer Positioning (Prevents Any UI Overlap)
+  // ─────────────────────────────────────────────────────────────
+  updateRootGroupPosition() {
+    if (!this.rootGroup) return;
+    const isDesktop = (window.innerWidth || this.width) >= 1024;
+    if (isDesktop) {
+      // Offset 3D sculpture to the open right half on desktop to avoid text columns
+      this.rootGroup.position.set(13.5, 0, -8);
+      this.rootGroup.scale.set(1.0, 1.0, 1.0);
+    } else {
+      // Keep deep in background on mobile/tablet so text remains 100% legible
+      this.rootGroup.position.set(0, -6, -14);
+      this.rootGroup.scale.set(0.65, 0.65, 0.65);
+    }
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Event Listeners & Interaction Handling
+  // Event Listeners & Interaction Handling (Passive Background Tracking)
   // ─────────────────────────────────────────────────────────────
   bindEvents() {
-    const el = this.container;
-
     const onPointerMove = (e) => {
-      const rect = el.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-      this.pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
-      this.pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+      this.pointer.x = (clientX / window.innerWidth) * 2 - 1;
+      this.pointer.y = -(clientY / window.innerHeight) * 2 + 1;
 
-      this.pointerTarget.set(this.pointer.x * 22, this.pointer.y * 14);
-
-      if (this.isDragging) {
-        const deltaX = clientX - this.dragStart.x;
-        const deltaY = clientY - this.dragStart.y;
-        this.targetWorldRotation.y += deltaX * 0.004;
-        this.targetWorldRotation.x += deltaY * 0.004;
-        this.dragStart.x = clientX;
-        this.dragStart.y = clientY;
-      }
-    };
-
-    const onPointerDown = (e) => {
-      this.isDragging = true;
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      this.dragStart.x = clientX;
-      this.dragStart.y = clientY;
-    };
-
-    const onPointerUp = () => {
-      if (this.isDragging) {
-        this.checkRaycastClick();
-      }
-      this.isDragging = false;
+      this.pointerTarget.set(this.pointer.x * 18, this.pointer.y * 12);
     };
 
     window.addEventListener('mousemove', onPointerMove, { passive: true });
     window.addEventListener('touchmove', onPointerMove, { passive: true });
 
-    el.addEventListener('mousedown', onPointerDown);
-    el.addEventListener('touchstart', onPointerDown, { passive: true });
-
-    window.addEventListener('mouseup', onPointerUp);
-    window.addEventListener('touchend', onPointerUp);
-
     window.addEventListener('resize', () => {
       if (!this.renderer || !this.camera) return;
-      this.width = el.clientWidth || window.innerWidth;
-      this.height = el.clientHeight || window.innerHeight;
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
       this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(this.width, this.height);
+      this.updateRootGroupPosition();
       if (this.monogramMesh) {
         this.monogramMesh.material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio || 1, 2);
       }
@@ -571,18 +509,7 @@ export class SpatialCanvas3D {
   }
 
   checkRaycastClick() {
-    if (!this.camera || !this.pillarNodes) return;
-    this.raycaster.setFromCamera(this.pointer, this.camera);
-    const hitBoxes = this.pillarNodes.map((n) => n.hitBox);
-    const intersects = this.raycaster.intersectObjects(hitBoxes);
-
-    if (intersects.length > 0) {
-      const data = intersects[0].object.userData;
-      audio.chime(data.index);
-      if (this.onSelectDiscipline) {
-        this.onSelectDiscipline(data.discipline);
-      }
-    }
+    // Disabled on background canvas to prevent accidental modal popups or click collisions
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -656,31 +583,10 @@ export class SpatialCanvas3D {
       this.dustMesh.rotation.y = elapsedTime * 0.03;
     }
 
-    // Interactive Hover on Pillars
-    this.raycaster.setFromCamera(this.pointer, this.camera);
-    const hitBoxes = this.pillarNodes.map((n) => n.hitBox);
-    const intersects = this.raycaster.intersectObjects(hitBoxes);
-    const activeIndex = intersects.length > 0 ? intersects[0].object.userData.index : -1;
-
-    if (activeIndex !== this.hoveredNodeIndex) {
-      if (activeIndex !== -1) audio.click(1800, 0.015);
-      this.hoveredNodeIndex = activeIndex;
-    }
-
+    // Subtle ambient animation on orbital pearls (zero UI collision)
     this.pillarNodes.forEach((node, i) => {
-      const isHovered = i === this.hoveredNodeIndex;
-      node.halo.rotation.z += 0.02;
-
-      const targetScale = isHovered ? 1.55 : 1.0;
-      node.group.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.15);
-
-      node.pearl.material.emissiveIntensity = THREE.MathUtils.lerp(
-        node.pearl.material.emissiveIntensity,
-        isHovered ? 2.2 : 0.6,
-        0.15
-      );
-
-      node.group.position.y = node.basePos.y + Math.sin(elapsedTime * 1.8 + i) * 0.45;
+      node.halo.rotation.z += 0.015;
+      node.group.position.y = node.basePos.y + Math.sin(elapsedTime * 1.6 + i) * 0.35;
     });
 
     this.renderer.render(this.scene, this.camera);
