@@ -311,6 +311,8 @@ body:not([data-view="core"]) .webgl-canvas-layer {
   background: rgba(74, 222, 128, 0.08);
   border: 1px solid rgba(74, 222, 128, 0.25);
   border-radius: var(--radius-pill);
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .status-pulse-dot {
@@ -320,6 +322,7 @@ body:not([data-view="core"]) .webgl-canvas-layer {
   background: var(--accent-green);
   box-shadow: 0 0 10px var(--accent-green);
   animation: pulseSubtle 2.2s infinite ease-in-out;
+  flex-shrink: 0;
 }
 
 @keyframes pulseSubtle {
@@ -333,6 +336,7 @@ body:not([data-view="core"]) .webgl-canvas-layer {
   letter-spacing: 0.04em;
   color: var(--accent-green);
   font-weight: 500;
+  white-space: nowrap !important;
 }
 
 .hud-action-btn {
@@ -348,6 +352,8 @@ body:not([data-view="core"]) .webgl-canvas-layer {
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
   transition: all var(--duration-fast) var(--ease-luxury);
 }
 
@@ -464,21 +470,21 @@ body:not([data-view="core"]) .webgl-canvas-layer {
   margin: 0 auto;
   padding: 32px 0 60px;
   position: relative;
-  z-index: 2;
+  z-index: 10;
 }
 
 /* Protective readability scrim behind hero typography */
 .hero-editorial-container::before {
   content: '';
   position: absolute;
-  top: -20px;
-  left: -28px;
-  right: -28px;
-  bottom: -20px;
-  background: radial-gradient(ellipse at 25% 30%, rgba(5, 5, 7, 0.88) 0%, rgba(5, 5, 7, 0.65) 50%, transparent 85%);
+  top: -40px;
+  left: -48px;
+  right: -48px;
+  bottom: -40px;
+  background: radial-gradient(ellipse at 25% 35%, rgba(5, 5, 7, 0.98) 0%, rgba(5, 5, 7, 0.92) 55%, rgba(5, 5, 7, 0.5) 80%, transparent 100%);
   pointer-events: none;
-  z-index: 0;
-  border-radius: 32px;
+  z-index: -1;
+  border-radius: 40px;
 }
 
 .hero-kicker-row,
@@ -2088,8 +2094,17 @@ body.tesla-mode .hud-action-btn {
 /* ─────────────────────────────────────────────────────────────
    Responsive Breakpoints
    ───────────────────────────────────────────────────────────── */
+@media (max-width: 1440px) {
+  .brand-role {
+    display: none;
+  }
+}
+
 @media (max-width: 1340px) {
   .availability-pill {
+    display: none !important;
+  }
+  .pr-roots-btn .pr-geo-coords {
     display: none;
   }
 }
@@ -2102,15 +2117,18 @@ body.tesla-mode .hud-action-btn {
     padding: 6px 10px;
     font-size: 12px;
   }
+  #btn-tesla-mode .btn-text {
+    display: none;
+  }
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1080px) {
   .header-center-nav {
-    display: none;
+    display: none !important;
   }
 
   .mobile-dock {
-    display: flex;
+    display: flex !important;
   }
 
   .main-viewport {

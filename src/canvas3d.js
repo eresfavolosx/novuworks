@@ -369,23 +369,24 @@ export class SpatialCanvas3D {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Ambient Cosmic Dust (Subtle Depth & Luxury Atmosphere)
+  // Ambient Cosmic Dust (Subtle Depth & Luxury Atmosphere, Deep Z)
   // ─────────────────────────────────────────────────────────────
   buildAmbientDust() {
-    const COUNT = 450;
+    const COUNT = 320;
     const pos = new Float32Array(COUNT * 3);
     for (let i = 0; i < COUNT; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 80;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 50;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 50;
+      pos[i * 3] = (Math.random() - 0.5) * 60;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 40;
+      // Strictly placed behind the text plane (z < -14) so zero particles ever overlap text
+      pos[i * 3 + 2] = -14.0 - Math.random() * 30.0;
     }
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     const mat = new THREE.PointsMaterial({
       color: 0xd4af37,
-      size: 0.75,
+      size: 0.45,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.22,
       blending: THREE.AdditiveBlending,
     });
     this.dustMesh = new THREE.Points(geo, mat);
@@ -394,18 +395,19 @@ export class SpatialCanvas3D {
 
   // ─────────────────────────────────────────────────────────────
   // 8 Architecture Pillars (Floating Gold Pearls on Orbit Ring)
+  // Scaled & Offset Strictly to the Right Sector
   // ─────────────────────────────────────────────────────────────
   buildArchitecturePillars() {
     this.pillarNodes = [];
     const count = DISCIPLINES.length;
-    const radius = 21.0;
+    const radius = 10.5;
 
     // Fine equatorial gold hairline ring
-    const ringGeometry = new THREE.TorusGeometry(radius, 0.04, 16, 120);
+    const ringGeometry = new THREE.TorusGeometry(radius, 0.035, 16, 120);
     const ringMat = new THREE.MeshBasicMaterial({
       color: 0xd4af37,
       transparent: true,
-      opacity: 0.28,
+      opacity: 0.24,
     });
     this.orbitRing = new THREE.Mesh(ringGeometry, ringMat);
     this.orbitRing.rotation.x = Math.PI / 2.35;
@@ -415,29 +417,29 @@ export class SpatialCanvas3D {
       const angle = (i / count) * Math.PI * 2;
       const x = Math.cos(angle) * radius;
       const z = Math.sin(angle) * radius;
-      const y = Math.sin(angle * 2.0) * 1.8;
+      const y = Math.sin(angle * 2.0) * 1.2;
 
       const group = new THREE.Group();
       group.position.set(x, y, z);
 
       // Delicate gold & titanium ambient pearl bead (purely ambient, zero text overlap)
-      const beadGeo = new THREE.SphereGeometry(0.42, 16, 16);
+      const beadGeo = new THREE.SphereGeometry(0.32, 16, 16);
       const beadMat = new THREE.MeshStandardMaterial({
         color: 0xd4af37,
         metalness: 0.95,
         roughness: 0.25,
         emissive: 0x221808,
-        emissiveIntensity: 0.4,
+        emissiveIntensity: 0.35,
       });
       const pearl = new THREE.Mesh(beadGeo, beadMat);
       group.add(pearl);
 
       // Outer delicate hairline halo
-      const haloGeo = new THREE.TorusGeometry(0.72, 0.02, 12, 32);
+      const haloGeo = new THREE.TorusGeometry(0.55, 0.018, 12, 32);
       const haloMat = new THREE.MeshBasicMaterial({
         color: 0xfff0c8,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.3,
       });
       const halo = new THREE.Mesh(haloGeo, haloMat);
       halo.rotation.x = Math.PI / 2;
@@ -463,12 +465,12 @@ export class SpatialCanvas3D {
     const isDesktop = (window.innerWidth || this.width) >= 1024;
     if (isDesktop) {
       // Offset 3D sculpture to the open right half on desktop to avoid text columns
-      this.rootGroup.position.set(13.5, 0, -8);
-      this.rootGroup.scale.set(1.0, 1.0, 1.0);
+      this.rootGroup.position.set(16.0, 0, -10.0);
+      this.rootGroup.scale.set(0.85, 0.85, 0.85);
     } else {
       // Keep deep in background on mobile/tablet so text remains 100% legible
-      this.rootGroup.position.set(0, -6, -14);
-      this.rootGroup.scale.set(0.65, 0.65, 0.65);
+      this.rootGroup.position.set(0, -6, -20.0);
+      this.rootGroup.scale.set(0.45, 0.45, 0.45);
     }
   }
 

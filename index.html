@@ -7,6 +7,19 @@
     <meta name="description" content="Executive portfolio and verified case studies of Fabián Vélez Vicente. Growth & Revenue Operations Analytics Lead with 8+ years across Money Group, Red Ventures (edX), Viva Advertising, and Link PR." />
     <meta name="keywords" content="Fabián Vélez Vicente, Fabian Velez, Novu Works, Money Group, Red Ventures, edX, Growth Lead, Media Buyer, RevOps Analytics, Computer Engineering, Stanford Innovation Fellow" />
 
+    <!-- Cache Invalidation Directives (Guarantees fresh production assets) -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script>
+      // Clear legacy service worker registrations if any exist
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          for (var r of regs) r.unregister();
+        });
+      }
+    </script>
+
     <!-- Open Graph & Social Cards -->
     <meta property="og:title" content="Fabián Vélez Vicente — Growth & Revenue Operations Analytics Lead" />
     <meta property="og:description" content="8+ years turning complex B2B funnel insights into pipeline growth across a $10M+ commercial portfolio. 122% bonus pacing at Money Group, Red Ventures edX, 40M+ Databricks sessions." />
