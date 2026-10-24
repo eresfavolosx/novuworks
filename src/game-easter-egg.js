@@ -65,9 +65,17 @@ export class CyberArcadeGame {
     this.engineOsc = null;
 
     this.renderHtml();
-    this.initThree();
-    this.initAudioEngine();
-    this.bindEvents();
+    this.bindEvents(); // Bind buttons & Escape key immediately after DOM injection
+    try {
+      this.initThree();
+    } catch (e) {
+      console.warn('CyberArcade 3D init caught:', e);
+    }
+    try {
+      this.initAudioEngine();
+    } catch (e) {
+      console.warn('CyberArcade audio init caught:', e);
+    }
     this.start();
   }
 
@@ -1003,25 +1011,37 @@ export class CyberArcadeGame {
   }
 
   stop() {
+    if (this.isStopping) return;
+    this.isStopping = true;
     this.isRunning = false;
-    if (this.animationId) cancelAnimationFrame(this.animationId);
+    if (this.animationId) {
+      cancelAnimationFrame(this.animationId);
+      this.animationId = null;
+    }
     window.removeEventListener('keydown', this.keydownHandler);
     window.removeEventListener('keyup', this.keyupHandler);
     window.removeEventListener('resize', this.resizeHandler);
 
     if (this.engineOsc) {
       try { this.engineOsc.stop(); } catch {}
+      this.engineOsc = null;
     }
     if (this.audioCtx) {
       try { this.audioCtx.close(); } catch {}
+      this.audioCtx = null;
     }
 
     if (this.renderer && this.renderer.domElement) {
-      this.renderer.domElement.remove();
-      this.renderer.dispose();
+      try {
+        this.renderer.domElement.remove();
+        this.renderer.dispose();
+      } catch {}
+      this.renderer = null;
     }
     this.container.innerHTML = '';
-    if (this.onClose) this.onClose();
+    const cb = this.onClose;
+    this.onClose = null;
+    if (cb) cb();
   }
 
   restart() {
@@ -1082,7 +1102,9 @@ export class CyberArcadeGame {
     this.updateEntities();
     this.checkCollisions();
     this.updateHUD();
-    this.renderer.render(this.scene, this.camera);
+    if (this.renderer && this.scene && this.camera) {
+      this.renderer.render(this.scene, this.camera);
+    }
   }
 
   updatePhysics() {

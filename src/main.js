@@ -811,6 +811,9 @@ class FabianPortfolioApp {
   // ─────────────────────────────────────────────────────────────
   openArcadeGame() {
     if (!this.dom.arcadeModal) return;
+    if (this.canvas3d) {
+      this.canvas3d.pause();
+    }
     this.dom.arcadeModal.showModal();
     audio.confirm();
     this.arcadeGame = new CyberArcadeGame(this.dom.arcadeModal, () => {
@@ -820,11 +823,27 @@ class FabianPortfolioApp {
 
   closeArcadeGame() {
     if (!this.dom.arcadeModal) return;
-    if (this.arcadeGame) {
-      this.arcadeGame.stop();
-      this.arcadeGame = null;
+    const game = this.arcadeGame;
+    this.arcadeGame = null;
+    if (game) {
+      game.stop();
     }
-    this.dom.arcadeModal.close();
+    if (this.dom.arcadeModal.open) {
+      this.dom.arcadeModal.close();
+    }
+    if (this.canvas3d) {
+      this.canvas3d.resume();
+    }
+    if (typeof window !== 'undefined') {
+      if (window.location.hash === '#arcade') {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+      if (window.location.search.includes('arcade=1')) {
+        const u = new URL(window.location.href);
+        u.searchParams.delete('arcade');
+        history.replaceState(null, '', u.toString());
+      }
+    }
     audio.click(750);
   }
 
@@ -1119,6 +1138,11 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       if (e.target === this.dom.arcadeModal) {
         this.closeArcadeGame();
       }
+    });
+
+    this.dom.arcadeModal?.addEventListener('cancel', (e) => {
+      e.preventDefault();
+      this.closeArcadeGame();
     });
   }
 

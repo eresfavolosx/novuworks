@@ -166,7 +166,7 @@ export class ArchitecturePlanner {
 
         <!-- CTA footer -->
         <div class="planner-footer">
-          <a href="${PROFILE.contact.calendarUrl}" class="primary-btn pulse-glow">
+          <a href="mailto:${PROFILE.emails.primary}?subject=Executive%20ROI%20Architecture%20Inquiry%20-%20Fabian%20Velez" class="primary-btn pulse-glow">
             <span>Execute This Architecture with Fabian</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>

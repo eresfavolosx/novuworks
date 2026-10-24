@@ -514,12 +514,24 @@ export class SpatialCanvas3D {
     // Disabled on background canvas to prevent accidental modal popups or click collisions
   }
 
+  pause() {
+    this.isPaused = true;
+  }
+
+  resume() {
+    if (this.isPaused) {
+      this.isPaused = false;
+      this.clock.start();
+    }
+  }
+
   // ─────────────────────────────────────────────────────────────
   // Smooth Animation Frame Loop
   // ─────────────────────────────────────────────────────────────
   animate() {
     if (!this.isAvailable || !this.renderer) return;
     requestAnimationFrame(() => this.animate());
+    if (this.isPaused) return;
 
     const elapsedTime = this.clock.getElapsedTime();
 
