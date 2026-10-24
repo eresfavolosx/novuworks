@@ -15,6 +15,7 @@ import { VisitorTools } from './visitor-tools.js';
 import { GitHubRadar } from './github-radar.js';
 import { SpatialImmersionEngine } from './spatial-immersion.js';
 import { BilingualBinaryHero } from './bilingual-binary-hero.js';
+import { ExecutiveChatManager } from './executive-chat.js';
 import { initFirebase, logCandidateEvent } from './firebase.js';
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
@@ -168,6 +169,7 @@ class FabianPortfolioApp {
     try {
       this.cmdPalette = new CommandPalette({
         onOpenHire: () => this.openRecruiterModal(),
+        onOpenChat: () => this.executiveChat?.open('cmd-palette'),
         onOpenPlanner: () => this.switchView('planner'),
         onOpenFeed: () => this.switchView('intel-feed'),
         onOpenArcade: () => this.openArcadeGame(),
@@ -266,6 +268,14 @@ class FabianPortfolioApp {
       this.bilingualHero.init();
     } catch (e) {
       console.warn('Bilingual Binary Hero init notice:', e);
+    }
+
+    // 7g. Initialize Executive WhatsApp & Direct Communications Suite
+    try {
+      this.executiveChat = new ExecutiveChatManager(this);
+      this.executiveChat.init();
+    } catch (e) {
+      console.warn('Executive Chat init notice:', e);
     }
 
     // 8. Run initial metric count-up animation

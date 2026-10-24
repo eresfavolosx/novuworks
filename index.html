@@ -344,10 +344,11 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                 <span data-i18n="btn_view_bg">View 3D Background</span>
               </button>
-              <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="luxury-btn subtle-ghost">
+              <button type="button" class="luxury-btn subtle-ghost lets-chat-trigger" id="btn-hero-lets-chat" title="Open Live WhatsApp & Direct Executive Communications">
+                <span class="chat-status-pulse" aria-hidden="true"></span>
                 <span data-i18n="btn_lets_chat">Let's Chat</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
-              </a>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              </button>
             </div>
 
             <!-- Monumental Verified Metrics Ribbon -->
@@ -542,10 +543,10 @@
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                 <span data-i18n="btn_export_resume">Export Executive Resume & Composite Card</span>
               </button>
-              <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="luxury-btn outline-platinum">
+              <button type="button" class="luxury-btn outline-platinum lets-chat-trigger" id="btn-dossier-chat" title="Open Live WhatsApp & Direct Executive Communications">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 <span data-i18n="btn_schedule_chat">Schedule a Strategy Chat</span>
-              </a>
+              </button>
             </div>
 
             <!-- Luxury Puerto Rico Cultural Colophon -->
@@ -683,10 +684,10 @@
                   </p>
                 </div>
                 <div class="cta-actions-side">
-                  <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="cta-action-btn gold-btn">
+                  <button type="button" class="cta-action-btn gold-btn lets-chat-trigger" id="btn-resume-cta-chat">
                     <span data-i18n="res_cta_btn_chat">Schedule a Strategy Chat</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
-                  </a>
+                  </button>
                   <a href="https://linkedin.com/in/fabian-velez-vicente" target="_blank" rel="noopener" class="cta-action-btn outline-btn">
                     <span data-i18n="res_cta_btn_linkedin">Connect on LinkedIn</span>
                   </a>
@@ -914,11 +915,121 @@
           </div>
         </div>
       </dialog>
-        </div>
-      </dialog>
 
       <!-- Visitor Utilities & Interactive Tools Modal Dialog -->
       <dialog id="visitor-tools-modal" class="executive-dialog tools-modal" aria-labelledby="tools-modal-title"></dialog>
+
+      <!-- Executive WhatsApp & Direct Communications Modal -->
+      <dialog id="executive-chat-modal" class="executive-dialog chat-modal" aria-labelledby="chat-modal-title">
+        <div class="dialog-card chat-card-shell">
+          <!-- Modal Header -->
+          <div class="chat-modal-header">
+            <div class="chat-profile-row">
+              <div class="chat-avatar-wrapper">
+                <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="chat-avatar-img" width="46" height="46" />
+                <span class="chat-online-dot" title="Online · Ready to connect"></span>
+              </div>
+              <div class="chat-profile-meta">
+                <div class="chat-name-row">
+                  <h3 id="chat-modal-title" class="chat-title-name">Fabián Vélez Vicente</h3>
+                  <span class="chat-official-badge">Verified Founder & Lead</span>
+                </div>
+                <div class="chat-status-line">
+                  <span class="wa-status-text" data-i18n="chat_status_online">🟢 WhatsApp Direct · Usually replies in minutes</span>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="modal-close-btn" id="btn-close-chat-modal" aria-label="Close Chat Dialog">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="chat-modal-body">
+            <!-- Section 1: 1-Click WhatsApp Quick Starters -->
+            <div class="chat-section-block">
+              <span class="chat-section-title" data-i18n="chat_starters_title">CHOOSE A CONVERSATION TOPIC (OPENS WHATSAPP DIRECTLY):</span>
+              <div class="chat-starters-grid" id="chat-starters-mount">
+                <!-- Populated dynamically by ExecutiveChatManager with localized prompts -->
+              </div>
+            </div>
+
+            <!-- Section 2: Custom Message Input -->
+            <div class="chat-section-block">
+              <span class="chat-section-title" data-i18n="chat_custom_title">OR TYPE A CUSTOM MESSAGE:</span>
+              <div class="custom-chat-input-box">
+                <textarea id="custom-chat-message" class="chat-textarea" rows="2" placeholder="Write your message here..."></textarea>
+                <button type="button" class="chat-send-btn" id="btn-send-custom-wa">
+                  <svg class="wa-send-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+                  </svg>
+                  <span data-i18n="chat_btn_send_wa">Open in WhatsApp</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Section 3: Alternative Channels (Direct Email, Phone & LinkedIn) -->
+            <div class="chat-alternative-channels">
+              <span class="chat-section-title" data-i18n="chat_alt_title">OTHER DIRECT EXECUTIVE CHANNELS:</span>
+              <div class="alt-channels-row">
+                <!-- Direct Email with Copy Button -->
+                <div class="alt-channel-card">
+                  <div class="channel-info">
+                    <span class="ch-label">Email</span>
+                    <span class="ch-val">fabianvvicente1@gmail.com</span>
+                  </div>
+                  <div class="channel-actions">
+                    <button type="button" class="channel-mini-btn" id="btn-copy-chat-email" title="Copy email address">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                      <span id="copy-email-label">Copy</span>
+                    </button>
+                    <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="channel-mini-btn" target="_blank" rel="noopener">
+                      <span>Open Mail</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Direct Phone / SMS -->
+                <a href="tel:+13478158054" class="alt-channel-card link-card">
+                  <div class="channel-info">
+                    <span class="ch-label">Direct Phone / SMS</span>
+                    <span class="ch-val">+1 (347) 815-8054</span>
+                  </div>
+                  <div class="channel-arrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  </div>
+                </a>
+
+                <!-- LinkedIn Direct InMail -->
+                <a href="https://linkedin.com/in/fabian-velez-vicente" target="_blank" rel="noopener noreferrer" class="alt-channel-card link-card">
+                  <div class="channel-info">
+                    <span class="ch-label">LinkedIn InMail</span>
+                    <span class="ch-val">linkedin.com/in/fabian-velez-vicente</span>
+                  </div>
+                  <div class="channel-arrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </dialog>
+
+      <!-- Persistent Floating WhatsApp Concierge Pill -->
+      <aside class="floating-whatsapp-badge" id="floating-whatsapp-badge" role="complementary" aria-label="Direct WhatsApp Concierge">
+        <button type="button" class="f-wa-btn" id="btn-floating-wa" title="Chat directly with Fabián on WhatsApp" aria-label="Chat directly on WhatsApp">
+          <span class="f-wa-pulse-ring" aria-hidden="true"></span>
+          <svg class="f-wa-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+          </svg>
+          <div class="f-wa-text-group">
+            <span class="f-wa-title" data-i18n="chat_floating_title">Chat with Fabián</span>
+            <span class="f-wa-sub" data-i18n="chat_floating_sub">WhatsApp Direct</span>
+          </div>
+        </button>
+        <button type="button" class="f-wa-close" aria-label="Dismiss chat concierge" title="Dismiss">✕</button>
+      </aside>
 
       <!-- 3D Spatial Visualizer Mode HUD (Zen / Immersive Canvas Controls) -->
       <aside id="visualizer-hud" class="visualizer-hud" hidden aria-label="3D Background Visualization Controls">

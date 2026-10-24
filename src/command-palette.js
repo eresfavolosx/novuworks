@@ -21,6 +21,13 @@ export class CommandPalette {
         action: () => options.onOpenHire && options.onOpenHire(),
       },
       {
+        id: 'whatsapp-chat',
+        title: "Let's Chat: Direct WhatsApp & Executive Communications",
+        category: 'Direct Connection',
+        shortcut: 'W',
+        action: () => options.onOpenChat && options.onOpenChat(),
+      },
+      {
         id: 'roi',
         title: 'Open Architecture Planner & ROI Calculator',
         category: 'Productivity Tool',

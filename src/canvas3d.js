@@ -380,27 +380,67 @@ export class SpatialCanvas3D {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Ambient Cosmic Dust (Subtle Depth & Luxury Atmosphere, Deep Z)
+  // Ambient Cosmic Dust & Kinetic Stellar Spark Matrix
+  // (Rich Multi-Color Dynamic Particles for High Mobile Immersion)
   // ─────────────────────────────────────────────────────────────
   buildAmbientDust() {
-    const COUNT = 320;
+    const COUNT = 1600;
     const pos = new Float32Array(COUNT * 3);
+    const col = new Float32Array(COUNT * 3);
+    const speeds = new Float32Array(COUNT);
+    const phases = new Float32Array(COUNT);
+
+    const gold = new THREE.Color('#d4af37');
+    const champagne = new THREE.Color('#f5e6be');
+    const sapphire = new THREE.Color('#38bdf8');
+    const violet = new THREE.Color('#8b52c8');
+    const coral = new THREE.Color('#e0566a');
+
     for (let i = 0; i < COUNT; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 60;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 40;
-      // Strictly placed behind the text plane (z < -14) so zero particles ever overlap text
-      pos[i * 3 + 2] = -14.0 - Math.random() * 30.0;
+      // Wide volumetric distribution enveloping mobile and desktop viewports
+      pos[i * 3] = (Math.random() - 0.5) * 75;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 55;
+      // Positioned with depth to create true 3D spatial field
+      pos[i * 3 + 2] = -4.0 - Math.random() * 32.0;
+
+      speeds[i] = 0.4 + Math.random() * 1.6;
+      phases[i] = Math.random() * Math.PI * 2;
+
+      // Color variation across the Novu Works brand palette
+      const r = Math.random();
+      const pColor = new THREE.Color();
+      if (r < 0.42) {
+        pColor.copy(gold).lerp(champagne, Math.random());
+      } else if (r < 0.72) {
+        pColor.copy(sapphire);
+      } else if (r < 0.88) {
+        pColor.copy(violet);
+      } else {
+        pColor.copy(coral);
+      }
+
+      col[i * 3] = pColor.r;
+      col[i * 3 + 1] = pColor.g;
+      col[i * 3 + 2] = pColor.b;
     }
+
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+
     const mat = new THREE.PointsMaterial({
-      color: 0xd4af37,
-      size: 0.55,
+      vertexColors: true,
+      size: 1.15,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.75,
       blending: THREE.AdditiveBlending,
+      depthWrite: false,
     });
+
     this.dustMesh = new THREE.Points(geo, mat);
+    this.dustSpeeds = speeds;
+    this.dustPhases = phases;
+    this.dustBasePositions = new Float32Array(pos);
     this.rootGroup.add(this.dustMesh);
   }
 
@@ -484,9 +524,9 @@ export class SpatialCanvas3D {
       this.targetRootPosition.set(7.5, 0.5, -2.0);
       this.targetRootScale.set(1.05, 1.05, 1.05);
     } else {
-      // Centered and softly scaled on mobile/tablet so text remains crisp and readable
-      this.targetRootPosition.set(0, -3.0, -12.0);
-      this.targetRootScale.set(0.65, 0.65, 0.65);
+      // Centered and monumentally scaled on mobile/tablet for rich dynamic particle immersion
+      this.targetRootPosition.set(0, -0.6, -4.5);
+      this.targetRootScale.set(0.95, 0.95, 0.95);
     }
   }
 
@@ -693,9 +733,28 @@ export class SpatialCanvas3D {
       this.prismRing2.rotation.y = elapsedTime * 0.5;
     }
 
-    // Ambient Dust drift
+    // Ambient Dust drift & dynamic kinetic wave oscillation (Enhanced for Mobile Immersion)
     if (this.dustMesh) {
-      this.dustMesh.rotation.y = elapsedTime * 0.03;
+      const isMobile = (window.innerWidth || this.width) < 1024;
+      const speedMult = isMobile ? 1.85 : 1.0;
+      this.dustMesh.rotation.y = elapsedTime * (0.038 * speedMult);
+      this.dustMesh.rotation.x = Math.sin(elapsedTime * 0.4) * (0.045 * speedMult);
+
+      // Animate individual dust particles in wave harmonics if positions are accessible
+      const posAttr = this.dustMesh.geometry.attributes.position;
+      if (posAttr && this.dustBasePositions && this.dustSpeeds) {
+        const arr = posAttr.array;
+        const base = this.dustBasePositions;
+        const count = arr.length / 3;
+        // Sample every other particle for ultra-smooth 60+ FPS performance on mobile
+        for (let i = 0; i < count; i += 2) {
+          const spd = this.dustSpeeds[i];
+          const phs = this.dustPhases[i];
+          arr[i * 3 + 1] = base[i * 3 + 1] + Math.sin(elapsedTime * spd + phs) * 0.85;
+          arr[i * 3] = base[i * 3] + Math.cos(elapsedTime * (spd * 0.7) + phs) * 0.55;
+        }
+        posAttr.needsUpdate = true;
+      }
     }
 
     // Subtle ambient animation on orbital pearls (zero UI collision)

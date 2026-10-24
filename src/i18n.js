@@ -803,6 +803,15 @@ export const I18N_STRINGS = {
     btn_view_bg: 'View 3D Background',
     btn_lets_chat: "Let's Chat",
 
+    // Executive Chat & WhatsApp Suite
+    chat_status_online: '🟢 WhatsApp Direct · Usually replies in minutes',
+    chat_starters_title: 'CHOOSE A CONVERSATION TOPIC (OPENS WHATSAPP DIRECTLY):',
+    chat_custom_title: 'OR TYPE A CUSTOM MESSAGE:',
+    chat_btn_send_wa: 'Open in WhatsApp',
+    chat_alt_title: 'OTHER DIRECT EXECUTIVE CHANNELS:',
+    chat_floating_title: 'Chat with Fabián',
+    chat_floating_sub: 'WhatsApp Direct',
+
     // Metrics Ribbon
     metric_1_label: 'Automated AI Workflows',
     metric_1_detail: 'Money Group (Full-Time)',
@@ -966,6 +975,15 @@ export const I18N_STRINGS = {
     btn_intel: 'Noticias y Radar en Vivo',
     btn_view_bg: 'Ver Fondo 3D',
     btn_lets_chat: 'Hablemos',
+
+    // Executive Chat & WhatsApp Suite
+    chat_status_online: '🟢 WhatsApp Directo · Suele responder en minutos',
+    chat_starters_title: 'ELIGE UN TEMA DE CONVERSACIÓN (ABRE WHATSAPP DIRECTO):',
+    chat_custom_title: 'O ESCRIBE UN MENSAJE PERSONALIZADO:',
+    chat_btn_send_wa: 'Abrir en WhatsApp',
+    chat_alt_title: 'OTROS CANALES EJECUTIVOS DIRECTOS:',
+    chat_floating_title: 'Chatea con Fabián',
+    chat_floating_sub: 'WhatsApp Directo',
 
     // Metrics Ribbon
     metric_1_label: 'Flujos de IA Automatizados',
