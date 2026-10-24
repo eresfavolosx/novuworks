@@ -191,12 +191,6 @@
             <span class="pr-geo-coords" id="pr-weather-badge">18°N 66°W</span>
           </button>
 
-          <!-- Spatial Gyroscope & 6DoF Motion Parallax Toggle Button -->
-          <button type="button" class="hud-action-btn spatial-gyro-btn" id="btn-spatial-gyro" title="Toggle Spatial Gyroscope & 6DoF Motion Parallax (Click to calibrate)" aria-label="Toggle Spatial Gyroscope">
-            <span class="spatial-gyro-icon" id="spatial-gyro-icon" aria-hidden="true">🧭</span>
-            <span class="spatial-gyro-label" id="spatial-gyro-label" data-i18n="spatial_gyro_label">Spatial Gyro</span>
-          </button>
-
           <!-- Background 3D Visualizer Mode Toggle Button -->
           <button type="button" class="hud-action-btn visualizer-btn" id="btn-toggle-visualizer" title="View 3D Background Visualization (Zen Mode · Press ESC to exit)" aria-label="View 3D Background Visualization">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
@@ -388,8 +382,8 @@
             <div class="sculpture-dock">
               <span class="dock-caption" data-i18n="dock_caption">Interactive 3D Matrix:</span>
               <div class="dock-buttons">
-                <button type="button" class="sculpture-pill active" data-morph="0" data-i18n="dock_btn_0">01 · NW Monogram</button>
-                <button type="button" class="sculpture-pill" data-morph="1" data-i18n="dock_btn_1">02 · Möbius Growth Flow</button>
+                <button type="button" class="sculpture-pill" data-morph="0" data-i18n="dock_btn_0">01 · NW Monogram</button>
+                <button type="button" class="sculpture-pill active" data-morph="1" data-i18n="dock_btn_1">02 · Möbius Growth Flow</button>
                 <button type="button" class="sculpture-pill" data-morph="2" data-i18n="dock_btn_2">03 · Quantum AI Prism</button>
                 <button type="button" class="sculpture-pill zen-pill" id="btn-dock-view-canvas" title="Enter Fullscreen 3D Background Visualizer Mode" data-i18n="dock_btn_view">✨ View 3D Background</button>
                 <button type="button" class="sculpture-pill arcade-easter-pill" id="btn-open-arcade-pill" title="Play 3D Cyber Growth Racer Minigame" data-i18n="dock_btn_arcade">🎮 Cyber Arcade</button>
@@ -1394,11 +1388,11 @@
 
           <div class="viz-hud-center">
             <div class="viz-morph-group" role="group" aria-label="Select 3D Sculpture Morph">
-              <button type="button" class="viz-morph-pill active" data-morph="0" title="Switch to NW Monogram Particle Matrix">
+              <button type="button" class="viz-morph-pill" data-morph="0" title="Switch to NW Monogram Particle Matrix">
                 <span class="viz-morph-index">01</span>
                 <span class="viz-morph-name">Monogram</span>
               </button>
-              <button type="button" class="viz-morph-pill" data-morph="1" title="Switch to Möbius Growth Flow Ribbon">
+              <button type="button" class="viz-morph-pill active" data-morph="1" title="Switch to Möbius Growth Flow Ribbon">
                 <span class="viz-morph-index">02</span>
                 <span class="viz-morph-name">Möbius</span>
               </button>

@@ -163,6 +163,11 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Universal display utilities */
+.hidden {
+  display: none !important;
+}
+
 /* Accessibility: Honor User Preference for Reduced Motion (WCAG 2.3.3) */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -547,6 +552,18 @@ body.visualizer-mode .webgl-canvas-layer:active {
   color: var(--gold-muted);
 }
 
+/* Base header button compactness: redundant text labels hidden across all screens to guarantee 0 overflow */
+#btn-theme-toggle .theme-btn-label,
+#btn-tesla-mode .btn-text,
+#btn-toggle-visualizer .visualizer-btn-label,
+.persona-lens-pill .persona-label,
+.persona-lens-pill .persona-tag,
+.tools-trigger-btn .tools-btn-label,
+.spatial-gyro-btn .spatial-gyro-label,
+.pr-roots-btn .pr-geo-coords {
+  display: none !important;
+}
+
 /* Puerto Rico Cultural Roots Micro-Badge */
 .pr-roots-btn {
   background: rgba(212, 175, 55, 0.08);
@@ -738,6 +755,27 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .theme-toggle-btn .icon-theme-sun,
 .theme-toggle-btn .icon-theme-moon {
   transition: transform var(--duration-smooth) var(--ease-luxury), opacity var(--duration-fast) ease;
+}
+
+/* Explicit declarative display rules: prevent double icon rendering */
+:root[data-theme="dark"] #btn-theme-toggle .icon-theme-moon,
+:root:not([data-theme="light"]) #btn-theme-toggle .icon-theme-moon {
+  display: none !important;
+}
+
+:root[data-theme="dark"] #btn-theme-toggle .icon-theme-sun,
+:root:not([data-theme="light"]) #btn-theme-toggle .icon-theme-sun {
+  display: inline-block !important;
+}
+
+:root[data-theme="light"] #btn-theme-toggle .icon-theme-sun,
+:root:has(> head > meta[name="color-scheme"][content="light"]) #btn-theme-toggle .icon-theme-sun {
+  display: none !important;
+}
+
+:root[data-theme="light"] #btn-theme-toggle .icon-theme-moon,
+:root:has(> head > meta[name="color-scheme"][content="light"]) #btn-theme-toggle .icon-theme-moon {
+  display: inline-block !important;
 }
 
 .theme-toggle-btn:hover {
@@ -3487,6 +3525,25 @@ body.tesla-mode .hud-action-btn {
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
+  }
+
+  /* Mobile Toast Positioning: Centered at Top Below Header, Never Overlapping Bottom Dock / WhatsApp */
+  .toast-popup {
+    top: 66px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translate(-50%, -10px) !important;
+    width: max-content !important;
+    max-width: calc(100vw - 28px) !important;
+    padding: 8px 18px !important;
+    font-size: 12px !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65) !important;
+    z-index: 9999 !important;
+  }
+
+  .toast-popup.visible {
+    transform: translate(-50%, 0) !important;
   }
 
   /* 2. Main Viewport & Layer Clearance */
@@ -11416,4 +11473,60 @@ body.tesla-cockpit-active {
     font-size: 26px;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Ultra-Narrow Viewports (320px - 360px, e.g. Fold outer / SE)
+   Guarantees 0 Header Overflow & Pixel-Perfect Alignment
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 360px) {
+  .app-header {
+    top: 6px !important;
+    left: 4px !important;
+    right: 4px !important;
+    padding: 0 5px !important;
+    gap: 4px !important;
+  }
+
+  .header-left {
+    gap: 4px !important;
+  }
+
+  .brand-avatar-box {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    padding: 1px !important;
+  }
+
+  .brand-name {
+    font-size: 10px !important;
+    letter-spacing: -0.03em !important;
+  }
+
+  .header-right {
+    gap: 3px !important;
+  }
+
+  #btn-tailor-experience,
+  .persona-lens-pill,
+  #btn-visitor-tools,
+  .tools-trigger-btn,
+  #btn-theme-toggle,
+  .theme-toggle-btn,
+  #btn-audio-toggle,
+  .audio-btn,
+  #btn-lang-toggle,
+  .lang-toggle-btn {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+  }
+
+  #btn-lang-toggle,
+  .lang-toggle-btn {
+    font-size: 9.5px !important;
+  }
+}
+
 

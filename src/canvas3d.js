@@ -35,9 +35,9 @@ export class SpatialCanvas3D {
     this.worldRotation = { x: 0.12, y: 0 };
     this.targetWorldRotation = { x: 0.12, y: 0 };
 
-    // Morph state: 0 = Monogram, 1 = Ribbon, 2 = AI Prism
-    this.activeMode = 0;
-    this.modeTransitions = [1, 0, 0]; // opacities/scales of the 3 modes
+    // Morph state: 0 = Monogram, 1 = Ribbon (Spiral Growth Flow - Default), 2 = AI Prism
+    this.activeMode = 1;
+    this.modeTransitions = [0, 1, 0]; // opacities/scales of the 3 modes
 
     // Visualizer mode state
     this.isVisualizerMode = false;
@@ -281,6 +281,8 @@ export class SpatialCanvas3D {
     });
 
     this.monogramMesh = new THREE.Points(geometry, shaderMaterial);
+    this.monogramMesh.scale.set(0.001, 0.001, 0.001);
+    this.monogramMesh.visible = false;
     this.rootGroup.add(this.monogramMesh);
   }
 
@@ -327,8 +329,8 @@ export class SpatialCanvas3D {
     this.ribbonRing.rotation.x = Math.PI / 3;
     this.ribbonGroup.add(this.ribbonRing);
 
-    this.ribbonGroup.scale.set(0.001, 0.001, 0.001);
-    this.ribbonGroup.visible = false;
+    this.ribbonGroup.scale.set(1, 1, 1);
+    this.ribbonGroup.visible = true;
     this.rootGroup.add(this.ribbonGroup);
   }
 
@@ -379,12 +381,34 @@ export class SpatialCanvas3D {
     this.rootGroup.add(this.prismGroup);
   }
 
+  createCircleParticleTexture() {
+    if (typeof document === 'undefined') return null;
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
+    grad.addColorStop(0.25, 'rgba(255, 255, 255, 0.85)');
+    grad.addColorStop(0.65, 'rgba(255, 255, 255, 0.25)');
+    grad.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(32, 32, 32, 0, Math.PI * 2);
+    ctx.fill();
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.generateMipmaps = false;
+    texture.minFilter = THREE.LinearFilter;
+    return texture;
+  }
+
   // ─────────────────────────────────────────────────────────────
   // Ambient Cosmic Dust & Kinetic Stellar Spark Matrix
-  // (Rich Multi-Color Dynamic Particles for High Mobile Immersion)
+  // (Minimalist, Round, High-End Luxury Celestial Particle Field)
   // ─────────────────────────────────────────────────────────────
   buildAmbientDust() {
-    const COUNT = 1600;
+    const COUNT = 420;
     const pos = new Float32Array(COUNT * 3);
     const col = new Float32Array(COUNT * 3);
     const speeds = new Float32Array(COUNT);
@@ -397,19 +421,18 @@ export class SpatialCanvas3D {
     const coral = new THREE.Color('#e0566a');
 
     for (let i = 0; i < COUNT; i++) {
-      // Wide volumetric distribution enveloping mobile and desktop viewports
-      pos[i * 3] = (Math.random() - 0.5) * 75;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 55;
-      // Positioned with depth to create true 3D spatial field
-      pos[i * 3 + 2] = -4.0 - Math.random() * 32.0;
+      // Gentle volumetric distribution enveloping mobile and desktop viewports
+      pos[i * 3] = (Math.random() - 0.5) * 80;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 60;
+      pos[i * 3 + 2] = -5.0 - Math.random() * 30.0;
 
-      speeds[i] = 0.4 + Math.random() * 1.6;
+      speeds[i] = 0.3 + Math.random() * 0.9;
       phases[i] = Math.random() * Math.PI * 2;
 
-      // Color variation across the Novu Works brand palette
+      // Soft color variation across Novu Works palette
       const r = Math.random();
       const pColor = new THREE.Color();
-      if (r < 0.42) {
+      if (r < 0.45) {
         pColor.copy(gold).lerp(champagne, Math.random());
       } else if (r < 0.72) {
         pColor.copy(sapphire);
@@ -428,11 +451,14 @@ export class SpatialCanvas3D {
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
 
+    const circleTexture = this.createCircleParticleTexture();
+
     const mat = new THREE.PointsMaterial({
       vertexColors: true,
-      size: 1.15,
+      map: circleTexture,
+      size: 1.45,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.55,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
@@ -735,8 +761,7 @@ export class SpatialCanvas3D {
 
     // Ambient Dust drift & dynamic kinetic wave oscillation (Enhanced for Mobile Immersion)
     if (this.dustMesh) {
-      const isMobile = (window.innerWidth || this.width) < 1024;
-      const speedMult = isMobile ? 1.85 : 1.0;
+      const speedMult = 0.85;
       this.dustMesh.rotation.y = elapsedTime * (0.038 * speedMult);
       this.dustMesh.rotation.x = Math.sin(elapsedTime * 0.4) * (0.045 * speedMult);
 

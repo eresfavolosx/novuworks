@@ -201,13 +201,25 @@ class FabianPortfolioApp {
       console.warn('3D Canvas safely in fallback mode:', e);
     }
 
-    // 6b. Initialize Spatial 6DoF Immersion & Hardware Sensor Suite
+    // 6b. Initialize Spatial 6DoF Immersion & Hardware Sensor Suite (ON by default)
     try {
       this.spatial = new SpatialImmersionEngine(this.canvas3d);
       this.spatial.init();
+
+      // Spatial 6DoF Gyroscope is ON by default: Auto-request permission on first user interaction (iOS Safari)
+      const autoRequestGyro = async () => {
+        try {
+          if (this.spatial) await this.spatial.requestGyroPermission();
+        } catch (_) {}
+      };
+      window.addEventListener('pointerdown', autoRequestGyro, { once: true, passive: true });
+      window.addEventListener('touchstart', autoRequestGyro, { once: true, passive: true });
     } catch (e) {
       console.warn('Spatial Immersion init notice:', e);
     }
+
+    // 6c. Sync 3D Sculpture Morph State (Mode 1: Möbius Growth Flow spiral ribbon default)
+    this.syncMorphPills(1);
 
     // 6c. Initialize Firebase Analytics & Performance Monitoring
     try {
