@@ -1426,85 +1426,303 @@ pre, code {
 }
 
 .planner-row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
-  margin-bottom: 32px;
-}
-
-.planner-col {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: 30px;
 }
 
-.col-label {
+.section-label {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-muted);
+  color: var(--gold-light);
+  display: block;
 }
 
-.planner-pills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+/* Stage & Scope Selection Cards */
+.stage-toggles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
 }
 
-.slider-group {
+.stage-btn {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--duration-fast) var(--ease-luxury);
+  position: relative;
+  overflow: hidden;
+}
+
+.stage-btn strong {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--titanium-white);
+  line-height: 1.25;
+}
+
+.stage-btn span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.stage-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--hairline-hover);
+  transform: translateY(-2px);
+}
+
+.stage-btn.active {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.18);
+}
+
+.stage-btn.active strong {
+  color: var(--gold-light);
+}
+
+.stage-btn.active span {
+  color: #ffffff;
+}
+
+/* Consulting & Technical Pillars Matrix */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 10px;
 }
 
-.slider-val-box {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--platinum);
-}
-
-input[type="range"] {
-  accent-color: var(--gold-primary);
+.pillar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-body);
+  transition: all var(--duration-fast) var(--ease-luxury);
+  text-align: left;
+  user-select: none;
 }
 
-/* Metric Display Output in Planner */
-.planner-metrics-grid {
+.chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--chip-color, var(--gold-primary));
+  opacity: 0.55;
+  flex-shrink: 0;
+  transition: all var(--duration-fast) ease;
+}
+
+.chip-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pillar-chip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--hairline-hover);
+  color: var(--titanium-white);
+  transform: translateY(-1px);
+}
+
+.pillar-chip:hover .chip-dot {
+  opacity: 1;
+  transform: scale(1.3);
+  box-shadow: 0 0 8px var(--chip-color, var(--gold-primary));
+}
+
+.pillar-chip.selected {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold-primary);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.16);
+}
+
+.pillar-chip.selected .chip-dot {
+  opacity: 1;
+  transform: scale(1.35);
+  box-shadow: 0 0 10px var(--chip-color, var(--gold-primary));
+}
+
+/* Live Metrics Grid Ribbon */
+.metrics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  padding: 24px;
-  background: #000000;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--hairline-gold);
-  margin-bottom: 28px;
+  margin: 32px 0;
 }
 
-.pm-item {
+.metric-box {
   display: flex;
   flex-direction: column;
+  padding: 22px 24px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--hairline-gold);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
-.pm-val {
-  font-family: var(--font-sans);
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--gold-light);
-  line-height: 1.1;
-  margin-bottom: 4px;
-}
-
-.pm-label {
+.metric-kicker {
   font-family: var(--font-mono);
   font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-muted);
+  margin-bottom: 8px;
+}
+
+.metric-val {
+  font-family: var(--font-sans);
+  font-size: clamp(26px, 2.6vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--gold-light);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.metric-sub {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Architecture Blueprint Section */
+.blueprint-section {
+  background: #06070a;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.blueprint-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--hairline);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.blueprint-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.action-btn.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  color: var(--text-body);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.action-btn.copy-btn:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold-primary);
+  color: #ffffff;
+}
+
+.action-btn.copy-btn.copied {
+  background: rgba(74, 222, 128, 0.15);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.blueprint-display {
+  padding: 20px 24px;
+  overflow-x: auto;
+  background: #080a10;
+}
+
+.blueprint-display pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: #a5f3fc;
+}
+
+.planner-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-top: 8px;
+}
+
+.primary-btn.pulse-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #d4af37 0%, #aa841e 100%);
+  color: #000000;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  box-shadow: 0 8px 28px rgba(212, 175, 55, 0.35);
+  transition: all var(--duration-fast) var(--ease-luxury);
+}
+
+.primary-btn.pulse-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(212, 175, 55, 0.5);
+  color: #000000;
+}
+
+.guarantee-note {
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--text-muted);
 }
 
@@ -2716,6 +2934,35 @@ body.tesla-mode .hud-action-btn {
     border-radius: 14px;
   }
 
+  /* Planner Mobile Layout Adaptations */
+  .stage-toggles {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .stage-btn {
+    padding: 12px 14px;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .metric-box {
+    padding: 14px 16px;
+  }
+
+  .metric-val {
+    font-size: 24px;
+  }
+
   .intel-feed-layout-container {
     padding: 12px clamp(6px, 2vw, 12px) calc(76px + env(safe-area-inset-bottom, 0px));
   }
@@ -3624,6 +3871,129 @@ body.tesla-mode .hud-action-btn {
 :root[data-theme="light"] .revops-heading,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .revops-heading {
   color: #0f172a;
+}
+
+/* Light Mode Planner Adaptations */
+:root[data-theme="light"] .planner-presets,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .planner-presets {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .preset-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .preset-pill {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #1e293b;
+}
+
+:root[data-theme="light"] .preset-pill:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .preset-pill:hover {
+  background: rgba(148, 104, 0, 0.08);
+  border-color: var(--gold-primary);
+  color: #6b4b00;
+}
+
+:root[data-theme="light"] .stage-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stage-btn {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+:root[data-theme="light"] .stage-btn strong,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stage-btn strong {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .stage-btn span,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stage-btn span {
+  color: #64748b;
+}
+
+:root[data-theme="light"] .stage-btn:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stage-btn:hover {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.2);
+}
+
+:root[data-theme="light"] .stage-btn.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stage-btn.active {
+  background: rgba(148, 104, 0, 0.08);
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 16px rgba(148, 104, 0, 0.15);
+}
+
+:root[data-theme="light"] .stage-btn.active strong,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stage-btn.active strong {
+  color: #6b4b00;
+}
+
+:root[data-theme="light"] .stage-btn.active span,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stage-btn.active span {
+  color: #1e293b;
+}
+
+:root[data-theme="light"] .pillar-chip,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .pillar-chip {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #1e293b;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+:root[data-theme="light"] .pillar-chip:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .pillar-chip:hover {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.2);
+}
+
+:root[data-theme="light"] .pillar-chip.selected,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .pillar-chip.selected {
+  background: rgba(148, 104, 0, 0.08);
+  border-color: var(--gold-primary);
+  color: #6b4b00;
+  box-shadow: 0 0 12px rgba(148, 104, 0, 0.12);
+}
+
+:root[data-theme="light"] .metric-box,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .metric-box {
+  background: #ffffff;
+  border-color: rgba(148, 104, 0, 0.25);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+}
+
+:root[data-theme="light"] .metric-kicker,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .metric-kicker {
+  color: #785b24;
+}
+
+:root[data-theme="light"] .metric-val,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .metric-val {
+  color: #6b4b00;
+}
+
+:root[data-theme="light"] .metric-sub,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .metric-sub {
+  color: #475569;
+}
+
+:root[data-theme="light"] .blueprint-section,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .blueprint-section {
+  background: #0b0f19;
+  border-color: rgba(15, 23, 42, 0.15);
+}
+
+:root[data-theme="light"] .blueprint-display,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .blueprint-display {
+  background: #080c14;
+}
+
+:root[data-theme="light"] .primary-btn.pulse-glow,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .primary-btn.pulse-glow {
+  background: linear-gradient(135deg, #946800 0%, #785b24 100%);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(148, 104, 0, 0.28);
 }
 
 /* ─────────────────────────────────────────────────────────────

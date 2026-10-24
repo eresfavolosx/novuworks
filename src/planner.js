@@ -265,7 +265,7 @@ SYSTEM TOPOLOGY:
    ├── PostgreSQL / ACID Data Store
    └── Redis Low-Latency Distributed Cache
 ============================================================
-Contact: fabian.velez1996@gmail.com | hello@novu.works
+Contact: ${PROFILE.emails.primary} | https://${PROFILE.domain}
 Novu Works · Puerto Rico · Remote Worldwide
 `;
   }
