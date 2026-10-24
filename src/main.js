@@ -328,6 +328,15 @@ class FabianPortfolioApp {
           <div class="logo-badge-item" title="edX Platform (40M+ Telemetry Sessions)">
             ${LOGOS.edx}
           </div>
+          <div class="logo-badge-item" title="Databricks Lakehouse (40M+ Sessions Normalized)">
+            ${LOGOS.databricks}
+          </div>
+          <div class="logo-badge-item" title="Anthropic Claude (20+ Automated Workflows)">
+            ${LOGOS.claude}
+          </div>
+          <div class="logo-badge-item" title="ATH Móvil Business (Fintech Payment Architecture)">
+            ${LOGOS.athMovil}
+          </div>
           <div class="logo-badge-item" title="Meta (San Juan Community Lead)">
             ${LOGOS.meta}
           </div>
@@ -340,6 +349,9 @@ class FabianPortfolioApp {
           <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site (linkpuertorico.org)">
             ${LOGOS.linkPR}
           </a>
+          <div class="logo-badge-item" title="Boys &amp; Girls Clubs de Puerto Rico (Youth Mentorship Partner)">
+            ${LOGOS.boysAndGirlsClubs}
+          </div>
           <div class="logo-badge-item" title="Stanford University Innovation Fellows">
             ${LOGOS.stanford}
           </div>
@@ -592,8 +604,12 @@ class FabianPortfolioApp {
             <div class="logo-badge-item" title="Money Group (Full-Time)">${LOGOS.moneyGroup}</div>
             <div class="logo-badge-item" title="Red Ventures (Full-Time)">${LOGOS.redVentures}</div>
             <div class="logo-badge-item" title="edX Platform">${LOGOS.edx}</div>
+            <div class="logo-badge-item" title="Databricks Lakehouse">${LOGOS.databricks}</div>
+            <div class="logo-badge-item" title="Anthropic Claude">${LOGOS.claude}</div>
+            <div class="logo-badge-item" title="ATH Móvil Business">${LOGOS.athMovil}</div>
             <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (My Company / Founder · $10M+ Pipeline) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
             <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site">${LOGOS.linkPR}</a>
+            <div class="logo-badge-item" title="Boys &amp; Girls Clubs de PR">${LOGOS.boysAndGirlsClubs}</div>
             <div class="logo-badge-item" title="Microsoft">${LOGOS.microsoft}</div>
             <div class="logo-badge-item" title="Meta">${LOGOS.meta}</div>
             <div class="logo-badge-item" title="Stanford University">${LOGOS.stanford}</div>

@@ -1,13 +1,12 @@
 // ─────────────────────────────────────────────────────────────
-//  Novu Works — The Hybrid Trifecta Executive Showcase
-//  Presents the rare synthesis of Engineering Rigor (4.0 GPA),
-//  World-Class Product Design, and Commercial Growth Marketing ($10M+).
-//  Eliminates overly geeky tropes in favor of executive polish.
+//  BilingualBinaryHero & Fullscreen Tesla-Style Cinematic Intro
+//  Fabián Vélez Vicente — novu.works
+//  The Trifecta of Mastery: Design × Marketing × Engineering
 // ─────────────────────────────────────────────────────────────
 
+import { getLanguage } from './i18n.js';
 import { audio } from './audio.js';
 import { logCandidateEvent } from './firebase.js';
-import { getLanguage } from './i18n.js';
 
 export const DISCIPLINE_DATA = {
   en: {
@@ -19,49 +18,49 @@ export const DISCIPLINE_DATA = {
         icon: '✨',
         pillLabel: 'The Unified Hybrid',
         headline: 'Where Engineering Rigor Meets World-Class Design & Commercial Marketing',
-        body: 'Most engineers write code without aesthetic empathy or commercial focus. Most marketers lack the technical horsepower to build proprietary ad-tech and autonomous AI systems. Fabián bridges the gap — uniting a 4.0 GPA in Computer Engineering, high-end product design sensibility, and a proven track record driving $10M+ in commercial revenue pipelines.',
+        body: 'Most engineers write code without aesthetic empathy or commercial focus. Most marketers lack the technical depth to build proprietary ad-tech and autonomous AI systems. Fabián bridges the gap — uniting a 4.0 GPA in Computer Engineering, high-end product design sensibility, and a proven track record driving $10M+ in verified commercial pipelines.',
         tags: [
           'The Rare Hybrid',
           'Design Craftsmanship',
           'Conversion Architecture',
           'Multi-Channel Growth',
-          'Stanford Innovation Fellow'
+          'Scale Infrastructure'
         ]
       },
       design: {
         id: 'design',
         icon: '🎨',
         pillLabel: 'Product & Experience Design',
-        headline: 'Aesthetic Refinement, Human Emotion & Conversion Architecture',
-        body: 'Obsessed with editorial typography, visual hierarchy, luxury micro-interactions, and frictionless user journeys. Crafting design systems where aesthetic polish meets rigorous usability to elevate brand equity, suppress churn (-83%), and maximize conversion rates across web and mobile.',
+        headline: 'Obsessive Craft, Editorial Polish & Conversion-First User Psychology',
+        body: 'Crafting luxury, high-conversion interfaces where every micro-interaction and typographic hierarchy reinforces brand equity. Proven experience leading product design sprints, creating scalable Figma design systems, and conducting real-time CRO tests that drive quantifiable retention.',
         tags: [
           'Design Systems (Figma)',
           'Editorial Typography',
           'User Psychology & CRO',
           'Interactive 3D / WebGL',
-          'Accessible A11y'
+          'Accessibility (A11y)'
         ]
       },
       marketing: {
         id: 'marketing',
         icon: '📈',
         pillLabel: 'Growth & Performance Marketing',
-        headline: 'Directing $10M+ Commercial Pipelines & Quantitative Media Buying',
-        body: 'Architecting multi-channel paid acquisition (Meta, Google, Programmatic), Server-Side CAPI tracking, full-funnel CRO, and CAC/LTV unit economic models. Scaled 150+ client brand campaigns and produced a verified $10M+ B2B commercial pipeline across digital properties.',
+        headline: 'Driving $10M+ Enterprise Pipelines & Quantitative Programmatic Media',
+        body: 'Architecting multi-channel paid acquisition (Meta, Google, Programmatic), Server-Side CAPI attribution, funnel optimization, and CAC/LTV economic models. 150+ client accounts directed and $10M+ in verified commercial B2B pipeline generated.',
         tags: [
-          '$10M+ Realized Pipeline',
-          'Performance Media Buying',
-          '-83% Churn Suppression',
+          '$10M+ Verified Pipeline',
+          'High-ROI Media Buying',
+          '-83% Churn Reduction',
           'CAC / LTV Modeling',
-          'Ad-Tech & CAPI'
+          'Ad-Tech Infrastructure'
         ]
       },
       engineering: {
         id: 'engineering',
         icon: '⚡',
         pillLabel: 'Computer Engineering (4.0 GPA)',
-        headline: 'Computer Engineering (4.0 GPA) & Agentic AI Systems',
-        body: 'Stanford Innovation Fellow holding a 4.0 GPA in Computer Engineering. Engineering scalable distributed systems, 20+ automated AI agentic workflows (Claude / OpenAI), and enterprise telemetry normalization across 40M+ sessions on edX with zero technical debt.',
+        headline: 'Stanford Innovation Fellow · 4.0 GPA Computer Engineering & Agentic AI',
+        body: 'Stanford Innovation Fellow with a 4.0 GPA in Computer Engineering. Building scalable distributed architectures, 20+ automated agentic AI workflows (Claude / OpenAI), and Databricks data normalization across 40M+ telemetry sessions with zero technical debt.',
         tags: [
           'Computer Engineering (4.0 GPA)',
           'Agentic AI Workflows',
@@ -74,28 +73,28 @@ export const DISCIPLINE_DATA = {
   },
   es: {
     badge_title: 'MÁS ALLÁ DEL CÓDIGO · LA TRIFECTA DE MAESTRÍA',
-    badge_subtitle: 'Un ingeniero de software con excepcional gusto por el diseño e instinto de mercadeo multimillonario.',
+    badge_subtitle: 'Un ingeniero de software con gusto excepcional por el diseño e instinto comercial multimillonario.',
     disciplines: {
       all: {
         id: 'all',
         icon: '✨',
         pillLabel: 'El Híbrido Unificado',
-        headline: 'Donde el Rigor de Ingeniería se Une al Diseño de Clase Mundial y al Mercadeo Comercial',
-        body: 'La mayoría de los ingenieros construyen sin empatía estética ni enfoque comercial. La mayoría de los especialistas en mercadeo carecen de la profundidad técnica para construir sistemas de IA y tecnología publicitaria propietaria. Fabián une un GPA de 4.0 en Ingeniería de Computadoras, una alta sensibilidad de diseño y un historial probado generando más de $10M en pipelines comerciales.',
+        headline: 'Donde el Rigor de Ingeniería se Une al Diseño de Clase Mundial y el Mercadeo Comercial',
+        body: 'La mayoría de los ingenieros programan sin empatía estética ni enfoque comercial. La mayoría de los mercadólogos carecen de la profundidad técnica para construir tecnología publicitaria propietaria y flujos agénticos de IA. Fabián une ambos mundos: 4.0 GPA en Ingeniería de Computadoras, sensibilidad de diseño de producto y un récord comprobado generando más de $10M en pipelines comerciales verificados.',
         tags: [
-          'Híbrido Excepcional',
-          'Maestría de Diseño',
+          'El Híbrido Raro',
+          'Artesanía de Diseño',
           'Arquitectura de Conversión',
           'Crecimiento Multicanal',
-          'Stanford Innovation Fellow'
+          'Infraestructura a Escala'
         ]
       },
       design: {
         id: 'design',
         icon: '🎨',
         pillLabel: 'Diseño de Producto y Experiencia',
-        headline: 'Refinamiento Estético, Emoción Humana y Arquitectura de Conversión',
-        body: 'Obsesión por la tipografía editorial, la jerarquía visual, las microinteracciones de lujo y los flujos sin fricción. Diseñando sistemas donde la sofisticación estética y la usabilidad se unen para elevar la marca, reducir la deserción (-83%) y maximizar la conversión en web y móvil.',
+        headline: 'Artesanía Obsesiva, Pulido Editorial y Psicología de Usuario Enfocada en Conversión',
+        body: 'Diseñando interfaces de lujo y alta conversión donde cada micro-interacción y jerarquía tipográfica refuerza el valor de marca. Experiencia liderando sprints de diseño de producto, sistemas de diseño escalables en Figma y pruebas de CRO en tiempo real que impulsan retención cuantificable.',
         tags: [
           'Sistemas de Diseño (Figma)',
           'Tipografía Editorial',
@@ -141,30 +140,184 @@ export class BilingualBinaryHero {
     this.app = app;
     this.currentDiscipline = 'all';
     this.currentLang = getLanguage() || 'en';
+    this.autoTimer = null;
+    this.isOpen = false;
 
     this.dom = {
-      container: document.getElementById('hero-hybrid-bar'),
-      statementContainer: document.getElementById('hybrid-statement'),
-      badgeTitle: document.querySelector('.hybrid-badge-title'),
-      badgeSubtitle: document.querySelector('.hybrid-subtext'),
-      pills: document.querySelectorAll('.hybrid-pill')
+      introOverlay: document.getElementById('cinematic-master-intro'),
+      btnSkip: document.getElementById('btn-skip-intro'),
+      btnEnter: document.getElementById('btn-enter-portfolio'),
+      progressFill: document.getElementById('intro-progress-fill'),
+      statementContainer: document.getElementById('intro-statement-display'),
+      discCards: document.querySelectorAll('.intro-disc-card'),
+      btnTailorExperience: document.getElementById('btn-tailor-experience'),
+      heroHybridBar: document.getElementById('hero-hybrid-bar')
     };
   }
 
   init() {
     this.bindEvents();
     this.render();
+
+    // Check if cinematic intro should run on initial page load
+    const hasSeenIntro = sessionStorage.getItem('seen_cinematic_intro') === '1';
+    if (!hasSeenIntro && this.dom.introOverlay) {
+      // First visit in this session: Show with cinematic countdown
+      this.openIntro(true);
+    }
   }
 
   bindEvents() {
-    if (!this.dom.container) return;
+    // 1. Skip / Enter buttons
+    if (this.dom.btnSkip) {
+      this.dom.btnSkip.addEventListener('click', () => this.closeIntro());
+    }
+    if (this.dom.btnEnter) {
+      this.dom.btnEnter.addEventListener('click', () => this.closeIntro());
+    }
 
-    this.dom.container.addEventListener('click', (e) => {
-      const pill = e.target.closest('.hybrid-pill');
-      if (pill && pill.dataset.discipline) {
-        this.selectDiscipline(pill.dataset.discipline);
+    // 2. Discipline card clicks in modal
+    if (this.dom.discCards) {
+      this.dom.discCards.forEach((card) => {
+        card.addEventListener('click', () => {
+          const disc = card.dataset.discipline;
+          if (disc) {
+            this.clearAutoTimer();
+            this.selectDiscipline(disc);
+          }
+        });
+      });
+    }
+
+    // 3. Header nav "Tailor Experience" button opens this fullscreen cinematic modal
+    if (this.dom.btnTailorExperience) {
+      this.dom.btnTailorExperience.addEventListener('click', () => {
+        this.openIntro(false); // open without auto-timer so user can deliberate
+      });
+    }
+
+    // 4. Keyboard Shortcuts: Escape to close, 1-4 to select discipline
+    document.addEventListener('keydown', (e) => {
+      if (!this.isOpen) return;
+
+      if (e.key === 'Escape') {
+        this.closeIntro();
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.closeIntro();
+      } else if (e.key === '1') {
+        this.selectDiscipline('all');
+      } else if (e.key === '2') {
+        this.selectDiscipline('design');
+      } else if (e.key === '3') {
+        this.selectDiscipline('marketing');
+      } else if (e.key === '4') {
+        this.selectDiscipline('engineering');
       }
     });
+
+    // 5. Click outside card on backdrop to close
+    if (this.dom.introOverlay) {
+      this.dom.introOverlay.addEventListener('click', (e) => {
+        if (e.target.classList.contains('cinematic-intro-backdrop') || e.target === this.dom.introOverlay) {
+          this.closeIntro();
+        }
+      });
+    }
+  }
+
+  openIntro(withAutoTimer = false) {
+    if (!this.dom.introOverlay) return;
+
+    this.isOpen = true;
+    this.dom.introOverlay.style.display = 'flex';
+    void this.dom.introOverlay.offsetWidth; // force reflow
+    this.dom.introOverlay.classList.add('is-visible');
+
+    try {
+      audio.open();
+    } catch (e) {}
+
+    // Synchronize current role lens from app
+    const activeLens = (this.app && this.app.activeRoleLens) || 'master';
+    const discMap = {
+      master: 'all',
+      growth: 'marketing',
+      design: 'design',
+      systems: 'engineering',
+      all: 'all'
+    };
+    this.currentDiscipline = discMap[activeLens] || 'all';
+    this.updateActiveCardUI(this.currentDiscipline);
+    this.renderStatement();
+
+    if (withAutoTimer) {
+      this.startAutoTimer();
+    } else {
+      this.clearAutoTimer();
+    }
+  }
+
+  closeIntro() {
+    if (!this.dom.introOverlay || !this.isOpen) return;
+
+    this.clearAutoTimer();
+    this.isOpen = false;
+
+    try {
+      audio.click();
+    } catch (e) {}
+
+    try {
+      sessionStorage.setItem('seen_cinematic_intro', '1');
+    } catch (e) {}
+
+    this.dom.introOverlay.classList.remove('is-visible');
+    this.dom.introOverlay.classList.add('is-closing');
+
+    setTimeout(() => {
+      this.dom.introOverlay.style.display = 'none';
+      this.dom.introOverlay.classList.remove('is-closing');
+    }, 380);
+
+    // Apply the selected discipline to the whole portfolio app
+    if (this.app && typeof this.app.setRoleLens === 'function') {
+      const lensMap = {
+        all: 'master',
+        design: 'design',
+        marketing: 'growth',
+        engineering: 'systems'
+      };
+      const lens = lensMap[this.currentDiscipline] || 'master';
+      this.app.setRoleLens(lens);
+    }
+  }
+
+  startAutoTimer() {
+    this.clearAutoTimer();
+
+    if (this.dom.progressFill) {
+      this.dom.progressFill.style.transition = 'none';
+      this.dom.progressFill.style.width = '0%';
+      void this.dom.progressFill.offsetWidth;
+      this.dom.progressFill.style.transition = 'width 3.5s linear';
+      this.dom.progressFill.style.width = '100%';
+    }
+
+    this.autoTimer = setTimeout(() => {
+      this.closeIntro();
+    }, 3600);
+  }
+
+  clearAutoTimer() {
+    if (this.autoTimer) {
+      clearTimeout(this.autoTimer);
+      this.autoTimer = null;
+    }
+    if (this.dom.progressFill) {
+      this.dom.progressFill.style.transition = 'none';
+      this.dom.progressFill.style.width = '0%';
+    }
   }
 
   selectDiscipline(disciplineId) {
@@ -175,15 +328,19 @@ export class BilingualBinaryHero {
       audio.click();
     } catch (e) {}
 
-    // Update active state on pills
-    const pills = this.dom.container.querySelectorAll('.hybrid-pill');
-    pills.forEach((p) => {
-      const isActive = p.dataset.discipline === disciplineId;
-      p.classList.toggle('active', isActive);
-      p.setAttribute('aria-selected', String(isActive));
-    });
-
+    this.updateActiveCardUI(disciplineId);
     this.renderStatement();
+
+    // Inform the main app lens
+    if (this.app && typeof this.app.setRoleLens === 'function') {
+      const lensMap = {
+        all: 'master',
+        design: 'design',
+        marketing: 'growth',
+        engineering: 'systems'
+      };
+      this.app.setRoleLens(lensMap[disciplineId] || 'master');
+    }
 
     try {
       logCandidateEvent('hybrid_discipline_selected', {
@@ -193,34 +350,23 @@ export class BilingualBinaryHero {
     } catch (e) {}
   }
 
+  updateActiveCardUI(disciplineId) {
+    if (this.dom.discCards) {
+      this.dom.discCards.forEach((card) => {
+        const isActive = card.dataset.discipline === disciplineId;
+        card.classList.toggle('active', isActive);
+        card.setAttribute('aria-selected', String(isActive));
+      });
+    }
+  }
+
   setLanguage(lang) {
     this.currentLang = lang === 'es' ? 'es' : 'en';
     this.render();
   }
 
   render() {
-    const langData = DISCIPLINE_DATA[this.currentLang] || DISCIPLINE_DATA.en;
-
-    // Update header tags
-    if (this.dom.badgeTitle) {
-      this.dom.badgeTitle.textContent = langData.badge_title;
-    }
-    if (this.dom.badgeSubtitle) {
-      this.dom.badgeSubtitle.textContent = langData.badge_subtitle;
-    }
-
-    // Update pill texts
-    const pills = this.dom.container ? this.dom.container.querySelectorAll('.hybrid-pill') : [];
-    pills.forEach((p) => {
-      const disc = p.dataset.discipline;
-      if (disc && langData.disciplines[disc]) {
-        const textSpan = p.querySelector('.pill-text');
-        if (textSpan) {
-          textSpan.textContent = `${langData.disciplines[disc].icon} ${langData.disciplines[disc].pillLabel}`;
-        }
-      }
-    });
-
+    this.updateActiveCardUI(this.currentDiscipline);
     this.renderStatement();
   }
 
@@ -232,7 +378,7 @@ export class BilingualBinaryHero {
 
     // Smooth transition
     this.dom.statementContainer.style.opacity = '0';
-    this.dom.statementContainer.style.transform = 'translateY(4px)';
+    this.dom.statementContainer.style.transform = 'translateY(6px)';
 
     setTimeout(() => {
       const tagsHtml = disc.tags
@@ -240,13 +386,16 @@ export class BilingualBinaryHero {
         .join('');
 
       this.dom.statementContainer.innerHTML = `
-        <div class="lens-headline">${disc.headline}</div>
-        <p class="lens-body">${disc.body}</p>
-        <div class="lens-tags-row">${tagsHtml}</div>
+        <div class="intro-statement-header">
+          <span class="statement-icon">${disc.icon}</span>
+          <h3 class="statement-headline">${disc.headline}</h3>
+        </div>
+        <p class="statement-body">${disc.body}</p>
+        <div class="statement-tags-row">${tagsHtml}</div>
       `;
 
       this.dom.statementContainer.style.opacity = '1';
       this.dom.statementContainer.style.transform = 'translateY(0)';
-    }, 120);
+    }, 100);
   }
 }

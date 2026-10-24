@@ -281,8 +281,13 @@
       <h2>Instituciones y Centros Aliados</h2>
       <div class="grid-cards">
         <div class="inst-card">
-          <span class="inst-badge">ORGANIZACIÓN ANCLA</span>
-          <h3 class="inst-title">Boys & Girls Clubs de Puerto Rico</h3>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <img src="assets/logo-bgcpr.jpg" alt="Boys & Girls Clubs de Puerto Rico" style="width: 48px; height: 48px; border-radius: 8px; object-fit: contain; background: #ffffff; padding: 4px;" />
+            <div>
+              <span class="inst-badge">ORGANIZACIÓN ANCLA</span>
+              <h3 class="inst-title" style="margin: 2px 0 0 0;">Boys & Girls Clubs de Puerto Rico</h3>
+            </div>
+          </div>
           <p class="inst-p">
             Ofrece un espacio seguro para aprender, crecer y desarrollar destrezas de vida y empleo para niños y jóvenes en comunidades vulnerables de Puerto Rico.
           </p>
@@ -330,6 +335,13 @@
             <div class="meta-row">🔒 Repositorio Verificado y Seguro en GitHub</div>
           </div>
         </div>
+        <div class="card" style="grid-column: 1 / -1;">
+          <h3 class="card-title">Certificado Oficial · Ganador de Hackathon</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5;">
+            Reconocimiento oficial emitido a Fabián Vélez Vicente por la concepción, desarrollo y despliegue del sistema Hackea por una Causa en apoyo a la juventud de Puerto Rico.
+          </p>
+          <img src="assets/certificado.png" alt="Certificado Hackathon Hackea por una Causa" style="width: 100%; max-width: 520px; border-radius: 12px; border: 1px solid var(--card-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: block;" />
+        </div>
       </div>
     </section>
   </main>
@@ -351,5 +363,6 @@
       event.target.classList.add('active');
     }
   </script>
+  <script src="novu-intro.js" data-project="hackea" defer></script>
 </body>
 </html>

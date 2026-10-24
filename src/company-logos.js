@@ -175,14 +175,65 @@ export const LOGOS = {
   `,
 
   // Official Link Puerto Rico logo directly from https://linkpuertorico.org/
+  // ALL BLUE (#00aeef) across the 3D isometric emblem, LINK wordmark, and PUERTO RICO sub-wordmark
   linkPR: `
     <svg class="comp-logo-svg" viewBox="0 0 1300 480" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Link Puerto Rico Official Logo">
-      <!-- Authentic Cyan 3D Isometric Hexagon Emblem -->
+      <!-- Authentic Cyan/Blue 3D Isometric Hexagon Emblem -->
       <path d="M 138.820 40.363 C 97.196 62.453, 62.920 80.747, 62.650 81.016 C 62.172 81.495, 123.012 119.300, 126.277 120.553 C 127.310 120.949, 134.749 117.657, 146.212 111.731 C 156.270 106.531, 175.975 96.388, 190 89.189 L 215.500 76.102 226 81.895 C 231.775 85.081, 248.650 94.209, 263.500 102.179 C 278.350 110.149, 303.648 123.749, 319.719 132.401 L 348.937 148.133 384.429 129.317 C 403.950 118.967, 419.923 110.275, 419.925 110 C 419.929 109.450, 215.679 -0.061, 214.951 0.100 C 214.703 0.155, 180.444 18.274, 138.820 40.363 M -0 241.671 L -0 361.509 72.750 401.966 C 112.763 424.217, 146.963 443.272, 148.750 444.310 L 152 446.198 151.988 405.849 L 151.976 365.500 136.738 357.238 C 115.069 345.490, 80.262 326.337, 75.250 323.403 L 71 320.916 71 241.646 L 71 162.375 36.414 142.438 C 17.392 131.472, 1.417 122.350, 0.914 122.167 C 0.365 121.967, -0 169.730, -0 241.671 M 172.741 167.634 L 131.981 188.170 132.241 237.140 L 132.500 286.110 173.500 308.052 C 196.050 320.121, 214.950 329.987, 215.500 329.978 C 216.050 329.969, 234.050 320.131, 255.500 308.115 L 294.500 286.267 294.759 237.263 L 295.019 188.259 256.350 167.960 C 235.083 156.796, 216.741 147.535, 215.591 147.380 C 214.419 147.222, 195.587 156.123, 172.741 167.634 M 392.500 204.751 L 360.500 223.500 360 273.481 L 359.500 323.461 326 342.176 C 307.575 352.470, 277.313 369.342, 258.750 379.670 L 225 398.448 225 435.654 L 225 472.859 233.331 468.180 C 237.913 465.606, 282.913 440.109, 333.331 411.521 L 425 359.541 425 272.771 C 425 225.047, 424.887 186.001, 424.750 186.001 C 424.613 186.002, 410.100 194.440, 392.500 204.751" fill="#00aeef" fill-rule="evenodd"/>
-      <!-- Authentic Bold Geometric LINK Wordmark in currentColor -->
-      <path d="M 543 236.483 L 543 359 617 359 L 691 359 691 334.500 L 691 310 642.005 310 L 593.010 310 592.755 212.250 L 592.500 114.500 567.750 114.233 L 543 113.965 543 236.483 M 743 236.500 L 743 359 767.500 359 L 792 359 792 236.500 L 792 114 767.500 114 L 743 114 743 236.500 M 854 235 L 854 360 878.493 360 L 902.986 360 903.243 291.946 L 903.500 223.891 974 291.057 C 1012.775 327.998, 1045.963 359.610, 1047.750 361.307 L 1051 364.392 1051 239.196 L 1051 114 1026.007 114 L 1001.014 114 1000.757 181.437 L 1000.500 248.874 927.610 179.437 C 887.520 141.247, 854.558 110, 854.360 110 C 854.162 110, 854 166.250, 854 235 M 1112 236.500 L 1112 359 1136.491 359 L 1160.982 359 1161.241 307.938 L 1161.500 256.875 1197 307.925 L 1232.500 358.975 1262.309 358.988 C 1285.881 358.997, 1291.966 358.738, 1291.390 357.750 C 1290.989 357.063, 1272.511 330.544, 1250.326 298.820 C 1228.142 267.097, 1209.720 240.435, 1209.389 239.572 C 1209.010 238.584, 1221.753 215.712, 1243.833 177.752 C 1263.108 144.613, 1279.182 116.705, 1279.552 115.734 C 1280.188 114.069, 1278.627 113.984, 1252.012 114.234 L 1223.797 114.500 1192.649 168.272 L 1161.500 222.044 1161.241 168.022 L 1160.983 114 1136.491 114 L 1112 114 1112 236.500" fill="currentColor" fill-rule="evenodd"/>
-      <!-- Official Sub-wordmark PUERTO RICO -->
+      <!-- Authentic Bold Geometric LINK Wordmark — ALL BLUE -->
+      <path d="M 543 236.483 L 543 359 617 359 L 691 359 691 334.500 L 691 310 642.005 310 L 593.010 310 592.755 212.250 L 592.500 114.500 567.750 114.233 L 543 113.965 543 236.483 M 743 236.500 L 743 359 767.500 359 L 792 359 792 236.500 L 792 114 767.500 114 L 743 114 743 236.500 M 854 235 L 854 360 878.493 360 L 902.986 360 903.243 291.946 L 903.500 223.891 974 291.057 C 1012.775 327.998, 1045.963 359.610, 1047.750 361.307 L 1051 364.392 1051 239.196 L 1051 114 1026.007 114 L 1001.014 114 1000.757 181.437 L 1000.500 248.874 927.610 179.437 C 887.520 141.247, 854.558 110, 854.360 110 C 854.162 110, 854 166.250, 854 235 M 1112 236.500 L 1112 359 1136.491 359 L 1160.982 359 1161.241 307.938 L 1161.500 256.875 1197 307.925 L 1232.500 358.975 1262.309 358.988 C 1285.881 358.997, 1291.966 358.738, 1291.390 357.750 C 1290.989 357.063, 1272.511 330.544, 1250.326 298.820 C 1228.142 267.097, 1209.720 240.435, 1209.389 239.572 C 1209.010 238.584, 1221.753 215.712, 1243.833 177.752 C 1263.108 144.613, 1279.182 116.705, 1279.552 115.734 C 1280.188 114.069, 1278.627 113.984, 1252.012 114.234 L 1223.797 114.500 1192.649 168.272 L 1161.500 222.044 1161.241 168.022 L 1160.983 114 1136.491 114 L 1112 114 1112 236.500" fill="#00aeef" fill-rule="evenodd"/>
+      <!-- Official Sub-wordmark PUERTO RICO — ALL BLUE -->
       <text x="548" y="440" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="800" font-size="74" letter-spacing="0.28em" fill="#00aeef">PUERTO RICO</text>
+    </svg>
+  `,
+
+  // Official ATH Móvil (Evertec) Logo
+  athMovil: `
+    <svg class="comp-logo-svg" viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ATH Móvil Official Logo">
+      <rect x="2" y="4" width="40" height="40" rx="10" fill="#ff671b"/>
+      <path d="M 12,24 L 22,34 L 32,14" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="52" y="27" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="900" font-size="18" letter-spacing="-0.02em" fill="#ff671b">ATH</text>
+      <text x="96" y="27" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="800" font-size="18" letter-spacing="-0.02em" fill="#0072ce">MÓVIL</text>
+      <text x="53" y="40" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="700" font-size="8.5" letter-spacing="0.18em" fill="currentColor" opacity="0.7">BUSINESS</text>
+    </svg>
+  `,
+
+  // Official Databricks Lakehouse Platform Logo
+  databricks: `
+    <svg class="comp-logo-svg" viewBox="0 0 210 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Databricks Official Logo">
+      <g transform="translate(6, 6) scale(0.38)">
+        <!-- Databricks 4-layer stacked isometric diamonds in signature red-orange -->
+        <polygon points="45,0 90,26 45,52 0,26" fill="#FF3621"/>
+        <polygon points="45,18 90,44 45,70 0,44" fill="#FF5A43"/>
+        <polygon points="45,36 90,62 45,88 0,62" fill="#FF7865"/>
+        <polygon points="45,54 90,80 45,106 0,80" fill="#FF9A8B"/>
+      </g>
+      <text x="52" y="28" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="800" font-size="17" letter-spacing="-0.02em" fill="currentColor">databricks</text>
+    </svg>
+  `,
+
+  // Official Anthropic Claude AI Logo (Workflows Deployed at Money Group)
+  claude: `
+    <svg class="comp-logo-svg" viewBox="0 0 190 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Anthropic Claude AI Official Logo">
+      <!-- Signature Terracotta Spark Icon -->
+      <g transform="translate(6, 7) scale(0.68)">
+        <polygon points="22,0 26,14 40,16 28,24 33,38 20,30 9,40 12,25 0,18 15,14" fill="#d97757"/>
+      </g>
+      <text x="44" y="27" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="800" font-size="16" letter-spacing="-0.01em" fill="currentColor">Claude</text>
+      <text x="110" y="27" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="600" font-size="11" letter-spacing="0.08em" fill="#d97757">AI</text>
+    </svg>
+  `,
+
+  // Official Boys & Girls Clubs de Puerto Rico Logo (Partner in Hackea PR & Liza Project)
+  boysAndGirlsClubs: `
+    <svg class="comp-logo-svg" viewBox="0 0 240 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Boys & Girls Clubs Official Logo">
+      <!-- Official Clasping Hands in Signature Azure Blue -->
+      <g transform="translate(4, 5) scale(0.40)">
+        <circle cx="50" cy="50" r="48" fill="#005a9c"/>
+        <path d="M 30,55 C 30,45 42,32 52,42 C 60,34 72,45 72,55 C 72,68 51,80 51,80 C 51,80 30,68 30,55 Z" fill="#ffffff"/>
+      </g>
+      <text x="54" y="22" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="800" font-size="12" letter-spacing="0.04em" fill="#005a9c">BOYS &amp; GIRLS CLUBS</text>
+      <text x="54" y="38" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="700" font-size="10.5" letter-spacing="0.12em" fill="currentColor">DE PUERTO RICO</text>
     </svg>
   `,
 
