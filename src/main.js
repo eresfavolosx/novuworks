@@ -1,12 +1,12 @@
 // ─────────────────────────────────────────────────────────────
-//  Fabián Vélez Vicente — Executive Portfolio & Interactive HUD
-//  Performance Marketing Lead · Technical Consultant · AI Engineer
+//  Fabián Vélez Vicente — Executive Portfolio & Interactive Atelier
+//  Performance Marketing Lead · Level ICS4 · Technical Consultant
+//  Minimalist Luxury · Fluid Motion & Choreographed Animations
 // ─────────────────────────────────────────────────────────────
 
 import { SpatialCanvas3D } from './canvas3d.js';
 import { ArchitecturePlanner } from './planner.js';
 import { CommandPalette } from './command-palette.js';
-import { LiveTelemetryManager } from './live-telemetry.js';
 import { AIGrowthLab } from './ai-lab.js';
 import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
@@ -15,7 +15,6 @@ class FabianPortfolioApp {
   constructor() {
     this.currentView = 'core';
     this.isTeslaMode = localStorage.getItem('fabian_tesla_mode') === 'true';
-    this.isFoldMode = false;
     this.canvas3d = null;
 
     this.dom = {
@@ -31,31 +30,34 @@ class FabianPortfolioApp {
       btnAudioToggle: document.getElementById('btn-audio-toggle'),
       btnCmdPalette: document.getElementById('btn-cmd-palette'),
       btnPrintResume: document.getElementById('btn-print-resume'),
-      telemFps: document.getElementById('telem-fps'),
-      telemDraws: document.getElementById('telem-draws'),
     };
 
     this.init();
   }
 
   init() {
-    // 1. Render all HTML content FIRST to guarantee DOM readiness
+    // 1. Dynamic Cursor Spotlight (Follows mouse/pointer coordinates smoothly)
+    window.addEventListener('pointermove', (e) => {
+      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    }, { passive: true });
+
+    // 2. Render all dynamic content FIRST to guarantee DOM readiness
     try {
       this.renderCaseStudies();
       this.renderCompetencyMatrix();
-      this.renderLiveHudBar();
     } catch (e) {
       console.error('Render error:', e);
     }
 
-    // 2. Bind Event Handlers IMMEDIATELY so buttons are 100% responsive
+    // 3. Bind Event Handlers IMMEDIATELY
     try {
       this.bindEvents();
     } catch (e) {
       console.error('Events binding error:', e);
     }
 
-    // 3. Initialize Interactive Components
+    // 4. Initialize Interactive Components
     try {
       if (this.dom.plannerMount) {
         this.planner = new ArchitecturePlanner(this.dom.plannerMount, (pillarId) => {
@@ -72,15 +74,6 @@ class FabianPortfolioApp {
       }
     } catch (e) {
       console.warn('AI Lab init caught:', e);
-    }
-
-    // 4. Initialize Live Telemetry
-    try {
-      this.telemetry = new LiveTelemetryManager((data) => {
-        this.updateLiveHud(data);
-      });
-    } catch (e) {
-      console.warn('Telemetry init caught:', e);
     }
 
     // 5. Initialize Command Palette
@@ -103,107 +96,63 @@ class FabianPortfolioApp {
         this.canvas3d = new SpatialCanvas3D(this.dom.webglContainer, (discipline) => {
           this.openDisciplineModal(discipline);
         });
-
-        if (this.canvas3d && this.canvas3d.isAvailable) {
-          this.canvas3d.onTelemetryUpdate = (metrics) => {
-            if (this.dom.telemFps) this.dom.telemFps.textContent = `${metrics.fps} FPS`;
-            if (this.dom.telemDraws) this.dom.telemDraws.textContent = `${metrics.drawCalls}`;
-          };
-        }
       }
     } catch (e) {
       console.warn('3D Canvas safely in fallback mode:', e);
     }
 
-    // 7. Apply saved states
+    // 7. Apply saved preferences
     if (this.isTeslaMode) {
       document.body.classList.add('tesla-mode');
       this.updateTeslaButton(true);
     }
     this.syncAudioButton();
+
+    // 8. Run initial metric count-up animation
+    this.animateCounters();
   }
 
-  renderLiveHudBar() {
-    const existing = document.getElementById('live-telemetry-hud');
-    if (existing) existing.remove();
+  // ─────────────────────────────────────────────────────────────
+  // Smooth Ease-Out-Expo Number Counter Animation
+  // ─────────────────────────────────────────────────────────────
+  animateCounters() {
+    const counterElements = document.querySelectorAll('.m-number[data-target]');
+    counterElements.forEach((el) => {
+      const target = parseFloat(el.dataset.target) || 0;
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800; // ms
+      const startTime = performance.now();
 
-    const hudBar = document.createElement('div');
-    hudBar.id = 'live-telemetry-hud';
-    hudBar.className = 'live-hud-strip glass-bar';
-    hudBar.innerHTML = `
-      <div class="hud-stream-item">
-        <span class="hud-label">PUERTO RICO HQ</span>
-        <span class="hud-data" id="hud-pr-time">21:45:00 AST</span>
-      </div>
-      <div class="hud-stream-item">
-        <span class="hud-label">EDGE LATENCY</span>
-        <span class="hud-data pulse-text" id="hud-ping">24ms (Optimal)</span>
-      </div>
-      <div class="hud-stream-item market-ticker">
-        <span class="hud-label">LIVE DATA</span>
-        <span class="hud-data" id="hud-market">BTC $80,800 · ETH $2,375 · SOL $102.4</span>
-      </div>
-      <div class="hud-stream-item hw-detector">
-        <span class="hud-label">DEVICE & GPU</span>
-        <span class="hud-data" id="hud-gpu">Hardware Accelerated</span>
-      </div>
-      <div class="hud-stream-item fold-control">
-        <button type="button" class="fold-btn" id="btn-toggle-fold" title="Toggle Foldable Dual-Screen Mode">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>
-          <span id="fold-btn-text">Fold Mode (135°)</span>
-        </button>
-      </div>
-    `;
+      const updateCount = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // EaseOutExpo: 1 - pow(2, -10 * progress)
+        const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const currentVal = Math.round(target * easeProgress);
 
-    const main = document.querySelector('.main-viewport');
-    if (main && main.parentNode) {
-      main.parentNode.insertBefore(hudBar, main);
-    }
+        el.textContent = `${prefix}${currentVal}${suffix}`;
 
-    document.getElementById('btn-toggle-fold')?.addEventListener('click', () => {
-      this.toggleFoldMode();
+        if (progress < 1) {
+          requestAnimationFrame(updateCount);
+        } else {
+          el.textContent = `${prefix}${target}${suffix}`;
+        }
+      };
+
+      requestAnimationFrame(updateCount);
     });
   }
 
-  updateLiveHud(data) {
-    const prTimeEl = document.getElementById('hud-pr-time');
-    const pingEl = document.getElementById('hud-ping');
-    const marketEl = document.getElementById('hud-market');
-    const gpuEl = document.getElementById('hud-gpu');
-
-    if (prTimeEl && data.clocks) prTimeEl.textContent = data.clocks.prTime;
-    if (pingEl && data.ping) pingEl.textContent = `${data.ping.edgeLatency}ms (${data.ping.status})`;
-    if (marketEl && data.markets) {
-      marketEl.textContent = `BTC $${data.markets.btc} · ETH $${data.markets.eth} · SOL $${data.markets.sol}`;
-    }
-    if (gpuEl && data.hardware) {
-      gpuEl.textContent = `${data.hardware.gpu.slice(0, 24)} · ${data.hardware.battery}`;
-    }
-  }
-
-  toggleFoldMode() {
-    this.isFoldMode = !this.isFoldMode;
-    let active = this.isFoldMode;
-    if (this.telemetry) {
-      active = this.telemetry.toggleVirtualFold(this.isFoldMode);
-    } else {
-      document.body.classList.toggle('virtual-fold-mode', this.isFoldMode);
-    }
-
-    const btnText = document.getElementById('fold-btn-text');
-    if (btnText) {
-      btnText.textContent = active ? 'Flat Mode (180°)' : 'Fold Mode (135°)';
-    }
-    audio.confirm();
-    this.showToast(active ? 'Foldable Dual-Screen Posture: Active' : 'Standard Viewport Restored');
-  }
-
+  // ─────────────────────────────────────────────────────────────
+  // Case Studies Rendering
+  // ─────────────────────────────────────────────────────────────
   renderCaseStudies() {
     if (!this.dom.caseStudiesMount) return;
     this.dom.caseStudiesMount.innerHTML = PROFILE.caseStudies.map((cs) => `
-      <div class="case-card solid-card" data-case-id="${cs.id}" style="--case-color: ${cs.color};">
+      <div class="case-card" data-case-id="${cs.id}">
         <div class="case-badge-row">
-          <span class="case-pill" style="color: ${cs.color}; border-color: ${cs.color};">${cs.badge}</span>
+          <span class="case-pill">${cs.badge}</span>
           <span class="case-company">${cs.company}</span>
         </div>
         <h3 class="case-title">${cs.title}</h3>
@@ -213,16 +162,16 @@ class FabianPortfolioApp {
         <div class="case-metric-row">
           ${Object.entries(cs.metrics).map(([k, val]) => `
             <div class="case-metric-box">
-              <span class="case-m-val text-gradient">${val}</span>
+              <span class="case-m-val">${val}</span>
               <span class="case-m-key">${k.toUpperCase()}</span>
             </div>
           `).join('')}
         </div>
 
-        <div class="case-cta-strip">
-          <span>Read Full Architectural Breakdown</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </div>
+        <button type="button" class="case-action-btn">
+          <span>Inspect Strategic Case Brief</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </button>
       </div>
     `).join('');
 
@@ -238,77 +187,97 @@ class FabianPortfolioApp {
     });
   }
 
+  // ─────────────────────────────────────────────────────────────
+  // Competency Matrix Table
+  // ─────────────────────────────────────────────────────────────
   renderCompetencyMatrix() {
     if (!this.dom.competencyMatrixMount) return;
     this.dom.competencyMatrixMount.innerHTML = `
-      <div class="comp-matrix-grid">
-        ${PROFILE.coreCompetencyMatrix.map((col) => `
-          <div class="comp-matrix-col solid-card">
-            <h4 class="comp-col-title">${col.category}</h4>
-            <ul class="comp-skill-list">
-              ${col.skills.map((s) => `<li><span class="comp-bullet">▹</span> ${s}</li>`).join('')}
-            </ul>
-          </div>
-        `).join('')}
-      </div>
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            ${PROFILE.coreCompetencyMatrix.map((col) => `<th>${col.category}</th>`).join('')}
+          </tr>
+        </thead>
+        <tbody>
+          ${[0, 1, 2, 3, 4].map((rowIndex) => `
+            <tr>
+              ${PROFILE.coreCompetencyMatrix.map((col) => `
+                <td>${col.skills[rowIndex] || '—'}</td>
+              `).join('')}
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
     `;
   }
 
+  // ─────────────────────────────────────────────────────────────
+  // Modal Handlers (Case Studies & Disciplines)
+  // ─────────────────────────────────────────────────────────────
   openCaseStudyModal(cs) {
     if (!this.dom.disciplineModal || !this.dom.dialogContentBody) return;
     this.dom.dialogContentBody.innerHTML = `
-      <button type="button" class="modal-close-btn" id="btn-close-modal" aria-label="Close modal">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-
-      <div style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: ${cs.color}; margin-bottom: 6px;">
-        ${cs.badge} · ${cs.company}
+      <div class="dialog-header">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light);">
+            ${cs.badge} · ${cs.company}
+          </span>
+          <h2 id="modal-disc-title" style="font-size: 26px; font-weight: 800; color: #ffffff; margin-top: 4px; line-height: 1.25;">
+            ${cs.title}
+          </h2>
+        </div>
+        <button type="button" class="dialog-close-btn" id="btn-close-modal" aria-label="Close dialog">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
-      <h2 id="modal-disc-title" style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-bottom: 12px; line-height: 1.2;">${cs.title}</h2>
-      <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 24px;">${cs.summary}</p>
 
-      <!-- Key Metrics Row -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px;">
-        ${Object.entries(cs.metrics).map(([k, val]) => `
-          <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-subtle); padding: 16px; border-radius: 10px;">
-            <div style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: #ffffff;">${val}</div>
-            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: #a5b4fc; text-transform: uppercase; margin-top: 4px;">${k}</div>
+      <div class="dialog-body">
+        <p style="color: var(--text-body); font-size: 15px; line-height: 1.7; margin-bottom: 24px;">
+          ${cs.summary}
+        </p>
+
+        <!-- Key Metrics Row -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px;">
+          ${Object.entries(cs.metrics).map(([k, val]) => `
+            <div style="background: #000000; border: 1px solid var(--hairline-gold); padding: 14px 18px; border-radius: var(--radius-sm);">
+              <div style="font-size: 22px; font-weight: 800; color: var(--gold-light);">${val}</div>
+              <div style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-top: 3px;">${k}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- 4-Pillar Narrative Cadence -->
+        <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px;">
+          <div style="background: rgba(0, 0, 0, 0.4); border-left: 3px solid #ff5f56; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #ff857f; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">1. Context & Scaling Friction:</strong>
+            <p style="font-size: 14px; color: #ffffff; line-height: 1.65;">${cs.challenge}</p>
           </div>
-        `).join('')}
-      </div>
 
-      <!-- 4-Pillar Narrative Cadence -->
-      <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px;">
-        <div style="background: rgba(18, 14, 30, 0.9); border-left: 4px solid #ef4444; padding: 16px; border-radius: 0 10px 10px 0;">
-          <strong style="color: #fca5a5; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.04em;">1. Context & Scaling Friction:</strong>
-          <p style="font-size: 0.98rem; color: #ffffff; margin-top: 6px; line-height: 1.6;">${cs.challenge}</p>
+          <div style="background: rgba(0, 0, 0, 0.4); border-left: 3px solid #ffbd2e; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #ffcf66; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">2. Strategic Hypothesis:</strong>
+            <p style="font-size: 14px; color: #ffffff; line-height: 1.65;">${cs.strategy}</p>
+          </div>
+
+          <div style="background: rgba(0, 0, 0, 0.4); border-left: 3px solid #3b82f6; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #93c5fd; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">3. Dev & Cross-Functional Execution:</strong>
+            <p style="font-size: 14px; color: #ffffff; line-height: 1.65;">${cs.execution}</p>
+          </div>
+
+          <div style="background: rgba(0, 0, 0, 0.4); border-left: 3px solid #27c93f; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #6ee7b7; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">4. Bottom-Line Impact & Permanence:</strong>
+            <p style="font-size: 14px; color: #ffffff; line-height: 1.65;">${cs.impact}</p>
+          </div>
         </div>
 
-        <div style="background: rgba(18, 14, 30, 0.9); border-left: 4px solid #f59e0b; padding: 16px; border-radius: 0 10px 10px 0;">
-          <strong style="color: #fde68a; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.04em;">2. Strategic Hypothesis:</strong>
-          <p style="font-size: 0.98rem; color: #ffffff; margin-top: 6px; line-height: 1.6;">${cs.strategy}</p>
-        </div>
-
-        <div style="background: rgba(18, 14, 30, 0.9); border-left: 4px solid #3b82f6; padding: 16px; border-radius: 0 10px 10px 0;">
-          <strong style="color: #93c5fd; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.04em;">3. Execution & Cross-Functional Delivery:</strong>
-          <p style="font-size: 0.98rem; color: #ffffff; margin-top: 6px; line-height: 1.6;">${cs.execution}</p>
-        </div>
-
-        <div style="background: rgba(18, 14, 30, 0.9); border-left: 4px solid #10b981; padding: 16px; border-radius: 0 10px 10px 0;">
-          <strong style="color: #6ee7b7; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.04em;">4. Bottom-Line Impact & Permanent Infrastructure:</strong>
-          <p style="font-size: 0.98rem; color: #ffffff; margin-top: 6px; line-height: 1.6;">${cs.impact}</p>
-        </div>
-      </div>
-
-      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-        <a href="mailto:fabianvvicente1@gmail.com?subject=Growth%20Engineering%20Inquiry%20-%20${encodeURIComponent(cs.title)}" class="primary-btn" style="flex: 1;">
-          <span>Contact Fabián to Discuss Similar Architecture</span>
+        <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20${encodeURIComponent(cs.title)}" class="luxury-btn primary-gold" style="width: 100%; justify-content: center;">
+          <span>Schedule an Executive Growth Interview</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
         </a>
       </div>
     `;
 
     this.dom.disciplineModal.showModal();
-
     this.dom.dialogContentBody.querySelector('#btn-close-modal')?.addEventListener('click', () => {
       this.dom.disciplineModal.close();
       audio.click(800);
@@ -318,45 +287,62 @@ class FabianPortfolioApp {
   openDisciplineModal(disc) {
     if (!this.dom.disciplineModal || !this.dom.dialogContentBody) return;
     this.dom.dialogContentBody.innerHTML = `
-      <button type="button" class="modal-close-btn" id="btn-close-modal" aria-label="Close modal">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-
-      <div class="modal-badge" style="color: ${disc.color}; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">
-        ${disc.number} · Core Discipline
-      </div>
-      <h2 id="modal-disc-title" style="font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">${disc.title}</h2>
-      <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 24px;">${disc.subtitle}</p>
-
-      <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 18px; margin-bottom: 24px;">
-        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; color: #a5b4fc; margin-bottom: 10px;">Key Deliverables:</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
-          ${disc.deliverables.map((item) => `<li style="display: flex; gap: 10px; font-size: 0.96rem; color: #ffffff;"><span style="color:${disc.color}; font-weight: bold;">✔</span> ${item}</li>`).join('')}
-        </ul>
-      </div>
-
-      <div style="margin-bottom: 24px;">
-        <h4 style="font-family: var(--font-mono); font-size: 0.82rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px;">Core Tech Stack:</h4>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-          ${disc.tech.map((t) => `<span style="font-family: var(--font-mono); font-size: 0.84rem; padding: 6px 12px; background: rgba(255,255,255,0.08); border-radius: 6px; border: 1px solid var(--border-subtle); color: #ffffff;">${t}</span>`).join('')}
+      <div class="dialog-header">
+        <div>
+          <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light);">
+            ${disc.number} · Architecture Discipline
+          </span>
+          <h2 id="modal-disc-title" style="font-size: 26px; font-weight: 800; color: #ffffff; margin-top: 4px;">
+            ${disc.title}
+          </h2>
         </div>
+        <button type="button" class="dialog-close-btn" id="btn-close-modal" aria-label="Close dialog">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
 
-      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-        <a href="mailto:fabianvvicente1@gmail.com?subject=Consulting%20Inquiry%20-%20${encodeURIComponent(disc.title)}" class="primary-btn" style="flex: 1;">
-          <span>Schedule Strategy Session</span>
+      <div class="dialog-body">
+        <p style="color: var(--text-body); font-size: 15px; line-height: 1.7; margin-bottom: 24px;">
+          ${disc.subtitle}
+        </p>
+
+        <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--hairline); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 24px;">
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 12px;">Key Engineering Deliverables:</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+            ${disc.deliverables.map((item) => `
+              <li style="display: flex; gap: 10px; font-size: 14px; color: #ffffff;">
+                <span style="color: var(--gold-primary);">✓</span> ${item}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <div style="margin-bottom: 28px;">
+          <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;">Production Tech Stack:</h4>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            ${disc.tech.map((t) => `
+              <span style="font-family: var(--font-mono); font-size: 12px; padding: 6px 14px; background: rgba(255,255,255,0.04); border-radius: var(--radius-pill); border: 1px solid var(--hairline); color: #ffffff;">${t}</span>
+            `).join('')}
+          </div>
+        </div>
+
+        <a href="mailto:fabianvvicente1@gmail.com?subject=Consulting%20Inquiry%20-%20${encodeURIComponent(disc.title)}" class="luxury-btn primary-gold" style="width: 100%; justify-content: center;">
+          <span>Schedule Strategy Consultation</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
         </a>
       </div>
     `;
 
     this.dom.disciplineModal.showModal();
-
     this.dom.dialogContentBody.querySelector('#btn-close-modal')?.addEventListener('click', () => {
       this.dom.disciplineModal.close();
       audio.click(800);
     });
   }
 
+  // ─────────────────────────────────────────────────────────────
+  // Event Binding
+  // ─────────────────────────────────────────────────────────────
   bindEvents() {
     // Navigation Tabs (Desktop & Mobile)
     document.querySelectorAll('.nav-tab, .dock-btn').forEach((btn) => {
@@ -366,13 +352,13 @@ class FabianPortfolioApp {
       });
     });
 
-    // Brand click returns to core view
+    // Brand Home Link
     document.getElementById('brand-home')?.addEventListener('click', (e) => {
       e.preventDefault();
       this.switchView('core');
     });
 
-    // Hero action buttons
+    // Hero Action Buttons
     document.getElementById('btn-explore-case-studies')?.addEventListener('click', () => {
       this.switchView('case-studies');
     });
@@ -381,14 +367,10 @@ class FabianPortfolioApp {
       this.switchView('ai-lab');
     });
 
-    document.getElementById('btn-view-dossier')?.addEventListener('click', () => {
-      this.switchView('dossier');
-    });
-
-    // 3D Morph buttons
-    document.querySelectorAll('.morph-btn').forEach((btn) => {
+    // 3D Sculpture Switcher Pills
+    document.querySelectorAll('.sculpture-pill, .morph-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.morph-btn').forEach((b) => b.classList.remove('active'));
+        document.querySelectorAll('.sculpture-pill, .morph-btn').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
         const morphIndex = parseInt(btn.dataset.morph, 10);
         if (this.canvas3d) this.canvas3d.setMorphState(morphIndex);
@@ -410,13 +392,13 @@ class FabianPortfolioApp {
       if (this.cmdPalette) this.cmdPalette.open();
     });
 
-    // Print Resume
+    // Print Resume (PDF Export)
     this.dom.btnPrintResume?.addEventListener('click', () => {
       audio.confirm();
       window.print();
     });
 
-    // Global Key Shortcuts (1-5 to switch views)
+    // Keyboard Shortcuts (1-5 for Views)
     window.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.key === '1') this.switchView('core');
@@ -426,7 +408,7 @@ class FabianPortfolioApp {
       if (e.key === '5') this.switchView('dossier');
     });
 
-    // Modal light-dismiss on backdrop click
+    // Modal click-outside backdrop dismiss
     this.dom.disciplineModal?.addEventListener('click', (e) => {
       if (e.target === this.dom.disciplineModal) {
         this.dom.disciplineModal.close();
@@ -434,7 +416,11 @@ class FabianPortfolioApp {
     });
   }
 
+  // ─────────────────────────────────────────────────────────────
+  // View Switcher with Choreographed Animations
+  // ─────────────────────────────────────────────────────────────
   switchView(viewName) {
+    if (this.currentView === viewName) return;
     this.currentView = viewName;
     audio.click(1300);
 
@@ -443,40 +429,52 @@ class FabianPortfolioApp {
       btn.classList.toggle('active', btn.dataset.view === viewName);
     });
 
-    // Toggle View Sections
+    // Fade and slide views
     const views = ['core', 'case-studies', 'ai-lab', 'planner', 'dossier'];
     views.forEach((v) => {
       const el = document.getElementById(`view-${v}`);
       if (el) {
         if (v === viewName) {
           el.classList.remove('hidden');
+          // Force reflow for smooth CSS entry transition
+          void el.offsetWidth;
           el.classList.add('active');
         } else {
-          el.classList.add('hidden');
           el.classList.remove('active');
+          setTimeout(() => {
+            if (this.currentView !== v) el.classList.add('hidden');
+          }, 350);
         }
       }
     });
 
-    // Adjust 3D Camera if canvas exists
+    // Trigger number counter animations on returning to overview
+    if (viewName === 'core') {
+      this.animateCounters();
+    }
+
+    // Dynamic 3D Camera Positioning based on view context
     if (this.canvas3d && this.canvas3d.camera) {
-      if (viewName === 'core') this.canvas3d.camera.position.set(0, 0, 48);
-      else if (viewName === 'case-studies') this.canvas3d.camera.position.set(0, 16, 54);
-      else if (viewName === 'ai-lab') this.canvas3d.camera.position.set(-14, 8, 52);
-      else if (viewName === 'planner') this.canvas3d.camera.position.set(16, 6, 56);
-      else this.canvas3d.camera.position.set(-18, 5, 54);
+      if (viewName === 'core') this.canvas3d.camera.position.set(0, 0, 46);
+      else if (viewName === 'case-studies') this.canvas3d.camera.position.set(0, 14, 52);
+      else if (viewName === 'ai-lab') this.canvas3d.camera.position.set(-12, 6, 50);
+      else if (viewName === 'planner') this.canvas3d.camera.position.set(14, 5, 52);
+      else this.canvas3d.camera.position.set(-16, 4, 52);
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // ─────────────────────────────────────────────────────────────
+  // Preferences & Toggles
+  // ─────────────────────────────────────────────────────────────
   toggleTeslaMode() {
     this.isTeslaMode = !this.isTeslaMode;
     localStorage.setItem('fabian_tesla_mode', String(this.isTeslaMode));
     document.body.classList.toggle('tesla-mode', this.isTeslaMode);
     this.updateTeslaButton(this.isTeslaMode);
     audio.confirm();
-    this.showToast(this.isTeslaMode ? 'Tesla In-Car Touch HUD Activated' : 'Tesla Mode Disabled');
+    this.showToast(this.isTeslaMode ? 'Tesla Touch HUD: Enabled' : 'Standard Viewport Restored');
   }
 
   updateTeslaButton(active) {
@@ -491,7 +489,7 @@ class FabianPortfolioApp {
   toggleAudio() {
     const isMuted = audio.toggleMute();
     this.syncAudioButton();
-    this.showToast(isMuted ? 'Audio Feedback Muted' : 'Executive Audio Active');
+    this.showToast(isMuted ? 'Acoustic Feedback Muted' : 'Tactile Audio Active');
   }
 
   syncAudioButton() {
@@ -506,28 +504,29 @@ class FabianPortfolioApp {
 
   cycleMorph() {
     if (!this.canvas3d) return;
-    const current = this.canvas3d.targetMorph;
+    const current = this.canvas3d.activeMode;
     const next = (current + 1) % 3;
     this.canvas3d.setMorphState(next);
-    document.querySelectorAll('.morph-btn').forEach((b) => {
+    document.querySelectorAll('.sculpture-pill, .morph-btn').forEach((b) => {
       b.classList.toggle('active', parseInt(b.dataset.morph, 10) === next);
     });
-    this.showToast(`3D Matrix: ${['NW Monogram', 'Growth Topology', 'Quantum AI Core'][next]}`);
+    const names = ['NW Monogram', 'Möbius Growth Flow', 'Quantum AI Prism'];
+    this.showToast(`3D Matrix: ${names[next]}`);
   }
 
   showToast(message) {
     const banner = this.dom.toastBanner;
     if (!banner) return;
     banner.textContent = message;
-    banner.classList.add('show');
+    banner.classList.add('visible');
     clearTimeout(this.toastTimer);
     this.toastTimer = setTimeout(() => {
-      banner.classList.remove('show');
+      banner.classList.remove('visible');
     }, 2400);
   }
 }
 
-// Boot application immediately
+// Boot application when DOM is ready
 window.addEventListener('DOMContentLoaded', () => {
   new FabianPortfolioApp();
 });

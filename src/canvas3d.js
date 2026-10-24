@@ -1,6 +1,10 @@
 // ─────────────────────────────────────────────────────────────
-//  Novu Works — 3D Spatial Canvas (Three.js WebGL2 Engine)
-//  Resilient: Gracefully catches WebGL context creation errors.
+//  Fabián Vélez Vicente — Luxury 3D Spatial Canvas (Three.js WebGL)
+//  Minimalist · Gallery-Grade · Gold & Titanium Physical Materials
+//  Three Interactive Morphing Sculptures:
+//    01: NW Monogram (Gold & Platinum Particle Matrix)
+//    02: Möbius Growth Flow (Liquid Titanium Parametric Ribbon)
+//    03: Quantum AI Prism (Obsidian & Gold Faceted Monolith)
 // ─────────────────────────────────────────────────────────────
 
 import * as THREE from 'three';
@@ -20,7 +24,7 @@ export class SpatialCanvas3D {
     this.clock = new THREE.Clock();
     this.isAvailable = false;
 
-    // Interaction states
+    // Interaction & inertia state
     this.pointer = new THREE.Vector2(0, 0);
     this.pointerTarget = new THREE.Vector2(0, 0);
     this.raycaster = new THREE.Raycaster();
@@ -28,11 +32,12 @@ export class SpatialCanvas3D {
     this.isDragging = false;
     this.dragStart = { x: 0, y: 0 };
     this.rotationVelocity = { x: 0, y: 0 };
-    this.worldRotation = { x: 0.15, y: 0 };
+    this.worldRotation = { x: 0.12, y: 0 };
+    this.targetWorldRotation = { x: 0.12, y: 0 };
 
-    // Morph state: 0 = Monogram, 1 = Growth Topology, 2 = Quantum Core
-    this.morphProgress = 0;
-    this.targetMorph = 0;
+    // Morph state: 0 = Monogram, 1 = Ribbon, 2 = AI Prism
+    this.activeMode = 0;
+    this.modeTransitions = [1, 0, 0]; // opacities/scales of the 3 modes
 
     // Telemetry tracking
     this.fps = 60;
@@ -47,13 +52,13 @@ export class SpatialCanvas3D {
     try {
       // 1. Scene
       this.scene = new THREE.Scene();
-      this.scene.fog = new THREE.FogExp2(0x06050b, 0.012);
+      this.scene.fog = new THREE.FogExp2(0x050507, 0.015);
 
-      // 2. Camera
-      this.camera = new THREE.PerspectiveCamera(50, this.width / this.height, 0.1, 1000);
-      this.camera.position.set(0, 0, 48);
+      // 2. Camera with cinematic focal length
+      this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 0.1, 1000);
+      this.camera.position.set(0, 0, 46);
 
-      // 3. Renderer with safe fallback
+      // 3. High-Performance WebGL Renderer
       this.renderer = new THREE.WebGLRenderer({
         powerPreference: 'high-performance',
         antialias: true,
@@ -62,78 +67,88 @@ export class SpatialCanvas3D {
       this.renderer.setSize(this.width, this.height);
       this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       this.renderer.setClearColor(0x000000, 0);
+      this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      this.renderer.toneMappingExposure = 1.15;
       this.container.appendChild(this.renderer.domElement);
       this.isAvailable = true;
 
-      // 4. Lighting
-      const ambient = new THREE.AmbientLight(0xffffff, 0.7);
-      this.scene.add(ambient);
+      // 4. Luxury Gallery Lighting (Warm Gold Key, Champagne Rim, Deep Obsidian Fill)
+      const ambientLight = new THREE.AmbientLight(0xfff8ee, 0.65);
+      this.scene.add(ambientLight);
 
-      const dirLight1 = new THREE.DirectionalLight(0xe0566a, 2.0);
-      dirLight1.position.set(20, 30, 20);
-      this.scene.add(dirLight1);
+      const keyLight = new THREE.DirectionalLight(0xffe6b3, 2.4);
+      keyLight.position.set(24, 32, 24);
+      this.scene.add(keyLight);
 
-      const dirLight2 = new THREE.DirectionalLight(0x3d63e6, 2.5);
-      dirLight2.position.set(-20, -20, 20);
-      this.scene.add(dirLight2);
+      const rimLight = new THREE.DirectionalLight(0xd4af37, 2.0);
+      rimLight.position.set(-24, -20, 18);
+      this.scene.add(rimLight);
 
-      // 5. Build 3D Objects
+      const topLight = new THREE.PointLight(0xffffff, 1.2, 80);
+      topLight.position.set(0, 25, 10);
+      this.scene.add(topLight);
+
+      // 5. Root Transform Group
       this.rootGroup = new THREE.Group();
       this.scene.add(this.rootGroup);
 
-      this.buildParticleCloud();
+      // Build Sculptures
+      this.buildParticleMonogram();
+      this.buildMobiusRibbon();
+      this.buildQuantumPrism();
+      this.buildAmbientDust();
       this.buildArchitecturePillars();
-      this.buildGridGround();
 
-      // 6. Event Listeners
+      // 6. Bind Event Listeners
       this.bindEvents();
 
-      // 7. Start Loop
+      // 7. Start Render Loop
       this.animate();
     } catch (err) {
-      console.warn('WebGL initialization caught gracefully. App running in standard graphics mode:', err);
+      console.warn('WebGL initialization fallback:', err);
       this.isAvailable = false;
       this.container.style.display = 'none';
     }
   }
 
-  buildParticleCloud() {
-    const COUNT = 3200;
-    const posA = new Float32Array(COUNT * 3); // Logo shape
-    const posB = new Float32Array(COUNT * 3); // Topology lattice
-    const posC = new Float32Array(COUNT * 3); // Dynamic sphere
+  // ─────────────────────────────────────────────────────────────
+  // 01: NW Monogram Emblem (Gold & Platinum Particle Matrix)
+  // ─────────────────────────────────────────────────────────────
+  buildParticleMonogram() {
+    const COUNT = 3400;
+    const positions = new Float32Array(COUNT * 3);
     const colors = new Float32Array(COUNT * 3);
     const sizes = new Float32Array(COUNT);
     const randoms = new Float32Array(COUNT);
 
-    const color1 = new THREE.Color('#e0566a');
-    const color2 = new THREE.Color('#8b52c8');
-    const color3 = new THREE.Color('#3d63e6');
+    const goldColor = new THREE.Color('#d4af37');
+    const champagneColor = new THREE.Color('#f3e5ab');
+    const platinumColor = new THREE.Color('#e2e8f0');
 
     for (let i = 0; i < COUNT; i++) {
       randoms[i] = Math.random();
-      sizes[i] = 1.0 + Math.random() * 2.5;
+      sizes[i] = 1.2 + Math.random() * 2.2;
 
       const t = i / COUNT;
-      let x = 0, y = 0, z = (Math.random() - 0.5) * 3.5;
+      let x = 0, y = 0, z = (Math.random() - 0.5) * 3.2;
 
-      if (t < 0.45) {
+      if (t < 0.44) {
         // "N" stroke
-        const sub = t / 0.45;
+        const sub = t / 0.44;
         if (sub < 0.33) {
-          x = -13 + (Math.random() - 0.5) * 1.5;
-          y = -9 + (sub / 0.33) * 18 + (Math.random() - 0.5);
+          x = -13 + (Math.random() - 0.5) * 1.2;
+          y = -9 + (sub / 0.33) * 18 + (Math.random() - 0.5) * 0.8;
         } else if (sub < 0.66) {
           const s = (sub - 0.33) / 0.33;
-          x = -13 + s * 9 + (Math.random() - 0.5) * 1.2;
-          y = 9 - s * 18 + (Math.random() - 0.5);
+          x = -13 + s * 9 + (Math.random() - 0.5) * 1.0;
+          y = 9 - s * 18 + (Math.random() - 0.5) * 0.8;
         } else {
-          x = -4 + (Math.random() - 0.5) * 1.5;
-          y = -9 + ((sub - 0.66) / 0.34) * 18 + (Math.random() - 0.5);
+          x = -4 + (Math.random() - 0.5) * 1.2;
+          y = -9 + ((sub - 0.66) / 0.34) * 18 + (Math.random() - 0.5) * 0.8;
         }
-      } else if (t < 0.95) {
+      } else if (t < 0.92) {
         // "W" stroke
-        const sub = (t - 0.45) / 0.50;
+        const sub = (t - 0.44) / 0.48;
         if (sub < 0.25) {
           const s = sub / 0.25;
           x = 2 + s * 3.5; y = 9 - s * 18;
@@ -147,39 +162,29 @@ export class SpatialCanvas3D {
           const s = (sub - 0.75) / 0.25;
           x = 12.5 + s * 3.5; y = -9 + s * 18;
         }
-        x += (Math.random() - 0.5) * 1.3;
-        y += (Math.random() - 0.5) * 1.3;
+        x += (Math.random() - 0.5) * 1.1;
+        y += (Math.random() - 0.5) * 1.1;
       } else {
-        x = (Math.random() - 0.5) * 34;
-        y = (Math.random() - 0.5) * 22;
-        z = (Math.random() - 0.5) * 12;
+        // Floating luxury halo aura
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 14 + Math.random() * 8;
+        x = Math.cos(angle) * radius;
+        y = Math.sin(angle) * (radius * 0.65);
+        z = (Math.random() - 0.5) * 8;
       }
 
-      posA[i * 3] = x;
-      posA[i * 3 + 1] = y;
-      posA[i * 3 + 2] = z;
+      positions[i * 3] = x;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z;
 
-      // Tiered growth architecture
-      const tier = i % 4;
-      const row = Math.floor(i / 4) % 18;
-      posB[i * 3] = (row - 9) * 2.4 + (Math.random() - 0.5) * 1.5;
-      posB[i * 3 + 1] = (tier - 1.5) * 6.0 + (Math.random() - 0.5) * 1.2;
-      posB[i * 3 + 2] = (Math.random() - 0.5) * 14.0;
-
-      // Quantum Core
-      const u = Math.random();
-      const v = Math.random();
-      const theta = u * 2.0 * Math.PI;
-      const phi = Math.acos(2.0 * v - 1.0);
-      const r = 11.0 + Math.cbrt(Math.random()) * 4.5;
-      posC[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      posC[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      posC[i * 3 + 2] = r * Math.cos(phi);
-
-      const gradT = THREE.MathUtils.clamp((x + 15) / 32, 0, 1);
+      // Color gradation across monogram
       const pColor = new THREE.Color();
-      if (gradT < 0.5) pColor.lerpColors(color1, color2, gradT * 2);
-      else pColor.lerpColors(color2, color3, (gradT - 0.5) * 2);
+      const gradT = THREE.MathUtils.clamp((x + 14) / 28, 0, 1);
+      if (gradT < 0.5) {
+        pColor.lerpColors(goldColor, champagneColor, gradT * 2);
+      } else {
+        pColor.lerpColors(champagneColor, platinumColor, (gradT - 0.5) * 2);
+      }
 
       colors[i * 3] = pColor.r;
       colors[i * 3 + 1] = pColor.g;
@@ -187,9 +192,7 @@ export class SpatialCanvas3D {
     }
 
     const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(posA, 3));
-    geometry.setAttribute('targetPosB', new THREE.BufferAttribute(posB, 3));
-    geometry.setAttribute('targetPosC', new THREE.BufferAttribute(posC, 3));
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
     geometry.setAttribute('rand', new THREE.BufferAttribute(randoms, 1));
@@ -197,18 +200,16 @@ export class SpatialCanvas3D {
     const shaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
-        uMorph: { value: 0 },
         uPointer: { value: new THREE.Vector3(0, 0, 0) },
+        uOpacity: { value: 1.0 },
         uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) },
       },
       vertexShader: `
         uniform float uTime;
-        uniform float uMorph;
         uniform vec3 uPointer;
+        uniform float uOpacity;
         uniform float uPixelRatio;
 
-        attribute vec3 targetPosB;
-        attribute vec3 targetPosC;
         attribute vec3 color;
         attribute float size;
         attribute float rand;
@@ -218,33 +219,26 @@ export class SpatialCanvas3D {
 
         void main() {
           vColor = color;
-          vec3 pA = position;
-          vec3 pB = targetPosB;
-          vec3 pC = targetPosC;
+          vec3 p = position;
 
-          vec3 p;
-          if (uMorph <= 1.0) {
-            p = mix(pA, pB, uMorph);
-          } else {
-            p = mix(pB, pC, uMorph - 1.0);
-          }
+          // Gentle organic luxury breathing
+          p.x += sin(uTime * 1.2 + rand * 6.28) * 0.28;
+          p.y += cos(uTime * 1.5 + rand * 6.28) * 0.28;
+          p.z += sin(uTime * 1.0 + rand * 6.28) * 0.35;
 
-          p.x += sin(uTime * 1.5 + rand * 6.28) * 0.35;
-          p.y += cos(uTime * 1.8 + rand * 6.28) * 0.35;
-          p.z += sin(uTime * 1.2 + rand * 6.28) * 0.45;
-
+          // Responsive cursor repulsion
           vec3 toPointer = p - uPointer;
           float dist = length(toPointer);
-          if (dist < 12.0) {
-            float force = (1.0 - dist / 12.0);
-            p += normalize(toPointer + 0.001) * force * 4.5;
+          if (dist < 10.0) {
+            float force = (1.0 - dist / 10.0);
+            p += normalize(toPointer + 0.001) * force * 3.2;
           }
 
           vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
           gl_Position = projectionMatrix * mvPosition;
 
-          gl_PointSize = size * uPixelRatio * (280.0 / -mvPosition.z);
-          vAlpha = smoothstep(60.0, 10.0, -mvPosition.z) * (0.65 + 0.35 * sin(uTime * 2.0 + rand * 10.0));
+          gl_PointSize = size * uPixelRatio * (260.0 / -mvPosition.z);
+          vAlpha = smoothstep(55.0, 15.0, -mvPosition.z) * uOpacity * (0.7 + 0.3 * sin(uTime * 2.2 + rand * 8.0));
         }
       `,
       fragmentShader: `
@@ -256,8 +250,9 @@ export class SpatialCanvas3D {
           float d = length(coord);
           if (d > 0.5) discard;
 
-          float intensity = pow(1.0 - (d * 2.0), 1.8);
-          vec3 glow = vColor * (1.2 + 0.8 * intensity);
+          // Soft luxury specular radial dropoff
+          float intensity = pow(1.0 - (d * 2.0), 1.6);
+          vec3 glow = vColor * (1.1 + 0.9 * intensity);
           gl_FragColor = vec4(glow, vAlpha * intensity);
         }
       `,
@@ -266,66 +261,197 @@ export class SpatialCanvas3D {
       blending: THREE.AdditiveBlending,
     });
 
-    this.particleMesh = new THREE.Points(geometry, shaderMaterial);
-    this.rootGroup.add(this.particleMesh);
+    this.monogramMesh = new THREE.Points(geometry, shaderMaterial);
+    this.rootGroup.add(this.monogramMesh);
   }
 
+  // ─────────────────────────────────────────────────────────────
+  // 02: Möbius Growth Flow (Parametric Liquid Titanium Ribbon)
+  // ─────────────────────────────────────────────────────────────
+  buildMobiusRibbon() {
+    this.ribbonGroup = new THREE.Group();
+
+    // High density Torus Knot representing compounding acquisition loop
+    const knotGeo = new THREE.TorusKnotGeometry(7.5, 1.4, 180, 24, 2, 3);
+
+    // Physical metallic gold & platinum material
+    const knotMat = new THREE.MeshStandardMaterial({
+      color: 0xd4af37,
+      metalness: 0.92,
+      roughness: 0.18,
+      wireframe: false,
+      emissive: 0x221a08,
+      emissiveIntensity: 0.35,
+    });
+    this.ribbonSolid = new THREE.Mesh(knotGeo, knotMat);
+    this.ribbonGroup.add(this.ribbonSolid);
+
+    // Delicate wireframe exoskeleton
+    const wireMat = new THREE.MeshBasicMaterial({
+      color: 0xfff4db,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.25,
+    });
+    this.ribbonWire = new THREE.Mesh(knotGeo, wireMat);
+    this.ribbonWire.scale.set(1.02, 1.02, 1.02);
+    this.ribbonGroup.add(this.ribbonWire);
+
+    // Inner orbiting light ring
+    const ringGeo = new THREE.TorusGeometry(11.5, 0.04, 16, 100);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0xd4af37,
+      transparent: true,
+      opacity: 0.4,
+    });
+    this.ribbonRing = new THREE.Mesh(ringGeo, ringMat);
+    this.ribbonRing.rotation.x = Math.PI / 3;
+    this.ribbonGroup.add(this.ribbonRing);
+
+    this.ribbonGroup.scale.set(0.001, 0.001, 0.001);
+    this.ribbonGroup.visible = false;
+    this.rootGroup.add(this.ribbonGroup);
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // 03: Quantum AI Prism (Obsidian & Gold Faceted Monolith)
+  // ─────────────────────────────────────────────────────────────
+  buildQuantumPrism() {
+    this.prismGroup = new THREE.Group();
+
+    // Central faceted obsidian icosahedron
+    const coreGeo = new THREE.IcosahedronGeometry(6.5, 0);
+    const coreMat = new THREE.MeshStandardMaterial({
+      color: 0x14141a,
+      metalness: 0.95,
+      roughness: 0.12,
+      flatShading: true,
+      emissive: 0x2a2010,
+      emissiveIntensity: 0.45,
+    });
+    this.prismCore = new THREE.Mesh(coreGeo, coreMat);
+    this.prismGroup.add(this.prismCore);
+
+    // Outer gold hairline cage
+    const cageGeo = new THREE.IcosahedronGeometry(8.2, 1);
+    const cageMat = new THREE.MeshStandardMaterial({
+      color: 0xd4af37,
+      wireframe: true,
+      metalness: 1.0,
+      roughness: 0.2,
+      emissive: 0xd4af37,
+      emissiveIntensity: 0.35,
+    });
+    this.prismCage = new THREE.Mesh(cageGeo, cageMat);
+    this.prismGroup.add(this.prismCage);
+
+    // Dual gimbal orbital rings
+    const ring1Geo = new THREE.TorusGeometry(11.0, 0.05, 16, 120);
+    const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.45 });
+    this.prismRing1 = new THREE.Mesh(ring1Geo, ringMat);
+    this.prismRing2 = new THREE.Mesh(ring1Geo, ringMat);
+    this.prismRing2.rotation.y = Math.PI / 2;
+    this.prismGroup.add(this.prismRing1);
+    this.prismGroup.add(this.prismRing2);
+
+    this.prismGroup.scale.set(0.001, 0.001, 0.001);
+    this.prismGroup.visible = false;
+    this.rootGroup.add(this.prismGroup);
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Ambient Cosmic Dust (Subtle Depth & Luxury Atmosphere)
+  // ─────────────────────────────────────────────────────────────
+  buildAmbientDust() {
+    const COUNT = 450;
+    const pos = new Float32Array(COUNT * 3);
+    for (let i = 0; i < COUNT; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 80;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 50;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 50;
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const mat = new THREE.PointsMaterial({
+      color: 0xd4af37,
+      size: 0.75,
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending,
+    });
+    this.dustMesh = new THREE.Points(geo, mat);
+    this.rootGroup.add(this.dustMesh);
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // 8 Architecture Pillars (Floating Gold Pearls on Orbit Ring)
+  // ─────────────────────────────────────────────────────────────
   buildArchitecturePillars() {
     this.pillarNodes = [];
     const count = DISCIPLINES.length;
-    const radius = 22.0;
+    const radius = 21.0;
 
-    const ringGeometry = new THREE.TorusGeometry(radius, 0.08, 16, 100);
+    // Fine equatorial gold hairline ring
+    const ringGeometry = new THREE.TorusGeometry(radius, 0.04, 16, 120);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0x8b52c8,
+      color: 0xd4af37,
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.28,
     });
     this.orbitRing = new THREE.Mesh(ringGeometry, ringMat);
-    this.orbitRing.rotation.x = Math.PI / 2.3;
+    this.orbitRing.rotation.x = Math.PI / 2.35;
     this.rootGroup.add(this.orbitRing);
 
     DISCIPLINES.forEach((disc, i) => {
       const angle = (i / count) * Math.PI * 2;
       const x = Math.cos(angle) * radius;
       const z = Math.sin(angle) * radius;
-      const y = Math.sin(angle * 2) * 2.5;
+      const y = Math.sin(angle * 2.0) * 2.2;
 
       const group = new THREE.Group();
       group.position.set(x, y, z);
 
-      const icoGeo = new THREE.IcosahedronGeometry(1.6, 0);
-      const wireMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(disc.color),
-        emissive: new THREE.Color(disc.color),
-        emissiveIntensity: 0.8,
-        wireframe: true,
+      // Polished gold & titanium pearl bead
+      const beadGeo = new THREE.SphereGeometry(0.85, 24, 24);
+      const beadMat = new THREE.MeshStandardMaterial({
+        color: 0xd4af37,
+        metalness: 0.95,
+        roughness: 0.15,
+        emissive: 0x443510,
+        emissiveIntensity: 0.6,
       });
-      const outer = new THREE.Mesh(icoGeo, wireMat);
-      group.add(outer);
+      const pearl = new THREE.Mesh(beadGeo, beadMat);
+      group.add(pearl);
 
-      const coreGeo = new THREE.SphereGeometry(0.8, 16, 16);
-      const coreMat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(disc.color),
+      // Outer delicate hairline halo
+      const haloGeo = new THREE.TorusGeometry(1.35, 0.03, 16, 48);
+      const haloMat = new THREE.MeshBasicMaterial({
+        color: 0xfff0c8,
+        transparent: true,
+        opacity: 0.65,
       });
-      const inner = new THREE.Mesh(coreGeo, coreMat);
-      group.add(inner);
+      const halo = new THREE.Mesh(haloGeo, haloMat);
+      halo.rotation.x = Math.PI / 2;
+      group.add(halo);
 
-      const hitGeo = new THREE.SphereGeometry(2.4, 8, 8);
+      // Invisible hit target
+      const hitGeo = new THREE.SphereGeometry(2.5, 8, 8);
       const hitMat = new THREE.MeshBasicMaterial({ visible: false });
       const hitBox = new THREE.Mesh(hitGeo, hitMat);
       hitBox.userData = { index: i, discipline: disc };
       group.add(hitBox);
 
-      const sprite = this.createNodeTextSprite(disc.number, disc.title, disc.color);
-      sprite.position.set(0, 2.7, 0);
+      // Ultra-clean Swiss typographic label
+      const sprite = this.createLuxuryNodeSprite(disc.number, disc.title);
+      sprite.position.set(0, 2.5, 0);
       group.add(sprite);
 
       this.rootGroup.add(group);
       this.pillarNodes.push({
         group,
-        outer,
-        inner,
+        pearl,
+        halo,
+        sprite,
         hitBox,
         disc,
         basePos: new THREE.Vector3(x, y, z),
@@ -334,41 +460,43 @@ export class SpatialCanvas3D {
     });
   }
 
-  createNodeTextSprite(number, text, colorHex) {
+  createLuxuryNodeSprite(number, text) {
     const canvas = document.createElement('canvas');
     canvas.width = 512;
-    canvas.height = 128;
+    canvas.height = 120;
     const ctx = canvas.getContext('2d');
 
-    ctx.fillStyle = 'rgba(10, 8, 20, 0.85)';
-    ctx.roundRect(10, 10, 492, 108, 16);
+    // Minimalist solid dark pill
+    ctx.fillStyle = 'rgba(7, 7, 10, 0.90)';
+    ctx.roundRect(8, 8, 496, 104, 18);
     ctx.fill();
 
-    ctx.strokeStyle = colorHex;
-    ctx.lineWidth = 4;
-    ctx.roundRect(10, 10, 492, 108, 16);
+    // Delicate gold hairline border
+    ctx.strokeStyle = 'rgba(212, 175, 55, 0.55)';
+    ctx.lineWidth = 2.5;
+    ctx.roundRect(8, 8, 496, 104, 18);
     ctx.stroke();
 
-    ctx.font = 'bold 36px "Space Grotesk", sans-serif';
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText(`${number} · ${text}`, 32, 74);
+    // Refined typography
+    ctx.font = '600 32px "Plus Jakarta Sans", sans-serif';
+    ctx.fillStyle = '#f5f5f7';
+    ctx.fillText(`${number} · ${text}`, 30, 68);
 
     const texture = new THREE.CanvasTexture(canvas);
     texture.minFilter = THREE.LinearFilter;
-    const material = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false });
+    const material = new THREE.SpriteMaterial({
+      map: texture,
+      transparent: true,
+      depthWrite: false,
+    });
     const sprite = new THREE.Sprite(material);
-    sprite.scale.set(7.5, 1.85, 1);
+    sprite.scale.set(6.8, 1.6, 1);
     return sprite;
   }
 
-  buildGridGround() {
-    const grid = new THREE.GridHelper(120, 40, 0x8b52c8, 0x1f1935);
-    grid.position.y = -18;
-    grid.material.transparent = true;
-    grid.material.opacity = 0.35;
-    this.rootGroup.add(grid);
-  }
-
+  // ─────────────────────────────────────────────────────────────
+  // Event Listeners & Interaction Handling
+  // ─────────────────────────────────────────────────────────────
   bindEvents() {
     const el = this.container;
 
@@ -380,15 +508,13 @@ export class SpatialCanvas3D {
       this.pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
       this.pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
 
-      this.pointerTarget.set(this.pointer.x * 24, this.pointer.y * 16);
+      this.pointerTarget.set(this.pointer.x * 22, this.pointer.y * 14);
 
       if (this.isDragging) {
         const deltaX = clientX - this.dragStart.x;
         const deltaY = clientY - this.dragStart.y;
-        this.worldRotation.y += deltaX * 0.005;
-        this.worldRotation.x += deltaY * 0.005;
-        this.rotationVelocity.x = deltaY * 0.001;
-        this.rotationVelocity.y = deltaX * 0.001;
+        this.targetWorldRotation.y += deltaX * 0.004;
+        this.targetWorldRotation.x += deltaY * 0.004;
         this.dragStart.x = clientX;
         this.dragStart.y = clientY;
       }
@@ -403,7 +529,7 @@ export class SpatialCanvas3D {
     };
 
     const onPointerUp = () => {
-      if (this.isDragging && Math.abs(this.rotationVelocity.x) < 0.002 && Math.abs(this.rotationVelocity.y) < 0.002) {
+      if (this.isDragging) {
         this.checkRaycastClick();
       }
       this.isDragging = false;
@@ -425,14 +551,14 @@ export class SpatialCanvas3D {
       this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(this.width, this.height);
-      if (this.particleMesh) {
-        this.particleMesh.material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio || 1, 2);
+      if (this.monogramMesh) {
+        this.monogramMesh.material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio || 1, 2);
       }
     });
   }
 
   setMorphState(stateIndex) {
-    this.targetMorph = stateIndex;
+    this.activeMode = stateIndex;
     audio.confirm();
   }
 
@@ -451,31 +577,78 @@ export class SpatialCanvas3D {
     }
   }
 
+  // ─────────────────────────────────────────────────────────────
+  // Smooth Animation Frame Loop
+  // ─────────────────────────────────────────────────────────────
   animate() {
     if (!this.isAvailable || !this.renderer) return;
     requestAnimationFrame(() => this.animate());
 
     const elapsedTime = this.clock.getElapsedTime();
 
+    // Silky smooth rotation inertia
     if (!this.isDragging) {
-      this.worldRotation.y += this.rotationVelocity.y + 0.0025;
-      this.worldRotation.x += this.rotationVelocity.x;
-      this.rotationVelocity.x *= 0.94;
-      this.rotationVelocity.y *= 0.94;
+      this.targetWorldRotation.y += 0.0022;
+      // Soft ambient tilt based on cursor position
+      this.targetWorldRotation.x = 0.12 + this.pointer.y * 0.18;
     }
+
+    this.worldRotation.y = THREE.MathUtils.lerp(this.worldRotation.y, this.targetWorldRotation.y, 0.05);
+    this.worldRotation.x = THREE.MathUtils.lerp(this.worldRotation.x, this.targetWorldRotation.x, 0.05);
 
     this.rootGroup.rotation.y = this.worldRotation.y;
-    this.rootGroup.rotation.x = THREE.MathUtils.lerp(this.rootGroup.rotation.x, this.worldRotation.x, 0.1);
+    this.rootGroup.rotation.x = this.worldRotation.x;
 
-    this.morphProgress = THREE.MathUtils.lerp(this.morphProgress, this.targetMorph, 0.06);
-
-    if (this.particleMesh) {
-      const u = this.particleMesh.material.uniforms;
-      u.uTime.value = elapsedTime;
-      u.uMorph.value = this.morphProgress;
-      u.uPointer.value.lerp(new THREE.Vector3(this.pointerTarget.x, this.pointerTarget.y, 0), 0.1);
+    // Smooth mode crossfade transitions
+    for (let i = 0; i < 3; i++) {
+      const target = this.activeMode === i ? 1.0 : 0.0;
+      this.modeTransitions[i] = THREE.MathUtils.lerp(this.modeTransitions[i], target, 0.07);
     }
 
+    // 01: Monogram
+    if (this.monogramMesh) {
+      const u = this.monogramMesh.material.uniforms;
+      u.uTime.value = elapsedTime;
+      u.uOpacity.value = this.modeTransitions[0];
+      u.uPointer.value.lerp(new THREE.Vector3(this.pointerTarget.x, this.pointerTarget.y, 0), 0.1);
+      this.monogramMesh.visible = this.modeTransitions[0] > 0.01;
+      const s0 = 0.8 + 0.2 * this.modeTransitions[0];
+      this.monogramMesh.scale.set(s0, s0, s0);
+    }
+
+    // 02: Möbius Ribbon
+    if (this.ribbonGroup) {
+      const t = this.modeTransitions[1];
+      this.ribbonGroup.visible = t > 0.01;
+      const s1 = (0.75 + 0.25 * t) * t;
+      this.ribbonGroup.scale.set(s1, s1, s1);
+      this.ribbonSolid.rotation.x = elapsedTime * 0.4;
+      this.ribbonSolid.rotation.y = elapsedTime * 0.6;
+      this.ribbonWire.rotation.x = -elapsedTime * 0.35;
+      this.ribbonWire.rotation.y = -elapsedTime * 0.55;
+      this.ribbonRing.rotation.z = elapsedTime * 0.25;
+    }
+
+    // 03: Quantum AI Prism
+    if (this.prismGroup) {
+      const t = this.modeTransitions[2];
+      this.prismGroup.visible = t > 0.01;
+      const s2 = (0.75 + 0.25 * t) * t;
+      this.prismGroup.scale.set(s2, s2, s2);
+      this.prismCore.rotation.x = elapsedTime * 0.35;
+      this.prismCore.rotation.y = elapsedTime * 0.45;
+      this.prismCage.rotation.x = -elapsedTime * 0.28;
+      this.prismCage.rotation.y = -elapsedTime * 0.38;
+      this.prismRing1.rotation.x = elapsedTime * 0.5;
+      this.prismRing2.rotation.y = elapsedTime * 0.5;
+    }
+
+    // Ambient Dust drift
+    if (this.dustMesh) {
+      this.dustMesh.rotation.y = elapsedTime * 0.03;
+    }
+
+    // Interactive Hover on Pillars
     this.raycaster.setFromCamera(this.pointer, this.camera);
     const hitBoxes = this.pillarNodes.map((n) => n.hitBox);
     const intersects = this.raycaster.intersectObjects(hitBoxes);
@@ -488,19 +661,18 @@ export class SpatialCanvas3D {
 
     this.pillarNodes.forEach((node, i) => {
       const isHovered = i === this.hoveredNodeIndex;
-      node.outer.rotation.x += 0.015 * (i % 2 === 0 ? 1 : -1);
-      node.outer.rotation.y += 0.02;
+      node.halo.rotation.z += 0.02;
 
-      const targetScale = isHovered ? 1.45 : 1.0;
+      const targetScale = isHovered ? 1.55 : 1.0;
       node.group.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.15);
 
-      node.outer.material.emissiveIntensity = THREE.MathUtils.lerp(
-        node.outer.material.emissiveIntensity,
-        isHovered ? 2.5 : 0.8,
+      node.pearl.material.emissiveIntensity = THREE.MathUtils.lerp(
+        node.pearl.material.emissiveIntensity,
+        isHovered ? 2.2 : 0.6,
         0.15
       );
 
-      node.group.position.y = node.basePos.y + Math.sin(elapsedTime * 2.0 + i) * 0.6;
+      node.group.position.y = node.basePos.y + Math.sin(elapsedTime * 1.8 + i) * 0.45;
     });
 
     this.renderer.render(this.scene, this.camera);
@@ -516,7 +688,6 @@ export class SpatialCanvas3D {
         this.onTelemetryUpdate({
           fps: this.fps,
           drawCalls: this.drawCalls,
-          points: 3200,
           triangles: this.renderer.info.render.triangles,
         });
       }
@@ -528,7 +699,7 @@ export class SpatialCanvas3D {
     if (idx !== -1 && this.pillarNodes && this.pillarNodes[idx]) {
       const node = this.pillarNodes[idx];
       const targetAngle = -node.angle + Math.PI / 2;
-      this.worldRotation.y = targetAngle;
+      this.targetWorldRotation.y = targetAngle;
       audio.chime(idx);
     }
   }
