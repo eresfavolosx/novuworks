@@ -302,6 +302,93 @@ class FabianPortfolioApp {
     // 9. Initialize Interactive Cursor Spotlight and Scroll-Driven Reveals
     this.initCardSpotlight();
     this.initScrollReveals();
+
+    // 10. Initialize Cinematic Particle Sculpture Loading Screen
+    this.initLoadingScreen();
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Cinematic Particle Sculpture Loading Screen
+  // ─────────────────────────────────────────────────────────────
+  initLoadingScreen() {
+    const loadingScreen = document.getElementById('particle-loading-screen');
+    if (!loadingScreen) return;
+
+    const progressBar = document.getElementById('loading-bar-progress');
+    const statusText = document.getElementById('loading-status-text');
+    const percentage = document.getElementById('loading-percentage');
+    const skipBtn = document.getElementById('loading-skip-btn');
+
+    let isDismissed = false;
+    const dismiss = () => {
+      if (isDismissed) return;
+      isDismissed = true;
+      loadingScreen.classList.add('is-loaded');
+      document.body.classList.add('loaded');
+      try {
+        audio.playClick();
+      } catch (_) {}
+      setTimeout(() => {
+        loadingScreen.remove();
+      }, 750);
+    };
+
+    if (skipBtn) {
+      skipBtn.addEventListener('click', dismiss);
+    }
+
+    const keyHandler = (e) => {
+      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
+        dismiss();
+        window.removeEventListener('keydown', keyHandler);
+      }
+    };
+    window.addEventListener('keydown', keyHandler);
+    loadingScreen.addEventListener('click', (e) => {
+      if (e.target.closest('.loading-skip-btn') || e.target === loadingScreen) {
+        dismiss();
+      }
+    });
+
+    // Smooth cinematic progress counter (0% to 100% in ~1200ms)
+    const startTime = performance.now();
+    const duration = 1200;
+
+    // Safety timeout ensures dismissal even if RAF is throttled or suspended
+    const safetyTimer = setTimeout(() => {
+      dismiss();
+    }, 1500);
+
+    const steps = [
+      { at: 0.15, text: 'INITIALIZING 3D PARTICLE MATRIX...' },
+      { at: 0.45, text: 'NORMALIZING 40M+ REVOPS TELEMETRY...' },
+      { at: 0.75, text: 'CALIBRATING DESIGN × ENGINEERING...' },
+      { at: 0.95, text: 'SYSTEM READY // WELCOME.' }
+    ];
+
+    const frame = (now) => {
+      if (isDismissed) return;
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const pct = Math.round(progress * 100);
+
+      if (progressBar) progressBar.style.width = `${pct}%`;
+      if (percentage) percentage.textContent = `${pct}%`;
+
+      const currentStep = steps.slice().reverse().find(s => progress >= s.at);
+      if (currentStep && statusText) {
+        statusText.textContent = currentStep.text;
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        clearTimeout(safetyTimer);
+        setTimeout(dismiss, 120);
+      }
+    };
+
+    requestAnimationFrame(frame);
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -310,7 +397,7 @@ class FabianPortfolioApp {
   renderCompanyLogos() {
     const stripHtml = `
       <div class="logo-strip-inner">
-        <span class="logo-strip-label">VERIFIED COMMERCIAL TRACK RECORD & ACCREDITATION:</span>
+        <span class="logo-strip-label">COMPANIES & INSTITUTIONS STUDIED OR WORKED AT:</span>
         <div class="logo-strip-row">
           <div class="logo-badge-item" title="Money Group (Media Buyer, Full-Time · $1B+ Scope)">
             ${LOGOS.moneyGroup}
@@ -318,62 +405,20 @@ class FabianPortfolioApp {
           <div class="logo-badge-item" title="Red Ventures (Growth / SEO Analyst, Full-Time · edX)">
             ${LOGOS.redVentures}
           </div>
-          <div class="logo-badge-item" title="edX Platform (40M+ Telemetry Sessions)">
+          <div class="logo-badge-item" title="edX Platform (Red Ventures, Full-Time · 40M+ Sessions)">
             ${LOGOS.edx}
           </div>
-          <div class="logo-badge-item" title="Databricks Lakehouse (40M+ Sessions Normalized)">
-            ${LOGOS.databricks}
-          </div>
-          <div class="logo-badge-item" title="Anthropic Claude (20+ Automated Workflows)">
-            ${LOGOS.claude}
-          </div>
-          <div class="logo-badge-item" title="ATH Móvil Business (Fintech Payment Architecture)">
-            ${LOGOS.athMovil}
-          </div>
-          <div class="logo-badge-item" title="Meta (San Juan Community Lead)">
-            ${LOGOS.meta}
-          </div>
-          <div class="logo-badge-item" title="Microsoft (Certified Power BI Analyst)">
-            ${LOGOS.microsoft}
-          </div>
-          <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (My Company / Founder · $10M+ Pipeline) — Visit Official Site (viva-advertising.com)">
+          <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (Founder · $10M+ Pipeline) — Visit Official Site (viva-advertising.com)">
             ${LOGOS.vivaAdvertising}
           </a>
-          <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site (linkpuertorico.org)">
+          <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (Co-Founder · 100+ Relational Databases) — Visit Official Site (linkpuertorico.org)">
             ${LOGOS.linkPR}
           </a>
-          <div class="logo-badge-item" title="IBM (Official Partner in Link Puerto Rico)">
-            ${LOGOS.ibm}
-          </div>
-          <div class="logo-badge-item" title="Google (GA4, Google Ads &amp; BigQuery Stack)">
-            ${LOGOS.google}
-          </div>
-          <div class="logo-badge-item" title="Amazon Web Services (Cloud &amp; Data Pipeline Architecture)">
-            ${LOGOS.aws}
-          </div>
-          <div class="logo-badge-item" title="Salesforce (Enterprise CRM Deduplication &amp; Revenue Analytics)">
-            ${LOGOS.salesforce}
-          </div>
-          <div class="logo-badge-item" title="CompTIA (Certified ITF+ Systems Engineer)">
-            ${LOGOS.comptia}
-          </div>
-          <div class="logo-badge-item" title="Boys &amp; Girls Clubs de Puerto Rico (Youth Mentorship Partner)">
-            ${LOGOS.boysAndGirlsClubs}
-          </div>
-          <div class="logo-badge-item" title="Stanford University Innovation Fellows">
+          <div class="logo-badge-item" title="Stanford University (Innovation Fellow · Design Thinking & Strategy)">
             ${LOGOS.stanford}
           </div>
-          <div class="logo-badge-item" title="Universidad Politécnica de PR (B.S. Comp Eng 4.0 GPA)">
+          <div class="logo-badge-item" title="Universidad Politécnica de Puerto Rico (B.S. Computer Engineering, 4.0 GPA)">
             ${LOGOS.politecnica}
-          </div>
-          <div class="logo-badge-item" title="Grupo Guayacán (Fellow & Mentor)">
-            ${LOGOS.guayacan}
-          </div>
-          <div class="logo-badge-item" title="Enactus (National / Global Judge)">
-            ${LOGOS.enactus}
-          </div>
-          <div class="logo-badge-item" title="Novu Works (Studio & Enterprise Lab)">
-            ${LOGOS.novuWorks}
           </div>
         </div>
       </div>
@@ -386,18 +431,13 @@ class FabianPortfolioApp {
     if (this.dom.recModalLogosMount) {
       this.dom.recModalLogosMount.innerHTML = `
         <div class="modal-logos-row">
-          <div class="modal-logo-cell">${LOGOS.moneyGroup}</div>
-          <div class="modal-logo-cell">${LOGOS.redVentures}</div>
-          <div class="modal-logo-cell">${LOGOS.edx}</div>
-          <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Viva Advertising (Founder) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
-          <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Link Puerto Rico (Co-Founder) — Visit Official Site">${LOGOS.linkPR}</a>
-          <div class="modal-logo-cell">${LOGOS.ibm}</div>
-          <div class="modal-logo-cell">${LOGOS.google}</div>
-          <div class="modal-logo-cell">${LOGOS.stanford}</div>
-          <div class="modal-logo-cell">${LOGOS.politecnica}</div>
-          <div class="modal-logo-cell">${LOGOS.databricks}</div>
-          <div class="modal-logo-cell">${LOGOS.claude}</div>
-          <div class="modal-logo-cell">${LOGOS.novuWorks}</div>
+          <div class="modal-logo-cell" title="Money Group (Full-Time)">${LOGOS.moneyGroup}</div>
+          <div class="modal-logo-cell" title="Red Ventures (Full-Time)">${LOGOS.redVentures}</div>
+          <div class="modal-logo-cell" title="edX Platform (Full-Time)">${LOGOS.edx}</div>
+          <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Viva Advertising (Founder)">${LOGOS.vivaAdvertising}</a>
+          <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Link Puerto Rico (Co-Founder)">${LOGOS.linkPR}</a>
+          <div class="modal-logo-cell" title="Stanford University (Fellow)">${LOGOS.stanford}</div>
+          <div class="modal-logo-cell" title="Universidad Politécnica de PR (B.S. 4.0 GPA)">${LOGOS.politecnica}</div>
         </div>
       `;
     }
@@ -607,33 +647,19 @@ class FabianPortfolioApp {
       `).join('');
     }
 
-    // 6. Dossier Company Logos Strip
+    // 6. Dossier Company Logos Strip (Institutions Studied or Worked At)
     if (this.dom.dossierLogosMount) {
       this.dom.dossierLogosMount.innerHTML = `
         <div class="logo-strip-inner">
-          <span class="logo-strip-label">ACCREDITED PARTNERS & AFFILIATIONS:</span>
+          <span class="logo-strip-label">COMPANIES & INSTITUTIONS STUDIED OR WORKED AT:</span>
           <div class="logo-strip-row">
-            <div class="logo-badge-item" title="Money Group (Full-Time)">${LOGOS.moneyGroup}</div>
-            <div class="logo-badge-item" title="Red Ventures (Full-Time)">${LOGOS.redVentures}</div>
-            <div class="logo-badge-item" title="edX Platform">${LOGOS.edx}</div>
-            <div class="logo-badge-item" title="Databricks Lakehouse">${LOGOS.databricks}</div>
-            <div class="logo-badge-item" title="Anthropic Claude">${LOGOS.claude}</div>
-            <div class="logo-badge-item" title="ATH Móvil Business">${LOGOS.athMovil}</div>
-            <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (My Company / Founder · $10M+ Pipeline) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
-            <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site">${LOGOS.linkPR}</a>
-            <div class="logo-badge-item" title="IBM">${LOGOS.ibm}</div>
-            <div class="logo-badge-item" title="Google">${LOGOS.google}</div>
-            <div class="logo-badge-item" title="AWS">${LOGOS.aws}</div>
-            <div class="logo-badge-item" title="Salesforce">${LOGOS.salesforce}</div>
-            <div class="logo-badge-item" title="CompTIA">${LOGOS.comptia}</div>
-            <div class="logo-badge-item" title="Boys &amp; Girls Clubs de PR">${LOGOS.boysAndGirlsClubs}</div>
-            <div class="logo-badge-item" title="Microsoft">${LOGOS.microsoft}</div>
-            <div class="logo-badge-item" title="Meta">${LOGOS.meta}</div>
-            <div class="logo-badge-item" title="Stanford University">${LOGOS.stanford}</div>
-            <div class="logo-badge-item" title="UPPR">${LOGOS.politecnica}</div>
-            <div class="logo-badge-item" title="Grupo Guayacán">${LOGOS.guayacan}</div>
-            <div class="logo-badge-item" title="Enactus">${LOGOS.enactus}</div>
-            <div class="logo-badge-item trigger-pr-coqui" title="Sol de Jayuya · Puerto Rico Heritage">${LOGOS.tainoSun}</div>
+            <div class="logo-badge-item" title="Money Group (Media Buyer, Full-Time)">${LOGOS.moneyGroup}</div>
+            <div class="logo-badge-item" title="Red Ventures (Growth / SEO Analyst, Full-Time)">${LOGOS.redVentures}</div>
+            <div class="logo-badge-item" title="edX Platform (Full-Time · 40M+ Sessions)">${LOGOS.edx}</div>
+            <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (Founder · $10M+ Pipeline)">${LOGOS.vivaAdvertising}</a>
+            <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (Co-Founder · 100+ Databases)">${LOGOS.linkPR}</a>
+            <div class="logo-badge-item" title="Stanford University (Innovation Fellow)">${LOGOS.stanford}</div>
+            <div class="logo-badge-item" title="Universidad Politécnica de Puerto Rico (B.S. 4.0 GPA)">${LOGOS.politecnica}</div>
           </div>
         </div>
       `;
