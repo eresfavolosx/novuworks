@@ -271,36 +271,16 @@
             <div class="dossier-role-lens-bar">
               <span class="role-lens-label">EXPLORE CANDIDATE BY TARGET ROLE LENS:</span>
               <div class="role-lens-pills" id="dossier-role-lens-pills">
-                <button type="button" class="role-lens-btn active" data-lens="master">🚀 All-Round Master</button>
-                <button type="button" class="role-lens-btn" data-lens="ai_engineering">🤖 AI & Software Engineering</button>
-                <button type="button" class="role-lens-btn" data-lens="revops_analytics">📊 RevOps & Growth Analytics</button>
-                <button type="button" class="role-lens-btn" data-lens="tech_ops">⚙️ Tech Ops & Systems Leadership</button>
+                <button type="button" class="role-lens-btn active" data-lens="master">🚀 Master Brief</button>
+                <button type="button" class="role-lens-btn" data-lens="ai_engineering">🤖 AI & Engineering</button>
+                <button type="button" class="role-lens-btn" data-lens="revops_analytics">📈 Media & RevOps</button>
+                <button type="button" class="role-lens-btn" data-lens="data_governance">📊 Data Governance</button>
+                <button type="button" class="role-lens-btn" data-lens="tech_ops">⚙️ Tech Ops & Systems</button>
               </div>
             </div>
 
-            <!-- Headline Stats Highlights -->
-            <div class="dossier-stats-grid">
-              <div class="stat-card">
-                <span class="stat-number gold-num">122%</span>
-                <span class="stat-title">Bonus Target Delivered</span>
-                <span class="stat-desc">$4,575 actual vs $3,750 base at Money Group, LLC</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-number gold-num">$10M+</span>
-                <span class="stat-title">Realized B2B Pipeline</span>
-                <span class="stat-desc">Across 150+ commercial accounts at Viva Advertising</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-number" style="color: #4ade80;">-83%</span>
-                <span class="stat-title">Client Churn Slashing</span>
-                <span class="stat-desc">Reduced from 30% to 5% via predictive CRM health models</span>
-              </div>
-              <div class="stat-card">
-                <span class="stat-number gold-num">40M+</span>
-                <span class="stat-title">Databricks Sessions Analyzed</span>
-                <span class="stat-desc">SQL & Python telemetry at Red Ventures across edX pages</span>
-              </div>
-            </div>
+            <!-- Headline Stats Highlights (Dynamically populated from active lens proofPoints) -->
+            <div class="dossier-stats-grid" id="dossier-stats-mount"></div>
 
             <!-- Verified Professional Experience Timeline (Dynamically lenses) -->
             <div class="dossier-section">
@@ -359,9 +339,10 @@
             <span class="modal-kicker">EXECUTIVE COMPOSITE CARD</span>
             <h2 id="resume-modal-title" class="modal-heading">Executive Resume Brief</h2>
             <div class="modal-lens-selector" id="resume-modal-lens-pills">
-              <button type="button" class="modal-lens-btn active" data-lens="master">🚀 All-Round Master</button>
+              <button type="button" class="modal-lens-btn active" data-lens="master">🚀 Master Brief</button>
               <button type="button" class="modal-lens-btn" data-lens="ai_engineering">🤖 AI & Engineering</button>
-              <button type="button" class="modal-lens-btn" data-lens="revops_analytics">📊 RevOps & Analytics</button>
+              <button type="button" class="modal-lens-btn" data-lens="revops_analytics">📈 Media & RevOps</button>
+              <button type="button" class="modal-lens-btn" data-lens="data_governance">📊 Data Governance</button>
               <button type="button" class="modal-lens-btn" data-lens="tech_ops">⚙️ Tech Ops & Systems</button>
             </div>
           </div>
@@ -472,7 +453,8 @@
             <div class="modal-lens-selector" id="recruiter-modal-lens-pills">
               <button type="button" class="modal-lens-btn active" data-lens="master">🚀 Master Brief</button>
               <button type="button" class="modal-lens-btn" data-lens="ai_engineering">🤖 AI & Engineering</button>
-              <button type="button" class="modal-lens-btn" data-lens="revops_analytics">📊 RevOps & Analytics</button>
+              <button type="button" class="modal-lens-btn" data-lens="revops_analytics">📈 Media & RevOps</button>
+              <button type="button" class="modal-lens-btn" data-lens="data_governance">📊 Data Governance</button>
               <button type="button" class="modal-lens-btn" data-lens="tech_ops">⚙️ Tech Ops & Systems</button>
             </div>
           </div>
@@ -508,50 +490,8 @@
             <!-- Verified Employer Logo Marquee Mount -->
             <div class="recruiter-modal-logos" id="rec-modal-logos-mount"></div>
 
-            <!-- Quantitative Proof Points Grid -->
-            <div class="scorecard-proofs-grid">
-              <div class="score-proof-card">
-                <div class="score-metric gold-num">122%</div>
-                <div class="score-title">Bonus Target Delivered</div>
-                <div class="score-sub">Money Group (Media Buyer, ICS4)</div>
-                <p class="score-desc">Delivered at 122% of quarterly bonus target ($4,575 actual vs $3,750 base) within a $1B+ portfolio scope. Restructured partner unit payouts from $125 to $250 to prioritize high-value downstream conversions.</p>
-              </div>
-
-              <div class="score-proof-card">
-                <div class="score-metric" style="color: #38bdf8;">40M+</div>
-                <div class="score-title">Databricks Sessions Normalized</div>
-                <div class="score-sub">Red Ventures (Growth / SEO Analyst, edX)</div>
-                <p class="score-desc">Queried and cleaned raw telemetry from scratch using Databricks SQL & Python across 40M+ sessions. Consolidated 1,250+ priority pages driving a 50%+ baseline search lift and 19% YoY conversion gain.</p>
-              </div>
-
-              <div class="score-proof-card">
-                <div class="score-metric" style="color: #4ade80;">$10M+</div>
-                <div class="score-title">Realized B2B Pipeline & -83% Churn</div>
-                <div class="score-sub">Viva Advertising (Co-Founder)</div>
-                <p class="score-desc">Managed $2M+ ad spend and 4B+ impressions across 150+ commercial accounts. Built predictive CRM account-health models that slashed client churn from 30% to 5%.</p>
-              </div>
-
-              <div class="score-proof-card">
-                <div class="score-metric" style="color: #d4af37;">100+ PCs</div>
-                <div class="score-title">Crisis IT Sourcing & Digital Libraries</div>
-                <div class="score-sub">Link PR (The Liza Project)</div>
-                <p class="score-desc">Internationally procured 100+ PCs and 50+ tablets in under 30 days during global supply shortages. Negotiated satellite internet and deployed MDM/firewalls for 1,000+ residents.</p>
-              </div>
-
-              <div class="score-proof-card">
-                <div class="score-metric" style="color: #a855f7;">20+ Skills</div>
-                <div class="score-title">Production AI & Agentic Workflows</div>
-                <div class="score-sub">Money Group & Novu Works Lab</div>
-                <p class="score-desc">Engineered 20+ automated production AI workflows with Claude and OpenAI, accelerating cycle velocity to under 4 hours (40% throughput lift).</p>
-              </div>
-
-              <div class="score-proof-card">
-                <div class="score-metric" style="color: #f59e0b;">4.0 GPA</div>
-                <div class="score-title">B.S. Computer Engineering + Stanford</div>
-                <div class="score-sub">Univ. Politécnica de PR & Stanford Fellow</div>
-                <p class="score-desc">Computer Engineering foundations paired with Stanford University Innovation Fellowship, Microsoft Hackathon 1st Place, and Lean Six Sigma White Belt.</p>
-              </div>
-            </div>
+            <!-- Quantitative Proof Points Grid (Dynamically populated from active lens proofPoints) -->
+            <div class="scorecard-proofs-grid" id="scorecard-proofs-mount"></div>
 
             <!-- Recruiter Quick Evaluation Checklist -->
             <div class="scorecard-checklist-box">

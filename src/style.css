@@ -1695,6 +1695,22 @@ input[type="range"] {
   color: var(--gold-light);
 }
 
+/* Dynamic Role Lens Re-Render Animation */
+@keyframes lensSwapFade {
+  0% {
+    opacity: 0.6;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lens-animating {
+  animation: lensSwapFade 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @media (max-width: 860px) {
   .standalone-projects-grid,
   .awards-grid {
@@ -2216,6 +2232,50 @@ body.tesla-mode .hud-action-btn {
   .dock-btn svg {
     width: 16px;
     height: 16px;
+  }
+
+  /* 7. Executive Modals Responsive Polish */
+  .resume-modal,
+  .recruiter-modal {
+    width: 96vw;
+    max-height: 95vh;
+    border-radius: 16px;
+  }
+
+  .resume-modal-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .resume-modal-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .resume-modal-actions .action-pill-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .modal-lens-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .modal-lens-btn {
+    font-size: 10.5px;
+    padding: 4px 8px;
+    flex: 0 0 auto;
   }
 }
 

@@ -46,7 +46,10 @@ class FabianPortfolioApp {
       resProjectsMount: document.getElementById('res-projects-mount'),
       resEducationMount: document.getElementById('res-education-mount'),
       resAwardsMount: document.getElementById('res-awards-mount'),
+      printableResume: document.getElementById('printable-resume'),
       scorecardRolesMount: document.getElementById('scorecard-roles-mount'),
+      scorecardProofsMount: document.getElementById('scorecard-proofs-mount'),
+      dossierStatsMount: document.getElementById('dossier-stats-mount'),
       disciplineModal: document.getElementById('discipline-modal'),
       dialogContentBody: document.getElementById('dialog-content-body'),
       resumeModal: document.getElementById('resume-export-modal'),
@@ -245,6 +248,18 @@ class FabianPortfolioApp {
     this.renderDossier(lensId);
     this.renderPrintableResume(lensId);
     this.updateRecruiterScorecard(lensId);
+
+    if (this.dom.dossierStatsMount) {
+      this.dom.dossierStatsMount.classList.remove('lens-animating');
+      void this.dom.dossierStatsMount.offsetWidth;
+      this.dom.dossierStatsMount.classList.add('lens-animating');
+    }
+    if (this.dom.scorecardProofsMount) {
+      this.dom.scorecardProofsMount.classList.remove('lens-animating');
+      void this.dom.scorecardProofsMount.offsetWidth;
+      this.dom.scorecardProofsMount.classList.add('lens-animating');
+    }
+
     audio.click(850);
   }
 
@@ -262,13 +277,29 @@ class FabianPortfolioApp {
       this.dom.dossierSummaryMount.textContent = variant.summary;
     }
 
-    // 2. Experience Timeline
+    // 2. Headline Stats Grid (from active role lens proofPoints)
+    if (this.dom.dossierStatsMount && variant.proofPoints) {
+      this.dom.dossierStatsMount.innerHTML = variant.proofPoints.map((p) => `
+        <div class="stat-card">
+          <span class="stat-number gold-num">${p.metric}</span>
+          <span class="stat-title">${p.title}</span>
+          <span class="stat-desc">${p.desc}</span>
+        </div>
+      `).join('');
+    }
+
+    // 3. Experience Timeline
     if (this.dom.dossierExperienceMount) {
       const expLogos = {
         'Money Group': LOGOS.moneyGroup,
         'Red Ventures': LOGOS.redVentures,
         'Viva Advertising': LOGOS.vivaAdvertising,
         'Link Puerto Rico': LOGOS.linkPR,
+        'Search Atlas': LOGOS.novuWorks,
+        'Triple S': LOGOS.enactus,
+        'Triple-S': LOGOS.enactus,
+        'Banco Popular': LOGOS.stanford,
+        '1Password': LOGOS.politecnica,
       };
 
       this.dom.dossierExperienceMount.innerHTML = variant.experiences.map((exp) => {
@@ -400,24 +431,31 @@ class FabianPortfolioApp {
   renderPrintableResume(lensId = this.activeRoleLens) {
     const variant = PROFILE.roleVariants[lensId] || PROFILE.roleVariants.master;
 
+    // Subtle re-render pulse animation for instant visual feedback on lens switch
+    if (this.dom.printableResume) {
+      this.dom.printableResume.classList.remove('lens-animating');
+      void this.dom.printableResume.offsetWidth; // trigger reflow
+      this.dom.printableResume.classList.add('lens-animating');
+    }
+
     // Header Role
     if (this.dom.resRoleMount) {
       this.dom.resRoleMount.textContent = variant.headline;
     }
 
-    // Summary
+    // Summary (Full Verbatim Tailored Text)
     if (this.dom.resSummaryMount) {
       this.dom.resSummaryMount.textContent = variant.summary;
     }
 
-    // Skills
+    // Skills (Tailored Categorized List)
     if (this.dom.resSkillsMount) {
       this.dom.resSkillsMount.innerHTML = variant.skills.map((s) => `
         <li><strong>${s.title}:</strong> ${s.items}</li>
       `).join('');
     }
 
-    // Experience
+    // Experience (Authentic Tailored Bullets per Specialty)
     if (this.dom.resExpMount) {
       this.dom.resExpMount.innerHTML = variant.experiences.map((exp) => `
         <div class="res-exp-block">
@@ -481,6 +519,22 @@ class FabianPortfolioApp {
     const variant = PROFILE.roleVariants[lensId] || PROFILE.roleVariants.master;
     if (this.dom.scorecardRolesMount) {
       this.dom.scorecardRolesMount.innerHTML = `Active Lens: <strong>${variant.shortTitle}</strong> (Targeting Level ICS4 Lead / Senior IC / Manager)`;
+    }
+
+    // Dynamic Quantitative Proof Cards (All 4 cards tailored per specialty)
+    if (this.dom.scorecardProofsMount && variant.proofPoints) {
+      const metricColors = ['gold-num', '#38bdf8', '#4ade80', '#d4af37'];
+      this.dom.scorecardProofsMount.innerHTML = variant.proofPoints.map((p, idx) => {
+        const colorStyle = idx === 0 ? 'class="score-metric gold-num"' : `class="score-metric" style="color: ${metricColors[idx % metricColors.length]};"`;
+        return `
+          <div class="score-proof-card">
+            <div ${colorStyle}>${p.metric}</div>
+            <div class="score-title">${p.title}</div>
+            <div class="score-sub">${p.sub}</div>
+            <p class="score-desc">${p.desc}</p>
+          </div>
+        `;
+      }).join('');
     }
   }
 
@@ -790,10 +844,7 @@ CORE SKILLS:
 ${variant.skills.map((s) => `• ${s.title}: ${s.items}`).join('\n')}
 
 KEY PROOF POINTS & METRICS:
-• Money Group: Delivered at 122% of quarterly bonus target ($4,575 vs $3,750 base) within a $1B+ portfolio scope; restructured partner unit payouts from $125 to $250; automated 20+ enterprise LLM telemetry agents cutting cycle times to <4 hours.
-• Red Ventures (edX): Led content & SEO intelligence for multi-million-page edX platform; normalized raw telemetry across 40M+ user sessions via Databricks SQL & Python; refreshed 1,250+ priority pages (+50% search lift, +19% YoY conversions).
-• Viva Advertising: Co-Founder managing $2M+ direct ad spend and 4B+ impressions across 150+ B2B commercial accounts; generated $10M+ pipeline; slashed churn by 83% (from 30% to 5%) via predictive CRM health models.
-• Link Puerto Rico (The Liza Project): Directed crisis procurement of 100+ computers and 50+ tablets in <30 days during global shortage; transformed 3 community centers into digital libraries with custom MDM and firewalls for 1,000+ residents.
+${variant.proofPoints ? variant.proofPoints.map((p) => `• [${p.metric}] ${p.title} (${p.sub}): ${p.desc}`).join('\n') : ''}
 • Education & Credentials: B.S. Computer Engineering (4.0 GPA), Universidad Politécnica de PR; Microsoft Certified Power BI Data Analyst Associate; Stanford University Innovation Fellow; Lean Six Sigma White Belt; CompTIA ITF+.`;
 
     navigator.clipboard.writeText(text).then(() => {
@@ -1160,9 +1211,12 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
   }
 }
 
-// Boot application when DOM is ready
-window.addEventListener('DOMContentLoaded', () => {
-  window.app = new FabianPortfolioApp();
+// Boot application when DOM is ready (foolproof for ES modules)
+function bootPortfolioApp() {
+  if (window.portfolioApp) return;
+  const instance = new FabianPortfolioApp();
+  window.portfolioApp = instance;
+  window.app = instance; // Explicitly override <div id="app"> DOM global reference
 
   // Deep-linking shortcuts
   const params = new URLSearchParams(window.location.search);
@@ -1171,20 +1225,26 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     const viewParam = params.get('view');
     if (viewParam) {
-      window.app.switchView(viewParam);
+      instance.switchView(viewParam);
     } else if (hash.startsWith('#view-') || hash.startsWith('#')) {
       const v = hash.replace('#view-', '').replace('#', '');
       if (['core', 'case-studies', 'ai-lab', 'planner', 'dossier', 'intel-feed'].includes(v)) {
-        window.app.switchView(v);
+        instance.switchView(v);
       }
     }
 
     if (params.get('arcade') === '1' || hash === '#arcade') {
-      window.app.openArcadeGame();
+      instance.openArcadeGame();
     } else if (params.get('resume') === '1' || hash === '#resume') {
-      window.app.openResumeBrief();
+      instance.openResumeModal();
     } else if (params.get('hire') === '1' || hash === '#hire') {
-      window.app.openRecruiterModal();
+      instance.openRecruiterModal();
     }
   }, 150);
-});
+}
+
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', bootPortfolioApp);
+} else {
+  bootPortfolioApp();
+}
