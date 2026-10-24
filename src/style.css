@@ -67,8 +67,10 @@
 
 html, body {
   width: 100%;
-  height: 100%;
-  overflow-x: hidden;
+  max-width: 100%;
+  min-height: 100%;
+  min-height: 100dvh;
+  overflow-x: clip;
   background-color: var(--bg-canvas);
   color: var(--text-body);
   font-family: var(--font-sans);
@@ -118,7 +120,14 @@ body::after {
   z-index: 0;
   pointer-events: auto;
   opacity: 0.95;
-  transition: opacity var(--duration-smooth) ease;
+  transition: opacity var(--duration-smooth) ease, filter var(--duration-smooth) ease;
+}
+
+/* Dim 3D WebGL background on content sub-views so orbital labels do not bleed through text */
+body:not([data-view="core"]) .webgl-canvas-layer {
+  opacity: 0.16;
+  pointer-events: none;
+  filter: blur(1.5px);
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -596,7 +605,7 @@ body::after {
 .sculpture-dock {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   align-self: center;
   padding: 8px 18px;
   background: var(--bg-glass-elevated);
@@ -604,6 +613,7 @@ body::after {
   border-radius: var(--radius-pill);
   backdrop-filter: blur(20px);
   margin-top: 10px;
+  max-width: 100%;
 }
 
 .dock-caption {
@@ -612,12 +622,15 @@ body::after {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--gold-muted);
+  white-space: nowrap;
 }
 
 .dock-buttons {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .sculpture-pill {
@@ -695,7 +708,7 @@ body::after {
   background: var(--bg-card);
   border: 1px solid var(--hairline);
   border-radius: var(--radius-lg);
-  padding: 36px;
+  padding: clamp(20px, 4vw, 36px);
   display: flex;
   flex-direction: column;
   transition: all var(--duration-smooth) var(--ease-luxury);
@@ -730,20 +743,38 @@ body::after {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
   margin-bottom: 20px;
+}
+
+.case-card-logo {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  max-width: 140px;
+}
+
+.case-card-logo svg {
+  height: 22px;
+  width: auto;
+  max-width: 130px;
+  display: block;
 }
 
 .case-pill {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 4px 12px;
+  padding: 4px 10px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--hairline-gold);
   color: var(--gold-light);
   background: rgba(212, 175, 55, 0.08);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .case-company {
@@ -1879,12 +1910,68 @@ body.tesla-mode .hud-action-btn {
 }
 
 @media (max-width: 768px) {
+  /* 1. Header Navigation & Brand Fitting */
   .app-header {
-    top: 10px;
-    left: 12px;
-    right: 12px;
-    padding: 0 16px;
-    height: 56px;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 0 10px;
+    height: 52px;
+    border-radius: 26px;
+  }
+
+  .header-left {
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .brand-link {
+    gap: 8px;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .brand-avatar-box {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    padding: 1.8px;
+  }
+
+  .brand-nw-badge {
+    width: 14px;
+    height: 14px;
+    bottom: -1px;
+    right: -1px;
+  }
+
+  .brand-text-group {
+    min-width: 0;
+    overflow: hidden;
+    justify-content: center;
+  }
+
+  .brand-name {
+    font-size: clamp(12.5px, 3.8vw, 14.5px);
+    white-space: nowrap;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .brand-role {
+    font-size: 8.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: clamp(120px, 40vw, 200px);
+    display: block;
+  }
+
+  .header-right {
+    gap: 6px;
+    flex-shrink: 0;
   }
 
   .availability-pill,
@@ -1892,15 +1979,179 @@ body.tesla-mode .hud-action-btn {
     display: none;
   }
 
+  #btn-tesla-mode .btn-text {
+    display: none;
+  }
+
+  #btn-tesla-mode,
+  .hud-action-btn.audio-btn {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  /* 2. Main Viewport & Layer Clearance */
+  .main-viewport {
+    padding-top: 74px;
+    padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .viewport-view {
+    padding: 0 clamp(12px, 3.5vw, 20px) calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .webgl-canvas-layer {
+    opacity: 0.35;
+  }
+
+  body:not([data-view="core"]) .webgl-canvas-layer {
+    opacity: 0.08;
+    filter: blur(2px);
+    pointer-events: none;
+  }
+
+  /* 3. Hero & Overview */
   .hero-editorial-container {
-    padding-top: 10px;
+    padding: 12px 0 36px;
+  }
+
+  .hero-kicker-row {
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .kicker-pill {
+    font-size: 9.5px;
+    padding: 4px 10px;
+  }
+
+  .hero-title {
+    font-size: clamp(30px, 8.5vw, 44px);
+    margin-bottom: 18px;
+  }
+
+  .hero-lead {
+    font-size: 14.5px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .hero-action-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .luxury-btn {
+    justify-content: center;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 13.5px;
   }
 
   .luxury-metrics-ribbon {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 14px;
+    padding: clamp(14px, 3.5vw, 22px);
   }
 
+  .sculpture-dock {
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .dock-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .sculpture-pill {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  /* 4. Case Studies */
+  .catalog-header {
+    margin-bottom: 20px;
+  }
+
+  .catalog-title {
+    font-size: clamp(24px, 6.5vw, 34px);
+    line-height: 1.2;
+  }
+
+  .catalog-sub {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .case-card {
+    padding: clamp(16px, 4vw, 22px);
+    border-radius: 14px;
+  }
+
+  .case-badge-row {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .case-card-logo svg {
+    height: 20px;
+    max-width: 110px;
+  }
+
+  .case-pill {
+    font-size: 9.5px;
+    padding: 3px 8px;
+  }
+
+  .case-title {
+    font-size: 18px;
+    line-height: 1.35;
+    margin-bottom: 10px;
+  }
+
+  .case-summary {
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  .case-metric-row {
+    gap: 6px;
+    padding: 10px 6px;
+    margin-bottom: 18px;
+  }
+
+  .case-m-val {
+    font-size: clamp(14px, 4vw, 17px);
+    font-weight: 800;
+  }
+
+  .case-m-key {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .case-action-btn {
+    padding: 11px 12px;
+    font-size: 12px;
+    justify-content: center;
+  }
+
+  /* 5. Dossier, Studio & Lab Containers */
   .dossier-hero {
     flex-direction: column;
   }
@@ -1908,6 +2159,63 @@ body.tesla-mode .hud-action-btn {
   .dossier-stats-grid,
   .philosophy-grid {
     grid-template-columns: 1fr;
+  }
+
+  .education-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .competency-table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ai-lab-card,
+  .planner-card,
+  .dossier-container {
+    padding: clamp(14px, 3.5vw, 22px);
+    border-radius: 14px;
+  }
+
+  .intel-feed-layout-container {
+    padding: 12px clamp(6px, 2vw, 12px) calc(76px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .industry-pulse-ticker {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 14px;
+  }
+
+  .pulse-chips-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .feed-search-box {
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* 6. Mobile Dock Clearance */
+  .mobile-dock {
+    height: calc(56px + env(safe-area-inset-bottom, 0px));
+    padding: 0 6px env(safe-area-inset-bottom, 0px);
+  }
+
+  .dock-btn {
+    font-size: 9px;
+    padding: 3px 5px;
+  }
+
+  .dock-btn svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -2263,7 +2571,7 @@ body.tesla-mode .hud-action-btn {
 /* Dossier Education & Bullets */
 .education-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 18px;
 }
 
@@ -2866,6 +3174,8 @@ body.tesla-mode .hud-action-btn {
   max-width: 1280px;
   margin: 0 auto;
   padding: 32px 24px 80px;
+  box-sizing: border-box;
+  overflow-x: clip;
 }
 
 .intel-feed-wrapper {
@@ -3064,9 +3374,15 @@ body.tesla-mode .hud-action-btn {
 /* Dual-Stream Layout */
 .feed-dual-layout {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: minmax(0, 1fr) 380px;
   gap: 32px;
   align-items: start;
+}
+
+.feed-main-stream,
+.feed-sidebar-radar {
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* Main Stream: Controls & Posts */
@@ -3772,7 +4088,12 @@ body.tesla-mode .hud-action-btn {
 
 @media (max-width: 960px) {
   .feed-dual-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .feed-search-box {
+    min-width: 0;
+    width: 100%;
   }
 }
 

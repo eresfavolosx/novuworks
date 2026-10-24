@@ -63,6 +63,9 @@ class FabianPortfolioApp {
   }
 
   init() {
+    // 0. Ensure root view dataset is set on body for CSS contextual styling
+    document.body.dataset.view = 'core';
+
     // 1. Dynamic Cursor Spotlight (Follows mouse/pointer coordinates smoothly)
     window.addEventListener('pointermove', (e) => {
       document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
@@ -534,11 +537,8 @@ class FabianPortfolioApp {
       return `
         <div class="case-card" data-case-id="${cs.id}">
           <div class="case-badge-row">
-            <div class="case-header-left">
-              <div class="case-card-logo">${logoSvg}</div>
-              <span class="case-pill">${cs.badge}</span>
-            </div>
-            <span class="case-company">${cs.company}</span>
+            <div class="case-card-logo">${logoSvg}</div>
+            <span class="case-pill">${cs.badge}</span>
           </div>
           <h3 class="case-title">${cs.title}</h3>
           <p class="case-summary">${cs.summary}</p>
@@ -1055,6 +1055,7 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
   switchView(viewName) {
     if (this.currentView === viewName) return;
     this.currentView = viewName;
+    document.body.dataset.view = viewName;
     audio.click(1300);
 
     // Update Nav buttons
@@ -1168,6 +1169,16 @@ window.addEventListener('DOMContentLoaded', () => {
   const hash = window.location.hash.toLowerCase();
 
   setTimeout(() => {
+    const viewParam = params.get('view');
+    if (viewParam) {
+      window.app.switchView(viewParam);
+    } else if (hash.startsWith('#view-') || hash.startsWith('#')) {
+      const v = hash.replace('#view-', '').replace('#', '');
+      if (['core', 'case-studies', 'ai-lab', 'planner', 'dossier', 'intel-feed'].includes(v)) {
+        window.app.switchView(v);
+      }
+    }
+
     if (params.get('arcade') === '1' || hash === '#arcade') {
       window.app.openArcadeGame();
     } else if (params.get('resume') === '1' || hash === '#resume') {
