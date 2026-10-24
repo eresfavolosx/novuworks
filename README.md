@@ -24,10 +24,10 @@ Designed to outperform standard resume websites and LinkedIn profiles, the syste
 
 | Company / Institution | Accredited Title | Core Impact & Quantitative Milestones |
 | :--- | :--- | :--- |
-| **Money Group** | Media Buyer (Demand Gen & RevOps Analytics, Level ICS4) | Delivered at **122% of quarterly bonus target** ($4,575 actual vs $3,750 base) within a $1B+ portfolio scope. Restructured partner unit payouts from $125 to $250. Engineered 20+ automated telemetry anomaly agents in &lt;4 hours. |
-| **Red Ventures** | Growth / SEO Analyst (Content & Audience Intelligence, edX) | Normalized raw event streams across **40,000,000+ user sessions** in Databricks using SQL & Python. Consolidated 1,250+ priority course pages driving a **+50% baseline search lift** and **+19% YoY conversion gain**. |
-| **Viva Advertising** | Co-Founder (B2B Growth, CRM & Event Intelligence) | Managed **$2M+ direct ad spend** and **4B+ impressions** across 150+ B2B commercial accounts. Built predictive CRM account-health models that **slashed client churn by 83%** (from 30% to 5%) across a **$10M+ pipeline**. |
-| **Link Puerto Rico** | Co-Founder & Technical Lead | Directed a 10+ person technical team to build and govern **100+ relational databases** for 80+ partner organizations, unlocking **$3 Million** in corporate sponsorships and B2B sales. |
+| **Money Group** | Media Buyer (Demand Gen & RevOps Analytics, Level ICS4) — Full-Time | Delivered at **122% of quarterly bonus target** within a $1B+ portfolio scope. Restructured partner unit payouts from $125 to $250. Engineered 20+ automated telemetry anomaly agents in &lt;4 hours. |
+| **Red Ventures** | Growth / SEO Analyst (Content & Audience Intelligence, edX) — Full-Time | Normalized raw event streams across **40,000,000+ user sessions** in Databricks using SQL & Python. Consolidated 1,250+ priority course pages driving a **+50% baseline search lift** and **+19% YoY conversion gain**. |
+| **Viva Advertising** | Founder & Managing Director (B2B Growth, CRM & Event Intelligence) — My Company / Founder | Managed **$2M+ direct ad spend** and **4B+ impressions** across 150+ B2B commercial accounts. Built predictive CRM account-health models that **slashed client churn by 83%** (from 30% to 5%) across a **$10M+ pipeline**. |
+| **Link Puerto Rico** | Co-Founder & Technical Lead (Tech Program Manager & Infrastructure) — My Company / Co-Founder | Directed a 10+ person technical team to build and govern **100+ relational databases** for 80+ partner organizations, unlocking **$3 Million** in corporate sponsorships and B2B sales. |
 | **Universidad Politécnica de PR** | B.S. Computer Engineering | **4.0 GPA** in core computer engineering coursework (Software Engineering, Algorithms, Database Systems, Operating Systems). |
 | **Stanford University** | Fellow | **Stanford University Innovation Fellows** program graduate. |
 

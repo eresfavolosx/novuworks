@@ -28,7 +28,7 @@ export const PROFILE = {
   status: 'Open to High-Impact Roles at AI / Tech Companies (Growth Engineering Lead, AI Technical Product Owner, Forward Deployed Analytics, Tech Ops Director).',
 
   headlineStats: [
-    { label: 'Quarterly Bonus Delivered', value: '122%', sub: '$4,575 actual vs $3,750 base at Money Group' },
+    { label: 'Quarterly Bonus Delivered', value: '122%', sub: 'Delivered at Money Group (Full-Time)' },
     { label: 'Pipeline Generated', value: '$10M+', sub: 'Across 150+ B2B commercial accounts' },
     { label: 'Client Churn Suppression', value: '-83%', sub: 'Reduced from 30% to 5% via CRM predictive modeling' },
     { label: 'Creative Testing Velocity', value: '3x', sub: 'Via automated AI prompt & telemetry agents' },
@@ -72,7 +72,8 @@ export const PROFILE = {
       experiences: [
         {
           company: 'Money Group',
-          role: 'Media Buyer (Ad-Tech & AI Operations)',
+          employmentType: 'Full-Time',
+          role: 'Media Buyer (Ad-Tech & AI Operations) — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
             'Performance Media & Ad-Tech: Managed over $100K+ in ad spend across a wide array of verticals in performance-based and flat-fee deals, concurrently supporting the development of proprietary internal ad-tech tools and an AI-powered website builder to optimize revenue operations for a 100+ employee organization.',
@@ -83,7 +84,8 @@ export const PROFILE = {
         },
         {
           company: 'Red Ventures',
-          role: 'Growth / SEO Analyst (Content & Systems, edX)',
+          employmentType: 'Full-Time',
+          role: 'Growth / SEO Analyst (Content & Systems, edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
             'SEO & Conversion Optimization: Led strategic deployment of Generative AI and logic-based front-end personalization rules across digital properties, achieving a +200% lift in AI-driven leads and a +38.1% verification increase.',
@@ -93,7 +95,8 @@ export const PROFILE = {
         },
         {
           company: 'Viva Advertising',
-          role: 'Co-Founder & Operations Lead',
+          employmentType: 'My Company / Founder',
+          role: 'Founder & Managing Director (Client Solutions & Systems) — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
             '360° Campaign Execution: Directed an Agile team of 15 (media buyers, designers, and developers), successfully executing full-funnel marketing campaigns that generated $10M+ in revenue and over 4 billion impressions.',
@@ -103,7 +106,8 @@ export const PROFILE = {
         },
         {
           company: 'Link Puerto Rico',
-          role: 'Co-Founder & Technical Lead',
+          employmentType: 'My Company / Co-Founder',
+          role: 'Co-Founder & Technical Lead (Technical Program Manager) — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
             'Product Launches & Growth: Managed deployment of scalable Azure infrastructure, successfully supporting 3.8K+ concurrent users for high-traffic platforms to drive engagement and retention.',
@@ -113,10 +117,10 @@ export const PROFILE = {
         },
       ],
       proofPoints: [
-        { metric: '122%', title: 'Bonus Target Delivered', sub: 'Money Group (Media Buyer, ICS4)', desc: 'Delivered at 122% of quarterly bonus target ($4,575 actual vs $3,750 base) within a $1B+ portfolio scope. Restructured partner unit payouts from $125 to $250.' },
-        { metric: '40M+', title: 'Databricks Sessions Normalized', sub: 'Red Ventures (Growth / SEO Analyst, edX)', desc: 'Queried and cleaned raw telemetry from scratch using Databricks SQL & Python across 40M+ sessions. Consolidated 1,250+ priority pages driving a 50%+ search lift and 19% YoY conversion gain.' },
-        { metric: '$10M+', title: 'Realized B2B Pipeline & -83% Churn', sub: 'Viva Advertising (Co-Founder)', desc: 'Managed $2M+ ad spend and 4B+ impressions across 150+ commercial accounts. Built predictive CRM account-health models that slashed client churn from 30% to 5%.' },
-        { metric: '100+ PCs', title: 'Crisis IT Sourcing & Digital Libraries', sub: 'Link PR (The Liza Project)', desc: 'Internationally procured 100+ PCs and 50+ tablets in under 30 days during global supply shortages. Negotiated satellite internet and deployed MDM/firewalls for 1,000+ residents.' }
+        { metric: '122%', title: 'Bonus Target Delivered', sub: 'Money Group (Full-Time, ICS4)', desc: 'Delivered at 122% of quarterly bonus target within a $1B+ portfolio scope. Restructured partner unit payouts from $125 to $250.' },
+        { metric: '40M+', title: 'Databricks Sessions Normalized', sub: 'Red Ventures (Full-Time, edX)', desc: 'Queried and cleaned raw telemetry from scratch using Databricks SQL & Python across 40M+ sessions. Consolidated 1,250+ priority pages driving a 50%+ search lift and 19% YoY conversion gain.' },
+        { metric: '$10M+', title: 'Realized B2B Pipeline & -83% Churn', sub: 'Viva Advertising (My Company / Founder)', desc: 'Managed $2M+ ad spend and 4B+ impressions across 150+ commercial accounts. Built predictive CRM account-health models that slashed client churn from 30% to 5%.' },
+        { metric: '100+ PCs', title: 'Crisis IT Sourcing & Digital Libraries', sub: 'Link PR (My Company / Co-Founder)', desc: 'Internationally procured 100+ PCs and 50+ tablets in under 30 days during global supply shortages. Negotiated satellite internet and deployed MDM/firewalls for 1,000+ residents.' }
       ]
     },
 
@@ -148,7 +152,8 @@ export const PROFILE = {
       experiences: [
         {
           company: 'Money Group',
-          role: 'Media Buyer (Agentic Marketing & Paid Acquisition)',
+          employmentType: 'Full-Time',
+          role: 'Media Buyer (Agentic Marketing & Paid Acquisition) — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
             'LLM Automation & Workflows: Engineered 20+ automated AI skills and workflows using enterprise LLM platforms to automate complex data requests and reduce reporting cycles to under 4 hours.',
@@ -159,7 +164,8 @@ export const PROFILE = {
         },
         {
           company: 'Red Ventures',
-          role: 'Growth / SEO Analyst (Marketing Analytics & CRO)',
+          employmentType: 'Full-Time',
+          role: 'Growth / SEO Analyst (Marketing Analytics & CRO, edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
             'SQL & Data Analytics: Queried raw digital engagement and web traffic data using advanced SQL and Python in Databricks to reconcile multi-channel attribution across 40 million+ user sessions.',
@@ -169,7 +175,8 @@ export const PROFILE = {
         },
         {
           company: 'Viva Advertising',
-          role: 'Co-Founder (B2B Demand-Generation & Strategy)',
+          employmentType: 'My Company / Founder',
+          role: 'Founder & Technical Director (B2B Demand-Generation & Strategy) — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
             'B2B Funnel Performance: Architected centralized Power BI and Looker dashboards to provide critical insights into B2B acquisition performance and manage a $10M+ commercial pipeline.',
@@ -179,7 +186,8 @@ export const PROFILE = {
         },
         {
           company: 'Link Puerto Rico',
-          role: 'Co-Founder & Technical Lead (Operations & Ecosystem Leadership)',
+          employmentType: 'My Company / Co-Founder',
+          role: 'Co-Founder & Technical Lead (Operations & Ecosystem Leadership) — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
             'Strategic Project Management: Coordinated joint data operations and tracked project milestones for a 10+ person team to deploy 100+ digital platforms driving over $3 Million in funding and sales.',
@@ -189,10 +197,10 @@ export const PROFILE = {
         },
       ],
       proofPoints: [
-        { metric: '20+', title: 'Production AI Skills Deployed', sub: 'Money Group (Claude Enterprise)', desc: 'Engineered 20+ automated AI skills and agentic workflows in an enterprise LLM platform, cutting reporting cycles and campaign build times from days to under 4 hours.' },
+        { metric: '20+', title: 'Production AI Skills Deployed', sub: 'Money Group (Full-Time, Claude Enterprise)', desc: 'Engineered 20+ automated AI skills and agentic workflows in an enterprise LLM platform, cutting reporting cycles and campaign build times from days to under 4 hours.' },
         { metric: '<4 Hours', title: 'Rapid Deployment Velocity', sub: 'Enterprise Ad-Tech & Operations', desc: 'Automated complex campaign and content build workflows via custom Claude Code and Antigravity agents, achieving a 40% overall team efficiency lift.' },
-        { metric: '3x Lift', title: 'High-Intent AI Conversions', sub: 'Red Ventures (edX B2B/B2C Platform)', desc: 'Partnered across Product and Engineering to ship AI-driven content generators and CMS workflows across 1,250+ landing pages, driving a +200% lift in high-intent leads.' },
-        { metric: '50+', title: 'Technical AI Workshops Delivered', sub: 'Link PR (Developer Community)', desc: 'Founded a 2,000+ developer community, delivering 50+ hands-on technical workshops for 5,000+ participants and coaching 80+ startups on AI automation and prompt engineering.' }
+        { metric: '3x Lift', title: 'High-Intent AI Conversions', sub: 'Red Ventures (Full-Time, edX Platform)', desc: 'Partnered across Product and Engineering to ship AI-driven content generators and CMS workflows across 1,250+ landing pages, driving a +200% lift in high-intent leads.' },
+        { metric: '50+', title: 'Technical AI Workshops Delivered', sub: 'Link PR (My Company / Co-Founder)', desc: 'Founded a 2,000+ developer community, delivering 50+ hands-on technical workshops for 5,000+ participants and coaching 80+ startups on AI automation and prompt engineering.' }
       ]
     },
 
@@ -224,7 +232,8 @@ export const PROFILE = {
       experiences: [
         {
           company: 'Money Group',
-          role: 'Media Buyer',
+          employmentType: 'Full-Time',
+          role: 'Media Buyer (Performance Media & RevOps Analytics) — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
             'Process Improvement & AI Automation: Engineered 20+ custom AI skills and led the marketing rollout for HeyMoney, the internal AI analytics platform. Trained a 15-person team, streamlining manual reporting processes and automating campaign creation to reduce setup time from days to hours.',
@@ -237,7 +246,8 @@ export const PROFILE = {
         },
         {
           company: 'Red Ventures',
-          role: 'Growth / SEO Analyst (edX)',
+          employmentType: 'Full-Time',
+          role: 'Growth / SEO Analyst (RevOps Analytics & Telemetry, edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
             'Dashboards & BI Tools: Designed automated reporting dashboards in Tableau and Looker to monitor real-time inventory health, identifying trends that improved lead generation efficiency by 19% YoY.',
@@ -248,7 +258,8 @@ export const PROFILE = {
         },
         {
           company: 'Viva Advertising',
-          role: 'Co-founder & Marketing VP',
+          employmentType: 'My Company / Founder',
+          role: 'Founder & Managing Director (Performance Media & BI) — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
             'Paid Media & Performance Tracking: Led the performance marketing strategy for a diverse book of business, managing ad spend across Google Ads, Meta, and Native channels that generated 1B+ impressions and $2M+ in direct revenue.',
@@ -261,7 +272,8 @@ export const PROFILE = {
         },
         {
           company: 'Link Puerto Rico',
-          role: 'Co-Founder',
+          employmentType: 'My Company / Co-Founder',
+          role: 'Co-Founder & Operations Lead — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
             'Revenue Operations & Accounting: Managed all internal accounting functions and revenue cashflow, tracking outstanding partner invoices and resolving issues with revenue allocation and financial reporting.',
@@ -272,10 +284,10 @@ export const PROFILE = {
         },
       ],
       proofPoints: [
-        { metric: '122%', title: 'Bonus Target Delivered', sub: 'Money Group ($1B+ Portfolio Scope)', desc: 'Assumed control of 5 distinct verticals within 7 months, actively managing $100,000+ in campaign ad spend and hitting 122% bonus target ($4,575 actual vs $3,750 base).' },
-        { metric: '+$125', title: 'Partner Payout Restructuring', sub: 'Money Group (Down-Funnel Conversion)', desc: 'Restructured affiliate partner unit payouts from $125 to $250 by auditing down-funnel clinical conversion telemetry rather than superficial lead volume, protecting margins.' },
-        { metric: '1B+ Impr', title: 'Performance Media Buying', sub: 'Viva Advertising ($2M+ Ad Budgets)', desc: 'Led performance marketing strategy across Google Ads, Meta, and Native channels, managing ad spend that generated 1B+ impressions and $2M+ in direct revenue.' },
-        { metric: '-83%', title: 'Agency Client Churn Slashing', sub: 'Viva Advertising (Predictive CRM Analytics)', desc: 'Architected a client success framework leveraging predictive analytics to investigate account health, reducing agency client churn from 30% to 5%.' }
+        { metric: '122%', title: 'Bonus Target Delivered', sub: 'Money Group (Full-Time, $1B+ Scope)', desc: 'Assumed control of 5 distinct verticals within 7 months, actively managing $100,000+ in campaign ad spend and delivering at 122% of quarterly bonus target.' },
+        { metric: '+$125', title: 'Partner Payout Restructuring', sub: 'Money Group (Full-Time, Down-Funnel Conversion)', desc: 'Restructured affiliate partner unit payouts from $125 to $250 by auditing down-funnel clinical conversion telemetry rather than superficial lead volume, protecting margins.' },
+        { metric: '1B+ Impr', title: 'Performance Media Buying', sub: 'Viva Advertising (My Company / Founder)', desc: 'Led performance marketing strategy across Google Ads, Meta, and Native channels, managing ad spend that generated 1B+ impressions and $2M+ in direct revenue.' },
+        { metric: '-83%', title: 'Agency Client Churn Slashing', sub: 'Viva Advertising (My Company / Founder)', desc: 'Architected a client success framework leveraging predictive analytics to investigate account health, reducing agency client churn from 30% to 5%.' }
       ]
     },
 
@@ -307,7 +319,8 @@ export const PROFILE = {
       experiences: [
         {
           company: 'Money Group',
-          role: 'Media Buyer (Data Governance & Operations Lead)',
+          employmentType: 'Full-Time',
+          role: 'Media Buyer (Data Governance & Operations Lead) — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
             'Data Quality & Governance: Ensured 100% accuracy and reliability by evaluating enterprise outputs against strict business KPIs to maintain a secure single source of truth for Revenue and Finance teams.',
@@ -318,7 +331,8 @@ export const PROFILE = {
         },
         {
           company: 'Red Ventures',
-          role: 'Growth / SEO Analyst (Data Integrity & BI Analytics, edX)',
+          employmentType: 'Full-Time',
+          role: 'Growth / SEO Analyst (Data Integrity & BI Analytics, edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
             'SQL & Data Integrity: Queried raw data in Databricks and SQL to resolve schema conflicts, reconciling attribution data across GA4 for over 40 million user sessions with 100% reporting accuracy.',
@@ -329,7 +343,8 @@ export const PROFILE = {
         },
         {
           company: 'Viva Advertising',
-          role: 'Co-Founder (BI & Financial Analytics)',
+          employmentType: 'My Company / Founder',
+          role: 'Founder & Managing Director (BI & Financial Analytics) — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
             'Executive Dashboards & Data Domains: Architected Looker and Power BI dashboards tracking a $10M+ pipeline and 4 Billion+ impressions, supporting enterprise strategies generating $10M+ in revenue.',
@@ -340,7 +355,8 @@ export const PROFILE = {
         },
         {
           company: 'Link Puerto Rico',
-          role: 'Co-Founder & Technical Lead',
+          employmentType: 'My Company / Co-Founder',
+          role: 'Co-Founder & Technical Lead (Relational Architecture) — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
             'Billing & Transaction Data Models: Directed a team of 10+ to deploy 100+ software and data platforms for 30+ organizations, integrating payment APIs and relational schemas across 50,000+ paid customer transactions and $3 Million in revenue.',
@@ -349,10 +365,10 @@ export const PROFILE = {
         },
       ],
       proofPoints: [
-        { metric: '100%', title: 'Financial Reporting Accuracy', sub: 'Money Group (Downstream Revenue Audits)', desc: 'Reconciled partner-reported revenue discrepancies, automated down-funnel integrations, and audited payouts to ensure 100% accuracy across executive forecasting data.' },
-        { metric: '40M+', title: 'Databricks Sessions Audited', sub: 'Red Ventures (edX Analytics Engineering)', desc: 'Wrote complex SQL queries (CTEs, window functions, joins) in Databricks to resolve schema conflicts and reconcile multi-channel attribution across 40M+ user sessions.' },
+        { metric: '100%', title: 'Financial Reporting Accuracy', sub: 'Money Group (Full-Time, Downstream Revenue Audits)', desc: 'Reconciled partner-reported revenue discrepancies, automated down-funnel integrations, and audited payouts to ensure 100% accuracy across executive forecasting data.' },
+        { metric: '40M+', title: 'Databricks Sessions Audited', sub: 'Red Ventures (Full-Time, edX Analytics Engineering)', desc: 'Wrote complex SQL queries (CTEs, window functions, joins) in Databricks to resolve schema conflicts and reconcile multi-channel attribution across 40M+ user sessions.' },
         { metric: '1,250+', title: 'Pages Governed & Optimized', sub: 'Enterprise Telemetry & Server Logs', desc: 'Analyzed server logs to modify session calculation logic and maintained decisioning datasets across 1,250+ courses, improving conversion efficiency by 19% YoY.' },
-        { metric: '50K+', title: 'Paid Transaction Data Models', sub: 'Link PR (Relational DB Governance)', desc: 'Integrated payment APIs and relational schemas across 50,000+ paid transactions and advised 80+ organizations on database compliance and secure data architecture.' }
+        { metric: '50K+', title: 'Paid Transaction Data Models', sub: 'Link PR (My Company / Co-Founder, Relational DBs)', desc: 'Integrated payment APIs and relational schemas across 50,000+ paid transactions and advised 80+ organizations on database compliance and secure data architecture.' }
       ]
     },
 
@@ -384,7 +400,8 @@ export const PROFILE = {
       experiences: [
         {
           company: 'Money Group',
-          role: 'Media Buyer (Project Management & Process Automation)',
+          employmentType: 'Full-Time',
+          role: 'Media Buyer (Project Management & Process Automation) — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
             'Process Automation & Workflow Engineering: Engineered 20+ automated AI skills and workflows in an enterprise LLM platform driving business process improvements that reduced multi-day operational setups to under 4 hours.',
@@ -395,7 +412,8 @@ export const PROFILE = {
         },
         {
           company: 'Red Ventures',
-          role: 'Growth / SEO Analyst (Data Analytics & Cross-Functional Projects)',
+          employmentType: 'Full-Time',
+          role: 'Growth / SEO Analyst (Data Analytics & Cross-Functional Projects, edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
             'Advanced Analytics & Data Governance: Queried raw datasets using SQL and Python in Databricks to resolve schema conflicts and reconcile multi-channel attribution across 40 million+ user sessions with 100% reporting accuracy.',
@@ -405,7 +423,8 @@ export const PROFILE = {
         },
         {
           company: 'Viva Advertising',
-          role: 'Co-Founder (Business Operations & Analytics)',
+          employmentType: 'My Company / Founder',
+          role: 'Founder & Managing Director (Business Operations & Analytics) — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
             'Executive BI & Commercial Planning: Architected centralized Looker and Power BI dashboards tracking $2M+ in direct budgets and a $10M+ commercial pipeline to develop data-driven models that generated $10M+ in client revenue.',
@@ -415,7 +434,8 @@ export const PROFILE = {
         },
         {
           company: 'Link Puerto Rico',
-          role: 'Co-Founder & Technical Lead (Technical Project Management)',
+          employmentType: 'My Company / Co-Founder',
+          role: 'Co-Founder & Technical Lead (Technical Program Management) — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
             'End-to-End Project Delivery: Directed a 10+ person team to scope and deploy 100+ custom software platforms for 30+ organizations managing vendor contracts and budgets that drove over $3 Million in sales and funding.',
@@ -424,10 +444,10 @@ export const PROFILE = {
         },
       ],
       proofPoints: [
-        { metric: '100+ PCs', title: 'Crisis Procurement in <30 Days', sub: 'Link PR (The Liza Project)', desc: 'Directed multi-site digital library initiative during peak global pandemic hardware shortages, sourcing 100+ PCs and 50+ tablets in under 30 days with satellite internet.' },
-        { metric: '15 Directs', title: 'Cross-Functional Agile Leadership', sub: 'Viva Advertising (Operations Director)', desc: 'Directed a 15-person team of analysts, designers, and developers across 150+ commercial accounts by implementing centralized RACI governance that lifted delivery by 40%.' },
+        { metric: '100+ PCs', title: 'Crisis Procurement in <30 Days', sub: 'Link PR (My Company / Co-Founder, The Liza Project)', desc: 'Directed multi-site digital library initiative during peak global pandemic hardware shortages, sourcing 100+ PCs and 50+ tablets in under 30 days with satellite internet.' },
+        { metric: '15 Directs', title: 'Cross-Functional Agile Leadership', sub: 'Viva Advertising (My Company / Founder, Operations)', desc: 'Directed a 15-person team of analysts, designers, and developers across 150+ commercial accounts by implementing centralized RACI governance that lifted delivery by 40%.' },
         { metric: 'Lean Six Sigma', title: 'Process Improvement & SLAs', sub: 'Accredited White Belt & UPPR PM', desc: 'Applied structured Agile & Waterfall delivery and vendor SLA negotiations, managing contracts across 5 operational verticals handling $100k+ direct spend.' },
-        { metric: '100+ Platforms', title: 'Enterprise SDLC Deployments', sub: 'Link PR (30+ Organizations)', desc: 'Managed cross-functional teams to scope and deploy 100+ custom software platforms for 30+ businesses, managing vendor contracts driving over $3M in sales and funding.' }
+        { metric: '100+ Platforms', title: 'Enterprise SDLC Deployments', sub: 'Link PR (My Company / Co-Founder, 30+ Orgs)', desc: 'Managed cross-functional teams to scope and deploy 100+ custom software platforms for 30+ businesses, managing vendor contracts driving over $3M in sales and funding.' }
       ]
     },
   },
@@ -546,8 +566,9 @@ export const PROFILE = {
   experience: [
     {
       company: 'Money Group',
+      employmentType: 'Full-Time',
       logoKey: 'moneyGroup',
-      role: 'Media Buyer (Ad-Tech, AI Operations & Revenue Analytics)',
+      role: 'Media Buyer (Ad-Tech, AI Operations & Revenue Analytics) — Full-Time',
       period: 'March 2026 – October 2026',
       bullets: [
         'Performance Media & Ad-Tech: Managed over $100K+ in ad spend across a wide array of verticals in various performance-based and flat-fee deals, while concurrently supporting the development of proprietary internal ad-tech tools and an AI-powered website builder to optimize revenue operations for a 100+ employee organization.',
@@ -558,8 +579,9 @@ export const PROFILE = {
     },
     {
       company: 'Red Ventures',
+      employmentType: 'Full-Time',
       logoKey: 'redVentures',
-      role: 'Growth / SEO Analyst (Content & Audience Intelligence, edX)',
+      role: 'Growth / SEO Analyst (Content & Audience Intelligence, edX) — Full-Time',
       period: 'August 2024 – January 2026',
       bullets: [
         'SEO & Conversion Optimization: Led the strategic deployment of Generative AI and logic-based front-end personalization rules across digital properties, achieving a +200% lift in AI-driven leads and a +38.1% verification increase.',
@@ -569,8 +591,9 @@ export const PROFILE = {
     },
     {
       company: 'Viva Advertising',
+      employmentType: 'My Company / Founder',
       logoKey: 'vivaAdvertising',
-      role: 'Co-Founder & Operations Lead (Client Solutions & Systems)',
+      role: 'Founder & Managing Director (Client Solutions & Ad-Tech Systems) — My Company / Founder',
       period: 'January 2018 – Present',
       bullets: [
         '360° Campaign Execution: Directed an Agile team of 15 (media buyers, designers, and developers), successfully executing full-funnel marketing campaigns that generated $10M+ in revenue and over 4 billion impressions.',
@@ -580,8 +603,9 @@ export const PROFILE = {
     },
     {
       company: 'Link Puerto Rico',
+      employmentType: 'My Company / Co-Founder',
       logoKey: 'linkPR',
-      role: 'Co-Founder & Technical Lead (Technical Program Manager)',
+      role: 'Co-Founder & Technical Lead (Technical Program Manager) — My Company / Co-Founder',
       period: 'November 2017 – Present',
       bullets: [
         'Product Launches & Growth: Managed the deployment of scalable Azure infrastructure, successfully supporting 3.8K+ concurrent users for high-traffic platforms to drive engagement and retention.',
@@ -729,8 +753,8 @@ export const PROFILE = {
     {
       id: 'money-group-scale',
       title: 'Demand Generation & RevOps Attribution ($1B+ Portfolio)',
-      company: 'Money Group',
-      badge: 'Demand Gen & RevOps',
+      company: 'Money Group (Full-Time)',
+      badge: 'Demand Gen & RevOps (Full-Time)',
       color: '#d4af37',
       metrics: {
         portfolio: '$1B+ Portfolio Scope',
@@ -741,13 +765,13 @@ export const PROFILE = {
       challenge: 'Fragmented lead-to-opportunity tracking, misaligned partner payouts, and slow creative testing cycles across 5 financial verticals.',
       strategy: 'Restructured unit payouts from $125 to $250 to prioritize high-value conversions. Automated 20+ landing page tests and built AI telemetry anomaly detection agents.',
       execution: 'Partnered with Sales and RevOps on standardized opportunity sizing models and deployed enterprise LLM agents to maintain 100% reporting accuracy in under 4 hours.',
-      impact: 'Delivered at 122% of quarterly bonus target ($4,575 actual vs $3,750 base target) and accelerated landing page testing velocity by 30%.',
+      impact: 'Delivered at 122% of quarterly bonus target and accelerated landing page testing velocity by 30% while restructuring partner payouts from $125 to $250.',
     },
     {
       id: 'red-ventures-edx',
       title: 'Large-Scale Content & SEO Audience Intelligence (edX)',
-      company: 'Red Ventures',
-      badge: 'Audience Intelligence',
+      company: 'Red Ventures (Full-Time)',
+      badge: 'Audience Intelligence (Full-Time)',
       color: '#4ade80',
       metrics: {
         trafficLift: '+50% Search Lift',
@@ -763,15 +787,15 @@ export const PROFILE = {
     {
       id: 'viva-advertising',
       title: 'B2B Funnel, CRM Quality & Churn Suppression ($10M+ Pipeline)',
-      company: 'Viva Advertising',
-      badge: 'B2B Growth & CRM',
+      company: 'Viva Advertising (My Company / Founder)',
+      badge: 'B2B Growth & CRM (Founder)',
       color: '#38bdf8',
       metrics: {
         pipeline: '$10M+ Realized Pipeline',
         impressions: '4 Billion+ Managed',
         churnReduction: '-83% Churn (30% to 5%)',
       },
-      summary: 'Co-founded commercial growth firm evaluating paid media, CRM hygiene, and predictive account-health models across 150+ B2B commercial accounts.',
+      summary: 'Founded commercial growth firm evaluating paid media, CRM hygiene, and predictive account-health models across 150+ B2B commercial accounts.',
       challenge: 'High account churn (30%) caused by dirty CRM records, duplicate buying-committee profiles, and misdirected sales outreach.',
       strategy: 'Normalized and enriched account data in Salesforce & HubSpot. Architected predictive account-health scoring to identify high-risk accounts prior to renewal.',
       execution: 'Directed a 15-person cross-functional team and built centralized Power BI & Looker executive dashboards translating raw data into budget recommendations.',
@@ -780,15 +804,15 @@ export const PROFILE = {
     {
       id: 'link-puerto-rico',
       title: 'Event Intelligence & Relational Database Governance',
-      company: 'Link Puerto Rico',
-      badge: 'Data Governance',
+      company: 'Link Puerto Rico (My Company / Co-Founder)',
+      badge: 'Data Governance (Co-Founder)',
       color: '#a855f7',
       metrics: {
         revenue: '$3M Sponsorships & Sales',
         attendees: '5,000+ Enriched Records',
         platforms: '100+ Relational Databases',
       },
-      summary: 'Architected attendee matching, enrichment, and database governance infrastructure across 50+ industry workshops and 4 major conferences.',
+      summary: 'Co-founded and engineered attendee matching, enrichment, and database governance infrastructure across 50+ industry workshops and 4 major conferences.',
       challenge: 'Unstructured attendee lists, missing buying signals, and fragmented CRM records preventing corporate sponsorships.',
       strategy: 'Sourced, cleaned, and matched attendee records into prioritized target-account tiers. Directed a 10+ person technical team.',
       execution: 'Constructed and maintained 100+ relational databases for 80+ organizations, normalizing 50,000+ records.',
@@ -933,20 +957,20 @@ export const INTEL_POSTS = [
       name: 'Fabián Vélez Vicente',
       title: 'Growth & Revenue Operations Analytics Lead · Level ICS4',
       avatar: '/assets/fabian-velez.jpg',
-      badge: 'Money Group · Verified Milestone',
+      badge: 'Money Group (Full-Time) · Verified Milestone',
     },
     publishedAt: 'October 2026',
     readTime: '3 min read',
     tags: ['AdTech / Attribution', 'Applied AI', 'Growth Engineering'],
     title: 'The 2026 Media Buying Shift: Why Server-Side CAPI + Prompt Engineering Beats Pixel Reliance',
     summary:
-      'Browser privacy updates and ad-blockers cause 25–35% attribution loss on standard client-side pixels. Here is how we delivered at 122% of quarterly bonus target at Money Group by coupling server-side Conversions API with 20+ automated AI anomaly agents.',
+      'Browser privacy updates and ad-blockers cause 25–35% attribution loss on standard client-side pixels. Here is how we delivered at 122% of quarterly bonus target at Money Group (Full-Time) by coupling server-side Conversions API with 20+ automated AI anomaly agents.',
     content: `
-<p>In traditional performance marketing, teams spend 80% of their time manually tweaking bids or arguing over which channel drove the lead. At <strong>Money Group</strong>, managing multi-channel spend across 5 high-volume verticals within a $1B+ portfolio scope, we discarded manual intuition in favor of <strong>algorithmic revenue operations</strong>.</p>
+<p>In traditional performance marketing, teams spend 80% of their time manually tweaking bids or arguing over which channel drove the lead. At <strong>Money Group (Full-Time)</strong>, managing multi-channel spend across 5 high-volume verticals within a $1B+ portfolio scope, we discarded manual intuition in favor of <strong>algorithmic revenue operations</strong>.</p>
 
 <div class="intel-highlight-card">
   <div class="ih-num text-gold">122%</div>
-  <div class="ih-text">Quarterly bonus target delivered ($4,575 actual vs $3,750 base target) by eliminating attribution loss and restructuring partner unit payouts from $125 to $250.</div>
+  <div class="ih-text">Quarterly bonus target delivered at 122% pacing by eliminating attribution loss and restructuring partner unit payouts from $125 to $250.</div>
 </div>
 
 <h4>1. The Multi-Channel Discrepancy Trap</h4>
@@ -978,7 +1002,7 @@ if (variance > 0.05) {
       name: 'Fabián Vélez Vicente',
       title: 'Growth & Revenue Operations Analytics Lead · Level ICS4',
       avatar: '/assets/fabian-velez.jpg',
-      badge: 'Red Ventures / edX · Verified Milestone',
+      badge: 'Red Ventures / edX (Full-Time) · Verified Milestone',
     },
     publishedAt: 'January 2026',
     readTime: '4 min read',
@@ -987,7 +1011,7 @@ if (variance > 0.05) {
     summary:
       'Default GA4 session groupings regularly fragment long B2B and educational research journeys into isolated visits. Here is the Databricks SQL architecture we built across the multi-million-page edX platform to achieve 100% reporting accuracy.',
     content: `
-<p>At <strong>Red Ventures</strong>, analyzing organic search, content performance, and conversions across the multi-million-page <strong>edX platform</strong> required grappling with enormous, raw, imperfect telemetry datasets: <strong>over 40,000,000 user sessions</strong>.</p>
+<p>At <strong>Red Ventures (Full-Time)</strong>, analyzing organic search, content performance, and conversions across the multi-million-page <strong>edX platform</strong> required grappling with enormous, raw, imperfect telemetry datasets: <strong>over 40,000,000 user sessions</strong>.</p>
 
 <h4>The Fundamental Flaw in Out-of-the-Box GA4</h4>
 <p>Standard analytics platforms struggle with multi-touch customer lifecycles spanning weeks between initial course research, syllabus download, and enrolled conversion. GA4 defaults to last-non-direct click, which drastically undervalues upper-funnel high-intent search content.</p>
@@ -1025,7 +1049,7 @@ if (variance > 0.05) {
       name: 'Fabián Vélez Vicente',
       title: 'Growth & Revenue Operations Analytics Lead · Level ICS4',
       avatar: '/assets/fabian-velez.jpg',
-      badge: 'Viva Advertising · Verified Milestone',
+      badge: 'Viva Advertising (My Company) · Verified Milestone',
     },
     publishedAt: 'September 2026',
     readTime: '3 min read',
@@ -1034,7 +1058,7 @@ if (variance > 0.05) {
     summary:
       'Waiting for renewal discussions to gauge client sentiment guarantees customer churn. By tracking buying-committee telemetry decay 45 days in advance across 150+ accounts, we cut churn from 30% to 5% and preserved a $10M+ pipeline.',
     content: `
-<p>As Co-Founder at <strong>Viva Advertising</strong>, managing over $2,000,000 in direct advertising spend and 4 Billion+ impressions across 150+ commercial accounts, retention was our highest-leverage growth lever. When client churn stood at a baseline of 30%, conventional advice was to "do more check-ins."</p>
+<p>As Founder at <strong>Viva Advertising (My Company)</strong>, managing over $2,000,000 in direct advertising spend and 4 Billion+ impressions across 150+ commercial accounts, retention was our highest-leverage growth lever. When client churn stood at a baseline of 30%, conventional advice was to "do more check-ins."</p>
 
 <h4>Detecting Buying-Committee Decay 45 Days Early</h4>
 <p>B2B accounts don't churn abruptly; their buying committee quietly stops logging in, stops clicking weekly BI dashboards, and stops attending performance syncs. We united Salesforce, HubSpot, and Power BI data into a unified lakehouse and trained an account-health risk model in PySpark:</p>
@@ -1107,7 +1131,7 @@ feature_matrix = account_df.join(telemetry_df, on="account_id").withColumn(
       name: 'Fabián Vélez Vicente',
       title: 'Growth & Revenue Operations Analytics Lead · Level ICS4',
       avatar: '/assets/fabian-velez.jpg',
-      badge: 'Link Puerto Rico · Verified Milestone',
+      badge: 'Link Puerto Rico (My Company) · Verified Milestone',
     },
     publishedAt: 'July 2026',
     readTime: '3 min read',
@@ -1116,7 +1140,7 @@ feature_matrix = account_df.join(telemetry_df, on="account_id").withColumn(
     summary:
       'Unstructured event badge scans yield low conversion. Here is how we directed a 10+ person technical team to build 100+ relational databases for 80+ organizations, unlocking $3M in sponsorships.',
     content: `
-<p>At <strong>Link Puerto Rico</strong>, powering 50+ industry workshops and 4 major conferences with over 5,000 participants and 2,000 community members, raw attendee badge scans routinely resulted in cold outreach failure. B2B sponsors demand verified decision-maker density.</p>
+<p>At <strong>Link Puerto Rico (My Company)</strong>, powering 50+ industry workshops and 4 major conferences with over 5,000 participants and 2,000 community members, raw attendee badge scans routinely resulted in cold outreach failure. B2B sponsors demand verified decision-maker density.</p>
 
 <h4>Engineering the Event Data Layer</h4>
 <p>We directed a 10+ person engineering and analytics team to build, normalize, and govern <strong>100+ relational databases</strong> across 80+ partner organizations. We matched attendee registration profiles against company firmographics, funding stages, and buying committee roles.</p>

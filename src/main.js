@@ -176,19 +176,19 @@ class FabianPortfolioApp {
       <div class="logo-strip-inner">
         <span class="logo-strip-label">VERIFIED COMMERCIAL TRACK RECORD & ACCREDITATION:</span>
         <div class="logo-strip-row">
-          <div class="logo-badge-item" title="Money Group (Media Buyer, $1B+ Scope)">
+          <div class="logo-badge-item" title="Money Group (Media Buyer, Full-Time · $1B+ Scope)">
             ${LOGOS.moneyGroup}
           </div>
-          <div class="logo-badge-item" title="Red Ventures (Growth / SEO Analyst, edX)">
+          <div class="logo-badge-item" title="Red Ventures (Growth / SEO Analyst, Full-Time · edX)">
             ${LOGOS.redVentures}
           </div>
           <div class="logo-badge-item" title="edX Platform (40M+ Telemetry Sessions)">
             ${LOGOS.edx}
           </div>
-          <div class="logo-badge-item" title="Viva Advertising (Co-Founder, $10M+ Pipeline)">
+          <div class="logo-badge-item" title="Viva Advertising (My Company / Founder · $10M+ Pipeline)">
             ${LOGOS.vivaAdvertising}
           </div>
-          <div class="logo-badge-item" title="Link Puerto Rico (100+ Relational Databases)">
+          <div class="logo-badge-item" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases)">
             ${LOGOS.linkPR}
           </div>
           <div class="logo-badge-item" title="Novu Works (80+ Organizations Mentored)">
@@ -312,7 +312,10 @@ class FabianPortfolioApp {
                 ${logoSvg ? `<div class="exp-company-logo-slot">${logoSvg}</div>` : ''}
                 <div>
                   <h4 class="exp-role">${exp.role}</h4>
-                  <span class="exp-company">${exp.company}</span>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 3px;">
+                    <span class="exp-company">${exp.company}</span>
+                    ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
+                  </div>
                 </div>
               </div>
               <span class="exp-date">${exp.period}</span>
@@ -409,11 +412,11 @@ class FabianPortfolioApp {
         <div class="logo-strip-inner">
           <span class="logo-strip-label">ACCREDITED PARTNERS & AFFILIATIONS:</span>
           <div class="logo-strip-row">
-            <div class="logo-badge-item" title="Money Group">${LOGOS.moneyGroup}</div>
-            <div class="logo-badge-item" title="Red Ventures">${LOGOS.redVentures}</div>
+            <div class="logo-badge-item" title="Money Group (Full-Time)">${LOGOS.moneyGroup}</div>
+            <div class="logo-badge-item" title="Red Ventures (Full-Time)">${LOGOS.redVentures}</div>
             <div class="logo-badge-item" title="edX Platform">${LOGOS.edx}</div>
-            <div class="logo-badge-item" title="Viva Advertising">${LOGOS.vivaAdvertising}</div>
-            <div class="logo-badge-item" title="Link Puerto Rico">${LOGOS.linkPR}</div>
+            <div class="logo-badge-item" title="Viva Advertising (My Company / Founder)">${LOGOS.vivaAdvertising}</div>
+            <div class="logo-badge-item" title="Link Puerto Rico (My Company / Co-Founder)">${LOGOS.linkPR}</div>
             <div class="logo-badge-item" title="Microsoft">${LOGOS.microsoft}</div>
             <div class="logo-badge-item" title="Meta">${LOGOS.meta}</div>
             <div class="logo-badge-item" title="Stanford University">${LOGOS.stanford}</div>
@@ -463,7 +466,10 @@ class FabianPortfolioApp {
         <div class="res-exp-block">
           <div class="res-exp-head">
             <div>
-              <span class="res-company">${exp.company}</span>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="res-company">${exp.company}</span>
+                ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
+              </div>
               <span class="res-role">${exp.role}</span>
             </div>
             <span class="res-date">${exp.period}</span>

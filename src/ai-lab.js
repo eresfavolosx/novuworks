@@ -145,7 +145,7 @@ export class AIGrowthLab {
           ]
         },
         cost: {
-          hook: "How we outpaced quarterly performance targets by 122% ($4,575 bonus) by eliminating low-intent ad auctions.",
+          hook: "How we outpaced quarterly performance targets by 122% at Money Group (Full-Time) by eliminating low-intent ad auctions.",
           variants: [
             { angle: "Capital Efficiency (Founder Hook)", copy: "Stop spending $150 to acquire a customer worth $120. Unit-economics modeling directly informing ad set budgets.", ctr: "4.8% Est. CTR" }
           ]

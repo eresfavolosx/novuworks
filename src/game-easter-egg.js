@@ -48,10 +48,10 @@ export class CyberArcadeGame {
 
     // Milestone career gates (Loop into endless timeline eras)
     this.checkpoints = [
-      { id: 'mg', z: -900, name: 'Money Group', metric: '122% Bonus Target Delivered ($1B+ Portfolio Scope)' },
-      { id: 'rv', z: -2100, name: 'Red Ventures / edX', metric: '40M+ Databricks SQL Sessions Normalized & Scaled' },
-      { id: 'va', z: -3400, name: 'Viva Advertising', metric: '$10M+ B2B Revenue Pipeline & -83% Churn Reduction' },
-      { id: 'lp', z: -4800, name: 'Link Puerto Rico', metric: '100+ Relational Databases & Disaster Ops Restored' },
+      { id: 'mg', z: -900, name: 'Money Group (Full-Time)', metric: '122% Bonus Target Delivered ($1B+ Portfolio Scope)' },
+      { id: 'rv', z: -2100, name: 'Red Ventures / edX (Full-Time)', metric: '40M+ Databricks SQL Sessions Normalized & Scaled' },
+      { id: 'va', z: -3400, name: 'Viva Advertising (My Company / Founder)', metric: '$10M+ B2B Revenue Pipeline & -83% Churn Reduction' },
+      { id: 'lp', z: -4800, name: 'Link Puerto Rico (My Company / Co-Founder)', metric: '100+ Relational Databases & Disaster Ops Restored' },
       { id: 'st', z: -6200, name: 'Stanford University', metric: 'Stanford Innovation Fellows Graduate Honor' },
       { id: 'up', z: -7600, name: 'Univ. Politécnica PR', metric: 'B.S. Computer Engineering (Summa Cum Laude 4.0 GPA)' },
     ];
@@ -1481,7 +1481,7 @@ export class CyberArcadeGame {
 
       if (isVictory) {
         titleEl.textContent = 'GREAT SCOTT! 122% BONUS TARGET DELIVERED!';
-        subEl.textContent = 'All corporate and academic milestones unlocked: Money Group, Red Ventures, Viva Advertising, Link PR, Stanford, and UPPR 4.0 GPA.';
+        subEl.textContent = 'All corporate and academic milestones unlocked: Money Group (Full-Time), Red Ventures (Full-Time), Viva Advertising (Founder), Link PR (Co-Founder), Stanford, and UPPR 4.0 GPA.';
       } else {
         titleEl.textContent = 'TEMPORAL DISPLACEMENT COLLAPSED';
         subEl.textContent = 'Attribution loss encountered! Re-ignite the Flux Capacitor to deliver 122% ROAS pacing.';
