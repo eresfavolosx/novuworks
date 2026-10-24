@@ -1,10 +1,11 @@
 // ─────────────────────────────────────────────────────────────
 //  Fabián Vélez Vicente — Video Game Easter Egg
-//  "CYBER GROWTH RACER: 88 MPH Time Machine"
+//  "CYBER GROWTH RACER: 88 MPH DeLorean Time Machine"
 //  Authentic 3D Procedural DeLorean DMC-12 Time Machine from
 //  "Back to the Future" featuring 88 MPH temporal displacement,
 //  twin flaming tire tracks, pulsing Y-flux capacitor, Mr. Fusion,
-//  dual turbine exhaust vents, and Web Audio synthesizer engine.
+//  dual turbine exhaust vents, endless procedural object recycling,
+//  invulnerability grace frames, and Web Audio synthesizer engine.
 // ─────────────────────────────────────────────────────────────
 
 import * as THREE from 'three';
@@ -19,14 +20,17 @@ export class CyberArcadeGame {
 
     // Game state
     this.score = 0;
-    this.speed = 45; // Start at gentle cruise
+    this.speed = 50; // Start at comfortable cruise
     this.targetSpeed = 75;
     this.maxSpeed = 135; // Can exceed 88 MPH into hyper-pacing
     this.carX = 0;
     this.targetCarX = 0;
     this.distance = 0;
     this.bonusPacing = 0; // 0 to 122%
-    this.lives = 3;
+    this.lives = 4; // 4 Chrono Shields for balanced, enjoyable gameplay
+    this.invulnerableTimer = 0; // i-frames (grace period) after collision
+    this.timelineEra = 1;
+    this.scoreMultiplier = 1.0;
     this.passedGates = new Set();
     this.hasTriggered88Mph = false;
 
@@ -42,14 +46,14 @@ export class CyberArcadeGame {
       this.hasTriggered88Mph = true;
     }
 
-    // Milestone gates (Career & Academic Achievements)
+    // Milestone career gates (Loop into endless timeline eras)
     this.checkpoints = [
-      { id: 'mg', z: -800, name: 'Money Group', metric: '122% Bonus Target Delivered ($1B+ Portfolio Scope)' },
-      { id: 'rv', z: -1800, name: 'Red Ventures / edX', metric: '40M+ Databricks SQL Sessions Normalized & Scaled' },
-      { id: 'va', z: -3000, name: 'Viva Advertising', metric: '$10M+ B2B Revenue Pipeline & -83% Churn Reduction' },
-      { id: 'lp', z: -4200, name: 'Link Puerto Rico', metric: '100+ Relational Databases & Disaster Ops Restored' },
-      { id: 'st', z: -5400, name: 'Stanford University', metric: 'Stanford Innovation Fellows Graduate Honor' },
-      { id: 'up', z: -6800, name: 'Univ. Politécnica PR', metric: 'B.S. Computer Engineering (Summa Cum Laude 4.0 GPA)' },
+      { id: 'mg', z: -900, name: 'Money Group', metric: '122% Bonus Target Delivered ($1B+ Portfolio Scope)' },
+      { id: 'rv', z: -2100, name: 'Red Ventures / edX', metric: '40M+ Databricks SQL Sessions Normalized & Scaled' },
+      { id: 'va', z: -3400, name: 'Viva Advertising', metric: '$10M+ B2B Revenue Pipeline & -83% Churn Reduction' },
+      { id: 'lp', z: -4800, name: 'Link Puerto Rico', metric: '100+ Relational Databases & Disaster Ops Restored' },
+      { id: 'st', z: -6200, name: 'Stanford University', metric: 'Stanford Innovation Fellows Graduate Honor' },
+      { id: 'up', z: -7600, name: 'Univ. Politécnica PR', metric: 'B.S. Computer Engineering (Summa Cum Laude 4.0 GPA)' },
     ];
 
     this.collectibles = [];
@@ -85,7 +89,7 @@ export class CyberArcadeGame {
             </div>
             <div class="tc-display green">
               <span class="tc-label">PRESENT</span>
-              <span class="tc-val">TOP 1% ENG</span>
+              <span class="tc-val" id="tc-era-val">ERA 1 · TOP 1%</span>
             </div>
             <div class="tc-display amber" id="tc-status-box">
               <span class="tc-label">TIME CIRCUITS</span>
@@ -97,7 +101,7 @@ export class CyberArcadeGame {
           <div class="arcade-stats-row">
             <div class="arcade-stat-box bttf-speed-box" id="hud-speed-box">
               <span class="as-label">SPEEDOMETER</span>
-              <span class="as-value text-speed" id="arc-speed">45.0 MPH</span>
+              <span class="as-value text-speed" id="arc-speed">50.0 MPH</span>
             </div>
             <div class="arcade-stat-box">
               <span class="as-label">PIPELINE ATTRIBUTED</span>
@@ -108,8 +112,8 @@ export class CyberArcadeGame {
               <span class="as-value" style="color: #4ade80;" id="arc-pacing">122% ROAS</span>
             </div>
             <div class="arcade-stat-box">
-              <span class="as-label">CHRONO INTEGRITY</span>
-              <span class="as-value" id="arc-lives">♥♥♥</span>
+              <span class="as-label">CHRONO SHIELDS</span>
+              <span class="as-value" id="arc-lives" style="color: #38bdf8;">♥♥♥♥</span>
             </div>
           </div>
 
@@ -148,13 +152,13 @@ export class CyberArcadeGame {
           </div>
         </footer>
 
-        <!-- Game Over / Victory Modal -->
+        <!-- Game Over Modal -->
         <div class="arcade-modal-backdrop hidden" id="arc-end-modal">
           <div class="arcade-modal-card">
             <span class="am-kicker">TEMPORAL MISSION DEBRIEF</span>
             <h3 class="am-title" id="am-verdict-title">GREAT SCOTT! 122% BONUS TARGET DELIVERED!</h3>
             <p class="am-sub" id="am-verdict-sub">
-              You pushed the DeLorean past 88 MPH, generated 1.21 Gigawatts of attribution lift, and time-traveled across Fabián's career milestones.
+              You pushed the DeLorean past 88 MPH, generated 1.21 Gigawatts of attribution lift, and navigated Fabián's career milestones.
             </p>
 
             <div class="am-score-grid">
@@ -232,9 +236,9 @@ export class CyberArcadeGame {
     this.sun.position.set(0, 22, -300);
     this.scene.add(this.sun);
 
-    // 2. High-Speed Asphalt Highway with Scrolling Center & Edge Striping
+    // 2. High-Speed Asphalt Highway with Continuous Procedural Scrolling
     const roadWidth = 14;
-    const roadLength = 700;
+    const roadLength = 850;
     const roadCanvas = document.createElement('canvas');
     roadCanvas.width = 128;
     roadCanvas.height = 256;
@@ -259,28 +263,32 @@ export class CyberArcadeGame {
     this.roadTex = new THREE.CanvasTexture(roadCanvas);
     this.roadTex.wrapS = THREE.RepeatWrapping;
     this.roadTex.wrapT = THREE.RepeatWrapping;
-    this.roadTex.repeat.set(1, 45);
+    this.roadTex.repeat.set(1, 52);
 
     const roadGeom = new THREE.PlaneGeometry(roadWidth, roadLength);
+    // Translate geometry so it spans from +80 behind car to -770 ahead into horizon
+    roadGeom.translate(0, 345, 0);
+    roadGeom.rotateX(-Math.PI / 2);
+
     const roadMat = new THREE.MeshStandardMaterial({
       map: this.roadTex,
       roughness: 0.8,
       metalness: 0.1,
     });
     this.road = new THREE.Mesh(roadGeom, roadMat);
-    this.road.rotation.x = -Math.PI / 2;
-    this.road.position.set(0, 0, -roadLength / 2 + 20);
+    this.road.position.set(0, 0, 0);
     this.scene.add(this.road);
 
     // Glowing 3D Neon Highway Guardrails
     const railGeom = new THREE.BufferGeometry();
     const railPts = [
-      -roadWidth / 2, 0.12, 60, -roadWidth / 2, 0.12, -640,
-      roadWidth / 2, 0.12, 60, roadWidth / 2, 0.12, -640,
+      -roadWidth / 2, 0.12, 80, -roadWidth / 2, 0.12, -770,
+      roadWidth / 2, 0.12, 80, roadWidth / 2, 0.12, -770,
     ];
     railGeom.setAttribute('position', new THREE.Float32BufferAttribute(railPts, 3));
     const railMat = new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.9 });
     this.rails = new THREE.LineSegments(railGeom, railMat);
+    this.rails.position.set(0, 0, 0);
     this.scene.add(this.rails);
 
     // 3. Build Procedural Back to the Future DeLorean DMC-12 Time Machine
@@ -305,7 +313,7 @@ export class CyberArcadeGame {
     // 5. Milestone Checkpoint Gates
     this.buildCheckpointGates();
 
-    // 6. Spawn Collectibles and Obstacles
+    // 6. Spawn Collectibles and Obstacles (Continuous Streaming Pool)
     this.spawnEntities();
   }
 
@@ -313,28 +321,24 @@ export class CyberArcadeGame {
     const carGroup = new THREE.Group();
 
     // ── Authentic Materials ──────────────────────────────────
-    // Brushed Stainless Steel DMC-12 Panels
     const stainlessMat = new THREE.MeshStandardMaterial({
-      color: 0xc8cdd5,
-      metalness: 0.94,
-      roughness: 0.22,
+      color: 0xc4c8d0,
+      metalness: 0.92,
+      roughness: 0.26,
     });
 
-    // Dark Trim & Cockpit
     const trimMat = new THREE.MeshStandardMaterial({
       color: 0x1f242d,
       metalness: 0.5,
       roughness: 0.7,
     });
 
-    // Matte Black Polyurethane Bumpers & Lower Louvers
     const bumperMat = new THREE.MeshStandardMaterial({
       color: 0x111215,
       metalness: 0.15,
       roughness: 0.9,
     });
 
-    // Tinted Glass Canopy
     const glassMat = new THREE.MeshStandardMaterial({
       color: 0x0a101d,
       metalness: 0.9,
@@ -343,45 +347,25 @@ export class CyberArcadeGame {
       opacity: 0.85,
     });
 
-    // Glowing Neon Cyan Flux Conduits
-    const fluxMat = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
-    });
+    const fluxMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+    const headlightMat = new THREE.MeshBasicMaterial({ color: 0xfffaea });
+    const amberMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b });
+    const tailRedMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
 
-    // Headlights (Warm Quad Sealed Beams)
-    const headlightMat = new THREE.MeshBasicMaterial({
-      color: 0xfffaea,
-    });
-
-    // Amber Turn Indicators
-    const amberMat = new THREE.MeshBasicMaterial({
-      color: 0xf59e0b,
-    });
-
-    // Red Tail Lights
-    const tailRedMat = new THREE.MeshBasicMaterial({
-      color: 0xef4444,
-    });
-
-    // Mr. Fusion White Reactor
     const mrFusionMat = new THREE.MeshStandardMaterial({
       color: 0xfafafa,
       metalness: 0.2,
       roughness: 0.3,
     });
 
-    // Rear Turbine Cooling Vents (Dark Gunmetal)
     const ventMat = new THREE.MeshStandardMaterial({
       color: 0x16161c,
       metalness: 0.7,
       roughness: 0.35,
     });
 
-    const ventInteriorMat = new THREE.MeshBasicMaterial({
-      color: 0x0284c7,
-    });
+    const ventInteriorMat = new THREE.MeshBasicMaterial({ color: 0x0284c7 });
 
-    // Wheels
     const tireRubberMat = new THREE.MeshStandardMaterial({
       color: 0x151518,
       metalness: 0.05,
@@ -423,7 +407,6 @@ export class CyberArcadeGame {
     carGroup.add(chassis);
 
     // ── 3. Main Stainless Steel Monocoque Body ───────────────
-    // Center Body Box
     const mainBody = new THREE.Mesh(new THREE.BoxGeometry(1.74, 0.26, 2.0), stainlessMat);
     mainBody.position.set(0, 0.34, 0);
     carGroup.add(mainBody);
@@ -480,13 +463,11 @@ export class CyberArcadeGame {
     carGroup.add(creaseL, creaseR);
 
     // ── 4. Cabin Greenhouse & Gullwing Roof ──────────────────
-    // Raked Tinted Windshield
     const windshield = new THREE.Mesh(new THREE.BoxGeometry(1.42, 0.62, 0.06), glassMat);
     windshield.position.set(0, 0.72, -0.42);
     windshield.rotation.x = 0.82;
     carGroup.add(windshield);
 
-    // Black A-pillars
     const pillarL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.66, 0.06), trimMat);
     pillarL.position.set(-0.72, 0.72, -0.42);
     pillarL.rotation.x = 0.82;
@@ -495,21 +476,18 @@ export class CyberArcadeGame {
     pillarR.rotation.x = 0.82;
     carGroup.add(pillarL, pillarR);
 
-    // Stainless Steel Roof & Gullwing T-Bar Strip
     const roof = new THREE.Mesh(new THREE.BoxGeometry(1.36, 0.06, 0.95), stainlessMat);
     roof.position.set(0, 0.98, 0.22);
     const tBar = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 0.98), trimMat);
     tBar.position.set(0, 0.99, 0.22);
     carGroup.add(roof, tBar);
 
-    // Side Windows
     const sideWinL = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.38, 0.92), glassMat);
     sideWinL.position.set(-0.68, 0.78, 0.22);
     const sideWinR = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.38, 0.92), glassMat);
     sideWinR.position.set(0.68, 0.78, 0.22);
     carGroup.add(sideWinL, sideWinR);
 
-    // Rear Window
     const rearWindow = new THREE.Mesh(new THREE.BoxGeometry(1.26, 0.62, 0.05), glassMat);
     rearWindow.position.set(0, 0.74, 0.88);
     rearWindow.rotation.x = -0.58;
@@ -528,12 +506,10 @@ export class CyberArcadeGame {
     dash.position.set(0, 0.58, -0.32);
     carGroup.add(dash);
 
-    // Flux Capacitor Box
     const fcBox = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.36, 0.1), trimMat);
     fcBox.position.set(0, 0.75, 0.56);
     carGroup.add(fcBox);
 
-    // The Iconic Y-Shaped Flux Capacitor Branches
     const fcStem = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.12, 8), fluxMat);
     fcStem.position.set(0, 0.71, 0.52);
 
@@ -551,7 +527,6 @@ export class CyberArcadeGame {
     carGroup.add(fcStem, fcLeft, fcRight, fcCore);
     this.fluxNodes = [fcStem, fcLeft, fcRight, fcCore];
 
-    // Pulsing Interior Flux PointLight
     this.fluxLight = new THREE.PointLight(0x38bdf8, 1.4, 3.8);
     this.fluxLight.position.set(0, 0.78, 0.52);
     carGroup.add(this.fluxLight);
@@ -580,7 +555,6 @@ export class CyberArcadeGame {
     // DUAL OVERSIZED REAR COOLING EXHAUST TURBINE BOX VENTS
     const ventW = 0.46, ventH = 0.38, ventLen = 0.62;
 
-    // Left Vent
     const ventLeft = new THREE.Mesh(new THREE.BoxGeometry(ventW, ventH, ventLen), ventMat);
     ventLeft.position.set(-0.52, 0.68, 1.76);
     ventLeft.rotation.y = 0.06;
@@ -588,7 +562,6 @@ export class CyberArcadeGame {
     ventLGlow.position.set(-0.52, 0.68, 2.08);
     ventLGlow.rotation.y = Math.PI;
 
-    // Right Vent
     const ventRight = new THREE.Mesh(new THREE.BoxGeometry(ventW, ventH, ventLen), ventMat);
     ventRight.position.set(0.52, 0.68, 1.76);
     ventRight.rotation.y = -0.06;
@@ -599,7 +572,6 @@ export class CyberArcadeGame {
     carGroup.add(ventLeft, ventLGlow, ventRight, ventRGlow);
     this.ventGlows = [ventLGlow, ventRGlow];
 
-    // Rear Coils & Electronics Box
     const coilBox = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.22, 0.45), trimMat);
     coilBox.position.set(0, 0.64, 1.68);
     carGroup.add(coilBox);
@@ -634,7 +606,6 @@ export class CyberArcadeGame {
     rearBumper.position.set(0, 0.24, 2.12);
     carGroup.add(rearBumper);
 
-    // Segmented Tail Lights
     for (let s = 0; s < 6; s++) {
       const xPos = -0.67 + (s + 0.5) * (1.34 / 6);
       const isAmber = s === 0 || s === 5;
@@ -644,12 +615,10 @@ export class CyberArcadeGame {
       carGroup.add(seg);
     }
 
-    // License Plate
     const plate = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.18, 0.02), new THREE.MeshBasicMaterial({ color: 0xfff0aa }));
     plate.position.set(0, 0.25, 2.24);
     carGroup.add(plate);
 
-    // Dual Exhaust Tips
     const exL = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.18, 12), alloyRimMat);
     exL.rotation.x = Math.PI / 2;
     exL.position.set(-0.35, 0.16, 2.22);
@@ -658,7 +627,7 @@ export class CyberArcadeGame {
     exR.position.set(0.35, 0.16, 2.22);
     carGroup.add(exL, exR);
 
-    // Front Headlight Beam Projection onto Road Surface (Flat decal)
+    // Front Headlight Beam Projection onto Road Surface (Flat Decal)
     const beamCanvas = document.createElement('canvas');
     beamCanvas.width = 64;
     beamCanvas.height = 128;
@@ -689,14 +658,12 @@ export class CyberArcadeGame {
     roadBeam.position.set(0, 0.03, -10.4);
     carGroup.add(roadBeam);
 
-    // Front Headlight Point Lights
     const hlPointL = new THREE.PointLight(0xfffaea, 1.4, 14);
     hlPointL.position.set(-0.54, 0.35, -2.4);
     const hlPointR = new THREE.PointLight(0xfffaea, 1.4, 14);
     hlPointR.position.set(0.54, 0.35, -2.4);
     carGroup.add(hlPointL, hlPointR);
 
-    // Futuristic Neon Cyan Underglow Light
     const underglow = new THREE.PointLight(0x38bdf8, 2.0, 6.0);
     underglow.position.set(0, 0.18, 0);
     carGroup.add(underglow);
@@ -725,7 +692,6 @@ export class CyberArcadeGame {
       return wGroup;
     };
 
-    // Front Wheels with Steering Pivots
     this.steerPivotL = new THREE.Group();
     this.steerPivotL.position.set(-0.92, 0.32, -1.35);
     this.wheelFL = buildWheel(0.33, 0.22);
@@ -736,7 +702,6 @@ export class CyberArcadeGame {
     this.wheelFR = buildWheel(0.33, 0.22);
     this.steerPivotR.add(this.wheelFR);
 
-    // Rear Wheels (authentic staggered size)
     this.wheelRL = buildWheel(0.36, 0.26);
     this.wheelRL.position.set(-0.94, 0.35, 1.25);
 
@@ -747,23 +712,20 @@ export class CyberArcadeGame {
     this.wheels = [this.wheelFL, this.wheelFR, this.wheelRL, this.wheelRR];
 
     // ── 10. Back to the Future 88 MPH Twin Fire Ribbons ──────
-    // Outer rich fire flame texture
     const fireCanvas = document.createElement('canvas');
     fireCanvas.width = 64;
     fireCanvas.height = 128;
     const fCtx = fireCanvas.getContext('2d');
 
-    // Rich saturated Back to the Future flame colors
     const fireGrad = fCtx.createLinearGradient(0, 0, 0, 128);
-    fireGrad.addColorStop(0, 'rgba(255, 235, 120, 1.0)');  // Incandescent white-yellow core at tire contact
-    fireGrad.addColorStop(0.18, 'rgba(255, 120, 10, 0.95)'); // Saturated blazing orange
-    fireGrad.addColorStop(0.45, 'rgba(235, 45, 5, 0.85)');   // Intense flame scarlet
-    fireGrad.addColorStop(0.8, 'rgba(180, 20, 5, 0.4)');    // Burning embers
-    fireGrad.addColorStop(1, 'rgba(100, 10, 0, 0)');        // Dissipates to smoke
+    fireGrad.addColorStop(0, 'rgba(255, 235, 120, 1.0)');
+    fireGrad.addColorStop(0.18, 'rgba(255, 120, 10, 0.95)');
+    fireGrad.addColorStop(0.45, 'rgba(235, 45, 5, 0.85)');
+    fireGrad.addColorStop(0.8, 'rgba(180, 20, 5, 0.4)');
+    fireGrad.addColorStop(1, 'rgba(100, 10, 0, 0)');
     fCtx.fillStyle = fireGrad;
     fCtx.fillRect(0, 0, 64, 128);
 
-    // Add organic flame flickers/streaks across width
     fCtx.fillStyle = 'rgba(255, 240, 180, 0.6)';
     for (let i = 0; i < 8; i++) {
       const x = 16 + Math.random() * 32;
@@ -795,7 +757,6 @@ export class CyberArcadeGame {
     this.fireTrailR = new THREE.Mesh(fireGeom, fireMatR);
     this.fireTrailR.position.set(0.94, 0.06, 1.4);
 
-    // Twin 88 MPH Dynamic Ground Fire Point Lights
     this.fireLightL = new THREE.PointLight(0xff5500, 0, 9);
     this.fireLightL.position.set(-0.94, 0.35, 2.5);
 
@@ -854,11 +815,11 @@ export class CyberArcadeGame {
     const types = ['plutonium', 'roas', 'capi', 'bonus'];
     const obstacleTypes = ['churn', 'loss'];
 
-    // Spawn 28 high-value collectibles along the timeline
-    for (let i = 0; i < 28; i++) {
+    // Spawn initial pool of 24 collectibles spaced along highway
+    for (let i = 0; i < 24; i++) {
       const type = types[Math.floor(Math.random() * types.length)];
       const lane = lanes[Math.floor(Math.random() * lanes.length)];
-      const z = -100 - i * 82;
+      const z = -70 - i * 55;
 
       const itemMesh = this.createCollectibleMesh(type);
       itemMesh.position.set(lane, 1.1, z);
@@ -866,11 +827,11 @@ export class CyberArcadeGame {
       this.collectibles.push({ mesh: itemMesh, type, z, lane, collected: false });
     }
 
-    // Spawn 16 obstacles along the highway
-    for (let i = 0; i < 16; i++) {
+    // Spawn initial pool of 12 obstacles (spaced comfortably)
+    for (let i = 0; i < 12; i++) {
       const type = obstacleTypes[Math.floor(Math.random() * obstacleTypes.length)];
       const lane = lanes[Math.floor(Math.random() * lanes.length)];
-      const z = -140 - i * 135;
+      const z = -140 - i * 110;
 
       const obsMesh = this.createObstacleMesh(type);
       obsMesh.position.set(lane, 0.9, z);
@@ -883,7 +844,6 @@ export class CyberArcadeGame {
     const group = new THREE.Group();
 
     if (type === 'plutonium') {
-      // Back to the Future Plutonium / Fuel Canister
       const cyl = new THREE.Mesh(
         new THREE.CylinderGeometry(0.3, 0.3, 0.8, 16),
         new THREE.MeshBasicMaterial({ color: 0xf59e0b, wireframe: true })
@@ -895,17 +855,14 @@ export class CyberArcadeGame {
       cap.position.y = 0.42;
       group.add(cyl, cap);
     } else if (type === 'bonus') {
-      // 122% ROAS Golden Core
       const geom = new THREE.IcosahedronGeometry(0.72, 0);
       const mat = new THREE.MeshBasicMaterial({ color: 0xd4af37, wireframe: true });
       group.add(new THREE.Mesh(geom, mat));
     } else if (type === 'roas') {
-      // Emerald High-ROAS Data Octahedron
       const geom = new THREE.OctahedronGeometry(0.68, 0);
       const mat = new THREE.MeshBasicMaterial({ color: 0x4ade80, wireframe: true });
       group.add(new THREE.Mesh(geom, mat));
     } else {
-      // CAPI Signal Vector Cube
       const geom = new THREE.BoxGeometry(0.68, 0.68, 0.68);
       const mat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true });
       group.add(new THREE.Mesh(geom, mat));
@@ -915,7 +872,7 @@ export class CyberArcadeGame {
   }
 
   createObstacleMesh(type) {
-    const geom = new THREE.TetrahedronGeometry(0.9, 0);
+    const geom = new THREE.TetrahedronGeometry(0.85, 0);
     const color = type === 'churn' ? 0xef4444 : 0xf97316;
     const mat = new THREE.MeshBasicMaterial({ color, wireframe: true });
     return new THREE.Mesh(geom, mat);
@@ -927,7 +884,6 @@ export class CyberArcadeGame {
       if (!AudioCtx) return;
       this.audioCtx = new AudioCtx();
 
-      // DeLorean Engine Synth Tone
       this.engineOsc = this.audioCtx.createOscillator();
       this.engineOsc.type = 'sawtooth';
       this.engineOsc.frequency.setValueAtTime(80, this.audioCtx.currentTime);
@@ -944,7 +900,7 @@ export class CyberArcadeGame {
       this.engineGain.connect(this.audioCtx.destination);
       this.engineOsc.start();
     } catch {
-      // Web Audio fallback if disabled
+      // Audio fallback
     }
   }
 
@@ -952,7 +908,6 @@ export class CyberArcadeGame {
     if (!this.audioCtx) return;
     try {
       const t = this.audioCtx.currentTime;
-      // Majestic 1.21 Gigawatts time-displacement harmonic chord
       [220, 277.18, 329.63, 440, 554.37].forEach((freq) => {
         const osc = this.audioCtx.createOscillator();
         const g = this.audioCtx.createGain();
@@ -970,6 +925,20 @@ export class CyberArcadeGame {
       });
     } catch {
       // Audio fallback
+    }
+  }
+
+  triggerShieldRestoreToast() {
+    audio.chime(4);
+    const toast = this.container.querySelector('#arc-checkpoint-toast');
+    const titleEl = this.container.querySelector('#cp-toast-title');
+    const descEl = this.container.querySelector('#cp-toast-desc');
+
+    if (toast && titleEl && descEl) {
+      titleEl.textContent = `⚡ CHRONO SHIELD RECHARGED!`;
+      descEl.textContent = `Shield Integrity Restored to ${this.lives} Hearts`;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 2400);
     }
   }
 
@@ -1057,25 +1026,49 @@ export class CyberArcadeGame {
 
   restart() {
     this.score = 0;
-    this.speed = 45;
+    this.speed = 50;
     this.carX = 0;
     this.targetCarX = 0;
     this.distance = 0;
-    this.lives = 3;
+    this.lives = 4;
+    this.invulnerableTimer = 0;
+    this.timelineEra = 1;
+    this.scoreMultiplier = 1.0;
     this.hasTriggered88Mph = false;
     this.passedGates.clear();
 
     const endModal = this.container.querySelector('#arc-end-modal');
     if (endModal) endModal.classList.add('hidden');
 
-    this.collectibles.forEach((c) => {
+    const carZ = this.car.position.z;
+    const lanes = [-4.5, -2.2, 0, 2.2, 4.5];
+
+    this.collectibles.forEach((c, i) => {
       c.collected = false;
       c.mesh.visible = true;
+      const newZ = carZ - 70 - i * 55;
+      const newLane = lanes[Math.floor(Math.random() * lanes.length)];
+      c.mesh.position.set(newLane, 1.1, newZ);
+      c.z = newZ;
+      c.lane = newLane;
     });
 
-    this.obstacles.forEach((o) => {
+    this.obstacles.forEach((o, i) => {
       o.hit = false;
       o.mesh.visible = true;
+      const newZ = carZ - 140 - i * 110;
+      const newLane = lanes[Math.floor(Math.random() * lanes.length)];
+      o.mesh.position.set(newLane, 0.9, newZ);
+      o.z = newZ;
+      o.lane = newLane;
+    });
+
+    // Reset gates relative to current car position
+    this.checkpoints.forEach((cp, idx) => {
+      cp.z = carZ - 900 - idx * 1200;
+      if (this.gateMeshes[idx]) {
+        this.gateMeshes[idx].group.position.set(0, 0, cp.z);
+      }
     });
 
     this.start();
@@ -1103,7 +1096,7 @@ export class CyberArcadeGame {
     this.car.rotation.z = (this.carX - this.targetCarX) * 0.14; // DeLorean banking
     this.car.rotation.y = (this.targetCarX - this.carX) * 0.08;
 
-    // Physical wheel steering
+    // Physical front wheel steering
     const steerAngle = (this.targetCarX - this.carX) * 0.65;
     if (this.steerPivotL) this.steerPivotL.rotation.y = steerAngle;
     if (this.steerPivotR) this.steerPivotR.rotation.y = steerAngle;
@@ -1143,12 +1136,19 @@ export class CyberArcadeGame {
     this.camera.position.x = this.carX * 0.42;
     this.camera.position.y = 2.6;
     this.camera.position.z = this.car.position.z + 6.8;
+
+    // Continuous road, rails, stars, and sun tracking (Zero snapping, infinite seamless highway)
+    this.road.position.z = this.car.position.z;
+    this.rails.position.z = this.car.position.z;
+    this.stars.position.z = this.car.position.z;
     this.sun.position.z = this.car.position.z - 300;
 
-    // Infinite road snapping
-    if (this.road.position.z - this.car.position.z > 220) {
-      this.road.position.z = this.car.position.z - 220;
-      this.rails.position.z = this.car.position.z - 220;
+    // Invulnerability i-frames handling & visual blinking
+    if (this.invulnerableTimer > 0) {
+      this.invulnerableTimer -= 1 / 60;
+      this.car.visible = Math.floor(performance.now() / 90) % 2 === 0;
+    } else {
+      this.car.visible = true;
     }
 
     // ── 88 MPH TIME DISPLACEMENT SPECIAL EFFECTS ─────────────
@@ -1242,66 +1242,155 @@ export class CyberArcadeGame {
 
   updateEntities() {
     const t = performance.now() * 0.003;
+    const carZ = this.car.position.z;
+    const recycleLimit = carZ + 25; // 25 units behind car
+    const lanes = [-4.5, -2.2, 0, 2.2, 4.5];
 
+    // Spin & Continuously Recycle Collectibles Ahead
     this.collectibles.forEach((c) => {
       c.mesh.rotation.y = t * 2.2;
       c.mesh.rotation.x = t * 1.1;
+
+      // If collectible passed behind player, respawn it ahead of the highway
+      if (c.mesh.position.z > recycleLimit) {
+        let minZ = carZ - 80;
+        for (let i = 0; i < this.collectibles.length; i++) {
+          if (this.collectibles[i].mesh.position.z < minZ) {
+            minZ = this.collectibles[i].mesh.position.z;
+          }
+        }
+        const respawnZ = minZ - (55 + Math.random() * 45);
+        const newLane = lanes[Math.floor(Math.random() * lanes.length)];
+        c.mesh.position.set(newLane, 1.1, respawnZ);
+        c.z = respawnZ;
+        c.lane = newLane;
+        c.collected = false;
+        c.mesh.visible = true;
+      }
     });
 
+    // Spin & Continuously Recycle Obstacles Ahead
     this.obstacles.forEach((o) => {
       o.mesh.rotation.y = -t * 1.8;
       o.mesh.rotation.z = t * 1.2;
+
+      // If obstacle passed behind player, respawn it ahead
+      if (o.mesh.position.z > recycleLimit) {
+        let minZ = carZ - 120;
+        for (let i = 0; i < this.obstacles.length; i++) {
+          if (this.obstacles[i].mesh.position.z < minZ) {
+            minZ = this.obstacles[i].mesh.position.z;
+          }
+        }
+        const respawnZ = minZ - (95 + Math.random() * 65);
+        const newLane = lanes[Math.floor(Math.random() * lanes.length)];
+        o.mesh.position.set(newLane, 0.9, respawnZ);
+        o.z = respawnZ;
+        o.lane = newLane;
+        o.hit = false;
+        o.mesh.visible = true;
+      }
     });
   }
 
   checkCollisions() {
     const carZ = this.car.position.z;
     const carX = this.car.position.x;
+    const isInvulnerable = this.invulnerableTimer > 0;
 
-    // Collectibles
+    // Collectibles Collision Check
     this.collectibles.forEach((c) => {
-      if (!c.collected && Math.abs(c.z - carZ) < 2.4 && Math.abs(c.lane - carX) < 1.7) {
+      if (!c.collected && Math.abs(c.z - carZ) < 2.4 && Math.abs(c.lane - carX) < 1.4) {
         c.collected = true;
         c.mesh.visible = false;
         audio.click(1800);
 
         let pts = 250;
-        if (c.type === 'bonus') pts = 1220; // 122% bonus
-        else if (c.type === 'plutonium') pts = 1000;
-        else if (c.type === 'roas') pts = 500;
+        if (c.type === 'bonus') {
+          pts = 1220; // 122% ROAS Golden Core
+          if (this.lives < 4) {
+            this.lives += 1;
+            this.triggerShieldRestoreToast();
+          }
+        } else if (c.type === 'plutonium') {
+          pts = 1000;
+          if (this.lives < 4) {
+            this.lives += 1;
+            this.triggerShieldRestoreToast();
+          }
+        } else if (c.type === 'roas') {
+          pts = 500;
+        }
 
-        this.score += pts;
+        this.score += Math.round(pts * this.scoreMultiplier);
         this.bonusPacing = Math.min(122, this.bonusPacing + 4);
       }
     });
 
-    // Obstacles
+    // Obstacles Collision Check (with Grace Period i-frames)
     this.obstacles.forEach((o) => {
-      if (!o.hit && Math.abs(o.z - carZ) < 2.0 && Math.abs(o.lane - carX) < 1.4) {
+      if (!o.hit && Math.abs(o.z - carZ) < 1.8 && Math.abs(o.lane - carX) < 1.05) {
         o.hit = true;
         o.mesh.visible = false;
-        audio.click(360);
-        this.lives -= 1;
-        this.speed = Math.max(35, this.speed - 45);
 
-        if (this.lives <= 0) {
-          this.endGame(false);
+        if (!isInvulnerable) {
+          audio.click(360);
+          this.lives -= 1;
+          this.invulnerableTimer = 2.0; // 2 seconds of grace protection
+          this.speed = Math.max(40, this.speed - 30);
+
+          if (this.lives <= 0) {
+            this.endGame(false);
+          }
         }
       }
     });
 
-    // Milestone Gates
+    // Milestone Checkpoint Gates
     this.checkpoints.forEach((cp) => {
       if (!this.passedGates.has(cp.id) && carZ <= cp.z) {
         this.passedGates.add(cp.id);
         this.triggerGateToast(cp);
-        this.score += 3500;
+        this.score += Math.round(3500 * this.scoreMultiplier);
 
+        // When all 6 gates are passed in this era, advance to next era seamlessly!
         if (this.passedGates.size === this.checkpoints.length) {
-          this.endGame(true);
+          this.advanceTimelineEra();
         }
       }
     });
+  }
+
+  advanceTimelineEra() {
+    this.timelineEra += 1;
+    this.scoreMultiplier += 0.5;
+    this.trigger88MphSonicBoom();
+
+    const tcEraVal = this.container.querySelector('#tc-era-val');
+    if (tcEraVal) {
+      tcEraVal.textContent = `ERA ${this.timelineEra} · ${this.scoreMultiplier.toFixed(1)}X`;
+    }
+
+    const toast = this.container.querySelector('#arc-checkpoint-toast');
+    const titleEl = this.container.querySelector('#cp-toast-title');
+    const descEl = this.container.querySelector('#cp-toast-desc');
+
+    if (toast && titleEl && descEl) {
+      titleEl.textContent = `⚡ 122% BONUS TARGET DELIVERED!`;
+      descEl.textContent = `Entering Temporal Era ${this.timelineEra} (${this.scoreMultiplier.toFixed(1)}x Multiplier Active)`;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 4000);
+    }
+
+    // Reposition gates ahead for the next milestone era
+    const carZ = this.car.position.z;
+    this.checkpoints.forEach((cp, idx) => {
+      cp.z = carZ - 1200 - idx * 1200;
+      if (this.gateMeshes[idx]) {
+        this.gateMeshes[idx].group.position.set(0, 0, cp.z);
+      }
+    });
+    this.passedGates.clear();
   }
 
   triggerGateToast(cp) {
@@ -1350,8 +1439,8 @@ export class CyberArcadeGame {
 
     const livesEl = this.container.querySelector('#arc-lives');
     if (livesEl) {
-      livesEl.textContent = '♥'.repeat(Math.max(0, this.lives)) + '♡'.repeat(Math.max(0, 3 - this.lives));
-      livesEl.style.color = this.lives <= 1 ? '#ef4444' : '#4ade80';
+      livesEl.textContent = '♥'.repeat(Math.max(0, this.lives)) + '♡'.repeat(Math.max(0, 4 - this.lives));
+      livesEl.style.color = this.lives <= 1 ? '#ef4444' : (this.lives === 4 ? '#38bdf8' : '#4ade80');
     }
   }
 
