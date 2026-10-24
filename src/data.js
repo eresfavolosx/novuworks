@@ -1,352 +1,379 @@
 // ─────────────────────────────────────────────────────────────
-//  Novu Works — Executive Professional Profile & Knowledge Base
-//  Fabián Vélez Vicente
-//  Performance Marketing Lead · Technical Consultant · AI Systems Architect
+//  Fabián Vélez Vicente — Executive Knowledge Base & Verified History
+//  Growth & Revenue Operations Analytics Lead · Media Buyer · Computer Engineer
+//  Accredited Experience: Money Group, Red Ventures, Viva Advertising, Link PR
 // ─────────────────────────────────────────────────────────────
 
 export const PROFILE = {
   fullName: 'Fabián Vélez Vicente',
   preferredName: 'Fabian Velez',
-  role: 'Performance Marketing Lead & Technical Consultant',
+  role: 'Growth & Revenue Operations Analytics Lead · Media Buyer',
   level: 'Level ICS4 Lead',
-  tenure: 'Aug 2017 – Present (8+ Years)',
-  location: 'Trujillo Alto & San Juan, Puerto Rico · Remote Worldwide',
-  phone: '+1 (347) 815-8054',
+  tenure: '8+ Years (Marketing, Sales, RevOps & Engineering)',
+  location: 'San Juan, PR (Remote / Worldwide)',
   emails: {
     primary: 'fabianvvicente1@gmail.com',
-    secondary: 'fabian.velez1996@gmail.com',
     enterprise: 'hello@novu.works',
   },
+  links: {
+    linkedin: 'https://linkedin.com/in/fabian-velez-vicente',
+    github: 'https://github.com/eresfavolosx',
+    website: 'https://novu.works',
+  },
   summary:
-    'Data-driven Performance Marketing Lead, Media Buyer, and Technical Consultant operating at the convergence of quantitative growth, cross-functional engineering, and modern AI/ML automation. Proven track record managing multi-million dollar annual media pacing, delivering 122% bonus target performance, and consulting 80+ startups across distributed cloud infrastructure, AI automation, and full-funnel acquisition systems.',
-  status: 'Open to High-Impact Roles at AI / Tech Companies (Growth Engineering, Performance Marketing Lead, Technical Advisory).',
+    'Growth & Revenue Operations Analytics Lead with 8+ years of experience sitting at the intersection of Marketing, Sales, and RevOps to analyze content, paid media, and CRM data, turning complex B2B funnel insights into pipeline growth across a $10M+ commercial portfolio.',
+  status: 'Open to High-Impact Roles at AI / Tech Companies (Growth Lead, RevOps Analytics, Performance Engineering).',
 
   headlineStats: [
-    { label: 'Quarterly Bonus Pacing', value: '122%', sub: '$4,575 actual vs $3,750 base target' },
-    { label: 'Startups & SMBs Mentored', value: '80+', sub: 'Technical consulting & infrastructure' },
-    { label: 'CAC Efficiency Reduction', value: '-28%', sub: 'Blended acquisition cost reduction' },
-    { label: 'Creative Velocity Boost', value: '3x', sub: 'Via generative AI prompt frameworks' },
+    { label: 'Quarterly Bonus Delivered', value: '122%', sub: '$4,575 actual vs $3,750 base at Money Group' },
+    { label: 'Pipeline Generated', value: '$10M+', sub: 'Across 150+ B2B commercial accounts' },
+    { label: 'Client Churn Suppression', value: '-83%', sub: 'Reduced from 30% to 5% via CRM predictive modeling' },
+    { label: 'Creative Testing Velocity', value: '3x', sub: 'Via automated AI prompt & telemetry agents' },
+    { label: 'Organizations Mentored', value: '80+', sub: 'Technical consulting & 100+ relational databases' },
   ],
 
-  companies: [
+  // ─────────────────────────────────────────────────────────────
+  // Skills Breakdown (Exact match to resume)
+  // ─────────────────────────────────────────────────────────────
+  skillCategories: [
     {
-      name: 'Money Group, LLC (formerly Ad Practitioners, LLC)',
-      role: 'Media Buyer / Performance Marketing Lead (Level ICS4)',
-      period: 'Marketing & Growth Operations',
-      scope: 'Cross-functional leadership bridging paid media with engineering, analytics, product, and commercial sales.',
-      achievement: 'Delivered at 122% of quarterly bonus target ($4,575 actual vs. $3,750 base target) through disciplined attribution modeling and algorithmic bid strategy.'
+      title: 'Content, SEO & Audience Intelligence',
+      skills: [
+        'Organic Search & Keyword Performance',
+        'Content Refresh & Consolidation Strategy',
+        'Website Engagement & Conversion Analytics (GA4)',
+        'Search & Audience Behavior Analysis',
+      ],
     },
     {
-      name: 'Novu Works',
-      role: 'Founder & Technical Consultant',
-      period: 'Aug 2017 – Present (8 yrs 5 mos)',
-      scope: 'Offered technical consulting and mentorship to 80+ startups and SMBs across Puerto Rico and US Remote.',
-      achievement: 'Guided 8 core disciplines: Technology Infrastructure, Software Development, AI, Automation, SEO, Marketing Strategy, BizDev, and Business Infrastructure.'
-    }
+      title: 'Paid Media & Demand Gen Analytics',
+      skills: [
+        'LinkedIn Ads, Google Ads & Programmatic Display',
+        'Multi-Dimensional Performance Analysis (Creative, Segment, Offer)',
+        'Spend-to-Pipeline & Opportunity Attribution',
+        'A/B & Multivariate Test Design',
+      ],
+    },
+    {
+      title: 'CRM Enrichment & Sales Intelligence',
+      skills: [
+        'Salesforce & HubSpot CRM Data Quality',
+        'Account Deduplication, Normalization & Enrichment',
+        'ICP Segmentation & Buying Committee Research',
+        'Event & Prospect Prioritization',
+      ],
+    },
+    {
+      title: 'Data Stack & BI Platforms',
+      skills: [
+        'SQL & T-SQL',
+        'Databricks & Python Data Automation',
+        'Power BI, Tableau & Looker',
+        'Advanced Spreadsheets (Excel & Google Sheets)',
+        'Bilingual (English & Spanish)',
+      ],
+    },
   ],
 
+  // ─────────────────────────────────────────────────────────────
+  // Professional Experience (Exact match to resume)
+  // ─────────────────────────────────────────────────────────────
+  experience: [
+    {
+      company: 'Money Group',
+      role: 'Media Buyer (Demand Generation & Revenue Operations Analytics)',
+      period: 'March 2026 – October 2026',
+      bullets: [
+        'Paid Media & Pipeline Attribution: Analyzed multi-channel advertising performance across Google, LinkedIn, and display placements for 5 verticals ($100k+ direct spend within a $1 Billion+ portfolio), moving beyond clicks to tie spend directly to qualified opportunities and revenue.',
+        'Account Intelligence & RevOps Alignment: Partnered with Sales and RevOps to evaluate B2B and consumer partner economics, building standardized opportunity sizing models and restructuring unit payouts from $125 to $250 to prioritize high-value downstream conversions.',
+        'Landing Page & Offer Testing: Partnered with Demand Generation to design and evaluate structured A/B tests across 20+ landing pages, analyzing performance by creative copy and offer to accelerate test velocity by 30%.',
+        'Automated Data Hygiene & Anomaly Detection: Engineered 20+ custom AI workflows and live telemetry agents in an enterprise LLM platform to normalize partner data, flag tracking anomalies, and maintain 100% reporting accuracy in under 4 hours.',
+      ],
+    },
+    {
+      company: 'Red Ventures',
+      role: 'Growth / SEO Analyst (Content & Audience Intelligence, edX)',
+      period: 'August 2024 – January 2026',
+      bullets: [
+        'Content & SEO Performance Strategy: Led content performance analysis across organic search, keyword rankings, and website engagement for the multi-million-page edX platform, refreshing and consolidating 1,250+ priority pages to drive a 50%+ baseline search lift and a 19% YoY conversion gain.',
+        'Audience & Search Opportunity Surfacing: Combined behavioral telemetry with search trends to surface emerging content and LLM search opportunities, partnering with Content and Product teams in Jira to generate a 3x lift (200%+) in high-intent prospective inquiries.',
+        'SQL Data Normalization & Funnel Analysis: Queried and cleaned raw, imperfect datasets from scratch using SQL and Python in Databricks across 40 million+ user sessions, reconciling GA4 and internal databases with 100% reporting accuracy.',
+      ],
+    },
+    {
+      company: 'Viva Advertising',
+      role: 'Co-Founder (B2B Growth, CRM & Event Intelligence)',
+      period: 'January 2018 – Present',
+      bullets: [
+        'B2B Funnel & Demand Gen Analytics: Evaluated paid media, content, and funnel performance across 150+ B2B and commercial accounts, managing $2M+ in direct ad budgets and 4 Billion+ impressions to generate a $10M+ pipeline and $10M+ in realized revenue.',
+        'CRM Data Quality & ICP Segmentation: Partnered with Sales and RevOps across Salesforce and HubSpot to normalize, deduplicate, and enrich account and buying-committee records, building predictive account-health models that reduced client churn by 83% (from 30% to 5%).',
+        'Executive BI & Proactive Recommendations: Architected centralized Power BI and Looker dashboards and directed a 15-person cross-functional team, translating raw marketing and CRM data into clear budget and targeting recommendations that lifted throughput by 40%.',
+      ],
+    },
+    {
+      company: 'Link Puerto Rico',
+      role: 'Co-Founder & Technical Lead (Event & Prospect Intelligence)',
+      period: 'November 2017 – Present',
+      bullets: [
+        'Conference, Event & Attendee Intelligence: Sourced, cleaned, matched, and enriched attendee and company data across 50+ industry workshops and 4 major conferences (5,000+ participants and 2,000+ community members), building prioritized target-account lists that drove $3 Million in sponsorships and B2B sales.',
+        'Market Research & Database Governance: Directed a 10+ person team to build and maintain 100+ relational databases and web platforms for 80+ organizations, normalizing 50,000+ customer and prospect records to uncover untapped market opportunities.',
+      ],
+    },
+  ],
+
+  // ─────────────────────────────────────────────────────────────
+  // Education & Certifications
+  // ─────────────────────────────────────────────────────────────
+  education: [
+    {
+      degree: 'B.S., Computer Engineering (4.0 GPA)',
+      institution: 'Universidad Politécnica de Puerto Rico',
+      status: 'In Progress',
+      coursework: 'Software Engineering, Data Structures & Algorithms, Database Systems, Operating Systems',
+    },
+  ],
+  certifications: [
+    'Lean Six Sigma White Belt',
+    'Data-driven Strategy: Planning, Reporting & Control with Power BI (UPPR)',
+    'Advanced Implementation of Data Analysis Tools with Power BI (UPPR)',
+    'CompTIA ITF+',
+  ],
+  fellowships: [
+    'Project Management Practice Tools & Techniques (UPPR)',
+    'Federal Funds Administration (UPR)',
+    'Stanford University Innovation Fellows',
+  ],
+
+  // ─────────────────────────────────────────────────────────────
+  // Core Competency Matrix (for 3D & Dossier Tables)
+  // ─────────────────────────────────────────────────────────────
   coreCompetencyMatrix: [
     {
-      category: 'Strategic Growth & Buying',
+      category: 'Strategic Growth & Paid Media',
       skills: [
-        'Paid Search (Google Ads / Bing)',
-        'Programmatic Display & DSPs',
-        'Paid Social (Meta, TikTok, LinkedIn)',
-        'Audience Segmentation & Retargeting',
-        'Conversion Rate Optimization (CRO)',
-        'Cross-Functional Campaign Architecture'
-      ]
+        'LinkedIn Ads, Google Ads & Programmatic DSPs',
+        'Spend-to-Pipeline Attribution',
+        'Multi-Dimensional Performance Analysis',
+        'A/B & Multivariate Testing Protocols',
+        'Landing Page & Offer Optimization',
+      ],
     },
     {
-      category: 'Data, Analytics & Attribution',
+      category: 'RevOps, Data & BI Stack',
       skills: [
-        'Multi-Touch Attribution Modeling',
-        'CAC / LTV Optimization & Unit Economics',
-        'Google Analytics 4 & Tag Manager',
-        'BigQuery & Advanced SQL Synthesis',
-        'Server-Side Conversions API (CAPI)',
-        'Cohort & Churn Data Synthesis',
-        'A/B & Multivariate Testing Protocols'
-      ]
+        'Salesforce & HubSpot CRM Deduplication & Normalization',
+        'SQL, T-SQL & Databricks (40M+ Sessions)',
+        'Power BI, Tableau & Looker Architecture',
+        'Google Analytics 4 & BigQuery Pipeline Modeling',
+        'Churn & Predictive Account Health Modeling (-83% Churn)',
+      ],
     },
     {
-      category: 'AI & Technical Leverage',
+      category: 'AI, Automation & Engineering',
       skills: [
-        'Prompt Engineering for Creative Testing',
-        'AI-Assisted Copy & Asset Prototyping',
-        'Automated Workflow Orchestration (n8n, APIs)',
-        'ML-Based Bidding & Budget Distribution',
-        'Vector Retrieval & RAG Copilots',
-        'Full-Stack Web (TypeScript, React, Three.js)',
-        'User Stories & Critical Thinking'
-      ]
-    }
+        'Enterprise LLM Telemetry Agents & Anomaly Detection',
+        'Prompt Engineering for Creative Testing (3x Velocity)',
+        'Python Data Automation & Cloud APIs',
+        'Relational Database Architecture (100+ DBs Built)',
+        'Computer Engineering (4.0 GPA, Software Systems)',
+      ],
+    },
   ],
 
+  // ─────────────────────────────────────────────────────────────
+  // Feature Case Studies
+  // ─────────────────────────────────────────────────────────────
   caseStudies: [
     {
       id: 'money-group-scale',
-      title: 'Algorithmic Media Buying & 122% Target Pacing',
-      company: 'Money Group, LLC',
-      badge: 'Performance Media',
-      color: '#e0566a',
+      title: 'Demand Generation & RevOps Attribution ($1B+ Portfolio)',
+      company: 'Money Group',
+      badge: 'Demand Gen & RevOps',
+      color: '#d4af37',
       metrics: {
-        spend: '$250K+ Monthly Pacing',
-        efficiency: '-28% Blended CAC',
-        scale: '3.4x ROAS at 122% Target'
+        portfolio: '$1B+ Portfolio Scope',
+        pacing: '122% Bonus Target Delivered',
+        payouts: '2x High-Value Conversions',
       },
-      summary: 'Architected and executed full-funnel acquisition across high-velocity financial products, consistently outpacing target benchmarks.',
-      challenge: 'High legacy acquisition costs, fragmented channel attribution, and escalating CPCs in competitive financial queries.',
-      strategy: 'Implemented BigQuery cohort synthesis to identify high-LTV user cohorts. Reallocated spend via algorithmic bid pacing while syncing with product to eliminate post-click drops.',
-      execution: 'Deployed cross-platform campaign structures across Meta, Google Search, and TikTok. Built automated bid-pacing scripts and multi-touch attribution pipelines.',
-      impact: 'Exceeded quarterly bonus target by 122% ($4,575 delivered), lowered blended CAC by 28%, and permanently lifted baseline ROAS to 3.4x.'
+      summary: 'Moved beyond vanity clicks to tie advertising spend across Google, LinkedIn, and display directly to qualified opportunities and realized pipeline.',
+      challenge: 'Fragmented lead-to-opportunity tracking, misaligned partner payouts, and slow creative testing cycles across 5 financial verticals.',
+      strategy: 'Restructured unit payouts from $125 to $250 to prioritize high-value conversions. Automated 20+ landing page tests and built AI telemetry anomaly detection agents.',
+      execution: 'Partnered with Sales and RevOps on standardized opportunity sizing models and deployed enterprise LLM agents to maintain 100% reporting accuracy in under 4 hours.',
+      impact: 'Delivered at 122% of quarterly bonus target ($4,575 actual vs $3,750 base target) and accelerated landing page testing velocity by 30%.',
     },
     {
-      id: 'ai-creative-engine',
-      title: 'Generative AI Creative Velocity Engine',
-      company: 'Novu Works & Growth Lab',
-      badge: 'AI / Prompt Engineering',
-      color: '#8b52c8',
+      id: 'red-ventures-edx',
+      title: 'Large-Scale Content & SEO Audience Intelligence (edX)',
+      company: 'Red Ventures',
+      badge: 'Audience Intelligence',
+      color: '#4ade80',
       metrics: {
-        velocity: '3x Faster Concept-to-Launch',
-        variants: '20+ Structured Hooks / Cohort',
-        fatigue: 'Eliminated Creative Burnout'
+        trafficLift: '+50% Search Lift',
+        conversion: '+19% YoY Conversion Gain',
+        dataset: '40M+ User Sessions',
       },
-      summary: 'Built an automated prompt-engineering framework mapping psychological triggers across customer stages to generate and test 20+ ad concepts simultaneously.',
-      challenge: 'Traditional creative iteration cycles were sluggish (3-5 days per batch), causing rapid ad fatigue and unpredictable audience saturation.',
-      strategy: 'Engineered an AI framework that parses target audience reviews, objection data, and competitor hooks to generate structured multi-angle copy and visual briefs.',
-      execution: 'Connected LLM prompt pipelines directly with Figma/Canva templates and automated upload workflows, enabling rapid multivariate testing matrices.',
-      impact: 'Boosted weekly creative testing cadence by 300%, cutting cycle time from days to under 4 hours and continuously finding winning outlier angles.'
+      summary: 'Led organic search and content intelligence across the multi-million-page edX platform, turning behavioral telemetry into high-intent conversion growth.',
+      challenge: 'Managing content decay, keyword cannibalization, and tracking discrepancies across a multi-million-page global educational catalog.',
+      strategy: 'Consolidated and refreshed 1,250+ priority pages using Databricks SQL & Python data normalization across 40M+ sessions to reconcile GA4 with internal databases.',
+      execution: 'Partnered with Content and Product teams via Jira to capitalize on emerging search and LLM discovery trends.',
+      impact: 'Generated a 50%+ baseline search lift, 19% YoY conversion gain, and a 3x lift (200%+) in high-intent prospective inquiries.',
     },
     {
-      id: 'server-side-attribution',
-      title: 'Cross-Functional Server-Side CAPI & Funnel Optimization',
-      company: 'Money Group / Novu Works',
-      badge: 'Engineering & Data',
-      color: '#3d63e6',
-      metrics: {
-        dataLoss: 'Near 0% Attribution Loss',
-        cvrLift: '+24% Landing Page CVR',
-        matchQuality: '9.2/10 Event Match Quality'
-      },
-      summary: 'Bridged engineering, product, and marketing to build bulletproof server-side tracking (Meta CAPI & GA4 BigQuery) and optimize post-click onboarding funnels.',
-      challenge: 'Browser privacy restrictions (iOS 14+, ad blockers) caused 30%+ drop in client-side attribution signals, muddying automated bidding algorithms.',
-      strategy: 'Architected a server-side Cloudflare Worker / Cloud Run proxy to dispatch first-party authenticated purchase and lead events directly to conversion APIs.',
-      execution: 'Instrumented custom data layers, matched hashed user parameters with 9.2/10 event quality score, and streamlined multi-step funnel forms with sub-second LCP.',
-      impact: 'Restored clean algorithmic attribution signals to ad platforms, unlocking 24% conversion rate gains and accurate LTV mapping.'
-    },
-    {
-      id: 'startup-mentorship-80',
-      title: 'Technical Infrastructure & Advisory for 80+ Startups',
-      company: 'Novu Works',
-      badge: 'Technical Consulting',
+      id: 'viva-advertising',
+      title: 'B2B Funnel, CRM Quality & Churn Suppression ($10M+ Pipeline)',
+      company: 'Viva Advertising',
+      badge: 'B2B Growth & CRM',
       color: '#38bdf8',
       metrics: {
-        portfolio: '80+ Companies Mentored',
-        tenure: '8.5 Years Continuous Delivery',
-        uptime: '99.99% Reliability'
+        pipeline: '$10M+ Realized Pipeline',
+        impressions: '4 Billion+ Managed',
+        churnReduction: '-83% Churn (30% to 5%)',
       },
-      summary: 'Direct advisory to startup founders and technical teams across Puerto Rico and remote US, translating user stories into production infrastructure.',
-      challenge: 'Early-stage teams frequently suffer from architectural overengineering, premature scaling costs, and misaligned marketing tech stacks.',
-      strategy: 'Created standardized infrastructure blueprints (modern serverless, Firebase/GCP, automated CI/CD, FinOps cost monitoring) and product delivery rubrics.',
-      execution: 'Mentored engineering squads, established clean User Story mappings, conducted architectural reviews, and automated operational pipelines.',
-      impact: 'Helped 80+ ventures scale to commercial traction, secure institutional funding, and cut average cloud infrastructure waste by 35%.'
-    }
-  ]
+      summary: 'Co-founded commercial growth firm evaluating paid media, CRM hygiene, and predictive account-health models across 150+ B2B commercial accounts.',
+      challenge: 'High account churn (30%) caused by dirty CRM records, duplicate buying-committee profiles, and misdirected sales outreach.',
+      strategy: 'Normalized and enriched account data in Salesforce & HubSpot. Architected predictive account-health scoring to identify high-risk accounts prior to renewal.',
+      execution: 'Directed a 15-person cross-functional team and built centralized Power BI & Looker executive dashboards translating raw data into budget recommendations.',
+      impact: 'Generated $10M+ in pipeline and $10M+ in realized revenue while slashing client churn by 83% and boosting throughput by 40%.',
+    },
+    {
+      id: 'link-puerto-rico',
+      title: 'Event Intelligence & Relational Database Governance',
+      company: 'Link Puerto Rico',
+      badge: 'Data Governance',
+      color: '#a855f7',
+      metrics: {
+        revenue: '$3M Sponsorships & Sales',
+        attendees: '5,000+ Enriched Records',
+        platforms: '100+ Relational Databases',
+      },
+      summary: 'Architected attendee matching, enrichment, and database governance infrastructure across 50+ industry workshops and 4 major conferences.',
+      challenge: 'Unstructured attendee lists, missing buying signals, and fragmented CRM records preventing corporate sponsorships.',
+      strategy: 'Sourced, cleaned, and matched attendee records into prioritized target-account tiers. Directed a 10+ person technical team.',
+      execution: 'Constructed and maintained 100+ relational databases for 80+ organizations, normalizing 50,000+ records.',
+      impact: 'Drove $3M in sponsorships and B2B sales and unlocked high-margin corporate partnerships.',
+    },
+  ],
 };
 
-// 8 Core Disciplines for Novu Works
+// 8 Architecture Disciplines for 3D Orbiting Pearls
 export const DISCIPLINES = [
   {
-    id: 'software',
+    id: 'growth',
     number: '01',
-    title: 'Software Development',
-    subtitle: 'Production-Grade Systems & High-Velocity Product Engineering',
-    color: '#e0566a',
-    summary: 'From user stories and architectural specs to shipped products. Web applications, APIs, and real-time interactive systems built with resilient design patterns.',
+    title: 'Demand Generation & RevOps',
+    subtitle: 'Connecting multi-channel advertising directly to qualified pipeline & closed revenue.',
+    color: '#d4af37',
     deliverables: [
-      'Full-stack web & mobile application engineering (TypeScript, React, Node)',
-      'Fault-tolerant RESTful and GraphQL API backends',
-      'Reactive, accessible UI with sub-second Core Web Vitals',
-      'Database modeling, migration planning, and caching tiers'
+      'Spend-to-Pipeline Attribution',
+      'Opportunity Sizing Models & Unit Payouts',
+      'Landing Page & Offer A/B Testing Matrices',
+      'Multi-Channel Performance Audits',
     ],
-    tech: ['TypeScript', 'Node.js', 'React/Next.js', 'Three.js/WebGL', 'PostgreSQL', 'Redis'],
-    metrics: 'Shipped production code powering 100k+ monthly active users across portfolio clients.'
+    tech: ['Google Ads', 'LinkedIn Ads', 'Display DSPs', 'GA4', 'Tableau'],
   },
   {
-    id: 'infra',
+    id: 'data',
     number: '02',
-    title: 'Technology Infrastructure',
-    subtitle: 'Scalable, Observable & Cost-Disciplined Cloud Platforms',
-    color: '#d4547d',
-    summary: 'Cloud, compute, and networking designed to scale seamlessly. Multi-region architectures, automated CI/CD, and proactive telemetry built in from day one.',
+    title: 'Data Stack & BI Platforms',
+    subtitle: 'Reconciling millions of telemetry sessions into pristine executive intelligence.',
+    color: '#f5e6be',
     deliverables: [
-      'Multi-region cloud architecture (GCP, AWS, Firebase)',
-      'Automated CI/CD build matrices & preview deployments',
-      'Infrastructure as Code (IaC) and containerization',
-      'FinOps cloud cost audits (typically saving 25-45% monthly spend)'
+      'SQL & T-SQL Data Pipelines',
+      'Databricks & Python Normalization (40M+ sessions)',
+      'Executive Dashboards (Power BI & Looker)',
+      'Anomaly Detection & Reporting Governance',
     ],
-    tech: ['Firebase', 'Cloud Run / Kubernetes', 'Cloudflare Workers', 'Terraform', 'Docker'],
-    metrics: 'Architected 99.99% SLA backends with zero single points of failure.'
+    tech: ['Databricks', 'SQL', 'Python', 'Power BI', 'Looker', 'BigQuery'],
+  },
+  {
+    id: 'crm',
+    number: '03',
+    title: 'CRM & Account Intelligence',
+    subtitle: 'Eliminating duplicate records and predicting account health to crush client churn.',
+    color: '#4ade80',
+    deliverables: [
+      'Salesforce & HubSpot Normalization & Deduplication',
+      'Predictive Account-Health Models (-83% Churn)',
+      'ICP Segmentation & Buying Committee Mapping',
+      'Lead-to-Account Matching Protocols',
+    ],
+    tech: ['Salesforce', 'HubSpot', 'Predictive Modeling', 'Segment', 'Zapier'],
   },
   {
     id: 'ai',
-    number: '03',
-    title: 'Artificial Intelligence & ML',
-    subtitle: 'Agentic Workflows, LLM Automation & Predictive Bidding',
-    color: '#b7509f',
-    summary: 'Pragmatic machine intelligence delivering measurable business leverage. Autonomous agent pipelines, contextual retrieval (RAG), and generative creative frameworks.',
-    deliverables: [
-      'Automated prompt engineering pipelines for creative asset testing',
-      'Autonomous multi-agent systems for operational and customer triage',
-      'Vector search & knowledge retrieval engines (RAG)',
-      'ML-assisted bid distribution & audience cluster modeling'
-    ],
-    tech: ['Claude / Gemini / OpenAI APIs', 'LangChain / LlamaIndex', 'Vector DBs (Pinecone/pgvector)', 'Python/Node'],
-    metrics: '3x creative testing velocity and automated 70%+ of operational data extraction.'
-  },
-  {
-    id: 'automation',
     number: '04',
-    title: 'Business Automation',
-    subtitle: 'Eliminating Operational Friction Through Seamless Integrations',
-    color: '#984ec1',
-    summary: 'Replacing tedious manual operations with reliable background automation. We connect CRM, billing, attribution, and internal systems via robust event buses.',
+    title: 'Enterprise AI & Automation',
+    subtitle: 'Deploying autonomous agents and prompt matrices for 3x velocity.',
+    color: '#38bdf8',
     deliverables: [
-      'Multi-system event dispatchers and webhook brokers',
-      'Automated lead qualification and CRM sync pipelines',
-      'Real-time Slack/Discord alerting and automated error recovery',
-      'Custom internal portals for non-technical team empowerment'
+      'Enterprise LLM Anomaly Detection Agents',
+      'Prompt Frameworks for 20+ Variant Generation',
+      'Live Telemetry Normalization in <4 Hours',
+      'Automated Workflow Orchestration',
     ],
-    tech: ['Make / Zapier / n8n', 'Custom Webhooks', 'Stripe API', 'Slack Bots', 'Cloud Functions'],
-    metrics: 'Saved an estimated 4,200+ human hours annually across consulting cohorts.'
-  },
-  {
-    id: 'marketing',
-    number: '05',
-    title: 'Performance Marketing & Media Buying',
-    subtitle: 'Multi-Million Dollar Pacing, Algorithmic Bidding & Attribution',
-    color: '#7652d8',
-    summary: 'Data-driven paid media execution backed by statistical rigor. Multi-touch attribution, server-side tracking, and conversion rate optimization (CRO).',
-    deliverables: [
-      'Full-funnel campaign architecture across Meta, Google Search, and TikTok',
-      'Server-side Meta & Google Conversions API (CAPI) implementation',
-      'Post-click landing page optimization with continuous A/B test harnesses',
-      'Algorithmic bid pacing and budget reallocation toward high-LTV cohorts'
-    ],
-    tech: ['Meta Ads Manager', 'Google Ads / Search Console', 'BigQuery / GA4', 'PostHog A/B'],
-    metrics: '122% bonus target delivery ($4,575) and -28% blended CAC reduction.'
+    tech: ['Claude 3.5', 'GPT-4o', 'LangChain', 'Python', 'Vector DBs', 'n8n'],
   },
   {
     id: 'seo',
+    number: '05',
+    title: 'Content & Search Intelligence',
+    subtitle: 'Turning audience behavior and search trends into high-intent pipeline lifts.',
+    color: '#a855f7',
+    deliverables: [
+      'Multi-Million Page Content Architecture',
+      '1,250+ Page Consolidation (+50% Baseline Lift)',
+      'Behavioral Telemetry & LLM Search Surfacing',
+      'Jira Cross-Functional Product Alignment',
+    ],
+    tech: ['edX Platform', 'Search Console', 'Ahrefs', 'Semrush', 'Jira'],
+  },
+  {
+    id: 'systems',
     number: '06',
-    title: 'SEO Optimization',
-    subtitle: 'Algorithmic Visibility, Core Web Vitals & Search Domination',
-    color: '#5b57e0',
-    summary: 'Search engineering grounded in technical excellence: perfect crawl budgets, lightning-fast Core Web Vitals (LCP < 1.2s), structured JSON-LD, and authority.',
+    title: 'Computer Engineering & Architecture',
+    subtitle: 'Applying computer engineering discipline (4.0 GPA) to scalable distributed software.',
+    color: '#f43f5e',
     deliverables: [
-      'Comprehensive technical audit (rendering, indexing, redirects)',
-      'Schema.org structured JSON-LD knowledge graph integration',
-      'Speed optimization & dynamic image/asset delivery pipeline',
-      'Programmatic SEO architecture for high-volume organic landing pages'
+      '100+ Relational Databases for 80+ Organizations',
+      'Distributed Cloud APIs & Data Layers',
+      'High-Performance WebGL & Client Architecture',
+      'Software Engineering & Database Systems',
     ],
-    tech: ['Google Search Console API', 'Lighthouse Automation', 'Next.js SSR/SSG', 'Edge Caching'],
-    metrics: 'Drove 2x-5x organic traffic expansion across client websites within 6 months.'
+    tech: ['PostgreSQL', 'TypeScript', 'Node.js', 'Three.js', 'Cloud Run'],
   },
   {
-    id: 'bizinfra',
+    id: 'governance',
     number: '07',
-    title: 'Business Infrastructure',
-    subtitle: 'The Enterprise Operating System for Repeatable Growth',
-    color: '#465de4',
-    summary: 'Building the foundational workflows, data hierarchies, and compliance guardrails that enable teams to scale without organizational chaos.',
+    title: 'Process Governance & Lean Six Sigma',
+    subtitle: 'Eliminating operational waste and standardizing reporting accuracy.',
+    color: '#e2e8f0',
     deliverables: [
-      'Data governance, security policy, and role-based access setup',
-      'Single-source-of-truth analytics & executive KPI dashboards',
-      'Technical hiring roadmaps and engineering interview rubrics',
-      'Vendor negotiations and technology consolidation'
+      'Lean Six Sigma White Belt Standardization',
+      'Data Quality Assurance in Under 4 Hours',
+      'Cross-Functional Leadership (15-Person Teams)',
+      'Federal & Institutional Project Governance',
     ],
-    tech: ['Notion Enterprise', 'Jira / Linear', 'PostHog / Mixpanel', 'SOC2 Readiness Checklists'],
-    metrics: 'Helped 20+ seed startups establish engineering discipline leading to successful funding.'
+    tech: ['Lean Six Sigma', 'CompTIA ITF+', 'Project Governance', 'UPPR'],
   },
   {
-    id: 'bizdev',
+    id: 'fellowship',
     number: '08',
-    title: 'Business Development',
-    subtitle: 'Strategic Partnerships & Product-Led Enterprise Growth',
-    color: '#3d63e6',
-    summary: 'Aligning technical capabilities with commercial market opportunities. Creating technical proof-of-concepts (POCs) that close high-value partnerships.',
+    title: 'Stanford Innovation & Leadership',
+    subtitle: 'Driving entrepreneurial innovation and high-impact commercial ecosystems.',
+    color: '#d4af37',
     deliverables: [
-      'Technical POC architecture for enterprise client pitches',
-      'API ecosystem strategy and developer platform positioning',
-      'Co-selling frameworks with technology partners',
-      'Pricing model architecture (usage-based vs tiered SaaS)'
+      'Stanford University Innovation Fellows',
+      'Co-Founding Commercial Scaling Agencies',
+      '$10M+ Commercial Revenue Realized',
+      'Mentorship of 80+ Startups & Organizations',
     ],
-    tech: ['API Platform Design', 'Usage Billing Engines', 'Executive Pitch Decks', 'Partner Ecosystems'],
-    metrics: 'Facilitated key commercial integrations unlocking $3M+ in combined contract value.'
-  }
+    tech: ['Stanford Fellows', 'Commercial Growth', 'Executive Advisory'],
+  },
 ];
 
-// Architectural Presets
+// Presets for ROI Simulator
 export const ROI_PRESETS = [
-  {
-    id: 'seed-mvp',
-    name: 'Early Stage MVP / Fast-Track Product',
-    stage: 'Pre-Seed / Seed Startup',
-    budgetTier: '$15k – $40k',
-    timeline: '4 – 8 Weeks',
-    pillars: ['software', 'infra', 'seo'],
-    description: 'Transform user stories and raw ideas into a high-performance, battle-tested web application ready for customer onboarding and investor scrutiny.',
-    projectedImpact: {
-      speedToMarket: '3.5x Faster',
-      infrastructureCost: '< $50 / mo on modern serverless',
-      scalability: 'Ready for 100k+ concurrent requests from day one'
-    },
-    techStack: ['TypeScript', 'Next.js / Vite', 'Firebase / Supabase', 'Tailwind / Modern CSS', 'Cloudflare']
-  },
-  {
-    id: 'ai-automation',
-    name: 'AI Agent & Ops Modernization',
-    stage: 'Growth Startup / SMB',
-    budgetTier: '$20k – $60k',
-    timeline: '6 – 10 Weeks',
-    pillars: ['ai', 'automation', 'bizinfra'],
-    description: 'Deploy intelligent automation agents to eliminate repetitive manual operational bottlenecks, triage customer requests, and sync data across all systems.',
-    projectedImpact: {
-      speedToMarket: 'Immediate 40hr/wk team saving',
-      infrastructureCost: '80% cheaper than adding headcount',
-      scalability: 'Handles 10x ticket surge with zero added staff'
-    },
-    techStack: ['LLM Orchestration', 'Node / Python Microservices', 'Webhook Fabric', 'Vector DB', 'Slack/Email Bots']
-  },
-  {
-    id: 'growth-acquisition',
-    name: 'Full-Funnel Growth & Attribution Engine',
-    stage: 'Scaleup / High Growth',
-    budgetTier: '$25k – $80k',
-    timeline: '4 – 8 Weeks',
-    pillars: ['marketing', 'software', 'ai', 'infra'],
-    description: 'Implement server-side Conversions API, multi-touch attribution, algorithmic bidding, and generative AI creative pipelines to compress blended CAC.',
-    projectedImpact: {
-      speedToMarket: '3x creative testing tempo',
-      infrastructureCost: '-28% blended CAC reduction',
-      scalability: 'Scales to $500k+/mo media pacing cleanly'
-    },
-    techStack: ['Meta CAPI', 'Google BigQuery', 'Cloudflare Workers', 'Prompt Frameworks', 'GA4 Server-Side']
-  },
-  {
-    id: 'scale-infra',
-    name: 'Cloud Infrastructure & FinOps Optimization',
-    stage: 'Series A / Scaleup',
-    budgetTier: '$25k – $75k',
-    timeline: '6 – 12 Weeks',
-    pillars: ['infra', 'software', 'seo'],
-    description: 'Overhaul lagging infrastructure, crush latency, eliminate memory leaks, and optimize cloud expenditures before major funding or high-volume scale.',
-    projectedImpact: {
-      speedToMarket: '2x engineering deployment frequency',
-      infrastructureCost: '30% – 50% cloud bill reduction',
-      scalability: 'Sub-100ms P95 latency and 99.99% uptime target'
-    },
-    techStack: ['GCP / AWS Multi-Region', 'Docker & Cloud Run', 'Edge CDN Caching', 'Prometheus / Datadog', 'PostgreSQL Tuning']
-  }
+  { id: 'b2b-revops', name: 'B2B RevOps & CRM Hygiene', pillars: ['growth', 'crm', 'data'] },
+  { id: 'ai-automation', name: 'AI Telemetry & Anomaly Agents', pillars: ['ai', 'growth', 'systems'] },
+  { id: 'enterprise-analytics', name: 'Large-Scale BI & Databricks', pillars: ['data', 'growth', 'seo'] },
 ];

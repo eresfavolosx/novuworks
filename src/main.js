@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 //  Fabián Vélez Vicente — Executive Portfolio & Interactive Atelier
-//  Performance Marketing Lead · Level ICS4 · Technical Consultant
-//  Minimalist Luxury · Fluid Motion & Choreographed Animations
+//  Growth & Revenue Operations Analytics Lead · Computer Engineering
+//  Verified Milestones: Money Group, Red Ventures (edX), Viva Advertising, Link PR
 // ─────────────────────────────────────────────────────────────
 
 import { SpatialCanvas3D } from './canvas3d.js';
@@ -25,6 +25,7 @@ class FabianPortfolioApp {
       competencyMatrixMount: document.getElementById('competency-matrix-mount'),
       disciplineModal: document.getElementById('discipline-modal'),
       dialogContentBody: document.getElementById('dialog-content-body'),
+      resumeModal: document.getElementById('resume-export-modal'),
       toastBanner: document.getElementById('toast-banner'),
       btnTeslaMode: document.getElementById('btn-tesla-mode'),
       btnAudioToggle: document.getElementById('btn-audio-toggle'),
@@ -341,6 +342,72 @@ class FabianPortfolioApp {
   }
 
   // ─────────────────────────────────────────────────────────────
+  // Executive Resume Modal Handlers
+  // ─────────────────────────────────────────────────────────────
+  openResumeModal() {
+    if (!this.dom.resumeModal) return;
+    this.dom.resumeModal.showModal();
+    audio.confirm();
+  }
+
+  closeResumeModal() {
+    if (!this.dom.resumeModal) return;
+    this.dom.resumeModal.close();
+    audio.click(800);
+  }
+
+  copyResumeText() {
+    const text = `FABIAN VELEZ VICENTE
+Growth & Revenue Operations Analytics Lead
+Email: fabianvvicente1@gmail.com | LinkedIn: https://linkedin.com/in/fabian-velez-vicente | GitHub: https://github.com/eresfavolosx | Portfolio: https://novu.works
+
+SUMMARY
+Growth & Revenue Operations Analytics Lead with 8+ years of experience sitting at the intersection of Marketing, Sales, and RevOps to analyze content, paid media, and CRM data, turning complex B2B funnel insights into pipeline growth across a $10M+ commercial portfolio.
+
+SKILLS
+• Content, SEO & Audience Intelligence: Organic Search & Keyword Performance | Content Refresh & Consolidation Strategy | Website Engagement & Conversion Analytics (GA4) | Search & Audience Behavior Analysis
+• Paid Media & Demand Gen Analytics: LinkedIn Ads, Google Ads & Display | Multi-Dimensional Performance Analysis (Creative, Segment, Offer) | Spend-to-Pipeline & Opportunity Attribution | A/B Test Design
+• CRM Enrichment & Sales Intelligence: Salesforce & HubSpot CRM Data Quality | Account Deduplication, Normalization & Enrichment | ICP Segmentation & Buying Committee Research | Event & Prospect Prioritization
+• Data Stack & BI Platforms: SQL & T-SQL | Databricks | Advanced Spreadsheets (Excel & Google Sheets) | Power BI | Tableau | Looker | Python Data Automation | Bilingual (English & Spanish)
+
+PROFESSIONAL EXPERIENCE
+Money Group | Media Buyer (Demand Generation & Revenue Operations Analytics) | March 2026 – October 2026
+• Paid Media & Pipeline Attribution: Analyzed multi-channel advertising performance across Google, LinkedIn, and display placements for 5 verticals ($100k+ direct spend within a $1 Billion+ portfolio), moving beyond clicks to tie spend directly to qualified opportunities and revenue.
+• Account Intelligence & RevOps Alignment: Partnered with Sales and RevOps to evaluate B2B and consumer partner economics, building standardized opportunity sizing models and restructuring unit payouts from $125 to $250 to prioritize high-value downstream conversions.
+• Landing Page & Offer Testing: Partnered with Demand Generation to design and evaluate structured A/B tests across 20+ landing pages, analyzing performance by creative copy and offer to accelerate test velocity by 30%.
+• Automated Data Hygiene & Anomaly Detection: Engineered 20+ custom AI workflows and live telemetry agents in an enterprise LLM platform to normalize partner data, flag tracking anomalies, and maintain 100% reporting accuracy in under 4 hours.
+
+Red Ventures | Growth / SEO Analyst (Content & Audience Intelligence, edX) | August 2024 – January 2026
+• Content & SEO Performance Strategy: Led content performance analysis across organic search, keyword rankings, and website engagement for the multi-million-page edX platform, refreshing and consolidating 1,250+ priority pages to drive a 50%+ baseline search lift and a 19% YoY conversion gain.
+• Audience & Search Opportunity Surfacing: Combined behavioral telemetry with search trends to surface emerging content and LLM search opportunities, partnering with Content and Product teams in Jira to generate a 3x lift (200%+) in high-intent prospective inquiries.
+• SQL Data Normalization & Funnel Analysis: Queried and cleaned raw, imperfect datasets from scratch using SQL and Python in Databricks across 40 million+ user sessions, reconciling GA4 and internal databases with 100% reporting accuracy.
+
+Viva Advertising | Co-Founder (B2B Growth, CRM & Event Intelligence) | January 2018 – Present
+• B2B Funnel & Demand Gen Analytics: Evaluated paid media, content, and funnel performance across 150+ B2B and commercial accounts, managing $2M+ in direct ad budgets and 4 Billion+ impressions to generate a $10M+ pipeline and $10M+ in realized revenue.
+• CRM Data Quality & ICP Segmentation: Partnered with Sales and RevOps across Salesforce and HubSpot to normalize, deduplicate, and enrich account and buying-committee records, building predictive account-health models that reduced client churn by 83% (from 30% to 5%).
+• Executive BI & Proactive Recommendations: Architected centralized Power BI and Looker dashboards and directed a 15-person cross-functional team, translating raw marketing and CRM data into clear budget and targeting recommendations that lifted throughput by 40%.
+
+Link Puerto Rico | Co-Founder & Technical Lead (Event & Prospect Intelligence) | November 2017 – Present
+• Conference, Event & Attendee Intelligence: Sourced, cleaned, matched, and enriched attendee and company data across 50+ industry workshops and 4 major conferences (5,000+ participants and 2,000+ community members), building prioritized target-account lists that drove $3 Million in sponsorships and B2B sales.
+• Market Research & Database Governance: Directed a 10+ person team to build and maintain 100+ relational databases and web platforms for 80+ organizations, normalizing 50,000+ customer and prospect records to uncover untapped market opportunities.
+
+EDUCATION & CERTIFICATIONS
+• B.S., Computer Engineering (4.0 GPA) | Universidad Politécnica de Puerto Rico | In Progress
+• Automation, Data & IT Certifications: Lean Six Sigma White Belt | Data-driven Strategy: Power BI (UPPR) | CompTIA ITF+
+• Governance & Fellowships: Stanford University Innovation Fellows | Project Management Practice (UPPR) | Federal Funds Administration (UPR)
+
+COLLABORATION & LET'S CHAT
+Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com`;
+
+    navigator.clipboard.writeText(text).then(() => {
+      audio.confirm();
+      this.showToast('Executive Resume copied to clipboard');
+    }).catch(() => {
+      this.showToast('Copied to clipboard');
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────────
   // Event Binding
   // ─────────────────────────────────────────────────────────────
   bindEvents() {
@@ -365,6 +432,28 @@ class FabianPortfolioApp {
 
     document.getElementById('btn-launch-ai-lab')?.addEventListener('click', () => {
       this.switchView('ai-lab');
+    });
+
+    // Resume Modal Triggers
+    document.getElementById('btn-open-resume-card')?.addEventListener('click', () => {
+      this.openResumeModal();
+    });
+
+    document.getElementById('btn-open-resume-card-bottom')?.addEventListener('click', () => {
+      this.openResumeModal();
+    });
+
+    document.getElementById('btn-close-resume-modal')?.addEventListener('click', () => {
+      this.closeResumeModal();
+    });
+
+    document.getElementById('btn-print-from-modal')?.addEventListener('click', () => {
+      audio.confirm();
+      window.print();
+    });
+
+    document.getElementById('btn-copy-resume-text')?.addEventListener('click', () => {
+      this.copyResumeText();
     });
 
     // 3D Sculpture Switcher Pills
@@ -392,10 +481,9 @@ class FabianPortfolioApp {
       if (this.cmdPalette) this.cmdPalette.open();
     });
 
-    // Print Resume (PDF Export)
+    // Print Resume (Global Button)
     this.dom.btnPrintResume?.addEventListener('click', () => {
-      audio.confirm();
-      window.print();
+      this.openResumeModal();
     });
 
     // Keyboard Shortcuts (1-5 for Views)
@@ -412,6 +500,12 @@ class FabianPortfolioApp {
     this.dom.disciplineModal?.addEventListener('click', (e) => {
       if (e.target === this.dom.disciplineModal) {
         this.dom.disciplineModal.close();
+      }
+    });
+
+    this.dom.resumeModal?.addEventListener('click', (e) => {
+      if (e.target === this.dom.resumeModal) {
+        this.closeResumeModal();
       }
     });
   }
