@@ -248,14 +248,7 @@ class FabianPortfolioApp {
       this.updateHeaderPersonaPill('master');
     }
 
-    if (localStorage.getItem('fv_onboarding_completed') !== 'true') {
-      setTimeout(() => {
-        // Only open automatically if no other modal has been opened yet
-        if (!this.dom.resumeModal?.open && !this.dom.recruiterModal?.open && !this.dom.arcadeModal?.open && !this.dom.disciplineModal?.open) {
-          this.openSurveyModal();
-        }
-      }, 1200);
-    }
+    // Do NOT auto-pop onboarding survey on load; keep page fluid and uninterrupted.
 
     // 7c. Initialize Visitor Utilities Suite with Spatial & Firebase
     try {
@@ -1529,7 +1522,11 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
 
     // Visitor Concierge / Tailor Experience Triggers
     this.dom.btnTailorExperience?.addEventListener('click', () => {
-      this.openSurveyModal();
+      if (this.bilingualHero && typeof this.bilingualHero.openIntro === 'function') {
+        this.bilingualHero.openIntro(false);
+      } else {
+        this.openSurveyModal();
+      }
     });
 
     this.dom.btnCloseSurveyModal?.addEventListener('click', () => {
@@ -2124,6 +2121,10 @@ function bootPortfolioApp() {
       instance.openResumeModal();
     } else if (params.get('hire') === '1' || hash === '#hire') {
       instance.openRecruiterModal();
+    } else if (params.get('tailor') === '1' || hash === '#tailor') {
+      instance.bilingualHero?.openIntro(false);
+    } else if (params.get('hud') === '1' || params.get('tesla') === '1' || hash === '#tesla' || hash === '#hud') {
+      instance.toggleTeslaMode();
     }
   }, 150);
 }

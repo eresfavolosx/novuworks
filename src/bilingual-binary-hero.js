@@ -159,12 +159,9 @@ export class BilingualBinaryHero {
     this.bindEvents();
     this.render();
 
-    // Check if cinematic intro should run on initial page load
-    const hasSeenIntro = sessionStorage.getItem('seen_cinematic_intro') === '1';
-    if (!hasSeenIntro && this.dom.introOverlay) {
-      // First visit in this session: Show with cinematic countdown
-      this.openIntro(true);
-    }
+    // Do NOT auto-open modal on initial page load.
+    // The candidate lands directly on the fluid, editorial Tesla-grade hero.
+    // Only opened on demand when visitor clicks "Tailor Experience" or presses 1-4.
   }
 
   bindEvents() {
@@ -242,6 +239,10 @@ export class BilingualBinaryHero {
     const activeLens = (this.app && this.app.activeRoleLens) || 'master';
     const discMap = {
       master: 'all',
+      revops_analytics: 'marketing',
+      tech_ops: 'design',
+      ai_engineering: 'engineering',
+      data_governance: 'engineering',
       growth: 'marketing',
       design: 'design',
       systems: 'engineering',
@@ -284,9 +285,9 @@ export class BilingualBinaryHero {
     if (this.app && typeof this.app.setRoleLens === 'function') {
       const lensMap = {
         all: 'master',
-        design: 'design',
-        marketing: 'growth',
-        engineering: 'systems'
+        design: 'tech_ops',
+        marketing: 'revops_analytics',
+        engineering: 'ai_engineering'
       };
       const lens = lensMap[this.currentDiscipline] || 'master';
       this.app.setRoleLens(lens);
@@ -335,9 +336,9 @@ export class BilingualBinaryHero {
     if (this.app && typeof this.app.setRoleLens === 'function') {
       const lensMap = {
         all: 'master',
-        design: 'design',
-        marketing: 'growth',
-        engineering: 'systems'
+        design: 'tech_ops',
+        marketing: 'revops_analytics',
+        engineering: 'ai_engineering'
       };
       this.app.setRoleLens(lensMap[disciplineId] || 'master');
     }

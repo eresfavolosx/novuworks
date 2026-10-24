@@ -211,8 +211,8 @@ export class CommandPalette {
       },
       {
         id: 'tesla',
-        title: 'Toggle Tesla In-Car Touchscreen Cockpit Mode',
-        category: 'Display / Vehicle',
+        title: 'Toggle Executive Telemetry & Systems HUD (Tesla Viewport)',
+        category: 'Telemetry & HUD',
         shortcut: 'T',
         action: () => options.onToggleTesla && options.onToggleTesla(),
       },
