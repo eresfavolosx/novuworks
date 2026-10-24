@@ -656,6 +656,78 @@ body.visualizer-mode .webgl-canvas-layer:active {
   color: #6b4b00;
 }
 
+/* Bilingual Language Toggle (EN / ES) */
+.lang-toggle-btn {
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 6px 11px;
+  position: relative;
+  transition: all var(--duration-fast) var(--ease-luxury);
+}
+
+.lang-toggle-btn .lang-icon {
+  font-size: 12px;
+  margin-right: 1px;
+  opacity: 0.85;
+}
+
+.lang-toggle-btn .lang-code-en,
+.lang-toggle-btn .lang-code-es {
+  transition: all var(--duration-fast) var(--ease-luxury);
+}
+
+.lang-toggle-btn .lang-code-en.active,
+.lang-toggle-btn .lang-code-es.active {
+  color: var(--gold-light);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.lang-toggle-btn .lang-code-en:not(.active),
+.lang-toggle-btn .lang-code-es:not(.active) {
+  color: var(--text-muted);
+  opacity: 0.55;
+  font-weight: 500;
+}
+
+.lang-toggle-btn .lang-sep {
+  opacity: 0.25;
+  font-size: 10px;
+}
+
+.lang-toggle-btn:hover {
+  border-color: var(--gold-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="light"] .lang-toggle-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lang-toggle-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(148, 104, 0, 0.35);
+}
+
+:root[data-theme="light"] .lang-toggle-btn .lang-code-en.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lang-toggle-btn .lang-code-en.active,
+:root[data-theme="light"] .lang-toggle-btn .lang-code-es.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lang-toggle-btn .lang-code-es.active {
+  color: #92400e;
+  text-shadow: none;
+}
+
+:root[data-theme="light"] .lang-toggle-btn .lang-code-en:not(.active),
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lang-toggle-btn .lang-code-es:not(.active) {
+  color: #64748b;
+}
+
+:root[data-theme="light"] .lang-toggle-btn:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lang-toggle-btn:hover {
+  background: rgba(148, 104, 0, 0.1);
+  border-color: var(--gold-primary);
+}
+
 /* Dark / Light Theme Toggle Button */
 .theme-toggle-btn {
   gap: 7px;

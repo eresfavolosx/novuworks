@@ -139,27 +139,27 @@
         <nav class="header-center-nav" aria-label="Executive Navigation">
           <button type="button" class="nav-tab active" data-view="core">
             <span class="tab-index">01</span>
-            <span class="tab-title">Overview</span>
+            <span class="tab-title" data-i18n="nav_overview">Overview</span>
           </button>
           <button type="button" class="nav-tab" data-view="case-studies">
             <span class="tab-index">02</span>
-            <span class="tab-title">Case Studies</span>
+            <span class="tab-title" data-i18n="nav_cases">Case Studies</span>
           </button>
           <button type="button" class="nav-tab" data-view="ai-lab">
             <span class="tab-index">03</span>
-            <span class="tab-title">AI Studio</span>
+            <span class="tab-title" data-i18n="nav_ai_lab">AI Studio</span>
           </button>
           <button type="button" class="nav-tab" data-view="planner">
             <span class="tab-index">04</span>
-            <span class="tab-title">ROI Model</span>
+            <span class="tab-title" data-i18n="nav_planner">ROI Model</span>
           </button>
           <button type="button" class="nav-tab" data-view="dossier">
             <span class="tab-index">05</span>
-            <span class="tab-title">Dossier</span>
+            <span class="tab-title" data-i18n="nav_dossier">Dossier</span>
           </button>
           <button type="button" class="nav-tab" data-view="intel-feed">
             <span class="tab-index">06</span>
-            <span class="tab-title">Intel Feed</span>
+            <span class="tab-title" data-i18n="nav_intel">Intel Feed</span>
           </button>
         </nav>
 
@@ -169,45 +169,53 @@
           <button type="button" class="hud-action-btn persona-lens-pill" id="btn-tailor-experience" title="Tailor portfolio experience by area of interest (Click to change)" aria-label="Tailor Experience by Area of Interest">
             <span class="persona-dot" aria-hidden="true">✨</span>
             <span class="persona-label">All-Round Master</span>
-            <span class="persona-tag">Tailor</span>
+            <span class="persona-tag" data-i18n="tailor_tag">Tailor</span>
           </button>
 
           <!-- Executive Visitor Utilities Trigger -->
           <button type="button" class="hud-action-btn tools-trigger-btn" id="btn-visitor-tools" title="Open Visitor Growth & Engineering Utilities (Meta CAPI, ROAS Calculator, ATS Resume Export)" aria-label="Open Visitor Utilities">
             <span class="tools-btn-icon" aria-hidden="true">🛠️</span>
-            <span class="tools-btn-label">Tools</span>
+            <span class="tools-btn-label" data-i18n="tools_label">Tools</span>
           </button>
 
           <!-- Live Status Badge -->
           <div class="availability-pill" title="Available for Strategic Roles (Growth & RevOps Lead / AI Systems)">
             <span class="status-pulse-dot"></span>
-            <span class="status-label">Available</span>
+            <span class="status-label" data-i18n="status_available">Available</span>
           </div>
 
           <!-- Puerto Rico Cultural Roots & Live Open-Meteo Weather Badge -->
           <button type="button" class="hud-action-btn pr-roots-btn" id="btn-pr-roots" title="San Juan, Puerto Rico (18.4655° N, 66.1057° W) · Click for Coquí chime & live atmospheric report" aria-label="San Juan, Puerto Rico Roots · Click for Coquí chime">
             <span class="pr-flag-emoji" aria-hidden="true">🇵🇷</span>
-            <span class="pr-loc-label">San Juan, PR</span>
+            <span class="pr-loc-label" data-i18n="pr_roots_label">San Juan, PR</span>
             <span class="pr-geo-coords" id="pr-weather-badge">18°N 66°W</span>
           </button>
 
           <!-- Spatial Gyroscope & 6DoF Motion Parallax Toggle Button -->
           <button type="button" class="hud-action-btn spatial-gyro-btn" id="btn-spatial-gyro" title="Toggle Spatial Gyroscope & 6DoF Motion Parallax (Click to calibrate)" aria-label="Toggle Spatial Gyroscope">
             <span class="spatial-gyro-icon" id="spatial-gyro-icon" aria-hidden="true">🧭</span>
-            <span class="spatial-gyro-label" id="spatial-gyro-label">Spatial Gyro</span>
+            <span class="spatial-gyro-label" id="spatial-gyro-label" data-i18n="spatial_gyro_label">Spatial Gyro</span>
           </button>
 
           <!-- Background 3D Visualizer Mode Toggle Button -->
           <button type="button" class="hud-action-btn visualizer-btn" id="btn-toggle-visualizer" title="View 3D Background Visualization (Zen Mode · Press ESC to exit)" aria-label="View 3D Background Visualization">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            <span class="visualizer-btn-label">View 3D</span>
+            <span class="visualizer-btn-label" data-i18n="visualizer_label">View 3D</span>
+          </button>
+
+          <!-- Bilingual Language Switcher (EN / ES Toggle · English Default) -->
+          <button type="button" class="hud-action-btn lang-toggle-btn" id="btn-lang-toggle" title="Switch language / Cambiar idioma (EN / ES)" aria-label="Switch language (Current: English)">
+            <span class="lang-icon" aria-hidden="true">🌐</span>
+            <span class="lang-code-en active">EN</span>
+            <span class="lang-sep">/</span>
+            <span class="lang-code-es">ES</span>
           </button>
 
           <!-- Theme Switcher (Dark / Light Mode) -->
           <button type="button" class="hud-action-btn theme-toggle-btn" id="btn-theme-toggle" title="Switch Theme (Dark / Light)" aria-label="Toggle Dark and Light Mode">
             <svg class="icon-theme-sun hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
             <svg class="icon-theme-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <span class="theme-btn-label">Theme</span>
+            <span class="theme-btn-label" data-i18n="theme_label">Theme</span>
           </button>
 
           <!-- Command Palette Trigger -->
@@ -218,6 +226,9 @@
 
           <!-- Tesla Mode Switch -->
           <button type="button" class="hud-action-btn tesla-toggle" id="btn-tesla-mode" title="Toggle Tesla High-Contrast Mode" aria-label="Toggle Tesla Mode">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14v-5l-3-4H8l-3 4v5z"></path><circle cx="7.5" cy="17.5" r="2.5"></circle><circle cx="16.5" cy="17.5" r="2.5"></circle></svg>
+            <span class="btn-text" data-i18n="tesla_label">Tesla HUD</span>
+          </button>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14v-5l-3-4H8l-3 4v5z"></path><circle cx="7.5" cy="17.5" r="2.5"></circle><circle cx="16.5" cy="17.5" r="2.5"></circle></svg>
             <span class="btn-text">Tesla HUD</span>
           </button>
@@ -240,23 +251,23 @@
           <div class="hero-editorial-container">
             <!-- Minimalist Top Kicker -->
             <div class="hero-kicker-row">
-              <span class="kicker-pill gold-pill">GROWTH & REVOPS LEAD</span>
+              <span class="kicker-pill gold-pill" data-i18n="hero_kicker_lead">GROWTH & REVOPS LEAD</span>
               <span class="kicker-pill">MONEY GROUP · RED VENTURES</span>
-              <span class="kicker-pill">COMPUTER ENGINEERING (4.0 GPA)</span>
-              <span class="kicker-pill">STANFORD INNOVATION FELLOW</span>
-              <span class="kicker-pill">🇺🇸 US CITIZEN (NO SPONSORSHIP REQUIRED)</span>
+              <span class="kicker-pill" data-i18n="hero_kicker_degree">COMPUTER ENGINEERING (4.0 GPA)</span>
+              <span class="kicker-pill" data-i18n="hero_kicker_fellow">STANFORD INNOVATION FELLOW</span>
+              <span class="kicker-pill" data-i18n="hero_kicker_auth">🇺🇸 US CITIZEN (NO SPONSORSHIP REQUIRED)</span>
               <span class="kicker-pill pr-kicker-pill trigger-pr-coqui" title="Hecho en Puerto Rico (Click for Coquí chime)" role="button" tabindex="0">
-                <span class="pr-flag-inline" aria-hidden="true">🇵🇷</span> SAN JUAN, PUERTO RICO
+                <span class="pr-flag-inline" aria-hidden="true">🇵🇷</span> <span data-i18n="hero_kicker_pr">SAN JUAN, PUERTO RICO</span>
               </span>
             </div>
 
             <!-- Grand Editorial Headline -->
-            <h1 class="hero-title">
+            <h1 class="hero-title" data-i18n="hero_title" data-i18n-html="true">
               Quantitative Growth.<br />
               <span class="editorial-serif">Architected for Scale.</span>
             </h1>
 
-            <p class="hero-lead">
+            <p class="hero-lead" data-i18n="hero_lead" data-i18n-html="true">
               Operating at the intersection of <strong>Marketing, Product, and RevOps</strong> to bridge ad-tech infrastructure, AI automation, and high-ROI media buying across a <strong>$10M+ commercial pipeline</strong>. 
               Engineered 20+ automated agentic workflows and proprietary ad-tech at <strong>Money Group (Full-Time)</strong>, led Generative AI personalization and 40M+ session analytics at <strong>Red Ventures (Full-Time, edX)</strong>, and directed 360° digital campaigns generating $10M+ across 150+ client accounts through his companies <strong>Viva Advertising (My Company / Founder)</strong>, <strong>Link Puerto Rico (My Company / Co-Founder)</strong>, and <strong>Novu Works (Technical Consultant)</strong>.
             </p>
@@ -265,28 +276,28 @@
             <div class="hero-action-row">
               <button type="button" class="luxury-btn primary-gold pulse-glow" id="btn-recruiter-brief">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                <span>60s Recruiter Brief</span>
+                <span data-i18n="btn_recruiter">60s Recruiter Brief</span>
               </button>
               <button type="button" class="luxury-btn outline-platinum" id="btn-explore-case-studies">
-                <span>View Case Studies</span>
+                <span data-i18n="btn_cases">View Case Studies</span>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
               <button type="button" class="luxury-btn outline-platinum" id="btn-launch-ai-lab">
-                <span>Launch AI Studio</span>
+                <span data-i18n="btn_ai_lab">Launch AI Studio</span>
               </button>
               <button type="button" class="luxury-btn outline-platinum" id="btn-open-resume-card">
-                <span>View Executive Resume Card</span>
+                <span data-i18n="btn_resume_card">View Executive Resume Card</span>
               </button>
               <button type="button" class="luxury-btn outline-platinum" id="btn-hero-intel-feed">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
-                <span>Live Intel & Radar</span>
+                <span data-i18n="btn_intel">Live Intel & Radar</span>
               </button>
               <button type="button" class="luxury-btn outline-platinum" id="btn-hero-view-canvas" title="View interactive 3D WebGL background visualization">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                <span>View 3D Background</span>
+                <span data-i18n="btn_view_bg">View 3D Background</span>
               </button>
               <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="luxury-btn subtle-ghost">
-                <span>Let's Chat</span>
+                <span data-i18n="btn_lets_chat">Let's Chat</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
               </a>
             </div>
@@ -295,32 +306,32 @@
             <div class="luxury-metrics-ribbon">
               <div class="metric-cell">
                 <span class="m-number gold-num" data-target="20" data-suffix="+">20+</span>
-                <span class="m-label">Automated AI Workflows</span>
-                <span class="m-detail">Money Group (Full-Time)</span>
+                <span class="m-label" data-i18n="metric_1_label">Automated AI Workflows</span>
+                <span class="m-detail" data-i18n="metric_1_detail">Money Group (Full-Time)</span>
               </div>
               <div class="metric-divider"></div>
               <div class="metric-cell">
                 <span class="m-number" data-target="200" data-prefix="+" data-suffix="%" style="color: #38bdf8;">+200%</span>
-                <span class="m-label">AI-Driven Lead Lift</span>
-                <span class="m-detail">Red Ventures (Full-Time, edX)</span>
+                <span class="m-label" data-i18n="metric_2_label">AI-Driven Lead Lift</span>
+                <span class="m-detail" data-i18n="metric_2_detail">Red Ventures (Full-Time, edX)</span>
               </div>
               <div class="metric-divider"></div>
               <div class="metric-cell">
                 <span class="m-number" data-target="10" data-prefix="$" data-suffix="M+">$10M+</span>
-                <span class="m-label">Realized B2B Pipeline</span>
-                <span class="m-detail">Viva Advertising (My Company)</span>
+                <span class="m-label" data-i18n="metric_3_label">Realized B2B Pipeline</span>
+                <span class="m-detail" data-i18n="metric_3_detail">Viva Advertising (My Company)</span>
               </div>
               <div class="metric-divider"></div>
               <div class="metric-cell">
                 <span class="m-number" data-target="83" data-prefix="-" data-suffix="%" style="color: #4ade80;">-83%</span>
-                <span class="m-label">Client Churn Suppression</span>
-                <span class="m-detail">Reduced Churn from 30% to 5%</span>
+                <span class="m-label" data-i18n="metric_4_label">Client Churn Suppression</span>
+                <span class="m-detail" data-i18n="metric_4_detail">Reduced Churn from 30% to 5%</span>
               </div>
               <div class="metric-divider"></div>
               <div class="metric-cell">
                 <span class="m-number" data-target="40" data-suffix="M+">40M+</span>
-                <span class="m-label">Databricks Telemetry</span>
-                <span class="m-detail">Normalized Sessions on edX</span>
+                <span class="m-label" data-i18n="metric_5_label">Databricks Telemetry</span>
+                <span class="m-detail" data-i18n="metric_5_detail">Normalized Sessions on edX</span>
               </div>
             </div>
 
@@ -329,13 +340,13 @@
 
             <!-- Minimalist Floating 3D Sculpture Switcher -->
             <div class="sculpture-dock">
-              <span class="dock-caption">Interactive 3D Matrix:</span>
+              <span class="dock-caption" data-i18n="dock_caption">Interactive 3D Matrix:</span>
               <div class="dock-buttons">
-                <button type="button" class="sculpture-pill active" data-morph="0">01 · NW Monogram</button>
-                <button type="button" class="sculpture-pill" data-morph="1">02 · Möbius Growth Flow</button>
-                <button type="button" class="sculpture-pill" data-morph="2">03 · Quantum AI Prism</button>
-                <button type="button" class="sculpture-pill zen-pill" id="btn-dock-view-canvas" title="Enter Fullscreen 3D Background Visualizer Mode">✨ View 3D Background</button>
-                <button type="button" class="sculpture-pill arcade-easter-pill" id="btn-open-arcade-pill" title="Play 3D Cyber Growth Racer Minigame">🎮 Cyber Arcade</button>
+                <button type="button" class="sculpture-pill active" data-morph="0" data-i18n="dock_btn_0">01 · NW Monogram</button>
+                <button type="button" class="sculpture-pill" data-morph="1" data-i18n="dock_btn_1">02 · Möbius Growth Flow</button>
+                <button type="button" class="sculpture-pill" data-morph="2" data-i18n="dock_btn_2">03 · Quantum AI Prism</button>
+                <button type="button" class="sculpture-pill zen-pill" id="btn-dock-view-canvas" title="Enter Fullscreen 3D Background Visualizer Mode" data-i18n="dock_btn_view">✨ View 3D Background</button>
+                <button type="button" class="sculpture-pill arcade-easter-pill" id="btn-open-arcade-pill" title="Play 3D Cyber Growth Racer Minigame" data-i18n="dock_btn_arcade">🎮 Cyber Arcade</button>
               </div>
             </div>
           </div>
@@ -345,9 +356,9 @@
         <section id="view-case-studies" class="viewport-view hidden">
           <div class="case-studies-container">
             <div class="catalog-header">
-              <span class="catalog-kicker">VERIFIED MILESTONES & ARCHITECTURE</span>
-              <h2 class="catalog-title">Business Engineering Case Studies</h2>
-              <p class="catalog-sub">Not static ad creatives—quantitative systems engineered to suppress CAC, accelerate iteration velocity, and scale revenue predictably.</p>
+              <span class="catalog-kicker" data-i18n="catalog_kicker">VERIFIED MILESTONES & ARCHITECTURE</span>
+              <h2 class="catalog-title" data-i18n="catalog_title">Business Engineering Case Studies</h2>
+              <p class="catalog-sub" data-i18n="catalog_sub">Not static ad creatives—quantitative systems engineered to suppress CAC, accelerate iteration velocity, and scale revenue predictably.</p>
             </div>
             <div class="case-studies-grid" id="case-studies-mount"></div>
           </div>
@@ -399,17 +410,17 @@
                   </a>
                   <span class="contact-pill auth-pill">
                     <span class="auth-flag" aria-hidden="true">🇺🇸</span>
-                    <span>US Citizen (No Sponsorship Needed)</span>
+                    <span data-i18n="dossier_auth_pill">US Citizen (No Sponsorship Needed)</span>
                   </span>
                   <a href="/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf" download="Fabian_Velez_Resume_2026.pdf" class="contact-pill download-pill" id="dossier-download-resume-btn" title="Download Official PDF Resume">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    <span>Download Official PDF</span>
+                    <span data-i18n="dossier_download_pdf">Download Official PDF</span>
                   </a>
                 </div>
                 <div class="dossier-roots-badge trigger-pr-coqui" title="Puerto Rico Heritage · Click for Coquí chime" role="button" tabindex="0">
                   <span class="pr-flag-emoji" aria-hidden="true">🇵🇷</span>
-                  <span class="roots-badge-text">Puerto Rico Heritage · San Juan · 18.4655° N, 66.1057° W</span>
-                  <span class="roots-chime-hint">(Chime Coquí)</span>
+                  <span class="roots-badge-text" data-i18n="dossier_heritage_text">Puerto Rico Heritage · San Juan · 18.4655° N, 66.1057° W</span>
+                  <span class="roots-chime-hint" data-i18n="dossier_chime_hint">(Chime Coquí)</span>
                 </div>
               </div>
             </div>
@@ -419,13 +430,13 @@
 
             <!-- Interactive Target Role Lens Switcher -->
             <div class="dossier-role-lens-bar">
-              <span class="role-lens-label">EXPLORE CANDIDATE BY TARGET ROLE LENS:</span>
+              <span class="role-lens-label" data-i18n="role_lens_bar_label">EXPLORE CANDIDATE BY TARGET ROLE LENS:</span>
               <div class="role-lens-pills" id="dossier-role-lens-pills">
-                <button type="button" class="role-lens-btn active" data-lens="master">🚀 Master Brief</button>
-                <button type="button" class="role-lens-btn" data-lens="ai_engineering">🤖 AI & Engineering</button>
-                <button type="button" class="role-lens-btn" data-lens="revops_analytics">📈 Media & RevOps</button>
-                <button type="button" class="role-lens-btn" data-lens="data_governance">📊 Data Governance</button>
-                <button type="button" class="role-lens-btn" data-lens="tech_ops">⚙️ Tech Ops & Systems</button>
+                <button type="button" class="role-lens-btn active" data-lens="master" data-i18n="role_lens_master">🚀 Master Brief</button>
+                <button type="button" class="role-lens-btn" data-lens="ai_engineering" data-i18n="role_lens_ai">🤖 AI & Engineering</button>
+                <button type="button" class="role-lens-btn" data-lens="revops_analytics" data-i18n="role_lens_revops">📈 Media & RevOps</button>
+                <button type="button" class="role-lens-btn" data-lens="data_governance" data-i18n="role_lens_data">📊 Data Governance</button>
+                <button type="button" class="role-lens-btn" data-lens="tech_ops" data-i18n="role_lens_tech">⚙️ Tech Ops & Systems</button>
               </div>
             </div>
 
@@ -434,13 +445,13 @@
 
             <!-- Verified Professional Experience Timeline (Dynamically lenses) -->
             <div class="dossier-section">
-              <h3 class="section-heading">Verified Professional Experience</h3>
+              <h3 class="section-heading" data-i18n="section_exp_heading">Verified Professional Experience</h3>
               <div class="experience-timeline" id="dossier-experience-mount"></div>
             </div>
 
             <!-- Verified Signature Engineering & Crisis Impact Projects -->
             <div class="dossier-section">
-              <h3 class="section-heading">Verified Signature Engineering & Crisis Impact Projects</h3>
+              <h3 class="section-heading" data-i18n="section_proj_heading">Verified Signature Engineering & Crisis Impact Projects</h3>
               <div class="standalone-projects-grid" id="standalone-projects-mount"></div>
             </div>
 
@@ -448,8 +459,8 @@
             <div class="dossier-section github-radar-section">
               <div class="section-title-row">
                 <div>
-                  <h3 class="section-heading">Live GitHub Codebase Radar & Open Source Telemetry</h3>
-                  <p class="section-subheading">Live REST sync via GitHub API (<code>@eresfavolosx</code>) · Real-time repository tracking, commit activity & open-source code.</p>
+                  <h3 class="section-heading" data-i18n="section_github_heading">Live GitHub Codebase Radar & Open Source Telemetry</h3>
+                  <p class="section-subheading" data-i18n="section_github_sub" data-i18n-html="true">Live REST sync via GitHub API (<code>@eresfavolosx</code>) · Real-time repository tracking, commit activity & open-source code.</p>
                 </div>
                 <a href="https://github.com/eresfavolosx" target="_blank" rel="noopener noreferrer" class="action-pill-btn" title="View Fabian's full GitHub profile">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
@@ -461,19 +472,19 @@
 
             <!-- Education & Accredited Certifications -->
             <div class="dossier-section">
-              <h3 class="section-heading">Education & Accredited Certifications</h3>
+              <h3 class="section-heading" data-i18n="section_edu_heading">Education & Accredited Certifications</h3>
               <div class="education-grid" id="dossier-education-mount"></div>
             </div>
 
             <!-- Honors, Awards & Civic Leadership -->
             <div class="dossier-section">
-              <h3 class="section-heading">Honors, Awards & Civic Leadership</h3>
+              <h3 class="section-heading" data-i18n="section_awards_heading">Honors, Awards & Civic Leadership</h3>
               <div class="awards-grid" id="dossier-awards-mount"></div>
             </div>
 
             <!-- Core Competency Matrix -->
             <div class="dossier-section">
-              <h3 class="section-heading">Core Competency Matrix</h3>
+              <h3 class="section-heading" data-i18n="section_matrix_heading">Core Competency Matrix</h3>
               <div class="competency-table-wrapper" id="competency-matrix-mount"></div>
             </div>
 
@@ -481,11 +492,11 @@
             <div class="dossier-footer">
               <button type="button" class="luxury-btn primary-gold" id="btn-open-resume-card-bottom">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                <span>Export Executive Resume & Composite Card</span>
+                <span data-i18n="btn_export_resume">Export Executive Resume & Composite Card</span>
               </button>
               <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="luxury-btn outline-platinum">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <span>Schedule a Strategy Chat</span>
+                <span data-i18n="btn_schedule_chat">Schedule a Strategy Chat</span>
               </a>
             </div>
 
@@ -502,8 +513,8 @@
                   </svg>
                 </span>
                 <div class="colophon-text-box">
-                  <span class="colophon-tag">HECHO CON ORGULLO EN PUERTO RICO 🇵🇷</span>
-                  <p class="colophon-desc">
+                  <span class="colophon-tag" data-i18n="colophon_tag">HECHO CON ORGULLO EN PUERTO RICO 🇵🇷</span>
+                  <p class="colophon-desc" data-i18n="colophon_desc">
                     Engineered in San Juan, Puerto Rico · Scaling global AI, RevOps analytics & software systems from Puerto Rico to the world.
                   </p>
                 </div>
@@ -522,28 +533,28 @@
       <dialog id="resume-export-modal" class="executive-dialog resume-modal" aria-labelledby="resume-modal-title">
         <div class="resume-modal-header">
           <div class="modal-title-group">
-            <span class="modal-kicker">EXECUTIVE COMPOSITE CARD</span>
-            <h2 id="resume-modal-title" class="modal-heading">Executive Resume Brief</h2>
+            <span class="modal-kicker" data-i18n="res_kicker">EXECUTIVE COMPOSITE CARD</span>
+            <h2 id="resume-modal-title" class="modal-heading" data-i18n="res_heading">Executive Resume Brief</h2>
             <div class="modal-lens-selector" id="resume-modal-lens-pills">
-              <button type="button" class="modal-lens-btn active" data-lens="master">🚀 Master Brief</button>
-              <button type="button" class="modal-lens-btn" data-lens="ai_engineering">🤖 AI & Engineering</button>
-              <button type="button" class="modal-lens-btn" data-lens="revops_analytics">📈 Media & RevOps</button>
-              <button type="button" class="modal-lens-btn" data-lens="data_governance">📊 Data Governance</button>
-              <button type="button" class="modal-lens-btn" data-lens="tech_ops">⚙️ Tech Ops & Systems</button>
+              <button type="button" class="modal-lens-btn active" data-lens="master" data-i18n="role_lens_master">🚀 Master Brief</button>
+              <button type="button" class="modal-lens-btn" data-lens="ai_engineering" data-i18n="role_lens_ai">🤖 AI & Engineering</button>
+              <button type="button" class="modal-lens-btn" data-lens="revops_analytics" data-i18n="role_lens_revops">📈 Media & RevOps</button>
+              <button type="button" class="modal-lens-btn" data-lens="data_governance" data-i18n="role_lens_data">📊 Data Governance</button>
+              <button type="button" class="modal-lens-btn" data-lens="tech_ops" data-i18n="role_lens_tech">⚙️ Tech Ops & Systems</button>
             </div>
           </div>
           <div class="resume-modal-actions">
             <a href="/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf" download="Fabian_Velez_Resume_2026.pdf" class="action-pill-btn gold" id="btn-download-resume-pdf" title="Download Official PDF Resume">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              <span>Download PDF</span>
+              <span data-i18n="res_btn_download">Download PDF</span>
             </a>
             <button type="button" class="action-pill-btn" id="btn-print-from-modal" title="Print or Save as PDF">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-              <span>Print / Save Clean PDF</span>
+              <span data-i18n="res_btn_print">Print / Save Clean PDF</span>
             </button>
             <button type="button" class="action-pill-btn" id="btn-copy-resume-text" title="Copy text resume to clipboard">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              <span>Copy Text</span>
+              <span data-i18n="res_btn_copy">Copy Text</span>
             </button>
             <button type="button" class="dialog-close-btn" id="btn-close-resume-modal" aria-label="Close modal">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -571,13 +582,13 @@
                 <span class="res-sep">|</span>
                 <span>San Juan, PR (US Remote)</span>
                 <span class="res-sep">|</span>
-                <strong>US Citizen (No Sponsorship Required)</strong>
+                <strong data-i18n="dossier_auth_pill">US Citizen (No Sponsorship Required)</strong>
               </div>
             </header>
 
             <!-- Summary -->
             <section class="res-section">
-              <h2 class="res-section-title">SUMMARY</h2>
+              <h2 class="res-section-title" data-i18n="res_sec_summary">SUMMARY</h2>
               <p class="res-summary-text" id="res-summary-mount">
                 Technical Product Manager & Performance Marketing Lead with 8+ years of experience bridging ad-tech infrastructure, AI automation, and high-ROI media buying. Proven track record of directing Agile marketing teams, executing 360° digital campaigns that generated $10M+ in revenue, and optimizing conversion pipelines.
               </p>
@@ -585,31 +596,31 @@
 
             <!-- Skills -->
             <section class="res-section">
-              <h2 class="res-section-title">SKILLS</h2>
+              <h2 class="res-section-title" data-i18n="res_sec_skills">SKILLS</h2>
               <ul class="res-skills-list" id="res-skills-mount"></ul>
             </section>
 
             <!-- Experience -->
             <section class="res-section">
-              <h2 class="res-section-title">PROFESSIONAL EXPERIENCE</h2>
+              <h2 class="res-section-title" data-i18n="res_sec_exp">PROFESSIONAL EXPERIENCE</h2>
               <div id="res-exp-mount"></div>
             </section>
 
             <!-- Standout Projects -->
             <section class="res-section">
-              <h2 class="res-section-title">SIGNATURE ENGINEERING & CRISIS IMPACT PROJECTS</h2>
+              <h2 class="res-section-title" data-i18n="res_sec_proj">SIGNATURE ENGINEERING & CRISIS IMPACT PROJECTS</h2>
               <div id="res-projects-mount"></div>
             </section>
 
             <!-- Education & Certifications -->
             <section class="res-section">
-              <h2 class="res-section-title">EDUCATION & ACCREDITED CERTIFICATIONS</h2>
+              <h2 class="res-section-title" data-i18n="res_sec_edu">EDUCATION & ACCREDITED CERTIFICATIONS</h2>
               <ul class="res-skills-list" id="res-education-mount"></ul>
             </section>
 
             <!-- Honors & Leadership -->
             <section class="res-section">
-              <h2 class="res-section-title">HONORS, AWARDS & CIVIC LEADERSHIP</h2>
+              <h2 class="res-section-title" data-i18n="res_sec_awards">HONORS, AWARDS & CIVIC LEADERSHIP</h2>
               <ul class="res-skills-list" id="res-awards-mount"></ul>
             </section>
 
@@ -617,19 +628,19 @@
             <div class="resume-cta-card">
               <div class="cta-inner">
                 <div class="cta-text-side">
-                  <span class="cta-badge">LET'S CONNECT & COLLABORATE</span>
-                  <h3 class="cta-heading">Ready to scale high-impact systems? Let's chat.</h3>
-                  <p class="cta-description">
+                  <span class="cta-badge" data-i18n="res_cta_badge">LET'S CONNECT & COLLABORATE</span>
+                  <h3 class="cta-heading" data-i18n="res_cta_heading">Ready to scale high-impact systems? Let's chat.</h3>
+                  <p class="cta-description" data-i18n="res_cta_desc">
                     Operating at the convergence of quantitative growth, revenue operations analytics, and AI automation. Open to select growth leadership, RevOps advisory, and high-impact engineering roles.
                   </p>
                 </div>
                 <div class="cta-actions-side">
                   <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="cta-action-btn gold-btn">
-                    <span>Schedule a Strategy Chat</span>
+                    <span data-i18n="res_cta_btn_chat">Schedule a Strategy Chat</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
                   </a>
                   <a href="https://linkedin.com/in/fabian-velez-vicente" target="_blank" rel="noopener" class="cta-action-btn outline-btn">
-                    <span>Connect on LinkedIn</span>
+                    <span data-i18n="res_cta_btn_linkedin">Connect on LinkedIn</span>
                   </a>
                 </div>
               </div>
@@ -642,24 +653,24 @@
       <dialog id="recruiter-fasttrack-modal" class="executive-dialog recruiter-modal" aria-labelledby="recruiter-modal-title">
         <div class="resume-modal-header">
           <div class="modal-title-group">
-            <span class="modal-kicker">EXECUTIVE ATS FAST-TRACK</span>
-            <h2 id="recruiter-modal-title" class="modal-heading">60-Second Recruiter Brief & Scorecard</h2>
+            <span class="modal-kicker" data-i18n="rec_kicker">EXECUTIVE ATS FAST-TRACK</span>
+            <h2 id="recruiter-modal-title" class="modal-heading" data-i18n="rec_heading">60-Second Recruiter Brief & Scorecard</h2>
             <div class="modal-lens-selector" id="recruiter-modal-lens-pills">
-              <button type="button" class="modal-lens-btn active" data-lens="master">🚀 Master Brief</button>
-              <button type="button" class="modal-lens-btn" data-lens="ai_engineering">🤖 AI & Engineering</button>
-              <button type="button" class="modal-lens-btn" data-lens="revops_analytics">📈 Media & RevOps</button>
-              <button type="button" class="modal-lens-btn" data-lens="data_governance">📊 Data Governance</button>
-              <button type="button" class="modal-lens-btn" data-lens="tech_ops">⚙️ Tech Ops & Systems</button>
+              <button type="button" class="modal-lens-btn active" data-lens="master" data-i18n="role_lens_master">🚀 Master Brief</button>
+              <button type="button" class="modal-lens-btn" data-lens="ai_engineering" data-i18n="role_lens_ai">🤖 AI & Engineering</button>
+              <button type="button" class="modal-lens-btn" data-lens="revops_analytics" data-i18n="role_lens_revops">📈 Media & RevOps</button>
+              <button type="button" class="modal-lens-btn" data-lens="data_governance" data-i18n="role_lens_data">📊 Data Governance</button>
+              <button type="button" class="modal-lens-btn" data-lens="tech_ops" data-i18n="role_lens_tech">⚙️ Tech Ops & Systems</button>
             </div>
           </div>
           <div class="resume-modal-actions">
             <a href="/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf" download="Fabian_Velez_Resume_2026.pdf" class="action-pill-btn gold" id="btn-download-recruiter-pdf" title="Download official PDF resume for ATS ingestion">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              <span>Download PDF Resume</span>
+              <span data-i18n="rec_btn_download">Download PDF Resume</span>
             </a>
             <button type="button" class="action-pill-btn" id="btn-copy-recruiter-notes" title="Copy ATS pre-formatted sourcing notes for Lever/Greenhouse">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              <span>Copy ATS Notes</span>
+              <span data-i18n="rec_btn_copy">Copy ATS Notes</span>
             </button>
             <button type="button" class="dialog-close-btn" id="btn-close-recruiter-modal" aria-label="Close modal">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -675,20 +686,20 @@
                 <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="scorecard-avatar" />
                 <div class="scorecard-meta">
                   <h3 class="scorecard-name">Fabián Vélez Vicente</h3>
-                  <div class="scorecard-roles" id="scorecard-roles-mount">Target: <strong>Technical Product Manager · AI Solutions · Performance Media Lead · Decision Science Analyst</strong></div>
+                  <div class="scorecard-roles" id="scorecard-roles-mount"><span data-i18n="rec_target_prefix">Target:</span> <strong>Technical Product Manager · AI Solutions · Performance Media Lead · Decision Science Analyst</strong></div>
                   <div class="scorecard-contact">
                     <span>San Juan, PR (US Remote / Worldwide)</span> · 
                     <a href="mailto:fabianvvicente1@gmail.com" class="rec-link">fabianvvicente1@gmail.com</a> · 
                     <a href="tel:+13478158054" class="rec-link">+1 (347) 815-8054</a>
                   </div>
-                  <div class="scorecard-workauth-badge">
+                  <div class="scorecard-workauth-badge" data-i18n="rec_workauth" data-i18n-html="true">
                     <span class="auth-flag" aria-hidden="true">🇺🇸</span> <strong>US Citizen (Born in Puerto Rico)</strong> · No Visa Sponsorship Required · Available Immediately for US Remote
                   </div>
                 </div>
               </div>
               <div class="scorecard-badge-box">
-                <span class="scorecard-verdict">TOP 1% CANDIDATE</span>
-                <span class="scorecard-grade">Verified Impact</span>
+                <span class="scorecard-verdict" data-i18n="rec_verdict">TOP 1% CANDIDATE</span>
+                <span class="scorecard-grade" data-i18n="rec_grade">Verified Impact</span>
               </div>
             </div>
 
@@ -700,28 +711,28 @@
 
             <!-- Recruiter Quick Evaluation Checklist -->
             <div class="scorecard-checklist-box">
-              <h4 class="checklist-title">Recruiter Core Competency Alignment</h4>
+              <h4 class="checklist-title" data-i18n="rec_checklist_title">Recruiter Core Competency Alignment</h4>
               <div class="checklist-grid">
-                <div class="check-item"><span class="check-icon">✓</span> <strong>Full-Funnel Ad Spend Management:</strong> Multi-million dollar annual pacing across Google, Meta, LinkedIn, and programmatic display.</div>
-                <div class="check-item"><span class="check-icon">✓</span> <strong>Data Layer & Server-Side Tracking:</strong> Conversions API (CAPI), Google Tag Manager Server-Side, Databricks SQL, PySpark pipelines.</div>
-                <div class="check-item"><span class="check-icon">✓</span> <strong>Applied AI & Prompt Frameworks:</strong> Automated creative iteration, 20+ copy variants, automated telemetry anomaly agents in &lt;4 hours.</div>
-                <div class="check-item"><span class="check-icon">✓</span> <strong>Crisis Procurement & Operations:</strong> Sourced 100+ computers and 50+ tablets in &lt;30 days; managed Active Directory and Mac/PC provisioning for 15-person office.</div>
-                <div class="check-item"><span class="check-icon">✓</span> <strong>Cross-Functional Leadership:</strong> Bridges Marketing with Software Engineering, BI/Analytics, Sales, and Product teams.</div>
+                <div class="check-item" data-i18n="rec_check_1" data-i18n-html="true"><span class="check-icon">✓</span> <strong>Full-Funnel Ad Spend Management:</strong> Multi-million dollar annual pacing across Google, Meta, LinkedIn, and programmatic display.</div>
+                <div class="check-item" data-i18n="rec_check_2" data-i18n-html="true"><span class="check-icon">✓</span> <strong>Data Layer & Server-Side Tracking:</strong> Conversions API (CAPI), Google Tag Manager Server-Side, Databricks SQL, PySpark pipelines.</div>
+                <div class="check-item" data-i18n="rec_check_3" data-i18n-html="true"><span class="check-icon">✓</span> <strong>Applied AI & Prompt Frameworks:</strong> Automated creative iteration, 20+ copy variants, automated telemetry anomaly agents in &lt;4 hours.</div>
+                <div class="check-item" data-i18n="rec_check_4" data-i18n-html="true"><span class="check-icon">✓</span> <strong>Crisis Procurement & Operations:</strong> Sourced 100+ computers and 50+ tablets in &lt;30 days; managed Active Directory and Mac/PC provisioning for 15-person office.</div>
+                <div class="check-item" data-i18n="rec_check_5" data-i18n-html="true"><span class="check-icon">✓</span> <strong>Cross-Functional Leadership:</strong> Bridges Marketing with Software Engineering, BI/Analytics, Sales, and Product teams.</div>
               </div>
             </div>
 
             <!-- Recruiter Action Footnote -->
             <div class="scorecard-footer-cta">
               <button type="button" class="luxury-btn primary-gold" id="btn-open-full-resume-from-rec">
-                <span>View Full Executive Resume & Composite Card</span>
+                <span data-i18n="rec_btn_view_full">View Full Executive Resume & Composite Card</span>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
               <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="luxury-btn outline-platinum">
-                <span>Email Candidate Directly</span>
+                <span data-i18n="rec_btn_email">Email Candidate Directly</span>
               </a>
               <a href="tel:+13478158054" class="luxury-btn subtle-ghost">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <span>Call +1 (347) 815-8054</span>
+                <span data-i18n="rec_btn_call">Call +1 (347) 815-8054</span>
               </a>
             </div>
           </article>
@@ -732,27 +743,27 @@
       <nav class="mobile-dock" aria-label="Mobile Navigation Dock">
         <button type="button" class="dock-btn active" data-view="core">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
-          <span>Overview</span>
+          <span data-i18n="dock_nav_overview">Overview</span>
         </button>
         <button type="button" class="dock-btn" data-view="case-studies">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
-          <span>Cases</span>
+          <span data-i18n="dock_nav_cases">Cases</span>
         </button>
         <button type="button" class="dock-btn" data-view="ai-lab">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-          <span>AI Studio</span>
+          <span data-i18n="dock_nav_ai">AI Studio</span>
         </button>
         <button type="button" class="dock-btn" data-view="planner">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-          <span>ROI Model</span>
+          <span data-i18n="dock_nav_roi">ROI Model</span>
         </button>
         <button type="button" class="dock-btn" data-view="dossier">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          <span>Dossier</span>
+          <span data-i18n="dock_nav_dossier">Dossier</span>
         </button>
         <button type="button" class="dock-btn" data-view="intel-feed">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
-          <span>Intel</span>
+          <span data-i18n="dock_nav_intel">Intel</span>
         </button>
       </nav>
 
@@ -768,8 +779,8 @@
       <dialog id="visitor-survey-modal" class="executive-dialog survey-modal" aria-labelledby="survey-modal-title">
         <div class="dialog-header survey-modal-header">
           <div class="survey-badge-row">
-            <span class="modal-kicker">EXECUTIVE CONCIERGE · TAILORED EXPERIENCE</span>
-            <span class="survey-step-tag">1-Click Personalization</span>
+            <span class="modal-kicker" data-i18n="survey_kicker">EXECUTIVE CONCIERGE · TAILORED EXPERIENCE</span>
+            <span class="survey-step-tag" data-i18n="survey_step">1-Click Personalization</span>
           </div>
           <button type="button" class="dialog-close-btn" id="btn-close-survey-modal" aria-label="Close Onboarding Survey">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -778,8 +789,8 @@
 
         <div class="dialog-body survey-modal-body">
           <div class="survey-intro">
-            <h3 id="survey-modal-title" class="survey-title">How would you like to explore Fabián's work?</h3>
-            <p class="survey-desc">
+            <h3 id="survey-modal-title" class="survey-title" data-i18n="survey_title">How would you like to explore Fabián's work?</h3>
+            <p class="survey-desc" data-i18n="survey_desc">
               Select your primary area of focus to dynamically reconfigure verified metrics, case studies, and engineering blueprints to your role:
             </p>
           </div>
@@ -789,10 +800,10 @@
             <button type="button" class="survey-card-btn" data-lens="revops_analytics">
               <div class="sc-header">
                 <span class="sc-icon">🎯</span>
-                <span class="sc-badge">Media & Performance</span>
+                <span class="sc-badge" data-i18n="survey_opt_1_badge">Media & Performance</span>
               </div>
-              <h4 class="sc-title">Growth & Performance Marketing</h4>
-              <p class="sc-desc">Multi-channel media buying, Server-Side CAPI, +200% AI lead lift, $10M+ commercial pipeline.</p>
+              <h4 class="sc-title" data-i18n="survey_opt_1_title">Growth & Performance Marketing</h4>
+              <p class="sc-desc" data-i18n="survey_opt_1_desc">Multi-channel media buying, Server-Side CAPI, +200% AI lead lift, $10M+ commercial pipeline.</p>
               <div class="sc-tags">
                 <span>Money Group</span>
                 <span>Viva Advertising</span>
@@ -804,10 +815,10 @@
             <button type="button" class="survey-card-btn" data-lens="ai_engineering">
               <div class="sc-header">
                 <span class="sc-icon">🤖</span>
-                <span class="sc-badge">AI Systems</span>
+                <span class="sc-badge" data-i18n="survey_opt_2_badge">AI Systems</span>
               </div>
-              <h4 class="sc-title">Applied AI & Agentic Workflows</h4>
-              <p class="sc-desc">20+ automated Claude agent workflows, LLM prompt engineering, autonomous ops triage & synthetic content.</p>
+              <h4 class="sc-title" data-i18n="survey_opt_2_title">Applied AI & Agentic Workflows</h4>
+              <p class="sc-desc" data-i18n="survey_opt_2_desc">20+ automated Claude agent workflows, LLM prompt engineering, autonomous ops triage & synthetic content.</p>
               <div class="sc-tags">
                 <span>Anthropic Claude</span>
                 <span>Agentic Ops</span>
@@ -819,10 +830,10 @@
             <button type="button" class="survey-card-btn" data-lens="data_governance">
               <div class="sc-header">
                 <span class="sc-icon">📊</span>
-                <span class="sc-badge">Analytics & BI</span>
+                <span class="sc-badge" data-i18n="survey_opt_3_badge">Analytics & BI</span>
               </div>
-              <h4 class="sc-title">Big Data & Revenue Operations</h4>
-              <p class="sc-desc">40M+ Databricks sessions, PySpark & SQL data pipelines, Microsoft Power BI, Azure/GCP infrastructure.</p>
+              <h4 class="sc-title" data-i18n="survey_opt_3_title">Big Data & Revenue Operations</h4>
+              <p class="sc-desc" data-i18n="survey_opt_3_desc">40M+ Databricks sessions, PySpark & SQL data pipelines, Microsoft Power BI, Azure/GCP infrastructure.</p>
               <div class="sc-tags">
                 <span>Databricks SQL</span>
                 <span>Red Ventures (edX)</span>
@@ -834,10 +845,10 @@
             <button type="button" class="survey-card-btn" data-lens="tech_ops">
               <div class="sc-header">
                 <span class="sc-icon">👔</span>
-                <span class="sc-badge">Engineering & Ops</span>
+                <span class="sc-badge" data-i18n="survey_opt_4_badge">Engineering & Ops</span>
               </div>
-              <h4 class="sc-title">Technical Product & Engineering</h4>
-              <p class="sc-desc">B.S. Computer Engineering (4.0 GPA), Stanford Innovation Fellow, cross-functional Agile product management.</p>
+              <h4 class="sc-title" data-i18n="survey_opt_4_title">Technical Product & Engineering</h4>
+              <p class="sc-desc" data-i18n="survey_opt_4_desc">B.S. Computer Engineering (4.0 GPA), Stanford Innovation Fellow, cross-functional Agile product management.</p>
               <div class="sc-tags">
                 <span>Stanford Fellow</span>
                 <span>Agile / Jira</span>
@@ -849,10 +860,12 @@
           <!-- Skip / Explore All Footer -->
           <div class="survey-footer">
             <button type="button" class="survey-explore-all-btn" id="btn-survey-explore-all" data-lens="master">
-              <span>🚀 Explore All-Round Master Experience (Default)</span>
+              <span data-i18n="survey_btn_skip">🚀 Explore All-Round Master Experience (Default)</span>
             </button>
             <span class="survey-note">You can change your lens anytime using the header selector or ⌘K.</span>
           </div>
+        </div>
+      </dialog>
         </div>
       </dialog>
 

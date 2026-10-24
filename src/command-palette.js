@@ -119,6 +119,20 @@ export class CommandPalette {
         action: () => options.onOpenArcade && options.onOpenArcade(),
       },
       {
+        id: 'lang-es',
+        title: 'Switch Language to Spanish / Cambiar a Español',
+        category: 'Language / Idioma',
+        shortcut: 'ES',
+        action: () => options.onSwitchLanguage && options.onSwitchLanguage('es'),
+      },
+      {
+        id: 'lang-en',
+        title: 'Switch Language to English / Cambiar a Inglés (Default)',
+        category: 'Language / Idioma',
+        shortcut: 'EN',
+        action: () => options.onSwitchLanguage && options.onSwitchLanguage('en'),
+      },
+      {
         id: 'theme-toggle',
         title: 'Toggle Dark / Light Theme',
         category: 'Appearance',

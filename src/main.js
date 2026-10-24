@@ -18,6 +18,7 @@ import { initFirebase, logCandidateEvent } from './firebase.js';
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
+import { getLanguage, resolveInitialLanguage, switchLanguage, updateDomTranslations, updateProfileDataForLanguage } from './i18n.js';
 
 class FabianPortfolioApp {
   constructor() {
@@ -25,6 +26,7 @@ class FabianPortfolioApp {
     this.isTeslaMode = localStorage.getItem('fabian_tesla_mode') === 'true';
     this.canvas3d = null;
     this.activeRoleLens = 'master';
+    this.currentLang = resolveInitialLanguage();
 
     this.dom = {
       webglContainer: document.getElementById('webgl-container'),
@@ -79,6 +81,7 @@ class FabianPortfolioApp {
       btnSurveyExploreAll: document.getElementById('btn-survey-explore-all'),
       btnVisitorTools: document.getElementById('btn-visitor-tools'),
       btnSpatialGyro: document.getElementById('btn-spatial-gyro'),
+      btnLangToggle: document.getElementById('btn-lang-toggle'),
       githubRadarMount: document.getElementById('github-radar-mount'),
       prWeatherBadge: document.getElementById('pr-weather-badge'),
     };
@@ -91,6 +94,14 @@ class FabianPortfolioApp {
   init() {
     // 0. Ensure root view dataset is set on body for CSS contextual styling
     document.body.dataset.view = 'core';
+
+    // 0b. Initialize Internationalization (Default: English)
+    try {
+      updateProfileDataForLanguage(this.currentLang);
+      updateDomTranslations(this.currentLang);
+    } catch (e) {
+      console.warn('i18n init error:', e);
+    }
 
     // 1. Dynamic Cursor Spotlight (Follows mouse/pointer coordinates smoothly)
     window.addEventListener('pointermove', (e) => {
@@ -164,6 +175,7 @@ class FabianPortfolioApp {
         onSelectLens: (lensId) => this.selectVisitorPersona(lensId),
         onToggleTheme: () => this.toggleTheme(),
         onSetTheme: (theme) => this.setTheme(theme, true),
+        onSwitchLanguage: (lang) => this.setLanguage(lang),
         onToggleTesla: () => this.toggleTeslaMode(),
         onCycleMorph: () => this.cycleMorph(),
         onToggleVisualizer: () => this.toggleVisualizerMode(),
@@ -438,7 +450,7 @@ class FabianPortfolioApp {
                   <h4 class="exp-role">${exp.role}</h4>
                   <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 3px;">
                     <span class="exp-company">${exp.company}</span>
-                    ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
+                    ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') || exp.employmentType.includes('Tiempo Completo') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
                     ${exp.url ? `
                       <a href="${exp.url}" target="_blank" rel="noopener noreferrer" class="exp-outbound-link" title="Visit ${exp.company} official website (${exp.urlDisplay || exp.url})">
                         <span>${exp.urlDisplay || 'Official Site'}</span>
@@ -614,7 +626,7 @@ class FabianPortfolioApp {
                 ${logoSvg ? `<div class="res-company-logo-slot">${logoSvg}</div>` : ''}
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                   <span class="res-company">${exp.company}</span>
-                  ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
+                  ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') || exp.employmentType.includes('Tiempo Completo') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
                   ${exp.url ? `
                     <a href="${exp.url}" target="_blank" rel="noopener noreferrer" class="exp-outbound-link" title="Visit ${exp.company} official website (${exp.urlDisplay || exp.url})">
                       <span>${exp.urlDisplay || 'Official Site'}</span>
@@ -1372,6 +1384,13 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       });
     });
 
+    // Bilingual Language Toggle (English / Español)
+    this.dom.btnLangToggle?.addEventListener('click', () => {
+      audio.click(1200);
+      const nextLang = this.currentLang === 'en' ? 'es' : 'en';
+      this.setLanguage(nextLang);
+    });
+
     // Theme Toggle (Dark / Light Mode)
     this.dom.btnThemeToggle?.addEventListener('click', () => {
       this.toggleTheme();
@@ -1717,6 +1736,15 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     const isMuted = audio.toggleMute();
     this.syncAudioButton();
     this.showToast(isMuted ? 'Acoustic Feedback Muted' : 'Tactile Audio Active');
+  }
+
+  setLanguage(lang) {
+    audio.confirm();
+    this.currentLang = switchLanguage(lang, this, true);
+  }
+
+  getLanguage() {
+    return this.currentLang;
   }
 
   syncAudioButton() {
