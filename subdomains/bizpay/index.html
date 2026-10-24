@@ -128,7 +128,7 @@ even in small screens. -->
                                     </tr>
                                     <tr>
                                         <td class="mdl-data-table__cell--non-numeric View-More-Text"></td>
-                                        <td><button class="mdl-button mdl-js-button mdl-button--primary secondary-button">
+                                        <td><button class="mdl-button mdl-js-button mdl-button--primary secondary-button" onclick="location.href='Pages/Payments.html'">
                                             View More
                                         </button></td>
                                     </tr>
@@ -174,7 +174,7 @@ even in small screens. -->
                                     </tr>
                                     <tr>
                                         <td class="mdl-data-table__cell--non-numeric View-More-Text"></td>
-                                        <td><button class="mdl-button mdl-js-button mdl-button--primary secondary-button">
+                                        <td><button class="mdl-button mdl-js-button mdl-button--primary secondary-button" onclick="location.href='Pages/Payroll.html'">
                                             View More
                                         </button></td>
                                     </tr>
@@ -218,7 +218,7 @@ even in small screens. -->
                                     </tr>
                                     <tr>
                                         <td class="mdl-data-table__cell--non-numeric View-More-Text"></td>
-                                        <td><button class="mdl-button mdl-js-button mdl-button--primary secondary-button">
+                                        <td><button class="mdl-button mdl-js-button mdl-button--primary secondary-button" onclick="location.href='Pages/Payments.html'">
                                             View More
                                         </button></td>
                                     </tr>
@@ -249,16 +249,26 @@ even in small screens. -->
     </dialog>
     <script>
         var dialog = document.querySelector('dialog');
-        var showDialogButton = document.querySelector('#show-dialog');
-        if (!dialog.showModal) {
-            dialogPolyfill.registerDialog(dialog);
+        var showDialogButton = document.querySelector('#show-dialog, .show-dialog');
+        if (showDialogButton && dialog) {
+            showDialogButton.addEventListener('click', function() {
+                if (typeof dialog.showModal === 'function') {
+                    dialog.showModal();
+                } else {
+                    dialog.setAttribute('open', '');
+                }
+            });
+            var closeBtn = dialog.querySelector('.close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    if (typeof dialog.close === 'function') {
+                        dialog.close();
+                    } else {
+                        dialog.removeAttribute('open');
+                    }
+                });
+            }
         }
-        showDialogButton.addEventListener('click', function() {
-            dialog.showModal();
-        });
-        dialog.querySelector('.close').addEventListener('click', function() {
-            dialog.close();
-        });
     </script>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
     <script src="novu-intro.js" data-project="bizpay" defer></script>

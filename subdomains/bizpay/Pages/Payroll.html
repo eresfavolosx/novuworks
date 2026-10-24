@@ -86,10 +86,10 @@ even in small screens. -->
         dliber@corporate.edu
         </span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link is-active" href="../index.html"><i class="material-icons nav-icon" role="presentation">home</i>Home</a>
+                <a class="mdl-navigation__link" href="../index.html"><i class="material-icons nav-icon" role="presentation">home</i>Home</a>
                 <a class="mdl-navigation__link" href="Payments.html"><i class="material-icons nav-icon" role="presentation">payment</i>Payments</a>
-                <a class="mdl-navigation__link" href="Payroll.html"><i class="material-icons nav-icon" role="presentation">people</i>Pay-Roll</a>
-                <a class="mdl-navigation__link" href="Pages/History.html"><i class="material-icons nav-icon" role="presentation">help</i>Help</a>
+                <a class="mdl-navigation__link is-active" href="Payroll.html"><i class="material-icons nav-icon" role="presentation">people</i>Pay-Roll</a>
+                <a class="mdl-navigation__link" href="History.html"><i class="material-icons nav-icon" role="presentation">help</i>Help</a>
             </nav>
         </div>
         <main class="mdl-layout__content">
@@ -495,16 +495,26 @@ even in small screens. -->
   </dialog>
   <script>
         var dialog = document.querySelector('dialog');
-        var showDialogButton = document.querySelector('.show-dialog');
-        if (!dialog.showModal) {
-            dialogPolyfill.registerDialog(dialog);
+        var showDialogButton = document.querySelector('#show-dialog, .show-dialog');
+        if (showDialogButton && dialog) {
+            showDialogButton.addEventListener('click', function() {
+                if (typeof dialog.showModal === 'function') {
+                    dialog.showModal();
+                } else {
+                    dialog.setAttribute('open', '');
+                }
+            });
+            var closeBtn = dialog.querySelector('.close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    if (typeof dialog.close === 'function') {
+                        dialog.close();
+                    } else {
+                        dialog.removeAttribute('open');
+                    }
+                });
+            }
         }
-        showDialogButton.addEventListener('click', function() {
-            dialog.showModal();
-        });
-        dialog.querySelector('.close').addEventListener('click', function() {
-            dialog.close();
-        });
     </script>
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 </body>
