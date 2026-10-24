@@ -177,13 +177,20 @@ export class SpatialCanvas3D {
       positions[i * 3 + 1] = y;
       positions[i * 3 + 2] = z;
 
-      // Color gradation across monogram
+      // Color gradation across monogram: Novu Works signature gradient (coral -> violet -> blue) fused with gold
+      const nwCoral = new THREE.Color('#e0566a');
+      const nwViolet = new THREE.Color('#8b52c8');
+      const nwBlue = new THREE.Color('#3d63e6');
+      const goldColor = new THREE.Color('#d4af37');
+
       const pColor = new THREE.Color();
       const gradT = THREE.MathUtils.clamp((x + 14) / 28, 0, 1);
-      if (gradT < 0.5) {
-        pColor.lerpColors(goldColor, champagneColor, gradT * 2);
+      if (gradT < 0.4) {
+        pColor.lerpColors(nwCoral, nwViolet, gradT / 0.4);
+      } else if (gradT < 0.75) {
+        pColor.lerpColors(nwViolet, nwBlue, (gradT - 0.4) / 0.35);
       } else {
-        pColor.lerpColors(champagneColor, platinumColor, (gradT - 0.5) * 2);
+        pColor.lerpColors(nwBlue, goldColor, (gradT - 0.75) / 0.25);
       }
 
       colors[i * 3] = pColor.r;
@@ -286,23 +293,23 @@ export class SpatialCanvas3D {
     this.ribbonSolid = new THREE.Mesh(knotGeo, knotMat);
     this.ribbonGroup.add(this.ribbonSolid);
 
-    // Delicate wireframe exoskeleton
+    // Delicate wireframe exoskeleton with Novu Works violet chromatic glow
     const wireMat = new THREE.MeshBasicMaterial({
-      color: 0xfff4db,
+      color: 0x8b52c8,
       wireframe: true,
       transparent: true,
-      opacity: 0.25,
+      opacity: 0.35,
     });
     this.ribbonWire = new THREE.Mesh(knotGeo, wireMat);
     this.ribbonWire.scale.set(1.02, 1.02, 1.02);
     this.ribbonGroup.add(this.ribbonWire);
 
-    // Inner orbiting light ring
+    // Inner orbiting light ring with Novu Works coral aura
     const ringGeo = new THREE.TorusGeometry(11.5, 0.04, 16, 100);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xd4af37,
+      color: 0xe0566a,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.45,
     });
     this.ribbonRing = new THREE.Mesh(ringGeo, ringMat);
     this.ribbonRing.rotation.x = Math.PI / 3;
@@ -345,11 +352,12 @@ export class SpatialCanvas3D {
     this.prismCage = new THREE.Mesh(cageGeo, cageMat);
     this.prismGroup.add(this.prismCage);
 
-    // Dual gimbal orbital rings
+    // Dual gimbal orbital rings with Novu Works violet & sapphire hues
     const ring1Geo = new THREE.TorusGeometry(11.0, 0.05, 16, 120);
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: 0.45 });
-    this.prismRing1 = new THREE.Mesh(ring1Geo, ringMat);
-    this.prismRing2 = new THREE.Mesh(ring1Geo, ringMat);
+    const ringMat1 = new THREE.MeshBasicMaterial({ color: 0x8b52c8, transparent: true, opacity: 0.55 });
+    const ringMat2 = new THREE.MeshBasicMaterial({ color: 0x3d63e6, transparent: true, opacity: 0.55 });
+    this.prismRing1 = new THREE.Mesh(ring1Geo, ringMat1);
+    this.prismRing2 = new THREE.Mesh(ring1Geo, ringMat2);
     this.prismRing2.rotation.y = Math.PI / 2;
     this.prismGroup.add(this.prismRing1);
     this.prismGroup.add(this.prismRing2);

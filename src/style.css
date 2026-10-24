@@ -18,6 +18,13 @@
   --gold-muted: #c5a880;
   --gold-glow: rgba(212, 175, 55, 0.18);
 
+  /* Novu Works Signature Brand Spectrum */
+  --nw-coral: #e0566a;
+  --nw-violet: #8b52c8;
+  --nw-blue: #3d63e6;
+  --nw-gradient: linear-gradient(135deg, #e0566a 0%, #8b52c8 50%, #3d63e6 100%);
+  --nw-gradient-glow: linear-gradient(135deg, rgba(224, 86, 106, 0.45) 0%, rgba(139, 82, 200, 0.45) 50%, rgba(61, 99, 230, 0.45) 100%);
+
   --platinum: #f5f5f7;
   --platinum-dark: #d8d8de;
   --titanium-white: #ffffff;
@@ -148,21 +155,52 @@ body::after {
 .brand-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-decoration: none;
   color: var(--titanium-white);
 }
 
-.brand-mark-img {
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--hairline-gold);
-  padding: 2px;
-  background: #000;
-  transition: transform var(--duration-fast) ease;
+.brand-avatar-box {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  padding: 2.2px;
+  background: var(--nw-gradient);
+  box-shadow: 0 0 16px rgba(139, 82, 200, 0.45), 0 2px 8px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
-.brand-link:hover .brand-mark-img {
-  transform: rotate(6deg) scale(1.06);
+.brand-link:hover .brand-avatar-box {
+  transform: scale(1.08);
+  box-shadow: 0 0 24px rgba(224, 86, 106, 0.6);
+}
+
+.brand-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.brand-nw-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #07070a;
+  border: 1.5px solid var(--nw-violet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.85);
 }
 
 .brand-text-group {
@@ -1113,20 +1151,40 @@ input[type="range"] {
 }
 
 .dossier-avatar-box {
-  width: 96px;
-  height: 96px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 2px solid var(--hairline-gold);
+  position: relative;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  padding: 3.5px;
+  background: var(--nw-gradient);
+  box-shadow: 0 0 32px rgba(139, 82, 200, 0.45), 0 8px 24px rgba(0, 0, 0, 0.6);
   flex-shrink: 0;
-  background: #000;
-  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dossier-avatar {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.dossier-nw-badge {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #07070a;
+  border: 2px solid var(--nw-violet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.85);
 }
 
 .dossier-meta {
