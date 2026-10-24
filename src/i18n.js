@@ -794,10 +794,13 @@ export const I18N_STRINGS = {
     // Nav tabs
     nav_overview: 'Overview',
     nav_cases: 'Case Studies',
-    nav_ai_lab: 'AI Studio',
+    nav_projects: 'Live Projects',
+    nav_ai_lab: 'Live Projects',
     nav_planner: 'ROI Model',
     nav_dossier: 'Dossier',
     nav_intel: 'Intel Feed',
+    dock_nav_projects: 'Projects',
+    dock_nav_ai: 'Projects',
 
     // Header controls
     tailor_tag: 'Tailor',
@@ -833,11 +836,21 @@ export const I18N_STRINGS = {
     // Hero Buttons
     btn_recruiter: '60s Recruiter Brief',
     btn_cases: 'View Case Studies',
-    btn_ai_lab: 'Launch AI Studio',
+    btn_projects: 'Shipped Projects & Subdomains',
+    btn_ai_lab: 'Shipped Projects & Subdomains',
     btn_resume_card: 'View Executive Resume Card',
     btn_intel: 'Live Intel & Radar',
     btn_view_bg: 'View 3D Background',
     btn_lets_chat: "Let's Chat",
+
+    // Shipped Systems & Subdomains Showcase
+    projects_kicker: 'VERIFIED PRODUCTION CODEBASES & CLOUD DEPLOYMENTS',
+    projects_title: 'Shipped Systems & Live Subdomains',
+    projects_sub: 'Production-deployed systems engineered and architected by Fabián—running live on *.novu.works with direct open-source GitHub repositories.',
+    featured_subdomains_kicker: 'ENGINEERED & DEPLOYED IN PRODUCTION',
+    featured_subdomains_title: 'Shipped Systems on Live Subdomains',
+    featured_subdomains_sub: 'Live production applications engineered by Fabián, deployed to novu.works subdomains with direct GitHub source code.',
+    view_all_projects_btn: 'Explore All Shipped Systems',
 
     // Executive Chat & Communications Suite (WhatsApp + Direct Email)
     chat_header_badge: 'Verified Founder & Lead',
@@ -991,10 +1004,13 @@ export const I18N_STRINGS = {
     // Nav tabs
     nav_overview: 'Resumen',
     nav_cases: 'Casos de Estudio',
-    nav_ai_lab: 'Estudio IA',
+    nav_projects: 'Proyectos en Vivo',
+    nav_ai_lab: 'Proyectos en Vivo',
     nav_planner: 'Modelo ROI',
     nav_dossier: 'Expediente',
     nav_intel: 'Noticias y Radar',
+    dock_nav_projects: 'Proyectos',
+    dock_nav_ai: 'Proyectos',
 
     // Header controls
     tailor_tag: 'Personalizar',
@@ -1030,11 +1046,21 @@ export const I18N_STRINGS = {
     // Hero Buttons
     btn_recruiter: 'Resumen de Reclutador (60s)',
     btn_cases: 'Ver Casos de Estudio',
-    btn_ai_lab: 'Lanzar Estudio IA',
+    btn_projects: 'Proyectos y Subdominios',
+    btn_ai_lab: 'Proyectos y Subdominios',
     btn_resume_card: 'Ver Hoja de Vida Ejecutiva',
     btn_intel: 'Noticias y Radar en Vivo',
     btn_view_bg: 'Ver Fondo 3D',
     btn_lets_chat: 'Hablemos',
+
+    // Shipped Systems & Subdomains Showcase
+    projects_kicker: 'SISTEMAS EN PRODUCCIÓN Y ARQUITECTURA CLOUD',
+    projects_title: 'Sistemas Desplegados y Subdominios en Vivo',
+    projects_sub: 'Aplicaciones en producción y código abierto desarrollados por Fabián—desplegados en *.novu.works con repositorios directos en GitHub.',
+    featured_subdomains_kicker: 'INGENIERÍA Y PRODUCCIÓN',
+    featured_subdomains_title: 'Sistemas en Vivo en Subdominios',
+    featured_subdomains_sub: 'Aplicaciones web en producción desplegadas en subdominios de novu.works con repositorios directos en GitHub.',
+    view_all_projects_btn: 'Explorar Todos los Sistemas',
 
     // Executive Chat & Communications Suite (WhatsApp + Direct Email)
     chat_header_badge: 'Fundador y Líder Verificado',

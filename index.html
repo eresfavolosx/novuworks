@@ -148,9 +148,9 @@
             <span class="tab-index">02</span>
             <span class="tab-title" data-i18n="nav_cases">Case Studies</span>
           </button>
-          <button type="button" class="nav-tab" data-view="ai-lab">
+          <button type="button" class="nav-tab" data-view="projects">
             <span class="tab-index">03</span>
-            <span class="tab-title" data-i18n="nav_ai_lab">AI Studio</span>
+            <span class="tab-title" data-i18n="nav_projects">Live Projects</span>
           </button>
           <button type="button" class="nav-tab" data-view="planner">
             <span class="tab-index">04</span>
@@ -306,8 +306,10 @@
                 <span data-i18n="btn_cases">View Case Studies</span>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
-              <button type="button" class="luxury-btn outline-platinum" id="btn-launch-ai-lab">
-                <span data-i18n="btn_ai_lab">Launch AI Studio</span>
+              <button type="button" class="luxury-btn outline-platinum" id="btn-explore-projects">
+                <span class="live-dot" aria-hidden="true"></span>
+                <span data-i18n="btn_projects">Shipped Projects & Subdomains</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
               </button>
               <button type="button" class="luxury-btn outline-platinum" id="btn-open-resume-card">
                 <span data-i18n="btn_resume_card">View Executive Resume Card</span>
@@ -373,6 +375,25 @@
                 <button type="button" class="sculpture-pill zen-pill" id="btn-dock-view-canvas" title="Enter Fullscreen 3D Background Visualizer Mode" data-i18n="dock_btn_view">✨ View 3D Background</button>
               </div>
             </div>
+
+            <!-- Featured Shipped Systems & Subdomains Showcase in Overview -->
+            <div class="featured-subdomains-section" id="featured-subdomains-container">
+              <div class="featured-subdomains-header">
+                <div>
+                  <div class="subdomains-kicker-badge">
+                    <span class="live-dot" aria-hidden="true"></span>
+                    <span data-i18n="featured_subdomains_kicker">ENGINEERED & DEPLOYED IN PRODUCTION</span>
+                  </div>
+                  <h3 class="featured-subdomains-title" data-i18n="featured_subdomains_title">Shipped Systems on Live Subdomains</h3>
+                  <p class="featured-subdomains-desc" data-i18n="featured_subdomains_sub">Real production applications engineered by Fabián, deployed to <code>novu.works</code> subdomains with direct GitHub source code.</p>
+                </div>
+                <button type="button" class="action-pill-btn" id="btn-view-all-projects">
+                  <span data-i18n="view_all_projects_btn">Explore All Shipped Systems</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+              </div>
+              <div class="standalone-projects-grid" id="featured-subdomains-mount"></div>
+            </div>
           </div>
         </section>
 
@@ -388,9 +409,16 @@
           </div>
         </section>
 
-        <!-- View 3: AI Prompt Engineering Lab -->
-        <section id="view-ai-lab" class="viewport-view hidden">
-          <div class="ai-lab-layout-container" id="ai-lab-mount"></div>
+        <!-- View 3: Shipped Projects & Subdomain Systems -->
+        <section id="view-projects" class="viewport-view hidden" data-view="projects">
+          <div class="case-studies-container">
+            <div class="catalog-header">
+              <span class="catalog-kicker" data-i18n="projects_kicker">VERIFIED PRODUCTION CODEBASES & CLOUD DEPLOYMENTS</span>
+              <h2 class="catalog-title" data-i18n="projects_title">Shipped Systems & Live Subdomains</h2>
+              <p class="catalog-sub" data-i18n="projects_sub">Production-deployed systems engineered and architected by Fabián—running live on *.novu.works with direct open-source GitHub repositories.</p>
+            </div>
+            <div class="standalone-projects-grid" id="projects-view-mount"></div>
+          </div>
         </section>
 
         <!-- View 4: Architecture & ROI Planner + Live RevOps Big Data Terminal -->
@@ -773,9 +801,9 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
           <span data-i18n="dock_nav_cases">Cases</span>
         </button>
-        <button type="button" class="dock-btn" data-view="ai-lab">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-          <span data-i18n="dock_nav_ai">AI Studio</span>
+        <button type="button" class="dock-btn" data-view="projects">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span data-i18n="dock_nav_projects">Projects</span>
         </button>
         <button type="button" class="dock-btn" data-view="planner">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>

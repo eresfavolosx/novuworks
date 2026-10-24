@@ -2977,6 +2977,108 @@ pre, code {
   color: #000000;
 }
 
+/* Featured Subdomains Showcase on Overview */
+.featured-subdomains-section {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--hairline);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.featured-subdomains-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.subdomains-kicker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  margin-bottom: 6px;
+}
+
+.featured-subdomains-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--titanium-white);
+  line-height: 1.25;
+  margin: 0 0 6px 0;
+}
+
+.featured-subdomains-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  max-width: 680px;
+  margin: 0;
+}
+
+.featured-subdomains-desc code {
+  font-family: var(--font-mono);
+  color: var(--gold-light);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Light Mode Elevation for Featured Subdomains */
+:root[data-theme="light"] .featured-subdomains-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .featured-subdomains-title {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .featured-subdomains-desc,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .featured-subdomains-desc {
+  color: #475569;
+}
+
+:root[data-theme="light"] .featured-subdomains-desc code,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .featured-subdomains-desc code {
+  color: #0284c7;
+  background: rgba(14, 165, 233, 0.08);
+}
+
+:root[data-theme="light"] .standalone-project-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .standalone-project-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+:root[data-theme="light"] .proj-name,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .proj-name {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .proj-meta,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .proj-meta {
+  color: #b45309;
+}
+
+:root[data-theme="light"] .proj-summary,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .proj-summary {
+  color: #334155;
+}
+
+:root[data-theme="light"] .proj-tag-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .proj-tag-pill {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.1);
+  color: #475569;
+}
+
 /* Awards Grid */
 .awards-grid {
   display: grid;
@@ -3300,18 +3402,13 @@ body.tesla-mode .hud-action-btn {
   #btn-tesla-mode .btn-text {
     display: none !important;
   }
+  .cmd-trigger,
+  #btn-toggle-visualizer {
+    display: none !important;
+  }
 }
 
 @media (max-width: 1140px) {
-  .nav-tab .tab-index {
-    display: none !important;
-  }
-  .availability-pill {
-    display: none !important;
-  }
-}
-
-@media (max-width: 1040px) {
   .header-center-nav {
     display: none !important;
   }
@@ -3472,6 +3569,13 @@ body.tesla-mode .hud-action-btn {
   #btn-lang-toggle .lang-code-en:not(.active),
   #btn-lang-toggle .lang-code-es:not(.active) {
     display: none !important;
+  }
+
+  @media (max-width: 480px) {
+    #btn-visitor-tools,
+    .tools-trigger-btn {
+      display: none !important;
+    }
   }
 
   .luxury-cultural-colophon {
