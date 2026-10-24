@@ -885,7 +885,7 @@ export const I18N_STRINGS = {
 
     // Sculpture Dock
     dock_caption: '3D Art Direction:',
-    dock_btn_0: '01 · NW Monogram',
+    dock_btn_0: '01 · Novu Works Monogram',
     dock_btn_1: '02 · Möbius Growth Curve',
     dock_btn_2: '03 · Geometric AI Prism',
     dock_btn_view: '✨ View 3D Background',
@@ -1082,7 +1082,7 @@ export const I18N_STRINGS = {
 
     // Sculpture Dock
     dock_caption: 'Dirección de Arte 3D:',
-    dock_btn_0: '01 · Monograma NW',
+    dock_btn_0: '01 · Monograma Novu Works',
     dock_btn_1: '02 · Curva de Crecimiento Möbius',
     dock_btn_2: '03 · Prisma Geométrico IA',
     dock_btn_view: '✨ Ver Fondo 3D',

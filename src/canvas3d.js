@@ -35,9 +35,9 @@ export class SpatialCanvas3D {
     this.worldRotation = { x: 0.12, y: 0 };
     this.targetWorldRotation = { x: 0.12, y: 0 };
 
-    // Morph state: 0 = Monogram, 1 = Ribbon (Spiral Growth Flow - Default), 2 = AI Prism
-    this.activeMode = 1;
-    this.modeTransitions = [0, 1, 0]; // opacities/scales of the 3 modes
+    // Morph state: 0 = Monogram (Novu Works Particle - Default), 1 = Ribbon (Spiral Growth Flow), 2 = AI Prism
+    this.activeMode = 0;
+    this.modeTransitions = [1, 0, 0]; // opacities/scales of the 3 modes
 
     // Device Capability & Adaptive Resource Profile (Guards lower-end devices from hoarding resources)
     this.deviceTier = this.detectDeviceTier();
@@ -314,8 +314,8 @@ export class SpatialCanvas3D {
     });
 
     this.monogramMesh = new THREE.Points(geometry, shaderMaterial);
-    this.monogramMesh.scale.set(0.001, 0.001, 0.001);
-    this.monogramMesh.visible = false;
+    this.monogramMesh.scale.set(1, 1, 1);
+    this.monogramMesh.visible = true;
     this.rootGroup.add(this.monogramMesh);
   }
 
@@ -364,8 +364,8 @@ export class SpatialCanvas3D {
     this.ribbonRing.rotation.x = Math.PI / 3;
     this.ribbonGroup.add(this.ribbonRing);
 
-    this.ribbonGroup.scale.set(1, 1, 1);
-    this.ribbonGroup.visible = true;
+    this.ribbonGroup.scale.set(0.001, 0.001, 0.001);
+    this.ribbonGroup.visible = false;
     this.rootGroup.add(this.ribbonGroup);
   }
 

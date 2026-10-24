@@ -218,8 +218,8 @@ class FabianPortfolioApp {
       console.warn('Spatial Immersion init notice:', e);
     }
 
-    // 6c. Sync 3D Sculpture Morph State (Mode 1: Möbius Growth Flow spiral ribbon default)
-    this.syncMorphPills(1);
+    // 6c. Sync 3D Sculpture Morph State (Mode 0: Novu Works Particle Monogram default)
+    this.syncMorphPills(0);
 
     // 6c. Initialize Firebase Analytics & Performance Monitoring
     try {
@@ -1901,7 +1901,7 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     const next = (current + 1) % 3;
     this.canvas3d.setMorphState(next);
     this.syncMorphPills(next);
-    const names = ['NW Monogram', 'Möbius Growth Flow', 'Quantum AI Prism'];
+    const names = ['Novu Works Monogram', 'Möbius Growth Flow', 'Quantum AI Prism'];
     this.showToast(`3D Matrix: ${names[next]}`);
   }
 
