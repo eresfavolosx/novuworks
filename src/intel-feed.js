@@ -15,6 +15,7 @@ export class IntelFeed {
     this.searchQuery = '';
     this.expandedPostIds = new Set(['post-01']); // First post expanded by default
     this.newsItems = [...CURATED_INDUSTRY_NEWS];
+    this.radarTopic = 'growth';
     this.isFetchingLiveNews = false;
     this.lastLiveSync = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -209,6 +210,14 @@ export class IntelFeed {
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
                   <span>Sync API</span>
                 </button>
+              </div>
+
+              <!-- Multi-Topic Real-Time Radar Switcher -->
+              <div class="radar-topic-switcher" role="group" aria-label="Select News Feed Topic">
+                <button type="button" class="radar-topic-btn ${this.radarTopic === 'growth' ? 'active' : ''}" data-topic="growth">🚀 Growth</button>
+                <button type="button" class="radar-topic-btn ${this.radarTopic === 'ai' ? 'active' : ''}" data-topic="ai">🤖 AI</button>
+                <button type="button" class="radar-topic-btn ${this.radarTopic === 'data' ? 'active' : ''}" data-topic="data">📊 Big Data</button>
+                <button type="button" class="radar-topic-btn ${this.radarTopic === 'tech' ? 'active' : ''}" data-topic="tech">⚡ Startups</button>
               </div>
 
               <div class="radar-news-list" id="radar-news-mount">
@@ -437,7 +446,7 @@ export class IntelFeed {
       .join('');
   }
 
-  async fetchLiveNews(playAudio = true) {
+  async fetchLiveNews(playAudio = true, topic = this.radarTopic) {
     if (this.isFetchingLiveNews) return;
     this.isFetchingLiveNews = true;
     if (playAudio) audio.click(1200);
@@ -445,10 +454,26 @@ export class IntelFeed {
     const refreshBtn = this.container.querySelector('#btn-refresh-radar');
     if (refreshBtn) refreshBtn.classList.add('spinning');
 
+    const topicQueries = {
+      growth: 'advertising+analytics+meta+attribution',
+      ai: 'claude+anthropic+openai+agentic',
+      data: 'databricks+pyspark+sql+analytics',
+      tech: 'startups+software+engineering',
+    };
+    const topicLabels = {
+      growth: 'AdTech & Media Stream',
+      ai: 'Applied AI & Agents Stream',
+      data: 'Big Data & Telemetry Stream',
+      tech: 'Engineering & Startups Stream',
+    };
+
+    const query = topicQueries[topic] || topicQueries.growth;
+    const categoryLabel = topicLabels[topic] || 'Live Industry Stream';
+
     try {
-      // Connect to Hacker News Algolia Search API for advertising analytics, AI, and growth engineering
+      // Connect to Hacker News Algolia Search API dynamically
       const res = await fetch(
-        'https://hn.algolia.com/api/v1/search?query=advertising+analytics+ai&tags=story&hitsPerPage=5'
+        `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query)}&tags=story&hitsPerPage=6`
       );
       if (res.ok) {
         const data = await res.json();
@@ -460,14 +485,13 @@ export class IntelFeed {
               source: h.author ? `HN / @${h.author}` : 'Hacker News Live',
               time: this.formatRelativeTime(h.created_at_i),
               title: h.title,
-              summary: `Live trending discussion with ${h.points || 0} points and ${h.num_comments || 0} industry engineer comments.`,
-              category: 'Live AdTech & Data Stream',
+              summary: `Live trending discussion with ${h.points || 0} points and ${h.num_comments || 0} engineer comments.`,
+              category: categoryLabel,
               url: h.url || h.story_url || `https://news.ycombinator.com/item?id=${h.objectID}`,
             }));
 
-          // Merge live articles with curated industry breakthroughs
           if (liveArticles.length > 0) {
-            this.newsItems = [...liveArticles.slice(0, 3), ...CURATED_INDUSTRY_NEWS.slice(0, 3)];
+            this.newsItems = [...liveArticles.slice(0, 4), ...CURATED_INDUSTRY_NEWS.slice(0, 2)];
           }
         }
       }
@@ -570,7 +594,18 @@ export class IntelFeed {
 
       // 5. Refresh Radar Button
       if (e.target.closest('#btn-refresh-radar')) {
-        this.fetchLiveNews(true);
+        this.fetchLiveNews(true, this.radarTopic);
+      }
+
+      // 5b. News Topic Switcher
+      const topicBtn = e.target.closest('.radar-topic-btn');
+      if (topicBtn) {
+        const topic = topicBtn.dataset.topic;
+        if (topic && topic !== this.radarTopic) {
+          this.radarTopic = topic;
+          this.container.querySelectorAll('.radar-topic-btn').forEach((b) => b.classList.toggle('active', b === topicBtn));
+          this.fetchLiveNews(true, topic);
+        }
       }
 
       // 6. Reset Filters Button in Empty State

@@ -42,6 +42,41 @@ export class CommandPalette {
         action: () => options.onOpenSurvey && options.onOpenSurvey(),
       },
       {
+        id: 'tools-suite',
+        title: 'Open Visitor Utilities Suite (CAPI Generator, ROAS Calculator, ATS Resume Export)',
+        category: 'Interactive Tools',
+        shortcut: 'U',
+        action: () => options.onOpenTools && options.onOpenTools('capi-builder'),
+      },
+      {
+        id: 'tools-capi',
+        title: 'Visitor Tool: Server-Side Meta CAPI Payload & Clean UTM Builder',
+        category: 'Interactive Tools',
+        shortcut: 'UTM',
+        action: () => options.onOpenTools && options.onOpenTools('capi-builder'),
+      },
+      {
+        id: 'tools-roas',
+        title: 'Visitor Tool: Paid Media CAC & ROAS Break-Even Modeler',
+        category: 'Interactive Tools',
+        shortcut: 'ROI',
+        action: () => options.onOpenTools && options.onOpenTools('roas-calc'),
+      },
+      {
+        id: 'tools-ats',
+        title: 'Visitor Tool: Recruiter ATS JSON Resume & schema.org Export',
+        category: 'Interactive Tools',
+        shortcut: 'ATS',
+        action: () => options.onOpenTools && options.onOpenTools('ats-export'),
+      },
+      {
+        id: 'tools-telemetry',
+        title: 'Visitor Tool: Live Edge POP Latency & Client Hardware Diagnostics',
+        category: 'Interactive Tools',
+        shortcut: 'LAT',
+        action: () => options.onOpenTools && options.onOpenTools('edge-telemetry'),
+      },
+      {
         id: 'lens-growth',
         title: 'Tailor Lens: Growth & Performance Marketing (Media Buying, CAPI)',
         category: 'Personalization',
@@ -159,7 +194,7 @@ export class CommandPalette {
         shortcut: 'PR',
         action: () => {
           audio.coqui();
-          options.showToast && options.showToast('🇵🇷 San Juan, Puerto Rico · 18°28′N 66°06′W · Borikén Heritage');
+          options.showToast && options.showToast('🇵🇷 San Juan, Puerto Rico · 18°28′N 66°06′W · Puerto Rico Heritage');
         },
       },
       {

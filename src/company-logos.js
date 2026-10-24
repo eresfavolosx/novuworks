@@ -241,7 +241,7 @@ export const LOGOS = {
         <circle cx="4" cy="-3" r="1.8" fill="#d4af37"/>
         <path d="M -4 4 Q 0 8 4 4" stroke="#d4af37" stroke-width="2" fill="none"/>
       </g>
-      <text x="44" y="22" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="900" font-size="13" letter-spacing="0.1em" fill="#ffffff">BORIKÉN</text>
+      <text x="44" y="22" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="900" font-size="12" letter-spacing="0.08em" fill="#ffffff">PUERTO RICO</text>
       <text x="44" y="34" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-weight="600" font-size="8.5" letter-spacing="0.22em" fill="#d4af37">SAN JUAN, PR</text>
     </svg>
   `,

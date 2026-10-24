@@ -11,6 +11,8 @@ import { AIGrowthLab } from './ai-lab.js';
 import { RevOpsTerminal } from './revops-terminal.js';
 import { IntelFeed } from './intel-feed.js';
 import { CyberArcadeGame } from './game-easter-egg.js';
+import { VisitorTools } from './visitor-tools.js';
+import { GitHubRadar } from './github-radar.js';
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
@@ -73,6 +75,9 @@ class FabianPortfolioApp {
       btnTailorExperience: document.getElementById('btn-tailor-experience'),
       btnCloseSurveyModal: document.getElementById('btn-close-survey-modal'),
       btnSurveyExploreAll: document.getElementById('btn-survey-explore-all'),
+      btnVisitorTools: document.getElementById('btn-visitor-tools'),
+      githubRadarMount: document.getElementById('github-radar-mount'),
+      prWeatherBadge: document.getElementById('pr-weather-badge'),
     };
 
     this.isVisualizerMode = false;
@@ -152,6 +157,7 @@ class FabianPortfolioApp {
         onOpenFeed: () => this.switchView('intel-feed'),
         onOpenArcade: () => this.openArcadeGame(),
         onOpenSurvey: () => this.openSurveyModal(),
+        onOpenTools: (tab) => this.visitorTools?.open(tab),
         onSelectLens: (lensId) => this.selectVisitorPersona(lensId),
         onToggleTheme: () => this.toggleTheme(),
         onSetTheme: (theme) => this.setTheme(theme, true),
@@ -200,6 +206,27 @@ class FabianPortfolioApp {
         }
       }, 1200);
     }
+
+    // 7c. Initialize Visitor Utilities Suite
+    try {
+      this.visitorTools = new VisitorTools({
+        showToast: (msg) => this.showToast(msg)
+      });
+    } catch (e) {
+      console.warn('Visitor Tools init notice:', e);
+    }
+
+    // 7d. Initialize Live GitHub Codebase Radar
+    try {
+      if (this.dom.githubRadarMount) {
+        this.githubRadar = new GitHubRadar(this.dom.githubRadarMount);
+      }
+    } catch (e) {
+      console.warn('GitHub radar init notice:', e);
+    }
+
+    // 7e. Initialize Live Puerto Rico Weather (Open-Meteo REST API)
+    this.initPuertoRicoWeather();
 
     // 8. Run initial metric count-up animation
     this.animateCounters();
@@ -473,7 +500,7 @@ class FabianPortfolioApp {
             <div class="logo-badge-item" title="UPPR">${LOGOS.politecnica}</div>
             <div class="logo-badge-item" title="Grupo Guayacán">${LOGOS.guayacan}</div>
             <div class="logo-badge-item" title="Enactus">${LOGOS.enactus}</div>
-            <div class="logo-badge-item trigger-pr-coqui" title="Sol de Jayuya · Borikén Heritage">${LOGOS.tainoSun}</div>
+            <div class="logo-badge-item trigger-pr-coqui" title="Sol de Jayuya · Puerto Rico Heritage">${LOGOS.tainoSun}</div>
           </div>
         </div>
       `;
@@ -1007,6 +1034,56 @@ ${variant.proofPoints ? variant.proofPoints.map((p) => `• [${p.metric}] ${p.ti
   }
 
   // ─────────────────────────────────────────────────────────────
+  // Live Puerto Rico Weather API (Open-Meteo REST API)
+  // ─────────────────────────────────────────────────────────────
+  async initPuertoRicoWeather() {
+    try {
+      const res = await fetch(
+        'https://api.open-meteo.com/v1/forecast?latitude=18.4655&longitude=-66.1057&current_weather=true'
+      );
+      if (res.ok) {
+        const data = await res.json();
+        const cw = data.current_weather;
+        if (cw) {
+          const tempC = Math.round(cw.temperature);
+          const tempF = Math.round((tempC * 9) / 5 + 32);
+          const wind = Math.round(cw.windspeed);
+
+          const weatherIcons = {
+            0: '☀️ Clear',
+            1: '🌤️ Mostly Clear',
+            2: '⛅ Partly Cloudy',
+            3: '☁️ Overcast',
+            45: '🌫️ Fog',
+            51: '🌦️ Light Drizzle',
+            61: '🌧️ Rain',
+            80: '🌧️ Showers',
+            95: '⛈️ Thunderstorm',
+          };
+          const cond = weatherIcons[cw.weathercode] || '☀️ Tropical';
+
+          this.prWeather = { tempC, tempF, wind, cond };
+
+          const badge = this.dom.prWeatherBadge;
+          if (badge) {
+            badge.textContent = `${tempC}°C / ${tempF}°F`;
+          }
+
+          const pill = this.dom.btnPrRoots;
+          if (pill) {
+            pill.setAttribute(
+              'title',
+              `San Juan, Puerto Rico · ${tempC}°C / ${tempF}°F · ${cond} · Wind: ${wind} km/h · 18.4655° N, 66.1057° W (Click for Coquí chime)`
+            );
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Open-Meteo Weather notice:', e);
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────
   // Executive Resume Modal Handlers
   // ─────────────────────────────────────────────────────────────
   openResumeModal() {
@@ -1174,6 +1251,13 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       }
     });
 
+    // Executive Visitor Utilities Trigger
+    this.dom.btnVisitorTools?.addEventListener('click', () => {
+      if (this.visitorTools) {
+        this.visitorTools.open();
+      }
+    });
+
     // 3D Background Visualizer Mode Triggers
     const triggerVisualizer = () => {
       this.toggleVisualizerMode();
@@ -1223,7 +1307,9 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     const triggerCoqui = (e) => {
       if (e) e.preventDefault();
       audio.coqui();
-      this.showToast('🇵🇷 San Juan, Puerto Rico · 18°28′N 66°06′W · Borikén Heritage');
+      const w = this.prWeather;
+      const weatherSnippet = w ? ` · ${w.tempC}°C / ${w.tempF}°F · ${w.cond}` : '';
+      this.showToast(`🇵🇷 San Juan, Puerto Rico${weatherSnippet} · 18°28′N 66°06′W · Puerto Rico Heritage`);
       const pill = this.dom.btnPrRoots;
       if (pill) {
         pill.classList.add('pr-chime-active');
