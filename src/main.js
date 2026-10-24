@@ -13,6 +13,8 @@ import { IntelFeed } from './intel-feed.js';
 import { CyberArcadeGame } from './game-easter-egg.js';
 import { VisitorTools } from './visitor-tools.js';
 import { GitHubRadar } from './github-radar.js';
+import { SpatialImmersionEngine } from './spatial-immersion.js';
+import { initFirebase, logCandidateEvent } from './firebase.js';
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
@@ -76,6 +78,7 @@ class FabianPortfolioApp {
       btnCloseSurveyModal: document.getElementById('btn-close-survey-modal'),
       btnSurveyExploreAll: document.getElementById('btn-survey-explore-all'),
       btnVisitorTools: document.getElementById('btn-visitor-tools'),
+      btnSpatialGyro: document.getElementById('btn-spatial-gyro'),
       githubRadarMount: document.getElementById('github-radar-mount'),
       prWeatherBadge: document.getElementById('pr-weather-badge'),
     };
@@ -182,6 +185,21 @@ class FabianPortfolioApp {
       console.warn('3D Canvas safely in fallback mode:', e);
     }
 
+    // 6b. Initialize Spatial 6DoF Immersion & Hardware Sensor Suite
+    try {
+      this.spatial = new SpatialImmersionEngine(this.canvas3d);
+      this.spatial.init();
+    } catch (e) {
+      console.warn('Spatial Immersion init notice:', e);
+    }
+
+    // 6c. Initialize Firebase Analytics & Performance Monitoring
+    try {
+      initFirebase();
+    } catch (e) {
+      console.warn('Firebase init notice:', e);
+    }
+
     // 7. Apply saved preferences
     this.initTheme();
     if (this.isTeslaMode) {
@@ -207,9 +225,10 @@ class FabianPortfolioApp {
       }, 1200);
     }
 
-    // 7c. Initialize Visitor Utilities Suite
+    // 7c. Initialize Visitor Utilities Suite with Spatial & Firebase
     try {
       this.visitorTools = new VisitorTools({
+        spatial: this.spatial,
         showToast: (msg) => this.showToast(msg)
       });
     } catch (e) {
@@ -364,6 +383,9 @@ class FabianPortfolioApp {
     }
 
     audio.click(850);
+    try {
+      logCandidateEvent('role_lens_selected', { lens: lensId });
+    } catch (e) {}
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -924,6 +946,9 @@ class FabianPortfolioApp {
     if (!this.dom.recruiterModal) return;
     this.dom.recruiterModal.showModal();
     audio.confirm();
+    try {
+      logCandidateEvent('recruiter_modal_opened', { lens: this.activeRoleLens });
+    } catch (e) {}
   }
 
   closeRecruiterModal() {
@@ -1117,6 +1142,9 @@ ${variant.proofPoints ? variant.proofPoints.map((p) => `• [${p.metric}] ${p.ti
     if (!this.dom.resumeModal) return;
     this.dom.resumeModal.showModal();
     audio.confirm();
+    try {
+      logCandidateEvent('resume_modal_opened', { lens: this.activeRoleLens });
+    } catch (e) {}
   }
 
   closeResumeModal() {
@@ -1330,18 +1358,40 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       this.toggleAudio();
     });
 
+    // Spatial 6DoF Gyroscope Toggle / Permission Trigger
+    this.dom.btnSpatialGyro?.addEventListener('click', async () => {
+      audio.click();
+      if (this.spatial) {
+        const granted = await this.spatial.requestGyroPermission();
+        if (granted) {
+          this.showToast('🧭 6DoF Spatial Gyroscope & Inertial Parallax Active');
+          this.dom.btnSpatialGyro?.classList.add('active');
+        } else {
+          this.showToast('🧭 Spatial Parallax active in Desktop Cursor mode');
+        }
+      }
+    });
+
     // Puerto Rico Cultural Roots & Coquí Sound Chime
     const triggerCoqui = (e) => {
       if (e) e.preventDefault();
       audio.coqui();
       const w = this.prWeather;
       const weatherSnippet = w ? ` · ${w.tempC}°C / ${w.tempF}°F · ${w.cond}` : '';
-      this.showToast(`🇵🇷 San Juan, Puerto Rico${weatherSnippet} · 18°28′N 66°06′W · Puerto Rico Heritage`);
+      const geo = this.spatial?.geodesicTelemetry;
+      const geoSnippet = geo ? ` · ${geo.distanceMiles.toLocaleString()} mi away (${geo.cardinal})` : '';
+      this.showToast(`🇵🇷 San Juan, Puerto Rico${weatherSnippet}${geoSnippet} · 18°28′N 66°06′W · Puerto Rico Heritage`);
       const pill = this.dom.btnPrRoots;
       if (pill) {
         pill.classList.add('pr-chime-active');
         setTimeout(() => pill.classList.remove('pr-chime-active'), 800);
       }
+      try {
+        logCandidateEvent('puerto_rico_coqui_triggered', {
+          weather: w?.cond || 'N/A',
+          distance_mi: geo?.distanceMiles || null,
+        });
+      } catch (err) {}
     };
 
     this.dom.btnPrRoots?.addEventListener('click', triggerCoqui);
@@ -1771,6 +1821,7 @@ function bootPortfolioApp() {
   const instance = new FabianPortfolioApp();
   window.portfolioApp = instance;
   window.app = instance; // Explicitly override <div id="app"> DOM global reference
+  window.__fabianApp = instance;
 
   // Deep-linking shortcuts
   const params = new URLSearchParams(window.location.search);

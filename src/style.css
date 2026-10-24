@@ -593,6 +593,69 @@ body.visualizer-mode .webgl-canvas-layer:active {
   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
 }
 
+/* Spatial Gyroscope & 6DoF Parallax HUD Button */
+.spatial-gyro-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--hairline);
+  color: var(--text-body);
+  gap: 6px;
+  position: relative;
+  transition: all var(--duration-fast) var(--ease-luxury);
+}
+
+.spatial-gyro-btn:hover {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--gold-primary);
+  color: var(--gold-light);
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.22);
+}
+
+.spatial-gyro-btn.active {
+  background: rgba(212, 175, 55, 0.16);
+  border-color: var(--gold-primary);
+  color: var(--gold-light);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+}
+
+.spatial-gyro-btn .spatial-gyro-icon {
+  font-size: 13px;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: rotate(calc(var(--tilt-x, 0) * 25deg));
+}
+
+.spatial-gyro-btn.active .spatial-gyro-icon {
+  animation: gyroSpinPulse 4s infinite linear;
+}
+
+@keyframes gyroSpinPulse {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg) scale(1.08); }
+  100% { transform: rotate(360deg); }
+}
+
+:root[data-theme="light"] .spatial-gyro-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .spatial-gyro-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: var(--text-body);
+}
+
+:root[data-theme="light"] .spatial-gyro-btn:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .spatial-gyro-btn:hover {
+  background: rgba(148, 104, 0, 0.1);
+  border-color: var(--gold-primary);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .spatial-gyro-btn.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .spatial-gyro-btn.active {
+  background: rgba(148, 104, 0, 0.14);
+  border-color: var(--gold-primary);
+  color: #6b4b00;
+}
+
 /* Dark / Light Theme Toggle Button */
 .theme-toggle-btn {
   gap: 7px;
@@ -2568,25 +2631,44 @@ body.tesla-mode .hud-action-btn {
 /* ─────────────────────────────────────────────────────────────
    Responsive Breakpoints
    ───────────────────────────────────────────────────────────── */
-@media (max-width: 1480px) {
+@media (max-width: 1680px) {
   .brand-role {
     display: none !important;
+  }
+  .spatial-gyro-btn .spatial-gyro-label,
+  .visualizer-btn .visualizer-btn-label,
+  .tools-trigger-btn .tools-btn-label {
+    display: none !important;
+  }
+  .persona-lens-pill .persona-label {
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pr-roots-btn .pr-geo-coords {
+    display: none !important;
+  }
+  .header-center-nav .tab-index {
+    display: none !important;
+  }
+  .header-center-nav .nav-tab {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .header-right {
+    gap: 6px;
+  }
+  .hud-action-btn {
+    padding: 6px 10px;
   }
 }
 
 @media (max-width: 1280px) {
-  .pr-roots-btn .pr-geo-coords {
-    display: none !important;
-  }
   .availability-pill .status-label {
     display: none !important;
   }
   #btn-tesla-mode .btn-text {
     display: none !important;
-  }
-  .nav-tab {
-    padding: 6px 10px;
-    font-size: 12px;
   }
 }
 
@@ -4213,6 +4295,74 @@ body.tesla-mode .hud-action-btn {
 :root:has(> head > meta[name="color-scheme"][content="light"]) .tools-trigger-btn:hover {
   background: rgba(14, 116, 144, 0.16);
   border-color: #0e7490;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .tools-modal {
+    background: #ffffff;
+    border-color: rgba(14, 116, 144, 0.3);
+    box-shadow: 0 32px 90px rgba(15, 23, 42, 0.18), 0 0 40px rgba(14, 116, 144, 0.1);
+  }
+  :root:not([data-theme="dark"]) .tools-modal-header {
+    border-bottom-color: rgba(15, 23, 42, 0.08);
+    background: #f8fafc;
+  }
+  :root:not([data-theme="dark"]) .tools-modal-title {
+    color: #0f172a;
+  }
+  :root:not([data-theme="dark"]) .tools-modal-sub {
+    color: #475569;
+  }
+  :root:not([data-theme="dark"]) .tools-tabs-bar {
+    background: #f1f5f9;
+    border-bottom-color: rgba(15, 23, 42, 0.08);
+  }
+  :root:not([data-theme="dark"]) .tools-tab-btn {
+    color: #475569;
+  }
+  :root:not([data-theme="dark"]) .tools-tab-btn:hover {
+    background: rgba(15, 23, 42, 0.06);
+    color: #0f172a;
+  }
+  :root:not([data-theme="dark"]) .tools-tab-btn.active {
+    background: #ffffff;
+    border-color: rgba(14, 116, 144, 0.35);
+    color: #0e7490;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+  }
+  :root:not([data-theme="dark"]) .tool-intro h4 {
+    color: #0f172a;
+  }
+  :root:not([data-theme="dark"]) .tool-intro p {
+    color: #475569;
+  }
+}
+
+:root[data-theme="dark"] .tools-modal,
+:root:not([data-theme="light"]) .tools-modal {
+  background: linear-gradient(180deg, rgba(14, 16, 24, 0.98) 0%, rgba(8, 10, 15, 0.98) 100%);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.85), 0 0 48px rgba(56, 189, 248, 0.12);
+}
+
+:root[data-theme="dark"] .tools-modal-title,
+:root:not([data-theme="light"]) .tools-modal-title {
+  color: #ffffff !important;
+}
+
+:root[data-theme="dark"] .tools-modal-sub,
+:root:not([data-theme="light"]) .tools-modal-sub {
+  color: #9a9aa5 !important;
+}
+
+:root[data-theme="dark"] .tool-intro h4,
+:root:not([data-theme="light"]) .tool-intro h4 {
+  color: #ffffff !important;
+}
+
+:root[data-theme="dark"] .tool-intro p,
+:root:not([data-theme="light"]) .tool-intro p {
+  color: #9a9aa5 !important;
 }
 
 :root[data-theme="light"] .tools-modal,
@@ -6703,51 +6853,266 @@ body.tesla-mode .hud-action-btn {
   margin: 0;
 }
 
-/* Edge Telemetry Tab */
+/* Edge Telemetry Tab & Executive Sensor Suite */
 .edge-telemetry-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 16px;
 }
 
-.edge-item {
+.telemetry-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  padding: 14px 16px;
+  border-radius: 12px;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 14px;
+  transition: all var(--duration-fast) var(--ease-luxury);
+  position: relative;
+  overflow: hidden;
 }
 
-.edge-item.full-width {
-  grid-column: 1 / -1;
+.telemetry-card:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-.ei-kicker {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
+.telemetry-card.highlight-card {
+  border-color: rgba(212, 175, 55, 0.28);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.tc-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tc-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tc-icon {
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tc-title {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.tc-subtitle {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 1px;
+}
+
+.tc-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e4e4e7;
+}
+
+.status-live-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-live-indicator.live {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.status-live-indicator.standby {
+  background: #eab308;
+  box-shadow: 0 0 6px #eab308;
+}
+
+.status-live-indicator.fallback {
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
+}
+
+.telemetry-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f4f4f5;
+}
+
+.telemetry-action-btn.primary-action {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: #f5e6be;
+}
+
+.telemetry-action-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--gold-primary);
+  color: #ffffff;
+}
+
+.tc-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 8px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.tc-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tcm-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   color: #a1a1aa;
 }
 
-.ei-val {
-  font-size: 16px;
+.tcm-value {
+  font-size: 13.5px;
   font-weight: 700;
   color: #ffffff;
 }
 
-.ei-val.mono-font {
+.tcm-value.gold-num {
+  color: var(--gold-light);
+}
+
+.tcm-value.mono-val {
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 11px;
   color: #38bdf8;
   word-break: break-all;
 }
 
-.ei-sub {
-  font-size: 11px;
+.tcm-sub {
+  font-size: 10px;
   color: #71717a;
+}
+
+/* Light Mode Overrides for Telemetry */
+:root[data-theme="light"] .telemetry-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .telemetry-card {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+:root[data-theme="light"] .telemetry-card:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .telemetry-card:hover {
+  border-color: rgba(148, 104, 0, 0.35);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .telemetry-card.highlight-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .telemetry-card.highlight-card {
+  background: linear-gradient(135deg, rgba(148, 104, 0, 0.04) 0%, #ffffff 100%);
+  border-color: rgba(148, 104, 0, 0.25);
+}
+
+:root[data-theme="light"] .tc-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .tc-title {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .tc-subtitle,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .tc-subtitle {
+  color: #64748b;
+}
+
+:root[data-theme="light"] .tc-metrics-grid,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .tc-metrics-grid {
+  background: rgba(15, 23, 42, 0.02);
+  border-color: rgba(15, 23, 42, 0.06);
+}
+
+:root[data-theme="light"] .tcm-value,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .tcm-value {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .tcm-value.mono-val,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .tcm-value.mono-val {
+  color: #0284c7;
+}
+
+:root[data-theme="light"] .tcm-sub,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .tcm-sub {
+  color: #64748b;
+}
+
+:root[data-theme="light"] .tcm-label,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .tcm-label {
+  color: #475569;
+}
+
+:root[data-theme="light"] .tc-status-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .tc-status-pill {
+  background: rgba(15, 23, 42, 0.05);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #334155;
+}
+
+:root[data-theme="light"] .telemetry-action-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .telemetry-action-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.15);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .telemetry-action-btn.primary-action,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .telemetry-action-btn.primary-action {
+  background: rgba(148, 104, 0, 0.1);
+  border-color: rgba(148, 104, 0, 0.35);
+  color: #6b4b00;
+}
+
+/* Eco Power Mode (triggered when device battery < 18% & discharging) */
+html.device-eco-power .webgl-canvas-layer {
+  opacity: 0.35;
+}
+html.device-eco-power * {
+  animation-duration: 0.001s !important;
+  transition-duration: 0.001s !important;
 }
 
 /* ─────────────────────────────────────────────────────────────

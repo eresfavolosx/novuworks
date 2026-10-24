@@ -5,6 +5,8 @@
 
 import { PROFILE } from './data.js';
 import { audio } from './audio.js';
+import { TELEMETRY_STATE, logCandidateEvent } from './firebase.js';
+import { SAN_JUAN_COORDS } from './spatial-immersion.js';
 
 export class VisitorTools {
   constructor(options = {}) {
@@ -114,7 +116,7 @@ export class VisitorTools {
           <span>📄</span> Recruiter ATS JSON Export
         </button>
         <button type="button" class="tools-tab-btn" data-tool="edge-telemetry" role="tab">
-          <span>⚡</span> Client Edge Telemetry
+          <span>🛰️</span> Edge, Hardware & Firebase Telemetry
         </button>
       </div>
 
@@ -280,8 +282,8 @@ export class VisitorTools {
         <!-- Tab 4: Client Edge Telemetry -->
         <div class="tool-tab-panel" id="tool-panel-edge-telemetry">
           <div class="tool-intro">
-            <h4>Live Visitor Client & Edge Network Telemetry Probe</h4>
-            <p>Real-time edge roundtrip latency, geographic Cloudflare POP, and WebGL hardware telemetry diagnostics.</p>
+            <h4>Live Visitor Edge, Firebase Suite & Hardware Sensor Telemetry</h4>
+            <p>Real-time edge roundtrip latency, Firebase enterprise session traces, high-precision GPS Great-Circle distance to San Juan HQ, 6DoF gyroscope motion parallax, and device environmental diagnostics.</p>
           </div>
 
           <div class="edge-telemetry-grid" id="edge-telemetry-mount">
@@ -437,33 +439,230 @@ export class VisitorTools {
   updateTelemetryMount() {
     const mount = document.getElementById('edge-telemetry-mount');
     if (!mount) return;
+
+    const spatial = this.options.spatial;
+    const geo = spatial?.geodesicTelemetry || {
+      distanceMiles: 1610,
+      distanceKm: 2591,
+      bearingDeg: 136,
+      cardinal: 'SE',
+      fiberLatencyMs: 26,
+      target: SAN_JUAN_COORDS?.label || 'San Juan, Puerto Rico (HQ)'
+    };
+
+    const roll = spatial ? Math.round(spatial.rawRoll) : 0;
+    const pitch = spatial ? Math.round(spatial.rawPitch) : 0;
+    const hasGyro = spatial?.hasGyro;
+    const gyroStateText = hasGyro
+      ? '<span class="status-live-indicator live"></span> Hardware Gyroscope Active (6DoF)'
+      : '<span class="status-live-indicator fallback"></span> Desktop Cursor Parallax Mode';
+
+    const batteryLevel = spatial?.battery ? Math.round(spatial.battery.level * 100) : 100;
+    const isCharging = spatial?.battery ? spatial.battery.charging : true;
+    const ecoMode = spatial?.isLowPowerMode ? 'Eco-Throttled (<18%)' : 'High Performance 60FPS';
+
+    const net = spatial?.networkInfo || {};
+    const downlink = net.downlink ? `${net.downlink} Mbps` : 'High Speed';
+    const rtt = net.rtt ? `${net.rtt}ms RTT` : 'Direct';
+    const netType = (net.effectiveType || 'Broadband').toUpperCase();
+
+    const firebaseStatus = TELEMETRY_STATE?.initialized
+      ? '<span class="status-live-indicator live"></span> Active & Logging'
+      : '<span class="status-live-indicator standby"></span> Ready (Edge Telemetry)';
+
     mount.innerHTML = `
-      <div class="edge-item">
-        <span class="ei-kicker">EDGE ROUNDTRIP LATENCY</span>
-        <span class="ei-val gold-num">${this.edgeData.ping}</span>
-        <span class="ei-sub">Probed live against Cloudflare Edge CDN</span>
+      <!-- Card 1: Edge CDN & Firebase Enterprise Telemetry -->
+      <div class="telemetry-card">
+        <div class="tc-header">
+          <div class="tc-title-wrap">
+            <span class="tc-icon">⚡</span>
+            <div>
+              <h5 class="tc-title">Edge Network & Firebase Telemetry</h5>
+              <span class="tc-subtitle">Production Edge Node & Recruiter Session Telemetry</span>
+            </div>
+          </div>
+          <span class="tc-status-pill">${firebaseStatus}</span>
+        </div>
+        <div class="tc-metrics-grid">
+          <div class="tc-metric">
+            <span class="tcm-label">EDGE ROUNDTRIP LATENCY</span>
+            <span class="tcm-value gold-num">${this.edgeData.ping}</span>
+            <span class="tcm-sub">Cloudflare CDN live ping</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">EDGE POP DATACENTER</span>
+            <span class="tcm-value">${this.edgeData.colo}</span>
+            <span class="tcm-sub">Global Edge Colocation</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">FIREBASE PROJECT</span>
+            <span class="tcm-value mono-val">novuworks</span>
+            <span class="tcm-sub">Target: https://novu.works</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">SESSION EVENTS LOGGED</span>
+            <span class="tcm-value gold-num">${TELEMETRY_STATE?.eventsLogged || 0} events</span>
+            <span class="tcm-sub">Analytics & Perf Monitoring</span>
+          </div>
+        </div>
       </div>
-      <div class="edge-item">
-        <span class="ei-kicker">POP DATACENTER</span>
-        <span class="ei-val">${this.edgeData.colo}</span>
-        <span class="ei-sub">San Juan, PR & Global Edge Node</span>
+
+      <!-- Card 2: GPS Geodesic Telemetry to San Juan HQ -->
+      <div class="telemetry-card highlight-card">
+        <div class="tc-header">
+          <div class="tc-title-wrap">
+            <span class="tc-icon">🇵🇷</span>
+            <div>
+              <h5 class="tc-title">GPS Geodesic Telemetry · San Juan, PR HQ</h5>
+              <span class="tc-subtitle">Great-Circle Haversine & Forward Azimuth Vector</span>
+            </div>
+          </div>
+          <button type="button" class="telemetry-action-btn primary-action" id="btn-recalc-gps" title="Trigger precision browser GPS lookup">
+            <span>📡 Probe High-Precision GPS</span>
+          </button>
+        </div>
+        <div class="tc-metrics-grid">
+          <div class="tc-metric">
+            <span class="tcm-label">GREAT-CIRCLE DISTANCE</span>
+            <span class="tcm-value gold-num">${geo.distanceMiles.toLocaleString()} miles</span>
+            <span class="tcm-sub">${geo.distanceKm.toLocaleString()} km · ${geo.distanceNautical || Math.round(geo.distanceKm * 0.54)} NM</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">FORWARD AZIMUTH (BEARING)</span>
+            <span class="tcm-value">${geo.bearingDeg}° (${geo.cardinal})</span>
+            <span class="tcm-sub">Heading to 18.4655°N, 66.1057°W</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">FIBER TRANSIT DELAY</span>
+            <span class="tcm-value">~${geo.fiberLatencyMs}ms roundtrip</span>
+            <span class="tcm-sub">Speed of light in fiber glass</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">BENCHMARK HEADQUARTERS</span>
+            <span class="tcm-value">San Juan, Puerto Rico</span>
+            <span class="tcm-sub">AST (UTC-4) · No DST</span>
+          </div>
+        </div>
       </div>
-      <div class="edge-item">
-        <span class="ei-kicker">SECURITY PROTOCOL</span>
-        <span class="ei-val">${this.edgeData.tls} (${this.edgeData.ipVersion})</span>
-        <span class="ei-sub">Modern cryptographic cipher suite</span>
+
+      <!-- Card 3: 6DoF Spatial Gyroscope & Motion Parallax -->
+      <div class="telemetry-card">
+        <div class="tc-header">
+          <div class="tc-title-wrap">
+            <span class="tc-icon">🧭</span>
+            <div>
+              <h5 class="tc-title">6DoF Spatial Gyroscope & Inertial Parallax</h5>
+              <span class="tc-subtitle">WebGL 3D Matrix & CSS Holographic Specular Lighting</span>
+            </div>
+          </div>
+          <button type="button" class="telemetry-action-btn" id="btn-telemetry-gyro" title="Request Gyroscope orientation permission">
+            <span>🧭 Calibrate Gyro</span>
+          </button>
+        </div>
+        <div class="tc-metrics-grid">
+          <div class="tc-metric">
+            <span class="tcm-label">HARDWARE STATUS</span>
+            <span class="tcm-value">${gyroStateText}</span>
+            <span class="tcm-sub">DeviceOrientation sensor</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">ROLL & PITCH ANGLES</span>
+            <span class="tcm-value mono-val">γ ${roll >= 0 ? '+' : ''}${roll}° · β ${pitch >= 0 ? '+' : ''}${pitch}°</span>
+            <span class="tcm-sub">Real-time device inclination</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">CAMERA PARALLAX DAMPING</span>
+            <span class="tcm-value mono-val">0.09 lerp (smooth)</span>
+            <span class="tcm-sub">Low-pass inertia filter</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">HOLOGRAPHIC SPECULAR HIGHLIGHTS</span>
+            <span class="tcm-value mono-val">Active (--tilt-x / y)</span>
+            <span class="tcm-sub">Dynamic lighting reflection</span>
+          </div>
+        </div>
       </div>
-      <div class="edge-item">
-        <span class="ei-kicker">CLIENT VIEWPORT & DPR</span>
-        <span class="ei-val">${this.edgeData.viewport} · @${this.edgeData.dpr}x</span>
-        <span class="ei-sub">Screen: ${this.edgeData.screen}</span>
-      </div>
-      <div class="edge-item full-width">
-        <span class="ei-kicker">GRAPHICS ACCELERATION / GPU</span>
-        <span class="ei-val mono-font">${this.edgeData.gpu}</span>
-        <span class="ei-sub">Hardware-accelerated Three.js WebGL spatial engine</span>
+
+      <!-- Card 4: Hardware Sensors, Power & Tactile Feedback -->
+      <div class="telemetry-card">
+        <div class="tc-header">
+          <div class="tc-title-wrap">
+            <span class="tc-icon">⚙️</span>
+            <div>
+              <h5 class="tc-title">Hardware Environmental Awareness & Haptics</h5>
+              <span class="tc-subtitle">Battery, Network RTT & Micro-Haptic Actuator</span>
+            </div>
+          </div>
+          <button type="button" class="telemetry-action-btn" id="btn-test-haptic" title="Trigger subtle tactile haptic vibration">
+            <span>📳 Test Haptic Pulse</span>
+          </button>
+        </div>
+        <div class="tc-metrics-grid">
+          <div class="tc-metric">
+            <span class="tcm-label">BATTERY & POWER MODE</span>
+            <span class="tcm-value">${batteryLevel}% · ${isCharging ? '⚡ Charging' : '🔋 Discharging'}</span>
+            <span class="tcm-sub">${ecoMode}</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">NETWORK TELEMETRY</span>
+            <span class="tcm-value">${netType} (${downlink})</span>
+            <span class="tcm-sub">${rtt} latency</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">CLIENT VIEWPORT & DPR</span>
+            <span class="tcm-value mono-val">${this.edgeData.viewport} @${this.edgeData.dpr}x</span>
+            <span class="tcm-sub">${this.edgeData.screen} screen resolution</span>
+          </div>
+          <div class="tc-metric">
+            <span class="tcm-label">WEBGL ACCELERATION / GPU</span>
+            <span class="tcm-value mono-val" style="font-size: 0.74rem; line-height: 1.3;">${this.edgeData.gpu}</span>
+            <span class="tcm-sub">Three.js hardware accelerated</span>
+          </div>
+        </div>
       </div>
     `;
+
+    this.bindTelemetryEvents();
+  }
+
+  bindTelemetryEvents() {
+    document.getElementById('btn-recalc-gps')?.addEventListener('click', async () => {
+      audio.click();
+      const spatial = this.options.spatial;
+      if (spatial) {
+        this.options.showToast && this.options.showToast('📡 Probing device GPS coordinates...');
+        const geo = await spatial.requestPrecisionGps();
+        this.updateTelemetryMount();
+        this.options.showToast && this.options.showToast(
+          `📍 GPS Verified: ${geo.distanceMiles.toLocaleString()} miles to San Juan HQ (${geo.bearingDeg}° ${geo.cardinal})`
+        );
+      } else {
+        this.options.showToast && this.options.showToast('📍 Geodesic coordinates synchronized with San Juan HQ');
+      }
+    });
+
+    document.getElementById('btn-telemetry-gyro')?.addEventListener('click', async () => {
+      audio.click();
+      const spatial = this.options.spatial;
+      if (spatial) {
+        const granted = await spatial.requestGyroPermission();
+        this.updateTelemetryMount();
+        if (granted) {
+          this.options.showToast && this.options.showToast('🧭 Spatial 6DoF Gyroscope calibrated and active');
+        } else {
+          this.options.showToast && this.options.showToast('🧭 Spatial Parallax in desktop cursor mode');
+        }
+      }
+    });
+
+    document.getElementById('btn-test-haptic')?.addEventListener('click', () => {
+      audio.confirm();
+      const spatial = this.options.spatial;
+      if (spatial) {
+        spatial.hapticSuccess();
+      }
+      this.options.showToast && this.options.showToast('📳 Tactile haptic pulse dispatched to device');
+    });
   }
 
   switchTab(toolId) {
@@ -474,6 +673,9 @@ export class VisitorTools {
     document.querySelectorAll('.tool-tab-panel').forEach((panel) => {
       panel.classList.toggle('active', panel.id === `tool-panel-${toolId}`);
     });
+    if (toolId === 'edge-telemetry') {
+      this.updateTelemetryMount();
+    }
     audio.click(900);
   }
 

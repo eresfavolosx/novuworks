@@ -648,10 +648,22 @@ export class SpatialCanvas3D {
       const u = this.monogramMesh.material.uniforms;
       u.uTime.value = elapsedTime;
       u.uOpacity.value = this.modeTransitions[0];
-      u.uPointer.value.lerp(new THREE.Vector3(this.pointerTarget.x, this.pointerTarget.y, 0), 0.1);
+      const gyroInfluenceX = (this.spatialTiltX || 0) * 12;
+      const gyroInfluenceY = (this.spatialTiltY || 0) * 9;
+      const combinedX = this.pointerTarget.x + gyroInfluenceX;
+      const combinedY = this.pointerTarget.y + gyroInfluenceY;
+      u.uPointer.value.lerp(new THREE.Vector3(combinedX, combinedY, 0), 0.1);
       this.monogramMesh.visible = this.modeTransitions[0] > 0.01;
       const s0 = 0.8 + 0.2 * this.modeTransitions[0];
       this.monogramMesh.scale.set(s0, s0, s0);
+    }
+
+    // Camera spatial 6DoF parallax (subtle high-end depth)
+    if (this.camera && !this.isVisualizerMode) {
+      const targetCamX = (this.spatialTiltX || 0) * 3.5 + this.pointer.x * 1.5;
+      const targetCamY = (this.spatialTiltY || 0) * 2.5 + this.pointer.y * 1.0;
+      this.camera.position.x = THREE.MathUtils.lerp(this.camera.position.x, targetCamX, 0.05);
+      this.camera.position.y = THREE.MathUtils.lerp(this.camera.position.y, targetCamY, 0.05);
     }
 
     // 02: Möbius Ribbon
@@ -734,5 +746,10 @@ export class SpatialCanvas3D {
       this.monogramMesh.material.blending = isLight ? THREE.NormalBlending : THREE.AdditiveBlending;
       this.monogramMesh.material.needsUpdate = true;
     }
+  }
+
+  setSpatialTilt(tiltX, tiltY) {
+    this.spatialTiltX = tiltX;
+    this.spatialTiltY = tiltY;
   }
 }

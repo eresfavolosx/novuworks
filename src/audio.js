@@ -48,8 +48,15 @@ export class ExecutiveAudio {
     return this.isMuted;
   }
 
+  triggerHaptic(pattern = 6) {
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      try { navigator.vibrate(pattern); } catch (e) {}
+    }
+  }
+
   // Tactile micro-click for UI buttons, tabs, toggles
   click(frequency = 1200, depth = 0.03) {
+    this.triggerHaptic(6);
     if (this.isMuted) return;
     this.init();
     if (!this.ctx) return;
@@ -74,6 +81,7 @@ export class ExecutiveAudio {
 
   // Harmonic chime when inspecting 3D nodes or switching architecture
   chime(index = 0) {
+    this.triggerHaptic([8, 25, 12]);
     if (this.isMuted) return;
     this.init();
     if (!this.ctx) return;
@@ -115,6 +123,7 @@ export class ExecutiveAudio {
 
   // Positive confirmation sound for form submit, calculation, or preset switch
   confirm() {
+    this.triggerHaptic([10, 30, 15]);
     if (this.isMuted) return;
     this.init();
     if (!this.ctx) return;
@@ -142,6 +151,7 @@ export class ExecutiveAudio {
 
   // Authentic Puerto Rican Coquí two-tone nocturnal call ("Co-quí")
   coqui() {
+    this.triggerHaptic([12, 40, 18]);
     if (this.isMuted) return;
     this.init();
     if (!this.ctx) return;
