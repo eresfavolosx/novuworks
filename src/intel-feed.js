@@ -400,9 +400,9 @@ export class IntelFeed {
     if (refreshBtn) refreshBtn.classList.add('spinning');
 
     try {
-      // Connect to Hacker News Algolia Search API for MarTech, AdTech, Databricks, and Growth Engineering
+      // Connect to Hacker News Algolia Search API for advertising analytics, AI, and growth engineering
       const res = await fetch(
-        'https://hn.algolia.com/api/v1/search?query=adtech+OR+martech+OR+%22growth+engineering%22+OR+databricks&tags=story&hitsPerPage=5'
+        'https://hn.algolia.com/api/v1/search?query=advertising+analytics+ai&tags=story&hitsPerPage=5'
       );
       if (res.ok) {
         const data = await res.json();
