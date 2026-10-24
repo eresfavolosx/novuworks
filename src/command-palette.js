@@ -28,6 +28,13 @@ export class CommandPalette {
         action: () => options.onOpenPlanner && options.onOpenPlanner(),
       },
       {
+        id: 'feed',
+        title: 'Open Intel Feed & Real-Time Industry Radar',
+        category: 'Thought Leadership',
+        shortcut: 'F',
+        action: () => options.onOpenFeed && options.onOpenFeed(),
+      },
+      {
         id: 'tesla',
         title: 'Toggle Tesla In-Car Touchscreen Cockpit Mode',
         category: 'Display / Vehicle',

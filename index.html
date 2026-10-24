@@ -68,6 +68,10 @@
             <span class="tab-index">05</span>
             <span class="tab-title">Dossier</span>
           </button>
+          <button type="button" class="nav-tab" data-view="intel-feed">
+            <span class="tab-index">06</span>
+            <span class="tab-title">Intel Feed</span>
+          </button>
         </nav>
 
         <!-- Right Quick Controls -->
@@ -140,6 +144,10 @@
               </button>
               <button type="button" class="luxury-btn outline-platinum" id="btn-open-resume-card">
                 <span>View Executive Resume Card</span>
+              </button>
+              <button type="button" class="luxury-btn outline-platinum" id="btn-hero-intel-feed">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
+                <span>Live Intel & Radar</span>
               </button>
               <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="luxury-btn subtle-ghost">
                 <span>Let's Chat</span>
@@ -389,6 +397,11 @@
               </a>
             </div>
           </div>
+        </section>
+
+        <!-- View 6: Executive Thought Leadership & Live Industry Radar -->
+        <section id="view-intel-feed" class="viewport-view hidden">
+          <div class="intel-feed-layout-container" id="intel-feed-mount"></div>
         </section>
       </main>
 
@@ -659,6 +672,10 @@
         <button type="button" class="dock-btn" data-view="dossier">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           <span>Dossier</span>
+        </button>
+        <button type="button" class="dock-btn" data-view="intel-feed">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
+          <span>Intel</span>
         </button>
       </nav>
 

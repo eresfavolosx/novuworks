@@ -9,6 +9,7 @@ import { ArchitecturePlanner } from './planner.js';
 import { CommandPalette } from './command-palette.js';
 import { AIGrowthLab } from './ai-lab.js';
 import { RevOpsTerminal } from './revops-terminal.js';
+import { IntelFeed } from './intel-feed.js';
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
@@ -23,6 +24,7 @@ class FabianPortfolioApp {
       webglContainer: document.getElementById('webgl-container'),
       plannerMount: document.getElementById('planner-mount-point'),
       revopsTerminalMount: document.getElementById('revops-terminal-mount'),
+      intelFeedMount: document.getElementById('intel-feed-mount'),
       caseStudiesMount: document.getElementById('case-studies-mount'),
       aiLabMount: document.getElementById('ai-lab-mount'),
       competencyMatrixMount: document.getElementById('competency-matrix-mount'),
@@ -92,11 +94,20 @@ class FabianPortfolioApp {
       console.warn('AI Lab init caught:', e);
     }
 
+    try {
+      if (this.dom.intelFeedMount) {
+        this.intelFeed = new IntelFeed(this.dom.intelFeedMount, (msg) => this.showToast(msg));
+      }
+    } catch (e) {
+      console.warn('Intel feed init caught:', e);
+    }
+
     // 5. Initialize Command Palette
     try {
       this.cmdPalette = new CommandPalette({
         onOpenHire: () => this.openRecruiterModal(),
         onOpenPlanner: () => this.switchView('planner'),
+        onOpenFeed: () => this.switchView('intel-feed'),
         onToggleTesla: () => this.toggleTeslaMode(),
         onCycleMorph: () => this.cycleMorph(),
         onSelectDiscipline: (d) => this.openDisciplineModal(d),
@@ -611,6 +622,10 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
       this.switchView('ai-lab');
     });
 
+    document.getElementById('btn-hero-intel-feed')?.addEventListener('click', () => {
+      this.switchView('intel-feed');
+    });
+
     // Recruiter Brief Trigger
     document.getElementById('btn-recruiter-brief')?.addEventListener('click', () => {
       this.openRecruiterModal();
@@ -725,7 +740,7 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
     });
 
     // Fade and slide views
-    const views = ['core', 'case-studies', 'ai-lab', 'planner', 'dossier'];
+    const views = ['core', 'case-studies', 'ai-lab', 'planner', 'dossier', 'intel-feed'];
     views.forEach((v) => {
       const el = document.getElementById(`view-${v}`);
       if (el) {
@@ -753,6 +768,7 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
       else if (viewName === 'case-studies') this.canvas3d.camera.position.set(0, 14, 52);
       else if (viewName === 'ai-lab') this.canvas3d.camera.position.set(-12, 6, 50);
       else if (viewName === 'planner') this.canvas3d.camera.position.set(14, 5, 52);
+      else if (viewName === 'intel-feed') this.canvas3d.camera.position.set(0, -10, 52);
       else this.canvas3d.camera.position.set(-16, 4, 52);
     }
 
