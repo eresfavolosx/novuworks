@@ -1,10 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 //  Novu Works — 3D Spatial Canvas (Three.js WebGL2 Engine)
-//  Features:
-//  - 3D Particle Cloud with Logo / Neural Topology Morphing
-//  - 8 Interactive 3D Spatial Architecture Nodes (Raycasted)
-//  - Touch/Mouse Magnetic Repulsion & Parallax
-//  - Real-time Telemetry (FPS, Draw Calls, GPU frame timing)
+//  Resilient: Gracefully catches WebGL context creation errors.
 // ─────────────────────────────────────────────────────────────
 
 import * as THREE from 'three';
@@ -22,6 +18,7 @@ export class SpatialCanvas3D {
     this.camera = null;
     this.renderer = null;
     this.clock = new THREE.Clock();
+    this.isAvailable = false;
 
     // Interaction states
     this.pointer = new THREE.Vector2(0, 0);
@@ -33,7 +30,7 @@ export class SpatialCanvas3D {
     this.rotationVelocity = { x: 0, y: 0 };
     this.worldRotation = { x: 0.15, y: 0 };
 
-    // Morph state: 0 = NW Monogram, 1 = Systems Topology, 2 = Orb Core
+    // Morph state: 0 = Monogram, 1 = Growth Topology, 2 = Quantum Core
     this.morphProgress = 0;
     this.targetMorph = 0;
 
@@ -47,50 +44,57 @@ export class SpatialCanvas3D {
   }
 
   init() {
-    // 1. Scene
-    this.scene = new THREE.Scene();
-    this.scene.fog = new THREE.FogExp2(0x06050b, 0.012);
+    try {
+      // 1. Scene
+      this.scene = new THREE.Scene();
+      this.scene.fog = new THREE.FogExp2(0x06050b, 0.012);
 
-    // 2. Camera
-    this.camera = new THREE.PerspectiveCamera(50, this.width / this.height, 0.1, 1000);
-    this.camera.position.set(0, 0, 48);
+      // 2. Camera
+      this.camera = new THREE.PerspectiveCamera(50, this.width / this.height, 0.1, 1000);
+      this.camera.position.set(0, 0, 48);
 
-    // 3. Renderer with high-DPI support and power efficiency
-    this.renderer = new THREE.WebGLRenderer({
-      powerPreference: 'high-performance',
-      antialias: true,
-      alpha: true,
-    });
-    this.renderer.setSize(this.width, this.height);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    this.renderer.setClearColor(0x000000, 0);
-    this.container.appendChild(this.renderer.domElement);
+      // 3. Renderer with safe fallback
+      this.renderer = new THREE.WebGLRenderer({
+        powerPreference: 'high-performance',
+        antialias: true,
+        alpha: true,
+      });
+      this.renderer.setSize(this.width, this.height);
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      this.renderer.setClearColor(0x000000, 0);
+      this.container.appendChild(this.renderer.domElement);
+      this.isAvailable = true;
 
-    // 4. Lighting
-    const ambient = new THREE.AmbientLight(0xffffff, 0.7);
-    this.scene.add(ambient);
+      // 4. Lighting
+      const ambient = new THREE.AmbientLight(0xffffff, 0.7);
+      this.scene.add(ambient);
 
-    const dirLight1 = new THREE.DirectionalLight(0xe0566a, 2.0);
-    dirLight1.position.set(20, 30, 20);
-    this.scene.add(dirLight1);
+      const dirLight1 = new THREE.DirectionalLight(0xe0566a, 2.0);
+      dirLight1.position.set(20, 30, 20);
+      this.scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0x3d63e6, 2.5);
-    dirLight2.position.set(-20, -20, 20);
-    this.scene.add(dirLight2);
+      const dirLight2 = new THREE.DirectionalLight(0x3d63e6, 2.5);
+      dirLight2.position.set(-20, -20, 20);
+      this.scene.add(dirLight2);
 
-    // 5. Build 3D Objects
-    this.rootGroup = new THREE.Group();
-    this.scene.add(this.rootGroup);
+      // 5. Build 3D Objects
+      this.rootGroup = new THREE.Group();
+      this.scene.add(this.rootGroup);
 
-    this.buildParticleCloud();
-    this.buildArchitecturePillars();
-    this.buildGridGround();
+      this.buildParticleCloud();
+      this.buildArchitecturePillars();
+      this.buildGridGround();
 
-    // 6. Event Listeners
-    this.bindEvents();
+      // 6. Event Listeners
+      this.bindEvents();
 
-    // 7. Start Loop
-    this.animate();
+      // 7. Start Loop
+      this.animate();
+    } catch (err) {
+      console.warn('WebGL initialization caught gracefully. App running in standard graphics mode:', err);
+      this.isAvailable = false;
+      this.container.style.display = 'none';
+    }
   }
 
   buildParticleCloud() {
@@ -102,18 +106,15 @@ export class SpatialCanvas3D {
     const sizes = new Float32Array(COUNT);
     const randoms = new Float32Array(COUNT);
 
-    const color1 = new THREE.Color('#e0566a'); // Rose red
-    const color2 = new THREE.Color('#8b52c8'); // Purple
-    const color3 = new THREE.Color('#3d63e6'); // Blue
+    const color1 = new THREE.Color('#e0566a');
+    const color2 = new THREE.Color('#8b52c8');
+    const color3 = new THREE.Color('#3d63e6');
 
-    // Generate Points:
-    // Shape A: Dual Letter Monogram "N W"
     for (let i = 0; i < COUNT; i++) {
       randoms[i] = Math.random();
       sizes[i] = 1.0 + Math.random() * 2.5;
 
       const t = i / COUNT;
-      // Monogram N (-14 to -2) and W (0 to 14)
       let x = 0, y = 0, z = (Math.random() - 0.5) * 3.5;
 
       if (t < 0.45) {
@@ -149,7 +150,6 @@ export class SpatialCanvas3D {
         x += (Math.random() - 0.5) * 1.3;
         y += (Math.random() - 0.5) * 1.3;
       } else {
-        // Floating cyber aura
         x = (Math.random() - 0.5) * 34;
         y = (Math.random() - 0.5) * 22;
         z = (Math.random() - 0.5) * 12;
@@ -159,14 +159,14 @@ export class SpatialCanvas3D {
       posA[i * 3 + 1] = y;
       posA[i * 3 + 2] = z;
 
-      // Shape B: Distributed Architecture Grid (Tiers: Ingress -> Services -> DB)
-      const tier = i % 4; // 0=Client, 1=Gateway, 2=Microservice, 3=Storage
+      // Tiered growth architecture
+      const tier = i % 4;
       const row = Math.floor(i / 4) % 18;
       posB[i * 3] = (row - 9) * 2.4 + (Math.random() - 0.5) * 1.5;
       posB[i * 3 + 1] = (tier - 1.5) * 6.0 + (Math.random() - 0.5) * 1.2;
       posB[i * 3 + 2] = (Math.random() - 0.5) * 14.0;
 
-      // Shape C: Quantum Sphere / Neural Core
+      // Quantum Core
       const u = Math.random();
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
@@ -176,14 +176,11 @@ export class SpatialCanvas3D {
       posC[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       posC[i * 3 + 2] = r * Math.cos(phi);
 
-      // Gradient color interpolation based on x position
       const gradT = THREE.MathUtils.clamp((x + 15) / 32, 0, 1);
       const pColor = new THREE.Color();
-      if (gradT < 0.5) {
-        pColor.lerpColors(color1, color2, gradT * 2);
-      } else {
-        pColor.lerpColors(color2, color3, (gradT - 0.5) * 2);
-      }
+      if (gradT < 0.5) pColor.lerpColors(color1, color2, gradT * 2);
+      else pColor.lerpColors(color2, color3, (gradT - 0.5) * 2);
+
       colors[i * 3] = pColor.r;
       colors[i * 3 + 1] = pColor.g;
       colors[i * 3 + 2] = pColor.b;
@@ -197,11 +194,10 @@ export class SpatialCanvas3D {
     geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
     geometry.setAttribute('rand', new THREE.BufferAttribute(randoms, 1));
 
-    // Custom Shader Material for maximum visual fidelity & 120 FPS speed
     const shaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
-        uMorph: { value: 0 }, // 0..1 (A to B) or 1..2 (B to C)
+        uMorph: { value: 0 },
         uPointer: { value: new THREE.Vector3(0, 0, 0) },
         uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) },
       },
@@ -222,8 +218,6 @@ export class SpatialCanvas3D {
 
         void main() {
           vColor = color;
-
-          // Multi-stage morph: 0->1: A->B, 1->2: B->C
           vec3 pA = position;
           vec3 pB = targetPosB;
           vec3 pC = targetPosC;
@@ -235,12 +229,10 @@ export class SpatialCanvas3D {
             p = mix(pB, pC, uMorph - 1.0);
           }
 
-          // Subtle harmonic breathing motion
           p.x += sin(uTime * 1.5 + rand * 6.28) * 0.35;
           p.y += cos(uTime * 1.8 + rand * 6.28) * 0.35;
           p.z += sin(uTime * 1.2 + rand * 6.28) * 0.45;
 
-          // Pointer magnetic interaction
           vec3 toPointer = p - uPointer;
           float dist = length(toPointer);
           if (dist < 12.0) {
@@ -251,7 +243,6 @@ export class SpatialCanvas3D {
           vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
           gl_Position = projectionMatrix * mvPosition;
 
-          // Depth-scaled point size
           gl_PointSize = size * uPixelRatio * (280.0 / -mvPosition.z);
           vAlpha = smoothstep(60.0, 10.0, -mvPosition.z) * (0.65 + 0.35 * sin(uTime * 2.0 + rand * 10.0));
         }
@@ -261,7 +252,6 @@ export class SpatialCanvas3D {
         varying float vAlpha;
 
         void main() {
-          // Circular particle with soft anti-aliased edge and glowing core
           vec2 coord = gl_PointCoord - vec2(0.5);
           float d = length(coord);
           if (d > 0.5) discard;
@@ -304,7 +294,6 @@ export class SpatialCanvas3D {
       const group = new THREE.Group();
       group.position.set(x, y, z);
 
-      // Outer crystal wireframe node
       const icoGeo = new THREE.IcosahedronGeometry(1.6, 0);
       const wireMat = new THREE.MeshStandardMaterial({
         color: new THREE.Color(disc.color),
@@ -315,7 +304,6 @@ export class SpatialCanvas3D {
       const outer = new THREE.Mesh(icoGeo, wireMat);
       group.add(outer);
 
-      // Inner glowing core
       const coreGeo = new THREE.SphereGeometry(0.8, 16, 16);
       const coreMat = new THREE.MeshBasicMaterial({
         color: new THREE.Color(disc.color),
@@ -323,14 +311,12 @@ export class SpatialCanvas3D {
       const inner = new THREE.Mesh(coreGeo, coreMat);
       group.add(inner);
 
-      // Interactive hit box for raycasting
       const hitGeo = new THREE.SphereGeometry(2.4, 8, 8);
       const hitMat = new THREE.MeshBasicMaterial({ visible: false });
       const hitBox = new THREE.Mesh(hitGeo, hitMat);
       hitBox.userData = { index: i, discipline: disc };
       group.add(hitBox);
 
-      // Node label sprite
       const sprite = this.createNodeTextSprite(disc.number, disc.title, disc.color);
       sprite.position.set(0, 2.7, 0);
       group.add(sprite);
@@ -354,7 +340,7 @@ export class SpatialCanvas3D {
     canvas.height = 128;
     const ctx = canvas.getContext('2d');
 
-    ctx.fillStyle = 'rgba(10, 8, 20, 0.75)';
+    ctx.fillStyle = 'rgba(10, 8, 20, 0.85)';
     ctx.roundRect(10, 10, 492, 108, 16);
     ctx.fill();
 
@@ -364,7 +350,7 @@ export class SpatialCanvas3D {
     ctx.stroke();
 
     ctx.font = 'bold 36px "Space Grotesk", sans-serif';
-    ctx.fillStyle = colorHex;
+    ctx.fillStyle = '#ffffff';
     ctx.fillText(`${number} · ${text}`, 32, 74);
 
     const texture = new THREE.CanvasTexture(canvas);
@@ -386,7 +372,6 @@ export class SpatialCanvas3D {
   bindEvents() {
     const el = this.container;
 
-    // Pointer move / raycast
     const onPointerMove = (e) => {
       const rect = el.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -395,7 +380,6 @@ export class SpatialCanvas3D {
       this.pointer.x = ((clientX - rect.left) / rect.width) * 2 - 1;
       this.pointer.y = -((clientY - rect.top) / rect.height) * 2 + 1;
 
-      // Update shader 3D pointer target in world space
       this.pointerTarget.set(this.pointer.x * 24, this.pointer.y * 16);
 
       if (this.isDragging) {
@@ -418,9 +402,8 @@ export class SpatialCanvas3D {
       this.dragStart.y = clientY;
     };
 
-    const onPointerUp = (e) => {
+    const onPointerUp = () => {
       if (this.isDragging && Math.abs(this.rotationVelocity.x) < 0.002 && Math.abs(this.rotationVelocity.y) < 0.002) {
-        // Test click on 3D node
         this.checkRaycastClick();
       }
       this.isDragging = false;
@@ -435,8 +418,8 @@ export class SpatialCanvas3D {
     window.addEventListener('mouseup', onPointerUp);
     window.addEventListener('touchend', onPointerUp);
 
-    // Responsive resize
     window.addEventListener('resize', () => {
+      if (!this.renderer || !this.camera) return;
       this.width = el.clientWidth || window.innerWidth;
       this.height = el.clientHeight || window.innerHeight;
       this.camera.aspect = this.width / this.height;
@@ -449,12 +432,12 @@ export class SpatialCanvas3D {
   }
 
   setMorphState(stateIndex) {
-    // 0: Monogram NW, 1: Systems Topology, 2: Quantum Core
     this.targetMorph = stateIndex;
     audio.confirm();
   }
 
   checkRaycastClick() {
+    if (!this.camera || !this.pillarNodes) return;
     this.raycaster.setFromCamera(this.pointer, this.camera);
     const hitBoxes = this.pillarNodes.map((n) => n.hitBox);
     const intersects = this.raycaster.intersectObjects(hitBoxes);
@@ -469,14 +452,13 @@ export class SpatialCanvas3D {
   }
 
   animate() {
+    if (!this.isAvailable || !this.renderer) return;
     requestAnimationFrame(() => this.animate());
 
-    const dt = this.clock.getDelta();
     const elapsedTime = this.clock.getElapsedTime();
 
-    // Smooth dampening of world rotation
     if (!this.isDragging) {
-      this.worldRotation.y += this.rotationVelocity.y + 0.0025; // Gentle continuous auto-spin
+      this.worldRotation.y += this.rotationVelocity.y + 0.0025;
       this.worldRotation.x += this.rotationVelocity.x;
       this.rotationVelocity.x *= 0.94;
       this.rotationVelocity.y *= 0.94;
@@ -485,10 +467,8 @@ export class SpatialCanvas3D {
     this.rootGroup.rotation.y = this.worldRotation.y;
     this.rootGroup.rotation.x = THREE.MathUtils.lerp(this.rootGroup.rotation.x, this.worldRotation.x, 0.1);
 
-    // Smooth morph transition
     this.morphProgress = THREE.MathUtils.lerp(this.morphProgress, this.targetMorph, 0.06);
 
-    // Update particles shader uniforms
     if (this.particleMesh) {
       const u = this.particleMesh.material.uniforms;
       u.uTime.value = elapsedTime;
@@ -496,7 +476,6 @@ export class SpatialCanvas3D {
       u.uPointer.value.lerp(new THREE.Vector3(this.pointerTarget.x, this.pointerTarget.y, 0), 0.1);
     }
 
-    // Animate 3D architecture nodes
     this.raycaster.setFromCamera(this.pointer, this.camera);
     const hitBoxes = this.pillarNodes.map((n) => n.hitBox);
     const intersects = this.raycaster.intersectObjects(hitBoxes);
@@ -521,14 +500,11 @@ export class SpatialCanvas3D {
         0.15
       );
 
-      // Gentle floating bob
       node.group.position.y = node.basePos.y + Math.sin(elapsedTime * 2.0 + i) * 0.6;
     });
 
-    // Render Scene
     this.renderer.render(this.scene, this.camera);
 
-    // Update telemetry metrics
     this.drawCalls = this.renderer.info.render.calls;
     this.frameCount++;
     const now = performance.now();
@@ -549,9 +525,8 @@ export class SpatialCanvas3D {
 
   focusPillar(disciplineId) {
     const idx = DISCIPLINES.findIndex((d) => d.id === disciplineId);
-    if (idx !== -1) {
+    if (idx !== -1 && this.pillarNodes && this.pillarNodes[idx]) {
       const node = this.pillarNodes[idx];
-      // Rotate world to face selected node directly
       const targetAngle = -node.angle + Math.PI / 2;
       this.worldRotation.y = targetAngle;
       audio.chime(idx);
