@@ -147,4 +147,26 @@ export const LOGOS = {
       <text x="100" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="10" letter-spacing="0.04em" fill="#facc15">ASSOCIATE</text>
     </svg>
   `,
+
+  tainoSun: `
+    <svg class="comp-logo-svg taino-sun-svg" viewBox="0 0 160 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Sol de Jayuya Heritage Logo">
+      <defs>
+        <linearGradient id="tainoGoldGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="50%" stop-color="#f5e6be"/>
+          <stop offset="100%" stop-color="#d4af37"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="4" width="28" height="28" rx="6" fill="#141108" stroke="#d4af37" stroke-width="1.6"/>
+      <g transform="translate(16, 18) scale(0.24)">
+        <path d="M 20.0 0.0 Q 33.8 9.1 17.3 10.0 Q 24.7 24.7 10.0 17.3 Q 9.1 33.8 0.0 20.0 Q -9.1 33.8 -10.0 17.3 Q -24.7 24.7 -17.3 10.0 Q -33.8 9.1 -20.0 0.0 Q -33.8 -9.1 -17.3 -10.0 Q -24.7 -24.7 -10.0 -17.3 Q -9.1 -33.8 0.0 -20.0 Q 9.1 -33.8 10.0 -17.3 Q 24.7 -24.7 17.3 -10.0 Q 33.8 -9.1 20.0 0.0 Z" stroke="url(#tainoGoldGrad)" stroke-width="2.5" fill="none"/>
+        <circle cx="0" cy="0" r="11" stroke="#d4af37" stroke-width="2.2" fill="none"/>
+        <circle cx="-4" cy="-3" r="1.8" fill="#d4af37"/>
+        <circle cx="4" cy="-3" r="1.8" fill="#d4af37"/>
+        <path d="M -4 4 Q 0 8 4 4" stroke="#d4af37" stroke-width="2" fill="none"/>
+      </g>
+      <text x="38" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="12" letter-spacing="0.06em" fill="#ffffff">BORIKÉN</text>
+      <text x="96" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="10" letter-spacing="0.08em" fill="#d4af37">SAN JUAN, PR</text>
+    </svg>
+  `,
 };

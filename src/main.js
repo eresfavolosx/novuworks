@@ -58,6 +58,7 @@ class FabianPortfolioApp {
       toastBanner: document.getElementById('toast-banner'),
       btnTeslaMode: document.getElementById('btn-tesla-mode'),
       btnAudioToggle: document.getElementById('btn-audio-toggle'),
+      btnPrRoots: document.getElementById('btn-pr-roots'),
       btnCmdPalette: document.getElementById('btn-cmd-palette'),
       btnPrintResume: document.getElementById('btn-print-resume'),
     };
@@ -419,6 +420,7 @@ class FabianPortfolioApp {
             <div class="logo-badge-item" title="UPPR">${LOGOS.politecnica}</div>
             <div class="logo-badge-item" title="Grupo Guayacán">${LOGOS.guayacan}</div>
             <div class="logo-badge-item" title="Enactus">${LOGOS.enactus}</div>
+            <div class="logo-badge-item trigger-pr-coqui" title="Sol de Jayuya · Borikén Heritage">${LOGOS.tainoSun}</div>
           </div>
         </div>
       `;
@@ -1012,6 +1014,26 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     // Audio Toggle
     this.dom.btnAudioToggle?.addEventListener('click', () => {
       this.toggleAudio();
+    });
+
+    // Puerto Rico Cultural Roots & Coquí Sound Chime
+    const triggerCoqui = (e) => {
+      if (e) e.preventDefault();
+      audio.coqui();
+      this.showToast('🇵🇷 San Juan, Puerto Rico · 18°28′N 66°06′W · Borikén Heritage');
+      const pill = this.dom.btnPrRoots;
+      if (pill) {
+        pill.classList.add('pr-chime-active');
+        setTimeout(() => pill.classList.remove('pr-chime-active'), 800);
+      }
+    };
+
+    this.dom.btnPrRoots?.addEventListener('click', triggerCoqui);
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest('.trigger-pr-coqui');
+      if (target) {
+        triggerCoqui(e);
+      }
     });
 
     // Command Palette Trigger

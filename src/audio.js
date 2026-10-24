@@ -140,6 +140,49 @@ export class ExecutiveAudio {
     });
   }
 
+  // Authentic Puerto Rican Coquí two-tone nocturnal call ("Co-quí")
+  coqui() {
+    if (this.isMuted) return;
+    this.init();
+    if (!this.ctx) return;
+
+    const t = this.ctx.currentTime;
+
+    // Note 1: "Co" (~1180 Hz, pure crystal sine)
+    const osc1 = this.ctx.createOscillator();
+    const gain1 = this.ctx.createGain();
+    osc1.type = 'sine';
+    osc1.frequency.setValueAtTime(1180, t);
+
+    gain1.gain.setValueAtTime(0.001, t);
+    gain1.gain.linearRampToValueAtTime(0.09, t + 0.018);
+    gain1.gain.exponentialRampToValueAtTime(0.0001, t + 0.13);
+
+    osc1.connect(gain1);
+    gain1.connect(this.masterGain);
+
+    osc1.start(t);
+    osc1.stop(t + 0.14);
+
+    // Note 2: "Quí" (~1920 Hz rising gently to ~2120 Hz)
+    const t2 = t + 0.16;
+    const osc2 = this.ctx.createOscillator();
+    const gain2 = this.ctx.createGain();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(1920, t2);
+    osc2.frequency.exponentialRampToValueAtTime(2120, t2 + 0.22);
+
+    gain2.gain.setValueAtTime(0.001, t2);
+    gain2.gain.linearRampToValueAtTime(0.12, t2 + 0.02);
+    gain2.gain.exponentialRampToValueAtTime(0.0001, t2 + 0.25);
+
+    osc2.connect(gain2);
+    gain2.connect(this.masterGain);
+
+    osc2.start(t2);
+    osc2.stop(t2 + 0.27);
+  }
+
   // Subtle ambient spatial drone for focus mode
   toggleAmbient() {
     this.init();

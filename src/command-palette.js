@@ -76,12 +76,22 @@ export class CommandPalette {
         },
       },
       {
+        id: 'coqui',
+        title: 'Chime Puerto Rico Coquí (Authentic Island Two-Tone Sound)',
+        category: 'Culture & Heritage',
+        shortcut: 'PR',
+        action: () => {
+          audio.coqui();
+          options.showToast && options.showToast('🇵🇷 San Juan, Puerto Rico · 18°28′N 66°06′W · Borikén Heritage');
+        },
+      },
+      {
         id: 'contact',
-        title: 'Email Fabian directly (fabian.velez1996@gmail.com)',
+        title: `Email Fabian directly (${PROFILE.emails.primary})`,
         category: 'Contact',
         shortcut: 'C',
         action: () => {
-          window.location.href = PROFILE.contact.calendarUrl;
+          window.location.href = `mailto:${PROFILE.emails.primary}?subject=Executive%20Inquiry%20-%20Let's%20Chat`;
         },
       },
       // Append the 8 disciplines
