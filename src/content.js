@@ -6,18 +6,21 @@
 export const CONFIG = {
   brand: 'Novu Works',
   tagline: 'Technical consulting for startups & growing businesses',
-  location: 'Puerto Rico · Remote worldwide',
+  location: 'San Juan, Puerto Rico · US Remote worldwide',
+  citizenship: 'United States Citizen (No Visa Sponsorship Required)',
   since: 2017,
   companies: '80+',
   person: {
-    name: 'Fabian Velez',
-    title: 'Technical Consultant · Software Engineer',
-    availability: 'Open to engineering roles & select consulting projects',
+    name: 'Fabián Vélez Vicente',
+    title: 'Technical Product Manager · Performance Marketing Lead · Decision Science Analyst',
+    availability: 'Open to High-Impact Leadership Roles (AI Product, Performance Media, Decision Science, Web Strategy)',
   },
-  // TODO: confirm these before going live
-  email: 'hello@novu.works',
-  linkedin: '', // e.g. 'https://www.linkedin.com/in/your-handle'
-  github: '',   // e.g. 'https://github.com/your-handle'
+  email: 'fabianvvicente1@gmail.com',
+  enterpriseEmail: 'hello@novu.works',
+  phone: '+1 (347) 815-8054',
+  linkedin: 'https://linkedin.com/in/fabian-velez-vicente',
+  github: 'https://github.com/eresfavolosx',
+  website: 'https://novu.works',
 };
 
 // Brand gradient sampled from the logo (rose → violet → blue)

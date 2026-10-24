@@ -327,6 +327,31 @@ class FabianPortfolioApp {
     this.updateRecruiterScorecard(lensId);
     this.updateHeaderPersonaPill(lensId);
 
+    // Dynamically update downloadable PDF resume URLs tailored to active role lens
+    const resumePath = PROFILE.links?.resumes?.[lensId] || PROFILE.links?.resumes?.master || '/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf';
+    const resumeFilename = `Fabian_Velez_Resume_${lensId}_2026.pdf`;
+
+    const dlRec = document.getElementById('btn-download-recruiter-pdf');
+    if (dlRec) {
+      dlRec.setAttribute('href', resumePath);
+      dlRec.setAttribute('download', resumeFilename);
+    }
+    const dlRes = document.getElementById('btn-download-resume-pdf');
+    if (dlRes) {
+      dlRes.setAttribute('href', resumePath);
+      dlRes.setAttribute('download', resumeFilename);
+    }
+    const dlDos = document.getElementById('dossier-download-resume-btn');
+    if (dlDos) {
+      dlDos.setAttribute('href', resumePath);
+      dlDos.setAttribute('download', resumeFilename);
+    }
+    const dlTools = document.getElementById('btn-tools-download-pdf');
+    if (dlTools) {
+      dlTools.setAttribute('href', resumePath);
+      dlTools.setAttribute('download', resumeFilename);
+    }
+
     if (this.dom.dossierStatsMount) {
       this.dom.dossierStatsMount.classList.remove('lens-animating');
       void this.dom.dossierStatsMount.offsetWidth;
@@ -954,6 +979,8 @@ class FabianPortfolioApp {
 TARGET ROLE: ${variant.headline}
 ACTIVE SOURCING LENS: ${variant.label}
 LOCATION: San Juan, PR (US Remote / Worldwide)
+WORK AUTHORIZATION: US Citizen (Born in Puerto Rico · No Visa Sponsorship Required)
+PHONE: +1 (347) 815-8054
 EMAIL: fabianvvicente1@gmail.com
 LINKEDIN: https://linkedin.com/in/fabian-velez-vicente
 GITHUB: https://github.com/eresfavolosx
@@ -1106,8 +1133,8 @@ ${variant.proofPoints ? variant.proofPoints.map((p) => `• [${p.metric}] ${p.ti
 
     const text = `FABIAN VELEZ VICENTE
 ${variant.headline}
-Email: fabianvvicente1@gmail.com | LinkedIn: https://linkedin.com/in/fabian-velez-vicente | GitHub: https://github.com/eresfavolosx | Portfolio: https://novu.works
-Location: San Juan, PR (US Remote)
+Email: fabianvvicente1@gmail.com | Phone: +1 (347) 815-8054 | LinkedIn: https://linkedin.com/in/fabian-velez-vicente | GitHub: https://github.com/eresfavolosx | Portfolio: https://novu.works
+Location: San Juan, PR (US Remote / Worldwide) · US Citizen (No Visa Sponsorship Required)
 
 SUMMARY
 ${variant.summary}

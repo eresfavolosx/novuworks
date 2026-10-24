@@ -14,6 +14,8 @@ export const PROFILE = {
   level: 'Level ICS4 Lead',
   tenure: '8+ Years (Marketing AI, RevOps Analytics & Software Systems)',
   location: 'San Juan, PR (US Remote / Worldwide)',
+  phone: '+1 (347) 815-8054',
+  workAuthorization: 'US Citizen (Born in Puerto Rico · No Visa Sponsorship Required)',
   emails: {
     primary: 'fabianvvicente1@gmail.com',
     enterprise: 'hello@novu.works',
@@ -22,6 +24,13 @@ export const PROFILE = {
     linkedin: 'https://linkedin.com/in/fabian-velez-vicente',
     github: 'https://github.com/eresfavolosx',
     website: 'https://novu.works',
+    resumes: {
+      master: '/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf',
+      ai_engineering: '/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf',
+      revops_analytics: '/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf',
+      data_governance: '/assets/resumes/Fabian_Velez_Resume_Decision_Science_Analytics.pdf',
+      tech_ops: '/assets/resumes/Fabian_Velez_Resume_Web_Strategy_CRO_Lead.pdf',
+    },
   },
   summary:
     'Dynamic Performance Marketing Lead and Technical Product Manager with 8+ years of experience bridging ad-tech infrastructure, AI automation, and high-ROI media buying. Proven track record of directing Agile marketing teams, executing 360° digital campaigns that generated $10M+ in revenue, and optimizing conversion pipelines. Highly resourceful leader equipped with deep technical fluency in data analytics (Databricks, SQL) and agentic workflows, enabling seamless collaboration with stakeholders to drive user acquisition and maximize marketing operational efficiency.',
