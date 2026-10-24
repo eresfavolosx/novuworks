@@ -289,6 +289,10 @@ class FabianPortfolioApp {
 
     // 8. Run initial metric count-up animation
     this.animateCounters();
+
+    // 9. Initialize Interactive Cursor Spotlight and Scroll-Driven Reveals
+    this.initCardSpotlight();
+    this.initScrollReveals();
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -798,6 +802,61 @@ class FabianPortfolioApp {
 
       requestAnimationFrame(updateCount);
     });
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Interactive Cursor Spotlight Glow Effect
+  // ─────────────────────────────────────────────────────────────
+  initCardSpotlight() {
+    const selector =
+      '.standalone-project-card, .case-card, .proof-card, .cluster-item, .tesla-gauge-card, .edu-card, .award-card, .hero-metric-card, .scorecard-card';
+    const attachGlow = () => {
+      document.querySelectorAll(selector).forEach((card) => {
+        if (card.dataset.glowAttached) return;
+        card.dataset.glowAttached = 'true';
+        card.addEventListener('pointermove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    };
+    attachGlow();
+    window.addEventListener('novu:view-changed', () => setTimeout(attachGlow, 60));
+    window.addEventListener('novu:lang-changed', () => setTimeout(attachGlow, 60));
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Smooth Scroll-Driven Entry Reveal Observers (Progressive Enhancement)
+  // ─────────────────────────────────────────────────────────────
+  initScrollReveals() {
+    if (!('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
+    );
+
+    const observeElements = () => {
+      document
+        .querySelectorAll(
+          '.standalone-project-card, .case-card, .proof-card, .edu-card, .award-card, .hero-metric-card, .cluster-item, .scorecard-card'
+        )
+        .forEach((el) => {
+          el.classList.add('scroll-reveal-target');
+          observer.observe(el);
+        });
+    };
+    observeElements();
+    window.addEventListener('novu:view-changed', () => setTimeout(observeElements, 60));
+    window.addEventListener('novu:lang-changed', () => setTimeout(observeElements, 60));
   }
 
   // ─────────────────────────────────────────────────────────────

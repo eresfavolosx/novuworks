@@ -740,18 +740,42 @@ export class SpatialCanvas3D {
       this.dustMesh.rotation.y = elapsedTime * (0.038 * speedMult);
       this.dustMesh.rotation.x = Math.sin(elapsedTime * 0.4) * (0.045 * speedMult);
 
-      // Animate individual dust particles in wave harmonics if positions are accessible
+      // Animate individual dust particles in wave harmonics and cursor interaction
       const posAttr = this.dustMesh.geometry.attributes.position;
       if (posAttr && this.dustBasePositions && this.dustSpeeds) {
         const arr = posAttr.array;
         const base = this.dustBasePositions;
         const count = arr.length / 3;
-        // Sample every other particle for ultra-smooth 60+ FPS performance on mobile
+        const pointerX = this.pointerTarget.x;
+        const pointerY = this.pointerTarget.y;
+
         for (let i = 0; i < count; i += 2) {
           const spd = this.dustSpeeds[i];
           const phs = this.dustPhases[i];
-          arr[i * 3 + 1] = base[i * 3 + 1] + Math.sin(elapsedTime * spd + phs) * 0.85;
-          arr[i * 3] = base[i * 3] + Math.cos(elapsedTime * (spd * 0.7) + phs) * 0.55;
+          
+          // Organic undulating wave kinetics
+          const waveY = Math.sin(elapsedTime * spd + phs) * 1.15;
+          const waveX = Math.cos(elapsedTime * (spd * 0.7) + phs) * 0.75;
+          const waveZ = Math.sin(elapsedTime * 0.5 + phs) * 0.6;
+
+          let targetX = base[i * 3] + waveX;
+          let targetY = base[i * 3 + 1] + waveY;
+          let targetZ = base[i * 3 + 2] + waveZ;
+
+          // Subtle cursor magnetic repulsion
+          const dx = targetX - pointerX;
+          const dy = targetY - pointerY;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < 144) {
+            const dist = Math.sqrt(distSq) || 1;
+            const force = (12 - dist) / 12 * 2.2;
+            targetX += (dx / dist) * force;
+            targetY += (dy / dist) * force;
+          }
+
+          arr[i * 3] = targetX;
+          arr[i * 3 + 1] = targetY;
+          arr[i * 3 + 2] = targetZ;
         }
         posAttr.needsUpdate = true;
       }
