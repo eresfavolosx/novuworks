@@ -590,18 +590,18 @@ export const PROFILE_ES = {
     },
     {
       id: 'picta',
-      name: 'Picta: Motor de Documentación Visual y Medios Interactivos',
-      role: 'Arquitecto de Sistemas UI/UX y Aplicaciones Móviles',
-      organization: 'Picta Studio',
-      period: '2024',
-      metrics: 'Lienzo Interactivo · Estado del Cliente · Cero Latencia',
+      name: 'Picta: Motor y Cámara de Asistencia para Daltonismo (CVD)',
+      role: 'Ingeniero Líder de Accesibilidad y Arquitecto de Visión Computarizada',
+      organization: 'Tecnología Asistiva / Accesibilidad',
+      period: '2024 – 2025',
+      metrics: 'Daltonización en Tiempo Real · 6 Modos CVD · Cuentagotas de Color',
       githubUrl: 'https://github.com/eresfavolosx/Picta',
       subdomainUrl: 'https://picta.novu.works',
       mirrorUrl: 'https://picta-novuworks.web.app',
       subdomainLabel: 'picta.novu.works',
       summary:
-        'Diseñó una aplicación de documentación visual ultra-rápida y optimizada para dispositivos móviles con historial de archivos por pestañas, almacenamiento en caché del cliente y sistemas de diseño adaptativos en Material Design Lite.',
-      tags: ['JavaScript', 'UI Móvil', 'Pipeline de Activos', 'Material Design Lite', 'Estado en Cliente']
+        'Diseñó y construyó una aplicación de visión computarizada asistiva para personas con deficiencia en la percepción del color (CVD). Incorpora procesamiento de video WebRTC en vivo con matrices matemáticas de Daltonización (Protanopía, Deuteranopía, Tritanopía), realce de bordes de alto contraste, simulación para usuarios con visión estándar y clasificador interactivo de color por píxel con síntesis de voz.',
+      tags: ['Visión Computarizada', 'WebRTC', 'Daltonización', 'Accesibilidad (A11y)', 'Ciencia del Color', 'Canvas API']
     },
     {
       id: 'nfc-platform',

@@ -135,6 +135,10 @@
               "value": "max-age=31536000; includeSubDomains; preload"
             },
             {
+              "key": "Permissions-Policy",
+              "value": "camera=(self), microphone=()"
+            },
+            {
               "key": "Content-Security-Policy",
               "value": "upgrade-insecure-requests"
             }
@@ -173,6 +177,10 @@
             {
               "key": "Strict-Transport-Security",
               "value": "max-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "key": "Permissions-Policy",
+              "value": "camera=(self), microphone=()"
             },
             {
               "key": "Content-Security-Policy",
@@ -221,6 +229,10 @@
               "value": "max-age=31536000; includeSubDomains; preload"
             },
             {
+              "key": "Permissions-Policy",
+              "value": "camera=(self), microphone=()"
+            },
+            {
               "key": "Content-Security-Policy",
               "value": "upgrade-insecure-requests"
             }
@@ -265,6 +277,10 @@
             {
               "key": "Strict-Transport-Security",
               "value": "max-age=31536000; includeSubDomains; preload"
+            },
+            {
+              "key": "Permissions-Policy",
+              "value": "camera=(self), microphone=()"
             },
             {
               "key": "Content-Security-Policy",
