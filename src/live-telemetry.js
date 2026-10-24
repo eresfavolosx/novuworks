@@ -56,10 +56,10 @@ export class LiveTelemetryManager {
     this.fetchMarketData();
     this.measureEdgePing();
 
-    // Periodic updates
-    setInterval(() => this.updateClocks(), 1000);
-    setInterval(() => this.measureEdgePing(), 12000);
-    setInterval(() => this.fetchMarketData(), 20000);
+    // Periodic updates (only active when browser tab is visible)
+    setInterval(() => { if (!document.hidden) this.updateClocks(); }, 1000);
+    setInterval(() => { if (!document.hidden) this.measureEdgePing(); }, 16000);
+    setInterval(() => { if (!document.hidden) this.fetchMarketData(); }, 30000);
   }
 
   detectHardware() {

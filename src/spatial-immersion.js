@@ -132,7 +132,16 @@ export class SpatialImmersionEngine {
   }
 
   startInterpolationLoop() {
+    let lastAppliedX = null;
+    let lastAppliedY = null;
+    let lastDomWriteTime = 0;
+
     const loop = () => {
+      if (document.hidden) {
+        this.rafId = requestAnimationFrame(loop);
+        return;
+      }
+
       // Silky smooth low-pass interpolation (lerp)
       const damping = this.hasGyro ? 0.09 : 0.06;
       this.tiltX += (this.targetTiltX - this.tiltX) * damping;
@@ -143,14 +152,25 @@ export class SpatialImmersionEngine {
         this.canvas3d.setSpatialTilt(this.tiltX, this.tiltY);
       }
 
-      // 2. Set dynamic CSS specular & holographic reflection variables
-      const root = document.documentElement;
-      if (root) {
-        root.style.setProperty('--tilt-x', this.tiltX.toFixed(3));
-        root.style.setProperty('--tilt-y', this.tiltY.toFixed(3));
-        root.style.setProperty('--specular-x', `${(50 + this.tiltX * 35).toFixed(1)}%`);
-        root.style.setProperty('--specular-y', `${(50 + this.tiltY * 35).toFixed(1)}%`);
-        root.style.setProperty('--shimmer-angle', `${Math.round(135 + this.tiltX * 45)}deg`);
+      // 2. Set dynamic CSS specular & holographic reflection variables (throttled & delta-gated)
+      // Prevents hoarding CPU/GPU by eliminating continuous root DOM style recalculations
+      const now = performance.now();
+      const dx = Math.abs(this.tiltX - (lastAppliedX ?? 999));
+      const dy = Math.abs(this.tiltY - (lastAppliedY ?? 999));
+
+      if ((dx > 0.003 || dy > 0.003) && (now - lastDomWriteTime >= 33)) {
+        lastAppliedX = this.tiltX;
+        lastAppliedY = this.tiltY;
+        lastDomWriteTime = now;
+
+        const root = document.documentElement;
+        if (root) {
+          root.style.setProperty('--tilt-x', this.tiltX.toFixed(3));
+          root.style.setProperty('--tilt-y', this.tiltY.toFixed(3));
+          root.style.setProperty('--specular-x', `${(50 + this.tiltX * 35).toFixed(1)}%`);
+          root.style.setProperty('--specular-y', `${(50 + this.tiltY * 35).toFixed(1)}%`);
+          root.style.setProperty('--shimmer-angle', `${Math.round(135 + this.tiltX * 45)}deg`);
+        }
       }
 
       this.rafId = requestAnimationFrame(loop);

@@ -1714,14 +1714,15 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       this.animateCounters();
     }
 
-    // Dynamic 3D Camera Positioning based on view context
-    if (this.canvas3d && this.canvas3d.camera) {
-      if (viewName === 'core') this.canvas3d.camera.position.set(0, 0, 46);
-      else if (viewName === 'case-studies') this.canvas3d.camera.position.set(0, 14, 52);
-      else if (viewName === 'ai-lab') this.canvas3d.camera.position.set(-12, 6, 50);
-      else if (viewName === 'planner') this.canvas3d.camera.position.set(14, 5, 52);
-      else if (viewName === 'intel-feed') this.canvas3d.camera.position.set(0, -10, 52);
-      else this.canvas3d.camera.position.set(-16, 4, 52);
+    // Dynamic 3D Camera & Pause Management (Conserves GPU/CPU on subviews)
+    if (this.canvas3d) {
+      if (viewName === 'core') {
+        this.canvas3d.resume();
+        if (this.canvas3d.camera) this.canvas3d.camera.position.set(0, 0, 46);
+      } else if (!this.canvas3d.isVisualizerMode) {
+        // Pausing 3D canvas when viewing heavy content views prevents device overheating
+        this.canvas3d.pause();
+      }
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });

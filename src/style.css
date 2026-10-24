@@ -8168,13 +8168,33 @@ body.tesla-mode .hud-action-btn {
   color: #6b4b00;
 }
 
-/* Eco Power Mode (triggered when device battery < 18% & discharging) */
-html.device-eco-power .webgl-canvas-layer {
-  opacity: 0.35;
+/* ─────────────────────────────────────────────────────────────
+   Eco Power & Low-End Device Performance Mode
+   (Protects Budget Hardware, Older Mobile Devices & Battery Life)
+   ───────────────────────────────────────────────────────────── */
+html.device-eco-power .webgl-canvas-layer,
+html.low-spec-device .webgl-canvas-layer {
+  opacity: 0.55;
 }
+
+html.device-eco-power *,
+html.low-spec-device * {
+  /* Alleviate GPU composite & framebuffer texture readbacks on low-end chips */
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
 html.device-eco-power * {
   animation-duration: 0.001s !important;
   transition-duration: 0.001s !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────

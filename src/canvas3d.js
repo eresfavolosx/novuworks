@@ -39,6 +39,13 @@ export class SpatialCanvas3D {
     this.activeMode = 1;
     this.modeTransitions = [0, 1, 0]; // opacities/scales of the 3 modes
 
+    // Device Capability & Adaptive Resource Profile (Guards lower-end devices from hoarding resources)
+    this.deviceTier = this.detectDeviceTier();
+    this.lastRenderTime = 0;
+    this.isVisibleInViewport = true;
+    this.isTabVisible = !document.hidden;
+    this.scratchVec3 = new THREE.Vector3();
+
     // Visualizer mode state
     this.isVisualizerMode = false;
     this.targetRootPosition = new THREE.Vector3(7.5, 0.5, -2.0);
@@ -54,6 +61,32 @@ export class SpatialCanvas3D {
     this.init();
   }
 
+  detectDeviceTier() {
+    if (typeof window === 'undefined') return { isLowEnd: false, isMobile: false, maxFps: 60, dpr: 1.5 };
+    const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const cores = navigator.hardwareConcurrency || 4;
+    const memory = navigator.deviceMemory || 8;
+    const isSaveData = Boolean(navigator.connection?.saveData);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const isLowEnd = cores <= 4 || memory <= 4 || isSaveData || prefersReducedMotion;
+    if (isLowEnd && document.documentElement) {
+      document.documentElement.classList.add('low-spec-device');
+    }
+
+    const dpr = isLowEnd ? 1.0 : (isMobile ? Math.min(window.devicePixelRatio || 1, 1.25) : Math.min(window.devicePixelRatio || 1, 1.75));
+    const maxFps = isLowEnd ? 30 : 60;
+
+    return {
+      isLowEnd,
+      isMobile,
+      cores,
+      memory,
+      maxFps,
+      dpr,
+    };
+  }
+
   init() {
     try {
       this.width = Math.max(window.innerWidth || 0, this.container.clientWidth || 0, 320);
@@ -67,14 +100,14 @@ export class SpatialCanvas3D {
       this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 0.1, 1000);
       this.camera.position.set(0, 0, 46);
 
-      // 3. High-Performance WebGL Renderer
+      // 3. Adaptive WebGL Renderer (Power & Memory Efficient for Lower-End Hardware)
       this.renderer = new THREE.WebGLRenderer({
-        powerPreference: 'high-performance',
-        antialias: true,
+        powerPreference: this.deviceTier.isLowEnd ? 'low-power' : 'default',
+        antialias: !this.deviceTier.isLowEnd,
         alpha: true,
       });
       this.renderer.setSize(this.width, this.height);
-      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      this.renderer.setPixelRatio(this.deviceTier.dpr);
       this.renderer.setClearColor(0x000000, 0);
       this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
       this.renderer.toneMappingExposure = 1.15;
@@ -127,7 +160,7 @@ export class SpatialCanvas3D {
   // 01: NW Monogram Emblem (Gold & Platinum Particle Matrix)
   // ─────────────────────────────────────────────────────────────
   buildParticleMonogram() {
-    const COUNT = 3400;
+    const COUNT = this.deviceTier.isLowEnd ? 1100 : (this.deviceTier.isMobile ? 1800 : 2600);
     const positions = new Float32Array(COUNT * 3);
     const colors = new Float32Array(COUNT * 3);
     const sizes = new Float32Array(COUNT);
@@ -292,8 +325,10 @@ export class SpatialCanvas3D {
   buildMobiusRibbon() {
     this.ribbonGroup = new THREE.Group();
 
-    // High density Torus Knot representing compounding acquisition loop
-    const knotGeo = new THREE.TorusKnotGeometry(7.5, 1.4, 180, 24, 2, 3);
+    // High density Torus Knot scaled adaptively to device tier
+    const radialSegs = this.deviceTier.isLowEnd ? 80 : (this.deviceTier.isMobile ? 100 : 140);
+    const tubularSegs = this.deviceTier.isLowEnd ? 16 : (this.deviceTier.isMobile ? 18 : 22);
+    const knotGeo = new THREE.TorusKnotGeometry(7.5, 1.4, radialSegs, tubularSegs, 2, 3);
 
     // Physical metallic gold & platinum material
     const knotMat = new THREE.MeshStandardMaterial({
@@ -408,7 +443,7 @@ export class SpatialCanvas3D {
   // (Minimalist, Round, High-End Luxury Celestial Particle Field)
   // ─────────────────────────────────────────────────────────────
   buildAmbientDust() {
-    const COUNT = 420;
+    const COUNT = this.deviceTier.isLowEnd ? 110 : (this.deviceTier.isMobile ? 160 : 240);
     const pos = new Float32Array(COUNT * 3);
     const col = new Float32Array(COUNT * 3);
     const speeds = new Float32Array(COUNT);
@@ -621,11 +656,39 @@ export class SpatialCanvas3D {
       this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(this.width, this.height);
+      this.renderer.setPixelRatio(this.deviceTier.dpr);
       this.updateRootGroupPosition();
       if (this.monogramMesh) {
-        this.monogramMesh.material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio || 1, 2);
+        this.monogramMesh.material.uniforms.uPixelRatio.value = this.deviceTier.dpr;
       }
     });
+
+    // Resource Guard 1: Pause WebGL render loop when browser tab is hidden or minimized
+    document.addEventListener('visibilitychange', () => {
+      this.isTabVisible = !document.hidden;
+      if (document.hidden) {
+        this.pause();
+      } else if (this.isVisibleInViewport) {
+        this.resume();
+      }
+    });
+
+    // Resource Guard 2: Pause WebGL render loop when canvas container is scrolled out of view
+    if ('IntersectionObserver' in window && this.container) {
+      this.viewportObserver = new IntersectionObserver(
+        (entries) => {
+          const isIntersecting = entries[0]?.isIntersecting ?? true;
+          this.isVisibleInViewport = isIntersecting;
+          if (!isIntersecting) {
+            this.pause();
+          } else if (this.isTabVisible) {
+            this.resume();
+          }
+        },
+        { threshold: 0.01 }
+      );
+      this.viewportObserver.observe(this.container);
+    }
   }
 
   setVisualizerMode(active) {
@@ -668,12 +731,20 @@ export class SpatialCanvas3D {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Smooth Animation Frame Loop
+  // Smooth Animation Frame Loop (Adaptive FPS Capped for Lower-End Devices)
   // ─────────────────────────────────────────────────────────────
   animate() {
     if (!this.isAvailable || !this.renderer) return;
     requestAnimationFrame(() => this.animate());
-    if (this.isPaused) return;
+    if (this.isPaused || !this.isVisibleInViewport || !this.isTabVisible) return;
+
+    // Throttle rendering on lower-end devices or battery saving modes to prevent thermal throttling & hoarding
+    const now = performance.now();
+    const minFrameInterval = 1000 / (this.deviceTier?.maxFps || 60);
+    if (now - this.lastRenderTime < minFrameInterval - 1.5) {
+      return;
+    }
+    this.lastRenderTime = now;
 
     const elapsedTime = this.clock.getElapsedTime();
 
@@ -709,8 +780,8 @@ export class SpatialCanvas3D {
       this.modeTransitions[i] = THREE.MathUtils.lerp(this.modeTransitions[i], target, 0.07);
     }
 
-    // 01: Monogram
-    if (this.monogramMesh) {
+    // 01: Monogram (Only compute when visible)
+    if (this.monogramMesh && this.modeTransitions[0] > 0.005) {
       const u = this.monogramMesh.material.uniforms;
       u.uTime.value = elapsedTime;
       u.uOpacity.value = this.modeTransitions[0];
@@ -718,10 +789,13 @@ export class SpatialCanvas3D {
       const gyroInfluenceY = (this.spatialTiltY || 0) * 9;
       const combinedX = this.pointerTarget.x + gyroInfluenceX;
       const combinedY = this.pointerTarget.y + gyroInfluenceY;
-      u.uPointer.value.lerp(new THREE.Vector3(combinedX, combinedY, 0), 0.1);
+      this.scratchVec3.set(combinedX, combinedY, 0);
+      u.uPointer.value.lerp(this.scratchVec3, 0.1);
       this.monogramMesh.visible = this.modeTransitions[0] > 0.01;
       const s0 = 0.8 + 0.2 * this.modeTransitions[0];
       this.monogramMesh.scale.set(s0, s0, s0);
+    } else if (this.monogramMesh && this.monogramMesh.visible) {
+      this.monogramMesh.visible = false;
     }
 
     // Camera spatial 6DoF parallax (subtle high-end depth)
@@ -732,8 +806,8 @@ export class SpatialCanvas3D {
       this.camera.position.y = THREE.MathUtils.lerp(this.camera.position.y, targetCamY, 0.05);
     }
 
-    // 02: Möbius Ribbon
-    if (this.ribbonGroup) {
+    // 02: Möbius Ribbon (Only rotate when visible)
+    if (this.ribbonGroup && this.modeTransitions[1] > 0.005) {
       const t = this.modeTransitions[1];
       this.ribbonGroup.visible = t > 0.01;
       const s1 = (0.75 + 0.25 * t) * t;
@@ -743,10 +817,12 @@ export class SpatialCanvas3D {
       this.ribbonWire.rotation.x = -elapsedTime * 0.35;
       this.ribbonWire.rotation.y = -elapsedTime * 0.55;
       this.ribbonRing.rotation.z = elapsedTime * 0.25;
+    } else if (this.ribbonGroup && this.ribbonGroup.visible) {
+      this.ribbonGroup.visible = false;
     }
 
-    // 03: Quantum AI Prism
-    if (this.prismGroup) {
+    // 03: Quantum AI Prism (Only rotate when visible)
+    if (this.prismGroup && this.modeTransitions[2] > 0.005) {
       const t = this.modeTransitions[2];
       this.prismGroup.visible = t > 0.01;
       const s2 = (0.75 + 0.25 * t) * t;
@@ -757,52 +833,56 @@ export class SpatialCanvas3D {
       this.prismCage.rotation.y = -elapsedTime * 0.38;
       this.prismRing1.rotation.x = elapsedTime * 0.5;
       this.prismRing2.rotation.y = elapsedTime * 0.5;
+    } else if (this.prismGroup && this.prismGroup.visible) {
+      this.prismGroup.visible = false;
     }
 
-    // Ambient Dust drift & dynamic kinetic wave oscillation (Enhanced for Mobile Immersion)
+    // Ambient Dust drift: 100% GPU rotation for silky performance; bypass CPU vertex loops on low-end
     if (this.dustMesh) {
       const speedMult = 0.85;
       this.dustMesh.rotation.y = elapsedTime * (0.038 * speedMult);
       this.dustMesh.rotation.x = Math.sin(elapsedTime * 0.4) * (0.045 * speedMult);
 
-      // Animate individual dust particles in wave harmonics and cursor interaction
-      const posAttr = this.dustMesh.geometry.attributes.position;
-      if (posAttr && this.dustBasePositions && this.dustSpeeds) {
-        const arr = posAttr.array;
-        const base = this.dustBasePositions;
-        const count = arr.length / 3;
-        const pointerX = this.pointerTarget.x;
-        const pointerY = this.pointerTarget.y;
+      // On non-low-end devices, update vertex waves at throttled frequency
+      if (!this.deviceTier.isLowEnd && (this.frameCount % 2 === 0)) {
+        const posAttr = this.dustMesh.geometry.attributes.position;
+        if (posAttr && this.dustBasePositions && this.dustSpeeds) {
+          const arr = posAttr.array;
+          const base = this.dustBasePositions;
+          const count = arr.length / 3;
+          const pointerX = this.pointerTarget.x;
+          const pointerY = this.pointerTarget.y;
 
-        for (let i = 0; i < count; i += 2) {
-          const spd = this.dustSpeeds[i];
-          const phs = this.dustPhases[i];
-          
-          // Organic undulating wave kinetics
-          const waveY = Math.sin(elapsedTime * spd + phs) * 1.15;
-          const waveX = Math.cos(elapsedTime * (spd * 0.7) + phs) * 0.75;
-          const waveZ = Math.sin(elapsedTime * 0.5 + phs) * 0.6;
+          for (let i = 0; i < count; i += 2) {
+            const spd = this.dustSpeeds[i];
+            const phs = this.dustPhases[i];
+            
+            // Organic undulating wave kinetics
+            const waveY = Math.sin(elapsedTime * spd + phs) * 1.15;
+            const waveX = Math.cos(elapsedTime * (spd * 0.7) + phs) * 0.75;
+            const waveZ = Math.sin(elapsedTime * 0.5 + phs) * 0.6;
 
-          let targetX = base[i * 3] + waveX;
-          let targetY = base[i * 3 + 1] + waveY;
-          let targetZ = base[i * 3 + 2] + waveZ;
+            let targetX = base[i * 3] + waveX;
+            let targetY = base[i * 3 + 1] + waveY;
+            let targetZ = base[i * 3 + 2] + waveZ;
 
-          // Subtle cursor magnetic repulsion
-          const dx = targetX - pointerX;
-          const dy = targetY - pointerY;
-          const distSq = dx * dx + dy * dy;
-          if (distSq < 144) {
-            const dist = Math.sqrt(distSq) || 1;
-            const force = (12 - dist) / 12 * 2.2;
-            targetX += (dx / dist) * force;
-            targetY += (dy / dist) * force;
+            // Subtle cursor magnetic repulsion
+            const dx = targetX - pointerX;
+            const dy = targetY - pointerY;
+            const distSq = dx * dx + dy * dy;
+            if (distSq < 144) {
+              const dist = Math.sqrt(distSq) || 1;
+              const force = (12 - dist) / 12 * 2.2;
+              targetX += (dx / dist) * force;
+              targetY += (dy / dist) * force;
+            }
+
+            arr[i * 3] = targetX;
+            arr[i * 3 + 1] = targetY;
+            arr[i * 3 + 2] = targetZ;
           }
-
-          arr[i * 3] = targetX;
-          arr[i * 3 + 1] = targetY;
-          arr[i * 3 + 2] = targetZ;
+          posAttr.needsUpdate = true;
         }
-        posAttr.needsUpdate = true;
       }
     }
 
@@ -816,7 +896,6 @@ export class SpatialCanvas3D {
 
     this.drawCalls = this.renderer.info.render.calls;
     this.frameCount++;
-    const now = performance.now();
     if (now - this.lastFpsUpdate >= 500) {
       this.fps = Math.round((this.frameCount * 1000) / (now - this.lastFpsUpdate));
       this.frameCount = 0;

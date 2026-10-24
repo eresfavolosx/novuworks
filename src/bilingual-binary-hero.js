@@ -194,10 +194,10 @@ export class BilingualBinaryHero {
   startCycle() {
     this.stopCycle();
     this.cycleTimer = setInterval(() => {
-      if (this.isCyclePaused || this.isScrambling) return;
+      if (this.isCyclePaused || this.isScrambling || document.hidden) return;
       this.currentIndex = (this.currentIndex + 1) % GREETING_STATES.length;
       this.updateDomState(this.currentIndex, true);
-    }, 4200);
+    }, 4800);
   }
 
   stopCycle() {
@@ -250,8 +250,12 @@ export class BilingualBinaryHero {
   scrambleTransition(element, targetText) {
     if (!element) return;
 
-    // Check reduced motion preference
-    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Check reduced motion preference or low-spec device profile
+    if (
+      (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ||
+      document.documentElement.classList.contains('low-spec-device') ||
+      document.hidden
+    ) {
       element.textContent = targetText;
       return;
     }
