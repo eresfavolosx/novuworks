@@ -26,7 +26,7 @@ export class CyberArcadeGame {
     this.carX = 0;
     this.targetCarX = 0;
     this.distance = 0;
-    this.bonusPacing = 0; // 0 to 122%
+    this.growthVelocity = 0; // 0 to 100%
     this.lives = 4; // 4 Chrono Shields for balanced, enjoyable gameplay
     this.invulnerableTimer = 0; // i-frames (grace period) after collision
     this.timelineEra = 1;
@@ -48,10 +48,10 @@ export class CyberArcadeGame {
 
     // Milestone career gates (Loop into endless timeline eras)
     this.checkpoints = [
-      { id: 'mg', z: -900, name: 'Money Group (Full-Time)', metric: '122% Bonus Target Delivered ($1B+ Portfolio Scope)' },
+      { id: 'mg', z: -900, name: 'Money Group (Full-Time)', metric: '20+ Automated Agentic Workflows ($1B+ Portfolio Scope)' },
       { id: 'rv', z: -2100, name: 'Red Ventures / edX (Full-Time)', metric: '40M+ Databricks SQL Sessions Normalized & Scaled' },
       { id: 'va', z: -3400, name: 'Viva Advertising (My Company / Founder)', metric: '$10M+ B2B Revenue Pipeline & -83% Churn Reduction' },
-      { id: 'lp', z: -4800, name: 'Link Puerto Rico (My Company / Co-Founder)', metric: '100+ Relational Databases & Disaster Ops Restored' },
+      { id: 'lp', z: -4800, name: 'Link Puerto Rico (My Company / Co-Founder)', metric: '100+ Relational Databases & Crisis IT Restored' },
       { id: 'st', z: -6200, name: 'Stanford University', metric: 'Stanford Innovation Fellows Graduate Honor' },
       { id: 'up', z: -7600, name: 'Univ. Politécnica PR', metric: 'B.S. Computer Engineering (Summa Cum Laude 4.0 GPA)' },
     ];
@@ -93,7 +93,7 @@ export class CyberArcadeGame {
           <div class="time-circuits-banner" id="arc-time-circuits">
             <div class="tc-display red">
               <span class="tc-label">DESTINATION</span>
-              <span class="tc-val">122% BONUS</span>
+              <span class="tc-val">+200% LIFT</span>
             </div>
             <div class="tc-display green">
               <span class="tc-label">PRESENT</span>
@@ -116,8 +116,8 @@ export class CyberArcadeGame {
               <span class="as-value text-gold" id="arc-score">$000,000</span>
             </div>
             <div class="arcade-stat-box">
-              <span class="as-label">BONUS PACING</span>
-              <span class="as-value" style="color: #4ade80;" id="arc-pacing">122% ROAS</span>
+              <span class="as-label">GROWTH PACING</span>
+              <span class="as-value" style="color: #4ade80;" id="arc-pacing">+200% ROAS</span>
             </div>
             <div class="arcade-stat-box">
               <span class="as-label">CHRONO SHIELDS</span>
@@ -164,7 +164,7 @@ export class CyberArcadeGame {
         <div class="arcade-modal-backdrop hidden" id="arc-end-modal">
           <div class="arcade-modal-card">
             <span class="am-kicker">TEMPORAL MISSION DEBRIEF</span>
-            <h3 class="am-title" id="am-verdict-title">GREAT SCOTT! 122% BONUS TARGET DELIVERED!</h3>
+            <h3 class="am-title" id="am-verdict-title">GREAT SCOTT! MAXIMUM GROWTH VELOCITY ACHIEVED!</h3>
             <p class="am-sub" id="am-verdict-sub">
               You pushed the DeLorean past 88 MPH, generated 1.21 Gigawatts of attribution lift, and navigated Fabián's career milestones.
             </p>
@@ -820,7 +820,7 @@ export class CyberArcadeGame {
 
   spawnEntities() {
     const lanes = [-4.5, -2.2, 0, 2.2, 4.5];
-    const types = ['plutonium', 'roas', 'capi', 'bonus'];
+    const types = ['plutonium', 'roas', 'capi', 'velocity'];
     const obstacleTypes = ['churn', 'loss'];
 
     // Spawn initial pool of 24 collectibles spaced along highway
@@ -862,7 +862,7 @@ export class CyberArcadeGame {
       );
       cap.position.y = 0.42;
       group.add(cyl, cap);
-    } else if (type === 'bonus') {
+    } else if (type === 'velocity') {
       const geom = new THREE.IcosahedronGeometry(0.72, 0);
       const mat = new THREE.MeshBasicMaterial({ color: 0xd4af37, wireframe: true });
       group.add(new THREE.Mesh(geom, mat));
@@ -1328,8 +1328,8 @@ export class CyberArcadeGame {
         audio.click(1800);
 
         let pts = 250;
-        if (c.type === 'bonus') {
-          pts = 1220; // 122% ROAS Golden Core
+        if (c.type === 'velocity') {
+          pts = 2000; // +200% ROAS Golden Core
           if (this.lives < 4) {
             this.lives += 1;
             this.triggerShieldRestoreToast();
@@ -1345,7 +1345,7 @@ export class CyberArcadeGame {
         }
 
         this.score += Math.round(pts * this.scoreMultiplier);
-        this.bonusPacing = Math.min(122, this.bonusPacing + 4);
+        this.growthVelocity = Math.min(100, this.growthVelocity + 4);
       }
     });
 
@@ -1398,7 +1398,7 @@ export class CyberArcadeGame {
     const descEl = this.container.querySelector('#cp-toast-desc');
 
     if (toast && titleEl && descEl) {
-      titleEl.textContent = `⚡ 122% BONUS TARGET DELIVERED!`;
+      titleEl.textContent = `⚡ MAXIMUM GROWTH VELOCITY ACHIEVED!`;
       descEl.textContent = `Entering Temporal Era ${this.timelineEra} (${this.scoreMultiplier.toFixed(1)}x Multiplier Active)`;
       toast.classList.add('visible');
       setTimeout(() => toast.classList.remove('visible'), 4000);
@@ -1457,7 +1457,7 @@ export class CyberArcadeGame {
     }
 
     const pacingEl = this.container.querySelector('#arc-pacing');
-    if (pacingEl) pacingEl.textContent = `${Math.min(122, Math.round(this.score / 70))}% ROAS`;
+    if (pacingEl) pacingEl.textContent = `+${Math.min(200, Math.round(this.score / 50))}% ROAS`;
 
     const livesEl = this.container.querySelector('#arc-lives');
     if (livesEl) {
@@ -1480,11 +1480,11 @@ export class CyberArcadeGame {
       scoreEl.textContent = `$${this.score.toLocaleString()}`;
 
       if (isVictory) {
-        titleEl.textContent = 'GREAT SCOTT! 122% BONUS TARGET DELIVERED!';
+        titleEl.textContent = 'GREAT SCOTT! MAXIMUM GROWTH VELOCITY ACHIEVED!';
         subEl.textContent = 'All corporate and academic milestones unlocked: Money Group (Full-Time), Red Ventures (Full-Time), Viva Advertising (Founder), Link PR (Co-Founder), Stanford, and UPPR 4.0 GPA.';
       } else {
         titleEl.textContent = 'TEMPORAL DISPLACEMENT COLLAPSED';
-        subEl.textContent = 'Attribution loss encountered! Re-ignite the Flux Capacitor to deliver 122% ROAS pacing.';
+        subEl.textContent = 'Attribution loss encountered! Re-ignite the Flux Capacitor to restore +200% ROAS pacing.';
       }
     }
   }

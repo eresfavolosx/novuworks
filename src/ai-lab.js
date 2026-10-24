@@ -23,7 +23,7 @@ export class AIGrowthLab {
           <div class="ai-lab-badge">Live Interactive Prototype</div>
           <h3 class="ai-lab-title">Generative AI Creative Velocity & Prompt Matrix</h3>
           <p class="ai-lab-desc">
-            Test Fabian's proprietary prompt architecture used to produce 20+ psychological creative variants and algorithmic bid rules in seconds—delivering 3x iteration tempo and 122% target performance.
+            Test Fabian's proprietary prompt architecture used to produce 20+ psychological creative variants and algorithmic bid rules in seconds—delivering 3x iteration tempo and +200% target performance.
           </p>
         </div>
 
@@ -145,7 +145,7 @@ export class AIGrowthLab {
           ]
         },
         cost: {
-          hook: "How we outpaced quarterly performance targets by 122% at Money Group (Full-Time) by eliminating low-intent ad auctions.",
+          hook: "How we scaled AI conversion leads by +200% at Red Ventures (Full-Time, edX) by eliminating low-intent friction.",
           variants: [
             { angle: "Capital Efficiency (Founder Hook)", copy: "Stop spending $150 to acquire a customer worth $120. Unit-economics modeling directly informing ad set budgets.", ctr: "4.8% Est. CTR" }
           ]

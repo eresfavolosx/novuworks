@@ -137,7 +137,7 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
       anomalies.push({ eventId: event.id, diagnosis: diagnosis.text });
     }
   }
-  return anomalies; // Delivers 122% bonus pacing with zero attribution loss
+  return anomalies; // Delivers high-intent ROAS pacing with zero attribution loss
 }`,
         metrics: {
           scanned: 'Continuous Live Stream',
@@ -147,7 +147,7 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
         },
         output: [
           { agent: 'Agent-Attribution-01', status: 'ACTIVE', latency: '24ms', verdict: '5 Verticals Monitored · 0 Tracking Anomalies' },
-          { agent: 'Agent-Payout-Restructure', status: 'ACTIVE', latency: '36ms', verdict: 'Unit Payouts Standardized to $250 (122% Pacing)' },
+          { agent: 'Agent-Payout-Restructure', status: 'ACTIVE', latency: '36ms', verdict: 'Unit Rates Optimized from $25 to $35 (Verified Pacing)' },
           { agent: 'Agent-Creative-Velocity', status: 'IDLE', latency: '18ms', verdict: '20+ Variant Hooks Generated (3x Tempo)' },
         ],
       },

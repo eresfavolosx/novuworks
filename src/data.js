@@ -24,14 +24,14 @@ export const PROFILE = {
     website: 'https://novu.works',
   },
   summary:
-    'Technical Product Manager, Performance Marketing Lead & AI Engineer with 8+ years of experience bridging ad-tech infrastructure, AI automation, and high-ROI media buying. Proven track record directing Agile teams, executing 360° campaigns generating $10M+ revenue, querying 40M+ sessions in Databricks SQL, and scaling agentic workflows across a $1B+ portfolio.',
+    'Dynamic Performance Marketing Lead and Technical Product Manager with 8+ years of experience bridging ad-tech infrastructure, AI automation, and high-ROI media buying. Proven track record of directing Agile marketing teams, executing 360° digital campaigns that generated $10M+ in revenue, and optimizing conversion pipelines. Highly resourceful leader equipped with deep technical fluency in data analytics (Databricks, SQL) and agentic workflows, enabling seamless collaboration with stakeholders to drive user acquisition and maximize marketing operational efficiency.',
   status: 'Open to High-Impact Roles at AI / Tech Companies (Growth Engineering Lead, AI Technical Product Owner, Forward Deployed Analytics, Tech Ops Director).',
 
   headlineStats: [
-    { label: 'Quarterly Bonus Delivered', value: '122%', sub: 'Delivered at Money Group (Full-Time)' },
-    { label: 'Pipeline Generated', value: '$10M+', sub: 'Across 150+ B2B commercial accounts' },
+    { label: 'Automated AI Workflows', value: '20+', sub: 'Money Group (Full-Time) · Anthropic Claude' },
+    { label: 'AI Lead Growth Lift', value: '+200%', sub: 'Red Ventures (Full-Time, edX) · +38.1% Verifications' },
+    { label: 'Pipeline Generated', value: '$10M+', sub: 'Viva Advertising (My Company) · 150+ Accounts' },
     { label: 'Client Churn Suppression', value: '-83%', sub: 'Reduced from 30% to 5% via CRM predictive modeling' },
-    { label: 'Creative Testing Velocity', value: '3x', sub: 'Via automated AI prompt & telemetry agents' },
     { label: 'Databricks Telemetry', value: '40M+', sub: 'SQL & Python normalized sessions on edX' },
   ],
 
@@ -43,18 +43,14 @@ export const PROFILE = {
     master: {
       id: 'master',
       label: '🚀 All-Round Master',
-      shortTitle: 'Technical Product Manager & Growth Lead',
-      headline: 'Technical Product Manager & Performance Marketing Lead',
+      shortTitle: 'Performance Marketing Lead & Technical Product Manager',
+      headline: 'Performance Marketing Lead & Technical Product Manager',
       summary:
-        'Technical Product Manager & Performance Marketing Lead with 8+ years of experience bridging ad-tech infrastructure, AI automation, and high-ROI media buying. Proven track record of directing Agile marketing teams, executing 360° digital campaigns that generated $10M+ in revenue, and optimizing conversion pipelines. Highly resourceful leader equipped with deep technical fluency in data analytics (Databricks, SQL) and agentic workflows, enabling seamless collaboration with stakeholders to drive user acquisition and maximize operational efficiency.',
+        'Dynamic Performance Marketing Lead and Technical Product Manager with 8+ years of experience bridging ad-tech infrastructure, AI automation, and high-ROI media buying. Proven track record of directing Agile marketing teams, executing 360° digital campaigns that generated $10M+ in revenue, and optimizing conversion pipelines. Highly resourceful leader equipped with deep technical fluency in data analytics (Databricks, SQL) and agentic workflows, enabling seamless collaboration with stakeholders to drive user acquisition and maximize marketing operational efficiency.',
       skills: [
         {
           title: 'Performance Marketing & Revenue Ops',
           items: 'Media Buying | 360° Campaign Management | SEO & Lead Generation | ROAS Optimization | B2B & B2C Strategy',
-        },
-        {
-          title: 'Marketing Platforms & CRM',
-          items: 'Google Ads, Meta Business Suite, TikTok Ads, HubSpot, Salesforce, Google Analytics (GA4)',
         },
         {
           title: 'Product & Project Management',
@@ -68,16 +64,20 @@ export const PROFILE = {
           title: 'AI & Automation Strategy',
           items: 'Generative AI | Agentic Workflows | LLM APIs (Anthropic Claude, OpenAI Codex, Gemini) | Process Automation',
         },
+        {
+          title: 'Marketing Platforms & CRM',
+          items: 'Google Ads, Meta Business Suite, TikTok Ads, HubSpot, Salesforce, Google Analytics (GA4)',
+        },
       ],
       experiences: [
         {
           company: 'Money Group',
           employmentType: 'Full-Time',
-          role: 'Media Buyer (Ad-Tech & AI Operations) — Full-Time',
+          role: 'Media Buyer — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
-            'Performance Media & Ad-Tech: Managed over $100K+ in ad spend across a wide array of verticals in performance-based and flat-fee deals, concurrently supporting the development of proprietary internal ad-tech tools and an AI-powered website builder to optimize revenue operations for a 100+ employee organization.',
-            'Campaign Automation: Directed the engineering of 20+ automated skills and agentic workflows using Anthropic Claude to generate complex performance reporting, track KPIs, and execute real-time marketing campaign adjustments.',
+            'Performance Media & Ad-Tech: Managed the development of proprietary internal ad-tech tools and an AI-powered website builder, driving company-wide adoption to optimize media buying and revenue operations across a 100+ employee organization.',
+            'Campaign Automation: Directed the engineering of 20+ automated agentic workflows using Anthropic Claude to generate complex performance reporting, track KPIs, and execute real-time marketing campaign adjustments.',
             'Agile Marketing Leadership: Orchestrated sprints in Asana and participated in the end-to-end lifecycle for over 30 new marketing technology features, architecting dynamic integrations via REST APIs.',
             'Operational Efficiency: Deployed unsupervised AI agents to autonomously manage internal business operations, real-time alerts, and correspondence routing, saving hundreds of hours across media and revenue teams.',
           ],
@@ -85,10 +85,10 @@ export const PROFILE = {
         {
           company: 'Red Ventures',
           employmentType: 'Full-Time',
-          role: 'Growth / SEO Analyst (Content & Systems, edX) — Full-Time',
+          role: 'Growth / SEO Analyst (edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
-            'SEO & Conversion Optimization: Led strategic deployment of Generative AI and logic-based front-end personalization rules across digital properties, achieving a +200% lift in AI-driven leads and a +38.1% verification increase.',
+            'SEO & Conversion Optimization: Led the strategic deployment of Generative AI and logic-based front-end personalization rules across digital properties, achieving a +200% lift in AI-driven leads and a +38.1% verification increase.',
             'Marketing Data Analytics: Leveraged Python and SQL (Databricks) to oversee scalable data pipelines, querying and reconciling massive datasets (40M+ sessions) to structure high-quality inputs for enterprise revenue analytics.',
             'Cross-Functional Tracking: Led cross-functional debugging via real-time monitoring dashboards, tracking system failures, QA tickets, and sprint deployments in Jira to ensure uninterrupted marketing performance.',
           ],
@@ -96,31 +96,32 @@ export const PROFILE = {
         {
           company: 'Viva Advertising',
           employmentType: 'My Company / Founder',
-          role: 'Founder & Managing Director (Client Solutions & Systems) — My Company / Founder',
+          role: 'Co-founder & Marketing VP — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
-            '360° Campaign Execution: Directed an Agile team of 15 (media buyers, designers, and developers), successfully executing full-funnel marketing campaigns that generated $10M+ in revenue and over 4 billion impressions.',
-            'Client Acquisition & Strategy: Translated client business goals into technical marketing execution, formulating ad-tech architecture plans to build high-converting platforms for 150+ enterprise clients.',
+            'Strategic Vision & Revenue Growth: Architected data-driven GTM strategies for a global digital ecosystem, generating 1B+ impressions and $10M+ in direct revenue. Managed a $50M+ opportunity pipeline, optimizing programmatic spend to maximize conversion rates.',
+            'Cross-Functional Leadership: Led an Agile multidisciplinary team of 15 (media buyers, designers, and developers), implementing productivity stacks (Asana, Jira) that increased project delivery throughput by 40% across 150+ concurrent enterprise projects.',
+            'Client Retention & Optimization: Architected a Sales Enablement framework utilizing predictive analytics to identify at-risk accounts, reducing client churn by 83% (from 30% to 5%).',
             'Marketing AI Automation: Architected end-to-end agentic workflows, integrating OpenAI Codex and Anthropic LLMs to automate complex content generation pipelines and eliminate marketing operational bottlenecks.',
           ],
         },
         {
           company: 'Link Puerto Rico',
           employmentType: 'My Company / Co-Founder',
-          role: 'Co-Founder & Technical Lead (Technical Program Manager) — My Company / Co-Founder',
+          role: 'Co-Founder & Technical Lead — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
-            'Product Launches & Growth: Managed deployment of scalable Azure infrastructure, successfully supporting 3.8K+ concurrent users for high-traffic platforms to drive engagement and retention.',
-            'Revenue Infrastructure & API Integration: Directed cross-functional teams in integrating secure JWT two-factor authentication (2FA) and ATH Móvil native payment APIs to process 50K+ paid user events.',
-            'Tech-Driven Community Building: Managed software development lifecycles (SDLC) for 80+ startups, directing the creation of an internal LMS to train and organically acquire 5,000+ local innovators.',
+            'Product Launches & Cloud Infrastructure: Managed deployment of scalable Azure infrastructure, successfully supporting 3.8K+ concurrent users for high-traffic platforms to drive engagement and retention. Managed resource groups and cost optimization for non-profit workloads.',
+            'Tech-Driven Community Building: Built and managed a technical ecosystem and developer community of 2,000+ developers, facilitating 50+ technical workshops on cloud technologies and software development for 5,000+ local innovators. Secured and managed $100k+ in grant funding for infrastructure projects.',
+            'Technical Stakeholder Communication & Startup Advisory: Advised 80+ enterprise startups on scalable data infrastructure and SDLC across 50,000+ paid user transactions, facilitating $3M+ in cumulative funding and sales.',
           ],
         },
       ],
       proofPoints: [
-        { metric: '122%', title: 'Bonus Target Delivered', sub: 'Money Group (Full-Time, ICS4)', desc: 'Delivered at 122% of quarterly bonus target within a $1B+ portfolio scope. Restructured partner unit payouts from $125 to $250.' },
-        { metric: '40M+', title: 'Databricks Sessions Normalized', sub: 'Red Ventures (Full-Time, edX)', desc: 'Queried and cleaned raw telemetry from scratch using Databricks SQL & Python across 40M+ sessions. Consolidated 1,250+ priority pages driving a 50%+ search lift and 19% YoY conversion gain.' },
-        { metric: '$10M+', title: 'Realized B2B Pipeline & -83% Churn', sub: 'Viva Advertising (My Company / Founder)', desc: 'Managed $2M+ ad spend and 4B+ impressions across 150+ commercial accounts. Built predictive CRM account-health models that slashed client churn from 30% to 5%.' },
-        { metric: '100+ PCs', title: 'Crisis IT Sourcing & Digital Libraries', sub: 'Link PR (My Company / Co-Founder)', desc: 'Internationally procured 100+ PCs and 50+ tablets in under 30 days during global supply shortages. Negotiated satellite internet and deployed MDM/firewalls for 1,000+ residents.' }
+        { metric: '20+', title: 'Automated AI Workflows Deployed', sub: 'Money Group (Full-Time, Ad-Tech & AI)', desc: 'Directed the engineering of 20+ automated agentic workflows using Anthropic Claude to generate complex performance reporting, track KPIs, and execute real-time campaign adjustments.' },
+        { metric: '+200%', title: 'AI-Driven Lead Lift', sub: 'Red Ventures (Full-Time, edX Platform)', desc: 'Led strategic deployment of Generative AI and logic-based front-end personalization rules across digital properties, achieving a +200% lift in AI-driven leads and +38.1% verification increase.' },
+        { metric: '$10M+', title: 'Realized Pipeline & -83% Churn', sub: 'Viva Advertising (My Company / Founder)', desc: 'Architected data-driven GTM strategies generating 1B+ impressions and $10M+ in direct revenue across 150+ concurrent enterprise projects, reducing churn by 83% (from 30% to 5%).' },
+        { metric: '40M+', title: 'Databricks Sessions Normalized', sub: 'Red Ventures (Full-Time, edX Lakehouse)', desc: 'Queried and cleaned raw telemetry from scratch using Databricks SQL & Python across 40M+ sessions to structure high-quality inputs for enterprise revenue analytics.' }
       ]
     },
 
@@ -210,7 +211,7 @@ export const PROFILE = {
       shortTitle: 'Performance Marketing & RevOps Lead',
       headline: 'Performance Marketing Strategist, Media Buyer & Revenue Operations Lead',
       summary:
-        'Data Analyst, Performance Marketing Strategist, and Technical Operator with 8+ Years of Experience managing $100K+ in direct media buying spend across competitive verticals. Proven track record auditing down-funnel financial attribution in Databricks SQL, executing down-funnel integrations to ensure 100% financial reporting accuracy, and delivering at 122% of quarterly bonus targets across a $10M+ commercial pipeline.',
+        'Data Analyst, Performance Marketing Strategist, and Technical Operator with 8+ Years of Experience managing $100K+ in direct media buying spend across competitive verticals. Proven track record auditing down-funnel financial attribution in Databricks SQL, executing down-funnel integrations to ensure 100% financial reporting accuracy, and driving market expansion across a $10M+ commercial pipeline.',
       skills: [
         {
           title: 'Revenue Operations & Financial Auditing',
@@ -284,9 +285,9 @@ export const PROFILE = {
         },
       ],
       proofPoints: [
-        { metric: '122%', title: 'Bonus Target Delivered', sub: 'Money Group (Full-Time, $1B+ Scope)', desc: 'Assumed control of 5 distinct verticals within 7 months, actively managing $100,000+ in campaign ad spend and delivering at 122% of quarterly bonus target.' },
-        { metric: '+$125', title: 'Partner Payout Restructuring', sub: 'Money Group (Full-Time, Down-Funnel Conversion)', desc: 'Restructured affiliate partner unit payouts from $125 to $250 by auditing down-funnel clinical conversion telemetry rather than superficial lead volume, protecting margins.' },
-        { metric: '1B+ Impr', title: 'Performance Media Buying', sub: 'Viva Advertising (My Company / Founder)', desc: 'Led performance marketing strategy across Google Ads, Meta, and Native channels, managing ad spend that generated 1B+ impressions and $2M+ in direct revenue.' },
+        { metric: '$25 to $35', title: 'Partner Unit Rates Optimized', sub: 'Money Group (Full-Time, Decision Science)', desc: 'Extracted and manipulated raw dataset metrics across 5 consumer verticals to develop forecasting models that optimized $100k+ in direct spend and increased partner unit rates from $25 to $35.' },
+        { metric: '100%', title: 'Financial Reporting Accuracy', sub: 'Money Group (Full-Time, RevOps Audits)', desc: 'Partnered with Revenue Operations to execute down-funnel integrations, troubleshoot partner-reported discrepancies, and audit payouts for 100% financial accuracy.' },
+        { metric: '1B+ Impr', title: 'Performance Media Buying', sub: 'Viva Advertising (My Company / Founder)', desc: 'Led performance marketing strategy across Google Ads, Meta, and Native channels, managing ad spend that generated 1B+ impressions and $10M+ in direct revenue.' },
         { metric: '-83%', title: 'Agency Client Churn Slashing', sub: 'Viva Advertising (My Company / Founder)', desc: 'Architected a client success framework leveraging predictive analytics to investigate account health, reducing agency client churn from 30% to 5%.' }
       ]
     },
@@ -509,7 +510,7 @@ export const PROFILE = {
       period: '2026',
       metrics: 'Three.js · Procedural Audio · 60 FPS WebGL',
       summary:
-        'Architected an interactive 3D WebGL arcade racing minigame embedded directly in the portfolio shell. Features procedural audio synthesis via Web Audio API, dynamic vehicle inertia physics, collectible MarTech currency (CAPI, ROAS, 122% Bonus Milestones), and obstacle avoidance.',
+        'Architected an interactive 3D WebGL arcade racing minigame embedded directly in the portfolio shell. Features procedural audio synthesis via Web Audio API, dynamic vehicle inertia physics, collectible MarTech currency (CAPI, ROAS, 88 MPH Milestones), and obstacle avoidance.',
       tags: ['Three.js', 'WebGL', 'Web Audio API', 'Procedural Shaders', 'Game Physics'],
     },
   ],
@@ -524,7 +525,7 @@ export const PROFILE = {
         'Media Buying ($100k+ Spend, $1B+ Portfolio)',
         'Server-Side Conversions API (CAPI) & Pixel Parity',
         'Spend-to-Pipeline Attribution & Opportunity Sizing',
-        'Unit Economics Restructuring ($125 to $250 Payouts)',
+        'Unit Economics Optimization ($25 to $35 Partner Rates)',
         'ROAS & Multi-Touch Conversion Modeling',
       ],
     },
@@ -568,12 +569,12 @@ export const PROFILE = {
       company: 'Money Group',
       employmentType: 'Full-Time',
       logoKey: 'moneyGroup',
-      role: 'Media Buyer (Ad-Tech, AI Operations & Revenue Analytics) — Full-Time',
+      role: 'Media Buyer — Full-Time',
       period: 'March 2026 – October 2026',
       bullets: [
-        'Performance Media & Ad-Tech: Managed over $100K+ in ad spend across a wide array of verticals in various performance-based and flat-fee deals, while concurrently supporting the development of proprietary internal ad-tech tools and an AI-powered website builder to optimize revenue operations for a 100+ employee organization.',
-        'Campaign Automation: Directed the engineering of 20+ automated skills and agentic workflows using Anthropic Claude to generate complex performance reporting, track KPIs, and execute real-time marketing campaign adjustments.',
-        'Agile Marketing Leadership: Orchestrated sprints in Asana and participated in the end-to-end lifecycle for over 30 new marketing technology features, architecting dynamic integrations via REST APIs.',
+        'Performance Media & Ad-Tech: Managed the development of proprietary internal ad-tech tools and an AI-powered website builder, driving company-wide adoption to optimize media buying and revenue operations across a 100+ employee organization.',
+        'Campaign Automation: Directed the engineering of 20+ automated agentic workflows using Anthropic Claude to generate complex performance reporting, track KPIs, and execute real-time marketing campaign adjustments.',
+        'Agile Marketing Leadership: Orchestrated sprints in Asana and managed the end-to-end lifecycle for over 30 new marketing technology features, architecting dynamic integrations via REST APIs.',
         'Operational Efficiency: Deployed unsupervised AI agents to autonomously manage internal business operations, real-time alerts, and correspondence routing, saving hundreds of hours across media and revenue teams.',
       ],
     },
@@ -581,7 +582,7 @@ export const PROFILE = {
       company: 'Red Ventures',
       employmentType: 'Full-Time',
       logoKey: 'redVentures',
-      role: 'Growth / SEO Analyst (Content & Audience Intelligence, edX) — Full-Time',
+      role: 'Growth / SEO Analyst (edX) — Full-Time',
       period: 'August 2024 – January 2026',
       bullets: [
         'SEO & Conversion Optimization: Led the strategic deployment of Generative AI and logic-based front-end personalization rules across digital properties, achieving a +200% lift in AI-driven leads and a +38.1% verification increase.',
@@ -593,24 +594,25 @@ export const PROFILE = {
       company: 'Viva Advertising',
       employmentType: 'My Company / Founder',
       logoKey: 'vivaAdvertising',
-      role: 'Founder & Managing Director (Client Solutions & Ad-Tech Systems) — My Company / Founder',
+      role: 'Co-founder & Marketing VP — My Company / Founder',
       period: 'January 2018 – Present',
       bullets: [
-        '360° Campaign Execution: Directed an Agile team of 15 (media buyers, designers, and developers), successfully executing full-funnel marketing campaigns that generated $10M+ in revenue and over 4 billion impressions.',
-        'Client Acquisition & Strategy: Translated client business goals into technical marketing execution, formulating ad-tech architecture plans to build high-converting platforms for 150+ enterprise clients.',
-        'Marketing AI Automation: Architected end-to-end agentic workflows, integrating OpenAI Codex and Anthropic LLMs to automate complex content generation pipelines, reducing client churn by 83% (from 30% to 5%).',
+        'Strategic Vision & Revenue Growth: Architected data-driven GTM strategies for a global digital ecosystem, generating 1B+ impressions and $10M+ in direct revenue. Managed a $50M+ opportunity pipeline, optimizing programmatic spend to maximize conversion rates.',
+        'Cross-Functional Leadership: Led an Agile multidisciplinary team of 15 (media buyers, designers, and developers), implementing productivity stacks (Asana, Jira) that increased project delivery throughput by 40% across 150+ concurrent enterprise projects.',
+        'Client Retention & Optimization: Architected a Sales Enablement framework utilizing predictive analytics to identify at-risk accounts, reducing client churn by 83% (from 30% to 5%).',
+        'Marketing AI Automation: Architected end-to-end agentic workflows, integrating OpenAI Codex and Anthropic LLMs to automate complex content generation pipelines and eliminate marketing operational bottlenecks.',
       ],
     },
     {
       company: 'Link Puerto Rico',
       employmentType: 'My Company / Co-Founder',
       logoKey: 'linkPR',
-      role: 'Co-Founder & Technical Lead (Technical Program Manager) — My Company / Co-Founder',
+      role: 'Co-Founder & Technical Lead — My Company / Co-Founder',
       period: 'November 2017 – Present',
       bullets: [
-        'Product Launches & Growth: Managed the deployment of scalable Azure infrastructure, successfully supporting 3.8K+ concurrent users for high-traffic platforms to drive engagement and retention.',
-        'Revenue Infrastructure & API Integration: Directed cross-functional teams in integrating secure JWT two-factor authentication (2FA) and ATH Móvil native payment APIs to process 50K+ paid user events.',
-        'Tech-Driven Community Building: Managed software development lifecycles (SDLC) for 80+ startups, directing the creation of an internal LMS to train and organically acquire 5,000+ local innovators.',
+        'Product Launches & Cloud Infrastructure: Managed deployment of scalable Azure infrastructure, successfully supporting 3.8K+ concurrent users for high-traffic platforms to drive engagement and retention. Managed resource groups and cost optimization for non-profit workloads.',
+        'Tech-Driven Community Building: Built and managed a technical ecosystem and developer community of 2,000+ developers, facilitating 50+ technical workshops on cloud technologies and software development for 5,000+ local innovators. Secured and managed $100k+ in grant funding for infrastructure projects.',
+        'Technical Stakeholder Communication & Startup Advisory: Advised 80+ enterprise startups on scalable data infrastructure and SDLC across 50,000+ paid user transactions, facilitating $3M+ in cumulative funding and sales.',
       ],
     },
   ],
@@ -758,14 +760,14 @@ export const PROFILE = {
       color: '#d4af37',
       metrics: {
         portfolio: '$1B+ Portfolio Scope',
-        pacing: '122% Bonus Target Delivered',
-        payouts: '2x High-Value Conversions',
+        pacing: '20+ AI Workflows Deployed',
+        payouts: '$25 to $35 Unit Rates',
       },
       summary: 'Moved beyond vanity clicks to tie advertising spend across Google, LinkedIn, and display directly to qualified opportunities and realized pipeline.',
       challenge: 'Fragmented lead-to-opportunity tracking, misaligned partner payouts, and slow creative testing cycles across 5 financial verticals.',
-      strategy: 'Restructured unit payouts from $125 to $250 to prioritize high-value conversions. Automated 20+ landing page tests and built AI telemetry anomaly detection agents.',
+      strategy: 'Optimized partner unit rates from $25 to $35 to prioritize high-value conversions. Automated 20+ landing page tests and built AI telemetry anomaly detection agents.',
       execution: 'Partnered with Sales and RevOps on standardized opportunity sizing models and deployed enterprise LLM agents to maintain 100% reporting accuracy in under 4 hours.',
-      impact: 'Delivered at 122% of quarterly bonus target and accelerated landing page testing velocity by 30% while restructuring partner payouts from $125 to $250.',
+      impact: 'Engineered 20+ automated agentic workflows using Anthropic Claude, accelerated landing page testing velocity by 30%, and increased partner unit rates from $25 to $35.',
     },
     {
       id: 'red-ventures-edx',
@@ -964,13 +966,13 @@ export const INTEL_POSTS = [
     tags: ['AdTech / Attribution', 'Applied AI', 'Growth Engineering'],
     title: 'The 2026 Media Buying Shift: Why Server-Side CAPI + Prompt Engineering Beats Pixel Reliance',
     summary:
-      'Browser privacy updates and ad-blockers cause 25–35% attribution loss on standard client-side pixels. Here is how we delivered at 122% of quarterly bonus target at Money Group (Full-Time) by coupling server-side Conversions API with 20+ automated AI anomaly agents.',
+      'Browser privacy updates and ad-blockers cause 25–35% attribution loss on standard client-side pixels. Here is how we scaled enterprise media operations at Money Group (Full-Time) by coupling server-side Conversions API with 20+ automated AI anomaly agents.',
     content: `
 <p>In traditional performance marketing, teams spend 80% of their time manually tweaking bids or arguing over which channel drove the lead. At <strong>Money Group (Full-Time)</strong>, managing multi-channel spend across 5 high-volume verticals within a $1B+ portfolio scope, we discarded manual intuition in favor of <strong>algorithmic revenue operations</strong>.</p>
 
 <div class="intel-highlight-card">
-  <div class="ih-num text-gold">122%</div>
-  <div class="ih-text">Quarterly bonus target delivered at 122% pacing by eliminating attribution loss and restructuring partner unit payouts from $125 to $250.</div>
+  <div class="ih-num text-gold">20+ Workflows</div>
+  <div class="ih-text">Automated agentic workflows deployed using Anthropic Claude, eliminating attribution loss and optimizing partner unit rates from $25 to $35.</div>
 </div>
 
 <h4>1. The Multi-Channel Discrepancy Trap</h4>
@@ -980,7 +982,7 @@ export const INTEL_POSTS = [
 const variance = Math.abs(event.clientConversions - event.serverCAPI) / event.serverCAPI;
 if (variance > 0.05) {
   // Divergence exceeds 5% threshold: trigger auto-reconciliation
-  await recalculatePartnerUnitPayout({ min: 125, target: 250 });
+  await recalculatePartnerUnitPayout({ min: 25, target: 35 });
 }</code></pre>
 
 <h4>2. Prompt Engineering as a Media Buying Force-Multiplier</h4>
@@ -994,7 +996,7 @@ if (variance > 0.05) {
       scale: 114,
       bookmarked: 67,
     },
-    metricsBadge: '122% Bonus Pacing · $1B+ Scope',
+    metricsBadge: '20+ AI Workflows · $1B+ Scope',
   },
   {
     id: 'post-02',
