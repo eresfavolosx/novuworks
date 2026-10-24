@@ -4708,18 +4708,127 @@ body.tesla-mode .hud-action-btn {
   color: #0f172a;
 }
 
-:root[data-theme="light"] .visualizer-hud,
-:root:has(> head > meta[name="color-scheme"][content="light"]) .visualizer-hud {
-  background: rgba(255, 255, 255, 0.94);
-  border-color: rgba(15, 23, 42, 0.12);
-  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.14);
+/* Sculpture Switcher Dock in Light Mode */
+:root[data-theme="light"] .sculpture-dock,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sculpture-dock {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(148, 104, 0, 0.22);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+:root[data-theme="light"] .dock-caption,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .dock-caption {
+  color: #785b24;
+}
+
+:root[data-theme="light"] .sculpture-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sculpture-pill {
+  color: #334155;
+  background: transparent;
+  border-color: transparent;
+}
+
+:root[data-theme="light"] .sculpture-pill:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sculpture-pill:hover {
+  background: rgba(148, 104, 0, 0.08);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .sculpture-pill.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sculpture-pill.active {
+  background: rgba(148, 104, 0, 0.12);
+  color: #78350f;
+  border-color: rgba(148, 104, 0, 0.45);
+  box-shadow: 0 0 12px rgba(148, 104, 0, 0.14);
+  font-weight: 600;
 }
 
 :root[data-theme="light"] .sculpture-pill.zen-pill,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .sculpture-pill.zen-pill {
   border-color: rgba(148, 104, 0, 0.35);
-  color: var(--gold-primary);
-  background: rgba(148, 104, 0, 0.06);
+  color: #92400e;
+  background: rgba(148, 104, 0, 0.08);
+}
+
+:root[data-theme="light"] .sculpture-pill.zen-pill:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sculpture-pill.zen-pill:hover {
+  background: rgba(148, 104, 0, 0.16);
+  color: #78350f;
+}
+
+/* 3D Visualizer HUD in Light Mode */
+:root[data-theme="light"] .visualizer-hud,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .visualizer-hud {
+  background: transparent;
+}
+
+:root[data-theme="light"] .visualizer-hud-inner,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .visualizer-hud-inner {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(148, 104, 0, 0.28);
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+:root[data-theme="light"] .viz-engine-label,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-engine-label {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .viz-engine-sub,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-engine-sub {
+  color: #64748b;
+}
+
+:root[data-theme="light"] .viz-morph-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-morph-pill {
+  color: #475569;
+}
+
+:root[data-theme="light"] .viz-morph-pill .viz-morph-index,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-morph-pill .viz-morph-index {
+  color: #785b24;
+}
+
+:root[data-theme="light"] .viz-morph-pill .viz-morph-name,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-morph-pill .viz-morph-name {
+  color: #334155;
+}
+
+:root[data-theme="light"] .viz-morph-pill:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-morph-pill:hover {
+  background: rgba(148, 104, 0, 0.08);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .viz-morph-pill.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-morph-pill.active {
+  background: rgba(148, 104, 0, 0.14);
+  border-color: rgba(148, 104, 0, 0.45);
+}
+
+:root[data-theme="light"] .viz-morph-pill.active .viz-morph-index,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-morph-pill.active .viz-morph-index {
+  color: #92400e;
+}
+
+:root[data-theme="light"] .viz-morph-pill.active .viz-morph-name,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-morph-pill.active .viz-morph-name {
+  color: #78350f;
+  font-weight: 700;
+}
+
+:root[data-theme="light"] .viz-btn-hud,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-btn-hud {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.15);
+}
+
+:root[data-theme="light"] .viz-hud-close,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .viz-hud-close {
+  background: rgba(148, 104, 0, 0.14);
+  color: #78350f;
+  border-color: rgba(148, 104, 0, 0.4);
 }
 
 /* Hero Typography & Scrim Adaptations in Light Mode */
