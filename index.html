@@ -221,12 +221,6 @@
             <span class="cmd-label">⌘K</span>
           </button>
 
-          <!-- Tesla Mode Switch -->
-          <button type="button" class="hud-action-btn tesla-toggle" id="btn-tesla-mode" title="Launch Tesla In-Car Fullscreen HUD Dashboard (Shortcut: T or Cmd+K)" aria-label="Launch Tesla Fullscreen HUD">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14v-5l-3-4H8l-3 4v5z"></path><circle cx="7.5" cy="17.5" r="2.5"></circle><circle cx="16.5" cy="17.5" r="2.5"></circle></svg>
-            <span class="btn-text" data-i18n="tesla_label">Tesla HUD</span>
-          </button>
-
           <!-- Audio Controls (Muted by Default) -->
           <button type="button" class="hud-action-btn audio-btn" id="btn-audio-toggle" title="Unmute Tactile Audio (Muted by Default)" aria-label="Toggle Audio">
             <svg class="icon-sound-on hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
@@ -245,7 +239,7 @@
           <div class="hero-editorial-container">
             <!-- Minimalist Top Kicker -->
             <div class="hero-kicker-row">
-              <span class="kicker-pill gold-pill" data-i18n="hero_kicker_lead">GROWTH & REVOPS LEAD</span>
+              <span class="kicker-pill gold-pill" data-i18n="hero_kicker_lead">THE RARE HYBRID · DESIGN × MARKETING × ENGINEERING</span>
               <span class="kicker-pill">MONEY GROUP · RED VENTURES</span>
               <span class="kicker-pill" data-i18n="hero_kicker_degree">COMPUTER ENGINEERING (4.0 GPA)</span>
               <span class="kicker-pill" data-i18n="hero_kicker_fellow">STANFORD INNOVATION FELLOW</span>
@@ -255,62 +249,50 @@
               </span>
             </div>
 
-            <!-- Dynamic Bilingual & Binary Headline Greeting Terminal -->
-            <div class="hero-greeting-terminal" id="hero-greeting-terminal" role="region" aria-label="Dynamic Bilingual and Binary Code Greeting Terminal">
-              <div class="terminal-bar">
-                <div class="terminal-left-group">
-                  <div class="terminal-dots" aria-hidden="true">
-                    <span class="t-dot dot-red"></span>
-                    <span class="t-dot dot-yellow"></span>
-                    <span class="t-dot dot-green"></span>
-                  </div>
-                  <span class="terminal-source-badge">
-                    <span class="status-pulse-dot"></span>
-                    <span class="greeting-stream-label" id="greeting-status-text" data-i18n="greeting_status_bilingual">Bilingual & Binary Dev Stream</span>
-                  </span>
+            <!-- The Hybrid Trifecta: Engineering Rigor · Design Polish · Growth Marketing -->
+            <div class="hero-hybrid-bar" id="hero-hybrid-bar" role="region" aria-label="Executive Hybrid Capabilities: Design, Marketing, and Technology">
+              <div class="hybrid-bar-header">
+                <div class="hybrid-badge">
+                  <span class="hybrid-badge-dot"></span>
+                  <span class="hybrid-badge-title" data-i18n="hybrid_badge_title">BEYOND CODE · THE TRIFECTA OF MASTERY</span>
                 </div>
-
-                <!-- Mode Selectors: EN / ES / 0101 BINARY -->
-                <div class="greeting-mode-pills" role="tablist" aria-label="Greeting Languages and Binary Mode">
-                  <button type="button" class="greeting-pill-btn active" data-mode="en" id="btn-greeting-mode-en" title="English Greeting: Hello" aria-label="English greeting: Hello" aria-pressed="true">
-                    <span class="pill-flag">🇺🇸</span> EN
-                  </button>
-                  <button type="button" class="greeting-pill-btn" data-mode="es" id="btn-greeting-mode-es" title="Saludo en Español: Hola (Completamente Bilingüe)" aria-label="Spanish greeting: Hola" aria-pressed="false">
-                    <span class="pill-flag">🇵🇷</span> ES
-                  </button>
-                  <button type="button" class="greeting-pill-btn" data-mode="bin" id="btn-greeting-mode-bin" title="UTF-8 Binary Code (Computer Engineering 4.0 GPA)" aria-label="Translate greeting to UTF-8 Binary Code" aria-pressed="false">
-                    <span class="pill-flag">⚡</span> 0101 BINARY
-                  </button>
-                  <button type="button" class="greeting-pill-btn action-pill" id="btn-headline-binary-toggle" title="Translate entire headline to Binary Code (Click to toggle)" aria-label="Toggle entire headline to binary code">
-                    <span class="pill-flag">💻</span> <span class="action-pill-text" id="headline-binary-label" data-i18n="btn_headline_binary">Binary Headline</span>
-                  </button>
-                </div>
+                <div class="hybrid-subtext" data-i18n="hybrid_badge_subtitle">A software engineer with exceptional design taste and multi-million dollar marketing instincts.</div>
               </div>
 
-              <div class="terminal-console-line">
-                <span class="console-prompt" aria-hidden="true">&gt;&nbsp;</span>
-                <span class="greeting-var-tag">headline.greeting:</span>
-                <span class="greeting-quote">"</span><span class="greeting-text-display" id="hero-greeting-text" aria-live="polite">Hello</span><span class="greeting-quote">"</span>
-                <span class="greeting-cursor" aria-hidden="true">_</span>
-                <span class="greeting-annotation-pill" id="hero-greeting-annotation">
-                  <span class="ann-dot"></span>
-                  <span class="ann-text" id="hero-greeting-ann-text" data-i18n="greeting_ann_en">🇺🇸 English · Native Bilingual</span>
-                </span>
-                <button type="button" class="greeting-copy-btn" id="btn-copy-greeting-binary" title="Copy binary code / text to clipboard" aria-label="Copy greeting to clipboard">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
-                  <span class="copy-label" data-i18n="btn_copy_label">Copy</span>
+              <div class="hybrid-pill-row" role="tablist" aria-label="Core Disciplines">
+                <button type="button" class="hybrid-pill active" data-discipline="all" id="pill-discipline-all" role="tab" aria-selected="true">
+                  <span class="pill-dot" style="background: var(--gold-primary);"></span>
+                  <span class="pill-text" data-i18n="pill_trifecta">✨ The Unified Hybrid</span>
                 </button>
+                <button type="button" class="hybrid-pill" data-discipline="design" id="pill-discipline-design" role="tab" aria-selected="false">
+                  <span class="pill-dot" style="background: #ec4899;"></span>
+                  <span class="pill-text" data-i18n="pill_design">🎨 Product & Experience Design</span>
+                </button>
+                <button type="button" class="hybrid-pill" data-discipline="marketing" id="pill-discipline-marketing" role="tab" aria-selected="false">
+                  <span class="pill-dot" style="background: #38bdf8;"></span>
+                  <span class="pill-text" data-i18n="pill_marketing">📈 Growth & Performance Marketing</span>
+                </button>
+                <button type="button" class="hybrid-pill" data-discipline="engineering" id="pill-discipline-engineering" role="tab" aria-selected="false">
+                  <span class="pill-dot" style="background: #34d399;"></span>
+                  <span class="pill-text" data-i18n="pill_engineering">⚡ Computer Engineering (4.0 GPA)</span>
+                </button>
+              </div>
+
+              <div class="hybrid-dynamic-lens" id="hybrid-dynamic-lens" aria-live="polite">
+                <div class="lens-statement" id="hybrid-statement">
+                  <!-- Injected dynamically by HybridTrifectaHero -->
+                </div>
               </div>
             </div>
 
             <!-- Grand Editorial Headline -->
             <h1 class="hero-title" data-i18n="hero_title" data-i18n-html="true">
               Quantitative Growth.<br />
-              <span class="editorial-serif">Architected for Scale.</span>
+              <span class="editorial-serif">Crafted by Engineering & Design.</span>
             </h1>
 
             <p class="hero-lead" data-i18n="hero_lead" data-i18n-html="true">
-              Operating at the intersection of <strong>Marketing, Product, and RevOps</strong> to bridge ad-tech infrastructure, AI automation, and high-ROI media buying across a <strong>$10M+ commercial pipeline</strong>. 
+              Operating at the intersection of <strong>Growth Marketing, Human-Centered Product Design, and Computer Engineering (4.0 GPA)</strong> to bridge ad-tech infrastructure, AI automation, and high-ROI media buying across a <strong>$10M+ commercial pipeline</strong>. 
               Engineered 20+ automated agentic workflows and proprietary ad-tech at <strong>Money Group (Full-Time)</strong>, led Generative AI personalization and 40M+ session analytics at <strong>Red Ventures (Full-Time, edX)</strong>, and directed 360° digital campaigns generating $10M+ across 150+ client accounts through his companies <strong>Viva Advertising (My Company / Founder)</strong>, <strong>Link Puerto Rico (My Company / Co-Founder)</strong>, and <strong>Novu Works (Technical Consultant)</strong>.
             </p>
 
@@ -373,8 +355,8 @@
               <div class="metric-divider"></div>
               <div class="metric-cell">
                 <span class="m-number" data-target="40" data-suffix="M+">40M+</span>
-                <span class="m-label" data-i18n="metric_5_label">Databricks Telemetry</span>
-                <span class="m-detail" data-i18n="metric_5_detail">Normalized Sessions on edX</span>
+                <span class="m-label" data-i18n="metric_5_label">Sessions Analyzed</span>
+                <span class="m-detail" data-i18n="metric_5_detail">Product & Growth Analytics (edX)</span>
               </div>
             </div>
 
@@ -383,13 +365,12 @@
 
             <!-- Minimalist Floating 3D Sculpture Switcher -->
             <div class="sculpture-dock">
-              <span class="dock-caption" data-i18n="dock_caption">Interactive 3D Matrix:</span>
+              <span class="dock-caption" data-i18n="dock_caption">3D Art Direction:</span>
               <div class="dock-buttons">
                 <button type="button" class="sculpture-pill" data-morph="0" data-i18n="dock_btn_0">01 · NW Monogram</button>
-                <button type="button" class="sculpture-pill active" data-morph="1" data-i18n="dock_btn_1">02 · Möbius Growth Flow</button>
-                <button type="button" class="sculpture-pill" data-morph="2" data-i18n="dock_btn_2">03 · Quantum AI Prism</button>
+                <button type="button" class="sculpture-pill active" data-morph="1" data-i18n="dock_btn_1">02 · Möbius Growth Curve</button>
+                <button type="button" class="sculpture-pill" data-morph="2" data-i18n="dock_btn_2">03 · Geometric AI Prism</button>
                 <button type="button" class="sculpture-pill zen-pill" id="btn-dock-view-canvas" title="Enter Fullscreen 3D Background Visualizer Mode" data-i18n="dock_btn_view">✨ View 3D Background</button>
-                <button type="button" class="sculpture-pill arcade-easter-pill" id="btn-open-arcade-pill" title="Play 3D Cyber Growth Racer Minigame" data-i18n="dock_btn_arcade">🎮 Cyber Arcade</button>
               </div>
             </div>
           </div>
@@ -884,18 +865,18 @@
               </div>
             </button>
 
-            <!-- Option 4: Technical Product & Leadership -->
+            <!-- Option 4: Product Design & UX Systems -->
             <button type="button" class="survey-card-btn" data-lens="tech_ops">
               <div class="sc-header">
-                <span class="sc-icon">👔</span>
-                <span class="sc-badge" data-i18n="survey_opt_4_badge">Engineering & Ops</span>
+                <span class="sc-icon">🎨</span>
+                <span class="sc-badge" data-i18n="survey_opt_4_badge">Design & UX</span>
               </div>
-              <h4 class="sc-title" data-i18n="survey_opt_4_title">Technical Product & Engineering</h4>
-              <p class="sc-desc" data-i18n="survey_opt_4_desc">B.S. Computer Engineering (4.0 GPA), Stanford Innovation Fellow, cross-functional Agile product management.</p>
+              <h4 class="sc-title" data-i18n="survey_opt_4_title">Product Design & UX Systems</h4>
+              <p class="sc-desc" data-i18n="survey_opt_4_desc">Human-centered design systems, conversion architecture, responsive mobile-first UX, luxury typography, and high-converting customer journeys.</p>
               <div class="sc-tags">
-                <span>Stanford Fellow</span>
-                <span>Agile / Jira</span>
-                <span>Comp. Engineering 4.0</span>
+                <span>Design Systems</span>
+                <span>UI/UX Architecture</span>
+                <span>Conversion Design</span>
               </div>
             </button>
           </div>

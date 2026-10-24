@@ -811,23 +811,24 @@ export const I18N_STRINGS = {
     lang_btn_title: 'Switch language / Cambiar idioma (EN / ES)',
 
     // Hero Kicker
-    hero_kicker_lead: 'GROWTH & REVOPS LEAD',
+    hero_kicker_lead: 'THE RARE HYBRID · DESIGN × MARKETING × ENGINEERING',
     hero_kicker_companies: 'MONEY GROUP · RED VENTURES',
     hero_kicker_degree: 'COMPUTER ENGINEERING (4.0 GPA)',
     hero_kicker_fellow: 'STANFORD INNOVATION FELLOW',
     hero_kicker_auth: '🇺🇸 US CITIZEN (NO SPONSORSHIP REQUIRED)',
     hero_kicker_pr: 'SAN JUAN, PUERTO RICO',
 
-    // Bilingual & Binary Greeting Stream
-    greeting_status_bilingual: 'Bilingual & Binary Dev Stream',
-    btn_headline_binary: 'Binary Headline',
-    btn_copy_label: 'Copy',
-    greeting_ann_en: '🇺🇸 English · Native Bilingual',
-    greeting_ann_es: '🇵🇷 Spanish · Native Language (San Juan, PR)',
+    // The Hybrid Trifecta Banner
+    hybrid_badge_title: 'BEYOND CODE · THE TRIFECTA OF MASTERY',
+    hybrid_badge_subtitle: 'A software engineer with exceptional design taste and multi-million dollar marketing instincts.',
+    pill_trifecta: '✨ The Unified Hybrid',
+    pill_design: '🎨 Product & Experience Design',
+    pill_marketing: '📈 Growth & Performance Marketing',
+    pill_engineering: '⚡ Computer Engineering (4.0 GPA)',
 
     // Hero Title & Lead
-    hero_title: 'Quantitative Growth.<br /><span class="editorial-serif">Architected for Scale.</span>',
-    hero_lead: 'Operating at the intersection of <strong>Marketing, Product, and RevOps</strong> to bridge ad-tech infrastructure, AI automation, and high-ROI media buying across a <strong>$10M+ commercial pipeline</strong>. Engineered 20+ automated agentic workflows and proprietary ad-tech at <strong>Money Group (Full-Time)</strong>, led Generative AI personalization and 40M+ session analytics at <strong>Red Ventures (Full-Time, edX)</strong>, and directed 360° digital campaigns generating $10M+ across 150+ client accounts through his companies <strong>Viva Advertising (My Company / Founder)</strong>, <strong>Link Puerto Rico (My Company / Co-Founder)</strong>, and <strong>Novu Works (Technical Consultant)</strong>.',
+    hero_title: 'Quantitative Growth.<br /><span class="editorial-serif">Crafted by Engineering & Design.</span>',
+    hero_lead: 'Operating at the intersection of <strong>Growth Marketing, Human-Centered Product Design, and Computer Engineering (4.0 GPA)</strong> to bridge ad-tech infrastructure, AI automation, and high-ROI media buying across a <strong>$10M+ commercial pipeline</strong>. Engineered 20+ automated agentic workflows and proprietary ad-tech at <strong>Money Group (Full-Time)</strong>, led Generative AI personalization and 40M+ session analytics at <strong>Red Ventures (Full-Time, edX)</strong>, and directed 360° digital campaigns generating $10M+ across 150+ client accounts through his companies <strong>Viva Advertising (My Company / Founder)</strong>, <strong>Link Puerto Rico (My Company / Co-Founder)</strong>, and <strong>Novu Works (Technical Consultant)</strong>.',
 
     // Hero Buttons
     btn_recruiter: '60s Recruiter Brief',
@@ -879,16 +880,16 @@ export const I18N_STRINGS = {
     metric_3_detail: 'Viva Advertising (My Company)',
     metric_4_label: 'Client Churn Suppression',
     metric_4_detail: 'Reduced Churn from 30% to 5%',
-    metric_5_label: 'Databricks Telemetry',
-    metric_5_detail: 'Normalized Sessions on edX',
+    metric_5_label: 'Sessions Analyzed',
+    metric_5_detail: 'Product & Growth Analytics (edX)',
 
     // Sculpture Dock
-    dock_caption: 'Interactive 3D Matrix:',
+    dock_caption: '3D Art Direction:',
     dock_btn_0: '01 · NW Monogram',
-    dock_btn_1: '02 · Möbius Growth Flow',
-    dock_btn_2: '03 · Quantum AI Prism',
+    dock_btn_1: '02 · Möbius Growth Curve',
+    dock_btn_2: '03 · Geometric AI Prism',
     dock_btn_view: '✨ View 3D Background',
-    dock_btn_arcade: '🎮 Cyber Arcade',
+    dock_btn_arcade: '✨ 3D Perspective',
 
     // Case Studies View
     catalog_kicker: 'VERIFIED MILESTONES & ARCHITECTURE',
@@ -969,9 +970,9 @@ export const I18N_STRINGS = {
     survey_opt_3_title: 'Big Data & Revenue Operations',
     survey_opt_3_badge: 'Analytics & BI',
     survey_opt_3_desc: '40M+ Databricks sessions, PySpark & SQL data pipelines, Microsoft Power BI, Azure/GCP infrastructure.',
-    survey_opt_4_title: 'Technical Product & Engineering',
-    survey_opt_4_badge: 'Engineering & Ops',
-    survey_opt_4_desc: 'B.S. Computer Engineering (4.0 GPA), Stanford Innovation Fellow, cross-functional Agile product management.',
+    survey_opt_4_title: 'Product Design & UX Systems',
+    survey_opt_4_badge: 'Design & UX',
+    survey_opt_4_desc: 'Human-centered design systems, conversion architecture, responsive mobile-first UX, luxury typography, and high-converting customer journeys.',
     survey_btn_skip: 'Skip · Explore All-Round Profile',
 
     // Mobile Dock
@@ -1007,23 +1008,24 @@ export const I18N_STRINGS = {
     lang_btn_title: 'Cambiar idioma / Switch language (ES / EN)',
 
     // Hero Kicker
-    hero_kicker_lead: 'LÍDER EN CRECIMIENTO Y REVOPS',
+    hero_kicker_lead: 'HÍBRIDO EXCEPCIONAL · DISEÑO × MERCADEO × INGENIERÍA',
     hero_kicker_companies: 'MONEY GROUP · RED VENTURES',
     hero_kicker_degree: 'INGENIERÍA EN COMPUTADORAS (4.0 GPA)',
     hero_kicker_fellow: 'BECARIO STANFORD INNOVATION',
     hero_kicker_auth: '🇺🇸 CIUDADANO EE.UU. (NO REQUIERE PATROCINIO)',
     hero_kicker_pr: 'SAN JUAN, PUERTO RICO',
 
-    // Bilingual & Binary Greeting Stream
-    greeting_status_bilingual: 'Flujo de Desarrollo Bilingüe y Binario',
-    btn_headline_binary: 'Titular en Binario',
-    btn_copy_label: 'Copiar',
-    greeting_ann_en: '🇺🇸 Inglés · Bilingüe Nativo',
-    greeting_ann_es: '🇵🇷 Español · Lengua Materna (San Juan, PR)',
+    // The Hybrid Trifecta Banner
+    hybrid_badge_title: 'MÁS ALLÁ DEL CÓDIGO · LA TRIFECTA DE MAESTRÍA',
+    hybrid_badge_subtitle: 'Un ingeniero de software con excepcional gusto por el diseño e instinto de mercadeo multimillonario.',
+    pill_trifecta: '✨ El Híbrido Unificado',
+    pill_design: '🎨 Diseño de Producto y Experiencia',
+    pill_marketing: '📈 Mercadeo de Crecimiento y Rendimiento',
+    pill_engineering: '⚡ Ingeniería de Computadoras (4.0 GPA)',
 
     // Hero Title & Lead
-    hero_title: 'Crecimiento Cuantitativo.<br /><span class="editorial-serif">Arquitectado para Escalar.</span>',
-    hero_lead: 'Operando en la intersección de <strong>Mercadeo, Producto y RevOps</strong> para conectar infraestructura ad-tech, automatización con IA y compra de medios de alto ROI a través de un pipeline comercial de más de <strong>$10M</strong>. Desarrolló más de 20 flujos de trabajo agénticos automatizados y tecnología publicitaria propietaria en <strong>Money Group (Tiempo Completo)</strong>, lideró la personalización con IA generativa y la analítica de más de 40M de sesiones en <strong>Red Ventures (Tiempo Completo, edX)</strong>, y dirigió campañas digitales de 360° generando más de $10M en más de 150 cuentas de clientes a través de sus empresas <strong>Viva Advertising (Mi Empresa / Fundador)</strong>, <strong>Link Puerto Rico (Mi Empresa / Co-Fundador)</strong> y <strong>Novu Works (Consultor Técnico)</strong>.',
+    hero_title: 'Crecimiento Cuantitativo.<br /><span class="editorial-serif">Forjado con Diseño e Ingeniería.</span>',
+    hero_lead: 'Operando en la intersección de <strong>Mercadeo de Crecimiento, Diseño de Producto Centrado en el Usuario e Ingeniería de Computadoras (4.0 GPA)</strong> para conectar infraestructura ad-tech, automatización con IA y compra de medios de alto ROI a través de un pipeline comercial de más de <strong>$10M</strong>. Desarrolló más de 20 flujos agénticos automatizados y tecnología publicitaria en <strong>Money Group (Tiempo Completo)</strong>, lideró la personalización con IA generativa y analítica de más de 40M de sesiones en <strong>Red Ventures (Tiempo Completo, edX)</strong>, y dirigió campañas digitales de 360° generando más de $10M en más de 150 cuentas de clientes a través de sus empresas <strong>Viva Advertising (Mi Empresa / Fundador)</strong>, <strong>Link Puerto Rico (Mi Empresa / Co-Fundador)</strong> y <strong>Novu Works (Consultor Técnico)</strong>.',
 
     // Hero Buttons
     btn_recruiter: 'Resumen de Reclutador (60s)',
@@ -1075,16 +1077,16 @@ export const I18N_STRINGS = {
     metric_3_detail: 'Viva Advertising (Mi Empresa)',
     metric_4_label: 'Supresión de Pérdida de Clientes',
     metric_4_detail: 'Reducción de churn del 30% al 5%',
-    metric_5_label: 'Telemetría en Databricks',
-    metric_5_detail: 'Sesiones Normalizadas en edX',
+    metric_5_label: 'Sesiones Analizadas',
+    metric_5_detail: 'Analítica de Producto y Crecimiento (edX)',
 
     // Sculpture Dock
-    dock_caption: 'Matriz 3D Interactiva:',
+    dock_caption: 'Dirección de Arte 3D:',
     dock_btn_0: '01 · Monograma NW',
-    dock_btn_1: '02 · Flujo Möbius',
-    dock_btn_2: '03 · Prisma Cuántico IA',
+    dock_btn_1: '02 · Curva de Crecimiento Möbius',
+    dock_btn_2: '03 · Prisma Geométrico IA',
     dock_btn_view: '✨ Ver Fondo 3D',
-    dock_btn_arcade: '🎮 Arcade Cibernético',
+    dock_btn_arcade: '✨ Perspectiva 3D',
 
     // Case Studies View
     catalog_kicker: 'HITOS Y ARQUITECTURA VERIFICADA',
@@ -1165,9 +1167,9 @@ export const I18N_STRINGS = {
     survey_opt_3_title: 'Big Data y Operaciones de Ingresos',
     survey_opt_3_badge: 'Analítica y BI',
     survey_opt_3_desc: 'Más de 40M de sesiones en Databricks, pipelines de datos en PySpark y SQL, Microsoft Power BI, infraestructura Azure/GCP.',
-    survey_opt_4_title: 'Producto Técnico e Ingeniería',
-    survey_opt_4_badge: 'Ingeniería y Operaciones',
-    survey_opt_4_desc: 'B.S. en Ingeniería de Computadoras (Promedio 4.0), Becario de Innovación en Stanford, gestión de producto técnica ágil y multidisciplinaria.',
+    survey_opt_4_title: 'Diseño de Producto y Sistemas UX',
+    survey_opt_4_badge: 'Diseño y UX',
+    survey_opt_4_desc: 'Sistemas de diseño centrados en las personas, arquitectura de conversión, UX responsivo para móviles, tipografía de lujo y embudos de alta conversión.',
     survey_btn_skip: 'Omitir · Explorar Perfil Completo',
 
     // Mobile Dock
