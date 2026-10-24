@@ -783,6 +783,13 @@ export const I18N_STRINGS = {
     hero_kicker_auth: '🇺🇸 US CITIZEN (NO SPONSORSHIP REQUIRED)',
     hero_kicker_pr: 'SAN JUAN, PUERTO RICO',
 
+    // Bilingual & Binary Greeting Stream
+    greeting_status_bilingual: 'Bilingual & Binary Dev Stream',
+    btn_headline_binary: 'Binary Headline',
+    btn_copy_label: 'Copy',
+    greeting_ann_en: '🇺🇸 English · Native Bilingual',
+    greeting_ann_es: '🇵🇷 Spanish · Native Language (San Juan, PR)',
+
     // Hero Title & Lead
     hero_title: 'Quantitative Growth.<br /><span class="editorial-serif">Architected for Scale.</span>',
     hero_lead: 'Operating at the intersection of <strong>Marketing, Product, and RevOps</strong> to bridge ad-tech infrastructure, AI automation, and high-ROI media buying across a <strong>$10M+ commercial pipeline</strong>. Engineered 20+ automated agentic workflows and proprietary ad-tech at <strong>Money Group (Full-Time)</strong>, led Generative AI personalization and 40M+ session analytics at <strong>Red Ventures (Full-Time, edX)</strong>, and directed 360° digital campaigns generating $10M+ across 150+ client accounts through his companies <strong>Viva Advertising (My Company / Founder)</strong>, <strong>Link Puerto Rico (My Company / Co-Founder)</strong>, and <strong>Novu Works (Technical Consultant)</strong>.',
@@ -939,6 +946,13 @@ export const I18N_STRINGS = {
     hero_kicker_fellow: 'BECARIO STANFORD INNOVATION',
     hero_kicker_auth: '🇺🇸 CIUDADANO EE.UU. (NO REQUIERE PATROCINIO)',
     hero_kicker_pr: 'SAN JUAN, PUERTO RICO',
+
+    // Bilingual & Binary Greeting Stream
+    greeting_status_bilingual: 'Flujo de Desarrollo Bilingüe y Binario',
+    btn_headline_binary: 'Titular en Binario',
+    btn_copy_label: 'Copiar',
+    greeting_ann_en: '🇺🇸 Inglés · Bilingüe Nativo',
+    greeting_ann_es: '🇵🇷 Español · Lengua Materna (San Juan, PR)',
 
     // Hero Title & Lead
     hero_title: 'Crecimiento Cuantitativo.<br /><span class="editorial-serif">Arquitectado para Escalar.</span>',
@@ -1221,8 +1235,15 @@ export function switchLanguage(lang, appInstance, showNotification = true) {
       if (typeof appInstance.renderPrintableResume === 'function') appInstance.renderPrintableResume();
       if (typeof appInstance.updateRecruiterScorecard === 'function') appInstance.updateRecruiterScorecard();
       if (typeof appInstance.setRoleLens === 'function') appInstance.setRoleLens(appInstance.activeRoleLens || 'master');
+      if (appInstance.bilingualHero && typeof appInstance.bilingualHero.setLanguage === 'function') {
+        appInstance.bilingualHero.setLanguage(lang);
+      }
     } catch (err) {
       console.warn('Re-rendering error upon language switch:', err);
+    }
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('novu:language-changed', { detail: { lang } }));
     }
 
     if (showNotification && typeof appInstance.showToast === 'function') {

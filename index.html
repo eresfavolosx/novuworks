@@ -261,6 +261,54 @@
               </span>
             </div>
 
+            <!-- Dynamic Bilingual & Binary Headline Greeting Terminal -->
+            <div class="hero-greeting-terminal" id="hero-greeting-terminal" role="region" aria-label="Dynamic Bilingual and Binary Code Greeting Terminal">
+              <div class="terminal-bar">
+                <div class="terminal-left-group">
+                  <div class="terminal-dots" aria-hidden="true">
+                    <span class="t-dot dot-red"></span>
+                    <span class="t-dot dot-yellow"></span>
+                    <span class="t-dot dot-green"></span>
+                  </div>
+                  <span class="terminal-source-badge">
+                    <span class="status-pulse-dot"></span>
+                    <span class="greeting-stream-label" id="greeting-status-text" data-i18n="greeting_status_bilingual">Bilingual & Binary Dev Stream</span>
+                  </span>
+                </div>
+
+                <!-- Mode Selectors: EN / ES / 0101 BINARY -->
+                <div class="greeting-mode-pills" role="tablist" aria-label="Greeting Languages and Binary Mode">
+                  <button type="button" class="greeting-pill-btn active" data-mode="en" id="btn-greeting-mode-en" title="English Greeting: Hello" aria-label="English greeting: Hello" aria-pressed="true">
+                    <span class="pill-flag">🇺🇸</span> EN
+                  </button>
+                  <button type="button" class="greeting-pill-btn" data-mode="es" id="btn-greeting-mode-es" title="Saludo en Español: Hola (Completamente Bilingüe)" aria-label="Spanish greeting: Hola" aria-pressed="false">
+                    <span class="pill-flag">🇵🇷</span> ES
+                  </button>
+                  <button type="button" class="greeting-pill-btn" data-mode="bin" id="btn-greeting-mode-bin" title="UTF-8 Binary Code (Computer Engineering 4.0 GPA)" aria-label="Translate greeting to UTF-8 Binary Code" aria-pressed="false">
+                    <span class="pill-flag">⚡</span> 0101 BINARY
+                  </button>
+                  <button type="button" class="greeting-pill-btn action-pill" id="btn-headline-binary-toggle" title="Translate entire headline to Binary Code (Click to toggle)" aria-label="Toggle entire headline to binary code">
+                    <span class="pill-flag">💻</span> <span class="action-pill-text" id="headline-binary-label" data-i18n="btn_headline_binary">Binary Headline</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="terminal-console-line">
+                <span class="console-prompt" aria-hidden="true">&gt;&nbsp;</span>
+                <span class="greeting-var-tag">headline.greeting:</span>
+                <span class="greeting-quote">"</span><span class="greeting-text-display" id="hero-greeting-text" aria-live="polite">Hello</span><span class="greeting-quote">"</span>
+                <span class="greeting-cursor" aria-hidden="true">_</span>
+                <span class="greeting-annotation-pill" id="hero-greeting-annotation">
+                  <span class="ann-dot"></span>
+                  <span class="ann-text" id="hero-greeting-ann-text" data-i18n="greeting_ann_en">🇺🇸 English · Native Bilingual</span>
+                </span>
+                <button type="button" class="greeting-copy-btn" id="btn-copy-greeting-binary" title="Copy binary code / text to clipboard" aria-label="Copy greeting to clipboard">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+                  <span class="copy-label" data-i18n="btn_copy_label">Copy</span>
+                </button>
+              </div>
+            </div>
+
             <!-- Grand Editorial Headline -->
             <h1 class="hero-title" data-i18n="hero_title" data-i18n-html="true">
               Quantitative Growth.<br />

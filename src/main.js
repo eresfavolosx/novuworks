@@ -14,6 +14,7 @@ import { CyberArcadeGame } from './game-easter-egg.js';
 import { VisitorTools } from './visitor-tools.js';
 import { GitHubRadar } from './github-radar.js';
 import { SpatialImmersionEngine } from './spatial-immersion.js';
+import { BilingualBinaryHero } from './bilingual-binary-hero.js';
 import { initFirebase, logCandidateEvent } from './firebase.js';
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
@@ -258,6 +259,14 @@ class FabianPortfolioApp {
 
     // 7e. Initialize Live Puerto Rico Weather (Open-Meteo REST API)
     this.initPuertoRicoWeather();
+
+    // 7f. Initialize Dynamic Bilingual & Binary Headline Greeting Stream
+    try {
+      this.bilingualHero = new BilingualBinaryHero(this);
+      this.bilingualHero.init();
+    } catch (e) {
+      console.warn('Bilingual Binary Hero init notice:', e);
+    }
 
     // 8. Run initial metric count-up animation
     this.animateCounters();
@@ -1741,6 +1750,9 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
   setLanguage(lang) {
     audio.confirm();
     this.currentLang = switchLanguage(lang, this, true);
+    if (this.bilingualHero && typeof this.bilingualHero.setLanguage === 'function') {
+      this.bilingualHero.setLanguage(lang);
+    }
   }
 
   getLanguage() {
