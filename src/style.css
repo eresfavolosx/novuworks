@@ -9505,6 +9505,386 @@ body.visualizer-mode #toast-banner {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Dual Channel Switcher (WhatsApp vs Executive Email)
+   ───────────────────────────────────────────────────────────── */
+.chat-channel-switcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.channel-switch-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+  transition: all 0.22s var(--ease-luxury);
+  position: relative;
+  overflow: hidden;
+}
+
+.channel-switch-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.channel-switch-btn.active#tab-chat-whatsapp {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.16) 0%, rgba(18, 140, 126, 0.12) 100%);
+  border-color: rgba(37, 211, 102, 0.55);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 16px rgba(37, 211, 102, 0.22);
+}
+
+.channel-switch-btn.active#tab-chat-email {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(180, 140, 30, 0.12) 100%);
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 16px rgba(212, 175, 55, 0.22);
+}
+
+.channel-btn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.wa-accent {
+  background: rgba(37, 211, 102, 0.16);
+  color: #25D366;
+}
+
+.channel-switch-btn.active .wa-accent {
+  background: #25D366;
+  color: #0c1015;
+  box-shadow: 0 0 12px rgba(37, 211, 102, 0.6);
+}
+
+.email-accent {
+  background: rgba(212, 175, 55, 0.16);
+  color: var(--gold-light);
+}
+
+.channel-switch-btn.active .email-accent {
+  background: var(--gold-primary);
+  color: #0c1015;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+
+.channel-btn-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.channel-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.channel-name {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.channel-pill {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1.5px 6px;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wa-pill {
+  background: rgba(37, 211, 102, 0.2);
+  color: #a7f3d0;
+  border: 1px solid rgba(37, 211, 102, 0.35);
+}
+
+.email-pill {
+  background: rgba(212, 175, 55, 0.2);
+  color: #fde68a;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.channel-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Channel Panels */
+.chat-channel-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeInPanel 0.22s var(--ease-luxury);
+}
+
+.chat-channel-panel[hidden] {
+  display: none !important;
+}
+
+@keyframes fadeInPanel {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Executive Email Identity Card */
+.email-identity-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(212, 175, 55, 0.06) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+.email-info-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.email-meta-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+}
+
+.email-address-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.email-address-text {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+.email-verified-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: #25D366;
+  background: rgba(37, 211, 102, 0.12);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  padding: 2px 7px;
+  border-radius: 9999px;
+  letter-spacing: 0.03em;
+}
+
+.email-response-time {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.email-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.email-action-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.copy-pill {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.copy-pill:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.mailto-pill {
+  background: linear-gradient(135deg, var(--gold-primary) 0%, #b8972e 100%);
+  color: #0c1015;
+  font-weight: 700;
+}
+
+.mailto-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+}
+
+.gmail-pill {
+  background: rgba(234, 67, 53, 0.14);
+  color: #fca5a5;
+  border-color: rgba(234, 67, 53, 0.35);
+}
+
+.gmail-pill:hover {
+  background: rgba(234, 67, 53, 0.25);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Email Starters Arrow color override */
+.email-arrow-col {
+  color: var(--gold-primary) !important;
+}
+
+/* Email Composer Box */
+.email-composer-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.email-composer-box.composer-highlight {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.3);
+}
+
+.chat-subject-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 4px 0 8px 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.chat-subject-input::placeholder {
+  color: #64748b;
+  font-weight: normal;
+}
+
+.chat-subject-input:focus {
+  border-bottom-color: var(--gold-primary);
+}
+
+.composer-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.email-send-btn {
+  background: linear-gradient(135deg, var(--gold-primary) 0%, #b8972e 100%) !important;
+  color: #0c1015 !important;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3) !important;
+}
+
+.email-send-btn:hover {
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45) !important;
+}
+
+.chat-send-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chat-send-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Nudge Switch Banners */
+.channel-switch-nudge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.nudge-switch-btn {
+  background: transparent;
+  border: none;
+  color: var(--gold-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.nudge-switch-btn:hover {
+  color: var(--gold-light);
+}
+
+/* ─────────────────────────────────────────────────────────────
    Persistent Floating WhatsApp Concierge Pill
    ───────────────────────────────────────────────────────────── */
 .floating-whatsapp-badge {
@@ -9707,6 +10087,60 @@ body.visualizer-mode #toast-banner {
   color: #059669;
 }
 
+:root[data-theme="light"] .chat-channel-switcher,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .chat-channel-switcher {
+  background: #f1f5f9;
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .channel-switch-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .channel-switch-btn {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+:root[data-theme="light"] .channel-name,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .channel-name {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .email-identity-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .email-identity-card {
+  background: #f8fafc;
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+:root[data-theme="light"] .email-address-text,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .email-address-text {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .copy-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .copy-pill {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+:root[data-theme="light"] .chat-subject-input,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .chat-subject-input {
+  color: #0f172a;
+  border-bottom-color: #cbd5e1;
+}
+
+:root[data-theme="light"] .chat-send-btn-secondary,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .chat-send-btn-secondary {
+  background: #ffffff;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+:root[data-theme="light"] .channel-switch-nudge,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .channel-switch-nudge {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
 @media (max-width: 768px) {
   .floating-whatsapp-badge {
     bottom: calc(76px + env(safe-area-inset-bottom, 0px));
@@ -9742,6 +10176,53 @@ body.visualizer-mode #toast-banner {
 
   .chat-title-name {
     font-size: 15px;
+  }
+
+  .chat-channel-switcher {
+    padding: 8px 14px;
+    gap: 6px;
+  }
+
+  .channel-switch-btn {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .channel-btn-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .channel-name {
+    font-size: 12px;
+  }
+
+  .channel-pill {
+    display: none;
+  }
+
+  .channel-desc {
+    font-size: 9.5px;
+  }
+
+  .email-quick-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .email-action-pill {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .composer-actions-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .composer-actions-row button {
+    width: 100%;
+    justify-content: center;
   }
 }
 

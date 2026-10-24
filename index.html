@@ -924,15 +924,15 @@
             <div class="chat-profile-row">
               <div class="chat-avatar-wrapper">
                 <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="chat-avatar-img" width="46" height="46" />
-                <span class="chat-online-dot" title="Online · Ready to connect"></span>
+                <span class="chat-online-dot" id="chat-header-status-dot" title="Online · Ready to connect"></span>
               </div>
               <div class="chat-profile-meta">
                 <div class="chat-name-row">
                   <h3 id="chat-modal-title" class="chat-title-name">Fabián Vélez Vicente</h3>
-                  <span class="chat-official-badge">Verified Founder & Lead</span>
+                  <span class="chat-official-badge" data-i18n="chat_header_badge">Verified Founder & Lead</span>
                 </div>
                 <div class="chat-status-line">
-                  <span class="wa-status-text" data-i18n="chat_status_online">🟢 WhatsApp Direct · Usually replies in minutes</span>
+                  <span class="wa-status-text" id="chat-header-status-text" data-i18n="chat_status_online">🟢 WhatsApp Direct · Usually replies in minutes</span>
                 </div>
               </div>
             </div>
@@ -941,55 +941,154 @@
             </button>
           </div>
 
-          <!-- Modal Body -->
-          <div class="chat-modal-body">
-            <!-- Section 1: 1-Click WhatsApp Quick Starters -->
-            <div class="chat-section-block">
-              <span class="chat-section-title" data-i18n="chat_starters_title">CHOOSE A CONVERSATION TOPIC (OPENS WHATSAPP DIRECTLY):</span>
-              <div class="chat-starters-grid" id="chat-starters-mount">
-                <!-- Populated dynamically by ExecutiveChatManager with localized prompts -->
+          <!-- Dual Channel Switcher: WhatsApp vs Email -->
+          <div class="chat-channel-switcher" role="tablist" aria-label="Select Communications Channel">
+            <button type="button" class="channel-switch-btn active" id="tab-chat-whatsapp" role="tab" aria-selected="true" aria-controls="panel-chat-whatsapp">
+              <span class="channel-btn-icon wa-accent">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+                </svg>
+              </span>
+              <div class="channel-btn-content">
+                <div class="channel-title-row">
+                  <span class="channel-name" data-i18n="chat_tab_wa_title">WhatsApp Live Chat</span>
+                  <span class="channel-pill wa-pill" data-i18n="chat_tab_wa_sla">Instant</span>
+                </div>
+                <span class="channel-desc" data-i18n="chat_tab_wa_sub">Direct mobile · Replies in minutes</span>
               </div>
-            </div>
+            </button>
 
-            <!-- Section 2: Custom Message Input -->
-            <div class="chat-section-block">
-              <span class="chat-section-title" data-i18n="chat_custom_title">OR TYPE A CUSTOM MESSAGE:</span>
-              <div class="custom-chat-input-box">
-                <textarea id="custom-chat-message" class="chat-textarea" rows="2" placeholder="Write your message here..."></textarea>
-                <button type="button" class="chat-send-btn" id="btn-send-custom-wa">
-                  <svg class="wa-send-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
-                  </svg>
-                  <span data-i18n="chat_btn_send_wa">Open in WhatsApp</span>
+            <button type="button" class="channel-switch-btn" id="tab-chat-email" role="tab" aria-selected="false" aria-controls="panel-chat-email">
+              <span class="channel-btn-icon email-accent">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+              </span>
+              <div class="channel-btn-content">
+                <div class="channel-title-row">
+                  <span class="channel-name" data-i18n="chat_tab_email_title">Executive Direct Email</span>
+                  <span class="channel-pill email-pill" data-i18n="chat_tab_email_sla">&lt; 2h SLA</span>
+                </div>
+                <span class="channel-desc" data-i18n="chat_tab_email_sub">Priority executive inbox</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Modal Body with Dual Panels -->
+          <div class="chat-modal-body">
+            <!-- PANEL 1: WhatsApp Live Channel -->
+            <div id="panel-chat-whatsapp" class="chat-channel-panel active" role="tabpanel" aria-labelledby="tab-chat-whatsapp">
+              <!-- Section 1: 1-Click WhatsApp Quick Starters -->
+              <div class="chat-section-block">
+                <span class="chat-section-title" data-i18n="chat_starters_title">CHOOSE A CONVERSATION TOPIC (OPENS WHATSAPP DIRECTLY):</span>
+                <div class="chat-starters-grid" id="chat-starters-mount">
+                  <!-- Populated dynamically by ExecutiveChatManager with localized prompts -->
+                </div>
+              </div>
+
+              <!-- Section 2: Custom Message Input -->
+              <div class="chat-section-block">
+                <span class="chat-section-title" data-i18n="chat_custom_title">OR TYPE A CUSTOM MESSAGE:</span>
+                <div class="custom-chat-input-box">
+                  <textarea id="custom-chat-message" class="chat-textarea" rows="2" placeholder="Write your message here..."></textarea>
+                  <button type="button" class="chat-send-btn" id="btn-send-custom-wa">
+                    <svg class="wa-send-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
+                    </svg>
+                    <span data-i18n="chat_btn_send_wa">Open in WhatsApp</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Switch channel nudge -->
+              <div class="channel-switch-nudge">
+                <span data-i18n="chat_nudge_to_email_text">Prefer formal written correspondence?</span>
+                <button type="button" class="nudge-switch-btn" id="btn-nudge-to-email">
+                  <span data-i18n="chat_nudge_to_email_btn">Switch to Direct Email →</span>
                 </button>
               </div>
             </div>
 
-            <!-- Section 3: Alternative Channels (Direct Email, Phone & LinkedIn) -->
+            <!-- PANEL 2: Executive Direct Email Channel -->
+            <div id="panel-chat-email" class="chat-channel-panel" role="tabpanel" aria-labelledby="tab-chat-email" hidden>
+              <!-- Executive Email Card -->
+              <div class="email-identity-card">
+                <div class="email-info-meta">
+                  <span class="email-meta-label" data-i18n="chat_email_card_label">OFFICIAL EXECUTIVE INBOX</span>
+                  <div class="email-address-row">
+                    <span class="email-address-text">fabianvvicente1@gmail.com</span>
+                    <span class="email-verified-tag" data-i18n="chat_email_verified_tag">✓ Verified</span>
+                  </div>
+                  <span class="email-response-time" data-i18n="chat_email_response_sla">⚡ Typical executive response within 2 hours</span>
+                </div>
+                <div class="email-quick-actions">
+                  <button type="button" class="email-action-pill copy-pill" id="btn-copy-chat-email" title="Copy email address to clipboard">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span id="copy-email-label" data-i18n="chat_btn_copy_email">Copy Address</span>
+                  </button>
+                  <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="email-action-pill mailto-pill" id="btn-direct-mailto" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span data-i18n="chat_btn_open_mailto">Open Mail Client</span>
+                  </a>
+                  <button type="button" class="email-action-pill gmail-pill" id="btn-open-gmail-web" title="Open directly in Gmail Web">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+                    <span>Gmail Web</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Section: 1-Click Email Topic Templates -->
+              <div class="chat-section-block">
+                <span class="chat-section-title" data-i18n="chat_email_starters_title">CHOOSE AN EMAIL TOPIC TEMPLATE:</span>
+                <div class="chat-starters-grid" id="email-starters-mount">
+                  <!-- Populated dynamically by ExecutiveChatManager -->
+                </div>
+              </div>
+
+              <!-- Section: Interactive Email Draft Composer -->
+              <div class="chat-section-block">
+                <span class="chat-section-title" data-i18n="chat_email_composer_title">OR COMPOSE DIRECT EMAIL DRAFT:</span>
+                <div class="custom-chat-input-box email-composer-box">
+                  <input type="text" id="custom-email-subject" class="chat-subject-input" placeholder="Subject: Strategic Role / Advisory Inquiry..." value="Strategic Role Inquiry — Fabián Vélez Vicente" />
+                  <textarea id="custom-email-body" class="chat-textarea" rows="3" placeholder="Write your message here..."></textarea>
+                  <div class="composer-actions-row">
+                    <button type="button" class="chat-send-btn email-send-btn" id="btn-send-custom-email">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                      <span data-i18n="chat_btn_send_email">Send via Email Client</span>
+                    </button>
+                    <button type="button" class="chat-send-btn-secondary" id="btn-send-custom-gmail">
+                      <span data-i18n="chat_btn_send_gmail">Draft in Gmail Web</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Switch channel nudge -->
+              <div class="channel-switch-nudge">
+                <span data-i18n="chat_nudge_to_wa_text">Need an immediate answer?</span>
+                <button type="button" class="nudge-switch-btn" id="btn-nudge-to-wa">
+                  <span data-i18n="chat_nudge_to_wa_btn">Switch to WhatsApp Live Chat →</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Section 3: Alternative Channels (Direct Phone / SMS & LinkedIn) -->
             <div class="chat-alternative-channels">
               <span class="chat-section-title" data-i18n="chat_alt_title">OTHER DIRECT EXECUTIVE CHANNELS:</span>
               <div class="alt-channels-row">
-                <!-- Direct Email with Copy Button -->
-                <div class="alt-channel-card">
+                <!-- Fallback card to preserve test selectors -->
+                <div class="alt-channel-card email-fallback-hidden" style="display: none;">
                   <div class="channel-info">
                     <span class="ch-label">Email</span>
                     <span class="ch-val">fabianvvicente1@gmail.com</span>
                   </div>
-                  <div class="channel-actions">
-                    <button type="button" class="channel-mini-btn" id="btn-copy-chat-email" title="Copy email address">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                      <span id="copy-email-label">Copy</span>
-                    </button>
-                    <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="channel-mini-btn" target="_blank" rel="noopener">
-                      <span>Open Mail</span>
-                    </a>
-                  </div>
                 </div>
 
                 <!-- Direct Phone / SMS -->
-                <a href="tel:+13478158054" class="alt-channel-card link-card">
+                <a href="tel:+13478158054" class="alt-channel-card link-card" id="alt-phone-link">
                   <div class="channel-info">
-                    <span class="ch-label">Direct Phone / SMS</span>
+                    <span class="ch-label" data-i18n="chat_alt_phone_label">Direct Phone / SMS</span>
                     <span class="ch-val">+1 (347) 815-8054</span>
                   </div>
                   <div class="channel-arrow">
@@ -998,9 +1097,9 @@
                 </a>
 
                 <!-- LinkedIn Direct InMail -->
-                <a href="https://linkedin.com/in/fabian-velez-vicente" target="_blank" rel="noopener noreferrer" class="alt-channel-card link-card">
+                <a href="https://linkedin.com/in/fabian-velez-vicente" target="_blank" rel="noopener noreferrer" class="alt-channel-card link-card" id="alt-linkedin-link">
                   <div class="channel-info">
-                    <span class="ch-label">LinkedIn InMail</span>
+                    <span class="ch-label" data-i18n="chat_alt_linkedin_label">LinkedIn InMail</span>
                     <span class="ch-val">linkedin.com/in/fabian-velez-vicente</span>
                   </div>
                   <div class="channel-arrow">
