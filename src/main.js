@@ -349,6 +349,21 @@ class FabianPortfolioApp {
           <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site (linkpuertorico.org)">
             ${LOGOS.linkPR}
           </a>
+          <div class="logo-badge-item" title="IBM (Official Partner in Link Puerto Rico)">
+            ${LOGOS.ibm}
+          </div>
+          <div class="logo-badge-item" title="Google (GA4, Google Ads &amp; BigQuery Stack)">
+            ${LOGOS.google}
+          </div>
+          <div class="logo-badge-item" title="Amazon Web Services (Cloud &amp; Data Pipeline Architecture)">
+            ${LOGOS.aws}
+          </div>
+          <div class="logo-badge-item" title="Salesforce (Enterprise CRM Deduplication &amp; Revenue Analytics)">
+            ${LOGOS.salesforce}
+          </div>
+          <div class="logo-badge-item" title="CompTIA (Certified ITF+ Systems Engineer)">
+            ${LOGOS.comptia}
+          </div>
           <div class="logo-badge-item" title="Boys &amp; Girls Clubs de Puerto Rico (Youth Mentorship Partner)">
             ${LOGOS.boysAndGirlsClubs}
           </div>
@@ -383,9 +398,13 @@ class FabianPortfolioApp {
           <div class="modal-logo-cell">${LOGOS.edx}</div>
           <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Viva Advertising (Founder) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
           <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Link Puerto Rico (Co-Founder) — Visit Official Site">${LOGOS.linkPR}</a>
-          <div class="modal-logo-cell">${LOGOS.novuWorks}</div>
+          <div class="modal-logo-cell">${LOGOS.ibm}</div>
+          <div class="modal-logo-cell">${LOGOS.google}</div>
           <div class="modal-logo-cell">${LOGOS.stanford}</div>
           <div class="modal-logo-cell">${LOGOS.politecnica}</div>
+          <div class="modal-logo-cell">${LOGOS.databricks}</div>
+          <div class="modal-logo-cell">${LOGOS.claude}</div>
+          <div class="modal-logo-cell">${LOGOS.novuWorks}</div>
         </div>
       `;
     }
@@ -609,6 +628,11 @@ class FabianPortfolioApp {
             <div class="logo-badge-item" title="ATH Móvil Business">${LOGOS.athMovil}</div>
             <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (My Company / Founder · $10M+ Pipeline) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
             <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site">${LOGOS.linkPR}</a>
+            <div class="logo-badge-item" title="IBM">${LOGOS.ibm}</div>
+            <div class="logo-badge-item" title="Google">${LOGOS.google}</div>
+            <div class="logo-badge-item" title="AWS">${LOGOS.aws}</div>
+            <div class="logo-badge-item" title="Salesforce">${LOGOS.salesforce}</div>
+            <div class="logo-badge-item" title="CompTIA">${LOGOS.comptia}</div>
             <div class="logo-badge-item" title="Boys &amp; Girls Clubs de PR">${LOGOS.boysAndGirlsClubs}</div>
             <div class="logo-badge-item" title="Microsoft">${LOGOS.microsoft}</div>
             <div class="logo-badge-item" title="Meta">${LOGOS.meta}</div>
@@ -628,10 +652,19 @@ class FabianPortfolioApp {
   // ─────────────────────────────────────────────────────────────
   renderProjectCards(projects, containerEl) {
     if (!containerEl || !projects) return;
-    containerEl.innerHTML = projects.map((p) => `
+    containerEl.innerHTML = projects.map((p) => {
+      let projLogo = '';
+      if (p.id === 'bizpay') projLogo = LOGOS.athMovil;
+      else if (p.id === 'jobhelper') projLogo = LOGOS.claude;
+      else if (p.id === 'picta') projLogo = LOGOS.novuWorks;
+      else if (p.id === 'nfc-platform' || p.id === 'liza-project') projLogo = LOGOS.linkPR;
+      else if (p.id === 'hackeaporunacausa') projLogo = LOGOS.boysAndGirlsClubs;
+
+      return `
       <div class="standalone-project-card">
         <div class="proj-top-row">
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            ${projLogo ? `<div style="height: 20px; display: inline-flex; align-items: center;">${projLogo}</div>` : ''}
             <h4 class="proj-name">${p.name}</h4>
             ${p.subdomainUrl ? `
               <span class="proj-live-badge">
@@ -665,7 +698,8 @@ class FabianPortfolioApp {
           </div>
         ` : ''}
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
 
   // ─────────────────────────────────────────────────────────────

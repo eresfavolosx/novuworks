@@ -4368,9 +4368,17 @@ body.tesla-mode .hud-action-btn {
   color: #0f172a !important;
 }
 
+:root[data-theme="light"] .comp-logo-svg.logo-invert-light,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .comp-logo-svg.logo-invert-light {
+  filter: invert(1) brightness(0.18) !important;
+}
+
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) .comp-logo-svg {
     color: #0f172a;
+  }
+  :root:not([data-theme="dark"]) .comp-logo-svg.logo-invert-light {
+    filter: invert(1) brightness(0.18);
   }
 }
 
