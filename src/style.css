@@ -4323,8 +4323,20 @@ body.tesla-mode .hud-action-btn {
   width: auto;
   max-width: 165px;
   display: block;
+  color: #ffffff;
   filter: brightness(0.98);
-  transition: filter 0.25s ease, transform 0.25s ease;
+  transition: filter 0.25s ease, transform 0.25s ease, color 0.2s ease;
+}
+
+:root[data-theme="light"] .comp-logo-svg,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .comp-logo-svg {
+  color: #0f172a !important;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .comp-logo-svg {
+    color: #0f172a;
+  }
 }
 
 .comp-logo-svg:hover {
@@ -4433,6 +4445,18 @@ body.tesla-mode .hud-action-btn {
 /* ─────────────────────────────────────────────────────────────
    Brand Logo Preservation & Contrast Protection in Light Mode
    ───────────────────────────────────────────────────────────── */
+:root[data-theme="light"] .company-logo-strip,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .company-logo-strip {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .logo-strip-label,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .logo-strip-label {
+  color: #b45309;
+}
+
 :root[data-theme="light"] .exp-company-logo-slot,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .exp-company-logo-slot,
 :root[data-theme="light"] .res-company-logo-slot,
@@ -4443,26 +4467,39 @@ body.tesla-mode .hud-action-btn {
 :root:has(> head > meta[name="color-scheme"][content="light"]) .modal-logo-cell {
   display: inline-flex;
   align-items: center;
-  background: #0b0f19;
-  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(241, 245, 249, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   padding: 4px 10px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .modal-logo-cell {
-    background: #0b0f19;
-    border: 1px solid rgba(15, 23, 42, 0.14);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  }
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
 }
 
 :root[data-theme="light"] .logo-badge-item,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .logo-badge-item {
-  background: #0b0f19;
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  background: rgba(248, 250, 252, 0.95);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+:root[data-theme="light"] .logo-badge-item:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .logo-badge-item:hover {
+  background: #ffffff;
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .company-logo-strip {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  }
+  :root:not([data-theme="dark"]) .modal-logo-cell,
+  :root:not([data-theme="dark"]) .logo-badge-item {
+    background: rgba(248, 250, 252, 0.95);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  }
 }
 
 /* High Contrast Light Mode Component Elevations */
