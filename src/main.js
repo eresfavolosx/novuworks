@@ -69,6 +69,10 @@ class FabianPortfolioApp {
       btnPrRoots: document.getElementById('btn-pr-roots'),
       btnCmdPalette: document.getElementById('btn-cmd-palette'),
       btnPrintResume: document.getElementById('btn-print-resume'),
+      visitorSurveyModal: document.getElementById('visitor-survey-modal'),
+      btnTailorExperience: document.getElementById('btn-tailor-experience'),
+      btnCloseSurveyModal: document.getElementById('btn-close-survey-modal'),
+      btnSurveyExploreAll: document.getElementById('btn-survey-explore-all'),
     };
 
     this.isVisualizerMode = false;
@@ -147,6 +151,8 @@ class FabianPortfolioApp {
         onOpenPlanner: () => this.switchView('planner'),
         onOpenFeed: () => this.switchView('intel-feed'),
         onOpenArcade: () => this.openArcadeGame(),
+        onOpenSurvey: () => this.openSurveyModal(),
+        onSelectLens: (lensId) => this.selectVisitorPersona(lensId),
         onToggleTheme: () => this.toggleTheme(),
         onSetTheme: (theme) => this.setTheme(theme, true),
         onToggleTesla: () => this.toggleTeslaMode(),
@@ -177,6 +183,23 @@ class FabianPortfolioApp {
       this.updateTeslaButton(true);
     }
     this.syncAudioButton();
+
+    // 7b. Visitor Persona & Onboarding Concierge check
+    const savedPersona = localStorage.getItem('fv_visitor_persona');
+    if (savedPersona && PROFILE.roleVariants[savedPersona]) {
+      this.setRoleLens(savedPersona);
+    } else {
+      this.updateHeaderPersonaPill('master');
+    }
+
+    if (localStorage.getItem('fv_onboarding_completed') !== 'true') {
+      setTimeout(() => {
+        // Only open automatically if no other modal has been opened yet
+        if (!this.dom.resumeModal?.open && !this.dom.recruiterModal?.open && !this.dom.arcadeModal?.open && !this.dom.disciplineModal?.open) {
+          this.openSurveyModal();
+        }
+      }, 1200);
+    }
 
     // 8. Run initial metric count-up animation
     this.animateCounters();
@@ -275,6 +298,7 @@ class FabianPortfolioApp {
     this.renderDossier(lensId);
     this.renderPrintableResume(lensId);
     this.updateRecruiterScorecard(lensId);
+    this.updateHeaderPersonaPill(lensId);
 
     if (this.dom.dossierStatsMount) {
       this.dom.dossierStatsMount.classList.remove('lens-animating');
@@ -927,6 +951,62 @@ ${variant.proofPoints ? variant.proofPoints.map((p) => `• [${p.metric}] ${p.ti
   }
 
   // ─────────────────────────────────────────────────────────────
+  // Visitor Area-of-Interest Onboarding Concierge Modal
+  // ─────────────────────────────────────────────────────────────
+  openSurveyModal() {
+    if (!this.dom.visitorSurveyModal) return;
+    document.querySelectorAll('.survey-card-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.lens === this.activeRoleLens);
+    });
+    this.dom.visitorSurveyModal.showModal();
+    audio.confirm();
+  }
+
+  closeSurveyModal() {
+    if (!this.dom.visitorSurveyModal) return;
+    this.dom.visitorSurveyModal.close();
+    audio.click(800);
+  }
+
+  selectVisitorPersona(lensId) {
+    if (!PROFILE.roleVariants[lensId]) lensId = 'master';
+    localStorage.setItem('fv_visitor_persona', lensId);
+    localStorage.setItem('fv_onboarding_completed', 'true');
+    this.setRoleLens(lensId);
+    this.closeSurveyModal();
+
+    const variant = PROFILE.roleVariants[lensId];
+    this.showToast(`✨ Tailored Portfolio: ${variant.shortTitle || variant.label}`);
+  }
+
+  updateHeaderPersonaPill(lensId) {
+    if (!this.dom.btnTailorExperience) return;
+    const labelSpan = this.dom.btnTailorExperience.querySelector('.persona-label');
+    const dotSpan = this.dom.btnTailorExperience.querySelector('.persona-dot');
+    const variant = PROFILE.roleVariants[lensId] || PROFILE.roleVariants.master;
+
+    const icons = {
+      master: '✨',
+      revops_analytics: '🎯',
+      ai_engineering: '🤖',
+      data_governance: '📊',
+      tech_ops: '⚡',
+    };
+
+    if (labelSpan) {
+      labelSpan.textContent = variant.shortTitle || variant.label;
+    }
+    if (dotSpan) {
+      dotSpan.textContent = icons[lensId] || '✨';
+    }
+
+    this.dom.btnTailorExperience.setAttribute(
+      'title',
+      `Currently tailored to: ${variant.label}. Click to re-tailor experience.`
+    );
+  }
+
+  // ─────────────────────────────────────────────────────────────
   // Executive Resume Modal Handlers
   // ─────────────────────────────────────────────────────────────
   openResumeModal() {
@@ -1063,6 +1143,35 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
 
     document.getElementById('btn-copy-resume-text')?.addEventListener('click', () => {
       this.copyResumeText();
+    });
+
+    // Visitor Concierge / Tailor Experience Triggers
+    this.dom.btnTailorExperience?.addEventListener('click', () => {
+      this.openSurveyModal();
+    });
+
+    this.dom.btnCloseSurveyModal?.addEventListener('click', () => {
+      this.closeSurveyModal();
+      localStorage.setItem('fv_onboarding_completed', 'true');
+    });
+
+    this.dom.btnSurveyExploreAll?.addEventListener('click', () => {
+      this.selectVisitorPersona('master');
+    });
+
+    document.querySelectorAll('.survey-card-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const lens = btn.dataset.lens;
+        if (lens) {
+          this.selectVisitorPersona(lens);
+        }
+      });
+    });
+
+    this.dom.visitorSurveyModal?.addEventListener('click', (e) => {
+      if (e.target === this.dom.visitorSurveyModal) {
+        this.closeSurveyModal();
+      }
     });
 
     // 3D Background Visualizer Mode Triggers

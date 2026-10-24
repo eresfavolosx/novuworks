@@ -105,6 +105,13 @@
 
         <!-- Right Quick Controls -->
         <div class="header-right">
+          <!-- Tailored Experience Lens Indicator & Trigger -->
+          <button type="button" class="hud-action-btn persona-lens-pill" id="btn-tailor-experience" title="Tailor portfolio experience by area of interest (Click to change)" aria-label="Tailor Experience by Area of Interest">
+            <span class="persona-dot" aria-hidden="true">✨</span>
+            <span class="persona-label">All-Round Master</span>
+            <span class="persona-tag">Tailor</span>
+          </button>
+
           <!-- Live Status Badge -->
           <div class="availability-pill" title="Available for Strategic Roles (Growth & RevOps Lead / AI Systems)">
             <span class="status-pulse-dot"></span>
@@ -637,6 +644,98 @@
 
       <!-- Cyber Arcade 3D Easter Egg Game Dialog -->
       <dialog id="cyber-arcade-modal" class="cyber-arcade-dialog" aria-label="Cyber Growth Racer Video Game"></dialog>
+
+      <!-- Visitor Area-of-Interest Onboarding Concierge Modal -->
+      <dialog id="visitor-survey-modal" class="executive-dialog survey-modal" aria-labelledby="survey-modal-title">
+        <div class="dialog-header survey-modal-header">
+          <div class="survey-badge-row">
+            <span class="modal-kicker">EXECUTIVE CONCIERGE · TAILORED EXPERIENCE</span>
+            <span class="survey-step-tag">1-Click Personalization</span>
+          </div>
+          <button type="button" class="dialog-close-btn" id="btn-close-survey-modal" aria-label="Close Onboarding Survey">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+
+        <div class="dialog-body survey-modal-body">
+          <div class="survey-intro">
+            <h3 id="survey-modal-title" class="survey-title">How would you like to explore Fabián's work?</h3>
+            <p class="survey-desc">
+              Select your primary area of focus to dynamically reconfigure verified metrics, case studies, and engineering blueprints to your role:
+            </p>
+          </div>
+
+          <div class="survey-options-grid">
+            <!-- Option 1: Growth & Media Buying -->
+            <button type="button" class="survey-card-btn" data-lens="revops_analytics">
+              <div class="sc-header">
+                <span class="sc-icon">🎯</span>
+                <span class="sc-badge">Media & Performance</span>
+              </div>
+              <h4 class="sc-title">Growth & Performance Marketing</h4>
+              <p class="sc-desc">Multi-channel media buying, Server-Side CAPI, +200% AI lead lift, $10M+ commercial pipeline.</p>
+              <div class="sc-tags">
+                <span>Money Group</span>
+                <span>Viva Advertising</span>
+                <span>Attribution / CAPI</span>
+              </div>
+            </button>
+
+            <!-- Option 2: Applied AI & Automation -->
+            <button type="button" class="survey-card-btn" data-lens="ai_engineering">
+              <div class="sc-header">
+                <span class="sc-icon">🤖</span>
+                <span class="sc-badge">AI Systems</span>
+              </div>
+              <h4 class="sc-title">Applied AI & Agentic Workflows</h4>
+              <p class="sc-desc">20+ automated Claude agent workflows, LLM prompt engineering, autonomous ops triage & synthetic content.</p>
+              <div class="sc-tags">
+                <span>Anthropic Claude</span>
+                <span>Agentic Ops</span>
+                <span>OpenAI / Codex</span>
+              </div>
+            </button>
+
+            <!-- Option 3: Big Data & Telemetry -->
+            <button type="button" class="survey-card-btn" data-lens="data_governance">
+              <div class="sc-header">
+                <span class="sc-icon">📊</span>
+                <span class="sc-badge">Analytics & BI</span>
+              </div>
+              <h4 class="sc-title">Big Data & Revenue Operations</h4>
+              <p class="sc-desc">40M+ Databricks sessions, PySpark & SQL data pipelines, Microsoft Power BI, Azure/GCP infrastructure.</p>
+              <div class="sc-tags">
+                <span>Databricks SQL</span>
+                <span>Red Ventures (edX)</span>
+                <span>Power BI</span>
+              </div>
+            </button>
+
+            <!-- Option 4: Technical Product & Leadership -->
+            <button type="button" class="survey-card-btn" data-lens="tech_ops">
+              <div class="sc-header">
+                <span class="sc-icon">👔</span>
+                <span class="sc-badge">Engineering & Ops</span>
+              </div>
+              <h4 class="sc-title">Technical Product & Engineering</h4>
+              <p class="sc-desc">B.S. Computer Engineering (4.0 GPA), Stanford Innovation Fellow, cross-functional Agile product management.</p>
+              <div class="sc-tags">
+                <span>Stanford Fellow</span>
+                <span>Agile / Jira</span>
+                <span>Comp. Engineering 4.0</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Skip / Explore All Footer -->
+          <div class="survey-footer">
+            <button type="button" class="survey-explore-all-btn" id="btn-survey-explore-all" data-lens="master">
+              <span>🚀 Explore All-Round Master Experience (Default)</span>
+            </button>
+            <span class="survey-note">You can change your lens anytime using the header selector or ⌘K.</span>
+          </div>
+        </div>
+      </dialog>
 
       <!-- 3D Spatial Visualizer Mode HUD (Zen / Immersive Canvas Controls) -->
       <aside id="visualizer-hud" class="visualizer-hud" hidden aria-label="3D Background Visualization Controls">

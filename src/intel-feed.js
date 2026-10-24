@@ -129,6 +129,44 @@ export class IntelFeed {
           </div>
         </header>
 
+        <!-- Verified LinkedIn Profile & Live Post Mirror Banner -->
+        <section class="linkedin-live-mirror-banner" aria-label="LinkedIn Verified Stream">
+          <div class="llm-card">
+            <div class="llm-left">
+              <div class="llm-avatar-wrap">
+                <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="llm-avatar" />
+                <span class="llm-in-badge" title="LinkedIn Verified Profile">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffffff"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </span>
+              </div>
+              <div class="llm-details">
+                <div class="llm-name-row">
+                  <span class="llm-name">Fabián Vélez Vicente</span>
+                  <span class="llm-sync-status">
+                    <span class="status-pulse-dot"></span>
+                    <span>Live LinkedIn Feed Mirror Active</span>
+                  </span>
+                </div>
+                <div class="llm-headline">Performance Marketing Lead & Technical Product Manager · Level ICS4 · 8+ Years</div>
+                <div class="llm-meta-row">
+                  <span class="llm-stat"><strong>1,500+</strong> Network Connections</span>
+                  <span class="llm-dot">·</span>
+                  <span class="llm-stat">Money Group (Full-Time) & Red Ventures (edX)</span>
+                  <span class="llm-dot">·</span>
+                  <span class="llm-stat">San Juan, PR (US Remote)</span>
+                </div>
+              </div>
+            </div>
+            <div class="llm-actions">
+              <a href="https://linkedin.com/in/fabian-velez-vicente" target="_blank" rel="noopener noreferrer" class="luxury-btn primary-gold llm-connect-btn" title="Open Fabian's LinkedIn profile in new tab">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span>Connect on LinkedIn</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
         <!-- Dual-Stream Layout: Main Playbooks (Left) + Live Radar (Right) -->
         <div class="feed-dual-layout">
           <!-- Left Stream: Fabián's Verified Playbooks -->
@@ -291,6 +329,10 @@ export class IntelFeed {
               </div>
             </div>
             <div class="post-timestamp-group">
+              <a href="https://linkedin.com/in/fabian-velez-vicente" target="_blank" rel="noopener noreferrer" class="post-linkedin-pill" title="Mirrored from Fabian's verified LinkedIn feed">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="#0a66c2"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span>LinkedIn Post</span>
+              </a>
               <span class="post-date">${post.publishedAt}</span>
               <span class="post-read-time">· ${post.readTime}</span>
             </div>
@@ -354,6 +396,10 @@ export class IntelFeed {
             </div>
 
             <div class="post-actions-group">
+              <a href="https://linkedin.com/in/fabian-velez-vicente" target="_blank" rel="noopener noreferrer" class="post-action-btn post-action-linkedin" title="View & discuss on LinkedIn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#0a66c2"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <span>LinkedIn</span>
+              </a>
               <button type="button" class="post-action-btn" data-action="copy-post" title="Copy clean playbook text to clipboard">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 <span>Copy</span>
