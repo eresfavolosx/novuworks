@@ -80,6 +80,22 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Accessibility: Honor User Preference for Reduced Motion (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Accessibility Focus Indicators (WCAG 2.4.7 Focus Visible) */
+:focus-visible {
+  outline: 2px solid var(--gold-primary) !important;
+  outline-offset: 3px !important;
+}
+
 /* Subtle luxury ambient vignette */
 body::before {
   content: '';
@@ -131,6 +147,31 @@ body:not([data-view="core"]) .webgl-canvas-layer {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Accessibility Skip Link (WCAG 2.4.1)
+   ───────────────────────────────────────────────────────────── */
+.skip-link {
+  position: fixed;
+  top: -60px;
+  left: 24px;
+  background: var(--gold-primary);
+  color: #000000;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  z-index: 100000;
+  transition: top 0.2s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+.skip-link:focus-visible {
+  top: 24px;
+  outline: 2px solid #ffffff;
+}
+
+/* ─────────────────────────────────────────────────────────────
    Floating Luxury Navigation Header
    ───────────────────────────────────────────────────────────── */
 .app-header {
@@ -145,6 +186,7 @@ body:not([data-view="core"]) .webgl-canvas-layer {
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
+  box-sizing: border-box;
   background: var(--bg-glass);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
