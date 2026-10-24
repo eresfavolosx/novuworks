@@ -720,4 +720,19 @@ export class SpatialCanvas3D {
       audio.chime(idx);
     }
   }
+
+  setTheme(theme) {
+    this.currentTheme = theme;
+    const isLight = theme === 'light';
+    if (this.dustMesh && this.dustMesh.material) {
+      this.dustMesh.material.blending = isLight ? THREE.NormalBlending : THREE.AdditiveBlending;
+      this.dustMesh.material.color.setHex(isLight ? 0x946800 : 0xd4af37);
+      this.dustMesh.material.opacity = isLight ? 0.45 : 0.35;
+      this.dustMesh.material.needsUpdate = true;
+    }
+    if (this.monogramMesh && this.monogramMesh.material) {
+      this.monogramMesh.material.blending = isLight ? THREE.NormalBlending : THREE.AdditiveBlending;
+      this.monogramMesh.material.needsUpdate = true;
+    }
+  }
 }

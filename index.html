@@ -3,6 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- MANDATORY: Declare support for both light and dark themes (modern-web-guidance) -->
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem("color-scheme");
+          if (saved === "light" || saved === "dark") {
+            document.querySelector('meta[name="color-scheme"]').content = saved;
+            document.documentElement.setAttribute('data-theme', saved);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <title>Fabián Vélez Vicente — Growth & Revenue Operations Analytics Lead · Computer Engineering</title>
     <meta name="description" content="Executive portfolio and verified case studies of Fabián Vélez Vicente. Growth & Revenue Operations Analytics Lead with 8+ years across Money Group (Full-Time), Red Ventures (Full-Time, edX), and his companies Viva Advertising and Link PR." />
     <meta name="keywords" content="Fabián Vélez Vicente, Fabian Velez, Novu Works, Money Group, Red Ventures, edX, Growth Lead, Media Buyer, RevOps Analytics, Computer Engineering, Stanford Innovation Fellow" />
@@ -109,6 +122,13 @@
           <button type="button" class="hud-action-btn visualizer-btn" id="btn-toggle-visualizer" title="View 3D Background Visualization (Zen Mode · Press ESC to exit)" aria-label="View 3D Background Visualization">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
             <span class="visualizer-btn-label">View 3D</span>
+          </button>
+
+          <!-- Theme Switcher (Dark / Light Mode) -->
+          <button type="button" class="hud-action-btn theme-toggle-btn" id="btn-theme-toggle" title="Switch Theme (Dark / Light)" aria-label="Toggle Dark and Light Mode">
+            <svg class="icon-theme-sun hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="icon-theme-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            <span class="theme-btn-label">Theme</span>
           </button>
 
           <!-- Command Palette Trigger -->

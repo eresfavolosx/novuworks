@@ -64,6 +64,7 @@ class FabianPortfolioApp {
       btnVizAudio: document.getElementById('btn-viz-audio'),
       btnVizCoqui: document.getElementById('btn-viz-coqui'),
       btnTeslaMode: document.getElementById('btn-tesla-mode'),
+      btnThemeToggle: document.getElementById('btn-theme-toggle'),
       btnAudioToggle: document.getElementById('btn-audio-toggle'),
       btnPrRoots: document.getElementById('btn-pr-roots'),
       btnCmdPalette: document.getElementById('btn-cmd-palette'),
@@ -146,6 +147,8 @@ class FabianPortfolioApp {
         onOpenPlanner: () => this.switchView('planner'),
         onOpenFeed: () => this.switchView('intel-feed'),
         onOpenArcade: () => this.openArcadeGame(),
+        onToggleTheme: () => this.toggleTheme(),
+        onSetTheme: (theme) => this.setTheme(theme, true),
         onToggleTesla: () => this.toggleTeslaMode(),
         onCycleMorph: () => this.cycleMorph(),
         onToggleVisualizer: () => this.toggleVisualizerMode(),
@@ -168,6 +171,7 @@ class FabianPortfolioApp {
     }
 
     // 7. Apply saved preferences
+    this.initTheme();
     if (this.isTeslaMode) {
       document.body.classList.add('tesla-mode');
       this.updateTeslaButton(true);
@@ -1091,6 +1095,11 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       });
     });
 
+    // Theme Toggle (Dark / Light Mode)
+    this.dom.btnThemeToggle?.addEventListener('click', () => {
+      this.toggleTheme();
+    });
+
     // Tesla Mode Toggle
     this.dom.btnTeslaMode?.addEventListener('click', () => {
       this.toggleTeslaMode();
@@ -1275,6 +1284,116 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
   // ─────────────────────────────────────────────────────────────
   // Preferences & Toggles
   // ─────────────────────────────────────────────────────────────
+  initTheme() {
+    // 1. Read current override from localStorage, or infer from document/system
+    const saved = localStorage.getItem('color-scheme');
+    if (saved === 'light' || saved === 'dark') {
+      this.applyTheme(saved, false);
+    } else {
+      // System mode
+      const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      this.updateThemeButton(isSystemDark ? 'dark' : 'light', true);
+    }
+
+    // 2. Multi-tab synchronization (modern-web-guidance)
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'color-scheme') {
+        const newTheme = e.newValue;
+        if (newTheme === 'light' || newTheme === 'dark') {
+          this.applyTheme(newTheme, false);
+        } else {
+          this.setTheme('system', false);
+        }
+      }
+    });
+
+    // 3. System preference change listener (modern-web-guidance)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      const savedTheme = localStorage.getItem('color-scheme');
+      if (!savedTheme) {
+        // Only adapt automatically if no explicit user override exists
+        const systemTheme = e.matches ? 'dark' : 'light';
+        this.updateThemeButton(systemTheme, true);
+        if (this.canvas3d) this.canvas3d.setTheme(systemTheme);
+      }
+    });
+  }
+
+  getCurrentResolvedTheme() {
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    const content = meta ? meta.getAttribute('content') : 'light dark';
+    if (content === 'light') return 'light';
+    if (content === 'dark') return 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  toggleTheme() {
+    const current = this.getCurrentResolvedTheme();
+    const target = current === 'dark' ? 'light' : 'dark';
+    this.setTheme(target, true);
+  }
+
+  setTheme(theme, isUserAction = true) {
+    if (theme === 'system') {
+      try {
+        localStorage.removeItem('color-scheme');
+      } catch (e) {}
+      const meta = document.querySelector('meta[name="color-scheme"]');
+      if (meta) meta.content = 'light dark';
+      document.documentElement.removeAttribute('data-theme');
+      const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const resolved = isSystemDark ? 'dark' : 'light';
+      this.updateThemeButton(resolved, true);
+      if (this.canvas3d) this.canvas3d.setTheme(resolved);
+      if (isUserAction) {
+        audio.nav();
+        this.showToast('Theme: System Preference Active');
+      }
+      return;
+    }
+
+    this.applyTheme(theme, isUserAction);
+  }
+
+  applyTheme(theme, isUserAction = false) {
+    if (theme !== 'light' && theme !== 'dark') return;
+    try {
+      localStorage.setItem('color-scheme', theme);
+    } catch (e) {}
+
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    if (meta) meta.content = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+
+    this.updateThemeButton(theme, false);
+    if (this.canvas3d) this.canvas3d.setTheme(theme);
+
+    if (isUserAction) {
+      audio.chime(theme === 'light' ? 2 : 0);
+      this.showToast(theme === 'light' ? '☀️ Light Theme Active' : '🌙 Dark Theme Active');
+    }
+  }
+
+  updateThemeButton(activeTheme, isSystem = false) {
+    const btn = this.dom.btnThemeToggle;
+    if (!btn) return;
+
+    const sunIcon = btn.querySelector('.icon-theme-sun');
+    const moonIcon = btn.querySelector('.icon-theme-moon');
+
+    if (activeTheme === 'light') {
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+      btn.title = isSystem ? 'System Theme (Light) · Click to switch to Dark' : 'Switch to Dark Theme';
+      btn.setAttribute('aria-label', 'Switch to Dark Theme');
+    } else {
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+      btn.title = isSystem ? 'System Theme (Dark) · Click to switch to Light' : 'Switch to Light Theme';
+      btn.setAttribute('aria-label', 'Switch to Light Theme');
+    }
+  }
+
   toggleTeslaMode() {
     this.isTeslaMode = !this.isTeslaMode;
     localStorage.setItem('fabian_tesla_mode', String(this.isTeslaMode));
