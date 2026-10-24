@@ -56,12 +56,21 @@ class FabianPortfolioApp {
       recruiterModal: document.getElementById('recruiter-fasttrack-modal'),
       arcadeModal: document.getElementById('cyber-arcade-modal'),
       toastBanner: document.getElementById('toast-banner'),
+      visualizerHud: document.getElementById('visualizer-hud'),
+      btnToggleVisualizer: document.getElementById('btn-toggle-visualizer'),
+      btnHeroViewCanvas: document.getElementById('btn-hero-view-canvas'),
+      btnDockViewCanvas: document.getElementById('btn-dock-view-canvas'),
+      btnExitVisualizer: document.getElementById('btn-exit-visualizer'),
+      btnVizAudio: document.getElementById('btn-viz-audio'),
+      btnVizCoqui: document.getElementById('btn-viz-coqui'),
       btnTeslaMode: document.getElementById('btn-tesla-mode'),
       btnAudioToggle: document.getElementById('btn-audio-toggle'),
       btnPrRoots: document.getElementById('btn-pr-roots'),
       btnCmdPalette: document.getElementById('btn-cmd-palette'),
       btnPrintResume: document.getElementById('btn-print-resume'),
     };
+
+    this.isVisualizerMode = false;
 
     this.init();
   }
@@ -139,6 +148,7 @@ class FabianPortfolioApp {
         onOpenArcade: () => this.openArcadeGame(),
         onToggleTesla: () => this.toggleTeslaMode(),
         onCycleMorph: () => this.cycleMorph(),
+        onToggleVisualizer: () => this.toggleVisualizerMode(),
         onSelectDiscipline: (d) => this.openDisciplineModal(d),
         showToast: (msg) => this.showToast(msg),
       });
@@ -1021,12 +1031,32 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       this.copyResumeText();
     });
 
-    // 3D Sculpture Switcher Pills
-    document.querySelectorAll('.sculpture-pill, .morph-btn').forEach((btn) => {
+    // 3D Background Visualizer Mode Triggers
+    const triggerVisualizer = () => {
+      this.toggleVisualizerMode();
+    };
+
+    this.dom.btnToggleVisualizer?.addEventListener('click', triggerVisualizer);
+    this.dom.btnHeroViewCanvas?.addEventListener('click', triggerVisualizer);
+    this.dom.btnDockViewCanvas?.addEventListener('click', triggerVisualizer);
+    this.dom.btnExitVisualizer?.addEventListener('click', () => {
+      this.exitVisualizerMode();
+    });
+
+    this.dom.btnVizAudio?.addEventListener('click', () => {
+      this.toggleAudio();
+    });
+
+    this.dom.btnVizCoqui?.addEventListener('click', (e) => {
+      triggerCoqui(e);
+    });
+
+    // 3D Sculpture Switcher Pills across all docks & HUD
+    document.querySelectorAll('.sculpture-pill, .morph-btn, .viz-morph-pill').forEach((btn) => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.sculpture-pill, .morph-btn').forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
         const morphIndex = parseInt(btn.dataset.morph, 10);
+        if (isNaN(morphIndex)) return;
+        this.syncMorphPills(morphIndex);
         if (this.canvas3d) this.canvas3d.setMorphState(morphIndex);
       });
     });
@@ -1071,9 +1101,19 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       this.openResumeModal();
     });
 
-    // Keyboard Shortcuts (1-6 for Views)
+    // Keyboard Shortcuts (1-6 for Views, Esc to exit visualizer, Z to toggle visualizer)
     window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.isVisualizerMode) {
+        e.preventDefault();
+        this.exitVisualizerMode();
+        return;
+      }
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if ((e.key === 'z' || e.key === 'Z') && !e.metaKey && !e.ctrlKey) {
+        e.preventDefault();
+        this.toggleVisualizerMode();
+        return;
+      }
       if (e.key === '1') this.switchView('core');
       if (e.key === '2') this.switchView('case-studies');
       if (e.key === '3') this.switchView('ai-lab');
@@ -1244,11 +1284,102 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     const current = this.canvas3d.activeMode;
     const next = (current + 1) % 3;
     this.canvas3d.setMorphState(next);
-    document.querySelectorAll('.sculpture-pill, .morph-btn').forEach((b) => {
-      b.classList.toggle('active', parseInt(b.dataset.morph, 10) === next);
-    });
+    this.syncMorphPills(next);
     const names = ['NW Monogram', 'Möbius Growth Flow', 'Quantum AI Prism'];
     this.showToast(`3D Matrix: ${names[next]}`);
+  }
+
+  syncMorphPills(index) {
+    document.querySelectorAll('.sculpture-pill, .morph-btn, .viz-morph-pill').forEach((b) => {
+      const morphVal = parseInt(b.dataset.morph, 10);
+      b.classList.toggle('active', morphVal === index);
+    });
+  }
+
+  canTransitionDisplay() {
+    if (this._supportsDisplayTransition !== undefined) return this._supportsDisplayTransition;
+    if (!window.CSS?.supports?.('transition-behavior', 'allow-discrete') || !document.body) {
+      this._supportsDisplayTransition = false;
+      return false;
+    }
+    const probe = document.createElement('div');
+    probe.style.cssText = 'transition: display 1s allow-discrete !important; display: block;';
+    document.body.appendChild(probe);
+    getComputedStyle(probe).display;
+    probe.style.display = 'none';
+    this._supportsDisplayTransition = getComputedStyle(probe).display === 'block';
+    probe.remove();
+    return this._supportsDisplayTransition;
+  }
+
+  showVisualizerHud() {
+    const el = this.dom.visualizerHud;
+    if (!el) return;
+    el.removeAttribute('data-closing');
+    el.hidden = false;
+  }
+
+  async hideVisualizerHud() {
+    const el = this.dom.visualizerHud;
+    if (!el || el.hidden) return;
+
+    if (this.canTransitionDisplay()) {
+      el.hidden = true;
+    } else {
+      el.setAttribute('data-closing', '');
+    }
+
+    const animations = el.getAnimations();
+    if (animations.length > 0) {
+      await Promise.race([
+        Promise.allSettled(animations.map((a) => a.finished)),
+        new Promise((r) => setTimeout(r, 600)),
+      ]);
+    }
+
+    if (el.hasAttribute('data-closing')) {
+      el.removeAttribute('data-closing');
+      el.hidden = true;
+    }
+  }
+
+  enterVisualizerMode() {
+    if (this.isVisualizerMode) return;
+    this.isVisualizerMode = true;
+    document.body.classList.add('visualizer-mode');
+
+    if (this.canvas3d) {
+      this.syncMorphPills(this.canvas3d.activeMode);
+      this.canvas3d.setVisualizerMode(true);
+    }
+
+    this.showVisualizerHud();
+    audio.confirm();
+    this.showToast('✨ 3D Background Visualization · Drag to orbit · Scroll to zoom · Press ESC to exit');
+  }
+
+  async exitVisualizerMode() {
+    if (!this.isVisualizerMode) return;
+    this.isVisualizerMode = false;
+
+    // Failsafe: Remove visualizer-mode class so UI is immediately interactable
+    document.body.classList.remove('visualizer-mode');
+
+    if (this.canvas3d) {
+      this.canvas3d.setVisualizerMode(false);
+    }
+
+    await this.hideVisualizerHud();
+    audio.confirm();
+    this.showToast('Portfolio View Restored');
+  }
+
+  toggleVisualizerMode() {
+    if (this.isVisualizerMode) {
+      this.exitVisualizerMode();
+    } else {
+      this.enterVisualizerMode();
+    }
   }
 
   showToast(message) {

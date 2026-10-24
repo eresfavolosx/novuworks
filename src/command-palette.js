@@ -49,6 +49,13 @@ export class CommandPalette {
         action: () => options.onToggleTesla && options.onToggleTesla(),
       },
       {
+        id: 'visualizer',
+        title: 'View 3D Background Visualization (Zen Mode / Canvas View)',
+        category: '3D Graphics',
+        shortcut: 'Z',
+        action: () => options.onToggleVisualizer && options.onToggleVisualizer(),
+      },
+      {
         id: 'morph',
         title: 'Cycle 3D Morph (Monogram → Topology → Quantum Core)',
         category: '3D Graphics',

@@ -15,8 +15,8 @@ export class SpatialCanvas3D {
   constructor(containerEl, onSelectDiscipline) {
     this.container = containerEl;
     this.onSelectDiscipline = onSelectDiscipline;
-    this.width = containerEl.clientWidth || window.innerWidth;
-    this.height = containerEl.clientHeight || window.innerHeight;
+    this.width = window.innerWidth || containerEl.clientWidth || 1440;
+    this.height = window.innerHeight || containerEl.clientHeight || 900;
 
     this.scene = null;
     this.camera = null;
@@ -39,6 +39,12 @@ export class SpatialCanvas3D {
     this.activeMode = 0;
     this.modeTransitions = [1, 0, 0]; // opacities/scales of the 3 modes
 
+    // Visualizer mode state
+    this.isVisualizerMode = false;
+    this.targetRootPosition = new THREE.Vector3(7.5, 0.5, -2.0);
+    this.targetRootScale = new THREE.Vector3(1.05, 1.05, 1.05);
+    this.targetCameraZ = 46;
+
     // Telemetry tracking
     this.fps = 60;
     this.frameCount = 0;
@@ -50,6 +56,9 @@ export class SpatialCanvas3D {
 
   init() {
     try {
+      this.width = Math.max(window.innerWidth || 0, this.container.clientWidth || 0, 320);
+      this.height = Math.max(window.innerHeight || 0, this.container.clientHeight || 0, 320);
+
       // 1. Scene
       this.scene = new THREE.Scene();
       this.scene.fog = new THREE.FogExp2(0x050507, 0.015);
@@ -92,6 +101,8 @@ export class SpatialCanvas3D {
       this.rootGroup = new THREE.Group();
       this.scene.add(this.rootGroup);
       this.updateRootGroupPosition();
+      this.rootGroup.position.copy(this.targetRootPosition);
+      this.rootGroup.scale.copy(this.targetRootScale);
 
       // Build Sculptures
       this.buildParticleMonogram();
@@ -463,21 +474,36 @@ export class SpatialCanvas3D {
   updateRootGroupPosition() {
     if (!this.rootGroup) return;
     const isDesktop = (window.innerWidth || this.width) >= 1024;
-    if (isDesktop) {
+    if (this.isVisualizerMode) {
+      // Centered and monumentally scaled for full-canvas zen mode
+      this.targetRootPosition.set(0, 0, 0);
+      const s = isDesktop ? 1.25 : 0.85;
+      this.targetRootScale.set(s, s, s);
+    } else if (isDesktop) {
       // Offset 3D sculpture to the open right half on desktop to frame the hero section without text collision
-      this.rootGroup.position.set(7.5, 0.5, -2.0);
-      this.rootGroup.scale.set(1.05, 1.05, 1.05);
+      this.targetRootPosition.set(7.5, 0.5, -2.0);
+      this.targetRootScale.set(1.05, 1.05, 1.05);
     } else {
       // Centered and softly scaled on mobile/tablet so text remains crisp and readable
-      this.rootGroup.position.set(0, -3.0, -12.0);
-      this.rootGroup.scale.set(0.65, 0.65, 0.65);
+      this.targetRootPosition.set(0, -3.0, -12.0);
+      this.targetRootScale.set(0.65, 0.65, 0.65);
     }
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Event Listeners & Interaction Handling (Passive Background Tracking)
+  // Event Listeners & Interaction Handling (Passive Background Tracking + Active Orbit Drag)
   // ─────────────────────────────────────────────────────────────
   bindEvents() {
+    const onPointerDown = (e) => {
+      if (!this.isVisualizerMode) return;
+      if (e.target && e.target.closest && e.target.closest('#visualizer-hud')) return;
+      this.isDragging = true;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      this.dragStart = { x: clientX, y: clientY };
+      if (this.renderer?.domElement) this.renderer.domElement.style.cursor = 'grabbing';
+    };
+
     const onPointerMove = (e) => {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -486,10 +512,41 @@ export class SpatialCanvas3D {
       this.pointer.y = -(clientY / window.innerHeight) * 2 + 1;
 
       this.pointerTarget.set(this.pointer.x * 18, this.pointer.y * 12);
+
+      if (this.isDragging && this.isVisualizerMode) {
+        const deltaX = clientX - this.dragStart.x;
+        const deltaY = clientY - this.dragStart.y;
+        this.targetWorldRotation.y += deltaX * 0.007;
+        this.targetWorldRotation.x = THREE.MathUtils.clamp(
+          this.targetWorldRotation.x + deltaY * 0.007,
+          -Math.PI * 0.45,
+          Math.PI * 0.45
+        );
+        this.dragStart = { x: clientX, y: clientY };
+      }
     };
 
+    const onPointerUp = () => {
+      if (this.isDragging) {
+        this.isDragging = false;
+        if (this.renderer?.domElement) {
+          this.renderer.domElement.style.cursor = this.isVisualizerMode ? 'grab' : 'default';
+        }
+      }
+    };
+
+    window.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('touchstart', onPointerDown, { passive: true });
     window.addEventListener('mousemove', onPointerMove, { passive: true });
     window.addEventListener('touchmove', onPointerMove, { passive: true });
+    window.addEventListener('mouseup', onPointerUp);
+    window.addEventListener('touchend', onPointerUp);
+
+    window.addEventListener('wheel', (e) => {
+      if (!this.isVisualizerMode) return;
+      if (e.target && e.target.closest && e.target.closest('#visualizer-hud')) return;
+      this.targetCameraZ = THREE.MathUtils.clamp((this.targetCameraZ || 46) + e.deltaY * 0.025, 24, 75);
+    }, { passive: true });
 
     window.addEventListener('resize', () => {
       if (!this.renderer || !this.camera) return;
@@ -503,6 +560,25 @@ export class SpatialCanvas3D {
         this.monogramMesh.material.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio || 1, 2);
       }
     });
+  }
+
+  setVisualizerMode(active) {
+    this.isVisualizerMode = !!active;
+    this.updateRootGroupPosition();
+    if (this.renderer && this.camera) {
+      this.width = window.innerWidth || this.width;
+      this.height = window.innerHeight || this.height;
+      this.camera.aspect = this.width / this.height;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(this.width, this.height);
+    }
+    if (this.renderer?.domElement) {
+      this.renderer.domElement.style.cursor = this.isVisualizerMode ? 'grab' : 'default';
+    }
+    if (!this.isVisualizerMode) {
+      this.targetCameraZ = 46;
+      this.targetWorldRotation.x = 0.12;
+    }
   }
 
   setMorphState(stateIndex) {
@@ -537,9 +613,11 @@ export class SpatialCanvas3D {
 
     // Silky smooth rotation inertia
     if (!this.isDragging) {
-      this.targetWorldRotation.y += 0.0022;
+      this.targetWorldRotation.y += this.isVisualizerMode ? 0.0032 : 0.0022;
       // Soft ambient tilt based on cursor position
-      this.targetWorldRotation.x = 0.12 + this.pointer.y * 0.18;
+      if (!this.isVisualizerMode) {
+        this.targetWorldRotation.x = 0.12 + this.pointer.y * 0.18;
+      }
     }
 
     this.worldRotation.y = THREE.MathUtils.lerp(this.worldRotation.y, this.targetWorldRotation.y, 0.05);
@@ -547,6 +625,17 @@ export class SpatialCanvas3D {
 
     this.rootGroup.rotation.y = this.worldRotation.y;
     this.rootGroup.rotation.x = this.worldRotation.x;
+
+    // Smooth root group translation and scaling
+    if (this.targetRootPosition && this.targetRootScale) {
+      this.rootGroup.position.lerp(this.targetRootPosition, 0.06);
+      this.rootGroup.scale.lerp(this.targetRootScale, 0.06);
+    }
+
+    // Smooth camera zoom
+    if (this.camera && this.targetCameraZ) {
+      this.camera.position.z = THREE.MathUtils.lerp(this.camera.position.z, this.targetCameraZ, 0.08);
+    }
 
     // Smooth mode crossfade transitions
     for (let i = 0; i < 3; i++) {

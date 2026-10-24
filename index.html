@@ -105,6 +105,12 @@
             <span class="pr-geo-coords">18°N 66°W</span>
           </button>
 
+          <!-- Background 3D Visualizer Mode Toggle Button -->
+          <button type="button" class="hud-action-btn visualizer-btn" id="btn-toggle-visualizer" title="View 3D Background Visualization (Zen Mode · Press ESC to exit)" aria-label="View 3D Background Visualization">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span class="visualizer-btn-label">View 3D</span>
+          </button>
+
           <!-- Command Palette Trigger -->
           <button type="button" class="hud-action-btn cmd-trigger" id="btn-cmd-palette" aria-label="Open Command Palette (Cmd + K)">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -175,6 +181,10 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
                 <span>Live Intel & Radar</span>
               </button>
+              <button type="button" class="luxury-btn outline-platinum" id="btn-hero-view-canvas" title="View interactive 3D WebGL background visualization">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <span>View 3D Background</span>
+              </button>
               <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="luxury-btn subtle-ghost">
                 <span>Let's Chat</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
@@ -224,6 +234,7 @@
                 <button type="button" class="sculpture-pill active" data-morph="0">01 · NW Monogram</button>
                 <button type="button" class="sculpture-pill" data-morph="1">02 · Möbius Growth Flow</button>
                 <button type="button" class="sculpture-pill" data-morph="2">03 · Quantum AI Prism</button>
+                <button type="button" class="sculpture-pill zen-pill" id="btn-dock-view-canvas" title="Enter Fullscreen 3D Background Visualizer Mode">✨ View 3D Background</button>
                 <button type="button" class="sculpture-pill arcade-easter-pill" id="btn-open-arcade-pill" title="Play 3D Cyber Growth Racer Minigame">🎮 Cyber Arcade</button>
               </div>
             </div>
@@ -606,6 +617,53 @@
 
       <!-- Cyber Arcade 3D Easter Egg Game Dialog -->
       <dialog id="cyber-arcade-modal" class="cyber-arcade-dialog" aria-label="Cyber Growth Racer Video Game"></dialog>
+
+      <!-- 3D Spatial Visualizer Mode HUD (Zen / Immersive Canvas Controls) -->
+      <aside id="visualizer-hud" class="visualizer-hud" hidden aria-label="3D Background Visualization Controls">
+        <div class="visualizer-hud-inner">
+          <div class="viz-hud-header">
+            <span class="viz-live-dot"></span>
+            <div class="viz-title-wrap">
+              <span class="viz-title">3D SPATIAL ENGINE · IMMERSIVE VIEW</span>
+              <span class="viz-subtitle">Three.js WebGL · Drag to Orbit · Scroll to Zoom</span>
+            </div>
+          </div>
+
+          <div class="viz-hud-center">
+            <div class="viz-morph-group" role="group" aria-label="Select 3D Sculpture Morph">
+              <button type="button" class="viz-morph-pill active" data-morph="0" title="Switch to NW Monogram Particle Matrix">
+                <span class="viz-morph-index">01</span>
+                <span class="viz-morph-name">Monogram</span>
+              </button>
+              <button type="button" class="viz-morph-pill" data-morph="1" title="Switch to Möbius Growth Flow Ribbon">
+                <span class="viz-morph-index">02</span>
+                <span class="viz-morph-name">Möbius</span>
+              </button>
+              <button type="button" class="viz-morph-pill" data-morph="2" title="Switch to Quantum AI Prism Monolith">
+                <span class="viz-morph-index">03</span>
+                <span class="viz-morph-name">AI Prism</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="viz-hud-actions">
+            <!-- Audio Toggle in HUD -->
+            <button type="button" class="viz-hud-btn" id="btn-viz-audio" title="Toggle Soundscape" aria-label="Toggle Soundscape">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            </button>
+            <!-- Coquí chime in HUD -->
+            <button type="button" class="viz-hud-btn" id="btn-viz-coqui" title="Chime Puerto Rico Coquí" aria-label="Puerto Rico Coquí Chime">
+              <span>🇵🇷</span>
+            </button>
+            <!-- Exit Visualizer Button -->
+            <button type="button" class="luxury-btn primary-gold viz-exit-btn" id="btn-exit-visualizer" title="Restore Portfolio View (Shortcut: ESC)" aria-label="Show Portfolio and Exit Visualizer">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <span>Show Portfolio</span>
+              <kbd class="viz-kbd">ESC</kbd>
+            </button>
+          </div>
+        </div>
+      </aside>
 
       <!-- Toast Feedback Popup -->
       <div id="toast-banner" class="toast-popup" role="status" aria-live="polite"></div>
