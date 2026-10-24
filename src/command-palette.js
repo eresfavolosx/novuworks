@@ -35,6 +35,13 @@ export class CommandPalette {
         action: () => options.onOpenFeed && options.onOpenFeed(),
       },
       {
+        id: 'arcade',
+        title: 'Play Cyber Growth Racer (3D Easter Egg Game)',
+        category: 'Interactive Easter Egg',
+        shortcut: 'G',
+        action: () => options.onOpenArcade && options.onOpenArcade(),
+      },
+      {
         id: 'tesla',
         title: 'Toggle Tesla In-Car Touchscreen Cockpit Mode',
         category: 'Display / Vehicle',

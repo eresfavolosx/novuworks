@@ -62,10 +62,15 @@ export const LOGOS = {
           <stop offset="50%" stop-color="#8b52c8"/>
           <stop offset="100%" stop-color="#3d63e6"/>
         </linearGradient>
+        <clipPath id="nwCircleClip">
+          <circle cx="16" cy="18" r="13"/>
+        </clipPath>
       </defs>
-      <rect x="2" y="4" width="28" height="28" rx="6" fill="#08060f" stroke="url(#nwGradLogo)" stroke-width="1.8"/>
-      <path d="M9 22V13L15 22V13" stroke="url(#nwGradLogo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M18 13L20 22L22 15L24 22L26 13" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="16" cy="18" r="13.5" fill="#08060f" stroke="url(#nwGradLogo)" stroke-width="2"/>
+      <g clip-path="url(#nwCircleClip)">
+        <path d="M10 22V13L16 22V13" stroke="url(#nwGradLogo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18 13L20 22L22 15L24 22L26 13" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
       <text x="38" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" letter-spacing="0.04em" fill="#ffffff">NOVU</text>
       <text x="82" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="13" letter-spacing="0.04em" fill="#d4af37">WORKS</text>
     </svg>

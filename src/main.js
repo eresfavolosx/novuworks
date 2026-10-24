@@ -10,6 +10,7 @@ import { CommandPalette } from './command-palette.js';
 import { AIGrowthLab } from './ai-lab.js';
 import { RevOpsTerminal } from './revops-terminal.js';
 import { IntelFeed } from './intel-feed.js';
+import { CyberArcadeGame } from './game-easter-egg.js';
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
@@ -34,6 +35,7 @@ class FabianPortfolioApp {
       dialogContentBody: document.getElementById('dialog-content-body'),
       resumeModal: document.getElementById('resume-export-modal'),
       recruiterModal: document.getElementById('recruiter-fasttrack-modal'),
+      arcadeModal: document.getElementById('cyber-arcade-modal'),
       toastBanner: document.getElementById('toast-banner'),
       btnTeslaMode: document.getElementById('btn-tesla-mode'),
       btnAudioToggle: document.getElementById('btn-audio-toggle'),
@@ -108,6 +110,7 @@ class FabianPortfolioApp {
         onOpenHire: () => this.openRecruiterModal(),
         onOpenPlanner: () => this.switchView('planner'),
         onOpenFeed: () => this.switchView('intel-feed'),
+        onOpenArcade: () => this.openArcadeGame(),
         onToggleTesla: () => this.toggleTeslaMode(),
         onCycleMorph: () => this.cycleMorph(),
         onSelectDiscipline: (d) => this.openDisciplineModal(d),
@@ -505,6 +508,28 @@ class FabianPortfolioApp {
     audio.click(800);
   }
 
+  // ─────────────────────────────────────────────────────────────
+  // Cyber Arcade 3D Easter Egg Game
+  // ─────────────────────────────────────────────────────────────
+  openArcadeGame() {
+    if (!this.dom.arcadeModal) return;
+    this.dom.arcadeModal.showModal();
+    audio.confirm();
+    this.arcadeGame = new CyberArcadeGame(this.dom.arcadeModal, () => {
+      this.closeArcadeGame();
+    });
+  }
+
+  closeArcadeGame() {
+    if (!this.dom.arcadeModal) return;
+    if (this.arcadeGame) {
+      this.arcadeGame.stop();
+      this.arcadeGame = null;
+    }
+    this.dom.arcadeModal.close();
+    audio.click(750);
+  }
+
   copyRecruiterNotes() {
     const text = `CANDIDATE: Fabián Vélez Vicente
 TARGET ROLES: Growth Engineering Lead / RevOps Analytics Lead / Head of Growth / Applied AI Lead
@@ -696,7 +721,7 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
       this.openResumeModal();
     });
 
-    // Keyboard Shortcuts (1-5 for Views)
+    // Keyboard Shortcuts (1-6 for Views)
     window.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.key === '1') this.switchView('core');
@@ -704,6 +729,46 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
       if (e.key === '3') this.switchView('ai-lab');
       if (e.key === '4') this.switchView('planner');
       if (e.key === '5') this.switchView('dossier');
+      if (e.key === '6') this.switchView('intel-feed');
+    });
+
+    // Arcade Easter Egg triggers
+    document.getElementById('btn-open-arcade-pill')?.addEventListener('click', () => {
+      this.openArcadeGame();
+    });
+
+    // Triple-click on brand avatar
+    let avatarClicks = 0;
+    let avatarClickTimer = null;
+    document.querySelector('.brand-avatar-box')?.addEventListener('click', () => {
+      avatarClicks++;
+      clearTimeout(avatarClickTimer);
+      if (avatarClicks >= 3) {
+        avatarClicks = 0;
+        this.openArcadeGame();
+      } else {
+        avatarClickTimer = setTimeout(() => {
+          avatarClicks = 0;
+        }, 800);
+      }
+    });
+
+    // Konami Code sequence listener (↑ ↑ ↓ ↓ ← → ← → B A)
+    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+      if (key === konamiSequence[konamiIndex].toLowerCase()) {
+        konamiIndex++;
+        if (konamiIndex === konamiSequence.length) {
+          konamiIndex = 0;
+          this.showToast('🎮 KONAMI CODE UNLOCKED! LAUNCHING CYBER ARCADE...');
+          this.openArcadeGame();
+        }
+      } else {
+        konamiIndex = 0;
+      }
     });
 
     // Modal click-outside backdrop dismiss
@@ -722,6 +787,12 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
     this.dom.recruiterModal?.addEventListener('click', (e) => {
       if (e.target === this.dom.recruiterModal) {
         this.closeRecruiterModal();
+      }
+    });
+
+    this.dom.arcadeModal?.addEventListener('click', (e) => {
+      if (e.target === this.dom.arcadeModal) {
+        this.closeArcadeGame();
       }
     });
   }
