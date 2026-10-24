@@ -3847,6 +3847,101 @@ body.tesla-mode .hud-action-btn {
   flex-direction: column;
 }
 
+/* Back to the Future Doc Brown Time Circuits 3-Color Display */
+.time-circuits-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0d0f17;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #27272a;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.tc-display {
+  display: flex;
+  flex-direction: column;
+  padding: 3px 8px;
+  border-radius: 4px;
+  min-width: 82px;
+  text-align: center;
+}
+
+.tc-display.red {
+  background: #200407;
+  border: 1px solid #7f1d1d;
+  color: #f87171;
+  text-shadow: 0 0 8px rgba(248, 113, 113, 0.7);
+}
+
+.tc-display.green {
+  background: #04200d;
+  border: 1px solid #14532d;
+  color: #4ade80;
+  text-shadow: 0 0 8px rgba(74, 222, 128, 0.7);
+}
+
+.tc-display.amber {
+  background: #201504;
+  border: 1px solid #78350f;
+  color: #fbbf24;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.7);
+}
+
+.tc-label {
+  font-family: var(--font-mono, monospace);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+}
+
+.tc-val {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.bttf-speed-box {
+  transition: all 0.25s ease;
+}
+
+.bttf-speed-box.time-circuits-engaged {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+  box-shadow: 0 0 24px rgba(239, 68, 68, 0.6) !important;
+  animation: bttfSpeedFlash 0.3s infinite alternate ease-in-out;
+}
+
+@keyframes bttfSpeedFlash {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 14px rgba(239, 68, 68, 0.5);
+  }
+  to {
+    transform: scale(1.04);
+    box-shadow: 0 0 28px rgba(248, 113, 113, 0.9);
+  }
+}
+
+/* 88 MPH Time-Displacement Fullscreen Flash */
+.time-displacement-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(56, 189, 248, 0.8) 50%, rgba(139, 92, 246, 0.4) 80%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.1, 1, 0.2, 1);
+}
+
+.time-displacement-flash.flash-active {
+  opacity: 1;
+}
+
 .arcade-tag {
   font-family: var(--font-mono, monospace);
   font-size: 10.5px;

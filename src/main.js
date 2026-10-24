@@ -1161,5 +1161,19 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
 
 // Boot application when DOM is ready
 window.addEventListener('DOMContentLoaded', () => {
-  new FabianPortfolioApp();
+  window.app = new FabianPortfolioApp();
+
+  // Deep-linking shortcuts
+  const params = new URLSearchParams(window.location.search);
+  const hash = window.location.hash.toLowerCase();
+
+  setTimeout(() => {
+    if (params.get('arcade') === '1' || hash === '#arcade') {
+      window.app.openArcadeGame();
+    } else if (params.get('resume') === '1' || hash === '#resume') {
+      window.app.openResumeBrief();
+    } else if (params.get('hire') === '1' || hash === '#hire') {
+      window.app.openRecruiterModal();
+    }
+  }, 150);
 });
