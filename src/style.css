@@ -1430,6 +1430,248 @@ input[type="range"] {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Target Role Lenses & Personas Switcher
+   ───────────────────────────────────────────────────────────── */
+.dossier-role-lens-bar {
+  background: rgba(18, 18, 26, 0.7);
+  border: 1px solid var(--hairline-gold);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.role-lens-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+}
+
+.role-lens-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.role-lens-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--hairline);
+  color: #a1a1aa;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-luxury);
+}
+
+.role-lens-btn:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold-muted);
+  color: var(--titanium-white);
+}
+
+.role-lens-btn.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(139, 82, 200, 0.22) 100%);
+  border-color: var(--gold-primary);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
+}
+
+/* Standalone Projects Showcase Grid */
+.standalone-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 18px;
+}
+
+.standalone-project-card {
+  background: rgba(12, 12, 18, 0.6);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--duration-medium) var(--ease-luxury);
+}
+
+.standalone-project-card:hover {
+  border-color: var(--gold-muted);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.08);
+}
+
+.proj-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.proj-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--titanium-white);
+  line-height: 1.3;
+}
+
+.proj-period {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.proj-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+
+.proj-metric-pill {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 12px;
+}
+
+.proj-summary {
+  font-size: 13px;
+  color: var(--text-body);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.proj-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.proj-tag-pill {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  color: #a1a1aa;
+}
+
+/* Awards Grid */
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.award-card {
+  background: rgba(12, 12, 18, 0.6);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all var(--duration-fast) ease;
+}
+
+.award-card:hover {
+  border-color: var(--hairline-gold);
+}
+
+.award-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.award-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--titanium-white);
+}
+
+.award-year {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold-light);
+}
+
+.award-org {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: #38bdf8;
+}
+
+.award-desc {
+  font-size: 12.5px;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+
+/* Modal Role Lens Switcher */
+.modal-lens-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.modal-lens-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--hairline);
+  color: #a1a1aa;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+}
+
+.modal-lens-btn:hover {
+  background: rgba(212, 175, 55, 0.1);
+  color: #ffffff;
+}
+
+.modal-lens-btn.active {
+  background: rgba(212, 175, 55, 0.18);
+  border-color: var(--gold-primary);
+  color: var(--gold-light);
+}
+
+@media (max-width: 860px) {
+  .standalone-projects-grid,
+  .awards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
    Executive Modal & Dialog
    ───────────────────────────────────────────────────────────── */
 .executive-dialog {

@@ -20,6 +20,7 @@ class FabianPortfolioApp {
     this.currentView = 'core';
     this.isTeslaMode = localStorage.getItem('fabian_tesla_mode') === 'true';
     this.canvas3d = null;
+    this.activeRoleLens = 'master';
 
     this.dom = {
       webglContainer: document.getElementById('webgl-container'),
@@ -31,6 +32,21 @@ class FabianPortfolioApp {
       competencyMatrixMount: document.getElementById('competency-matrix-mount'),
       companyLogoStripMount: document.getElementById('company-logo-strip-mount'),
       recModalLogosMount: document.getElementById('rec-modal-logos-mount'),
+      dossierTagMount: document.getElementById('dossier-tag-mount'),
+      dossierSummaryMount: document.getElementById('dossier-summary-mount'),
+      dossierExperienceMount: document.getElementById('dossier-experience-mount'),
+      standaloneProjectsMount: document.getElementById('standalone-projects-mount'),
+      dossierEducationMount: document.getElementById('dossier-education-mount'),
+      dossierAwardsMount: document.getElementById('dossier-awards-mount'),
+      dossierLogosMount: document.getElementById('dossier-logos-mount'),
+      resRoleMount: document.getElementById('res-role-mount'),
+      resSummaryMount: document.getElementById('res-summary-mount'),
+      resSkillsMount: document.getElementById('res-skills-mount'),
+      resExpMount: document.getElementById('res-exp-mount'),
+      resProjectsMount: document.getElementById('res-projects-mount'),
+      resEducationMount: document.getElementById('res-education-mount'),
+      resAwardsMount: document.getElementById('res-awards-mount'),
+      scorecardRolesMount: document.getElementById('scorecard-roles-mount'),
       disciplineModal: document.getElementById('discipline-modal'),
       dialogContentBody: document.getElementById('dialog-content-body'),
       resumeModal: document.getElementById('resume-export-modal'),
@@ -58,6 +74,9 @@ class FabianPortfolioApp {
       this.renderCaseStudies();
       this.renderCompetencyMatrix();
       this.renderCompanyLogos();
+      this.renderDossier();
+      this.renderPrintableResume();
+      this.updateRecruiterScorecard();
     } catch (e) {
       console.error('Render error:', e);
     }
@@ -197,53 +216,276 @@ class FabianPortfolioApp {
       `;
     }
 
-    this.renderExperienceLogos();
+    this.renderDossier();
+    this.renderPrintableResume();
+    this.updateRecruiterScorecard();
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Dynamic Role Lens / Persona Switcher
+  // ─────────────────────────────────────────────────────────────
+  setRoleLens(lensId) {
+    if (!PROFILE.roleVariants[lensId]) return;
+    this.activeRoleLens = lensId;
+
+    // Update active button state across all lens button groups
+    document.querySelectorAll('#dossier-role-lens-pills .role-lens-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.lens === lensId);
+    });
+    document.querySelectorAll('#resume-modal-lens-pills .modal-lens-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.lens === lensId);
+    });
+    document.querySelectorAll('#recruiter-modal-lens-pills .modal-lens-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.lens === lensId);
+    });
+
+    this.renderDossier(lensId);
+    this.renderPrintableResume(lensId);
+    this.updateRecruiterScorecard(lensId);
+    audio.click(850);
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Render Dossier View (Role Narrative, Experience, Projects, Certs)
+  // ─────────────────────────────────────────────────────────────
+  renderDossier(lensId = this.activeRoleLens) {
+    const variant = PROFILE.roleVariants[lensId] || PROFILE.roleVariants.master;
+
+    // 1. Tagline & Summary
+    if (this.dom.dossierTagMount) {
+      this.dom.dossierTagMount.textContent = variant.headline;
+    }
+    if (this.dom.dossierSummaryMount) {
+      this.dom.dossierSummaryMount.textContent = variant.summary;
+    }
+
+    // 2. Experience Timeline
+    if (this.dom.dossierExperienceMount) {
+      const expLogos = {
+        'Money Group': LOGOS.moneyGroup,
+        'Red Ventures': LOGOS.redVentures,
+        'Viva Advertising': LOGOS.vivaAdvertising,
+        'Link Puerto Rico': LOGOS.linkPR,
+      };
+
+      this.dom.dossierExperienceMount.innerHTML = variant.experiences.map((exp) => {
+        const logoSvg = expLogos[exp.company] || '';
+        return `
+          <div class="exp-item">
+            <div class="exp-header">
+              <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                ${logoSvg ? `<div class="exp-company-logo-slot">${logoSvg}</div>` : ''}
+                <div>
+                  <h4 class="exp-role">${exp.role}</h4>
+                  <span class="exp-company">${exp.company}</span>
+                </div>
+              </div>
+              <span class="exp-date">${exp.period}</span>
+            </div>
+            <ul class="exp-bullet-list">
+              ${exp.bullets.map((b) => {
+                const parts = b.split(': ');
+                if (parts.length > 1) {
+                  return `<li><strong>${parts[0]}:</strong> ${parts.slice(1).join(': ')}</li>`;
+                }
+                return `<li>${b}</li>`;
+              }).join('')}
+            </ul>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 3. Standalone Projects
+    if (this.dom.standaloneProjectsMount && PROFILE.standaloneProjects) {
+      this.dom.standaloneProjectsMount.innerHTML = PROFILE.standaloneProjects.map((p) => `
+        <div class="standalone-project-card">
+          <div class="proj-top-row">
+            <h4 class="proj-name">${p.name}</h4>
+            <span class="proj-period">${p.period}</span>
+          </div>
+          <div class="proj-meta">${p.role} · ${p.organization}</div>
+          <span class="proj-metric-pill">${p.metrics}</span>
+          <p class="proj-summary">${p.summary}</p>
+          <div class="proj-tags-row">
+            ${p.tags.map((t) => `<span class="proj-tag-pill">${t}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 4. Education & Certifications
+    if (this.dom.dossierEducationMount) {
+      const edu = PROFILE.education[0];
+      this.dom.dossierEducationMount.innerHTML = `
+        <div class="edu-card">
+          <div style="margin-bottom: 8px;">${LOGOS.politecnica}</div>
+          <h4 class="edu-degree">${edu.degree}</h4>
+          <span class="edu-school">${edu.institution} · ${edu.status}</span>
+          <p class="edu-desc"><strong>Coursework:</strong> ${edu.coursework}</p>
+        </div>
+
+        <div class="edu-card">
+          <div style="margin-bottom: 8px; display: flex; gap: 10px; flex-wrap: wrap;">
+            ${LOGOS.powerbi}
+          </div>
+          <h4 class="edu-degree">Professional Certifications & Badges</h4>
+          <span class="edu-school">Microsoft · CompTIA · Lean Six Sigma · UPPR</span>
+          <ul style="list-style: none; padding: 0; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; color: var(--text-body);">
+            ${PROFILE.certifications.map((c) => `
+              <li style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+                <span>• <strong>${c.name}</strong> (${c.issuer})</span>
+                <span style="font-family: var(--font-mono); font-size: 10px; color: var(--gold-light); background: rgba(212,175,55,0.1); padding: 2px 6px; border-radius: 4px;">${c.badge}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <div class="edu-card">
+          <div style="margin-bottom: 8px;">${LOGOS.stanford}</div>
+          <h4 class="edu-degree">Fellowships & Institutional Governance</h4>
+          <span class="edu-school">Stanford University & UPR</span>
+          <p class="edu-desc">
+            <strong>Stanford University Innovation Fellows:</strong> Selected for elite design thinking and higher education innovation fellowship.<br/>
+            <strong>Project Management Practice Tools & Techniques:</strong> UPPR structured Agile & Waterfall delivery.<br/>
+            <strong>Federal Funds Administration:</strong> UPR federal grant governance and compliance.
+          </p>
+        </div>
+      `;
+    }
+
+    // 5. Awards & Civic Leadership
+    if (this.dom.dossierAwardsMount && PROFILE.awards) {
+      this.dom.dossierAwardsMount.innerHTML = PROFILE.awards.map((a) => `
+        <div class="award-card">
+          <div class="award-head">
+            <h4 class="award-title">${a.title}</h4>
+            <span class="award-year">${a.year}</span>
+          </div>
+          <div class="award-org">${a.organization}</div>
+          <p class="award-desc">${a.description}</p>
+        </div>
+      `).join('');
+    }
+
+    // 6. Dossier Company Logos Strip
+    if (this.dom.dossierLogosMount) {
+      this.dom.dossierLogosMount.innerHTML = `
+        <div class="logo-strip-inner">
+          <span class="logo-strip-label">ACCREDITED PARTNERS & AFFILIATIONS:</span>
+          <div class="logo-strip-row">
+            <div class="logo-badge-item" title="Money Group">${LOGOS.moneyGroup}</div>
+            <div class="logo-badge-item" title="Red Ventures">${LOGOS.redVentures}</div>
+            <div class="logo-badge-item" title="edX Platform">${LOGOS.edx}</div>
+            <div class="logo-badge-item" title="Viva Advertising">${LOGOS.vivaAdvertising}</div>
+            <div class="logo-badge-item" title="Link Puerto Rico">${LOGOS.linkPR}</div>
+            <div class="logo-badge-item" title="Microsoft">${LOGOS.microsoft}</div>
+            <div class="logo-badge-item" title="Meta">${LOGOS.meta}</div>
+            <div class="logo-badge-item" title="Stanford University">${LOGOS.stanford}</div>
+            <div class="logo-badge-item" title="UPPR">${LOGOS.politecnica}</div>
+            <div class="logo-badge-item" title="Grupo Guayacán">${LOGOS.guayacan}</div>
+            <div class="logo-badge-item" title="Enactus">${LOGOS.enactus}</div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Render Printable Executive Resume & Composite Card
+  // ─────────────────────────────────────────────────────────────
+  renderPrintableResume(lensId = this.activeRoleLens) {
+    const variant = PROFILE.roleVariants[lensId] || PROFILE.roleVariants.master;
+
+    // Header Role
+    if (this.dom.resRoleMount) {
+      this.dom.resRoleMount.textContent = variant.headline;
+    }
+
+    // Summary
+    if (this.dom.resSummaryMount) {
+      this.dom.resSummaryMount.textContent = variant.summary;
+    }
+
+    // Skills
+    if (this.dom.resSkillsMount) {
+      this.dom.resSkillsMount.innerHTML = variant.skills.map((s) => `
+        <li><strong>${s.title}:</strong> ${s.items}</li>
+      `).join('');
+    }
+
+    // Experience
+    if (this.dom.resExpMount) {
+      this.dom.resExpMount.innerHTML = variant.experiences.map((exp) => `
+        <div class="res-exp-block">
+          <div class="res-exp-head">
+            <div>
+              <span class="res-company">${exp.company}</span>
+              <span class="res-role">${exp.role}</span>
+            </div>
+            <span class="res-date">${exp.period}</span>
+          </div>
+          <ul class="res-bullets">
+            ${exp.bullets.map((b) => {
+              const parts = b.split(': ');
+              if (parts.length > 1) {
+                return `<li><strong>${parts[0]}:</strong> ${parts.slice(1).join(': ')}</li>`;
+              }
+              return `<li>${b}</li>`;
+            }).join('')}
+          </ul>
+        </div>
+      `).join('');
+    }
+
+    // Projects
+    if (this.dom.resProjectsMount && PROFILE.standaloneProjects) {
+      this.dom.resProjectsMount.innerHTML = PROFILE.standaloneProjects.slice(0, 3).map((p) => `
+        <div class="res-exp-block" style="margin-bottom: 12px;">
+          <div class="res-exp-head">
+            <div>
+              <span class="res-company">${p.name}</span>
+              <span class="res-role">(${p.role} · ${p.organization})</span>
+            </div>
+            <span class="res-date">${p.period}</span>
+          </div>
+          <div style="font-size: 11.5px; color: var(--gold-light); font-family: var(--font-mono); margin-bottom: 4px;">${p.metrics}</div>
+          <p style="font-size: 12.5px; color: #d6d6de; line-height: 1.55;">${p.summary}</p>
+        </div>
+      `).join('');
+    }
+
+    // Education & Certifications
+    if (this.dom.resEducationMount) {
+      const edu = PROFILE.education[0];
+      const certsText = PROFILE.certifications.map((c) => `${c.name} (${c.issuer})`).join(' | ');
+      this.dom.resEducationMount.innerHTML = `
+        <li><strong>${edu.degree}</strong> | ${edu.institution} | ${edu.status} (Coursework: ${edu.coursework})</li>
+        <li><strong>Accredited Certifications:</strong> ${certsText}</li>
+        <li><strong>Fellowships:</strong> Stanford University Innovation Fellows | Project Management Practice (UPPR) | Federal Funds Administration (UPR)</li>
+      `;
+    }
+
+    // Awards & Leadership
+    if (this.dom.resAwardsMount && PROFILE.awards) {
+      this.dom.resAwardsMount.innerHTML = PROFILE.awards.map((a) => `
+        <li><strong>${a.title}</strong> (${a.year}, ${a.organization}) — ${a.description}</li>
+      `).join('');
+    }
+  }
+
+  updateRecruiterScorecard(lensId = this.activeRoleLens) {
+    const variant = PROFILE.roleVariants[lensId] || PROFILE.roleVariants.master;
+    if (this.dom.scorecardRolesMount) {
+      this.dom.scorecardRolesMount.innerHTML = `Active Lens: <strong>${variant.shortTitle}</strong> (Targeting Level ICS4 Lead / Senior IC / Manager)`;
+    }
   }
 
   // ─────────────────────────────────────────────────────────────
   // Inject Logos into Dossier Experience & Printable Resume
   // ─────────────────────────────────────────────────────────────
   renderExperienceLogos() {
-    const expLogos = {
-      'Money Group': LOGOS.moneyGroup,
-      'Red Ventures': LOGOS.redVentures,
-      'Viva Advertising': LOGOS.vivaAdvertising,
-      'Link Puerto Rico': LOGOS.linkPR,
-    };
-
-    // Inject into Dossier timeline
-    document.querySelectorAll('.exp-item').forEach((item) => {
-      const compEl = item.querySelector('.exp-company');
-      if (compEl) {
-        const compName = compEl.textContent.trim();
-        if (expLogos[compName] && !item.querySelector('.exp-company-logo-slot')) {
-          const logoDiv = document.createElement('div');
-          logoDiv.className = 'exp-company-logo-slot';
-          logoDiv.innerHTML = expLogos[compName];
-          const header = item.querySelector('.exp-header');
-          if (header) {
-            header.insertBefore(logoDiv, header.firstChild);
-          }
-        }
-      }
-    });
-
-    // Inject into Printable Resume
-    document.querySelectorAll('.res-exp-block').forEach((block) => {
-      const compEl = block.querySelector('.res-company');
-      if (compEl) {
-        const compName = compEl.textContent.trim();
-        if (expLogos[compName] && !block.querySelector('.res-company-logo-slot')) {
-          const logoDiv = document.createElement('div');
-          logoDiv.className = 'res-company-logo-slot';
-          logoDiv.innerHTML = expLogos[compName];
-          const head = block.querySelector('.res-exp-head');
-          if (head) {
-            head.insertBefore(logoDiv, head.firstChild);
-          }
-        }
-      }
-    });
+    // Handled dynamically via renderDossier & renderPrintableResume
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -531,24 +773,32 @@ class FabianPortfolioApp {
   }
 
   copyRecruiterNotes() {
+    const variant = PROFILE.roleVariants[this.activeRoleLens] || PROFILE.roleVariants.master;
     const text = `CANDIDATE: Fabián Vélez Vicente
-TARGET ROLES: Growth Engineering Lead / RevOps Analytics Lead / Head of Growth / Applied AI Lead
+TARGET ROLE: ${variant.headline}
+ACTIVE SOURCING LENS: ${variant.label}
 LOCATION: San Juan, PR (US Remote / Worldwide)
 EMAIL: fabianvvicente1@gmail.com
 LINKEDIN: https://linkedin.com/in/fabian-velez-vicente
 GITHUB: https://github.com/eresfavolosx
 PORTFOLIO: https://novu.works
 
-KEY EXECUTIVE PROOF POINTS:
-• Money Group: Delivered at 122% of quarterly bonus target ($4,575 vs $3,750 base) within a $1B+ portfolio scope; restructured partner unit payouts from $125 to $250; automated 20+ enterprise LLM telemetry agents.
+EXECUTIVE SUMMARY:
+${variant.summary}
+
+CORE SKILLS:
+${variant.skills.map((s) => `• ${s.title}: ${s.items}`).join('\n')}
+
+KEY PROOF POINTS & METRICS:
+• Money Group: Delivered at 122% of quarterly bonus target ($4,575 vs $3,750 base) within a $1B+ portfolio scope; restructured partner unit payouts from $125 to $250; automated 20+ enterprise LLM telemetry agents cutting cycle times to <4 hours.
 • Red Ventures (edX): Led content & SEO intelligence for multi-million-page edX platform; normalized raw telemetry across 40M+ user sessions via Databricks SQL & Python; refreshed 1,250+ priority pages (+50% search lift, +19% YoY conversions).
 • Viva Advertising: Co-Founder managing $2M+ direct ad spend and 4B+ impressions across 150+ B2B commercial accounts; generated $10M+ pipeline; slashed churn by 83% (from 30% to 5%) via predictive CRM health models.
-• Link Puerto Rico: Technical Lead constructing and maintaining 100+ relational databases for 80+ organizations; unlocked $3M in sponsorships.
-• Education & Credentials: B.S. Computer Engineering (4.0 GPA), Universidad Politécnica de PR; Stanford University Innovation Fellow; Lean Six Sigma White Belt; CompTIA ITF+.`;
+• Link Puerto Rico (The Liza Project): Directed crisis procurement of 100+ computers and 50+ tablets in <30 days during global shortage; transformed 3 community centers into digital libraries with custom MDM and firewalls for 1,000+ residents.
+• Education & Credentials: B.S. Computer Engineering (4.0 GPA), Universidad Politécnica de PR; Microsoft Certified Power BI Data Analyst Associate; Stanford University Innovation Fellow; Lean Six Sigma White Belt; CompTIA ITF+.`;
 
     navigator.clipboard.writeText(text).then(() => {
       audio.confirm();
-      this.showToast('Recruiter ATS Sourcing Notes copied to clipboard');
+      this.showToast(`Recruiter ATS Notes (${variant.shortTitle}) copied to clipboard`);
     }).catch(() => {
       this.showToast('Candidate notes copied to clipboard');
     });
@@ -570,51 +820,43 @@ KEY EXECUTIVE PROOF POINTS:
   }
 
   copyResumeText() {
+    const variant = PROFILE.roleVariants[this.activeRoleLens] || PROFILE.roleVariants.master;
+    const edu = PROFILE.education[0];
+    const certsText = PROFILE.certifications.map((c) => `• ${c.name} (${c.issuer})`).join('\n');
+    const awardsText = PROFILE.awards.map((a) => `• ${a.title} (${a.year}, ${a.organization})`).join('\n');
+
     const text = `FABIAN VELEZ VICENTE
-Growth & Revenue Operations Analytics Lead
+${variant.headline}
 Email: fabianvvicente1@gmail.com | LinkedIn: https://linkedin.com/in/fabian-velez-vicente | GitHub: https://github.com/eresfavolosx | Portfolio: https://novu.works
+Location: San Juan, PR (US Remote)
 
 SUMMARY
-Growth & Revenue Operations Analytics Lead with 8+ years of experience sitting at the intersection of Marketing, Sales, and RevOps to analyze content, paid media, and CRM data, turning complex B2B funnel insights into pipeline growth across a $10M+ commercial portfolio.
+${variant.summary}
 
 SKILLS
-• Content, SEO & Audience Intelligence: Organic Search & Keyword Performance | Content Refresh & Consolidation Strategy | Website Engagement & Conversion Analytics (GA4) | Search & Audience Behavior Analysis
-• Paid Media & Demand Gen Analytics: LinkedIn Ads, Google Ads & Display | Multi-Dimensional Performance Analysis (Creative, Segment, Offer) | Spend-to-Pipeline & Opportunity Attribution | A/B Test Design
-• CRM Enrichment & Sales Intelligence: Salesforce & HubSpot CRM Data Quality | Account Deduplication, Normalization & Enrichment | ICP Segmentation & Buying Committee Research | Event & Prospect Prioritization
-• Data Stack & BI Platforms: SQL & T-SQL | Databricks | Advanced Spreadsheets (Excel & Google Sheets) | Power BI | Tableau | Looker | Python Data Automation | Bilingual (English & Spanish)
+${variant.skills.map((s) => `• ${s.title}: ${s.items}`).join('\n')}
 
 PROFESSIONAL EXPERIENCE
-Money Group | Media Buyer (Demand Generation & Revenue Operations Analytics) | March 2026 – October 2026
-• Paid Media & Pipeline Attribution: Analyzed multi-channel advertising performance across Google, LinkedIn, and display placements for 5 verticals ($100k+ direct spend within a $1 Billion+ portfolio), moving beyond clicks to tie spend directly to qualified opportunities and revenue.
-• Account Intelligence & RevOps Alignment: Partnered with Sales and RevOps to evaluate B2B and consumer partner economics, building standardized opportunity sizing models and restructuring unit payouts from $125 to $250 to prioritize high-value downstream conversions.
-• Landing Page & Offer Testing: Partnered with Demand Generation to design and evaluate structured A/B tests across 20+ landing pages, analyzing performance by creative copy and offer to accelerate test velocity by 30%.
-• Automated Data Hygiene & Anomaly Detection: Engineered 20+ custom AI workflows and live telemetry agents in an enterprise LLM platform to normalize partner data, flag tracking anomalies, and maintain 100% reporting accuracy in under 4 hours.
+${variant.experiences.map((exp) => `${exp.company} | ${exp.role} | ${exp.period}\n${exp.bullets.map((b) => `• ${b}`).join('\n')}`).join('\n\n')}
 
-Red Ventures | Growth / SEO Analyst (Content & Audience Intelligence, edX) | August 2024 – January 2026
-• Content & SEO Performance Strategy: Led content performance analysis across organic search, keyword rankings, and website engagement for the multi-million-page edX platform, refreshing and consolidating 1,250+ priority pages to drive a 50%+ baseline search lift and a 19% YoY conversion gain.
-• Audience & Search Opportunity Surfacing: Combined behavioral telemetry with search trends to surface emerging content and LLM search opportunities, partnering with Content and Product teams in Jira to generate a 3x lift (200%+) in high-intent prospective inquiries.
-• SQL Data Normalization & Funnel Analysis: Queried and cleaned raw, imperfect datasets from scratch using SQL and Python in Databricks across 40 million+ user sessions, reconciling GA4 and internal databases with 100% reporting accuracy.
+SIGNATURE ENGINEERING & CRISIS IMPACT PROJECTS
+${PROFILE.standaloneProjects.map((p) => `${p.name} | ${p.role} · ${p.organization} | ${p.period}\nMetrics: ${p.metrics}\n${p.summary}`).join('\n\n')}
 
-Viva Advertising | Co-Founder (B2B Growth, CRM & Event Intelligence) | January 2018 – Present
-• B2B Funnel & Demand Gen Analytics: Evaluated paid media, content, and funnel performance across 150+ B2B and commercial accounts, managing $2M+ in direct ad budgets and 4 Billion+ impressions to generate a $10M+ pipeline and $10M+ in realized revenue.
-• CRM Data Quality & ICP Segmentation: Partnered with Sales and RevOps across Salesforce and HubSpot to normalize, deduplicate, and enrich account and buying-committee records, building predictive account-health models that reduced client churn by 83% (from 30% to 5%).
-• Executive BI & Proactive Recommendations: Architected centralized Power BI and Looker dashboards and directed a 15-person cross-functional team, translating raw marketing and CRM data into clear budget and targeting recommendations that lifted throughput by 40%.
+EDUCATION & ACCREDITED CERTIFICATIONS
+• ${edu.degree} | ${edu.institution} | ${edu.status} (Coursework: ${edu.coursework})
+${certsText}
+• Stanford University Innovation Fellows (Design Thinking & Business Strategy)
+• Federal Funds Administration (Universidad de Puerto Rico)
 
-Link Puerto Rico | Co-Founder & Technical Lead (Event & Prospect Intelligence) | November 2017 – Present
-• Conference, Event & Attendee Intelligence: Sourced, cleaned, matched, and enriched attendee and company data across 50+ industry workshops and 4 major conferences (5,000+ participants and 2,000+ community members), building prioritized target-account lists that drove $3 Million in sponsorships and B2B sales.
-• Market Research & Database Governance: Directed a 10+ person team to build and maintain 100+ relational databases and web platforms for 80+ organizations, normalizing 50,000+ customer and prospect records to uncover untapped market opportunities.
-
-EDUCATION & CERTIFICATIONS
-• B.S., Computer Engineering (4.0 GPA) | Universidad Politécnica de Puerto Rico | In Progress
-• Automation, Data & IT Certifications: Lean Six Sigma White Belt | Data-driven Strategy: Power BI (UPPR) | CompTIA ITF+
-• Governance & Fellowships: Stanford University Innovation Fellows | Project Management Practice (UPPR) | Federal Funds Administration (UPR)
+HONORS, AWARDS & CIVIC LEADERSHIP
+${awardsText}
 
 COLLABORATION & LET'S CHAT
-Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com`;
+Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Schedule a strategy conversation at https://novu.works`;
 
     navigator.clipboard.writeText(text).then(() => {
       audio.confirm();
-      this.showToast('Executive Resume copied to clipboard');
+      this.showToast(`Executive Resume (${variant.shortTitle}) copied to clipboard`);
     }).catch(() => {
       this.showToast('Copied to clipboard');
     });
@@ -649,6 +891,16 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
 
     document.getElementById('btn-hero-intel-feed')?.addEventListener('click', () => {
       this.switchView('intel-feed');
+    });
+
+    // Dynamic Target Role Lens Selectors
+    document.querySelectorAll('.role-lens-btn, .modal-lens-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const lensId = e.currentTarget.dataset.lens;
+        if (lensId) {
+          this.setRoleLens(lensId);
+        }
+      });
     });
 
     // Recruiter Brief Trigger

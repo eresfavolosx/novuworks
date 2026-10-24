@@ -95,4 +95,56 @@ export const LOGOS = {
       <text x="76" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="11" letter-spacing="0.02em" fill="#ffffff">COMP ENG (4.0)</text>
     </svg>
   `,
+
+  microsoft: `
+    <svg class="comp-logo-svg" viewBox="0 0 160 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Microsoft Logo">
+      <g transform="translate(4, 8)">
+        <rect x="0" y="0" width="9" height="9" fill="#f25022"/>
+        <rect x="11" y="0" width="9" height="9" fill="#7fba00"/>
+        <rect x="0" y="11" width="9" height="9" fill="#00a4ef"/>
+        <rect x="11" y="11" width="9" height="9" fill="#ffb900"/>
+      </g>
+      <text x="36" y="22" font-family="'Segoe UI', 'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="13" letter-spacing="0.02em" fill="#ffffff">Microsoft</text>
+      <text x="100" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="10" letter-spacing="0.06em" fill="#7fba00">1ST PLACE</text>
+    </svg>
+  `,
+
+  meta: `
+    <svg class="comp-logo-svg" viewBox="0 0 150 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Meta Logo">
+      <rect x="2" y="4" width="28" height="28" rx="6" fill="#071328" stroke="#0081fb" stroke-width="1.8"/>
+      <path d="M8 22C8 18 10 14 13 14C15 14 16 16 16 18C16 16 17 14 19 14C22 14 24 18 24 22M8 22C8 25 10 26 12 25C14 24 16 20 16 18M24 22C24 25 22 26 20 25C18 24 16 20 16 18" stroke="#0081fb" stroke-width="1.8" stroke-linecap="round"/>
+      <text x="38" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" letter-spacing="0.04em" fill="#ffffff">Meta</text>
+      <text x="76" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="10" letter-spacing="0.06em" fill="#0081fb">SAN JUAN REP</text>
+    </svg>
+  `,
+
+  guayacan: `
+    <svg class="comp-logo-svg" viewBox="0 0 170 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Grupo Guayacán Logo">
+      <rect x="2" y="4" width="28" height="28" rx="6" fill="#081a14" stroke="#10b981" stroke-width="1.8"/>
+      <path d="M16 10L22 18H18L21 24H11L14 18H10L16 10Z" fill="#10b981"/>
+      <text x="38" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="12" letter-spacing="0.04em" fill="#ffffff">GUAYACÁN</text>
+      <text x="108" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="10" letter-spacing="0.06em" fill="#10b981">MENTOR</text>
+    </svg>
+  `,
+
+  enactus: `
+    <svg class="comp-logo-svg" viewBox="0 0 155 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Enactus Logo">
+      <rect x="2" y="4" width="28" height="28" rx="6" fill="#1c1605" stroke="#f59e0b" stroke-width="1.8"/>
+      <circle cx="16" cy="18" r="7" stroke="#f59e0b" stroke-width="1.8"/>
+      <path d="M12 18H20M16 14V22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="38" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" letter-spacing="0.06em" fill="#ffffff">ENACTUS</text>
+      <text x="96" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="10" letter-spacing="0.06em" fill="#f59e0b">GLOBAL JUDGE</text>
+    </svg>
+  `,
+
+  powerbi: `
+    <svg class="comp-logo-svg" viewBox="0 0 170 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Microsoft Power BI Logo">
+      <rect x="2" y="4" width="28" height="28" rx="6" fill="#1c1704" stroke="#facc15" stroke-width="1.8"/>
+      <rect x="8" y="18" width="3.5" height="8" rx="1" fill="#facc15"/>
+      <rect x="14" y="14" width="3.5" height="12" rx="1" fill="#f59e0b"/>
+      <rect x="20" y="10" width="3.5" height="16" rx="1" fill="#d97706"/>
+      <text x="38" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="12" letter-spacing="0.04em" fill="#ffffff">POWER BI</text>
+      <text x="100" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="10" letter-spacing="0.04em" fill="#facc15">ASSOCIATE</text>
+    </svg>
+  `,
 };
