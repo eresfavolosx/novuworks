@@ -24,6 +24,8 @@ export const PROFILE = {
     linkedin: 'https://linkedin.com/in/fabian-velez-vicente',
     github: 'https://github.com/eresfavolosx',
     website: 'https://novu.works',
+    vivaAdvertising: 'https://viva-advertising.com/',
+    linkPR: 'https://linkpuertorico.org/',
     resumes: {
       master: '/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf',
       ai_engineering: '/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf',
@@ -105,6 +107,8 @@ export const PROFILE = {
         {
           company: 'Viva Advertising',
           employmentType: 'My Company / Founder',
+          url: 'https://viva-advertising.com/',
+          urlDisplay: 'viva-advertising.com',
           role: 'Co-founder & Marketing VP — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
@@ -117,6 +121,8 @@ export const PROFILE = {
         {
           company: 'Link Puerto Rico',
           employmentType: 'My Company / Co-Founder',
+          url: 'https://linkpuertorico.org/',
+          urlDisplay: 'linkpuertorico.org',
           role: 'Co-Founder & Technical Lead — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
@@ -186,6 +192,8 @@ export const PROFILE = {
         {
           company: 'Viva Advertising',
           employmentType: 'My Company / Founder',
+          url: 'https://viva-advertising.com/',
+          urlDisplay: 'viva-advertising.com',
           role: 'Founder & Technical Director (B2B Demand-Generation & Strategy) — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
@@ -197,6 +205,8 @@ export const PROFILE = {
         {
           company: 'Link Puerto Rico',
           employmentType: 'My Company / Co-Founder',
+          url: 'https://linkpuertorico.org/',
+          urlDisplay: 'linkpuertorico.org',
           role: 'Co-Founder & Technical Lead (Operations & Ecosystem Leadership) — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
@@ -269,6 +279,8 @@ export const PROFILE = {
         {
           company: 'Viva Advertising',
           employmentType: 'My Company / Founder',
+          url: 'https://viva-advertising.com/',
+          urlDisplay: 'viva-advertising.com',
           role: 'Founder & Managing Director (Performance Media & BI) — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
@@ -283,6 +295,8 @@ export const PROFILE = {
         {
           company: 'Link Puerto Rico',
           employmentType: 'My Company / Co-Founder',
+          url: 'https://linkpuertorico.org/',
+          urlDisplay: 'linkpuertorico.org',
           role: 'Co-Founder & Operations Lead — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
@@ -354,6 +368,8 @@ export const PROFILE = {
         {
           company: 'Viva Advertising',
           employmentType: 'My Company / Founder',
+          url: 'https://viva-advertising.com/',
+          urlDisplay: 'viva-advertising.com',
           role: 'Founder & Managing Director (BI & Financial Analytics) — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
@@ -366,6 +382,8 @@ export const PROFILE = {
         {
           company: 'Link Puerto Rico',
           employmentType: 'My Company / Co-Founder',
+          url: 'https://linkpuertorico.org/',
+          urlDisplay: 'linkpuertorico.org',
           role: 'Co-Founder & Technical Lead (Relational Architecture) — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
@@ -434,6 +452,8 @@ export const PROFILE = {
         {
           company: 'Viva Advertising',
           employmentType: 'My Company / Founder',
+          url: 'https://viva-advertising.com/',
+          urlDisplay: 'viva-advertising.com',
           role: 'Founder & Managing Director (Business Operations & Analytics) — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
@@ -445,6 +465,8 @@ export const PROFILE = {
         {
           company: 'Link Puerto Rico',
           employmentType: 'My Company / Co-Founder',
+          url: 'https://linkpuertorico.org/',
+          urlDisplay: 'linkpuertorico.org',
           role: 'Co-Founder & Technical Lead (Technical Program Management) — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
@@ -603,6 +625,8 @@ export const PROFILE = {
       company: 'Viva Advertising',
       employmentType: 'My Company / Founder',
       logoKey: 'vivaAdvertising',
+      url: 'https://viva-advertising.com/',
+      urlDisplay: 'viva-advertising.com',
       role: 'Co-founder & Marketing VP — My Company / Founder',
       period: 'January 2018 – Present',
       bullets: [
@@ -616,6 +640,8 @@ export const PROFILE = {
       company: 'Link Puerto Rico',
       employmentType: 'My Company / Co-Founder',
       logoKey: 'linkPR',
+      url: 'https://linkpuertorico.org/',
+      urlDisplay: 'linkpuertorico.org',
       role: 'Co-Founder & Technical Lead — My Company / Co-Founder',
       period: 'November 2017 – Present',
       bullets: [
@@ -801,12 +827,15 @@ export const PROFILE = {
       company: 'Viva Advertising (My Company / Founder)',
       badge: 'B2B Growth & CRM (Founder)',
       color: '#38bdf8',
+      url: 'https://viva-advertising.com/',
+      urlText: 'Visit Viva Advertising Live (viva-advertising.com) →',
+      urlDisplay: 'viva-advertising.com',
       metrics: {
         pipeline: '$10M+ Realized Pipeline',
         impressions: '4 Billion+ Managed',
         churnReduction: '-83% Churn (30% to 5%)',
       },
-      summary: 'Founded commercial growth firm evaluating paid media, CRM hygiene, and predictive account-health models across 150+ B2B commercial accounts.',
+      summary: 'Founded high-performance digital marketing agency in Puerto Rico (viva-advertising.com) specializing in Meta Ads, Google Ads, luxury real estate marketing, and predictive account-health models across 150+ commercial accounts.',
       challenge: 'High account churn (30%) caused by dirty CRM records, duplicate buying-committee profiles, and misdirected sales outreach.',
       strategy: 'Normalized and enriched account data in Salesforce & HubSpot. Architected predictive account-health scoring to identify high-risk accounts prior to renewal.',
       execution: 'Directed a 15-person cross-functional team and built centralized Power BI & Looker executive dashboards translating raw data into budget recommendations.',
@@ -814,20 +843,24 @@ export const PROFILE = {
     },
     {
       id: 'link-puerto-rico',
-      title: 'Event Intelligence & Relational Database Governance',
+      title: 'Software Development & Tech Ecosystem Governance',
       company: 'Link Puerto Rico (My Company / Co-Founder)',
-      badge: 'Data Governance (Co-Founder)',
+      badge: 'Tech Ecosystem (Co-Founder)',
       color: '#a855f7',
+      url: 'https://linkpuertorico.org/',
+      urlText: 'Visit Link Puerto Rico Live (linkpuertorico.org) →',
+      urlDisplay: 'linkpuertorico.org',
       metrics: {
-        revenue: '$3M Sponsorships & Sales',
-        attendees: '5,000+ Enriched Records',
-        platforms: '100+ Relational Databases',
+        livesImpacted: '4,000+ Lives Impacted',
+        fundsAwarded: '$100K+ Awarded in Funds',
+        solutionsCreated: '110+ Solutions Created',
+        eventsProduced: '30+ Events & Summits',
       },
-      summary: 'Co-founded and engineered attendee matching, enrichment, and database governance infrastructure across 50+ industry workshops and 4 major conferences.',
+      summary: 'Co-founded software development and tech ecosystem venture (linkpuertorico.org) delivering premium software, technical consulting, and empowering 4,000+ Latinx innovators with $100K+ in awarded grant funds across Puerto Rico.',
       challenge: 'Unstructured attendee lists, missing buying signals, and fragmented CRM records preventing corporate sponsorships.',
       strategy: 'Sourced, cleaned, and matched attendee records into prioritized target-account tiers. Directed a 10+ person technical team.',
-      execution: 'Constructed and maintained 100+ relational databases for 80+ organizations, normalizing 50,000+ records.',
-      impact: 'Drove $3M in sponsorships and B2B sales and unlocked high-margin corporate partnerships.',
+      execution: 'Constructed and maintained 100+ relational databases for 80+ organizations, normalizing 50,000+ records and deploying 110+ custom software solutions.',
+      impact: 'Drove $3M in sponsorships and B2B sales, impacted 4,000+ lives, and unlocked high-margin corporate partnerships.',
     },
   ],
 };

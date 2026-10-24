@@ -405,13 +405,21 @@ export class VisitorTools {
           { "network": "GitHub", "username": "eresfavolosx", "url": "https://github.com/eresfavolosx" }
         ]
       },
-      "work": v.experiences.map((e) => ({
-        "name": e.company,
-        "position": e.role,
-        "startDate": e.period.split(' — ')[0],
-        "endDate": e.period.split(' — ')[1] || "Present",
-        "highlights": e.bullets
-      })),
+      "work": v.experiences.map((e) => {
+        let orgUrl = e.url;
+        if (!orgUrl) {
+          if (e.company.includes('Viva Advertising')) orgUrl = 'https://viva-advertising.com/';
+          else if (e.company.includes('Link Puerto Rico')) orgUrl = 'https://linkpuertorico.org/';
+        }
+        return {
+          "name": e.company,
+          "position": e.role,
+          ...(orgUrl ? { "url": orgUrl } : {}),
+          "startDate": e.period.split(' — ')[0],
+          "endDate": e.period.split(' — ')[1] || "Present",
+          "highlights": e.bullets
+        };
+      }),
       "education": PROFILE.education.map((ed) => ({
         "institution": ed.institution,
         "area": "Computer Engineering",

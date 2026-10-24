@@ -274,12 +274,12 @@ class FabianPortfolioApp {
           <div class="logo-badge-item" title="Microsoft (Certified Power BI Analyst)">
             ${LOGOS.microsoft}
           </div>
-          <div class="logo-badge-item" title="Viva Advertising (My Company / Founder · $10M+ Pipeline)">
+          <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (My Company / Founder · $10M+ Pipeline) — Visit Official Site (viva-advertising.com)">
             ${LOGOS.vivaAdvertising}
-          </div>
-          <div class="logo-badge-item" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases)">
+          </a>
+          <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site (linkpuertorico.org)">
             ${LOGOS.linkPR}
-          </div>
+          </a>
           <div class="logo-badge-item" title="Stanford University Innovation Fellows">
             ${LOGOS.stanford}
           </div>
@@ -309,8 +309,8 @@ class FabianPortfolioApp {
           <div class="modal-logo-cell">${LOGOS.moneyGroup}</div>
           <div class="modal-logo-cell">${LOGOS.redVentures}</div>
           <div class="modal-logo-cell">${LOGOS.edx}</div>
-          <div class="modal-logo-cell">${LOGOS.vivaAdvertising}</div>
-          <div class="modal-logo-cell">${LOGOS.linkPR}</div>
+          <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Viva Advertising (Founder) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
+          <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Link Puerto Rico (Co-Founder) — Visit Official Site">${LOGOS.linkPR}</a>
           <div class="modal-logo-cell">${LOGOS.novuWorks}</div>
           <div class="modal-logo-cell">${LOGOS.stanford}</div>
           <div class="modal-logo-cell">${LOGOS.politecnica}</div>
@@ -439,6 +439,12 @@ class FabianPortfolioApp {
                   <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 3px;">
                     <span class="exp-company">${exp.company}</span>
                     ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
+                    ${exp.url ? `
+                      <a href="${exp.url}" target="_blank" rel="noopener noreferrer" class="exp-outbound-link" title="Visit ${exp.company} official website (${exp.urlDisplay || exp.url})">
+                        <span>${exp.urlDisplay || 'Official Site'}</span>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                      </a>
+                    ` : ''}
                   </div>
                 </div>
               </div>
@@ -539,8 +545,8 @@ class FabianPortfolioApp {
             <div class="logo-badge-item" title="Money Group (Full-Time)">${LOGOS.moneyGroup}</div>
             <div class="logo-badge-item" title="Red Ventures (Full-Time)">${LOGOS.redVentures}</div>
             <div class="logo-badge-item" title="edX Platform">${LOGOS.edx}</div>
-            <div class="logo-badge-item" title="Viva Advertising (My Company / Founder)">${LOGOS.vivaAdvertising}</div>
-            <div class="logo-badge-item" title="Link Puerto Rico (My Company / Co-Founder)">${LOGOS.linkPR}</div>
+            <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (My Company / Founder · $10M+ Pipeline) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
+            <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site">${LOGOS.linkPR}</a>
             <div class="logo-badge-item" title="Microsoft">${LOGOS.microsoft}</div>
             <div class="logo-badge-item" title="Meta">${LOGOS.meta}</div>
             <div class="logo-badge-item" title="Stanford University">${LOGOS.stanford}</div>
@@ -609,6 +615,12 @@ class FabianPortfolioApp {
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                   <span class="res-company">${exp.company}</span>
                   ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
+                  ${exp.url ? `
+                    <a href="${exp.url}" target="_blank" rel="noopener noreferrer" class="exp-outbound-link" title="Visit ${exp.company} official website (${exp.urlDisplay || exp.url})">
+                      <span>${exp.urlDisplay || 'Official Site'}</span>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                  ` : ''}
                 </div>
               </div>
               <span class="res-role">${exp.role}</span>
@@ -742,7 +754,16 @@ class FabianPortfolioApp {
         <div class="case-card" data-case-id="${cs.id}">
           <div class="case-badge-row">
             <div class="case-card-logo">${logoSvg}</div>
-            <span class="case-pill">${cs.badge}</span>
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+              <span class="case-pill">${cs.badge}</span>
+              ${cs.url ? `
+                <a href="${cs.url}" target="_blank" rel="noopener noreferrer" class="case-live-badge" title="Visit ${cs.urlDisplay} live site" onclick="event.stopPropagation();">
+                  <span class="live-dot" aria-hidden="true"></span>
+                  <span>${cs.urlDisplay}</span>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              ` : ''}
+            </div>
           </div>
           <h3 class="case-title">${cs.title}</h3>
           <p class="case-summary">${cs.summary}</p>
@@ -869,10 +890,18 @@ class FabianPortfolioApp {
           </div>
         </div>
 
-        <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20${encodeURIComponent(cs.title)}" class="luxury-btn primary-gold" style="width: 100%; justify-content: center;">
-          <span>Schedule an Executive Growth Interview</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
-        </a>
+        <div style="display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
+          ${cs.url ? `
+            <a href="${cs.url}" target="_blank" rel="noopener noreferrer" class="luxury-btn outline-platinum" style="flex: 1; justify-content: center; min-width: 220px;" title="Visit official site: ${cs.url}">
+              <span>${cs.urlText || 'Visit Official Site'}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          ` : ''}
+          <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20${encodeURIComponent(cs.title)}" class="luxury-btn primary-gold" style="flex: 1; justify-content: center; min-width: 240px;">
+            <span>Schedule Executive Interview</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+          </a>
+        </div>
       </div>
     `;
 
