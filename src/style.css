@@ -3086,9 +3086,9 @@ body.tesla-mode .hud-action-btn {
 .comp-logo-svg {
   height: 24px;
   width: auto;
-  max-width: 140px;
+  max-width: 165px;
   display: block;
-  filter: brightness(0.95);
+  filter: brightness(0.98);
   transition: filter 0.25s ease, transform 0.25s ease;
 }
 

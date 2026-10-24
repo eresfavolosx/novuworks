@@ -195,20 +195,32 @@ class FabianPortfolioApp {
           <div class="logo-badge-item" title="edX Platform (40M+ Telemetry Sessions)">
             ${LOGOS.edx}
           </div>
+          <div class="logo-badge-item" title="Meta (San Juan Community Lead)">
+            ${LOGOS.meta}
+          </div>
+          <div class="logo-badge-item" title="Microsoft (Certified Power BI Analyst)">
+            ${LOGOS.microsoft}
+          </div>
           <div class="logo-badge-item" title="Viva Advertising (My Company / Founder · $10M+ Pipeline)">
             ${LOGOS.vivaAdvertising}
           </div>
           <div class="logo-badge-item" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases)">
             ${LOGOS.linkPR}
           </div>
-          <div class="logo-badge-item" title="Novu Works (80+ Organizations Mentored)">
-            ${LOGOS.novuWorks}
-          </div>
           <div class="logo-badge-item" title="Stanford University Innovation Fellows">
             ${LOGOS.stanford}
           </div>
           <div class="logo-badge-item" title="Universidad Politécnica de PR (B.S. Comp Eng 4.0 GPA)">
             ${LOGOS.politecnica}
+          </div>
+          <div class="logo-badge-item" title="Grupo Guayacán (Fellow & Mentor)">
+            ${LOGOS.guayacan}
+          </div>
+          <div class="logo-badge-item" title="Enactus (National / Global Judge)">
+            ${LOGOS.enactus}
+          </div>
+          <div class="logo-badge-item" title="Novu Works (Studio & Enterprise Lab)">
+            ${LOGOS.novuWorks}
           </div>
         </div>
       </div>
@@ -303,14 +315,14 @@ class FabianPortfolioApp {
     if (this.dom.dossierExperienceMount) {
       const expLogos = {
         'Money Group': LOGOS.moneyGroup,
+        'Money Group (Full-Time)': LOGOS.moneyGroup,
         'Red Ventures': LOGOS.redVentures,
+        'Red Ventures (Full-Time)': LOGOS.redVentures,
         'Viva Advertising': LOGOS.vivaAdvertising,
+        'Viva Advertising (My Company / Founder)': LOGOS.vivaAdvertising,
         'Link Puerto Rico': LOGOS.linkPR,
-        'Search Atlas': LOGOS.novuWorks,
-        'Triple S': LOGOS.enactus,
-        'Triple-S': LOGOS.enactus,
-        'Banco Popular': LOGOS.stanford,
-        '1Password': LOGOS.politecnica,
+        'Link Puerto Rico (My Company / Co-Founder)': LOGOS.linkPR,
+        'Novu Works': LOGOS.novuWorks,
       };
 
       this.dom.dossierExperienceMount.innerHTML = variant.experiences.map((exp) => {
@@ -472,13 +484,30 @@ class FabianPortfolioApp {
 
     // Experience (Authentic Tailored Bullets per Specialty)
     if (this.dom.resExpMount) {
-      this.dom.resExpMount.innerHTML = variant.experiences.map((exp) => `
+      const expLogos = {
+        'Money Group': LOGOS.moneyGroup,
+        'Money Group (Full-Time)': LOGOS.moneyGroup,
+        'Red Ventures': LOGOS.redVentures,
+        'Red Ventures (Full-Time)': LOGOS.redVentures,
+        'Viva Advertising': LOGOS.vivaAdvertising,
+        'Viva Advertising (My Company / Founder)': LOGOS.vivaAdvertising,
+        'Link Puerto Rico': LOGOS.linkPR,
+        'Link Puerto Rico (My Company / Co-Founder)': LOGOS.linkPR,
+        'Novu Works': LOGOS.novuWorks,
+      };
+
+      this.dom.resExpMount.innerHTML = variant.experiences.map((exp) => {
+        const logoSvg = expLogos[exp.company] || '';
+        return `
         <div class="res-exp-block">
           <div class="res-exp-head">
             <div>
-              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <span class="res-company">${exp.company}</span>
-                ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
+              <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                ${logoSvg ? `<div class="res-company-logo-slot">${logoSvg}</div>` : ''}
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                  <span class="res-company">${exp.company}</span>
+                  ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
+                </div>
               </div>
               <span class="res-role">${exp.role}</span>
             </div>
@@ -494,7 +523,8 @@ class FabianPortfolioApp {
             }).join('')}
           </ul>
         </div>
-      `).join('');
+      `;
+      }).join('');
     }
 
     // Projects
