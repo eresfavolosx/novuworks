@@ -127,7 +127,11 @@
 
             <!-- Minimalist Action Buttons -->
             <div class="hero-action-row">
-              <button type="button" class="luxury-btn primary-gold" id="btn-explore-case-studies">
+              <button type="button" class="luxury-btn primary-gold pulse-glow" id="btn-recruiter-brief">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <span>60s Recruiter Brief</span>
+              </button>
+              <button type="button" class="luxury-btn outline-platinum" id="btn-explore-case-studies">
                 <span>View Case Studies</span>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </button>
@@ -176,6 +180,9 @@
               </div>
             </div>
 
+            <!-- Verified Employer & Commercial Accreditation Marquee -->
+            <div class="company-logo-strip" id="company-logo-strip-mount"></div>
+
             <!-- Minimalist Floating 3D Sculpture Switcher -->
             <div class="sculpture-dock">
               <span class="dock-caption">Interactive 3D Matrix:</span>
@@ -205,9 +212,10 @@
           <div class="ai-lab-layout-container" id="ai-lab-mount"></div>
         </section>
 
-        <!-- View 4: Architecture & ROI Planner -->
+        <!-- View 4: Architecture & ROI Planner + Live RevOps Big Data Terminal -->
         <section id="view-planner" class="viewport-view hidden">
           <div class="planner-layout-container" id="planner-mount-point"></div>
+          <div class="revops-terminal-layout-container" id="revops-terminal-mount"></div>
         </section>
 
         <!-- View 5: Executive Dossier & Verified Resume -->
@@ -530,6 +538,101 @@
                   </a>
                 </div>
               </div>
+            </div>
+          </article>
+        </div>
+      </dialog>
+
+      <!-- Dedicated 60s Recruiter Fast-Track Scorecard Modal -->
+      <dialog id="recruiter-fasttrack-modal" class="executive-dialog recruiter-modal" aria-labelledby="recruiter-modal-title">
+        <div class="resume-modal-header">
+          <div class="modal-title-group">
+            <span class="modal-kicker">EXECUTIVE ATS FAST-TRACK</span>
+            <h2 id="recruiter-modal-title" class="modal-heading">60-Second Recruiter Brief & Scorecard</h2>
+          </div>
+          <div class="resume-modal-actions">
+            <button type="button" class="action-pill-btn gold" id="btn-copy-recruiter-notes" title="Copy ATS pre-formatted sourcing notes for Lever/Greenhouse">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy ATS Notes</span>
+            </button>
+            <button type="button" class="dialog-close-btn" id="btn-close-recruiter-modal" aria-label="Close modal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="resume-modal-scrollable">
+          <article class="recruiter-scorecard-card">
+            <!-- Top Scorecard Bar -->
+            <div class="scorecard-top-bar">
+              <div class="scorecard-avatar-row">
+                <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="scorecard-avatar" />
+                <div class="scorecard-meta">
+                  <h3 class="scorecard-name">Fabián Vélez Vicente</h3>
+                  <div class="scorecard-roles">Target: <strong>Growth Engineering Lead · RevOps Analytics Lead · Head of Growth · Applied AI Lead</strong></div>
+                  <div class="scorecard-contact">San Juan, PR (US Remote / Worldwide) · fabianvvicente1@gmail.com</div>
+                </div>
+              </div>
+              <div class="scorecard-badge-box">
+                <span class="scorecard-verdict">TOP 1% CANDIDATE</span>
+                <span class="scorecard-grade">A+ Growth Engineer</span>
+              </div>
+            </div>
+
+            <!-- Verified Employer Logo Marquee Mount -->
+            <div class="recruiter-modal-logos" id="rec-modal-logos-mount"></div>
+
+            <!-- 4 Quantitative Proof Points Grid -->
+            <div class="scorecard-proofs-grid">
+              <div class="score-proof-card">
+                <div class="score-metric gold-num">122%</div>
+                <div class="score-title">Bonus Target Delivered</div>
+                <div class="score-sub">Money Group (Media Buyer, ICS4)</div>
+                <p class="score-desc">Delivered at 122% of quarterly bonus target ($4,575 actual vs $3,750 base) within a $1B+ portfolio scope. Restructured partner unit payouts from $125 to $250 to prioritize high-value downstream conversions.</p>
+              </div>
+
+              <div class="score-proof-card">
+                <div class="score-metric" style="color: #38bdf8;">40M+</div>
+                <div class="score-title">Databricks Sessions Normalized</div>
+                <div class="score-sub">Red Ventures (Growth / SEO Analyst, edX)</div>
+                <p class="score-desc">Queried and cleaned raw telemetry from scratch using Databricks SQL & Python across 40M+ sessions. Consolidated 1,250+ priority pages driving a 50%+ baseline search lift and 19% YoY conversion gain.</p>
+              </div>
+
+              <div class="score-proof-card">
+                <div class="score-metric" style="color: #4ade80;">$10M+</div>
+                <div class="score-title">Realized B2B Pipeline & -83% Churn</div>
+                <div class="score-sub">Viva Advertising (Co-Founder)</div>
+                <p class="score-desc">Managed $2M+ ad spend and 4B+ impressions across 150+ commercial accounts. Built predictive CRM account-health models that slashed client churn from 30% to 5%.</p>
+              </div>
+
+              <div class="score-proof-card">
+                <div class="score-metric" style="color: #d4af37;">4.0 GPA</div>
+                <div class="score-title">B.S. Computer Engineering + Stanford</div>
+                <div class="score-sub">Univ. Politécnica de PR & Stanford Fellow</div>
+                <p class="score-desc">Rigorous CS fundamentals (Software Engineering, Algorithms, Database Systems) paired with Stanford University Innovation Fellowship and Lean Six Sigma White Belt.</p>
+              </div>
+            </div>
+
+            <!-- Recruiter Quick Evaluation Checklist -->
+            <div class="scorecard-checklist-box">
+              <h4 class="checklist-title">Recruiter Core Competency Alignment</h4>
+              <div class="checklist-grid">
+                <div class="check-item"><span class="check-icon">✓</span> <strong>Full-Funnel Ad Spend Management:</strong> Multi-million dollar annual pacing across Google, Meta, LinkedIn, and programmatic display.</div>
+                <div class="check-item"><span class="check-icon">✓</span> <strong>Data Layer & Server-Side Tracking:</strong> Conversions API (CAPI), Google Tag Manager Server-Side, Databricks SQL, PySpark pipelines.</div>
+                <div class="check-item"><span class="check-icon">✓</span> <strong>Applied AI & Prompt Frameworks:</strong> Automated creative iteration, 20+ copy variants, automated telemetry anomaly agents in &lt;4 hours.</div>
+                <div class="check-item"><span class="check-icon">✓</span> <strong>Cross-Functional Leadership:</strong> Bridges Marketing with Software Engineering, BI/Analytics, Sales, and Product teams.</div>
+              </div>
+            </div>
+
+            <!-- Recruiter Action Footnote -->
+            <div class="scorecard-footer-cta">
+              <button type="button" class="luxury-btn primary-gold" id="btn-open-full-resume-from-rec">
+                <span>View Full Executive Resume & Composite Card</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+              <a href="mailto:fabianvvicente1@gmail.com?subject=Strategic%20Role%20Inquiry%20-%20Let's%20Chat" class="luxury-btn outline-platinum">
+                <span>Email Candidate Directly</span>
+              </a>
             </div>
           </article>
         </div>

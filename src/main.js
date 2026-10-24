@@ -8,6 +8,8 @@ import { SpatialCanvas3D } from './canvas3d.js';
 import { ArchitecturePlanner } from './planner.js';
 import { CommandPalette } from './command-palette.js';
 import { AIGrowthLab } from './ai-lab.js';
+import { RevOpsTerminal } from './revops-terminal.js';
+import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
 
@@ -20,12 +22,16 @@ class FabianPortfolioApp {
     this.dom = {
       webglContainer: document.getElementById('webgl-container'),
       plannerMount: document.getElementById('planner-mount-point'),
+      revopsTerminalMount: document.getElementById('revops-terminal-mount'),
       caseStudiesMount: document.getElementById('case-studies-mount'),
       aiLabMount: document.getElementById('ai-lab-mount'),
       competencyMatrixMount: document.getElementById('competency-matrix-mount'),
+      companyLogoStripMount: document.getElementById('company-logo-strip-mount'),
+      recModalLogosMount: document.getElementById('rec-modal-logos-mount'),
       disciplineModal: document.getElementById('discipline-modal'),
       dialogContentBody: document.getElementById('dialog-content-body'),
       resumeModal: document.getElementById('resume-export-modal'),
+      recruiterModal: document.getElementById('recruiter-fasttrack-modal'),
       toastBanner: document.getElementById('toast-banner'),
       btnTeslaMode: document.getElementById('btn-tesla-mode'),
       btnAudioToggle: document.getElementById('btn-audio-toggle'),
@@ -47,6 +53,7 @@ class FabianPortfolioApp {
     try {
       this.renderCaseStudies();
       this.renderCompetencyMatrix();
+      this.renderCompanyLogos();
     } catch (e) {
       console.error('Render error:', e);
     }
@@ -58,7 +65,7 @@ class FabianPortfolioApp {
       console.error('Events binding error:', e);
     }
 
-    // 4. Initialize Interactive Components
+    // 4. Initialize Interactive Engineering Components
     try {
       if (this.dom.plannerMount) {
         this.planner = new ArchitecturePlanner(this.dom.plannerMount, (pillarId) => {
@@ -67,6 +74,14 @@ class FabianPortfolioApp {
       }
     } catch (e) {
       console.warn('Planner init caught:', e);
+    }
+
+    try {
+      if (this.dom.revopsTerminalMount) {
+        this.revopsTerminal = new RevOpsTerminal(this.dom.revopsTerminalMount);
+      }
+    } catch (e) {
+      console.warn('RevOps terminal init caught:', e);
     }
 
     try {
@@ -80,7 +95,7 @@ class FabianPortfolioApp {
     // 5. Initialize Command Palette
     try {
       this.cmdPalette = new CommandPalette({
-        onOpenHire: () => this.switchView('dossier'),
+        onOpenHire: () => this.openRecruiterModal(),
         onOpenPlanner: () => this.switchView('planner'),
         onToggleTesla: () => this.toggleTeslaMode(),
         onCycleMorph: () => this.cycleMorph(),
@@ -114,6 +129,110 @@ class FabianPortfolioApp {
   }
 
   // ─────────────────────────────────────────────────────────────
+  // Company Logo Strip Rendering
+  // ─────────────────────────────────────────────────────────────
+  renderCompanyLogos() {
+    const stripHtml = `
+      <div class="logo-strip-inner">
+        <span class="logo-strip-label">VERIFIED COMMERCIAL TRACK RECORD & ACCREDITATION:</span>
+        <div class="logo-strip-row">
+          <div class="logo-badge-item" title="Money Group (Media Buyer, $1B+ Scope)">
+            ${LOGOS.moneyGroup}
+          </div>
+          <div class="logo-badge-item" title="Red Ventures (Growth / SEO Analyst, edX)">
+            ${LOGOS.redVentures}
+          </div>
+          <div class="logo-badge-item" title="edX Platform (40M+ Telemetry Sessions)">
+            ${LOGOS.edx}
+          </div>
+          <div class="logo-badge-item" title="Viva Advertising (Co-Founder, $10M+ Pipeline)">
+            ${LOGOS.vivaAdvertising}
+          </div>
+          <div class="logo-badge-item" title="Link Puerto Rico (100+ Relational Databases)">
+            ${LOGOS.linkPR}
+          </div>
+          <div class="logo-badge-item" title="Novu Works (80+ Organizations Mentored)">
+            ${LOGOS.novuWorks}
+          </div>
+          <div class="logo-badge-item" title="Stanford University Innovation Fellows">
+            ${LOGOS.stanford}
+          </div>
+          <div class="logo-badge-item" title="Universidad Politécnica de PR (B.S. Comp Eng 4.0 GPA)">
+            ${LOGOS.politecnica}
+          </div>
+        </div>
+      </div>
+    `;
+
+    if (this.dom.companyLogoStripMount) {
+      this.dom.companyLogoStripMount.innerHTML = stripHtml;
+    }
+
+    if (this.dom.recModalLogosMount) {
+      this.dom.recModalLogosMount.innerHTML = `
+        <div class="modal-logos-row">
+          <div class="modal-logo-cell">${LOGOS.moneyGroup}</div>
+          <div class="modal-logo-cell">${LOGOS.redVentures}</div>
+          <div class="modal-logo-cell">${LOGOS.edx}</div>
+          <div class="modal-logo-cell">${LOGOS.vivaAdvertising}</div>
+          <div class="modal-logo-cell">${LOGOS.linkPR}</div>
+          <div class="modal-logo-cell">${LOGOS.novuWorks}</div>
+          <div class="modal-logo-cell">${LOGOS.stanford}</div>
+          <div class="modal-logo-cell">${LOGOS.politecnica}</div>
+        </div>
+      `;
+    }
+
+    this.renderExperienceLogos();
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Inject Logos into Dossier Experience & Printable Resume
+  // ─────────────────────────────────────────────────────────────
+  renderExperienceLogos() {
+    const expLogos = {
+      'Money Group': LOGOS.moneyGroup,
+      'Red Ventures': LOGOS.redVentures,
+      'Viva Advertising': LOGOS.vivaAdvertising,
+      'Link Puerto Rico': LOGOS.linkPR,
+    };
+
+    // Inject into Dossier timeline
+    document.querySelectorAll('.exp-item').forEach((item) => {
+      const compEl = item.querySelector('.exp-company');
+      if (compEl) {
+        const compName = compEl.textContent.trim();
+        if (expLogos[compName] && !item.querySelector('.exp-company-logo-slot')) {
+          const logoDiv = document.createElement('div');
+          logoDiv.className = 'exp-company-logo-slot';
+          logoDiv.innerHTML = expLogos[compName];
+          const header = item.querySelector('.exp-header');
+          if (header) {
+            header.insertBefore(logoDiv, header.firstChild);
+          }
+        }
+      }
+    });
+
+    // Inject into Printable Resume
+    document.querySelectorAll('.res-exp-block').forEach((block) => {
+      const compEl = block.querySelector('.res-company');
+      if (compEl) {
+        const compName = compEl.textContent.trim();
+        if (expLogos[compName] && !block.querySelector('.res-company-logo-slot')) {
+          const logoDiv = document.createElement('div');
+          logoDiv.className = 'res-company-logo-slot';
+          logoDiv.innerHTML = expLogos[compName];
+          const head = block.querySelector('.res-exp-head');
+          if (head) {
+            head.insertBefore(logoDiv, head.firstChild);
+          }
+        }
+      }
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────────
   // Smooth Ease-Out-Expo Number Counter Animation
   // ─────────────────────────────────────────────────────────────
   animateCounters() {
@@ -128,7 +247,6 @@ class FabianPortfolioApp {
       const updateCount = (currentTime) => {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        // EaseOutExpo: 1 - pow(2, -10 * progress)
         const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
         const currentVal = Math.round(target * easeProgress);
 
@@ -150,31 +268,42 @@ class FabianPortfolioApp {
   // ─────────────────────────────────────────────────────────────
   renderCaseStudies() {
     if (!this.dom.caseStudiesMount) return;
-    this.dom.caseStudiesMount.innerHTML = PROFILE.caseStudies.map((cs) => `
-      <div class="case-card" data-case-id="${cs.id}">
-        <div class="case-badge-row">
-          <span class="case-pill">${cs.badge}</span>
-          <span class="case-company">${cs.company}</span>
-        </div>
-        <h3 class="case-title">${cs.title}</h3>
-        <p class="case-summary">${cs.summary}</p>
+    this.dom.caseStudiesMount.innerHTML = PROFILE.caseStudies.map((cs) => {
+      let logoSvg = LOGOS.novuWorks;
+      if (cs.company.includes('Money Group')) logoSvg = LOGOS.moneyGroup;
+      else if (cs.company.includes('Red Ventures')) logoSvg = `${LOGOS.redVentures}`;
+      else if (cs.company.includes('Viva Advertising')) logoSvg = LOGOS.vivaAdvertising;
+      else if (cs.company.includes('Link Puerto Rico')) logoSvg = LOGOS.linkPR;
 
-        <!-- 3 Executive Metrics -->
-        <div class="case-metric-row">
-          ${Object.entries(cs.metrics).map(([k, val]) => `
-            <div class="case-metric-box">
-              <span class="case-m-val">${val}</span>
-              <span class="case-m-key">${k.toUpperCase()}</span>
+      return `
+        <div class="case-card" data-case-id="${cs.id}">
+          <div class="case-badge-row">
+            <div class="case-header-left">
+              <div class="case-card-logo">${logoSvg}</div>
+              <span class="case-pill">${cs.badge}</span>
             </div>
-          `).join('')}
-        </div>
+            <span class="case-company">${cs.company}</span>
+          </div>
+          <h3 class="case-title">${cs.title}</h3>
+          <p class="case-summary">${cs.summary}</p>
 
-        <button type="button" class="case-action-btn">
-          <span>Inspect Strategic Case Brief</span>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
-        </button>
-      </div>
-    `).join('');
+          <!-- 3 Executive Metrics -->
+          <div class="case-metric-row">
+            ${Object.entries(cs.metrics).map(([k, val]) => `
+              <div class="case-metric-box">
+                <span class="case-m-val">${val}</span>
+                <span class="case-m-key">${k.toUpperCase()}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <button type="button" class="case-action-btn">
+            <span>Inspect Strategic Architecture & Code</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+          </button>
+        </div>
+      `;
+    }).join('');
 
     this.dom.caseStudiesMount.querySelectorAll('.case-card').forEach((card) => {
       card.addEventListener('click', () => {
@@ -214,16 +343,25 @@ class FabianPortfolioApp {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Modal Handlers (Case Studies & Disciplines)
+  // Modal Handlers (Case Studies, Disciplines, Recruiter)
   // ─────────────────────────────────────────────────────────────
   openCaseStudyModal(cs) {
     if (!this.dom.disciplineModal || !this.dom.dialogContentBody) return;
+    let logoSvg = LOGOS.novuWorks;
+    if (cs.company.includes('Money Group')) logoSvg = LOGOS.moneyGroup;
+    else if (cs.company.includes('Red Ventures')) logoSvg = `${LOGOS.redVentures} ${LOGOS.edx}`;
+    else if (cs.company.includes('Viva Advertising')) logoSvg = LOGOS.vivaAdvertising;
+    else if (cs.company.includes('Link Puerto Rico')) logoSvg = LOGOS.linkPR;
+
     this.dom.dialogContentBody.innerHTML = `
       <div class="dialog-header">
         <div>
-          <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light);">
-            ${cs.badge} · ${cs.company}
-          </span>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+            <div style="height: 28px;">${logoSvg}</div>
+            <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light);">
+              ${cs.badge}
+            </span>
+          </div>
           <h2 id="modal-disc-title" style="font-size: 26px; font-weight: 800; color: #ffffff; margin-top: 4px; line-height: 1.25;">
             ${cs.title}
           </h2>
@@ -342,6 +480,45 @@ class FabianPortfolioApp {
   }
 
   // ─────────────────────────────────────────────────────────────
+  // Recruiter Fast-Track (60s Scorecard) Modal
+  // ─────────────────────────────────────────────────────────────
+  openRecruiterModal() {
+    if (!this.dom.recruiterModal) return;
+    this.dom.recruiterModal.showModal();
+    audio.confirm();
+  }
+
+  closeRecruiterModal() {
+    if (!this.dom.recruiterModal) return;
+    this.dom.recruiterModal.close();
+    audio.click(800);
+  }
+
+  copyRecruiterNotes() {
+    const text = `CANDIDATE: Fabián Vélez Vicente
+TARGET ROLES: Growth Engineering Lead / RevOps Analytics Lead / Head of Growth / Applied AI Lead
+LOCATION: San Juan, PR (US Remote / Worldwide)
+EMAIL: fabianvvicente1@gmail.com
+LINKEDIN: https://linkedin.com/in/fabian-velez-vicente
+GITHUB: https://github.com/eresfavolosx
+PORTFOLIO: https://novu.works
+
+KEY EXECUTIVE PROOF POINTS:
+• Money Group: Delivered at 122% of quarterly bonus target ($4,575 vs $3,750 base) within a $1B+ portfolio scope; restructured partner unit payouts from $125 to $250; automated 20+ enterprise LLM telemetry agents.
+• Red Ventures (edX): Led content & SEO intelligence for multi-million-page edX platform; normalized raw telemetry across 40M+ user sessions via Databricks SQL & Python; refreshed 1,250+ priority pages (+50% search lift, +19% YoY conversions).
+• Viva Advertising: Co-Founder managing $2M+ direct ad spend and 4B+ impressions across 150+ B2B commercial accounts; generated $10M+ pipeline; slashed churn by 83% (from 30% to 5%) via predictive CRM health models.
+• Link Puerto Rico: Technical Lead constructing and maintaining 100+ relational databases for 80+ organizations; unlocked $3M in sponsorships.
+• Education & Credentials: B.S. Computer Engineering (4.0 GPA), Universidad Politécnica de PR; Stanford University Innovation Fellow; Lean Six Sigma White Belt; CompTIA ITF+.`;
+
+    navigator.clipboard.writeText(text).then(() => {
+      audio.confirm();
+      this.showToast('Recruiter ATS Sourcing Notes copied to clipboard');
+    }).catch(() => {
+      this.showToast('Candidate notes copied to clipboard');
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────────
   // Executive Resume Modal Handlers
   // ─────────────────────────────────────────────────────────────
   openResumeModal() {
@@ -434,6 +611,24 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
       this.switchView('ai-lab');
     });
 
+    // Recruiter Brief Trigger
+    document.getElementById('btn-recruiter-brief')?.addEventListener('click', () => {
+      this.openRecruiterModal();
+    });
+
+    document.getElementById('btn-close-recruiter-modal')?.addEventListener('click', () => {
+      this.closeRecruiterModal();
+    });
+
+    document.getElementById('btn-copy-recruiter-notes')?.addEventListener('click', () => {
+      this.copyRecruiterNotes();
+    });
+
+    document.getElementById('btn-open-full-resume-from-rec')?.addEventListener('click', () => {
+      this.closeRecruiterModal();
+      this.openResumeModal();
+    });
+
     // Resume Modal Triggers
     document.getElementById('btn-open-resume-card')?.addEventListener('click', () => {
       this.openResumeModal();
@@ -508,6 +703,12 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
         this.closeResumeModal();
       }
     });
+
+    this.dom.recruiterModal?.addEventListener('click', (e) => {
+      if (e.target === this.dom.recruiterModal) {
+        this.closeRecruiterModal();
+      }
+    });
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -530,7 +731,6 @@ Ready to scale high-impact growth systems? Let's chat: fabianvvicente1@gmail.com
       if (el) {
         if (v === viewName) {
           el.classList.remove('hidden');
-          // Force reflow for smooth CSS entry transition
           void el.offsetWidth;
           el.classList.add('active');
         } else {

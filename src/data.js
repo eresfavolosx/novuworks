@@ -4,6 +4,9 @@
 //  Accredited Experience: Money Group, Red Ventures, Viva Advertising, Link PR
 // ─────────────────────────────────────────────────────────────
 
+import { LOGOS } from './company-logos.js';
+export { LOGOS };
+
 export const PROFILE = {
   fullName: 'Fabián Vélez Vicente',
   preferredName: 'Fabian Velez',
@@ -81,6 +84,7 @@ export const PROFILE = {
   experience: [
     {
       company: 'Money Group',
+      logoKey: 'moneyGroup',
       role: 'Media Buyer (Demand Generation & Revenue Operations Analytics)',
       period: 'March 2026 – October 2026',
       bullets: [
@@ -92,6 +96,7 @@ export const PROFILE = {
     },
     {
       company: 'Red Ventures',
+      logoKey: 'redVentures',
       role: 'Growth / SEO Analyst (Content & Audience Intelligence, edX)',
       period: 'August 2024 – January 2026',
       bullets: [
@@ -102,6 +107,7 @@ export const PROFILE = {
     },
     {
       company: 'Viva Advertising',
+      logoKey: 'vivaAdvertising',
       role: 'Co-Founder (B2B Growth, CRM & Event Intelligence)',
       period: 'January 2018 – Present',
       bullets: [
@@ -112,6 +118,7 @@ export const PROFILE = {
     },
     {
       company: 'Link Puerto Rico',
+      logoKey: 'linkPR',
       role: 'Co-Founder & Technical Lead (Event & Prospect Intelligence)',
       period: 'November 2017 – Present',
       bullets: [
