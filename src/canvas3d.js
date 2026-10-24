@@ -245,8 +245,8 @@ export class SpatialCanvas3D {
           vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
           gl_Position = projectionMatrix * mvPosition;
 
-          gl_PointSize = size * uPixelRatio * (260.0 / -mvPosition.z);
-          vAlpha = smoothstep(55.0, 15.0, -mvPosition.z) * uOpacity * (0.7 + 0.3 * sin(uTime * 2.2 + rand * 8.0));
+          gl_PointSize = size * uPixelRatio * (360.0 / -mvPosition.z);
+          vAlpha = smoothstep(95.0, 18.0, -mvPosition.z) * uOpacity * (0.8 + 0.2 * sin(uTime * 2.2 + rand * 8.0));
         }
       `,
       fragmentShader: `
@@ -384,9 +384,9 @@ export class SpatialCanvas3D {
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     const mat = new THREE.PointsMaterial({
       color: 0xd4af37,
-      size: 0.45,
+      size: 0.55,
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.35,
       blending: THREE.AdditiveBlending,
     });
     this.dustMesh = new THREE.Points(geo, mat);
@@ -464,13 +464,13 @@ export class SpatialCanvas3D {
     if (!this.rootGroup) return;
     const isDesktop = (window.innerWidth || this.width) >= 1024;
     if (isDesktop) {
-      // Offset 3D sculpture to the open right half on desktop to avoid text columns
-      this.rootGroup.position.set(16.0, 0, -10.0);
-      this.rootGroup.scale.set(0.85, 0.85, 0.85);
+      // Offset 3D sculpture to the open right half on desktop to frame the hero section without text collision
+      this.rootGroup.position.set(7.5, 0.5, -2.0);
+      this.rootGroup.scale.set(1.05, 1.05, 1.05);
     } else {
-      // Keep deep in background on mobile/tablet so text remains 100% legible
-      this.rootGroup.position.set(0, -6, -20.0);
-      this.rootGroup.scale.set(0.45, 0.45, 0.45);
+      // Centered and softly scaled on mobile/tablet so text remains crisp and readable
+      this.rootGroup.position.set(0, -3.0, -12.0);
+      this.rootGroup.scale.set(0.65, 0.65, 0.65);
     }
   }
 
