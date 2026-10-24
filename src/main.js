@@ -1241,15 +1241,16 @@ ${variant.proofPoints ? variant.proofPoints.map((p) => `• [${p.metric}] ${p.ti
   async initPuertoRicoWeather() {
     try {
       const res = await fetch(
-        'https://api.open-meteo.com/v1/forecast?latitude=18.4655&longitude=-66.1057&current_weather=true'
+        'https://api.open-meteo.com/v1/forecast?latitude=18.4655&longitude=-66.1057&current_weather=true',
+        { signal: AbortSignal.timeout ? AbortSignal.timeout(5000) : undefined }
       );
       if (res.ok) {
         const data = await res.json();
         const cw = data.current_weather;
-        if (cw) {
+        if (cw && typeof cw.temperature === 'number' && Number.isFinite(cw.temperature)) {
           const tempC = Math.round(cw.temperature);
           const tempF = Math.round((tempC * 9) / 5 + 32);
-          const wind = Math.round(cw.windspeed);
+          const wind = typeof cw.windspeed === 'number' && Number.isFinite(cw.windspeed) ? Math.round(cw.windspeed) : 10;
 
           const weatherIcons = {
             0: '☀️ Clear',

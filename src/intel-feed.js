@@ -434,7 +434,7 @@ export class IntelFeed {
             <span class="r-news-source">${this.escapeHtml(news.source)}</span>
             <span class="r-news-time">${this.escapeHtml(news.time)}</span>
           </div>
-          <a href="${this.escapeHtml(news.url)}" target="_blank" rel="noopener noreferrer" class="r-news-title">
+          <a href="${this.sanitizeUrl(news.url)}" target="_blank" rel="noopener noreferrer" class="r-news-title">
             <span>${this.escapeHtml(news.title)}</span>
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
           </a>
@@ -471,9 +471,10 @@ export class IntelFeed {
     const categoryLabel = topicLabels[topic] || 'Live Industry Stream';
 
     try {
-      // Connect to Hacker News Algolia Search API dynamically
+      // Connect to Hacker News Algolia Search API dynamically with strict timeout
       const res = await fetch(
-        `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query)}&tags=story&hitsPerPage=6`
+        `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query)}&tags=story&hitsPerPage=6`,
+        { signal: AbortSignal.timeout ? AbortSignal.timeout(6000) : undefined }
       );
       if (res.ok) {
         const data = await res.json();
@@ -661,5 +662,16 @@ export class IntelFeed {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
+  }
+
+  sanitizeUrl(url) {
+    if (!url) return '#';
+    try {
+      const parsed = new URL(url);
+      if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
+        return parsed.href;
+      }
+    } catch (e) {}
+    return '#';
   }
 }

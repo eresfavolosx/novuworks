@@ -84,17 +84,19 @@ export class GitHubRadar {
 
   async fetchData() {
     try {
-      // 1. Fetch User Profile
+      // 1. Fetch User Profile with strict timeout and error boundary
       const userRes = await fetch('https://api.github.com/users/eresfavolosx', {
-        headers: { 'Accept': 'application/vnd.github.v3+json' }
+        headers: { 'Accept': 'application/vnd.github.v3+json' },
+        signal: AbortSignal.timeout ? AbortSignal.timeout(6000) : undefined,
       });
       if (userRes.ok) {
         this.userData = await userRes.json();
       }
 
-      // 2. Fetch Repositories
+      // 2. Fetch Repositories with strict timeout
       const reposRes = await fetch('https://api.github.com/users/eresfavolosx/repos?sort=updated&per_page=6', {
-        headers: { 'Accept': 'application/vnd.github.v3+json' }
+        headers: { 'Accept': 'application/vnd.github.v3+json' },
+        signal: AbortSignal.timeout ? AbortSignal.timeout(6000) : undefined,
       });
       if (reposRes.ok) {
         const data = await reposRes.json();
@@ -114,13 +116,34 @@ export class GitHubRadar {
     }
   }
 
+  escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  sanitizeGithubUrl(url) {
+    if (!url) return 'https://github.com/eresfavolosx';
+    try {
+      const parsed = new URL(url);
+      if (parsed.protocol === 'https:' && parsed.hostname === 'github.com') {
+        return parsed.href;
+      }
+    } catch (e) {}
+    return 'https://github.com/eresfavolosx';
+  }
+
   formatDate(dateStr) {
     if (!dateStr) return 'Recently';
     try {
       const d = new Date(dateStr);
       return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     } catch {
-      return dateStr;
+      return this.escapeHtml(dateStr);
     }
   }
 
@@ -139,8 +162,10 @@ export class GitHubRadar {
   render() {
     if (!this.mount) return;
 
-    const publicReposCount = this.userData?.public_repos || 15;
-    const followers = this.userData?.followers || 7;
+    const rawRepos = Number(this.userData?.public_repos);
+    const rawFollowers = Number(this.userData?.followers);
+    const publicReposCount = Number.isFinite(rawRepos) && rawRepos >= 0 ? rawRepos : 15;
+    const followers = Number.isFinite(rawFollowers) && rawFollowers >= 0 ? rawFollowers : 7;
 
     this.mount.innerHTML = `
       <div class="gh-radar-container">
@@ -165,24 +190,24 @@ export class GitHubRadar {
         <!-- Repository Grid -->
         <div class="gh-repos-grid">
           ${this.repos.map((repo) => `
-            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="gh-repo-card" title="Open repository ${repo.name} on GitHub">
+            <a href="${this.sanitizeGithubUrl(repo.html_url)}" target="_blank" rel="noopener noreferrer" class="gh-repo-card" title="Open repository ${this.escapeHtml(repo.name)} on GitHub">
               <div class="gh-card-header">
                 <div class="gh-card-title-row">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                  <h4 class="gh-repo-name">${repo.name}</h4>
+                  <h4 class="gh-repo-name">${this.escapeHtml(repo.name)}</h4>
                 </div>
                 <span class="gh-badge-public">Public</span>
               </div>
-              <p class="gh-repo-desc">${repo.description || 'Verified production engineering repository.'}</p>
+              <p class="gh-repo-desc">${this.escapeHtml(repo.description || 'Verified production engineering repository.')}</p>
               <div class="gh-card-footer">
                 <div class="gh-lang-tag">
                   <span class="gh-lang-dot" style="background: ${this.getLangColor(repo.language || 'JavaScript')}"></span>
-                  <span>${repo.language || 'JavaScript'}</span>
+                  <span>${this.escapeHtml(repo.language || 'JavaScript')}</span>
                 </div>
-                ${repo.stargazers_count > 0 ? `
-                  <span class="gh-metric-tag" title="${repo.stargazers_count} GitHub stars">
+                ${Number(repo.stargazers_count) > 0 ? `
+                  <span class="gh-metric-tag" title="${Number(repo.stargazers_count)} GitHub stars">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    <span>${repo.stargazers_count}</span>
+                    <span>${Number(repo.stargazers_count)}</span>
                   </span>
                 ` : ''}
                 <span class="gh-updated-time">Updated ${this.formatDate(repo.updated_at)}</span>

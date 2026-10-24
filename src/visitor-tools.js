@@ -49,7 +49,8 @@ export class VisitorTools {
     const start = performance.now();
     try {
       const res = await fetch('https://www.cloudflare.com/cdn-cgi/trace?' + Date.now(), {
-        cache: 'no-store'
+        cache: 'no-store',
+        signal: AbortSignal.timeout ? AbortSignal.timeout(5000) : undefined,
       });
       if (res.ok) {
         const text = await res.text();
@@ -59,10 +60,12 @@ export class VisitorTools {
         const lines = text.split('\n');
         for (const line of lines) {
           const [k, v] = line.split('=');
-          if (k === 'colo') this.edgeData.colo = `${v} (Cloudflare Edge)`;
-          if (k === 'tls') this.edgeData.tls = v;
-          if (k === 'kex') this.edgeData.kex = v;
-          if (k === 'ip') this.edgeData.ipVersion = v.includes(':') ? 'IPv6 Verified' : 'IPv4 Verified';
+          const cleanK = (k || '').trim().replace(/[^a-zA-Z0-9_\-]/g, '');
+          const cleanV = (v || '').trim().replace(/[^a-zA-Z0-9_\-.:]/g, '');
+          if (cleanK === 'colo') this.edgeData.colo = `${cleanV} (Cloudflare Edge)`;
+          if (cleanK === 'tls') this.edgeData.tls = cleanV;
+          if (cleanK === 'kex') this.edgeData.kex = cleanV;
+          if (cleanK === 'ip') this.edgeData.ipVersion = cleanV.includes(':') ? 'IPv6 Verified' : 'IPv4 Verified';
         }
       }
     } catch {

@@ -139,10 +139,11 @@ export class LiveTelemetryManager {
   async measureEdgePing() {
     const start = performance.now();
     try {
-      // Lightweight zero-cache roundtrip probe
+      // Lightweight zero-cache roundtrip probe with strict timeout
       await fetch('https://www.cloudflare.com/cdn-cgi/trace?' + Date.now(), {
         mode: 'no-cors',
-        cache: 'no-store'
+        cache: 'no-store',
+        signal: AbortSignal.timeout ? AbortSignal.timeout(5000) : undefined,
       });
       const elapsed = Math.round(performance.now() - start);
       this.data.ping.edgeLatency = elapsed;
@@ -158,17 +159,33 @@ export class LiveTelemetryManager {
 
   async fetchMarketData() {
     try {
-      const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbols=%5B%22BTCUSDT%22,%22ETHUSDT%22,%22SOLUSDT%22%5D');
+      const res = await fetch(
+        'https://api.binance.com/api/v3/ticker/price?symbols=%5B%22BTCUSDT%22,%22ETHUSDT%22,%22SOLUSDT%22%5D',
+        { signal: AbortSignal.timeout ? AbortSignal.timeout(5000) : undefined }
+      );
       if (res.ok) {
         const json = await res.json();
-        const btcObj = json.find((x) => x.symbol === 'BTCUSDT');
-        const ethObj = json.find((x) => x.symbol === 'ETHUSDT');
-        const solObj = json.find((x) => x.symbol === 'SOLUSDT');
+        if (Array.isArray(json)) {
+          const btcObj = json.find((x) => x?.symbol === 'BTCUSDT');
+          const ethObj = json.find((x) => x?.symbol === 'ETHUSDT');
+          const solObj = json.find((x) => x?.symbol === 'SOLUSDT');
 
-        if (btcObj) this.data.markets.btc = Math.round(parseFloat(btcObj.price)).toLocaleString();
-        if (ethObj) this.data.markets.eth = Math.round(parseFloat(ethObj.price)).toLocaleString();
-        if (solObj) this.data.markets.sol = parseFloat(solObj.price).toFixed(1);
-        this.data.markets.lastUpdated = 'Synced Live';
+          const safeParse = (obj, decimals = 0) => {
+            if (!obj || typeof obj.price !== 'string') return null;
+            const num = parseFloat(obj.price);
+            if (!Number.isFinite(num) || num <= 0) return null;
+            return decimals === 0 ? Math.round(num).toLocaleString() : num.toFixed(decimals);
+          };
+
+          const btcVal = safeParse(btcObj, 0);
+          const ethVal = safeParse(ethObj, 0);
+          const solVal = safeParse(solObj, 1);
+
+          if (btcVal) this.data.markets.btc = btcVal;
+          if (ethVal) this.data.markets.eth = ethVal;
+          if (solVal) this.data.markets.sol = solVal;
+          this.data.markets.lastUpdated = 'Synced Live';
+        }
       }
     } catch {
       // Keep existing data or realistic live simulation
