@@ -559,37 +559,49 @@ export const PROFILE_ES = {
 
   standaloneProjects: [
     {
-      id: 'liza-project',
-      name: 'El Proyecto Liza: Adquisición de TI en Crisis y Bibliotecas Digitales',
-      role: 'Director de Proyecto y Arquitecto Líder de Sistemas',
-      organization: 'Link Puerto Rico · Apoyo en Crisis',
-      period: '2020 – 2023',
-      metrics: '100+ PCs · 50+ Tabletas · 3 Centros Comunitarios · 1,000+ Residentes',
-      summary:
-        'Durante la crisis global de suministros y cierres escolares, adquirió internacionalmente más de 100 computadoras y 50 tabletas en menos de 30 días. Negoció conectividad satelital para comunidades rurales desconectadas, desplegó software MDM personalizado, configuró firewalls y brindó 3 años de soporte técnico diario para transformar 3 centros comunitarios en bibliotecas digitales seguras.',
-      tags: ['Adquisición en Crisis', 'Despliegue MDM', 'Seguridad de Redes', 'Firewalls', 'Aprovisionamiento de Hardware']
-    },
-    {
       id: 'jobhelper',
       name: 'JobHelper: Agente Autónomo de Evaluación y Calificación con LLM',
       role: 'Creador e Ingeniero de Sistemas',
       organization: 'Innovación Independiente / Open Source',
       period: '2026',
       metrics: 'Rúbrica de 100 Puntos · Triaje Autónomo · LLM Multi-Modelo',
+      githubUrl: 'https://github.com/eresfavolosx/JobHelper',
+      subdomainUrl: 'https://jobhelper.novu.works',
+      mirrorUrl: 'https://jobhelper-c3cd7.web.app',
+      subdomainLabel: 'jobhelper.novu.works',
       summary:
         'Desarrolló un agente autónomo en Python utilizando razonamiento de LLMs multi-modelo (Claude / OpenAI) y rúbricas de evaluación técnica sobre descripciones de trabajo, automatizando el triaje de postulaciones con retroalimentación estructurada en JSON.',
-      tags: ['Python', 'Agentes Autónomos', 'Rúbricas para LLMs', 'NLP', 'GitHub CI/CD']
+      tags: ['Python', 'Agentes Autónomos', 'Rúbricas para LLMs', 'NLP', 'Next.js', 'Firebase']
     },
     {
-      id: 'favobot',
-      name: 'FavoBot: Agente Autónomo de Investigación y Tareas en Telegram',
-      role: 'Ingeniero Líder de IA',
-      organization: 'Novu Works Lab',
-      period: '2025 – 2026',
-      metrics: 'Búsqueda en Tiempo Real · Llamada a Herramientas · Cero Desviación',
+      id: 'bizpay',
+      name: 'BizPay: Pasarela y Facturación Comercial B2B',
+      role: 'Ingeniero Frontend Líder y Arquitecto de Sistemas',
+      organization: 'Fintech / Comercio Digital',
+      period: '2024 – 2025',
+      metrics: 'Checkout Instantáneo · APIs ATH Móvil y Tarjetas · Cero Deslizamiento',
+      githubUrl: 'https://github.com/eresfavolosx/BizPay',
+      subdomainUrl: 'https://bizpay.novu.works',
+      mirrorUrl: 'https://bizpay-novuworks.web.app',
+      subdomainLabel: 'bizpay.novu.works',
       summary:
-        'Creó un agente conversacional autónomo en Python integrado con Telegram, equipado con directrices estrictas de comportamiento, llamada a herramientas para búsqueda en tiempo real, supervisión humana y manejo elegante de errores para automatizar síntesis de mercado.',
-      tags: ['Python', 'API de Telegram Bot', 'Llamadas a Herramientas', 'Directrices de Marca', 'Anthropic Claude']
+        'Arquitectó un portal de pagos comerciales B2B de alta conversión con enrutamiento de facturas multinivel, integración de ATH Móvil Business, cálculo de comisiones en tiempo real e interfaz móvil Material UI.',
+      tags: ['JavaScript', 'Fintech', 'ATH Móvil', 'Material Design', 'Facturación B2B']
+    },
+    {
+      id: 'picta',
+      name: 'Picta: Motor de Documentación Visual y Medios Interactivos',
+      role: 'Arquitecto de Sistemas UI/UX y Aplicaciones Móviles',
+      organization: 'Picta Studio',
+      period: '2024',
+      metrics: 'Lienzo Interactivo · Estado del Cliente · Cero Latencia',
+      githubUrl: 'https://github.com/eresfavolosx/Picta',
+      subdomainUrl: 'https://picta.novu.works',
+      mirrorUrl: 'https://picta-novuworks.web.app',
+      subdomainLabel: 'picta.novu.works',
+      summary:
+        'Diseñó una aplicación de documentación visual ultra-rápida y optimizada para dispositivos móviles con historial de archivos por pestañas, almacenamiento en caché del cliente y sistemas de diseño adaptativos en Material Design Lite.',
+      tags: ['JavaScript', 'UI Móvil', 'Pipeline de Activos', 'Material Design Lite', 'Estado en Cliente']
     },
     {
       id: 'nfc-platform',
@@ -598,20 +610,43 @@ export const PROFILE_ES = {
       organization: 'Link Puerto Rico',
       period: '2025',
       metrics: 'Multiplataforma · Firebase · Suite de QA Automatizada en Python',
+      githubUrl: 'https://github.com/eresfavolosx/NFC',
+      subdomainUrl: 'https://nfc.novu.works',
+      mirrorUrl: 'https://nfc-novuworks.web.app',
+      subdomainLabel: 'nfc.novu.works',
       summary:
         'Desarrolló una aplicación multiplataforma para registro y verificación de eventos utilizando Capacitor, Firebase y Vite. Creó una suite de pruebas automatizadas en Python para verificar enrutamiento de UI, persistencia de estado y reportes de salud del sistema.',
       tags: ['Capacitor', 'Firebase', 'Vite', 'Suite de Pruebas en Python', 'App Móvil']
     },
     {
-      id: 'cyber-growth-racer',
-      name: 'Cyber Growth Racer: Videojuego 3D de Física y AdTech en WebGL',
-      role: 'Ingeniero de Gráficos y Sistemas de Juego',
-      organization: 'Novu Works',
-      period: '2026',
-      metrics: 'Three.js · Audio Procedural · 60 FPS en WebGL',
+      id: 'hackeaporunacausa',
+      name: 'Hackea por una Causa: Red de Mentoría Comunitaria y Calendario Juvenil',
+      role: 'Desarrollador Líder y Co-Fundador',
+      organization: 'Boys & Girls Clubs / Ganador de Hackathon',
+      period: '2017 – Presente',
+      metrics: 'Ganador de Hackathon de Impacto Social · 120+ Horas de Mentoría · 6 Centros Aliados',
+      githubUrl: 'https://github.com/eresfavolosx/hackeaporunacausa',
+      subdomainUrl: 'https://hackea.novu.works',
+      mirrorUrl: 'https://hackea-novuworks.web.app',
+      subdomainLabel: 'hackea.novu.works',
       summary:
-        'Diseñó un minijuego interactivo de carreras 3D en WebGL integrado directamente en el portafolio. Cuenta con síntesis de audio procedural mediante Web Audio API, física dinámica de inercia vehicular, recolección de recompensas MarTech (CAPI, ROAS) y evasión de obstáculos.',
-      tags: ['Three.js', 'WebGL', 'Web Audio API', 'Shaders Procedurales', 'Física de Videojuegos']
+        'Concebido y creado durante el hackathon Hackea por una Causa: una red de calendarización y reclutamiento de mentores voluntarios conectando a jóvenes en riesgo con profesionales a través de Boys & Girls Clubs y centros comunitarios en Puerto Rico.',
+      tags: ['React', 'Node.js', 'Impacto Social', 'Mentoría Comunitaria', 'Motor de Citas']
+    },
+    {
+      id: 'liza-project',
+      name: 'El Proyecto Liza: Adquisición de TI en Crisis y Bibliotecas Digitales',
+      role: 'Director de Proyecto y Arquitecto Líder de Sistemas',
+      organization: 'Link Puerto Rico · Apoyo en Crisis',
+      period: '2020 – 2023',
+      metrics: '100+ PCs · 50+ Tabletas · 3 Centros Comunitarios · 1,000+ Residentes',
+      githubUrl: 'https://github.com/eresfavolosx/TokenFund',
+      subdomainUrl: 'https://linkpuertorico.org',
+      mirrorUrl: 'https://linkpuertorico.org',
+      subdomainLabel: 'linkpuertorico.org',
+      summary:
+        'Durante la crisis global de suministros y cierres escolares, adquirió internacionalmente más de 100 computadoras y 50 tabletas en menos de 30 días. Negoció conectividad satelital para comunidades rurales desconectadas, desplegó software MDM personalizado, configuró firewalls y brindó 3 años de soporte técnico diario para transformar 3 centros comunitarios en bibliotecas digitales seguras.',
+      tags: ['Adquisición en Crisis', 'Despliegue MDM', 'Seguridad de Redes', 'Firewalls', 'Aprovisionamiento de Hardware']
     }
   ],
 

@@ -1,0 +1,243 @@
+<!--ahg
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="College doesn't have to be expensive">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="icon" href="../images/athmovil-logo.png">
+    <title>BizPay</title>
+
+    <!-- Page styles -->
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="../Assets/JS/parallax.min.js">
+    </script>
+    <script type="text/javascript" src="../Assets/JS/script.js">
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.grey-deep_orange.min.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.min.css">
+    <link rel="stylesheet" href="../Assets/CSS/bootstrap.css">
+    <link rel="stylesheet" href="../styles.css">
+
+
+
+    <!-- Page JS -->
+    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script src="https://use.fontawesome.com/cb7558c9f5.js"></script>
+
+    <style>
+        #view-source {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- The drawer is always open in large screens. The header is always shown,
+even in small screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+          mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title nav-title">Payments</span>
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                mdl-textfield--floating-label mdl-textfield--align-right">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+        <i class="material-icons search">search</i>
+      </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title"><img src="../images/Logo.png" alt="" class="navbar-profile img-circle"/> <img src="../images/athmovil-logo.png" alt="ath-movil" class="ath-movil" />
+            <br>
+            dliber@corporate.edu
+            </span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link is-active" href="../index.html"><i class="material-icons nav-icon" role="presentation">home</i>Home</a>
+                <a class="mdl-navigation__link" href="Payments.html"><i class="material-icons nav-icon" role="presentation">payment</i>Payments</a>
+                <a class="mdl-navigation__link" href="Payroll.html"><i class="material-icons nav-icon" role="presentation">people</i>Pay-Roll</a>
+                <a class="mdl-navigation__link" href="Pages/History.html"><i class="material-icons nav-icon" role="presentation">help</i>Help</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="page-content ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 Home-title">
+                            On-Site
+                        </div>
+                    </div>
+                    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp payments-table">
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                <th class="mdl-data-table__cell--non-numeric p-header">Payment Status</th>
+                                <th class="mdl-data-table__cell--non-numeric q-header">Quantity</th>
+                                <th class="mdl-data-table__cell--non-numeric final-row">Date</th>
+
+                            </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric"> <img src="http://bjstlh.com/data/wallpapers/65/WDF_1102999.jpg" alt="" class=" img-circle sample-profile" height="48px" width="48px" />Carmen Figueroa</td>
+                                <td class="mdl-data-table__cell--non-numeric"><a class="paid">Paid</a></td>
+                                <td class="quantity">$340.00</td>
+                                <td>05/14/16</td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric"> <img src="http://www.long-distance-lover.com/wp-content/uploads/2013/09/testimonial121.jpg" alt="" class=" img-circle sample-profile" height="48px" width="48px" />Marie Concepcion</td>
+                                <td class="mdl-data-table__cell--non-numeric"><a class="paid">Paid</a></td>
+                                <td class="quantity">$273.00</td>
+                                <td>07/14/16</td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric"> <img src="https://i.vimeocdn.com/portrait/7772033_300x300" alt="" class=" img-circle sample-profile" height="48px" width="48px" />Tomas Gonzalez</td>
+                                <td class="mdl-data-table__cell--non-numeric"><a class="unpaid">Unpaid</a></td>
+                                <td class="quantity">$6.58</td>
+                                <td>09/10/16</td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric"> <img src="https://justatic.com/v/20160902100120/jld/images/getfeatured/profile-2.jpg" alt="" class=" img-circle sample-profile" height="48px" width="48px" />Maria Matos</td>
+                                <td class="mdl-data-table__cell--non-numeric"><a class="unpaid">Unpaid</a></td>
+                                <td class="quantity">$74.00</td>
+                                <td>10/14/16</td>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric View-More-Text"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><button class="mdl-button mdl-js-button mdl-button--primary secondary-button">
+                                    View More
+                                </button></td>
+                                </tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+
+            <div class="page-content last-table">
+                <main class="mdl-layout__content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 Home-title">
+                                Online
+                            </div>
+                        </div>
+                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp payments-table">
+                            <thead>
+                                <tr>
+                                    <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                    <th class="mdl-data-table__cell--non-numeric p-header">Payment Status</th>
+                                    <th class="mdl-data-table__cell--non-numeri q-header">Quantity</th>
+                                    <th class="mdl-data-table__cell--non-numeric final-row">Date</th>
+
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric"> <img src="http://www.american.edu/uploads/profiles/large/chris_palmer_profile_11.jpg" alt="" class=" img-circle sample-profile" height="48px" width="48px" />Juan Colon</td>
+                                    <td class="mdl-data-table__cell--non-numeric"><a class="paid">Paid</a></td>
+                                    <td class="quantity">$64.09</td>
+                                    <td>05/14/16</td>
+                                </tr>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric"> <img src="https://i.vimeocdn.com/portrait/8871703_300x300" alt="" class=" img-circle sample-profile" height="48px" width="48px" />Paul Rivera</td>
+                                    <td class="mdl-data-table__cell--non-numeric"><a class="paid">Paid</a></td>
+                                    <td class="quantity">$73.80</td>
+                                    <td>07/14/16</td>
+                                </tr>
+                                <tr>
+                                    <td class="mdl-data-table__cell--non-numeric"> <img src="https://lh3.googleusercontent.com/-aQgPcf5qADM/AAAAAAAAAAI/AAAAAAAAAAA/gyCKEZb6dFw/photo.jpg" alt="" class=" img-circle sample-profile" height="48px" width="48px" />Patricia Santiago</td>
+                                    <td class="mdl-data-table__cell--non-numeric"><a class="unpaid">Unpaid</a></td>
+                                    <td class="quantity">$58.90</td>
+                                    <td>09/10/16</td>
+                                </tr>
+                                <tr>
+
+                                    <td class="mdl-data-table__cell--non-numeric"> <img src="https://www.gatescambridge.org/sites/www.gatescambridge.org/files/webform/aiche_profile_-_version_2.jpg" alt="" class=" img-circle sample-profile" height="48px" width="48px" />Sasha Martinez</td>
+                                    <td class="mdl-data-table__cell--non-numeric"><a class="unpaid">Unpaid</a></td>
+                                    <td class="quantity">$74.00</td>
+                                    <td>10/14/16</td>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric View-More-Text"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><button class="mdl-button mdl-js-button mdl-button--primary secondary-button">
+                                    View More
+                                </button></td>
+                                    </tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </main>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--colored mdl-button--fab view-source" id="show-dialog">
+        <a target="_blank"
+  <i class="material-icons">add</i></a>
+</button>
+            <dialog class="mdl-dialog">
+                <h4 class="mdl-dialog__title">We are still getting there!</h4>
+                <div class="mdl-dialog__content">
+                    <p>
+                        Soon you will be able to use Bizpay and all of its functionality online, but just not yet.
+                    </p>
+                </div>
+                <div class="mdl-dialog__actions">
+                    <button type="button" class="mdl-button close">Okay!</button>
+                </div>
+            </dialog>
+            <script>
+                var dialog = document.querySelector('dialog');
+                var showDialogButton = document.querySelector('.show-dialog');
+                if (!dialog.showModal) {
+                    dialogPolyfill.registerDialog(dialog);
+                }
+                showDialogButton.addEventListener('click', function() {
+                    dialog.showModal();
+                });
+                dialog.querySelector('.close').addEventListener('click', function() {
+                    dialog.close();
+                });
+            </script>
+            <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+</body>
+
+</html>

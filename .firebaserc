@@ -1,5 +1,27 @@
 {
   "projects": {
     "default": "novuworks"
-  }
+  },
+  "targets": {
+    "novuworks": {
+      "hosting": {
+        "portfolio": [
+          "novuworks"
+        ],
+        "bizpay": [
+          "bizpay-novuworks"
+        ],
+        "picta": [
+          "picta-novuworks"
+        ],
+        "nfc": [
+          "nfc-novuworks"
+        ],
+        "hackea": [
+          "hackea-novuworks"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

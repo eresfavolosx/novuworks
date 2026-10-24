@@ -1,0 +1,268 @@
+.mdl-layout__header {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    min-height: 64px;
+    max-height: 1000px;
+    z-index: 3;
+    background-color: #EF6C00;
+    color: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-property: max-height, box-shadow;
+}
+
+.mdl-button--fab.mdl-button--colored:active {
+    background-color: #EF6C00;
+}
+
+.mdl-button--fab.mdl-button--colored:hover {
+    background-color: #EF6C00;
+}
+
+.mdl-button--fab.mdl-button--colored {
+    background: #EF6C00;
+    color: #fff;
+}
+
+.mdl-button .material-icons {
+    vertical-align: middle;
+    text-decoration: none;
+    background-color: #EF6C00;
+    color: white;
+}
+
+.navbar-profile {
+    width: 48px;
+    height: 48px;
+    margin-top: 58px;
+    margin-bottom: -10px;
+}
+
+.mdl-layout-title {
+    background-color: #212121;
+    background-image: url("images/athmovil-logo.png");
+    width: 100%;
+    height: auto;
+}
+
+.mdl-layout__drawer>.mdl-layout__title, .mdl-layout__drawer>.mdl-layout-title {
+    line-height: 64px;
+    padding-left: 16px;
+    color: white;
+    font-size: 14px;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    display: block;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    padding: 16px 16px;
+    margin: 0;
+    color: #757575;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+    display: block;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    padding: 16px 16px;
+    margin: 0;
+    color: #757575;
+    text-decoration: none;
+}
+
+.page-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    background-color: #EEEEEE;
+}
+
+.payments-table {
+    width: 100%
+}
+
+.final-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.nav-icon {
+    margin-right: 32px;
+}
+
+.mdl-navigation__link {
+    font-weight: 700;
+}
+
+.row {
+    padding-bottom: 24px;
+}
+
+.mdl-button--fab.mdl-button--mini-fab {
+    height: 40px;
+    min-width: 40px;
+    width: 40px;
+    background-color: #EF6C00;
+}
+
+.View-More-Text {
+    border: 0;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.secondary-button {
+    color: #EF6C00 !important;
+    text-decoration: none!important;
+}
+
+.Home-title {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 24px;
+    font-weight: 400!important;
+    line-height: 32px;
+}
+
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link:active, .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover, .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:visited {
+    background-color: #e0e0e0;
+}
+
+.graff {
+    height: 303px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.graff2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ath-movil {
+    width: 60px;
+    height: 60px;
+    margin-left: 105px;
+    margin-top: -30px
+}
+
+.sample-profile {
+    margin-right: 16px;
+}
+
+.quantity {
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+    width: 50px;
+}
+
+.q-header {
+    padding-right: 0px !important;
+}
+
+.p-header {
+    padding-left: 0px !important;
+}
+
+.payroll-table {
+    padding: 0px;
+}
+
+.last-table {
+    padding-bottom: 24px;
+}
+
+main {
+    background-color: #EEEEEE !important;
+}
+
+.nav-title {
+    background-color:  #EF6C00!important;
+}
+
+.navbar-nav {
+    margin-left: -300px!important;
+}
+
+.search {
+    color: white!important;
+    margin-top: 3px;
+}
+
+.mdl-navigation__link {
+    text-decoration: none!important;
+}
+
+.filter {
+    color: white!important;
+    margin-left: -5px;
+}
+
+.mdl-menu {
+    padding-left: 14px;
+}
+
+.unpaid,
+.unpaid:hover {
+    color: red;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.paid,
+.paid:hover {
+    color: green;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.graff2 {
+    background-color: white;
+}
+
+.mdl-menu__container {
+    top: 48px;
+    width: 144.828px;
+    height: 208px;
+    right: 90px!important;
+}
+
+.view-source {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+}
+
+.timespan {
+    padding-left: 140px !important;
+}

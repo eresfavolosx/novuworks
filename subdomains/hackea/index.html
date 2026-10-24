@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackea por una Causa · Red de Mentores para Jóvenes</title>
+  <meta name="description" content="App para reclutamiento y calendarización de mentores profesionales para jóvenes en riesgo en Puerto Rico. Hackathon Hackea por una Causa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(22, 29, 47, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #ff4c1d;
+      --accent-green: #10b981;
+      --accent-blue: #0284c7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    header {
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-badge {
+      background: linear-gradient(135deg, #ff4c1d, #d93810);
+      color: white;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.05em;
+    }
+    .logo-title { font-size: 16px; font-weight: 700; }
+    .logo-sub { font-size: 11px; color: var(--text-muted); }
+    .nav-links { display: flex; gap: 10px; }
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover { background: rgba(255, 255, 255, 0.1); }
+    .nav-btn.active {
+      background: rgba(255, 76, 29, 0.15);
+      border-color: rgba(255, 76, 29, 0.4);
+      color: #ff6b42;
+    }
+    main {
+      flex: 1;
+      max-width: 1140px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(255, 76, 29, 0.12) 0%, rgba(2, 132, 199, 0.08) 100%);
+      border: 1px solid rgba(255, 76, 29, 0.25);
+      border-radius: 20px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: #ff6b42;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-banner h1 { font-size: 30px; font-weight: 800; line-height: 1.25; }
+    .hero-banner p { font-size: 15px; color: var(--text-muted); line-height: 1.6; max-width: 800px; }
+    .team-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .team-pill {
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      color: #cbd5e1;
+    }
+    .tab-section { display: none; flex-direction: column; gap: 24px; }
+    .tab-section.active { display: flex; }
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .card-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #ff6b42;
+      font-weight: 700;
+    }
+    .card-status {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .status-confirmed { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .status-pending { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+    .card-title { font-size: 17px; font-weight: 700; }
+    .card-meta { font-size: 13px; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px; }
+    .meta-row { display: flex; align-items: center; gap: 8px; }
+    .inst-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .inst-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 700;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .inst-title { font-size: 18px; font-weight: 700; }
+    .inst-p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-links { display: flex; gap: 16px; }
+    .footer-links a { color: #ff6b42; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <span class="logo-badge">HACKEA</span>
+      <div>
+        <div class="logo-title">Hackea por una Causa</div>
+        <div class="logo-sub">Red de Mentoría Comunitaria · Puerto Rico</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <button class="nav-btn active" onclick="switchTab('citas')">📅 Sesiones</button>
+      <button class="nav-btn" onclick="switchTab('instituciones')">🏛️ Instituciones</button>
+      <button class="nav-btn" onclick="switchTab('perfil')">👤 Mentor</button>
+      <a href="https://novu.works" class="nav-btn" style="border-color: rgba(255,255,255,0.25);">← Novu Works</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-banner">
+      <span class="hero-tag">HACKATHON SOCIAL IMPACT PROJECT</span>
+      <h1>Reclutamiento y Calendarización de Mentores Profesionales para Jóvenes en Riesgo</h1>
+      <p>
+        Plataforma concebida para conectar mentores capacitados en tecnología, ciencias y liderazgo con instituciones comunitarias que apoyan a la niñez y juventud de Puerto Rico.
+      </p>
+      <div class="team-strip">
+        <span class="team-pill">⭐ Fabián Vélez (Lead Developer)</span>
+        <span class="team-pill">Luis Betancourt</span>
+        <span class="team-pill">Leonardo Calderón</span>
+        <span class="team-pill">Ryan González</span>
+        <span class="team-pill">Arturo Santiago</span>
+      </div>
+    </section>
+
+    <!-- Tab 1: Citas -->
+    <section id="tab-citas" class="tab-section active">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2>Sesiones de Mentoría Programadas</h2>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#10b981;">● 6 Citas Activas</span>
+      </div>
+
+      <div class="grid-cards">
+        <div class="card">
+          <div class="card-top">
+            <span class="card-date">MARTES · 8:00 AM</span>
+            <span class="card-status status-confirmed">Confirmada</span>
+          </div>
+          <h3 class="card-title">Taller de Introducción al Código</h3>
+          <div class="card-meta">
+            <div class="meta-row">📍 Boys & Girls Club · San Juan</div>
+            <div class="meta-row">⏱️ 8:00 AM - 9:30 AM (Semanal)</div>
+            <div class="meta-row">👤 Mentee: John D. (16 años)</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <span class="card-date">MIÉRCOLES · 3:30 PM</span>
+            <span class="card-status status-confirmed">Confirmada</span>
+          </div>
+          <h3 class="card-title">Asesoría Vocacional en STEM</h3>
+          <div class="card-meta">
+            <div class="meta-row">📍 Centro Comunitario Santurce</div>
+            <div class="meta-row">⏱️ 3:30 PM - 5:00 PM</div>
+            <div class="meta-row">👤 Mentee: Gabriela S. (17 años)</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <span class="card-date">VIERNES · 4:00 PM</span>
+            <span class="card-status status-pending">Pendiente Confirmación</span>
+          </div>
+          <h3 class="card-title">Laboratorio de Robótica y Sensores</h3>
+          <div class="card-meta">
+            <div class="meta-row">📍 Casa Esperanza · Río Piedras</div>
+            <div class="meta-row">⏱️ 4:00 PM - 6:00 PM</div>
+            <div class="meta-row">👤 Mentee: Carlos M. (15 años)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Instituciones -->
+    <section id="tab-instituciones" class="tab-section">
+      <h2>Instituciones y Centros Aliados</h2>
+      <div class="grid-cards">
+        <div class="inst-card">
+          <span class="inst-badge">ORGANIZACIÓN ANCLA</span>
+          <h3 class="inst-title">Boys & Girls Clubs de Puerto Rico</h3>
+          <p class="inst-p">
+            Ofrece un espacio seguro para aprender, crecer y desarrollar destrezas de vida y empleo para niños y jóvenes en comunidades vulnerables de Puerto Rico.
+          </p>
+          <div style="font-size:12px; color:#cbd5e1;">📌 San Juan, Carolina, Arecibo, Bayamón, Mayagüez</div>
+        </div>
+
+        <div class="inst-card">
+          <span class="inst-badge">CENTRO JUVENIL</span>
+          <h3 class="inst-title">Iniciativa Comunitaria</h3>
+          <p class="inst-p">
+            Programas integrales de apoyo biosicosocial, prevención y desarrollo de talentos para jóvenes y familias en zonas urbanas de alta vulnerabilidad.
+          </p>
+          <div style="font-size:12px; color:#cbd5e1;">📌 Hato Rey, San Juan, PR</div>
+        </div>
+
+        <div class="inst-card">
+          <span class="inst-badge">EDUCACIÓN VOCACIONAL</span>
+          <h3 class="inst-title">Centros Sor Isolina Ferré</h3>
+          <p class="inst-p">
+            Empoderamiento juvenil a través de educación alternativa, tutoría académica y capacitación tecnológica y artística comunitaria.
+          </p>
+          <div style="font-size:12px; color:#cbd5e1;">📌 Ponce, Caimito & San Juan, PR</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Perfil Mentor -->
+    <section id="tab-perfil" class="tab-section">
+      <h2>Perfil y Estadísticas de Impacto</h2>
+      <div class="grid-cards">
+        <div class="card">
+          <h3 class="card-title">Fabián Vélez Vicente</h3>
+          <div class="card-meta">
+            <div class="meta-row">🎓 Ingeniero en Computadoras (UPRM · 4.0 GPA)</div>
+            <div class="meta-row">💼 Growth Analytics & Tech Lead</div>
+            <div class="meta-row">📍 San Juan, Puerto Rico</div>
+            <div class="meta-row">🤝 120+ Horas de Mentoría Comunitaria</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Métricas del Proyecto</h3>
+          <div class="card-meta">
+            <div class="meta-row">⭐ Hackathon Hackea por una Causa 2017</div>
+            <div class="meta-row">💻 Stack: Node.js, Express, React, Webpack</div>
+            <div class="meta-row">🔒 Repositorio Verificado y Seguro en GitHub</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© 2017–2026 Hackea por una Causa · Fabián Vélez Vicente & Equipo</div>
+    <div class="footer-links">
+      <a href="https://github.com/eresfavolosx/hackeaporunacausa" target="_blank" rel="noopener">GitHub Repo</a>
+      <a href="https://novu.works" target="_blank" rel="noopener">Novu Works Portfolio</a>
+    </div>
+  </footer>
+
+  <script>
+    function switchTab(name) {
+      document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      const target = document.getElementById('tab-' + name);
+      if (target) target.classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

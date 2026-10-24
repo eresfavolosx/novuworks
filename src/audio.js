@@ -7,7 +7,9 @@
 export class ExecutiveAudio {
   constructor() {
     this.ctx = null;
-    this.isMuted = localStorage.getItem('novu_muted') === 'true';
+    const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('novu_muted') : null;
+    // Default to MUTED unless visitor explicitly enabled audio previously
+    this.isMuted = stored === null ? true : stored === 'true';
     this.ambientGain = null;
     this.ambientRunning = false;
   }

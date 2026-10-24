@@ -486,20 +486,9 @@ export const PROFILE = {
 
   // ─────────────────────────────────────────────────────────────
   // Verified Standalone Engineering & Crisis Impact Projects
-  // Extracted from Verified Production Resumes
+  // Extracted from Verified Production Resumes & Live Deployments
   // ─────────────────────────────────────────────────────────────
   standaloneProjects: [
-    {
-      id: 'liza-project',
-      name: 'The Liza Project: Crisis IT Sourcing & Digital Libraries',
-      organization: 'Link Puerto Rico',
-      role: 'Project Director & Lead Systems Architect',
-      period: '2020 – 2023',
-      metrics: '100+ PCs · 50+ Tablets · 3 Community Centers · 1,000+ Residents',
-      summary:
-        'During the height of the global supply chain crisis and school/workplace shutdowns, internationally sourced and procured over 100 computers and 50 tablets in under 30 days. Negotiated satellite internet connectivity for disconnected rural communities, deployed custom Mobile Device Management (MDM) software, configured firewalls and site-blocking protocols, and provided 3 years of daily ongoing technical support to transform 3 community centers into secure digital libraries.',
-      tags: ['Crisis Procurement', 'MDM Deployment', 'Network Security', 'Firewalls', 'Hardware Provisioning'],
-    },
     {
       id: 'jobhelper',
       name: 'JobHelper: Autonomous LLM Evaluation & Scoring Agent',
@@ -507,20 +496,43 @@ export const PROFILE = {
       role: 'Creator & Systems Engineer',
       period: '2026',
       metrics: '100-Point Rubric · Autonomous Triage · Multi-Model LLM',
+      githubUrl: 'https://github.com/eresfavolosx/JobHelper',
+      subdomainUrl: 'https://jobhelper.novu.works',
+      mirrorUrl: 'https://jobhelper-c3cd7.web.app',
+      subdomainLabel: 'jobhelper.novu.works',
       summary:
         'Engineered an autonomous Python agent utilizing multi-model LLM reasoning (Claude / OpenAI) and strict constraint rubrics to evaluate complex technical job descriptions against candidate backgrounds using a 100-point scoring scaffold mapped to SDLC and API specifications, automating intake triage with structured JSON feedback.',
-      tags: ['Python', 'Autonomous Agents', 'LLM Prompt Rubrics', 'NLP', 'GitHub CI/CD'],
+      tags: ['Python', 'Autonomous Agents', 'LLM Prompt Rubrics', 'NLP', 'Next.js', 'Firebase'],
     },
     {
-      id: 'favobot',
-      name: 'FavoBot: Autonomous Telegram Research & Task Agent',
-      organization: 'Novu Works Lab',
-      role: 'Lead AI Engineer',
-      period: '2025 – 2026',
-      metrics: 'Real-Time Market Search · Tool Calling · Zero Drift',
+      id: 'bizpay',
+      name: 'BizPay: B2B Commercial Invoicing & Payment Gateway',
+      organization: 'Fintech / Commerce',
+      role: 'Lead Frontend Engineer & Systems Architect',
+      period: '2024 – 2025',
+      metrics: 'Instant Checkout · ATH Móvil & Card APIs · Zero Slippage',
+      githubUrl: 'https://github.com/eresfavolosx/BizPay',
+      subdomainUrl: 'https://bizpay.novu.works',
+      mirrorUrl: 'https://bizpay-novuworks.web.app',
+      subdomainLabel: 'bizpay.novu.works',
       summary:
-        'Engineered an autonomous conversational agent in Python integrated with Telegram, equipped with strict LLM behavioral constraints, tool calling for real-time market search, human-in-the-loop steering, and graceful error handling to automate research synthesis and task execution.',
-      tags: ['Python', 'Telegram Bot API', 'Tool Calling', 'Brand Guardrails', 'Anthropic Claude'],
+        'Architected a high-converting B2B commercial payment portal featuring multi-tier invoice routing, ATH Móvil business integration, real-time transaction fee calculation, and responsive mobile-first material UI.',
+      tags: ['JavaScript', 'Fintech', 'ATH Móvil', 'Material Design', 'B2B Invoicing'],
+    },
+    {
+      id: 'picta',
+      name: 'Picta: Interactive Visual Documentation & Media Engine',
+      organization: 'Picta Studio',
+      role: 'Mobile App & UI/UX Systems Architect',
+      period: '2024',
+      metrics: 'Interactive Canvas · Client-Side State · Zero-Latency',
+      githubUrl: 'https://github.com/eresfavolosx/Picta',
+      subdomainUrl: 'https://picta.novu.works',
+      mirrorUrl: 'https://picta-novuworks.web.app',
+      subdomainLabel: 'picta.novu.works',
+      summary:
+        'Engineered an ultra-fast, mobile-optimized visual documentation application with tabbed asset history, client-side caching, and responsive design systems built on Material Design Lite.',
+      tags: ['JavaScript', 'Mobile UI', 'Asset Pipeline', 'Material Design Lite', 'Client-Side State'],
     },
     {
       id: 'nfc-platform',
@@ -529,20 +541,43 @@ export const PROFILE = {
       role: 'Full-Stack Mobile Engineer',
       period: '2025',
       metrics: 'Cross-Platform · Firebase · Automated Python QA Suite',
+      githubUrl: 'https://github.com/eresfavolosx/NFC',
+      subdomainUrl: 'https://nfc.novu.works',
+      mirrorUrl: 'https://nfc-novuworks.web.app',
+      subdomainLabel: 'nfc.novu.works',
       summary:
         'Developed a cross-platform event registration and verification application using Capacitor, Firebase, and Vite. Architected a custom Python automated verification suite to continuously test UI routing, state persistence, and generate real-time system health reports.',
       tags: ['Capacitor', 'Firebase', 'Vite', 'Python Test Suite', 'Mobile App'],
     },
     {
-      id: 'cyber-growth-racer',
-      name: 'Cyber Growth Racer: 3D AdTech Physics Arcade',
-      organization: 'Novu Works',
-      role: 'Graphics & Game Systems Engineer',
-      period: '2026',
-      metrics: 'Three.js · Procedural Audio · 60 FPS WebGL',
+      id: 'hackeaporunacausa',
+      name: 'Hackea por una Causa: Youth Mentorship & Scheduling Network',
+      organization: 'Boys & Girls Clubs / Hackathon Winner',
+      role: 'Lead Developer & Co-Founder',
+      period: '2017 – Present',
+      metrics: 'Social Impact Hackathon Winner · 120+ Mentor Hours · 6 Partner Centers',
+      githubUrl: 'https://github.com/eresfavolosx/hackeaporunacausa',
+      subdomainUrl: 'https://hackea.novu.works',
+      mirrorUrl: 'https://hackea-novuworks.web.app',
+      subdomainLabel: 'hackea.novu.works',
       summary:
-        'Architected an interactive 3D WebGL arcade racing minigame embedded directly in the portfolio shell. Features procedural audio synthesis via Web Audio API, dynamic vehicle inertia physics, collectible MarTech currency (CAPI, ROAS, 88 MPH Milestones), and obstacle avoidance.',
-      tags: ['Three.js', 'WebGL', 'Web Audio API', 'Procedural Shaders', 'Game Physics'],
+        'Conceived and built during the Hackea por una Causa hackathon: an appointment scheduling and volunteer recruitment network connecting at-risk youth with professional mentors across Boys & Girls Clubs and community centers in Puerto Rico.',
+      tags: ['React', 'Node.js', 'Social Impact', 'Community Mentorship', 'Scheduling Engine'],
+    },
+    {
+      id: 'liza-project',
+      name: 'The Liza Project: Crisis IT Sourcing & Digital Libraries',
+      organization: 'Link Puerto Rico',
+      role: 'Project Director & Lead Systems Architect',
+      period: '2020 – 2023',
+      metrics: '100+ PCs · 50+ Tablets · 3 Community Centers · 1,000+ Residents',
+      githubUrl: 'https://github.com/eresfavolosx/TokenFund',
+      subdomainUrl: 'https://linkpuertorico.org',
+      mirrorUrl: 'https://linkpuertorico.org',
+      subdomainLabel: 'linkpuertorico.org',
+      summary:
+        'During the height of the global supply chain crisis and school/workplace shutdowns, internationally sourced and procured over 100 computers and 50 tablets in under 30 days. Negotiated satellite internet connectivity for disconnected rural communities, deployed custom Mobile Device Management (MDM) software, configured firewalls and site-blocking protocols, and provided 3 years of daily ongoing technical support to transform 3 community centers into secure digital libraries.',
+      tags: ['Crisis Procurement', 'MDM Deployment', 'Network Security', 'Firewalls', 'Hardware Provisioning'],
     },
   ],
 
