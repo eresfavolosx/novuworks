@@ -9530,3 +9530,944 @@ body.visualizer-mode #toast-banner {
     font-size: 15px;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Tesla Fullscreen Cockpit & Real-Time Intelligence Dashboard
+   Transforms the viewport into an edge-to-edge automotive HUD
+   ───────────────────────────────────────────────────────────── */
+
+body.tesla-cockpit-active {
+  overflow: hidden !important;
+}
+
+.tesla-cockpit-hud {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: radial-gradient(circle at 50% 0%, #0f1524 0%, #07090f 50%, #030407 100%);
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tesla-cockpit-hud.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tesla-cockpit-hud[hidden] {
+  display: none !important;
+}
+
+/* Custom Cockpit Scrollbar */
+.tesla-cockpit-hud::-webkit-scrollbar {
+  width: 6px;
+}
+.tesla-cockpit-hud::-webkit-scrollbar-track {
+  background: #06080e;
+}
+.tesla-cockpit-hud::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 3px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Top Cockpit Telemetry Bar
+   ───────────────────────────────────────────────────────────── */
+.tesla-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: rgba(8, 11, 18, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  gap: 16px;
+}
+
+.tesla-status-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.tesla-t-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(232, 33, 39, 0.12);
+  color: #e82127;
+  border: 1px solid rgba(232, 33, 39, 0.35);
+  box-shadow: 0 0 16px rgba(232, 33, 39, 0.25);
+}
+
+.tesla-model-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tesla-os-tag {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+}
+
+.tesla-fsd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #38bdf8;
+  letter-spacing: 0.04em;
+}
+
+.fsd-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: fsdPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes fsdPulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* Center Telemetry Clusters */
+.tesla-telemetry-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 6px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tesla-clock-box,
+.tesla-weather-box,
+.tesla-gps-box,
+.tesla-battery-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tesla-clock-box {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.tesla-clock-time {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 15px;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: 0.05em;
+}
+
+.tesla-clock-zone {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 10px;
+  color: #64748b;
+  letter-spacing: 0.04em;
+}
+
+.tesla-stat-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.t-weather-icon,
+.t-gps-icon,
+.t-batt-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.t-weather-text,
+.t-gps-text,
+.t-batt-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.t-weather-temp,
+.t-gps-dist,
+.t-batt-level {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.t-weather-loc,
+.t-gps-coords,
+.t-batt-range {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 10px;
+  color: #64748b;
+}
+
+/* Close Cockpit Button */
+.tesla-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.tesla-close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tesla-close-btn:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3);
+}
+
+.close-kbd {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 9.5px;
+  color: #cbd5e1;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Main Cockpit Dashboard Grid Layout
+   ───────────────────────────────────────────────────────────── */
+.tesla-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr 1.35fr;
+  gap: 20px;
+  padding: 24px;
+  max-width: 1720px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+
+.tesla-panel {
+  background: rgba(13, 17, 26, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.panel-header-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  gap: 10px;
+}
+
+.panel-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-num {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+  font-weight: 800;
+  color: #38bdf8;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.panel-title {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.panel-badge-pill {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 10px;
+  font-weight: 600;
+  color: #94a3b8;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Panel 1: Executive Telemetry & Bio
+   ───────────────────────────────────────────────────────────── */
+.tesla-gauge-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.gauge-dial-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.radial-gauge-circle {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 4px solid rgba(245, 158, 11, 0.2);
+  border-top-color: #f59e0b;
+  border-right-color: #f59e0b;
+  box-shadow: 0 0 28px rgba(245, 158, 11, 0.25), inset 0 0 24px rgba(245, 158, 11, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
+}
+
+.gauge-inner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0 12px;
+}
+
+.gauge-big-num {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 32px;
+  font-weight: 800;
+  color: #fbbf24;
+  text-shadow: 0 0 16px rgba(251, 191, 36, 0.45);
+  line-height: 1.1;
+}
+
+.gauge-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #f1f5f9;
+  text-transform: uppercase;
+}
+
+.gauge-sub {
+  font-size: 9.5px;
+  color: #94a3b8;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+}
+
+.cluster-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cluster-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cl-val {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.gold-num { color: #fbbf24; }
+.cyan-num { color: #38bdf8; }
+.green-num { color: #34d399; }
+.purple-num { color: #c084fc; }
+
+.cl-lbl {
+  font-size: 11px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.cl-sub {
+  font-size: 9.5px;
+  color: #64748b;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+}
+
+/* Executive Bio Card */
+.tesla-bio-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bio-top-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bio-avatar-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(56, 189, 248, 0.4);
+  flex-shrink: 0;
+}
+
+.bio-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bio-text-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bio-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.bio-title {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.bio-auth {
+  font-size: 10px;
+  color: #38bdf8;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+}
+
+.bio-summary-p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+/* Touch Action Pedals */
+.tesla-pedals-row {
+  display: flex;
+  gap: 10px;
+}
+
+.tesla-pedal-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tesla-pedal-btn.primary-red {
+  background: linear-gradient(135deg, #e82127 0%, #b91c1c 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(232, 33, 39, 0.35);
+}
+
+.tesla-pedal-btn.primary-red:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(232, 33, 39, 0.5);
+}
+
+.tesla-pedal-btn.green-wa {
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+}
+
+.tesla-pedal-btn.green-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(37, 211, 102, 0.5);
+}
+
+.tesla-pedal-btn.outline-plat {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f1f5f9;
+}
+
+.tesla-pedal-btn.outline-plat:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Panel 2: 6DoF Artificial Horizon & Dynamics
+   ───────────────────────────────────────────────────────────── */
+.horizon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.horizon-ring {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 4px solid #1e293b;
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.8);
+  transition: transform 0.1s ease-out;
+}
+
+.horizon-sky {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, #0284c7 0%, #38bdf8 100%);
+}
+
+.horizon-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, #78350f 0%, #451a03 100%);
+}
+
+.horizon-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+  transform: translateY(0);
+  transition: transform 0.1s ease-out;
+}
+
+.horizon-aircraft-ref {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ref-wing-left {
+  width: 42px;
+  height: 4px;
+  background: #fbbf24;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.ref-center-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fbbf24;
+  margin: 0 8px;
+  border: 2px solid #000000;
+}
+
+.ref-wing-right {
+  width: 42px;
+  height: 4px;
+  background: #fbbf24;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.horizon-readouts {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+}
+
+.hr-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hr-lbl {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 9.5px;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.hr-val {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 13px;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+/* Systems Status Matrix */
+.tesla-systems-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.sys-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sys-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sys-dot.online {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.sys-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.sys-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.sys-status {
+  font-size: 9.5px;
+  color: #64748b;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Panel 3: Real-Time Industry News Stream
+   ───────────────────────────────────────────────────────────── */
+.tesla-refresh-news-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tesla-refresh-news-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.spin-icon.spinning {
+  display: inline-block;
+  animation: spinNews 1s linear infinite;
+}
+
+@keyframes spinNews {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.tesla-news-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tesla-filter-chip {
+  padding: 5px 11px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tesla-filter-chip:hover {
+  color: #f1f5f9;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tesla-filter-chip.active {
+  background: rgba(56, 189, 248, 0.14);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+.tesla-news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 520px;
+  padding-right: 4px;
+}
+
+.tesla-news-list::-webkit-scrollbar {
+  width: 4px;
+}
+.tesla-news-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+.tesla-news-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.2s ease;
+}
+
+.tesla-news-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(56, 189, 248, 0.3);
+  transform: translateX(2px);
+}
+
+.tn-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 10px;
+}
+
+.tn-source {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.tn-time {
+  color: #64748b;
+}
+
+.tn-title-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: #f1f5f9;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.tn-title-link:hover {
+  color: #38bdf8;
+}
+
+.tn-title-link svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  opacity: 0.7;
+}
+
+.tn-summary {
+  font-size: 11.5px;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tn-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 9.5px;
+}
+
+.tn-category {
+  color: #cbd5e1;
+}
+
+.tn-pulse-tag {
+  color: #10b981;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Responsive Breakpoints for Cockpit HUD
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 1240px) {
+  .tesla-dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .tesla-news-panel {
+    grid-column: span 2;
+  }
+  .tesla-telemetry-center .tesla-gps-box {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .tesla-dashboard-grid {
+    grid-template-columns: 1fr;
+    padding: 14px;
+    gap: 16px;
+  }
+
+  .tesla-news-panel {
+    grid-column: span 1;
+  }
+
+  .tesla-top-bar {
+    padding: 10px 14px;
+    gap: 10px;
+    overflow-x: auto;
+  }
+
+  .tesla-telemetry-center {
+    display: none;
+  }
+
+  .tesla-model-info .tesla-fsd-badge {
+    display: none;
+  }
+
+  .tesla-pedals-row {
+    flex-direction: column;
+  }
+
+  .horizon-ring {
+    width: 150px;
+    height: 150px;
+  }
+
+  .radial-gauge-circle {
+    width: 140px;
+    height: 140px;
+  }
+
+  .gauge-big-num {
+    font-size: 26px;
+  }
+}
+

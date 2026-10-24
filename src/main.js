@@ -16,6 +16,7 @@ import { GitHubRadar } from './github-radar.js';
 import { SpatialImmersionEngine } from './spatial-immersion.js';
 import { BilingualBinaryHero } from './bilingual-binary-hero.js';
 import { ExecutiveChatManager } from './executive-chat.js';
+import { TeslaCockpitDashboard } from './tesla-cockpit.js';
 import { initFirebase, logCandidateEvent } from './firebase.js';
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
@@ -276,6 +277,14 @@ class FabianPortfolioApp {
       this.executiveChat.init();
     } catch (e) {
       console.warn('Executive Chat init notice:', e);
+    }
+
+    // 7h. Initialize Fullscreen Tesla In-Car Cockpit HUD Dashboard
+    try {
+      this.teslaCockpit = new TeslaCockpitDashboard(this);
+      this.teslaCockpit.init();
+    } catch (e) {
+      console.warn('Tesla Cockpit HUD init notice:', e);
     }
 
     // 8. Run initial metric count-up animation
@@ -1176,6 +1185,10 @@ ${variant.proofPoints ? variant.proofPoints.map((p) => `• [${p.metric}] ${p.ti
 
           this.prWeather = { tempC, tempF, wind, cond };
 
+          if (this.teslaCockpit) {
+            this.teslaCockpit.updateWeather(`${tempF}°F / ${tempC}°C`, cond.split(' ')[0] || '☀️');
+          }
+
           const badge = this.dom.prWeatherBadge;
           if (badge) {
             badge.textContent = `${tempC}°C / ${tempF}°F`;
@@ -1734,6 +1747,14 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
   }
 
   toggleTeslaMode() {
+    if (this.teslaCockpit) {
+      if (this.teslaCockpit.isOpen) {
+        this.teslaCockpit.close();
+      } else {
+        this.teslaCockpit.open();
+      }
+      return;
+    }
     this.isTeslaMode = !this.isTeslaMode;
     localStorage.setItem('fabian_tesla_mode', String(this.isTeslaMode));
     document.body.classList.toggle('tesla-mode', this.isTeslaMode);
