@@ -320,6 +320,7 @@
               <button type="button" class="t-sub-chip" data-landing="nfc-platform">NFC Platform</button>
               <button type="button" class="t-sub-chip" data-landing="hackeaporunacausa">Hackea</button>
               <button type="button" class="t-sub-chip" data-landing="liza-project">Link Puerto Rico</button>
+              <button type="button" class="t-sub-chip t-sub-chip-3d" id="btn-top-drawer-3d">✨ 3D Secondary Screen</button>
             </div>
           </div>
         </div>
@@ -379,9 +380,9 @@
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
                 <span data-i18n="btn_intel">Live Intel & Radar</span>
               </button>
-              <button type="button" class="luxury-btn outline-platinum" id="btn-hero-view-canvas" title="View interactive 3D WebGL background visualization">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                <span data-i18n="btn_view_bg">View 3D Background</span>
+              <button type="button" class="luxury-btn outline-platinum" id="btn-hero-view-canvas" title="Open 3D NovuWorks Sculpture Studio (Dedicated Secondary Screen · Press ESC to exit)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                <span>3D Atelier (Secondary Screen)</span>
               </button>
               <button type="button" class="luxury-btn subtle-ghost lets-chat-trigger" id="btn-hero-lets-chat" title="Open Live WhatsApp & Direct Executive Communications">
                 <span class="chat-status-pulse" aria-hidden="true"></span>
@@ -426,14 +427,25 @@
             <!-- Verified Employer & Commercial Accreditation Marquee -->
             <div class="company-logo-strip" id="company-logo-strip-mount"></div>
 
-            <!-- Minimalist Floating 3D Sculpture Switcher -->
-            <div class="sculpture-dock">
-              <span class="dock-caption" data-i18n="dock_caption">3D Art Direction:</span>
-              <div class="dock-buttons">
-                <button type="button" class="sculpture-pill active" data-morph="0" data-i18n="dock_btn_0">01 · Novu Works Monogram</button>
-                <button type="button" class="sculpture-pill" data-morph="1" data-i18n="dock_btn_1">02 · Möbius Growth Curve</button>
-                <button type="button" class="sculpture-pill" data-morph="2" data-i18n="dock_btn_2">03 · Geometric AI Prism</button>
-                <button type="button" class="sculpture-pill zen-pill" id="btn-dock-view-canvas" title="Enter Fullscreen 3D Background Visualizer Mode" data-i18n="dock_btn_view">✨ View 3D Background</button>
+            <!-- Dedicated Secondary Screen: 3D Atelier & Sculpture Studio -->
+            <div class="secondary-3d-portal-card" id="secondary-3d-portal-card">
+              <div class="portal-card-glow"></div>
+              <div class="portal-card-inner">
+                <div class="portal-meta-row">
+                  <span class="portal-badge-dot"></span>
+                  <span class="portal-kicker">SECONDARY SCREEN</span>
+                  <span class="portal-tag">FULLSCREEN 3D ATELIER</span>
+                </div>
+                <div class="portal-body-row">
+                  <div class="portal-copy">
+                    <h3 class="portal-title">NovuWorks 3D Sculpture Studio</h3>
+                    <p class="portal-desc">Separated from the reading experience into a dedicated full-screen interactive space. 360° orbit rotation, 3D particle monogram morphing, and tactile audio chime.</p>
+                  </div>
+                  <button type="button" class="luxury-btn primary-gold portal-launch-btn" id="btn-dock-view-canvas">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    <span>Launch 3D Secondary Screen (ESC to Exit) →</span>
+                  </button>
+                </div>
               </div>
             </div>
 

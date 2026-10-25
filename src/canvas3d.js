@@ -103,9 +103,10 @@ export class SpatialCanvas3D {
 
       // 3. Adaptive WebGL Renderer (Power & Memory Efficient for Lower-End Hardware)
       this.renderer = new THREE.WebGLRenderer({
-        powerPreference: this.deviceTier.isLowEnd ? 'low-power' : 'default',
+        powerPreference: 'default',
         antialias: !this.deviceTier.isLowEnd,
         alpha: true,
+        failIfMajorPerformanceCaveat: false,
       });
       this.renderer.setSize(this.width, this.height);
       this.renderer.setPixelRatio(this.deviceTier.dpr);
@@ -152,6 +153,7 @@ export class SpatialCanvas3D {
       this.animate();
     } catch (err) {
       console.warn('WebGL initialization fallback:', err);
+      this.initError = { message: err.message, stack: err.stack };
       this.isAvailable = false;
       this.container.style.display = 'none';
     }
@@ -718,7 +720,19 @@ export class SpatialCanvas3D {
 
   setVisualizerMode(active) {
     this.isVisualizerMode = !!active;
+    if (this.isVisualizerMode) {
+      this.isPaused = false;
+      this.isVisibleInViewport = true;
+      this.resume();
+    }
     this.updateRootGroupPosition();
+    if (this.isVisualizerMode && this.rootGroup && this.targetRootPosition && this.targetRootScale) {
+      this.rootGroup.position.copy(this.targetRootPosition);
+      this.rootGroup.scale.copy(this.targetRootScale);
+    }
+    if (this.monogramMesh?.material?.uniforms?.uOpacity) {
+      this.monogramMesh.material.uniforms.uOpacity.value = this.isVisualizerMode ? 0.95 : 0.0;
+    }
     if (this.renderer && this.camera) {
       this.width = window.innerWidth || this.width;
       this.height = window.innerHeight || this.height;
@@ -732,6 +746,8 @@ export class SpatialCanvas3D {
     if (!this.isVisualizerMode) {
       this.targetCameraZ = 46;
       this.targetWorldRotation.x = 0.12;
+    } else {
+      this.targetCameraZ = 46;
     }
   }
 
@@ -762,6 +778,12 @@ export class SpatialCanvas3D {
     if (!this.isAvailable || !this.renderer) return;
     requestAnimationFrame(() => this.animate());
     if (this.isPaused || !this.isVisibleInViewport || !this.isTabVisible) return;
+
+    // Background particles are strictly displayed on the Startup Screen or dedicated Secondary Screen (Visualizer Mode)
+    // When browsing the portfolio normally, stop rendering to guarantee 100% clean reading & zero battery drain
+    if (!this.isVisualizerMode && !this.isInitialLoading) {
+      return;
+    }
 
     // Throttle rendering on lower-end devices or battery saving modes to prevent thermal throttling & hoarding
     const now = performance.now();

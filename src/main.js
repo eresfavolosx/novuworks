@@ -1701,6 +1701,10 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     this.dom.btnToggleVisualizer?.addEventListener('click', triggerVisualizer);
     this.dom.btnHeroViewCanvas?.addEventListener('click', triggerVisualizer);
     this.dom.btnDockViewCanvas?.addEventListener('click', triggerVisualizer);
+    document.getElementById('btn-top-drawer-3d')?.addEventListener('click', () => {
+      this.closeTopNavDrawer();
+      this.enterVisualizerMode();
+    });
     this.dom.btnExitVisualizer?.addEventListener('click', () => {
       this.exitVisualizerMode();
     });
@@ -2265,6 +2269,7 @@ function bootPortfolioApp() {
   if (window.portfolioApp) return;
   const instance = new FabianPortfolioApp();
   window.portfolioApp = instance;
+  window.fabianApp = instance;
   window.app = instance; // Explicitly override <div id="app"> DOM global reference
   window.__fabianApp = instance;
 
