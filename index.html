@@ -160,11 +160,11 @@
             <button type="button" class="epic-enter-btn" id="loading-skip-btn" aria-label="Enter Novu Works Portfolio">
               <span class="epic-btn-glow"></span>
               <span class="epic-btn-content">
-                <span class="epic-btn-text">ENTER EXPERIENCE</span>
+                <span class="epic-btn-text" data-i18n="intro_enter_btn">ENTER EXPERIENCE</span>
                 <svg class="epic-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
               </span>
             </button>
-            <div class="intro-shortcut-hint">Press <kbd class="intro-kbd">ENTER</kbd> or click anywhere to explore</div>
+            <div class="intro-shortcut-hint" data-i18n="intro_shortcut_hint" data-i18n-html="true">Press <kbd class="intro-kbd">ENTER</kbd> or click anywhere to explore</div>
           </div>
 
         </div>
@@ -343,8 +343,8 @@
               <button type="button" class="t-sub-chip" data-landing="nfc-platform">NFC Platform</button>
               <button type="button" class="t-sub-chip" data-landing="hackeaporunacausa">Hackea</button>
               <button type="button" class="t-sub-chip" data-landing="liza-project">Link Puerto Rico</button>
-              <button type="button" class="t-sub-chip t-sub-chip-3d" id="btn-top-drawer-3d">✨ 3D Secondary Screen</button>
-              <button type="button" class="t-sub-chip t-sub-chip-intro" id="btn-top-drawer-replay-intro">🎬 Replay Intro &amp; Sign-Off</button>
+              <button type="button" class="t-sub-chip t-sub-chip-3d" id="btn-top-drawer-3d" data-i18n="btn_3d_atelier">✨ 3D Secondary Screen</button>
+              <button type="button" class="t-sub-chip t-sub-chip-intro" id="btn-top-drawer-replay-intro" data-i18n="btn_replay_intro">🎬 Replay Intro &amp; Sign-Off</button>
             </div>
           </div>
         </div>
@@ -403,7 +403,7 @@
               </button>
               <button type="button" class="luxury-btn outline-platinum" id="btn-hero-view-canvas" title="Open 3D NovuWorks Sculpture Studio (Dedicated Secondary Screen · Press ESC to exit)">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                <span>3D Atelier (Secondary Screen)</span>
+                <span data-i18n="btn_3d_atelier">3D Atelier (Secondary Screen)</span>
               </button>
               <button type="button" class="luxury-btn subtle-ghost lets-chat-trigger" id="btn-hero-lets-chat" title="Open Live WhatsApp & Direct Executive Communications">
                 <span class="chat-status-pulse" aria-hidden="true"></span>
@@ -1070,7 +1070,7 @@
               <div class="chat-section-block">
                 <span class="chat-section-title" data-i18n="chat_custom_title">OR TYPE A CUSTOM MESSAGE:</span>
                 <div class="custom-chat-input-box">
-                  <textarea id="custom-chat-message" class="chat-textarea" rows="2" placeholder="Write your message here..."></textarea>
+                  <textarea id="custom-chat-message" class="chat-textarea" rows="2" placeholder="Write your message here..." aria-label="Direct message to Fabián"></textarea>
                   <button type="button" class="chat-send-btn" id="btn-send-custom-wa">
                     <svg class="wa-send-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
@@ -1129,8 +1129,8 @@
               <div class="chat-section-block">
                 <span class="chat-section-title" data-i18n="chat_email_composer_title">OR COMPOSE DIRECT EMAIL DRAFT:</span>
                 <div class="custom-chat-input-box email-composer-box">
-                  <input type="text" id="custom-email-subject" class="chat-subject-input" placeholder="Subject: Strategic Role / Advisory Inquiry..." value="Strategic Role Inquiry — Fabián Vélez Vicente" />
-                  <textarea id="custom-email-body" class="chat-textarea" rows="3" placeholder="Write your message here..."></textarea>
+                  <input type="text" id="custom-email-subject" class="chat-subject-input" placeholder="Subject: Strategic Role / Advisory Inquiry..." value="Strategic Role Inquiry — Fabián Vélez Vicente" aria-label="Executive Email Subject" />
+                  <textarea id="custom-email-body" class="chat-textarea" rows="3" placeholder="Write your message here..." aria-label="Executive Email Message Body"></textarea>
                   <div class="composer-actions-row">
                     <button type="button" class="chat-send-btn email-send-btn" id="btn-send-custom-email">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>

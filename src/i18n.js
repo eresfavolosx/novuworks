@@ -841,6 +841,12 @@ export const I18N_STRINGS = {
     btn_resume_card: 'View Executive Resume Card',
     btn_intel: 'Live Intel & Radar',
     btn_view_bg: 'View 3D Background',
+    btn_3d_atelier: '3D Atelier (Secondary Screen)',
+    btn_replay_intro: '🎬 Replay Intro & Sign-Off',
+    intro_enter_btn: 'ENTER EXPERIENCE',
+    intro_shortcut_hint: 'Press <kbd class="intro-kbd">ENTER</kbd> or click anywhere to explore',
+    sig_verified_stamp: 'Verified Sign-Off',
+    sig_replay_btn: 'Replay Signature',
     btn_lets_chat: "Let's Chat",
 
     // Shipped Systems & Subdomains Showcase
@@ -1051,6 +1057,12 @@ export const I18N_STRINGS = {
     btn_resume_card: 'Ver Hoja de Vida Ejecutiva',
     btn_intel: 'Noticias y Radar en Vivo',
     btn_view_bg: 'Ver Fondo 3D',
+    btn_3d_atelier: 'Taller 3D (Pantalla Secundaria)',
+    btn_replay_intro: '🎬 Reproducir Intro y Firma',
+    intro_enter_btn: 'INGRESAR A LA EXPERIENCIA',
+    intro_shortcut_hint: 'Presiona <kbd class="intro-kbd">ENTER</kbd> o haz clic en cualquier lugar para explorar',
+    sig_verified_stamp: 'Firma Verificada',
+    sig_replay_btn: 'Repetir Firma',
     btn_lets_chat: 'Hablemos',
 
     // Shipped Systems & Subdomains Showcase

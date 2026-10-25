@@ -21,7 +21,7 @@ export class SpatialCanvas3D {
     this.scene = null;
     this.camera = null;
     this.renderer = null;
-    this.clock = new THREE.Clock();
+    this.startTime = performance.now();
     this.isAvailable = false;
 
     // Interaction & inertia state
@@ -767,7 +767,6 @@ export class SpatialCanvas3D {
   resume() {
     if (this.isPaused) {
       this.isPaused = false;
-      this.clock.start();
     }
   }
 
@@ -793,7 +792,7 @@ export class SpatialCanvas3D {
     }
     this.lastRenderTime = now;
 
-    const elapsedTime = this.clock.getElapsedTime();
+    const elapsedTime = (now - this.startTime) * 0.001;
 
     // Silky smooth rotation inertia
     if (!this.isDragging) {

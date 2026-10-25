@@ -59,11 +59,11 @@ export function renderExecutiveSignatureBlock() {
           <div class="sig-actions-bottom">
             <button type="button" class="sig-replay-btn" id="btn-replay-signature" title="Replay Calligraphic Signature Animation">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M3 21v-5h5"></path></svg>
-              <span>Replay Signature</span>
+              <span data-i18n="sig_replay_btn">Replay Signature</span>
             </button>
             <span class="sig-verified-stamp">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Verified Sign-Off</span>
+              <span data-i18n="sig_verified_stamp">Verified Sign-Off</span>
             </span>
           </div>
         </div>

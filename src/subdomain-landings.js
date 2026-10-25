@@ -340,7 +340,7 @@ function renderTestBenchHtml(type) {
         <label class="tb-label" for="tb-invoice-amount">B2B Commercial Invoice Amount ($ USD):</label>
         <div class="tb-input-wrap">
           <span class="tb-currency">$</span>
-          <input type="number" id="tb-invoice-amount" class="tb-input" value="2500" min="50" max="100000" step="50" />
+          <input type="number" id="tb-invoice-amount" class="tb-input" value="2500" min="50" max="100000" step="50" aria-label="Invoice Amount" />
         </div>
 
         <div class="tb-calc-grid">
@@ -410,7 +410,7 @@ function renderTestBenchHtml(type) {
     return `
       <div class="tb-module tb-nfc">
         <label class="tb-label" for="tb-nfc-url">Dynamic Attendee Pass Redirect URL:</label>
-        <input type="text" id="tb-nfc-url" class="tb-input" value="https://novu.works/pass/vip-fabian" />
+        <input type="text" id="tb-nfc-url" class="tb-input" value="https://novu.works/pass/vip-fabian" aria-label="NFC URL Payload" />
 
         <div class="tb-nfc-tier-row">
           <label class="tb-label">Access Credential Tier:</label>

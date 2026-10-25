@@ -183,7 +183,7 @@ export class IntelFeed {
               </div>
               <div class="feed-search-box">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="feed-search-input" class="feed-search-input" placeholder="Search insights, SQL, PySpark, CAPI..." value="${this.escapeHtml(this.searchQuery)}" />
+                <input type="text" id="feed-search-input" class="feed-search-input" placeholder="Search insights, SQL, PySpark, CAPI..." value="${this.escapeHtml(this.searchQuery)}" aria-label="Search intelligence insights, SQL, and case studies" />
               </div>
             </div>
 
@@ -281,7 +281,7 @@ export class IntelFeed {
                 High-leverage RevOps architectures, prompt engineering templates, and algorithmic media buying case studies sent once a month.
               </p>
               <form class="nl-form" id="feed-newsletter-form">
-                <input type="email" class="nl-input" id="nl-email-input" placeholder="your.email@company.com" required />
+                <input type="email" class="nl-input" id="nl-email-input" placeholder="your.email@company.com" required aria-label="Email address for monthly RevOps insights" />
                 <button type="submit" class="nl-submit-btn">Subscribe</button>
               </form>
               <div class="nl-footer-links">
