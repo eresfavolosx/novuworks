@@ -938,6 +938,9 @@ export class SpatialCanvas3D {
   setTheme(theme) {
     this.currentTheme = theme;
     const isLight = theme === 'light';
+    if (this.scene && this.scene.fog) {
+      this.scene.fog.color.setHex(isLight ? 0xf8f9fb : 0x050507);
+    }
     if (this.dustMesh && this.dustMesh.material) {
       this.dustMesh.material.blending = isLight ? THREE.NormalBlending : THREE.AdditiveBlending;
       this.dustMesh.material.color.setHex(isLight ? 0x946800 : 0xd4af37);

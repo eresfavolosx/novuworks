@@ -808,6 +808,22 @@ body.visualizer-mode .webgl-canvas-layer:active {
   color: var(--gold-light);
 }
 
+.theme-toggle-btn.is-device-auto {
+  position: relative;
+}
+
+.theme-toggle-btn.is-device-auto::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 6px var(--accent-green);
+}
+
 :root[data-theme="light"] .theme-toggle-btn,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .theme-toggle-btn {
   background: rgba(15, 23, 42, 0.05);

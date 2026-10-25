@@ -9,10 +9,13 @@
       (function() {
         try {
           var saved = localStorage.getItem("color-scheme");
-          if (saved === "light" || saved === "dark") {
-            document.querySelector('meta[name="color-scheme"]').content = saved;
-            document.documentElement.setAttribute('data-theme', saved);
+          var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = (saved === "light" || saved === "dark") ? saved : (isDark ? "dark" : "light");
+          var meta = document.querySelector('meta[name="color-scheme"]');
+          if (meta) {
+            meta.content = (saved === "light" || saved === "dark") ? saved : "light dark";
           }
+          document.documentElement.setAttribute('data-theme', theme);
         } catch (e) {}
       })();
     </script>

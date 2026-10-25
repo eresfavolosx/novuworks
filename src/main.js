@@ -1931,17 +1931,22 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Preferences & Toggles
+  // Preferences & Toggles: Automatic Device Dark/Light Mode Sync
   // ─────────────────────────────────────────────────────────────
   initTheme() {
-    // 1. Read current override from localStorage, or infer from document/system
+    // 1. Read stored override from localStorage, or resolve directly from device
     const saved = localStorage.getItem('color-scheme');
     if (saved === 'light' || saved === 'dark') {
       this.applyTheme(saved, false);
     } else {
-      // System mode
-      const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.updateThemeButton(isSystemDark ? 'dark' : 'light', true);
+      // Auto Device Mode: automatically detect device prefers-color-scheme
+      const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const systemTheme = isSystemDark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', systemTheme);
+      const meta = document.querySelector('meta[name="color-scheme"]');
+      if (meta) meta.content = 'light dark';
+      this.updateThemeButton(systemTheme, true);
+      if (this.canvas3d) this.canvas3d.setTheme(systemTheme);
     }
 
     // 2. Multi-tab synchronization (modern-web-guidance)
@@ -1956,16 +1961,29 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       }
     });
 
-    // 3. System preference change listener (modern-web-guidance)
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      const savedTheme = localStorage.getItem('color-scheme');
-      if (!savedTheme) {
-        // Only adapt automatically if no explicit user override exists
-        const systemTheme = e.matches ? 'dark' : 'light';
-        this.updateThemeButton(systemTheme, true);
-        if (this.canvas3d) this.canvas3d.setTheme(systemTheme);
+    // 3. System preference change listener (auto-switch when device changes)
+    if (window.matchMedia) {
+      const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleDeviceThemeChange = (e) => {
+        const savedTheme = localStorage.getItem('color-scheme');
+        // Only adapt automatically if no explicit user override is locked
+        if (!savedTheme || savedTheme === 'system') {
+          const newSystemTheme = e.matches ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', newSystemTheme);
+          const meta = document.querySelector('meta[name="color-scheme"]');
+          if (meta) meta.content = 'light dark';
+          this.updateThemeButton(newSystemTheme, true);
+          if (this.canvas3d) this.canvas3d.setTheme(newSystemTheme);
+          this.showToast(newSystemTheme === 'light' ? '☀️ Auto-switched to Device Light Mode' : '🌙 Auto-switched to Device Dark Mode');
+        }
+      };
+
+      if (typeof darkQuery.addEventListener === 'function') {
+        darkQuery.addEventListener('change', handleDeviceThemeChange);
+      } else if (typeof darkQuery.addListener === 'function') {
+        darkQuery.addListener(handleDeviceThemeChange);
       }
-    });
+    }
   }
 
   getCurrentResolvedTheme() {
@@ -1973,10 +1991,21 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     const content = meta ? meta.getAttribute('content') : 'light dark';
     if (content === 'light') return 'light';
     if (content === 'dark') return 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const attr = document.documentElement.getAttribute('data-theme');
+    if (attr === 'light' || attr === 'dark') return attr;
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
   }
 
   toggleTheme() {
+    const saved = localStorage.getItem('color-scheme');
+
+    // If already on a manual override, toggling returns cleanly to automatic device mode!
+    if (saved === 'light' || saved === 'dark') {
+      this.setTheme('system', true);
+      return;
+    }
+
+    // Currently following device: toggle to the opposite theme as a comfort override
     const current = this.getCurrentResolvedTheme();
     const target = current === 'dark' ? 'light' : 'dark';
     this.setTheme(target, true);
@@ -1989,14 +2018,14 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       } catch (e) {}
       const meta = document.querySelector('meta[name="color-scheme"]');
       if (meta) meta.content = 'light dark';
-      document.documentElement.removeAttribute('data-theme');
-      const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       const resolved = isSystemDark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', resolved);
       this.updateThemeButton(resolved, true);
       if (this.canvas3d) this.canvas3d.setTheme(resolved);
       if (isUserAction) {
         audio.nav();
-        this.showToast('Theme: System Preference Active');
+        this.showToast(`✨ Auto Device Mode Active (${resolved === 'light' ? 'Light' : 'Dark'})`);
       }
       return;
     }
@@ -2033,13 +2062,19 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     if (activeTheme === 'light') {
       sunIcon?.classList.add('hidden');
       moonIcon?.classList.remove('hidden');
-      btn.title = isSystem ? 'System Theme (Light) · Click to switch to Dark' : 'Switch to Dark Theme';
-      btn.setAttribute('aria-label', 'Switch to Dark Theme');
+      btn.title = isSystem ? 'Auto Theme (Following Device: Light) · Click to switch' : 'Manual Light Mode · Click to return to Auto Device Sync';
+      btn.setAttribute('aria-label', isSystem ? 'Auto Device Theme: Light' : 'Switch Theme');
     } else {
       sunIcon?.classList.remove('hidden');
       moonIcon?.classList.add('hidden');
-      btn.title = isSystem ? 'System Theme (Dark) · Click to switch to Light' : 'Switch to Light Theme';
-      btn.setAttribute('aria-label', 'Switch to Light Theme');
+      btn.title = isSystem ? 'Auto Theme (Following Device: Dark) · Click to switch' : 'Manual Dark Mode · Click to return to Auto Device Sync';
+      btn.setAttribute('aria-label', isSystem ? 'Auto Device Theme: Dark' : 'Switch Theme');
+    }
+
+    if (isSystem) {
+      btn.classList.add('is-device-auto');
+    } else {
+      btn.classList.remove('is-device-auto');
     }
   }
 
