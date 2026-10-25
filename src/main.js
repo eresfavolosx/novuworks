@@ -24,12 +24,14 @@ import { DISCIPLINES, PROFILE } from './data.js';
 import { getLanguage, resolveInitialLanguage, switchLanguage, updateDomTranslations, updateProfileDataForLanguage } from './i18n.js';
 import { renderSubdomainLandingHtml, bindSubdomainLandingEvents, PROJECT_TRANSITIONS } from './subdomain-landings.js';
 import { renderExecutiveSignatureBlock, initExecutiveSignature } from './executive-signature.js';
+import { MinimalParticleMatrix } from './minimal-particles.js';
 
 class FabianPortfolioApp {
   constructor() {
     this.currentView = 'core';
     this.isTeslaMode = localStorage.getItem('fabian_tesla_mode') === 'true';
     this.canvas3d = null;
+    this.minimalParticles = null;
     this.activeRoleLens = 'master';
     this.currentLang = resolveInitialLanguage();
 
@@ -320,8 +322,72 @@ class FabianPortfolioApp {
     this.initCardSpotlight();
     this.initScrollReveals();
 
-    // 10. Initialize Cinematic Particle Sculpture Loading Screen
+    // 10. Initialize Creative Computing & Minimalist Particle Matrix
+    this.initMinimalParticles();
+
+    // 11. Initialize Cinematic Particle Sculpture Loading Screen
     this.initLoadingScreen();
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Creative Computing: Minimalist NovuWorks Particle Matrix
+  // ─────────────────────────────────────────────────────────────
+  initMinimalParticles() {
+    const canvasEl = document.getElementById('minimal-particle-canvas');
+    if (!canvasEl) return;
+
+    try {
+      this.minimalParticles = new MinimalParticleMatrix(canvasEl, {
+        theme: this.getCurrentResolvedTheme(),
+      });
+
+      const warpBtn = document.getElementById('ep-btn-warp');
+      if (warpBtn) {
+        warpBtn.addEventListener('click', () => {
+          if (this.minimalParticles) {
+            this.minimalParticles.warp();
+            audio.click(820, 0.05);
+            this.showToast('⚡ Kinetic Energy Shockwave Emitted');
+          }
+        });
+      }
+
+      const paletteBtn = document.getElementById('ep-btn-palette');
+      if (paletteBtn) {
+        paletteBtn.addEventListener('click', () => {
+          if (this.minimalParticles) {
+            const next = this.minimalParticles.cyclePalette();
+            audio.click(950, 0.04);
+            const name = next === 'gold' ? 'Champagne Gold' : (next === 'emerald' ? 'Cyber Emerald' : 'Novu Signature');
+            this.showToast(`🎨 Particle Palette: ${name}`);
+          }
+        });
+      }
+
+      const launch3dBtn = document.getElementById('ep-btn-launch-3d');
+      if (launch3dBtn) {
+        launch3dBtn.addEventListener('click', () => {
+          this.enterVisualizerMode();
+          if (this.canvas3d) {
+            this.canvas3d.switchMode(0); // 0 = Novu Monogram
+          }
+        });
+      }
+
+      const dossierParticleBtn = document.getElementById('btn-dossier-particle-showcase');
+      if (dossierParticleBtn) {
+        dossierParticleBtn.addEventListener('click', () => {
+          this.switchView('projects');
+          const card = document.getElementById('particle-matrix-showcase');
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (this.minimalParticles) this.minimalParticles.warp();
+          }
+        });
+      }
+    } catch (e) {
+      console.warn('Minimal particle canvas init notice:', e);
+    }
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -352,9 +418,23 @@ class FabianPortfolioApp {
       loadingScreen.classList.add('is-loaded');
       document.body.classList.add('loaded');
       try {
+        sessionStorage.setItem('seen_portfolio_intro', '1');
+      } catch (_) {}
+      try {
         audio.playClick();
       } catch (_) {}
     };
+
+    this.dismissLoadingScreen = dismiss;
+
+    // Check if returning from a subdomain or skipIntro requested
+    try {
+      const p = new URLSearchParams(window.location.search);
+      if (p.get('skipIntro') === '1' || window.location.hash.includes('projects')) {
+        dismiss();
+        return;
+      }
+    } catch (_) {}
 
     if (skipBtn) {
       skipBtn.onclick = (e) => {
@@ -759,6 +839,15 @@ class FabianPortfolioApp {
       if (p.id === 'bizpay' || p.id === 'jobhelper' || p.id === 'picta') projLogo = LOGOS.novuWorks;
       else if (p.id === 'nfc-platform' || p.id === 'liza-project' || p.id === 'hackeaporunacausa') projLogo = LOGOS.linkPR;
 
+      let subUrl = p.subdomainUrl;
+      if (subUrl) {
+        try {
+          const u = new URL(subUrl, window.location.href);
+          u.searchParams.set('theme', this.getCurrentResolvedTheme());
+          subUrl = u.toString();
+        } catch (_) {}
+      }
+
       return `
       <div class="standalone-project-card">
         <div class="proj-top-row">
@@ -785,8 +874,8 @@ class FabianPortfolioApp {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
             <span>Platform Landing</span>
           </button>
-          ${p.subdomainUrl ? `
-            <a href="${p.subdomainUrl}" target="_blank" rel="noopener noreferrer" class="proj-action-btn subdomain-btn" data-project-id="${p.id}" title="Open live production app at ${p.subdomainUrl}">
+          ${subUrl ? `
+            <a href="${subUrl}" target="_blank" rel="noopener noreferrer" class="proj-action-btn subdomain-btn" data-project-id="${p.id}" title="Open live production app at ${subUrl}">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
               <span>${p.subdomainLabel || 'Live App'}</span>
             </a>
@@ -1743,11 +1832,16 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       }
     });
 
-    // Live Subdomain Outbound Triggers (Splash Transition on Click)
+    // Live Subdomain Outbound Triggers (Splash Transition on Click with Dynamic Theme Preservation)
     document.addEventListener('click', (e) => {
       const subBtn = e.target.closest('.subdomain-btn');
       if (subBtn) {
-        const href = subBtn.href;
+        let href = subBtn.href;
+        try {
+          const u = new URL(href, window.location.href);
+          u.searchParams.set('theme', this.getCurrentResolvedTheme());
+          href = u.toString();
+        } catch (_) {}
         const projId = subBtn.dataset.projectId || 'bizpay';
         e.preventDefault();
         this.triggerProjectTransitionSplash(projId, { isLiveOutbound: true }, () => {
@@ -2136,6 +2230,14 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
       this.animateCounters();
     }
 
+    // Refresh Minimalist Particle Matrix layout when entering projects view
+    if (viewName === 'projects' && this.minimalParticles) {
+      setTimeout(() => {
+        this.minimalParticles.resize();
+        this.minimalParticles.warp();
+      }, 60);
+    }
+
     // Dynamic 3D Camera & Pause Management (Conserves GPU/CPU on subviews)
     if (this.canvas3d) {
       if (viewName === 'core') {
@@ -2151,37 +2253,53 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Preferences & Toggles: Automatic Device Dark/Light Mode Sync
+  // Preferences & Toggles: Automatic Device & Cross-Domain Theme Sync
   // ─────────────────────────────────────────────────────────────
   initTheme() {
-    // 1. Read stored override from localStorage, or resolve directly from device
-    const saved = localStorage.getItem('color-scheme');
-    if (saved === 'light' || saved === 'dark') {
-      this.applyTheme(saved, false);
-    } else {
-      // Auto Device Mode: automatically detect device prefers-color-scheme
-      const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const systemTheme = isSystemDark ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', systemTheme);
-      const meta = document.querySelector('meta[name="color-scheme"]');
-      if (meta) meta.content = 'light dark';
-      this.updateThemeButton(systemTheme, true);
-      if (this.canvas3d) this.canvas3d.setTheme(systemTheme);
+    // 1. Check URL parameters first (e.g. returning from subdomain with ?theme=dark|light)
+    let initialTheme = null;
+    try {
+      const urlParam = new URLSearchParams(window.location.search).get('theme');
+      if (urlParam === 'light' || urlParam === 'dark') {
+        initialTheme = urlParam;
+      }
+    } catch (_) {}
+
+    // 2. Read stored override from localStorage
+    if (!initialTheme) {
+      try {
+        const saved = localStorage.getItem('color-scheme');
+        if (saved === 'light' || saved === 'dark') initialTheme = saved;
+      } catch (_) {}
     }
 
-    // 2. Multi-tab synchronization (modern-web-guidance)
+    // 3. Read document.cookie fallback
+    if (!initialTheme) {
+      try {
+        const match = document.cookie.match(/(?:^|; )color-scheme=([^;]+)/);
+        if (match && (match[1] === 'light' || match[1] === 'dark')) initialTheme = match[1];
+      } catch (_) {}
+    }
+
+    // 4. Resolve directly from device preference
+    if (!initialTheme) {
+      const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      initialTheme = isSystemDark ? 'dark' : 'light';
+    }
+
+    this.applyTheme(initialTheme, false);
+
+    // Multi-tab synchronization (modern-web-guidance)
     window.addEventListener('storage', (e) => {
       if (e.key === 'color-scheme') {
         const newTheme = e.newValue;
         if (newTheme === 'light' || newTheme === 'dark') {
           this.applyTheme(newTheme, false);
-        } else {
-          this.setTheme('system', false);
         }
       }
     });
 
-    // 3. System preference change listener (auto-switch when device changes)
+    // System preference change listener
     if (window.matchMedia) {
       const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const handleDeviceThemeChange = (e) => {
@@ -2189,11 +2307,7 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
         // Only adapt automatically if no explicit user override is locked
         if (!savedTheme || savedTheme === 'system') {
           const newSystemTheme = e.matches ? 'dark' : 'light';
-          document.documentElement.setAttribute('data-theme', newSystemTheme);
-          const meta = document.querySelector('meta[name="color-scheme"]');
-          if (meta) meta.content = 'light dark';
-          this.updateThemeButton(newSystemTheme, true);
-          if (this.canvas3d) this.canvas3d.setTheme(newSystemTheme);
+          this.applyTheme(newSystemTheme, false);
           this.showToast(newSystemTheme === 'light' ? '☀️ Auto-switched to Device Light Mode' : '🌙 Auto-switched to Device Dark Mode');
         }
       };
@@ -2217,39 +2331,13 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
   }
 
   toggleTheme() {
-    const saved = localStorage.getItem('color-scheme');
-
-    // If already on a manual override, toggling returns cleanly to automatic device mode!
-    if (saved === 'light' || saved === 'dark') {
-      this.setTheme('system', true);
-      return;
-    }
-
-    // Currently following device: toggle to the opposite theme as a comfort override
+    // Directly toggle between light and dark mode cleanly and predictably
     const current = this.getCurrentResolvedTheme();
     const target = current === 'dark' ? 'light' : 'dark';
-    this.setTheme(target, true);
+    this.applyTheme(target, true);
   }
 
   setTheme(theme, isUserAction = true) {
-    if (theme === 'system') {
-      try {
-        localStorage.removeItem('color-scheme');
-      } catch (e) {}
-      const meta = document.querySelector('meta[name="color-scheme"]');
-      if (meta) meta.content = 'light dark';
-      const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const resolved = isSystemDark ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', resolved);
-      this.updateThemeButton(resolved, true);
-      if (this.canvas3d) this.canvas3d.setTheme(resolved);
-      if (isUserAction) {
-        audio.nav();
-        this.showToast(`✨ Auto Device Mode Active (${resolved === 'light' ? 'Light' : 'Dark'})`);
-      }
-      return;
-    }
-
     this.applyTheme(theme, isUserAction);
   }
 
@@ -2257,19 +2345,41 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     if (theme !== 'light' && theme !== 'dark') return;
     try {
       localStorage.setItem('color-scheme', theme);
+      document.cookie = `color-scheme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
+      if (location.hostname.endsWith('novu.works')) {
+        document.cookie = `color-scheme=${theme}; path=/; domain=.novu.works; max-age=31536000; SameSite=Lax`;
+      }
     } catch (e) {}
 
     const meta = document.querySelector('meta[name="color-scheme"]');
     if (meta) meta.content = theme;
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.classList.toggle('light-theme', theme === 'light');
 
     this.updateThemeButton(theme, false);
     if (this.canvas3d) this.canvas3d.setTheme(theme);
+    if (this.minimalParticles) this.minimalParticles.setTheme(theme);
+
+    // Keep all subdomain and external links synchronized with active theme!
+    this.syncSubdomainThemeLinks(theme);
 
     if (isUserAction) {
       audio.chime(theme === 'light' ? 2 : 0);
       this.showToast(theme === 'light' ? '☀️ Light Theme Active' : '🌙 Dark Theme Active');
     }
+  }
+
+  syncSubdomainThemeLinks(theme) {
+    const targetTheme = theme || this.getCurrentResolvedTheme();
+    document.querySelectorAll('.subdomain-btn, a[href*="bizpay"], a[href*="picta"], a[href*="nfc"], a[href*="hackea"]').forEach((a) => {
+      try {
+        const url = new URL(a.href, window.location.href);
+        if (url.hostname.includes('novu.works') || url.hostname.includes('web.app') || url.pathname.includes('subdomains')) {
+          url.searchParams.set('theme', targetTheme);
+          a.href = url.toString();
+        }
+      } catch (_) {}
+    });
   }
 
   updateThemeButton(activeTheme, isSystem = false) {

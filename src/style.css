@@ -4161,19 +4161,25 @@ body.tesla-mode .hud-action-btn {
     height: 50px;
     border-radius: 25px;
     gap: 6px;
+    overflow: hidden !important;
+    max-width: calc(100vw - 16px) !important;
+    box-sizing: border-box !important;
   }
 
   .header-left {
     gap: 6px;
-    flex: 0 0 auto !important;
+    flex: 0 1 auto !important;
     white-space: nowrap !important;
-    min-width: 0;
+    min-width: 0 !important;
+    overflow: hidden !important;
   }
 
   .brand-link {
     gap: 6px;
     flex-shrink: 0 !important;
     white-space: nowrap !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
   }
 
   .brand-avatar-box {
@@ -4181,6 +4187,7 @@ body.tesla-mode .hud-action-btn {
     height: 28px;
     min-width: 28px;
     padding: 1.5px;
+    flex-shrink: 0 !important;
   }
 
   .brand-nw-badge {
@@ -4191,9 +4198,11 @@ body.tesla-mode .hud-action-btn {
   }
 
   .brand-text-group {
-    flex-shrink: 0 !important;
+    flex-shrink: 1 !important;
     white-space: nowrap !important;
     justify-content: center;
+    min-width: 0 !important;
+    overflow: hidden !important;
   }
 
   .brand-name {
@@ -4202,6 +4211,10 @@ body.tesla-mode .hud-action-btn {
     line-height: 1.2;
     font-weight: 700;
     letter-spacing: -0.02em;
+    max-width: 135px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: inline-block !important;
   }
 
   .brand-role {
@@ -4213,6 +4226,7 @@ body.tesla-mode .hud-action-btn {
     flex-shrink: 0 !important;
     display: flex;
     align-items: center;
+    min-width: 0 !important;
   }
 
   /* Secondary controls hidden from header on mobile to prevent overflow */
@@ -4225,23 +4239,23 @@ body.tesla-mode .hud-action-btn {
   #btn-toggle-visualizer,
   .visualizer-btn,
   #btn-tesla-mode,
-  .tesla-toggle {
-    display: none !important;
-  }
-
-  /* 5 Core Top-Bar Actions on Mobile: Tailor, Tools, Lang, Theme, Audio */
+  .tesla-toggle,
   #btn-tailor-experience,
   .persona-lens-pill,
   #btn-visitor-tools,
-  .tools-trigger-btn,
+  .tools-trigger-btn {
+    display: none !important;
+  }
+
+  /* 3 Compact Core Top-Bar Actions on Mobile: Lang, Theme, Audio (+ Menu Button) */
   #btn-theme-toggle,
   .theme-toggle-btn,
   #btn-audio-toggle,
   .audio-btn {
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
     padding: 0 !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -4249,23 +4263,22 @@ body.tesla-mode .hud-action-btn {
     border-radius: 50% !important;
     box-sizing: border-box;
     flex-shrink: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
-  .persona-lens-pill .persona-label,
-  .persona-lens-pill .persona-tag,
-  .tools-trigger-btn .tools-btn-label,
   .theme-toggle-btn .theme-btn-label {
     display: none !important;
   }
 
   #btn-lang-toggle,
   .lang-toggle-btn {
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
-    max-width: 32px !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
     padding: 0 !important;
-    font-size: 10.5px !important;
+    font-size: 10px !important;
     font-weight: 700 !important;
     border-radius: 50% !important;
     display: inline-flex !important;
@@ -12480,17 +12493,22 @@ body.tesla-cockpit-active {
   #btn-tailor-experience,
   .persona-lens-pill,
   #btn-visitor-tools,
-  .tools-trigger-btn,
+  .tools-trigger-btn {
+    display: none !important;
+  }
+
   #btn-theme-toggle,
   .theme-toggle-btn,
   #btn-audio-toggle,
   .audio-btn,
   #btn-lang-toggle,
   .lang-toggle-btn {
-    width: 28px !important;
-    height: 28px !important;
-    min-width: 28px !important;
-    max-width: 28px !important;
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
+    max-width: 26px !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
   }
 
   #btn-lang-toggle,
@@ -14364,4 +14382,209 @@ body.tesla-cockpit-active {
 :root[data-theme="light"] .pts-status-pct,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .pts-status-pct {
   color: #854d0e;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Engineering Showcase: Minimalist NovuWorks Particle Matrix
+   ───────────────────────────────────────────────────────────── */
+.engineering-particle-showcase-card {
+  background: var(--bg-card);
+  border: 1px solid var(--hairline-gold);
+  border-radius: var(--radius-lg);
+  padding: clamp(18px, 3vw, 26px);
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(212, 175, 55, 0.06);
+  transition: all var(--duration-smooth) var(--ease-luxury);
+}
+
+.engineering-particle-showcase-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #e0566a, #8b52c8, #3d63e6, #d4af37);
+  opacity: 0.85;
+}
+
+:root[data-theme="light"] .engineering-particle-showcase-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .engineering-particle-showcase-card {
+  background: #ffffff;
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06), 0 0 25px rgba(212, 175, 55, 0.08);
+}
+
+.ep-showcase-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.ep-showcase-left {
+  flex: 1;
+  min-width: 260px;
+}
+
+.ep-kicker-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.ep-kicker-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+:root[data-theme="light"] .ep-kicker-pill {
+  color: #b45309;
+}
+
+.ep-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ep-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.ep-title {
+  font-size: clamp(20px, 2.5vw, 23px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 5px;
+  color: var(--text-primary);
+}
+
+.ep-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 640px;
+}
+
+.ep-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ep-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+
+.ep-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.ep-btn-3d {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.1) 100%);
+  border-color: rgba(212, 175, 55, 0.55);
+  color: var(--gold-light);
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.15);
+}
+
+.ep-btn-3d:hover {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.5) 0%, rgba(212, 175, 55, 0.22) 100%);
+  border-color: var(--gold-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(212, 175, 55, 0.35);
+}
+
+:root[data-theme="light"] .ep-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #334155;
+}
+
+:root[data-theme="light"] .ep-btn:hover {
+  background: rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.2);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .ep-btn-3d {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(212, 175, 55, 0.1) 100%);
+  border-color: #d4af37;
+  color: #92400e;
+}
+
+.ep-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(10, 15, 30, 0.95) 0%, rgba(4, 7, 16, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+:root[data-theme="light"] .ep-canvas-wrapper {
+  background: radial-gradient(ellipse at 50% 50%, rgba(248, 250, 252, 0.98) 0%, rgba(241, 245, 249, 0.99) 100%);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+.minimal-particle-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ep-canvas-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: rgba(148, 163, 184, 0.7);
+  pointer-events: none;
+  letter-spacing: 0.04em;
+}
+
+:root[data-theme="light"] .ep-canvas-hint {
+  color: rgba(100, 116, 139, 0.8);
 }

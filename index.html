@@ -8,14 +8,35 @@
     <script>
       (function() {
         try {
-          var saved = localStorage.getItem("color-scheme");
+          // 1. Check URL parameters first (Highest priority for cross-domain / subdomain return transitions)
+          var params = new URLSearchParams(window.location.search);
+          var urlTheme = params.get('theme');
+          var saved = (urlTheme === 'light' || urlTheme === 'dark') ? urlTheme : localStorage.getItem("color-scheme");
+          
+          // 2. Check document.cookie fallback
+          if (!saved) {
+            var match = document.cookie.match(/(?:^|; )color-scheme=([^;]+)/);
+            if (match && (match[1] === 'light' || match[1] === 'dark')) {
+              saved = match[1];
+            }
+          }
+
           var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
           var theme = (saved === "light" || saved === "dark") ? saved : (isDark ? "dark" : "light");
+
+          // 3. Persist resolved theme across storage and cookie
+          localStorage.setItem("color-scheme", theme);
+          document.cookie = "color-scheme=" + theme + "; path=/; max-age=31536000; SameSite=Lax";
+          if (location.hostname.endsWith('novu.works')) {
+            document.cookie = "color-scheme=" + theme + "; path=/; domain=.novu.works; max-age=31536000; SameSite=Lax";
+          }
+
           var meta = document.querySelector('meta[name="color-scheme"]');
           if (meta) {
-            meta.content = (saved === "light" || saved === "dark") ? saved : "light dark";
+            meta.content = theme;
           }
           document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.classList.toggle('light-theme', theme === 'light');
         } catch (e) {}
       })();
     </script>
@@ -564,6 +585,38 @@
               <h2 class="catalog-title" data-i18n="projects_title">Shipped Systems & Live Subdomains</h2>
               <p class="catalog-sub" data-i18n="projects_sub">Production-deployed systems engineered and architected by Fabián—running live on *.novu.works with direct open-source GitHub repositories.</p>
             </div>
+
+            <!-- Interactive Minimalist NovuWorks Particle Matrix Showcase -->
+            <div class="engineering-particle-showcase-card" id="particle-matrix-showcase">
+              <div class="ep-showcase-top">
+                <div class="ep-showcase-left">
+                  <div class="ep-kicker-row">
+                    <span class="ep-kicker-pill">CREATIVE COMPUTING & GRAPHICS ENGINEERING</span>
+                    <span class="ep-status-pill"><span class="ep-live-dot"></span> 60 FPS PROCEDURAL</span>
+                  </div>
+                  <h3 class="ep-title">NovuWorks Quantum Particle Matrix</h3>
+                  <p class="ep-desc">
+                    Minimalist procedural particle constellation inspired by the NovuWorks emblem. Hover, tap, or warp the particle field to experience real-time spring physics, harmonic wave drift, and dynamic filament connections.
+                  </p>
+                </div>
+                <div class="ep-controls-row">
+                  <button type="button" class="ep-btn ep-btn-warp" id="ep-btn-warp" title="Emit kinetic shockwave across particle matrix">
+                    <span>⚡ Pulse Energy</span>
+                  </button>
+                  <button type="button" class="ep-btn ep-btn-palette" id="ep-btn-palette" title="Cycle color spectrum (Novu Gradient / Champagne Gold / Emerald)">
+                    <span>🎨 Palette</span>
+                  </button>
+                  <button type="button" class="ep-btn ep-btn-3d" id="ep-btn-launch-3d" title="Launch Fullscreen 3D Spatial Visualizer Mode">
+                    <span>✦ Full 3D Visualizer</span>
+                  </button>
+                </div>
+              </div>
+              <div class="ep-canvas-wrapper">
+                <canvas id="minimal-particle-canvas" class="minimal-particle-canvas"></canvas>
+                <div class="ep-canvas-hint">Touch or drag anywhere to perturb the field · Click for kinetic shockwave</div>
+              </div>
+            </div>
+
             <div class="standalone-projects-grid" id="projects-view-mount"></div>
           </div>
         </section>
@@ -650,7 +703,15 @@
 
             <!-- Verified Signature Engineering & Crisis Impact Projects -->
             <div class="dossier-section">
-              <h3 class="section-heading" data-i18n="section_proj_heading">Verified Signature Engineering & Crisis Impact Projects</h3>
+              <div class="section-title-row">
+                <div>
+                  <h3 class="section-heading" data-i18n="section_proj_heading">Verified Signature Engineering & Crisis Impact Projects</h3>
+                  <p class="section-subheading">Production cloud architectures, WebRTC Daltonization, B2B fintech, and contactless NFC systems.</p>
+                </div>
+                <button type="button" class="action-pill-btn" id="btn-dossier-particle-showcase" title="Inspect Interactive NovuWorks Particle Matrix & 3D Visualizer">
+                  <span>✦ NovuWorks Particle Matrix</span>
+                </button>
+              </div>
               <div class="standalone-projects-grid" id="standalone-projects-mount"></div>
             </div>
 
