@@ -54,89 +54,85 @@ export const PROFILE = {
     master: {
       id: 'master',
       label: '🚀 All-Round Master',
-      shortTitle: 'Performance Marketing Lead & Technical Product Manager',
-      headline: 'Performance Marketing Lead & Technical Product Manager',
+      shortTitle: 'Cloud & Enterprise Architecture Lead',
+      headline: 'Cloud & Enterprise Architecture Lead',
       summary:
-        'Dynamic Performance Marketing Lead and Technical Product Manager with 8+ years of experience bridging ad-tech infrastructure, AI automation, and high-ROI media buying. Proven track record of directing Agile marketing teams, executing 360° digital campaigns that generated $10M+ in revenue, and optimizing conversion pipelines. Highly resourceful leader equipped with deep technical fluency in data analytics (Databricks, SQL) and agentic workflows, enabling seamless collaboration with stakeholders to drive user acquisition and maximize marketing operational efficiency.',
+        'Multidisciplinary Cloud & Enterprise Architecture Lead with 8+ years of experience bridging cloud infrastructure design, legacy system migrations, AI/LLM workflows, and technical IT sales to drive $13M+ in combined revenue and funding across higher education, public sector, and enterprise organizations.',
       skills: [
         {
-          title: 'Performance Marketing & Revenue Ops',
-          items: 'Media Buying | 360° Campaign Management | SEO & Lead Generation | ROAS Optimization | B2B & B2C Strategy',
+          title: 'Cloud & Infrastructure Architecture',
+          items: 'Cloud Computing & Legacy Migration (Azure, Cloud VMs, Docker) | REST APIs & API Gateways | Web Security (JWT 2FA) | CI/CD & Git/GitHub Version Control',
         },
         {
-          title: 'Product & Project Management',
-          items: 'Technical Project Management | Agile / Scrum | Sprint Planning | Jira & Asana | Bilingual (English/Spanish)',
+          title: 'AI, LLMs & Developer Tooling',
+          items: 'Generative AI & Agentic Workflows | LLM APIs (Anthropic Claude, OpenAI Codex, Google, Meta Muse) | Claude Code & Antigravity | Tool & Function Calling | Prompt Engineering',
         },
         {
-          title: 'Data & Ad-Tech Architecture',
-          items: 'Data Pipelines (Databricks, SQL) | Cloud Infrastructure (Azure) | Data-Driven Analytics (PowerBI, Tableau, Looker)',
+          title: 'Database & Data Architecture',
+          items: 'SQL & T-SQL | Databricks | Relational & NoSQL Database Modeling (Firebase) | Python | JavaScript (Node.js, React) | HTML5 & CSS3 | Looker, Power BI & Tableau',
         },
         {
-          title: 'AI & Automation Strategy',
-          items: 'Generative AI | Agentic Workflows | LLM APIs (Anthropic Claude, OpenAI Codex, Gemini) | Process Automation',
-        },
-        {
-          title: 'Marketing Platforms & CRM',
-          items: 'Google Ads, Meta Business Suite, TikTok Ads, HubSpot, Salesforce, Google Analytics (GA4)',
+          title: 'IT Sales, SDLC & Public Sector',
+          items: 'Technical Pre-Sales & PoC Delivery | Agile/Scrum SDLC (Jira, Asana) | Higher Education (edX, LMS) & Municipal Modernization | Federal Funds Compliance | Bilingual (English/Spanish)',
         },
       ],
       experiences: [
         {
           company: 'Money Group',
-          employmentType: 'Full-Time',
-          role: 'Media Buyer — Full-Time',
+          role: 'Media Buyer (Technical Solutions & AI Architecture)',
           period: 'March 2026 – October 2026',
           bullets: [
-            'Performance Media & Ad-Tech: Managed the development of proprietary internal ad-tech tools and an AI-powered website builder, driving company-wide adoption to optimize media buying and revenue operations across a 100+ employee organization.',
-            'Campaign Automation: Directed the engineering of 20+ automated agentic workflows using Anthropic Claude to generate complex performance reporting, track KPIs, and execute real-time marketing campaign adjustments.',
-            'Agile Marketing Leadership: Orchestrated sprints in Asana and participated in the end-to-end lifecycle for over 30 new marketing technology features, architecting dynamic integrations via REST APIs.',
-            'Operational Efficiency: Deployed unsupervised AI agents to autonomously manage internal business operations, real-time alerts, and correspondence routing, saving hundreds of hours across media and revenue teams.',
+            'AI Proof-of-Concepts (PoCs) & Workflow Engineering: Engineered **20+ custom AI skills** and live agent workflows in an **enterprise LLM platform** using **Claude**, cutting operational deployment cycles from days to **under 4 hours**.',
+            'SDLC, REST APIs & Feature Architecture: Partnered with Software Engineering in **Asana sprints** to scope, conduct **QA/UAT**, and launch **30+ platform features** via **REST APIs and tool/function calling**, troubleshooting broken partner integrations across a **$1 Billion+ portfolio ($100k+ direct spend** across **5 verticals)**.',
+            'Technical Enablement & Output Evaluation: Evaluated **LLM outputs** against business KPIs for **100% reporting accuracy** and led interactive **technical workshops** to upskill a **15-person cross-functional team** on standardized AI and cloud workflows.',
           ],
         },
         {
           company: 'Red Ventures',
-          employmentType: 'Full-Time',
-          role: 'Growth / SEO Analyst (edX) — Full-Time',
+          role: 'Growth / SEO Analyst (Higher Education Data & Platform Architecture)',
           period: 'August 2024 – January 2026',
           bullets: [
-            'SEO & Conversion Optimization: Led the strategic deployment of Generative AI and logic-based front-end personalization rules across digital properties, achieving a +200% lift in AI-driven leads and a +38.1% verification increase.',
-            'Marketing Data Analytics: Leveraged Python and SQL (Databricks) to oversee scalable data pipelines, querying and reconciling massive datasets (40M+ sessions) to structure high-quality inputs for enterprise revenue analytics.',
-            'Cross-Functional Tracking: Led cross-functional debugging via real-time monitoring dashboards, tracking system failures, QA tickets, and sprint deployments in Jira to ensure uninterrupted marketing performance.',
+            'Higher Education Platform Modernization: Partnered with Engineering and Product in **Jira** to modernize web and content architectures across the global **edX higher education platform**, deploying **Generative AI features** across **1,250+ pages** for a **50%+ performance lift**, a **3x lift (+200%) in AI-driven leads**, and a **38.1% verification increase**.',
+            'Database Architecture & Server Log Optimization: Queried **40 million+ user sessions** using **SQL and Python in Databricks** and analyzed **raw server logs** to modify session calculation logic and optimize **data architecture**, achieving **100% reporting accuracy** across **GA4** and internal databases.',
+            'Enterprise Telemetry & Cost Efficiency: Built automated **Tableau, Looker, and Power BI dashboards** to monitor system health, latency, and conversion funnels, improving YoY operational efficiency by **19%**.',
           ],
         },
         {
           company: 'Viva Advertising',
-          employmentType: 'My Company / Founder',
-          url: 'https://viva-advertising.com/',
-          urlDisplay: 'viva-advertising.com',
-          role: 'Co-founder & Marketing VP — My Company / Founder',
+          role: 'Co-Founder (IT Solution Sales & Technical Consulting)',
           period: 'January 2018 – Present',
           bullets: [
-            'Strategic Vision & Revenue Growth: Architected data-driven GTM strategies for a global digital ecosystem, generating 1B+ impressions and $10M+ in direct revenue. Managed a $50M+ opportunity pipeline, optimizing programmatic spend to maximize conversion rates.',
-            'Cross-Functional Leadership: Led an Agile multidisciplinary team of 15 (media buyers, designers, and developers), implementing productivity stacks (Asana, Jira) that increased project delivery throughput by 40% across 150+ concurrent enterprise projects.',
-            'Client Retention & Optimization: Architected a Sales Enablement framework utilizing predictive analytics to identify at-risk accounts, reducing client churn by 83% (from 30% to 5%).',
-            'Marketing AI Automation: Architected end-to-end agentic workflows, integrating OpenAI Codex and Anthropic LLMs to automate complex content generation pipelines and eliminate marketing operational bottlenecks.',
+            'IT Pre-Sales & Commercial Strategy: Led **technical pre-sales, architecture scoping, live webinars, and solution consulting** across **150+ client accounts**, managing **$2M+ in budgets** and a **$10M+ commercial pipeline** to generate **$10M+ in client revenue**.',
+            'Cloud BI & Predictive Architecture: Architected centralized **Looker and Power BI data ecosystems** and **predictive analytics frameworks** that reduced customer operating costs and cut enterprise account churn by **83% (from 30% to 5%)**.',
+            'Agile Delivery & AI Code Acceleration: Directed a **15-person cross-functional team** of developers, analysts, and specialists using **Agile SDLC workflows** and AI developer platforms (**OpenAI Codex, Claude Code...**), increasing delivery throughput by **40%**.',
           ],
         },
         {
           company: 'Link Puerto Rico',
-          employmentType: 'My Company / Co-Founder',
-          url: 'https://linkpuertorico.org/',
-          urlDisplay: 'linkpuertorico.org',
-          role: 'Co-Founder & Technical Lead — My Company / Co-Founder',
+          role: 'Co-Founder (Cloud Migration & Public Sector Systems)',
           period: 'November 2017 – Present',
           bullets: [
-            'Product Launches & Cloud Infrastructure: Managed deployment of scalable Azure infrastructure, successfully supporting 3.8K+ concurrent users for high-traffic platforms to drive engagement and retention. Managed resource groups and cost optimization for non-profit workloads.',
-            'Tech-Driven Community Building: Built and managed a technical ecosystem and developer community of 2,000+ developers, facilitating 50+ technical workshops on cloud technologies and software development for 5,000+ local innovators. Secured and managed $100k+ in grant funding for infrastructure projects.',
-            'Technical Stakeholder Communication & Startup Advisory: Advised 80+ enterprise startups on scalable data infrastructure and SDLC across 50,000+ paid user transactions, facilitating $3M+ in cumulative funding and sales.',
+            'Cloud Migration, SDLC & Database Modeling: Directed a **10+ person engineering team** across the **SDLC** to migrate legacy cloud infrastructure (**Azure, Docker, auto-scaling VMs**) and manage **GitHub repositories, SQL/Firebase database models, and JWT 2FA APIs** across **100+ custom software deployments (50,000+ transactions)**, driving **$3 Million** in IT sales and funding.',
+            'Puerto Rico Public Sector Modernization: Architected the 3-year **"Puente a Puente" municipal infrastructure initiative** across **3 sites in Loíza**, coordinating government leaders, network telemetry, and **150+ hardware deployments to serve 1,000+ citizens**.',
+            'Partner Ecosystem & Education Enablement: Founded a **2,000+ member Puerto Rico developer community**, curated an **LMS in partnership with IBM**, delivered **50+ technical workshops for 5,000+ learners**, led **4 major hackathons (6,000+ programming hours)**, and advised **80+ local organizations** on cloud infrastructure and AI.',
           ],
         },
       ],
+      resumeProjects: [
+        {
+          name: 'JobHelper',
+          description: 'Engineered an autonomous AI agent using **LLM constraints, automated reasoning, and a 100-point rubric** to evaluate technical opportunities mapped directly to **SDLC and API integration architecture**.',
+        },
+        {
+          name: 'FavoBot',
+          description: 'Developed an autonomous, Telegram-integrated AI bot using **Python and enterprise LLM workflows** for real-time task execution and system event monitoring.',
+        },
+      ],
       proofPoints: [
-        { metric: '20+', title: 'Automated AI Workflows Deployed', sub: 'Money Group (Full-Time, Ad-Tech & AI)', desc: 'Directed the engineering of 20+ automated agentic workflows using Anthropic Claude to generate complex performance reporting, track KPIs, and execute real-time campaign adjustments.' },
-        { metric: '+200%', title: 'AI-Driven Lead Lift', sub: 'Red Ventures (Full-Time, edX Platform)', desc: 'Led strategic deployment of Generative AI and logic-based front-end personalization rules across digital properties, achieving a +200% lift in AI-driven leads and +38.1% verification increase.' },
-        { metric: '$10M+', title: 'Realized Pipeline & -83% Churn', sub: 'Viva Advertising (My Company / Founder)', desc: 'Architected data-driven GTM strategies generating 1B+ impressions and $10M+ in direct revenue across 150+ concurrent enterprise projects, reducing churn by 83% (from 30% to 5%).' },
-        { metric: '40M+', title: 'Databricks Sessions Normalized', sub: 'Red Ventures (Full-Time, edX Lakehouse)', desc: 'Queried and cleaned raw telemetry from scratch using Databricks SQL & Python across 40M+ sessions to structure high-quality inputs for enterprise revenue analytics.' }
+        { metric: '20+', title: 'Custom AI Skills Deployed', sub: 'Money Group (Technical Solutions & AI)', desc: 'Engineered 20+ custom AI skills and live agent workflows in an enterprise LLM platform using Claude, cutting operational deployment cycles from days to under 4 hours.' },
+        { metric: '+200%', title: 'AI-Driven Lead Lift', sub: 'Red Ventures (edX Platform)', desc: 'Deployed Generative AI features across 1,250+ pages achieving a 3x lift (+200%) in AI-driven leads and a 38.1% verification increase.' },
+        { metric: '$13M+', title: 'Combined Revenue & Funding', sub: 'Viva Advertising & Link Puerto Rico', desc: 'Led technical pre-sales and cloud migration across 250+ accounts generating $10M+ in client revenue and $3M in IT sales and funding.' },
+        { metric: '40M+', title: 'Sessions Queried in Databricks', sub: 'Red Ventures (edX Lakehouse)', desc: 'Queried and cleaned raw telemetry using SQL & Python in Databricks across 40M+ sessions to achieve 100% reporting accuracy.' }
       ]
     },
 

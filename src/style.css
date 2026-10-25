@@ -4828,7 +4828,7 @@ body.tesla-mode .hud-action-btn {
   font-size: 26px;
   font-weight: 800;
   letter-spacing: 0.04em;
-  color: var(--titanium-white);
+  color: #ea580c;
   margin-bottom: 4px;
 }
 
@@ -4874,13 +4874,13 @@ body.tesla-mode .hud-action-btn {
 }
 
 .res-section-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: var(--font-sans);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gold-light);
-  border-bottom: 1px solid var(--hairline-gold);
+  color: #ea580c;
+  border-bottom: 1px solid #d1d5db;
   padding-bottom: 4px;
   margin-bottom: 10px;
 }
@@ -4892,13 +4892,17 @@ body.tesla-mode .hud-action-btn {
 }
 
 .res-skills-list {
-  list-style: none;
-  padding: 0;
+  list-style-type: disc;
+  padding-left: 18px;
   display: flex;
   flex-direction: column;
   gap: 6px;
   font-size: 12.5px;
-  line-height: 1.6;
+  line-height: 1.55;
+}
+
+.res-skills-list li {
+  list-style-type: disc;
 }
 
 .res-skills-list li strong {
@@ -4917,6 +4921,33 @@ body.tesla-mode .hud-action-btn {
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 4px;
+}
+
+.res-exp-head-compact {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.res-sep-inline {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.res-role-inline {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-light);
+}
+
+.res-date-inline {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 .res-company {
@@ -5926,13 +5957,48 @@ body.tesla-mode .hud-action-btn {
 :root:has(> head > meta[name="color-scheme"][content="light"]) .printable-resume-card {
   background: #ffffff;
   border-color: rgba(15, 23, 42, 0.12);
-  color: var(--text-body);
+  color: #111827;
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
 }
 
 :root[data-theme="light"] .res-summary-text,
-:root:has(> head > meta[name="color-scheme"][content="light"]) .res-summary-text {
-  color: var(--text-body);
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-summary-text,
+:root[data-theme="light"] .res-bullets,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-bullets,
+:root[data-theme="light"] .res-skills-list,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-skills-list {
+  color: #1f2937;
+}
+
+:root[data-theme="light"] .res-skills-list li strong,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-skills-list li strong,
+:root[data-theme="light"] .res-bullets li strong,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-bullets li strong,
+:root[data-theme="light"] .res-company,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-company {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .res-role-inline,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-role-inline {
+  color: #334155;
+}
+
+:root[data-theme="light"] .res-date-inline,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-date-inline,
+:root[data-theme="light"] .res-sep-inline,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-sep-inline {
+  color: #64748b;
+}
+
+:root[data-theme="light"] .res-contact-bar,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-contact-bar {
+  color: #334155;
+}
+
+:root[data-theme="light"] .res-contact-bar a,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-contact-bar a {
+  color: #1d4ed8;
 }
 
 :root[data-theme="light"] .revops-heading,
@@ -9824,16 +9890,19 @@ html.device-eco-power * {
    ───────────────────────────────────────────────────────────── */
 @media print {
   @page {
-    margin: 0.5in;
+    margin: 0.35in 0.45in;
     size: letter portrait;
   }
 
   body, html {
     background: #ffffff !important;
-    color: #000000 !important;
-    font-size: 10.5pt !important;
-    line-height: 1.35 !important;
+    color: #111111 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 8.5pt !important;
+    line-height: 1.32 !important;
     overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   body::before,
@@ -9845,7 +9914,15 @@ html.device-eco-power * {
   .toast-popup,
   #discipline-modal,
   main,
-  .header-center-nav {
+  .header-center-nav,
+  .dialog-close-btn,
+  .resume-modal-actions,
+  .resume-cta-card,
+  .exp-type-pill,
+  .exp-outbound-link,
+  .res-company-logo-slot,
+  .comp-logo-svg,
+  .res-title-role {
     display: none !important;
   }
 
@@ -9876,115 +9953,128 @@ html.device-eco-power * {
     box-shadow: none !important;
     padding: 0 !important;
     max-width: 100% !important;
-  }
-
-  .comp-logo-svg {
-    filter: invert(0.85) hue-rotate(180deg) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .res-header {
-    border-bottom: 1.5pt solid #111111 !important;
-    padding-bottom: 8pt !important;
-    margin-bottom: 12pt !important;
+    border-bottom: none !important;
+    padding-bottom: 2pt !important;
+    margin-bottom: 6pt !important;
+    text-align: center !important;
   }
 
   .res-name {
-    font-size: 18pt !important;
-    color: #000000 !important;
-    letter-spacing: 0.05em !important;
-  }
-
-  .res-title-role {
-    font-size: 10.5pt !important;
-    color: #333333 !important;
-    margin-bottom: 4pt !important;
+    font-size: 16pt !important;
+    font-weight: 800 !important;
+    color: #ea580c !important;
+    letter-spacing: 0.04em !important;
+    text-align: center !important;
+    margin-bottom: 2pt !important;
   }
 
   .res-contact-bar {
-    font-size: 8.5pt !important;
-    color: #444444 !important;
+    font-size: 8pt !important;
+    color: #111111 !important;
+    text-align: center !important;
+    display: block !important;
+    margin-bottom: 6pt !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
   }
 
   .res-contact-bar a {
-    color: #111111 !important;
+    color: #1d4ed8 !important;
     text-decoration: underline !important;
   }
 
-  .res-section-title {
-    font-size: 9.5pt !important;
-    color: #000000 !important;
-    border-bottom: 1pt solid #222222 !important;
-    padding-bottom: 2pt !important;
-    margin-bottom: 6pt !important;
+  .res-sep {
+    color: #374151 !important;
+    margin: 0 3pt !important;
   }
 
-  .res-summary-text,
-  .res-skills-list,
-  .res-bullets {
-    font-size: 9pt !important;
-    line-height: 1.35 !important;
-    color: #1a1a1a !important;
-  }
-
-  .res-company,
-  .res-role,
-  .res-date {
-    color: #000000 !important;
-  }
-
-  .res-company {
-    font-size: 10pt !important;
-  }
-
-  .res-role {
-    font-size: 9.5pt !important;
-    font-style: italic !important;
-  }
-
-  .res-date {
-    font-size: 8.5pt !important;
-  }
-
-  .exp-type-pill {
-    border: 0.5pt solid #555555 !important;
-    color: #111111 !important;
-    background: transparent !important;
-    font-size: 6.5pt !important;
-    padding: 0 4pt !important;
-  }
-
-  .resume-cta-card {
-    background: #f7f7f9 !important;
-    border: 1.5pt solid #333333 !important;
-    box-shadow: none !important;
-    padding: 12pt 16pt !important;
-    margin-top: 14pt !important;
+  .res-section {
+    margin-bottom: 5pt !important;
     page-break-inside: avoid !important;
   }
 
-  .cta-badge {
-    color: #555555 !important;
-    font-size: 8pt !important;
+  .res-section-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-size: 9pt !important;
+    font-weight: 700 !important;
+    color: #ea580c !important;
+    border-bottom: 1pt solid #d1d5db !important;
+    padding-bottom: 1.5pt !important;
+    margin-bottom: 3.5pt !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
   }
 
-  .cta-heading {
-    color: #000000 !important;
-    font-size: 12pt !important;
-    margin-bottom: 3pt !important;
+  .res-summary-text {
+    font-size: 8.2pt !important;
+    line-height: 1.32 !important;
+    color: #111111 !important;
+    margin: 0 !important;
   }
 
-  .cta-description {
-    color: #222222 !important;
-    font-size: 8.5pt !important;
+  .res-skills-list,
+  .res-bullets {
+    display: block !important;
+    list-style-type: disc !important;
+    padding-left: 14pt !important;
+    margin: 0 !important;
+  }
+
+  .res-skills-list li,
+  .res-bullets li {
+    display: list-item !important;
+    list-style-type: disc !important;
+    font-size: 8.1pt !important;
     line-height: 1.3 !important;
+    color: #111111 !important;
+    margin-bottom: 2.2pt !important;
   }
 
-  .cta-action-btn {
-    border: 1pt solid #000000 !important;
-    background: #ffffff !important;
+  .res-skills-list li strong,
+  .res-bullets li strong {
     color: #000000 !important;
+    font-weight: 700 !important;
+  }
+
+  .res-exp-block {
+    margin-bottom: 4pt !important;
+    page-break-inside: avoid !important;
+  }
+
+  .res-exp-head-compact {
+    display: block !important;
     font-size: 8.5pt !important;
-    padding: 4pt 10pt !important;
+    font-weight: 700 !important;
+    color: #000000 !important;
+    margin-bottom: 1.5pt !important;
+  }
+
+  .res-company {
+    font-size: 8.5pt !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+  }
+
+  .res-sep-inline {
+    color: #4b5563 !important;
+    font-weight: 400 !important;
+    margin: 0 2pt !important;
+  }
+
+  .res-role-inline {
+    font-size: 8.3pt !important;
+    font-weight: 600 !important;
+    color: #111111 !important;
+  }
+
+  .res-date-inline {
+    font-size: 8pt !important;
+    color: #374151 !important;
+    font-weight: 400 !important;
   }
 }
 

@@ -1065,11 +1065,6 @@ class FabianPortfolioApp {
       this.dom.printableResume.classList.add('lens-animating');
     }
 
-    // Header Role
-    if (this.dom.resRoleMount) {
-      this.dom.resRoleMount.textContent = variant.headline;
-    }
-
     // Summary (Full Verbatim Tailored Text)
     if (this.dom.resSummaryMount) {
       this.dom.resSummaryMount.textContent = variant.summary;
@@ -1082,50 +1077,27 @@ class FabianPortfolioApp {
       `).join('');
     }
 
-    // Experience (Authentic Tailored Bullets per Specialty)
+    // Experience (Compact Format: Company | Role | Period)
     if (this.dom.resExpMount) {
-      const expLogos = {
-        'Money Group': LOGOS.moneyGroup,
-        'Money Group (Full-Time)': LOGOS.moneyGroup,
-        'Red Ventures': LOGOS.redVentures,
-        'Red Ventures (Full-Time)': LOGOS.redVentures,
-        'Viva Advertising': LOGOS.vivaAdvertising,
-        'Viva Advertising (My Company / Founder)': LOGOS.vivaAdvertising,
-        'Link Puerto Rico': LOGOS.linkPR,
-        'Link Puerto Rico (My Company / Co-Founder)': LOGOS.linkPR,
-        'Novu Works': LOGOS.novuWorks,
-      };
-
       this.dom.resExpMount.innerHTML = variant.experiences.map((exp) => {
-        const logoSvg = expLogos[exp.company] || '';
+        // Convert **bold** markers to <strong> tags
+        const formatBold = (text) => text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
         return `
         <div class="res-exp-block">
-          <div class="res-exp-head">
-            <div>
-              <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                ${logoSvg ? `<div class="res-company-logo-slot">${logoSvg}</div>` : ''}
-                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                  <span class="res-company">${exp.company}</span>
-                  ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') || exp.employmentType.includes('Tiempo Completo') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
-                  ${exp.url ? `
-                    <a href="${exp.url}" target="_blank" rel="noopener noreferrer" class="exp-outbound-link" title="Visit ${exp.company} official website (${exp.urlDisplay || exp.url})">
-                      <span>${exp.urlDisplay || 'Official Site'}</span>
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    </a>
-                  ` : ''}
-                </div>
-              </div>
-              <span class="res-role">${exp.role}</span>
-            </div>
-            <span class="res-date">${exp.period}</span>
+          <div class="res-exp-head-compact">
+            <span class="res-company">${exp.company}</span>
+            <span class="res-sep-inline">|</span>
+            <span class="res-role-inline">${exp.role}</span>
+            <span class="res-sep-inline">|</span>
+            <span class="res-date-inline">${exp.period}</span>
           </div>
           <ul class="res-bullets">
             ${exp.bullets.map((b) => {
               const parts = b.split(': ');
               if (parts.length > 1) {
-                return `<li><strong>${parts[0]}:</strong> ${parts.slice(1).join(': ')}</li>`;
+                return `<li><strong>${parts[0]}:</strong> ${formatBold(parts.slice(1).join(': '))}</li>`;
               }
-              return `<li>${b}</li>`;
+              return `<li>${formatBold(b)}</li>`;
             }).join('')}
           </ul>
         </div>
@@ -1133,40 +1105,24 @@ class FabianPortfolioApp {
       }).join('');
     }
 
-    // Projects
-    if (this.dom.resProjectsMount && PROFILE.standaloneProjects) {
-      this.dom.resProjectsMount.innerHTML = PROFILE.standaloneProjects.slice(0, 3).map((p) => `
-        <div class="res-exp-block" style="margin-bottom: 12px;">
-          <div class="res-exp-head">
-            <div>
-              <span class="res-company">${p.name}</span>
-              <span class="res-role">(${p.role} · ${p.organization})</span>
-            </div>
-            <span class="res-date">${p.period}</span>
-          </div>
-          <div style="font-size: 11.5px; color: var(--gold-light); font-family: var(--font-mono); margin-bottom: 4px;">${p.metrics}</div>
-          <p style="font-size: 12.5px; color: #d6d6de; line-height: 1.55;">${p.summary}</p>
-        </div>
-      `).join('');
+    // Projects (Compact: name + description with bold markers)
+    if (this.dom.resProjectsMount && variant.resumeProjects) {
+      const formatBold = (text) => text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      this.dom.resProjectsMount.innerHTML = `<ul class="res-bullets">${variant.resumeProjects.map((p) =>
+        `<li><strong>${p.name}:</strong> ${formatBold(p.description)}</li>`
+      ).join('')}</ul>`;
     }
 
-    // Education & Certifications
+    // Education & Certifications (3-line format matching image)
     if (this.dom.resEducationMount) {
-      const edu = PROFILE.education[0];
-      const certsText = PROFILE.certifications.map((c) => `${c.name} (${c.issuer})`).join(' | ');
       this.dom.resEducationMount.innerHTML = `
-        <li><strong>${edu.degree}</strong> | ${edu.institution} | ${edu.status} (Coursework: ${edu.coursework})</li>
-        <li><strong>Accredited Certifications:</strong> ${certsText}</li>
-        <li><strong>Fellowships:</strong> Stanford University Innovation Fellows | Project Management Practice (UPPR) | Federal Funds Administration (UPR)</li>
+        <li><strong>B.S., Computer Engineering (4.0 GPA)</strong> | Universidad Politécnica de Puerto Rico | In Progress (Coursework: Data Structures & Algorithms, Software Engineering, Database Management Systems, Object-Oriented Programming, Systems Architecture)</li>
+        <li><strong>Cloud, Analytics & IT Certifications:</strong> CompTIA IT Fundamentals+ (ITF+) | Data-driven Strategy: Planning, Reporting & Control with Power BI (UPPR) | Advanced Implementation of Data Analysis Tools with Power BI (UPPR) | Lean Six Sigma White Belt</li>
+        <li><strong>Public Sector & Innovation Governance:</strong> Federal Funds Administration (UPR) | Project Management Practice Tools & Techniques (UPPR) | Stanford University Innovation Fellows</li>
       `;
     }
 
-    // Awards & Leadership
-    if (this.dom.resAwardsMount && PROFILE.awards) {
-      this.dom.resAwardsMount.innerHTML = PROFILE.awards.map((a) => `
-        <li><strong>${a.title}</strong> (${a.year}, ${a.organization}) — ${a.description}</li>
-      `).join('');
-    }
+
   }
 
   updateRecruiterScorecard(lensId = this.activeRoleLens) {
@@ -1746,14 +1702,12 @@ ${variant.proofPoints ? variant.proofPoints.map((p) => `• [${p.metric}] ${p.ti
 
   copyResumeText() {
     const variant = PROFILE.roleVariants[this.activeRoleLens] || PROFILE.roleVariants.master;
-    const edu = PROFILE.education[0];
-    const certsText = PROFILE.certifications.map((c) => `• ${c.name} (${c.issuer})`).join('\n');
-    const awardsText = PROFILE.awards.map((a) => `• ${a.title} (${a.year}, ${a.organization})`).join('\n');
+    // Strip **bold** markers for plain text copy
+    const stripBold = (t) => t.replace(/\*\*(.+?)\*\*/g, '$1');
+    const projText = (variant.resumeProjects || []).map((p) => `• ${p.name}: ${stripBold(p.description)}`).join('\n');
 
     const text = `FABIAN VELEZ VICENTE
-${variant.headline}
-Email: fabianvvicente1@gmail.com | Phone: +1 (347) 815-8054 | LinkedIn: https://linkedin.com/in/fabian-velez-vicente | GitHub: https://github.com/eresfavolosx | Portfolio: https://novu.works
-Location: San Juan, PR (US Remote / Worldwide) · US Citizen (No Visa Sponsorship Required)
+fabianvvicente1@gmail.com | +1 (347) 815-8054 | linkedin.com/in/fabian-velez-vicente | github.com/eresfavolosx
 
 SUMMARY
 ${variant.summary}
@@ -1762,22 +1716,15 @@ SKILLS
 ${variant.skills.map((s) => `• ${s.title}: ${s.items}`).join('\n')}
 
 PROFESSIONAL EXPERIENCE
-${variant.experiences.map((exp) => `${exp.company} | ${exp.role} | ${exp.period}\n${exp.bullets.map((b) => `• ${b}`).join('\n')}`).join('\n\n')}
+${variant.experiences.map((exp) => `${exp.company} | ${exp.role} | ${exp.period}\n${exp.bullets.map((b) => `• ${stripBold(b)}`).join('\n')}`).join('\n\n')}
 
-SIGNATURE ENGINEERING & CRISIS IMPACT PROJECTS
-${PROFILE.standaloneProjects.map((p) => `${p.name} | ${p.role} · ${p.organization} | ${p.period}\nMetrics: ${p.metrics}\n${p.summary}`).join('\n\n')}
+PROJECTS
+${projText}
 
-EDUCATION & ACCREDITED CERTIFICATIONS
-• ${edu.degree} | ${edu.institution} | ${edu.status} (Coursework: ${edu.coursework})
-${certsText}
-• Stanford University Innovation Fellows (Design Thinking & Business Strategy)
-• Federal Funds Administration (Universidad de Puerto Rico)
-
-HONORS, AWARDS & CIVIC LEADERSHIP
-${awardsText}
-
-COLLABORATION & LET'S CHAT
-Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Schedule a strategy conversation at https://novu.works`;
+EDUCATION & CERTIFICATIONS
+• B.S., Computer Engineering (4.0 GPA) | Universidad Politécnica de Puerto Rico | In Progress (Coursework: Data Structures & Algorithms, Software Engineering, Database Management Systems, Object-Oriented Programming, Systems Architecture)
+• Cloud, Analytics & IT Certifications: CompTIA IT Fundamentals+ (ITF+) | Data-driven Strategy: Planning, Reporting & Control with Power BI (UPPR) | Advanced Implementation of Data Analysis Tools with Power BI (UPPR) | Lean Six Sigma White Belt
+• Public Sector & Innovation Governance: Federal Funds Administration (UPR) | Project Management Practice Tools & Techniques (UPPR) | Stanford University Innovation Fellows`;
 
     navigator.clipboard.writeText(text).then(() => {
       audio.confirm();
