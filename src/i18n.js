@@ -792,7 +792,13 @@ export const PROFILE_ES = {
 export const I18N_STRINGS = {
   en: {
     // Nav tabs
-    nav_overview: 'Overview',
+    intro_enter_btn: 'ENTER EXPERIENCE',
+    intro_shortcut_hint: 'Press <kbd class="intro-kbd">ENTER</kbd> anytime to access executive portfolio',
+    btn_3d_atelier: '✨ 3D Secondary Screen',
+    btn_replay_intro: '🎬 Replay Intro & Sign-Off',
+    sig_replay_btn: 'Replay Signature',
+    sig_verified_stamp: 'VERIFIED EXECUTIVE SIGN-OFF',
+        nav_overview: 'Overview',
     nav_cases: 'Case Studies',
     nav_projects: 'Live Projects',
     nav_ai_lab: 'Live Projects',
@@ -1008,7 +1014,13 @@ export const I18N_STRINGS = {
 
   es: {
     // Nav tabs
-    nav_overview: 'Resumen',
+    intro_enter_btn: 'ENTRAR A LA EXPERIENCIA',
+    intro_shortcut_hint: 'Presiona <kbd class="intro-kbd">ENTER</kbd> en cualquier momento para entrar',
+    btn_3d_atelier: '✨ Pantalla Secundaria 3D',
+    btn_replay_intro: '🎬 Repetir Introducción y Firma',
+    sig_replay_btn: 'Repetir Firma',
+    sig_verified_stamp: 'FIRMA EJECUTIVA VERIFICADA',
+        nav_overview: 'Resumen',
     nav_cases: 'Casos de Estudio',
     nav_projects: 'Proyectos en Vivo',
     nav_ai_lab: 'Proyectos en Vivo',

@@ -101,7 +101,20 @@ export class SpatialCanvas3D {
       this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 0.1, 1000);
       this.camera.position.set(0, 0, 46);
 
-      // 3. Adaptive WebGL Renderer (Power & Memory Efficient for Lower-End Hardware)
+      // 3. Adaptive WebGL Renderer (Feature-detect to prevent console noise on non-GPU environments)
+      const isWebGLAvailable = (() => {
+        try {
+          const testCanvas = document.createElement('canvas');
+          return !!(window.WebGLRenderingContext && (testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')));
+        } catch (e) {
+          return false;
+        }
+      })();
+
+      if (!isWebGLAvailable) {
+        throw new Error('WebGL context unavailable (falling back to lightweight ambient particle visualizer).');
+      }
+
       this.renderer = new THREE.WebGLRenderer({
         powerPreference: 'default',
         antialias: !this.deviceTier.isLowEnd,
