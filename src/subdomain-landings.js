@@ -200,6 +200,12 @@ export const PLATFORM_LANDINGS = {
   }
 };
 
+// Aliases for seamless direct routing
+PLATFORM_LANDINGS['nfc'] = PLATFORM_LANDINGS['nfc-platform'];
+PLATFORM_LANDINGS['hackea'] = PLATFORM_LANDINGS['hackeaporunacausa'];
+PLATFORM_LANDINGS['liza'] = PLATFORM_LANDINGS['liza-project'];
+PLATFORM_LANDINGS['linkpr'] = PLATFORM_LANDINGS['liza-project'];
+
 export function renderSubdomainLandingHtml(projectId) {
   const data = PLATFORM_LANDINGS[projectId] || PLATFORM_LANDINGS.jobhelper;
 

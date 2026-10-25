@@ -679,19 +679,33 @@ class FabianPortfolioApp {
       `).join('');
     }
 
-    // 6. Dossier Company Logos Strip (Institutions Studied or Worked At)
+    // 6. Dossier Company Logos Strip (Accredited Employers, Partners & Affiliations)
     if (this.dom.dossierLogosMount) {
       this.dom.dossierLogosMount.innerHTML = `
         <div class="logo-strip-inner">
-          <span class="logo-strip-label">COMPANIES & INSTITUTIONS STUDIED OR WORKED AT:</span>
+          <span class="logo-strip-label">ACCREDITED PARTNERS, EMPLOYERS &amp; AFFILIATIONS:</span>
           <div class="logo-strip-row">
-            <div class="logo-badge-item" title="Money Group (Media Buyer, Full-Time)">${LOGOS.moneyGroup}</div>
-            <div class="logo-badge-item" title="Red Ventures (Growth / SEO Analyst, Full-Time)">${LOGOS.redVentures}</div>
-            <div class="logo-badge-item" title="edX Platform (Full-Time · 40M+ Sessions)">${LOGOS.edx}</div>
-            <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (Founder · $10M+ Pipeline)">${LOGOS.vivaAdvertising}</a>
-            <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (Co-Founder · 100+ Databases)">${LOGOS.linkPR}</a>
-            <div class="logo-badge-item" title="Stanford University (Innovation Fellow)">${LOGOS.stanford}</div>
-            <div class="logo-badge-item" title="Universidad Politécnica de Puerto Rico (B.S. 4.0 GPA)">${LOGOS.politecnica}</div>
+            <div class="logo-badge-item" title="Money Group (Full-Time)">${LOGOS.moneyGroup}</div>
+            <div class="logo-badge-item" title="Red Ventures (Full-Time)">${LOGOS.redVentures}</div>
+            <div class="logo-badge-item" title="edX Platform">${LOGOS.edx}</div>
+            <div class="logo-badge-item" title="Databricks Lakehouse">${LOGOS.databricks}</div>
+            <div class="logo-badge-item" title="Anthropic Claude">${LOGOS.claude}</div>
+            <div class="logo-badge-item" title="ATH Móvil Business">${LOGOS.athMovil}</div>
+            <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (My Company / Founder · $10M+ Pipeline) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
+            <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site">${LOGOS.linkPR}</a>
+            <div class="logo-badge-item" title="IBM">${LOGOS.ibm}</div>
+            <div class="logo-badge-item" title="Google">${LOGOS.google}</div>
+            <div class="logo-badge-item" title="AWS">${LOGOS.aws}</div>
+            <div class="logo-badge-item" title="Salesforce">${LOGOS.salesforce}</div>
+            <div class="logo-badge-item" title="CompTIA">${LOGOS.comptia}</div>
+            <div class="logo-badge-item" title="Boys &amp; Girls Clubs de PR">${LOGOS.boysAndGirlsClubs}</div>
+            <div class="logo-badge-item" title="Microsoft">${LOGOS.microsoft}</div>
+            <div class="logo-badge-item" title="Meta">${LOGOS.meta}</div>
+            <div class="logo-badge-item" title="Stanford University">${LOGOS.stanford}</div>
+            <div class="logo-badge-item" title="UPPR">${LOGOS.politecnica}</div>
+            <div class="logo-badge-item" title="Grupo Guayacán">${LOGOS.guayacan}</div>
+            <div class="logo-badge-item" title="Enactus">${LOGOS.enactus}</div>
+            <div class="logo-badge-item trigger-pr-coqui" title="Sol de Jayuya · Puerto Rico Heritage">${LOGOS.tainoSun}</div>
           </div>
         </div>
       `;
