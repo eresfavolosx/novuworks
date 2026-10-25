@@ -1,16 +1,12 @@
 /**
  * novu-intro.js
- * Executive Introduction Modal for novu.works Visitors
- * 
- * Behavior:
- * 1. ONLY displays if visitor arrived from novu.works (via ?from=novuworks or document.referrer).
- * 2. ONLY displays on the visitor's first visit to this specific project (persisted via localStorage).
- * 3. Never displays for direct navigation, organic searches, or returning visitors.
+ * Universal Liquid Glass Platform Architecture & Objective Bar
+ * Powered by novu.works · Fabián Vélez Vicente
  */
 (function () {
   'use strict';
 
-  // 1. Detect project ID from script tag attribute or hostname
+  // 1. Detect project ID
   var currentScript = document.currentScript;
   var projectId = currentScript ? currentScript.getAttribute('data-project') : null;
   var host = window.location.hostname.toLowerCase();
@@ -25,330 +21,225 @@
     else projectId = 'default';
   }
 
-  // 2. Strict Referral Check
-  var urlParams = new URLSearchParams(window.location.search);
-  var fromParam = urlParams.get('from');
-  var referrer = (document.referrer || '').toLowerCase();
-  var isLocalDev = host === 'localhost' || host === '127.0.0.1';
-
-  var isFromNovu = (
-    fromParam === 'novuworks' ||
-    referrer.indexOf('novu.works') !== -1 ||
-    referrer.indexOf('novuworks.web.app') !== -1 ||
-    referrer.indexOf('novuworks.firebaseapp.com') !== -1 ||
-    (isLocalDev && (fromParam === 'novuworks' || referrer.indexOf('localhost') !== -1 || referrer.indexOf('127.0.0.1') !== -1))
-  );
-
-  // STRICT RULE: If not arriving from novu.works, do not display
-  if (!isFromNovu) {
-    return;
-  }
-
-  // 3. First-Time Visit Check
-  var storageKey = 'seen_novuintro_' + projectId;
-  try {
-    if (localStorage.getItem(storageKey)) {
-      // Already viewed on a prior visit
-      return;
-    }
-  } catch (e) {
-    // If localStorage is disabled/restricted, proceed safely
-  }
-
-  // 4. Project Content Directory
   var PROJECTS = {
     bizpay: {
-      badge: 'Fintech & B2B Invoicing Platform',
+      badge: 'B2B Commercial Invoicing',
       title: 'BizPay: Commercial Payment Gateway',
-      role: 'Architected & Engineered by Fabián Vélez Vicente',
-      metrics: 'ATH Móvil Business API · Instant Checkout · Real-Time Fee Routing',
-      summary: 'Welcome from novu.works! BizPay was architected to eliminate commercial billing friction and payment delays for enterprise vendors in Puerto Rico. It directly integrates ATH Móvil Business APIs with automated fee routing, client ledger reconciliation, and zero checkout slippage.',
+      role: 'Lead Architect: Fabián Vélez Vicente',
+      metrics: 'ATH Móvil API · Instant Checkout · Zero Slippage',
+      summary: 'BizPay was engineered to eliminate commercial billing delays for Puerto Rico enterprises by coupling ATH Móvil Business APIs with automated fee routing, client ledger reconciliation, and responsive mobile-first material UI.',
       highlights: [
-        {
-          icon: '💳',
-          title: 'Live ATH Móvil Checkout Flow',
-          desc: 'Click "Pagar con ATH Móvil" to launch the business transaction modal and test the checkout flow.'
-        },
-        {
-          icon: '📊',
-          title: 'Dynamic Fee & Ledger Math',
-          desc: 'Real-time percentage and flat processing fee calculations integrated directly into commercial invoicing.'
-        },
-        {
-          icon: '⚡',
-          title: 'Responsive Material Architecture',
-          desc: 'Lightweight Material Design Lite interface optimized for lightning-fast mobile transactions.'
-        }
+        { icon: '💳', title: 'ATH Móvil Business Flow', desc: 'Direct commercial checkout integration with real-time merchant fee calculations.' },
+        { icon: '⚡', title: 'Instant Settlement', desc: 'Eliminates 3.5% international card fees with local 1.5% instant debit clearance.' },
+        { icon: '📊', title: 'Ledger Reconciliation', desc: 'Automated invoice status tracking with zero transaction slippage.' }
       ]
     },
     picta: {
-      badge: 'Assistive Tech & Computer Vision',
-      title: 'Picta: Assistive Color Vision Camera',
-      role: 'Architected & Engineered by Fabián Vélez Vicente',
-      metrics: 'Real-Time Daltonization · 6 CVD Modes · Live Color Eyedropper',
-      summary: 'Welcome from novu.works! Picta is an assistive computer vision camera application designed for people with Color Vision Deficiency (CVD). Running directly in the browser via WebRTC and SVG/WebGL color transformation matrices, it converts invisible color contrasts into distinguishable hues in real time.',
+      badge: 'Assistive Computer Vision',
+      title: 'Picta: Daltonization CVD Camera',
+      role: 'Lead Architect: Fabián Vélez Vicente',
+      metrics: 'Real-Time Daltonization · 6 CVD Modes · Speech Eyedropper',
+      summary: 'Picta is an assistive computer vision camera application designed for people with Color Vision Deficiency (CVD). Running directly in the browser via WebRTC and SVG/WebGL transformation matrices, it converts invisible color contrasts into perceptible hues in real time.',
       highlights: [
-        {
-          icon: '👁️',
-          title: 'Hardware Daltonization Boost Filters',
-          desc: 'Switch between Protanopia (red-blind), Deuteranopia (green-blind), and Tritanopia (blue-blind) corrective matrices.'
-        },
-        {
-          icon: '🎯',
-          title: 'Tap-to-Inspect Pixel Classifier',
-          desc: 'Tap or click anywhere on the live video stream to identify the exact color name, hex code, RGB value, and hear speech audio.'
-        },
-        {
-          icon: '🔬',
-          title: 'CVD Simulation Mode',
-          desc: 'Toggle simulation filters to experience firsthand how color-blind individuals perceive different environments.'
-        }
+        { icon: '👁️', title: 'Hardware Daltonization Boost', desc: 'Switch between Protanopia, Deuteranopia, and Tritanopia corrective matrices.' },
+        { icon: '🎯', title: 'Tap-to-Inspect Classifier', desc: 'Tap anywhere on the live video stream to identify exact colors with speech audio.' },
+        { icon: '🌐', title: '60 FPS WebRTC Pipeline', desc: 'Zero cloud latency: pure client-side mathematical color filtering.' }
       ]
     },
     nfc: {
-      badge: 'Mobile & Cloud Infrastructure',
-      title: 'NFC Digital Event & Verification Platform',
-      role: 'Architected & Engineered by Fabián Vélez Vicente · Link Puerto Rico',
-      metrics: 'Capacitor · Firebase · Automated Python QA Suite',
-      summary: 'Welcome from novu.works! Tocaito is a contactless event management and NFC bracelet programming platform engineered for high-density developer conferences. It pairs instant physical credential verification with an automated Python regression test suite.',
+      badge: 'Event Logistics & NFC Routing',
+      title: 'Tocaito: Dynamic NFC Event Platform',
+      role: 'Lead Architect: Fabián Vélez Vicente',
+      metrics: 'Capacitor Bridge · Firebase Firestore · Python QA Suite',
+      summary: 'Tocaito manages dynamic NFC event credentials and attendee passes with automated Python verification for continuous system reliability across conferences and community festivals.',
       highlights: [
-        {
-          icon: '📱',
-          title: 'Dynamic Link & Badge Programming',
-          desc: 'Interactive mobile console for configuring NFC bracelet redirects and attendee credentials on the fly.'
-        },
-        {
-          icon: '⚡',
-          title: 'Offline-First Edge Sync',
-          desc: 'Built with Firebase and local caching to ensure 100% check-in uptime even in network-constrained event venues.'
-        },
-        {
-          icon: '🧪',
-          title: 'Automated Python Regression QA',
-          desc: 'Hardened with automated UI routing and state persistence regression tests to guarantee zero check-in downtime.'
-        }
+        { icon: '📡', title: 'Dynamic NFC Rewriting', desc: 'Update attendee destinations over-the-air without replacing physical wristbands.' },
+        { icon: '⚡', title: 'Sub-Second Verification', desc: 'Instant RFID/NFC pass reading with offline caching for zero queue latency.' },
+        { icon: '🧪', title: 'Automated Python QA', desc: 'Headless end-to-end testing suite validating routing and state integrity.' }
       ]
     },
     hackea: {
-      badge: 'Civic Innovation & Community Mentorship',
+      badge: 'Social Impact Mentorship',
       title: 'Hackea por una Causa: Mentorship Network',
-      role: 'Conceived & Co-Founded by Fabián Vélez Vicente',
-      metrics: 'Social Impact Hackathon Winner · 120+ Mentor Hours · 6 Partner Centers',
-      summary: 'Welcome from novu.works! Conceived and built during the Hackea por una Causa civic hackathon to combat youth dropout rates in Puerto Rico. The platform provides a streamlined intake engine and calendar scheduling system connecting students with professional STEM mentors across Boys & Girls Clubs.',
+      role: 'Lead Architect: Fabián Vélez Vicente',
+      metrics: 'Boys & Girls Clubs Winner · 120+ Mentor Hours · 6 Centers',
+      summary: 'An appointment scheduling and volunteer recruitment network connecting at-risk youth with professional STEM mentors across Boys & Girls Clubs and community centers in Puerto Rico.',
       highlights: [
-        {
-          icon: '📅',
-          title: 'Volunteer Scheduling Engine',
-          desc: 'Automated intake workflow coordinating volunteer availability with youth center schedules.'
-        },
-        {
-          icon: '🤝',
-          title: 'Community Impact at Scale',
-          desc: 'Over 120 hours of STEM mentorship delivered across 6 community partner centers in Puerto Rico.'
-        },
-        {
-          icon: '🏆',
-          title: 'Hackathon Award Winner',
-          desc: 'Recognized for civic impact, rapid emergency prototyping, and community empowerment.'
-        }
+        { icon: '🤝', title: '1-on-1 Mentor Matching', desc: 'Connects students directly with verified software and design mentors.' },
+        { icon: '📅', title: 'Center Slot Reservation', desc: 'Live booking pipeline across San Juan, Bayamón, and Ponce hubs.' },
+        { icon: '🏆', title: 'Hackathon Grand Prize', desc: 'Recognized for measurable social impact and community tech enablement.' }
       ]
     },
     default: {
-      badge: 'Production System Showcase',
-      title: 'Production System Architecture',
+      badge: 'Production Engineering Project',
+      title: 'Novu Works Verified Platform',
       role: 'Architected by Fabián Vélez Vicente',
-      metrics: 'Production Deployment · Open Source',
-      summary: 'Welcome from novu.works! You are exploring a production system architected and engineered by Fabián Vélez Vicente.',
+      metrics: 'Full-Stack Architecture · Zero Downtime',
+      summary: 'This platform is engineered by Fabián Vélez Vicente as part of the Novu Works enterprise and social impact ecosystem.',
       highlights: [
-        {
-          icon: '🚀',
-          title: 'Live Deployed System',
-          desc: 'Explore the full interactive application directly in your browser.'
-        },
-        {
-          icon: '💻',
-          title: 'Open Source Repository',
-          desc: 'Review the source code, architecture, and documentation on GitHub.'
-        }
+        { icon: '🚀', title: 'Live Production Architecture', desc: 'Deployed with high-availability cloud infrastructure and strict QA.' }
       ]
     }
   };
 
   var project = PROJECTS[projectId] || PROJECTS.default;
 
-  // 5. Build and inject modal
-  function showModal() {
+  // 2. Inject CSS Styles
+  var style = document.createElement('style');
+  style.textContent = [
+    '#novu-platform-topbar {',
+    '  position: fixed;',
+    '  top: 0;',
+    '  left: 0;',
+    '  right: 0;',
+    '  height: 38px;',
+    '  background: rgba(10, 12, 18, 0.92);',
+    '  backdrop-filter: blur(24px) saturate(180%);',
+    '  -webkit-backdrop-filter: blur(24px) saturate(180%);',
+    '  border-bottom: 1px solid rgba(255, 255, 255, 0.12);',
+    '  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);',
+    '  z-index: 9999999;',
+    '  display: flex;',
+    '  align-items: center;',
+    '  justify-content: space-between;',
+    '  padding: 0 16px;',
+    '  box-sizing: border-box;',
+    '  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;',
+    '  font-size: 11.5px;',
+    '  color: #e2e8f0;',
+    '}',
+    'body { margin-top: 38px !important; }',
+    '.np-left { display: flex; align-items: center; gap: 10px; }',
+    '.np-badge { display: inline-flex; align-items: center; gap: 5px; color: #d4af37; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 10px; }',
+    '.np-dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; box-shadow: 0 0 6px #10b981; }',
+    '.np-name { font-weight: 600; color: #ffffff; }',
+    '.np-right { display: flex; align-items: center; gap: 8px; }',
+    '.np-btn-blueprint { background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4); color: #f3e5ab; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }',
+    '.np-btn-blueprint:hover { background: rgba(212, 175, 55, 0.28); color: #ffffff; }',
+    '.np-btn-home { color: #94a3b8; text-decoration: none; font-size: 11px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; transition: color 0.2s ease; }',
+    '.np-btn-home:hover { color: #ffffff; background: rgba(255, 255, 255, 0.06); }',
+    '#novuintro-overlay {',
+    '  position: fixed;',
+    '  inset: 0;',
+    '  background: rgba(5, 8, 16, 0.85);',
+    '  backdrop-filter: blur(16px);',
+    '  -webkit-backdrop-filter: blur(16px);',
+    '  z-index: 10000000;',
+    '  display: flex;',
+    '  align-items: center;',
+    '  justify-content: center;',
+    '  padding: 16px;',
+    '  box-sizing: border-box;',
+    '  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;',
+    '}',
+    '#novuintro-card {',
+    '  width: 100%;',
+    '  max-width: 560px;',
+    '  max-height: 90vh;',
+    '  overflow-y: auto;',
+    '  background: linear-gradient(135deg, rgba(20, 24, 38, 0.98) 0%, rgba(10, 12, 20, 0.99) 100%);',
+    '  border: 1px solid rgba(255, 255, 255, 0.14);',
+    '  border-radius: 20px;',
+    '  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(212, 175, 55, 0.12);',
+    '  color: #f1f5f9;',
+    '  padding: 28px;',
+    '  box-sizing: border-box;',
+    '}',
+    '.novuintro-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }',
+    '.novuintro-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35); color: #d4af37; font-size: 10.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; }',
+    '.novuintro-close-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }',
+    '.novuintro-title { font-size: 20px; font-weight: 800; color: #ffffff; margin: 0 0 6px; letter-spacing: -0.01em; }',
+    '.novuintro-role { font-size: 12.5px; color: #d4af37; font-weight: 600; margin-bottom: 6px; }',
+    '.novuintro-metrics-pill { display: inline-block; font-size: 11px; color: #94a3b8; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 4px 10px; border-radius: 6px; margin-bottom: 12px; }',
+    '.novuintro-summary { font-size: 13px; line-height: 1.6; color: #cbd5e1; margin-bottom: 16px; background: rgba(255, 255, 255, 0.03); border-left: 3px solid #d4af37; padding: 12px; border-radius: 0 8px 8px 0; }',
+    '.novuintro-highlights { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }',
+    '.novuintro-item { display: flex; align-items: flex-start; gap: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); padding: 10px 12px; border-radius: 10px; }',
+    '.novuintro-item-icon { font-size: 18px; flex-shrink: 0; }',
+    '.novuintro-item-title { font-size: 12.5px; font-weight: 700; color: #f8fafc; margin-bottom: 2px; }',
+    '.novuintro-item-desc { font-size: 11.5px; color: #94a3b8; line-height: 1.4; }',
+    '.novuintro-actions { display: flex; gap: 10px; }',
+    '.novuintro-btn-primary { flex: 1; background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.12) 100%); border: 1px solid #d4af37; color: #ffffff; font-size: 13px; font-weight: 700; padding: 11px 16px; border-radius: 10px; cursor: pointer; }',
+    '.novuintro-btn-secondary { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); color: #cbd5e1; font-size: 12.5px; font-weight: 600; padding: 11px 14px; border-radius: 10px; text-decoration: none; display: inline-flex; align-items: center; }',
+    '@media (max-width: 540px) {',
+    '  .np-name { display: none; }',
+    '  .novuintro-actions { flex-direction: column; }',
+    '}'
+  ].join('
+');
+  document.head.appendChild(style);
+
+  // 3. Inject Top Bar
+  var topBar = document.createElement('div');
+  topBar.id = 'novu-platform-topbar';
+  topBar.innerHTML = [
+    '<div class="np-left">',
+    '  <span class="np-badge"><span class="np-dot"></span> NOVU.WORKS // ' + project.badge + '</span>',
+    '  <span class="np-name">' + project.title + '</span>',
+    '</div>',
+    '<div class="np-right">',
+    '  <button class="np-btn-blueprint" id="np-btn-open-blueprint">Platform Objective Blueprint</button>',
+    '  <a class="np-btn-home" href="https://novu.works#projects">&larr; Return to Portfolio</a>',
+    '</div>'
+  ].join('');
+  document.body.prepend(topBar);
+
+  // 4. Modal Injection
+  function showBlueprintModal() {
     if (document.getElementById('novuintro-overlay')) return;
 
     var overlay = document.createElement('div');
     overlay.id = 'novuintro-overlay';
-    overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-labelledby', 'novuintro-title');
-
     overlay.innerHTML = [
-      '<style>',
-      '  #novuintro-overlay {',
-      '    position: fixed;',
-      '    top: 0;',
-      '    left: 0;',
-      '    width: 100vw;',
-      '    height: 100vh;',
-      '    background: rgba(5, 8, 16, 0.82);',
-      '    backdrop-filter: blur(10px);',
-      '    -webkit-backdrop-filter: blur(10px);',
-      '    z-index: 2147483647;',
-      '    display: flex;',
-      '    align-items: center;',
-      '    justify-content: center;',
-      '    padding: 16px;',
-      '    box-sizing: border-box;',
-      '    opacity: 0;',
-      '    animation: novuOverlayIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;',
-      '    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;',
-      '  }',
-      '  @keyframes novuOverlayIn {',
-      '    to { opacity: 1; }',
-      '  }',
-      '  @keyframes novuCardSlide {',
-      '    from { opacity: 0; transform: translateY(24px) scale(0.96); }',
-      '    to { opacity: 1; transform: translateY(0) scale(1); }',
-      '  }',
-      '  #novuintro-card {',
-      '    position: relative;',
-      '    width: 100%;',
-      '    max-width: 580px;',
-      '    max-height: 90vh;',
-      '    overflow-y: auto;',
-      '    background: linear-gradient(145deg, rgba(20, 27, 45, 0.98) 0%, rgba(10, 14, 26, 0.99) 100%);',
-      '    border: 1px solid rgba(255, 255, 255, 0.14);',
-      '    border-radius: 20px;',
-      '    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85), 0 0 40px rgba(56, 189, 248, 0.15);',
-      '    color: #f1f5f9;',
-      '    padding: 28px;',
-      '    box-sizing: border-box;',
-      '    animation: novuCardSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;',
-      '  }',
-      '  #novuintro-card::-webkit-scrollbar { width: 6px; }',
-      '  #novuintro-card::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 3px; }',
-      '  .novuintro-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }',
-      '  .novuintro-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 9999px; }',
-      '  .novuintro-badge-dot { width: 7px; height: 7px; background: #38bdf8; border-radius: 50%; box-shadow: 0 0 8px #38bdf8; animation: novuPulse 2s infinite; }',
-      '  @keyframes novuPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }',
-      '  .novuintro-close-btn { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1; transition: all 0.15s ease; }',
-      '  .novuintro-close-btn:hover { background: rgba(255, 255, 255, 0.15); color: #ffffff; transform: scale(1.05); }',
-      '  .novuintro-header { margin-bottom: 14px; }',
-      '  .novuintro-title { font-size: 21px; font-weight: 800; color: #ffffff; line-height: 1.25; margin: 0 0 6px 0; letter-spacing: -0.02em; }',
-      '  .novuintro-role { font-size: 13px; color: #38bdf8; font-weight: 600; margin-bottom: 4px; }',
-      '  .novuintro-metrics-pill { display: inline-block; font-size: 11px; font-weight: 600; color: #94a3b8; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 4px 10px; border-radius: 6px; margin-top: 6px; }',
-      '  .novuintro-summary { font-size: 13.5px; line-height: 1.6; color: #cbd5e1; margin: 14px 0; background: rgba(255, 255, 255, 0.025); border-left: 3px solid #38bdf8; padding: 12px 14px; border-radius: 0 8px 8px 0; }',
-      '  .novuintro-section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; font-weight: 700; margin: 16px 0 10px 0; }',
-      '  .novuintro-highlights { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }',
-      '  .novuintro-item { display: flex; align-items: flex-start; gap: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); padding: 10px 12px; border-radius: 10px; }',
-      '  .novuintro-item-icon { font-size: 18px; flex-shrink: 0; line-height: 1.2; }',
-      '  .novuintro-item-content { flex: 1; }',
-      '  .novuintro-item-title { font-size: 13px; font-weight: 700; color: #f8fafc; margin-bottom: 2px; }',
-      '  .novuintro-item-desc { font-size: 12px; color: #94a3b8; line-height: 1.45; }',
-      '  .novuintro-actions { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }',
-      '  .novuintro-btn-primary { flex: 1; min-width: 170px; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: #ffffff; border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35); font-size: 14px; font-weight: 700; padding: 12px 20px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.15s ease; }',
-      '  .novuintro-btn-primary:hover { background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45); }',
-      '  .novuintro-btn-secondary { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); color: #cbd5e1; font-size: 13px; font-weight: 600; padding: 12px 16px; border-radius: 10px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.15s ease; }',
-      '  .novuintro-btn-secondary:hover { background: rgba(255, 255, 255, 0.1); color: #ffffff; border-color: rgba(255, 255, 255, 0.2); }',
-      '  .novuintro-footer-note { margin-top: 14px; font-size: 11px; color: #64748b; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }',
-      '  @media (max-width: 480px) {',
-      '    #novuintro-card { padding: 20px 16px; }',
-      '    .novuintro-title { font-size: 18px; }',
-      '    .novuintro-actions { flex-direction: column; }',
-      '    .novuintro-btn-primary, .novuintro-btn-secondary { width: 100%; }',
-      '  }',
-      '</style>',
       '<div id="novuintro-card">',
       '  <div class="novuintro-topbar">',
       '    <div class="novuintro-badge">',
-      '      <span class="novuintro-badge-dot"></span>',
       '      <span>novu.works · ' + project.badge + '</span>',
       '    </div>',
-      '    <button class="novuintro-close-btn" id="novuintro-btn-close" aria-label="Close introduction">&times;</button>',
+      '    <button class="novuintro-close-btn" id="novuintro-btn-close">&times;</button>',
       '  </div>',
-      '  <div class="novuintro-header">',
-      '    <h2 class="novuintro-title" id="novuintro-title">' + project.title + '</h2>',
-      '    <div class="novuintro-role">' + project.role + '</div>',
-      '    <span class="novuintro-metrics-pill">' + project.metrics + '</span>',
-      '  </div>',
+      '  <h2 class="novuintro-title">' + project.title + '</h2>',
+      '  <div class="novuintro-role">' + project.role + '</div>',
+      '  <div class="novuintro-metrics-pill">' + project.metrics + '</div>',
       '  <div class="novuintro-summary">' + project.summary + '</div>',
-      '  <div class="novuintro-section-label">Key Capabilities to Test</div>',
       '  <div class="novuintro-highlights">' +
-            project.highlights.map(function (h) {
-              return '<div class="novuintro-item">' +
-                '<span class="novuintro-item-icon">' + h.icon + '</span>' +
-                '<div class="novuintro-item-content">' +
-                  '<div class="novuintro-item-title">' + h.title + '</div>' +
-                  '<div class="novuintro-item-desc">' + h.desc + '</div>' +
-                '</div>' +
-              '</div>';
-            }).join('') +
+           project.highlights.map(function (h) {
+             return '<div class="novuintro-item">' +
+               '<span class="novuintro-item-icon">' + h.icon + '</span>' +
+               '<div>' +
+                 '<div class="novuintro-item-title">' + h.title + '</div>' +
+                 '<div class="novuintro-item-desc">' + h.desc + '</div>' +
+               '</div>' +
+             '</div>';
+           }).join('') +
       '  </div>',
       '  <div class="novuintro-actions">',
-      '    <button class="novuintro-btn-primary" id="novuintro-btn-explore">',
-      '      <span>Explore Live System</span>',
-      '      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>',
-      '    </button>',
-      '    <a class="novuintro-btn-secondary" id="novuintro-btn-back" href="https://novu.works#projects">',
-      '      <span>&larr; Return to novu.works</span>',
-      '    </a>',
-      '  </div>',
-      '  <div class="novuintro-footer-note">',
-      '    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
-      '    <span>Showing this introduction because you arrived from novu.works. You will not see this again.</span>',
+      '    <button class="novuintro-btn-primary" id="novuintro-btn-explore">Launch Interactive Features &rarr;</button>',
+      '    <a class="novuintro-btn-secondary" href="https://novu.works#projects">&larr; Back to novu.works</a>',
       '  </div>',
       '</div>'
-    ].join('\n');
+    ].join('');
 
     document.body.appendChild(overlay);
 
-    function dismiss() {
-      try {
-        localStorage.setItem(storageKey, 'seen');
-      } catch (e) {}
-
-      overlay.style.transition = 'opacity 0.2s ease';
-      overlay.style.opacity = '0';
-      setTimeout(function () {
-        if (overlay.parentNode) {
-          overlay.parentNode.removeChild(overlay);
-        }
-      }, 200);
+    function close() {
+      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
     }
 
-    var btnExplore = document.getElementById('novuintro-btn-explore');
-    var btnClose = document.getElementById('novuintro-btn-close');
-    var btnBack = document.getElementById('novuintro-btn-back');
-
-    if (btnExplore) btnExplore.addEventListener('click', dismiss);
-    if (btnClose) btnClose.addEventListener('click', dismiss);
-    if (btnBack) {
-      btnBack.addEventListener('click', function () {
-        try {
-          localStorage.setItem(storageKey, 'seen');
-        } catch (e) {}
-      });
-    }
-
+    overlay.querySelector('#novuintro-btn-close').addEventListener('click', close);
+    overlay.querySelector('#novuintro-btn-explore').addEventListener('click', close);
     overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) dismiss();
-    });
-
-    document.addEventListener('keydown', function onKey(e) {
-      if (e.key === 'Escape' || e.keyCode === 27) {
-        dismiss();
-        document.removeEventListener('keydown', onKey);
-      }
+      if (e.target === overlay) close();
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', showModal);
-  } else {
-    setTimeout(showModal, 150);
+  document.getElementById('np-btn-open-blueprint').addEventListener('click', showBlueprintModal);
+
+  // Auto-display modal if arriving from novu.works for the first time
+  var urlParams = new URLSearchParams(window.location.search);
+  var fromParam = urlParams.get('from');
+  var storageKey = 'seen_blueprint_' + projectId;
+  if (fromParam === 'novuworks' && !localStorage.getItem(storageKey)) {
+    try { localStorage.setItem(storageKey, '1'); } catch (_) {}
+    showBlueprintModal();
   }
 })();

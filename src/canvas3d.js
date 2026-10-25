@@ -46,10 +46,11 @@ export class SpatialCanvas3D {
     this.isTabVisible = !document.hidden;
     this.scratchVec3 = new THREE.Vector3();
 
-    // Visualizer mode state
+    // Visualizer & Initial Loading state
     this.isVisualizerMode = false;
-    this.targetRootPosition = new THREE.Vector3(7.5, 0.5, -2.0);
-    this.targetRootScale = new THREE.Vector3(1.05, 1.05, 1.05);
+    this.isInitialLoading = typeof document !== 'undefined' && Boolean(document.getElementById('particle-loading-screen'));
+    this.targetRootPosition = new THREE.Vector3(0, 0, 0);
+    this.targetRootScale = new THREE.Vector3(1.25, 1.25, 1.25);
     this.targetCameraZ = 46;
 
     // Telemetry tracking
@@ -575,6 +576,15 @@ export class SpatialCanvas3D {
   updateRootGroupPosition() {
     if (!this.rootGroup) return;
     const isDesktop = (window.innerWidth || this.width) >= 1024;
+
+    if (this.isInitialLoading) {
+      // Prominently centered in upper viewport for cinematic NovuWorks particle startup animation
+      this.targetRootPosition.set(0, isDesktop ? 1.6 : 2.0, 0);
+      const s = isDesktop ? 1.45 : 1.15;
+      this.targetRootScale.set(s, s, s);
+      return;
+    }
+
     if (this.isVisualizerMode) {
       // Centered and monumentally scaled for full-canvas zen mode
       this.targetRootPosition.set(0, 0, 0);
@@ -589,6 +599,11 @@ export class SpatialCanvas3D {
       this.targetRootPosition.set(0, -0.6, -4.5);
       this.targetRootScale.set(0.95, 0.95, 0.95);
     }
+  }
+
+  finishInitialLoading() {
+    this.isInitialLoading = false;
+    this.updateRootGroupPosition();
   }
 
   // ─────────────────────────────────────────────────────────────

@@ -22,6 +22,7 @@ import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
 import { getLanguage, resolveInitialLanguage, switchLanguage, updateDomTranslations, updateProfileDataForLanguage } from './i18n.js';
+import { renderSubdomainLandingHtml, bindSubdomainLandingEvents } from './subdomain-landings.js';
 
 class FabianPortfolioApp {
   constructor() {
@@ -63,6 +64,10 @@ class FabianPortfolioApp {
       dossierStatsMount: document.getElementById('dossier-stats-mount'),
       disciplineModal: document.getElementById('discipline-modal'),
       dialogContentBody: document.getElementById('dialog-content-body'),
+      platformModal: document.getElementById('subdomain-platform-modal'),
+      platformModalBody: document.getElementById('subdomain-platform-modal-body'),
+      topNavDrawer: document.getElementById('top-navigation-drawer'),
+      mobileMenuToggleBtn: document.getElementById('btn-mobile-menu-toggle'),
       resumeModal: document.getElementById('resume-export-modal'),
       recruiterModal: document.getElementById('recruiter-fasttrack-modal'),
       arcadeModal: document.getElementById('cyber-arcade-modal'),
@@ -323,6 +328,9 @@ class FabianPortfolioApp {
     const dismiss = () => {
       if (isDismissed) return;
       isDismissed = true;
+      if (this.canvas3d && typeof this.canvas3d.finishInitialLoading === 'function') {
+        this.canvas3d.finishInitialLoading();
+      }
       loadingScreen.classList.add('is-loaded');
       document.body.classList.add('loaded');
       try {
@@ -350,20 +358,20 @@ class FabianPortfolioApp {
       }
     });
 
-    // Smooth cinematic progress counter (0% to 100% in ~1200ms)
+    // Smooth cinematic progress counter (0% to 100% in ~2000ms) showcasing the 3D particle NovuWorks Monogram
     const startTime = performance.now();
-    const duration = 1200;
+    const duration = 2000;
 
     // Safety timeout ensures dismissal even if RAF is throttled or suspended
     const safetyTimer = setTimeout(() => {
       dismiss();
-    }, 1500);
+    }, 2800);
 
     const steps = [
-      { at: 0.15, text: 'INITIALIZING 3D PARTICLE MATRIX...' },
-      { at: 0.45, text: 'NORMALIZING 40M+ REVOPS TELEMETRY...' },
-      { at: 0.75, text: 'CALIBRATING DESIGN × ENGINEERING...' },
-      { at: 0.95, text: 'SYSTEM READY // WELCOME.' }
+      { at: 0.12, text: 'QUANTUM PARTICLES // NOVUWORKS MATRIX' },
+      { at: 0.38, text: 'ASSEMBLING GOLD & PLATINUM MONOGRAM...' },
+      { at: 0.68, text: 'NORMALIZING 40M+ SESSIONS & REVOPS TELEMETRY...' },
+      { at: 0.90, text: 'SYSTEM READY // ENTERING NOVU.WORKS' }
     ];
 
     const frame = (now) => {
@@ -384,7 +392,7 @@ class FabianPortfolioApp {
         requestAnimationFrame(frame);
       } else {
         clearTimeout(safetyTimer);
-        setTimeout(dismiss, 120);
+        setTimeout(dismiss, 140);
       }
     };
 
@@ -673,11 +681,8 @@ class FabianPortfolioApp {
     if (!containerEl || !projects) return;
     containerEl.innerHTML = projects.map((p) => {
       let projLogo = '';
-      if (p.id === 'bizpay') projLogo = LOGOS.athMovil;
-      else if (p.id === 'jobhelper') projLogo = LOGOS.claude;
-      else if (p.id === 'picta') projLogo = LOGOS.novuWorks;
-      else if (p.id === 'nfc-platform' || p.id === 'liza-project') projLogo = LOGOS.linkPR;
-      else if (p.id === 'hackeaporunacausa') projLogo = LOGOS.boysAndGirlsClubs;
+      if (p.id === 'bizpay' || p.id === 'jobhelper' || p.id === 'picta') projLogo = LOGOS.novuWorks;
+      else if (p.id === 'nfc-platform' || p.id === 'liza-project' || p.id === 'hackeaporunacausa') projLogo = LOGOS.linkPR;
 
       return `
       <div class="standalone-project-card">
@@ -700,25 +705,62 @@ class FabianPortfolioApp {
         <div class="proj-tags-row">
           ${p.tags.map((t) => `<span class="proj-tag-pill">${t}</span>`).join('')}
         </div>
-        ${(p.subdomainUrl || p.githubUrl) ? `
-          <div class="proj-actions-row">
-            ${p.subdomainUrl ? `
-              <a href="${p.subdomainUrl}" target="_blank" rel="noopener noreferrer" class="proj-action-btn subdomain-btn" title="Open live production app at ${p.subdomainUrl}">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                <span>${p.subdomainLabel || 'Live App'}</span>
-              </a>
-            ` : ''}
-            ${p.githubUrl ? `
-              <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="proj-action-btn github-btn" title="View open-source repository on GitHub">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                <span>GitHub</span>
-              </a>
-            ` : ''}
-          </div>
-        ` : ''}
+        <div class="proj-actions-row">
+          <button type="button" class="proj-action-btn showcase-landing-btn" data-landing-id="${p.id}" title="Open Interactive Liquid Glass Landing Page for ${p.name}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span>Platform Landing</span>
+          </button>
+          ${p.subdomainUrl ? `
+            <a href="${p.subdomainUrl}" target="_blank" rel="noopener noreferrer" class="proj-action-btn subdomain-btn" title="Open live production app at ${p.subdomainUrl}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>${p.subdomainLabel || 'Live App'}</span>
+            </a>
+          ` : ''}
+          ${p.githubUrl ? `
+            <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="proj-action-btn github-btn" title="View open-source repository on GitHub">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              <span>GitHub</span>
+            </a>
+          ` : ''}
+        </div>
       </div>
     `;
     }).join('');
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Open Subdomain Platform Interactive Landing Showcase
+  // ─────────────────────────────────────────────────────────────
+  openSubdomainLanding(projectId) {
+    if (!this.dom.platformModal || !this.dom.platformModalBody) return;
+
+    let targetId = projectId;
+    if (targetId === 'nfc') targetId = 'nfc-platform';
+    if (targetId === 'hackea') targetId = 'hackeaporunacausa';
+    if (targetId === 'liza' || targetId === 'linkpr') targetId = 'liza-project';
+
+    this.dom.platformModalBody.innerHTML = renderSubdomainLandingHtml(targetId);
+    bindSubdomainLandingEvents(targetId, this.dom.platformModal);
+
+    try {
+      this.dom.platformModal.showModal();
+      audio.playClick();
+    } catch (_) {
+      this.dom.platformModal.setAttribute('open', '');
+    }
+
+    try {
+      history.replaceState(null, document.title, `#project-${targetId}`);
+    } catch (_) {}
+  }
+
+  closeTopNavDrawer() {
+    if (this.dom.topNavDrawer) {
+      this.dom.topNavDrawer.classList.remove('is-open');
+    }
+    if (this.dom.mobileMenuToggleBtn) {
+      this.dom.mobileMenuToggleBtn.setAttribute('aria-expanded', 'false');
+    }
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -1461,13 +1503,65 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
   // Event Binding
   // ─────────────────────────────────────────────────────────────
   bindEvents() {
-    // Navigation Tabs (Desktop & Mobile)
-    document.querySelectorAll('.nav-tab, .dock-btn').forEach((btn) => {
+    // Navigation Tabs (Desktop & Top Navigation Drawer)
+    document.querySelectorAll('.nav-tab, .top-nav-tab, .dock-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const view = btn.dataset.view;
-        if (view) this.switchView(view);
+        if (view) {
+          this.switchView(view);
+          this.closeTopNavDrawer();
+        }
       });
     });
+
+    // Mobile Top Navigation Menu Toggle (Appears smoothly from top)
+    const mobileMenuBtn = document.getElementById('btn-mobile-menu-toggle');
+    const topNavDrawer = document.getElementById('top-navigation-drawer');
+    if (mobileMenuBtn && topNavDrawer) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = topNavDrawer.classList.toggle('is-open');
+        mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+        try { audio.playClick(); } catch (_) {}
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && topNavDrawer.classList.contains('is-open')) {
+          this.closeTopNavDrawer();
+        }
+      });
+    }
+
+    // Platform Landing Triggers (from Top Drawer, Project Cards, and Direct Clicks)
+    document.addEventListener('click', (e) => {
+      const landingBtn = e.target.closest('[data-landing-id], [data-landing]');
+      if (landingBtn) {
+        const id = landingBtn.dataset.landingId || landingBtn.dataset.landing;
+        if (id) {
+          e.preventDefault();
+          this.openSubdomainLanding(id);
+          this.closeTopNavDrawer();
+        }
+      }
+    });
+
+    // URL Hash Routing for direct deep links (#jobhelper, #bizpay, #project-picta, etc.)
+    const checkHashRoute = () => {
+      const hash = window.location.hash.toLowerCase().replace('#', '');
+      if (!hash) return;
+      if (hash.startsWith('project-')) {
+        const id = hash.replace('project-', '');
+        this.openSubdomainLanding(id);
+      } else if (['jobhelper', 'bizpay', 'picta', 'nfc', 'nfc-platform', 'hackea', 'hackeaporunacausa', 'liza', 'linkpr', 'liza-project'].includes(hash)) {
+        this.openSubdomainLanding(hash);
+      } else if (hash === 'menu' || hash === 'navigation') {
+        const topNavDrawer = document.getElementById('top-navigation-drawer');
+        const mobileMenuBtn = document.getElementById('btn-mobile-menu-toggle');
+        topNavDrawer?.classList.add('is-open');
+        mobileMenuBtn?.setAttribute('aria-expanded', 'true');
+      }
+    };
+    window.addEventListener('hashchange', checkHashRoute);
+    setTimeout(checkHashRoute, 400);
 
     // Brand Home Link
     document.getElementById('brand-home')?.addEventListener('click', (e) => {
