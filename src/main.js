@@ -322,6 +322,9 @@ class FabianPortfolioApp {
     const loadingScreen = document.getElementById('particle-loading-screen');
     if (!loadingScreen) return;
 
+    if (this.loadingSafetyTimer) clearTimeout(this.loadingSafetyTimer);
+    if (this.loadingAutoDismissTimer) clearTimeout(this.loadingAutoDismissTimer);
+
     const progressBar = document.getElementById('loading-bar-progress');
     const statusText = document.getElementById('loading-status-text');
     const percentage = document.getElementById('loading-percentage');
@@ -331,6 +334,9 @@ class FabianPortfolioApp {
     const dismiss = () => {
       if (isDismissed) return;
       isDismissed = true;
+      if (this.loadingSafetyTimer) clearTimeout(this.loadingSafetyTimer);
+      if (this.loadingAutoDismissTimer) clearTimeout(this.loadingAutoDismissTimer);
+
       if (this.canvas3d && typeof this.canvas3d.finishInitialLoading === 'function') {
         this.canvas3d.finishInitialLoading();
       }
@@ -363,21 +369,22 @@ class FabianPortfolioApp {
       dismiss();
     };
 
-    // Smooth cinematic progress counter (~2600ms) showcasing the 3D particle matrix & authentic signature sign-off
+    // Smooth cinematic progress counter (~5400ms) showcasing the 3D particle matrix, identity & vector signature sign-off
     const startTime = performance.now();
-    const duration = 2600;
+    const duration = 5400;
 
     // Safety timeout ensures dismissal even if RAF is throttled or suspended
-    const safetyTimer = setTimeout(() => {
+    this.loadingSafetyTimer = setTimeout(() => {
       dismiss();
-    }, 3800);
+    }, 15000);
 
     const steps = [
-      { at: 0.10, text: 'QUANTUM PARTICLES // NOVUWORKS MATRIX' },
-      { at: 0.30, text: 'AUTHENTICATING IDENTITY // FABIÁN VÉLEZ VICENTE' },
-      { at: 0.55, text: 'DYNAMIC VECTOR SIGNATURE // VERIFIED SIGN-OFF' },
-      { at: 0.80, text: 'CALIBRATING REVOPS & MEDIA ARCHITECTURE (40M+ SESSIONS)...' },
-      { at: 0.98, text: 'SYSTEM READY // ENTER NOVU.WORKS' }
+      { at: 0.05, text: 'QUANTUM PARTICLES // NOVUWORKS MATRIX' },
+      { at: 0.20, text: 'AUTHENTICATING IDENTITY // FABIÁN VÉLEZ VICENTE' },
+      { at: 0.42, text: 'EXECUTING HANDWRITTEN CALLIGRAPHIC SIGN-OFF...' },
+      { at: 0.72, text: 'ACCREDITING VERIFIED SIGN-OFF // 40M+ SESSIONS RECONCILED' },
+      { at: 0.88, text: 'CALIBRATING REVOPS ARCHITECTURE // SYSTEM VERIFIED' },
+      { at: 0.99, text: '✦ SYSTEM READY // ENTER NOVU.WORKS' }
     ];
 
     const frame = (now) => {
@@ -397,8 +404,16 @@ class FabianPortfolioApp {
       if (progress < 1) {
         requestAnimationFrame(frame);
       } else {
-        clearTimeout(safetyTimer);
-        setTimeout(dismiss, 450);
+        if (this.loadingSafetyTimer) clearTimeout(this.loadingSafetyTimer);
+        if (statusText) statusText.textContent = '✦ SYSTEM READY // IDENTITY VERIFIED';
+        if (percentage) percentage.textContent = '100%';
+        loadingScreen.classList.add('is-ready');
+
+        // Generous dwell time (4500ms) so visitor can take in the completed signature & name,
+        // or click 'ENTER EXPERIENCE' / press ENTER / click anywhere at will
+        this.loadingAutoDismissTimer = setTimeout(() => {
+          dismiss();
+        }, 4500);
       }
     };
 
@@ -409,8 +424,19 @@ class FabianPortfolioApp {
     const loadingScreen = document.getElementById('particle-loading-screen');
     if (!loadingScreen) return;
 
+    if (this.loadingSafetyTimer) clearTimeout(this.loadingSafetyTimer);
+    if (this.loadingAutoDismissTimer) clearTimeout(this.loadingAutoDismissTimer);
+
     document.body.classList.remove('loaded');
     loadingScreen.classList.remove('is-loaded');
+    loadingScreen.classList.remove('is-ready');
+
+    const progressBar = document.getElementById('loading-bar-progress');
+    const percentage = document.getElementById('loading-percentage');
+    const statusText = document.getElementById('loading-status-text');
+    if (progressBar) progressBar.style.width = '0%';
+    if (percentage) percentage.textContent = '0%';
+    if (statusText) statusText.textContent = 'INITIALIZING 3D PARTICLE MATRIX...';
 
     if (this.canvas3d) {
       this.canvas3d.isInitialLoading = true;

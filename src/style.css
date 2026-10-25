@@ -1131,8 +1131,47 @@ body.visualizer-mode .webgl-canvas-layer:active {
   transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.executive-signature-card.is-animating .sig-first {
+  animation: sigFirstNameReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.executive-signature-card.is-animating .sig-gold-part {
+  animation: sigGoldGleam 2.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes sigFirstNameReveal {
+  0% {
+    opacity: 0.2;
+    transform: translateY(4px);
+    letter-spacing: -0.04em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: -0.02em;
+  }
+}
+
+@keyframes sigGoldGleam {
+  0% {
+    filter: brightness(0.85) drop-shadow(0 0 0px transparent);
+  }
+  35% {
+    filter: brightness(1.45) drop-shadow(0 0 12px rgba(212, 175, 55, 0.7));
+  }
+  100% {
+    filter: brightness(1) drop-shadow(0 0 3px rgba(212, 175, 55, 0.2));
+  }
+}
+
 .executive-signature-card.is-animating .sig-underline-bar {
-  width: 75%;
+  animation: sigUnderlineExpand 2.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sigUnderlineExpand {
+  0% { width: 0%; opacity: 0; }
+  15% { opacity: 1; }
+  100% { width: 85%; opacity: 1; }
 }
 
 .sig-title {
@@ -1172,8 +1211,8 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .signature-stage {
   position: relative;
   width: 100%;
-  max-width: 380px;
-  height: 150px;
+  max-width: 420px;
+  height: 185px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1184,9 +1223,9 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .sig-vector-svg {
   width: 100%;
   height: 100%;
-  max-height: 140px;
+  max-height: 175px;
   overflow: visible;
-  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.28));
+  filter: drop-shadow(0 4px 16px rgba(212, 175, 55, 0.35));
 }
 
 .sig-ink-path {
@@ -1196,24 +1235,28 @@ body.visualizer-mode .webgl-canvas-layer:active {
   opacity: 0.15;
 }
 
-/* Dynamic Calligraphic Wipe Reveal Animation */
+/* Dynamic Calligraphic Wipe Reveal Animation (3.2s pacing) */
 .executive-signature-card.is-animating .sig-ink-path {
-  animation: sigCalligraphyReveal 1.6s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+  animation: sigCalligraphyReveal 3.2s cubic-bezier(0.28, 0.12, 0.28, 1) forwards;
 }
 
 @keyframes sigCalligraphyReveal {
   0% {
     clip-path: inset(0 100% 0 0);
-    opacity: 0.2;
-    filter: brightness(1.6);
+    opacity: 0.1;
+    filter: brightness(1.8) drop-shadow(0 0 16px rgba(212, 175, 55, 0.9));
   }
-  30% {
-    opacity: 0.9;
+  15% {
+    opacity: 0.75;
+  }
+  80% {
+    opacity: 1;
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
   }
   100% {
     clip-path: inset(0 0% 0 0);
     opacity: 1;
-    filter: brightness(1);
+    filter: brightness(1) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
   }
 }
 
@@ -1233,31 +1276,47 @@ body.visualizer-mode .webgl-canvas-layer:active {
 }
 
 .executive-signature-card.is-animating .sig-nib-sparkle {
-  animation: sigNibTravel 1.6s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+  animation: sigNibTravel 3.2s cubic-bezier(0.28, 0.12, 0.28, 1) forwards;
 }
 
 @keyframes sigNibTravel {
   0% {
     left: 8%;
     top: 25%;
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
   }
-  40% {
-    left: 45%;
+  5% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+  25% {
+    left: 28%;
     top: 55%;
     opacity: 1;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+  50% {
+    left: 50%;
+    top: 40%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.35);
+  }
+  75% {
+    left: 76%;
+    top: 60%;
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  95% {
+    left: 95%;
+    top: 48%;
+    opacity: 0.85;
     transform: translate(-50%, -50%) scale(1.2);
   }
-  80% {
-    left: 85%;
-    top: 40%;
-    opacity: 0.9;
-    transform: translate(-50%, -50%) scale(1);
-  }
   100% {
-    left: 96%;
-    top: 45%;
+    left: 98%;
+    top: 48%;
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.3);
   }
@@ -1311,6 +1370,26 @@ body.visualizer-mode .webgl-canvas-layer:active {
   letter-spacing: 0.08em;
   color: #10b981;
   text-transform: uppercase;
+}
+
+.executive-signature-card.is-animating .sig-verified-stamp {
+  animation: sigStampPop 0.6s 2.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes sigStampPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(4px);
+  }
+  65% {
+    transform: scale(1.15) translateY(-1px);
+    filter: drop-shadow(0 0 8px #10b981);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: none;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -1385,7 +1464,10 @@ body.visualizer-mode .webgl-canvas-layer:active {
   }
   .signature-stage {
     max-width: 100%;
-    height: 120px;
+    height: 155px;
+  }
+  .sig-vector-svg {
+    max-height: 145px;
   }
   .sig-actions-bottom {
     max-width: 100%;
@@ -12983,6 +13065,25 @@ body.tesla-cockpit-active {
   box-shadow: 0 6px 28px rgba(212, 175, 55, 0.45);
 }
 
+.particle-loading-screen.is-ready .epic-enter-btn {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.42) 0%, rgba(212, 175, 55, 0.22) 100%);
+  border-color: #d4af37;
+  color: #ffffff;
+  box-shadow: 0 0 28px rgba(212, 175, 55, 0.55), 0 4px 18px rgba(0, 0, 0, 0.45);
+  animation: enterBtnReadyPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes enterBtnReadyPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+  }
+  100% {
+    transform: scale(1.03);
+    box-shadow: 0 0 34px rgba(212, 175, 55, 0.75), 0 0 10px rgba(255, 255, 255, 0.6);
+  }
+}
+
 .epic-btn-content {
   display: inline-flex;
   align-items: center;
@@ -13067,6 +13168,14 @@ body.tesla-cockpit-active {
   border-color: #92400e;
 }
 
+:root[data-theme="light"] .particle-loading-screen.is-ready .epic-enter-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .particle-loading-screen.is-ready .epic-enter-btn {
+  background: linear-gradient(135deg, rgba(148, 104, 0, 0.32) 0%, rgba(148, 104, 0, 0.16) 100%);
+  border-color: #92400e;
+  color: #78350f;
+  box-shadow: 0 0 24px rgba(148, 104, 0, 0.45);
+}
+
 @media (max-width: 680px) {
   .loading-center-hud.epic-intro-hud {
     padding: 16px 14px 16px;
@@ -13084,10 +13193,13 @@ body.tesla-cockpit-active {
     padding-bottom: 8px;
   }
   .signature-stage {
-    height: 95px;
+    height: 145px;
+  }
+  .sig-vector-svg {
+    max-height: 135px;
   }
   .sig-name {
-    font-size: 20px;
+    font-size: 22px;
   }
   .sig-title {
     font-size: 12px;
