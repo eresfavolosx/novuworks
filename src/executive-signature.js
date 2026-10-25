@@ -88,12 +88,12 @@ export function initExecutiveSignature() {
   // Trigger smooth calligraphic entrance after hero mounts
   setTimeout(triggerAnimation, 300);
 
-  // Bind replay button
+  // Bind replay button safely
   const replayBtn = document.getElementById('btn-replay-signature');
   if (replayBtn) {
-    replayBtn.addEventListener('click', (e) => {
+    replayBtn.onclick = (e) => {
       e.stopPropagation();
       triggerAnimation();
-    });
+    };
   }
 }

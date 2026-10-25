@@ -316,7 +316,7 @@ class FabianPortfolioApp {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Cinematic Particle Sculpture Loading Screen
+  // Cinematic Epic Intro & Executive Signature Sign-Off Screen
   // ─────────────────────────────────────────────────────────────
   initLoadingScreen() {
     const loadingScreen = document.getElementById('particle-loading-screen');
@@ -339,13 +339,13 @@ class FabianPortfolioApp {
       try {
         audio.playClick();
       } catch (_) {}
-      setTimeout(() => {
-        loadingScreen.remove();
-      }, 750);
     };
 
     if (skipBtn) {
-      skipBtn.addEventListener('click', dismiss);
+      skipBtn.onclick = (e) => {
+        e.stopPropagation();
+        dismiss();
+      };
     }
 
     const keyHandler = (e) => {
@@ -355,26 +355,29 @@ class FabianPortfolioApp {
       }
     };
     window.addEventListener('keydown', keyHandler);
-    loadingScreen.addEventListener('click', (e) => {
-      if (e.target.closest('.loading-skip-btn') || e.target === loadingScreen) {
-        dismiss();
+    loadingScreen.onclick = (e) => {
+      // Don't dismiss if clicking signature replay button
+      if (e.target.closest('#btn-replay-signature')) {
+        return;
       }
-    });
+      dismiss();
+    };
 
-    // Smooth cinematic progress counter (0% to 100% in ~2000ms) showcasing the 3D particle NovuWorks Monogram
+    // Smooth cinematic progress counter (~2600ms) showcasing the 3D particle matrix & authentic signature sign-off
     const startTime = performance.now();
-    const duration = 2000;
+    const duration = 2600;
 
     // Safety timeout ensures dismissal even if RAF is throttled or suspended
     const safetyTimer = setTimeout(() => {
       dismiss();
-    }, 2800);
+    }, 3800);
 
     const steps = [
-      { at: 0.12, text: 'QUANTUM PARTICLES // NOVUWORKS MATRIX' },
-      { at: 0.38, text: 'ASSEMBLING GOLD & PLATINUM MONOGRAM...' },
-      { at: 0.68, text: 'NORMALIZING 40M+ SESSIONS & REVOPS TELEMETRY...' },
-      { at: 0.90, text: 'SYSTEM READY // ENTERING NOVU.WORKS' }
+      { at: 0.10, text: 'QUANTUM PARTICLES // NOVUWORKS MATRIX' },
+      { at: 0.30, text: 'AUTHENTICATING IDENTITY // FABIÁN VÉLEZ VICENTE' },
+      { at: 0.55, text: 'DYNAMIC VECTOR SIGNATURE // VERIFIED SIGN-OFF' },
+      { at: 0.80, text: 'CALIBRATING REVOPS & MEDIA ARCHITECTURE (40M+ SESSIONS)...' },
+      { at: 0.98, text: 'SYSTEM READY // ENTER NOVU.WORKS' }
     ];
 
     const frame = (now) => {
@@ -395,11 +398,29 @@ class FabianPortfolioApp {
         requestAnimationFrame(frame);
       } else {
         clearTimeout(safetyTimer);
-        setTimeout(dismiss, 140);
+        setTimeout(dismiss, 450);
       }
     };
 
     requestAnimationFrame(frame);
+  }
+
+  replayEpicIntro() {
+    const loadingScreen = document.getElementById('particle-loading-screen');
+    if (!loadingScreen) return;
+
+    document.body.classList.remove('loaded');
+    loadingScreen.classList.remove('is-loaded');
+
+    if (this.canvas3d) {
+      this.canvas3d.isInitialLoading = true;
+      this.canvas3d.isPaused = false;
+      this.canvas3d.isVisibleInViewport = true;
+      this.canvas3d.resume();
+    }
+
+    initExecutiveSignature();
+    this.initLoadingScreen();
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -1704,6 +1725,10 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
     document.getElementById('btn-top-drawer-3d')?.addEventListener('click', () => {
       this.closeTopNavDrawer();
       this.enterVisualizerMode();
+    });
+    document.getElementById('btn-top-drawer-replay-intro')?.addEventListener('click', () => {
+      this.closeTopNavDrawer();
+      this.replayEpicIntro();
     });
     this.dom.btnExitVisualizer?.addEventListener('click', () => {
       this.exitVisualizerMode();

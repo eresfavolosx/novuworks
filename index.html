@@ -125,15 +125,28 @@
     <!-- 3D WebGL Canvas Layer (Direct Body Child for Seamless Stacking & Visualizer Mode) -->
     <div id="webgl-container" class="webgl-canvas-layer"></div>
 
-    <!-- Cinematic 3D Particle Sculpture Loading Screen -->
-    <div id="particle-loading-screen" class="particle-loading-screen" role="status" aria-live="polite" aria-label="Loading Novu Works Portfolio">
-      <div class="loading-sculpture-frame">
-        <div class="loading-center-hud">
-          <div class="loading-brand-badge">
-            <span class="loading-badge-dot"></span>
-            <span class="loading-badge-text">NOVU.WORKS // ARCHITECTURE</span>
+    <!-- Epic Cinematic Intro & Executive Signature Sign-Off Screen -->
+    <div id="particle-loading-screen" class="particle-loading-screen epic-intro-screen" role="dialog" aria-modal="true" aria-label="Fabián Vélez Vicente Executive Intro and Sign-Off">
+      <div class="epic-intro-backdrop"></div>
+      <div class="loading-sculpture-frame epic-intro-frame">
+        <div class="loading-center-hud epic-intro-hud">
+          
+          <!-- Top Telemetry Header -->
+          <div class="intro-telemetry-header">
+            <div class="loading-brand-badge">
+              <span class="loading-badge-dot"></span>
+              <span class="loading-badge-text">NOVU.WORKS // THE RARE HYBRID</span>
+            </div>
+            <div class="intro-auth-stamp">
+              <span class="intro-pr-flag" aria-hidden="true">🇵🇷</span>
+              <span>SAN JUAN, PUERTO RICO · US CITIZEN</span>
+            </div>
           </div>
-          <div class="loading-title">FABIÁN VÉLEZ VICENTE</div>
+
+          <!-- Executive Signature & Certified Identity Showcase (Sign-Off Centerpiece) -->
+          <div id="executive-signature-mount" class="executive-signature-mount intro-signature-mount"></div>
+
+          <!-- Loading Progress Bar Track -->
           <div class="loading-bar-track">
             <div class="loading-bar-progress" id="loading-bar-progress"></div>
           </div>
@@ -141,9 +154,19 @@
             <span class="loading-status-text" id="loading-status-text">INITIALIZING 3D PARTICLE MATRIX...</span>
             <span class="loading-percentage" id="loading-percentage">0%</span>
           </div>
-          <button type="button" class="loading-skip-btn" id="loading-skip-btn" aria-label="Skip Loading Screen">
-            PRESS ANY KEY OR CLICK TO ENTER →
-          </button>
+
+          <!-- Epic Enter Button -->
+          <div class="intro-action-container">
+            <button type="button" class="epic-enter-btn" id="loading-skip-btn" aria-label="Enter Novu Works Portfolio">
+              <span class="epic-btn-glow"></span>
+              <span class="epic-btn-content">
+                <span class="epic-btn-text">ENTER EXPERIENCE</span>
+                <svg class="epic-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </span>
+            </button>
+            <div class="intro-shortcut-hint">Press <kbd class="intro-kbd">ENTER</kbd> or click anywhere to explore</div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -321,6 +344,7 @@
               <button type="button" class="t-sub-chip" data-landing="hackeaporunacausa">Hackea</button>
               <button type="button" class="t-sub-chip" data-landing="liza-project">Link Puerto Rico</button>
               <button type="button" class="t-sub-chip t-sub-chip-3d" id="btn-top-drawer-3d">✨ 3D Secondary Screen</button>
+              <button type="button" class="t-sub-chip t-sub-chip-intro" id="btn-top-drawer-replay-intro">🎬 Replay Intro &amp; Sign-Off</button>
             </div>
           </div>
         </div>
@@ -343,9 +367,6 @@
               </span>
               <span class="kicker-pill auth-pill" data-i18n="hero_kicker_auth">🇺🇸 US CITIZEN (NO SPONSORSHIP REQUIRED)</span>
             </div>
-
-            <!-- Executive Signature & Certified Identity Showcase -->
-            <div id="executive-signature-mount" class="executive-signature-mount"></div>
 
             <!-- Grand Editorial Headline (Tesla-Grade Fluidity & Hierarchy) -->
             <h1 class="hero-title" data-i18n="hero_title" data-i18n-html="true">
