@@ -206,6 +206,139 @@ PLATFORM_LANDINGS['hackea'] = PLATFORM_LANDINGS['hackeaporunacausa'];
 PLATFORM_LANDINGS['liza'] = PLATFORM_LANDINGS['liza-project'];
 PLATFORM_LANDINGS['linkpr'] = PLATFORM_LANDINGS['liza-project'];
 
+export const PROJECT_TRANSITIONS = {
+  bizpay: {
+    name: 'BizPay',
+    badge: 'FINTECH & B2B COMMERCIAL INVOICING',
+    accent: '#ff671b',
+    accentGlow: 'rgba(255, 103, 27, 0.45)',
+    logoSvg: `
+      <svg viewBox="0 0 100 100" class="pts-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ptsBizpayGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ff671b"/>
+            <stop offset="55%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#d4af37"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" rx="24" fill="#0c111d" stroke="url(#ptsBizpayGrad)" stroke-width="2.5"/>
+        <rect x="18" y="18" width="64" height="64" rx="16" fill="url(#ptsBizpayGrad)"/>
+        <path d="M 32,50 L 46,64 L 68,36" stroke="#ffffff" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      </svg>
+    `
+  },
+  picta: {
+    name: 'Picta',
+    badge: 'ASSISTIVE COMPUTER VISION & DALTONIZATION',
+    accent: '#06b6d4',
+    accentGlow: 'rgba(6, 182, 212, 0.45)',
+    logoSvg: `
+      <svg viewBox="0 0 100 100" class="pts-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ptsPictaGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4f46e5"/>
+            <stop offset="50%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#ec4899"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" rx="24" fill="#090f1e" stroke="url(#ptsPictaGrad)" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="30" stroke="url(#ptsPictaGrad)" stroke-width="3" fill="none"/>
+        <circle cx="50" cy="50" r="14" fill="url(#ptsPictaGrad)"/>
+        <circle cx="50" cy="50" r="6" fill="#ffffff"/>
+        <path d="M 50,12 L 50,22 M 50,78 L 50,88 M 12,50 L 22,50 M 78,50 L 88,50" stroke="#00cec9" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    `
+  },
+  nfc: {
+    name: 'Tocaito NFC',
+    badge: 'EVENT ACCESS & CONTACTLESS NFC',
+    accent: '#8b5cf6',
+    accentGlow: 'rgba(139, 92, 246, 0.45)',
+    logoSvg: `
+      <svg viewBox="0 0 100 100" class="pts-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ptsNfcGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#00cec9"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" rx="24" fill="#090b14" stroke="url(#ptsNfcGrad)" stroke-width="2.5"/>
+        <circle cx="50" cy="46" r="10" fill="none" stroke="url(#ptsNfcGrad)" stroke-width="3"/>
+        <circle cx="50" cy="46" r="20" fill="none" stroke="url(#ptsNfcGrad)" stroke-width="2" stroke-dasharray="3 3"/>
+        <circle cx="50" cy="46" r="30" fill="none" stroke="url(#ptsNfcGrad)" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="50" cy="46" r="4" fill="#00cec9"/>
+        <text x="50" y="80" text-anchor="middle" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="12" font-weight="800" letter-spacing="0.12em">NFC</text>
+      </svg>
+    `
+  },
+  'nfc-platform': null,
+  hackea: {
+    name: 'Hackea por una Causa',
+    badge: 'CIVIC TECH & YOUTH MENTORSHIP',
+    accent: '#ff4c1d',
+    accentGlow: 'rgba(255, 76, 29, 0.45)',
+    logoSvg: `
+      <svg viewBox="0 0 100 100" class="pts-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ptsHackeaGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ff4c1d"/>
+            <stop offset="50%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#10b981"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" rx="24" fill="#0a0f1d" stroke="url(#ptsHackeaGrad)" stroke-width="2.5"/>
+        <path d="M 50,18 C 60,30 70,42 66,58 C 62,72 44,76 38,66 C 34,60 38,54 42,50 C 44,47 45,43 44,38 C 47,40 50,30 50,18 Z" fill="url(#ptsHackeaGrad)"/>
+        <circle cx="50" cy="62" r="5" fill="#ffffff" opacity="0.95"/>
+      </svg>
+    `
+  },
+  hackeaporunacausa: null,
+  jobhelper: {
+    name: 'JobHelper AI',
+    badge: 'AUTONOMOUS MULTI-MODEL LLM AGENT',
+    accent: '#10b981',
+    accentGlow: 'rgba(16, 185, 129, 0.45)',
+    logoSvg: `
+      <svg viewBox="0 0 100 100" class="pts-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ptsJobhelperGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="50%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" rx="24" fill="#061a14" stroke="url(#ptsJobhelperGrad)" stroke-width="2.5"/>
+        <polygon points="50,22 76,37 76,67 50,82 24,67 24,37" fill="none" stroke="url(#ptsJobhelperGrad)" stroke-width="3"/>
+        <circle cx="50" cy="52" r="11" fill="url(#ptsJobhelperGrad)"/>
+        <circle cx="50" cy="22" r="3.5" fill="#ffffff"/>
+        <circle cx="76" cy="37" r="3.5" fill="#ffffff"/>
+        <circle cx="76" cy="67" r="3.5" fill="#ffffff"/>
+        <circle cx="50" cy="82" r="3.5" fill="#ffffff"/>
+        <circle cx="24" cy="67" r="3.5" fill="#ffffff"/>
+        <circle cx="24" cy="37" r="3.5" fill="#ffffff"/>
+      </svg>
+    `
+  },
+  liza: {
+    name: 'LIZA & Link PR',
+    badge: 'COMMERCE & LOGISTICS ENGINE',
+    accent: '#02b0f4',
+    accentGlow: 'rgba(2, 176, 244, 0.45)',
+    logoSvg: `
+      <svg viewBox="0 0 100 100" class="pts-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" rx="24" fill="#071526" stroke="#02b0f4" stroke-width="2.5"/>
+        <polygon points="50,18 82,50 50,82 18,50" fill="none" stroke="#02b0f4" stroke-width="4"/>
+        <circle cx="50" cy="50" r="12" fill="#02b0f4"/>
+      </svg>
+    `
+  },
+  'liza-project': null
+};
+PROJECT_TRANSITIONS['nfc-platform'] = PROJECT_TRANSITIONS.nfc;
+PROJECT_TRANSITIONS.hackeaporunacausa = PROJECT_TRANSITIONS.hackea;
+PROJECT_TRANSITIONS['liza-project'] = PROJECT_TRANSITIONS.liza;
+
 export function renderSubdomainLandingHtml(projectId) {
   const data = PLATFORM_LANDINGS[projectId] || PLATFORM_LANDINGS.jobhelper;
 

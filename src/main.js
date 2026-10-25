@@ -22,7 +22,7 @@ import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
 import { getLanguage, resolveInitialLanguage, switchLanguage, updateDomTranslations, updateProfileDataForLanguage } from './i18n.js';
-import { renderSubdomainLandingHtml, bindSubdomainLandingEvents } from './subdomain-landings.js';
+import { renderSubdomainLandingHtml, bindSubdomainLandingEvents, PROJECT_TRANSITIONS } from './subdomain-landings.js';
 import { renderExecutiveSignatureBlock, initExecutiveSignature } from './executive-signature.js';
 
 class FabianPortfolioApp {
@@ -68,6 +68,15 @@ class FabianPortfolioApp {
       dialogContentBody: document.getElementById('dialog-content-body'),
       platformModal: document.getElementById('subdomain-platform-modal'),
       platformModalBody: document.getElementById('subdomain-platform-modal-body'),
+      projectTransitionSplash: document.getElementById('project-transition-splash'),
+      ptsAmbientGlow: document.getElementById('pts-ambient-glow'),
+      ptsLogoSlot: document.getElementById('pts-logo-slot'),
+      ptsLogoAura: document.getElementById('pts-logo-aura'),
+      ptsProjectName: document.getElementById('pts-project-name'),
+      ptsCategoryPill: document.getElementById('pts-category-pill'),
+      ptsProgressBar: document.getElementById('pts-progress-bar'),
+      ptsStatusText: document.getElementById('pts-status-text'),
+      ptsStatusPct: document.getElementById('pts-status-pct'),
       topNavDrawer: document.getElementById('top-navigation-drawer'),
       mobileMenuToggleBtn: document.getElementById('btn-mobile-menu-toggle'),
       resumeModal: document.getElementById('resume-export-modal'),
@@ -366,25 +375,28 @@ class FabianPortfolioApp {
       if (e.target.closest('#btn-replay-signature')) {
         return;
       }
-      dismiss();
+      // On mobile and desktop, dismiss on general click ONLY once ready (100%),
+      // preventing accidental touch dismissal while the signature is animating!
+      if (loadingScreen.classList.contains('is-ready')) {
+        dismiss();
+      }
     };
 
-    // Smooth cinematic progress counter (~5400ms) showcasing the 3D particle matrix, identity & vector signature sign-off
+    // Snappy, cinematic progress counter (~2400ms) showcasing identity & vector signature sign-off
     const startTime = performance.now();
-    const duration = 5400;
+    const duration = 2400;
 
     // Safety timeout ensures dismissal even if RAF is throttled or suspended
     this.loadingSafetyTimer = setTimeout(() => {
       dismiss();
-    }, 15000);
+    }, 6000);
 
     const steps = [
       { at: 0.05, text: 'QUANTUM PARTICLES // NOVUWORKS MATRIX' },
       { at: 0.20, text: 'AUTHENTICATING IDENTITY // FABIÁN VÉLEZ VICENTE' },
-      { at: 0.42, text: 'EXECUTING HANDWRITTEN CALLIGRAPHIC SIGN-OFF...' },
-      { at: 0.72, text: 'ACCREDITING VERIFIED SIGN-OFF // 40M+ SESSIONS RECONCILED' },
-      { at: 0.88, text: 'CALIBRATING REVOPS ARCHITECTURE // SYSTEM VERIFIED' },
-      { at: 0.99, text: '✦ SYSTEM READY // ENTER NOVU.WORKS' }
+      { at: 0.45, text: 'EXECUTING HANDWRITTEN CALLIGRAPHIC SIGN-OFF...' },
+      { at: 0.75, text: 'ACCREDITING VERIFIED SIGN-OFF // 40M+ SESSIONS' },
+      { at: 0.95, text: '✦ SYSTEM READY // ENTER NOVU.WORKS' }
     ];
 
     const frame = (now) => {
@@ -409,11 +421,10 @@ class FabianPortfolioApp {
         if (percentage) percentage.textContent = '100%';
         loadingScreen.classList.add('is-ready');
 
-        // Generous dwell time (4500ms) so visitor can take in the completed signature & name,
-        // or click 'ENTER EXPERIENCE' / press ENTER / click anywhere at will
+        // Snappy dwell time (900ms) before smooth auto-dismissal into portfolio
         this.loadingAutoDismissTimer = setTimeout(() => {
           dismiss();
-        }, 4500);
+        }, 900);
       }
     };
 
@@ -775,7 +786,7 @@ class FabianPortfolioApp {
             <span>Platform Landing</span>
           </button>
           ${p.subdomainUrl ? `
-            <a href="${p.subdomainUrl}" target="_blank" rel="noopener noreferrer" class="proj-action-btn subdomain-btn" title="Open live production app at ${p.subdomainUrl}">
+            <a href="${p.subdomainUrl}" target="_blank" rel="noopener noreferrer" class="proj-action-btn subdomain-btn" data-project-id="${p.id}" title="Open live production app at ${p.subdomainUrl}">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
               <span>${p.subdomainLabel || 'Live App'}</span>
             </a>
@@ -793,15 +804,129 @@ class FabianPortfolioApp {
   }
 
   // ─────────────────────────────────────────────────────────────
+  // Trigger Project Transition Splash Screen (Full-Screen Gateway)
+  // ─────────────────────────────────────────────────────────────
+  triggerProjectTransitionSplash(projectId, options = {}, onComplete) {
+    const splash = this.dom.projectTransitionSplash;
+    if (!splash) {
+      if (typeof onComplete === 'function') onComplete();
+      return;
+    }
+
+    let targetId = (projectId || 'bizpay').toLowerCase();
+    if (targetId.startsWith('project-')) targetId = targetId.replace('project-', '');
+    const meta = PROJECT_TRANSITIONS[targetId] || PROJECT_TRANSITIONS.bizpay;
+
+    // Apply specific project brand visuals
+    if (this.dom.ptsAmbientGlow) {
+      this.dom.ptsAmbientGlow.style.background = `radial-gradient(circle at 50% 45%, ${meta.accentGlow} 0%, transparent 70%)`;
+    }
+    if (this.dom.ptsLogoSlot) {
+      this.dom.ptsLogoSlot.innerHTML = meta.logoSvg;
+    }
+    if (this.dom.ptsLogoAura) {
+      this.dom.ptsLogoAura.style.background = `radial-gradient(circle, ${meta.accentGlow} 0%, transparent 70%)`;
+    }
+    if (this.dom.ptsProjectName) {
+      this.dom.ptsProjectName.textContent = meta.name.toUpperCase();
+    }
+    if (this.dom.ptsCategoryPill) {
+      this.dom.ptsCategoryPill.textContent = meta.badge;
+      this.dom.ptsCategoryPill.style.color = meta.accent;
+      this.dom.ptsCategoryPill.style.borderColor = meta.accent;
+    }
+    if (this.dom.ptsProgressBar) {
+      this.dom.ptsProgressBar.style.width = '0%';
+      this.dom.ptsProgressBar.style.background = `linear-gradient(90deg, #d4af37 0%, ${meta.accent} 100%)`;
+      this.dom.ptsProgressBar.style.boxShadow = `0 0 14px ${meta.accent}`;
+    }
+    if (this.dom.ptsStatusText) {
+      this.dom.ptsStatusText.textContent = options.isLiveOutbound
+        ? `CALIBRATING CLOUD CLUSTER // CONNECTING TO ${meta.name.toUpperCase()}...`
+        : `CALIBRATING SUBSYSTEM RUNTIME // LAUNCHING ${meta.name.toUpperCase()}...`;
+    }
+    if (this.dom.ptsStatusPct) {
+      this.dom.ptsStatusPct.textContent = '0%';
+    }
+
+    // Audio cue
+    try {
+      audio.click(950, 0.05);
+    } catch (_) {}
+
+    // Activate splash view
+    splash.classList.remove('hidden', 'is-exiting');
+    void splash.offsetWidth;
+    splash.classList.add('is-active');
+
+    const duration = options.duration || 850;
+    const startTime = performance.now();
+    let isExited = false;
+
+    const finish = () => {
+      if (isExited) return;
+      isExited = true;
+      splash.classList.add('is-exiting');
+      setTimeout(() => {
+        splash.classList.remove('is-active', 'is-exiting');
+        splash.classList.add('hidden');
+        if (typeof onComplete === 'function') onComplete();
+      }, 300);
+    };
+
+    const tick = (now) => {
+      if (isExited) return;
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      if (this.dom.ptsProgressBar) {
+        this.dom.ptsProgressBar.style.width = `${Math.round(progress * 100)}%`;
+      }
+      if (this.dom.ptsStatusPct) {
+        this.dom.ptsStatusPct.textContent = `${Math.round(progress * 100)}%`;
+      }
+
+      if (this.dom.ptsStatusText) {
+        if (progress < 0.35) {
+          this.dom.ptsStatusText.textContent = options.isLiveOutbound
+            ? `ESTABLISHING SECURE GATEWAY // ${meta.name.toUpperCase()}...`
+            : `AUTHENTICATING RUNTIME MATRIX // ${meta.name.toUpperCase()}...`;
+        } else if (progress < 0.75) {
+          this.dom.ptsStatusText.textContent = options.isLiveOutbound
+            ? `RESOLVING LIVE EDGE CDN & PRODUCTION ASSETS...`
+            : `VERIFYING SUBSYSTEM BLUEPRINT & ARCHITECTURE...`;
+        } else {
+          this.dom.ptsStatusText.textContent = `✦ SYSTEM READY // LAUNCHING ${meta.name.toUpperCase()}`;
+        }
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        setTimeout(finish, 120);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  }
+
+  // ─────────────────────────────────────────────────────────────
   // Open Subdomain Platform Interactive Landing Showcase
   // ─────────────────────────────────────────────────────────────
-  openSubdomainLanding(projectId) {
+  openSubdomainLanding(projectId, skipSplash = false) {
     if (!this.dom.platformModal || !this.dom.platformModalBody) return;
 
     let targetId = projectId;
     if (targetId === 'nfc') targetId = 'nfc-platform';
     if (targetId === 'hackea') targetId = 'hackeaporunacausa';
     if (targetId === 'liza' || targetId === 'linkpr') targetId = 'liza-project';
+
+    if (!skipSplash) {
+      this.triggerProjectTransitionSplash(targetId, {}, () => {
+        this.openSubdomainLanding(targetId, true);
+      });
+      return;
+    }
 
     this.dom.platformModalBody.innerHTML = renderSubdomainLandingHtml(targetId);
     bindSubdomainLandingEvents(targetId, this.dom.platformModal);
@@ -1615,6 +1740,19 @@ Ready to scale high-impact systems? Let's chat: fabianvvicente1@gmail.com | Sche
           this.openSubdomainLanding(id);
           this.closeTopNavDrawer();
         }
+      }
+    });
+
+    // Live Subdomain Outbound Triggers (Splash Transition on Click)
+    document.addEventListener('click', (e) => {
+      const subBtn = e.target.closest('.subdomain-btn');
+      if (subBtn) {
+        const href = subBtn.href;
+        const projId = subBtn.dataset.projectId || 'bizpay';
+        e.preventDefault();
+        this.triggerProjectTransitionSplash(projId, { isLiveOutbound: true }, () => {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        });
       }
     });
 

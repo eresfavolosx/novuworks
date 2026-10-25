@@ -89,11 +89,11 @@ export function initExecutiveSignature() {
       if (card.classList.contains('is-animating')) {
         try { audio.chime(4); } catch (_) {}
       }
-    }, 3200);
+    }, 1650);
   };
 
-  // Trigger smooth calligraphic entrance with paced delay so visitor sees name first
-  setTimeout(triggerAnimation, 650);
+  // Trigger smooth calligraphic entrance immediately so visitor watches it draw in real-time
+  setTimeout(triggerAnimation, 120);
 
   // Bind replay button safely
   const replayBtn = document.getElementById('btn-replay-signature');

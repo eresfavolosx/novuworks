@@ -21,12 +21,30 @@
 
   var PROJECTS = {
     bizpay: {
+      name: 'BizPay',
       badge: 'FINTECH & B2B COMMERCIAL INVOICING',
       status: 'PRODUCTION // LIVE DEPLOYED',
       uptime: '100% RECONCILED · ZERO SLIPPAGE',
+      accent: '#ff671b',
+      accentGlow: 'rgba(255, 103, 27, 0.45)',
       title: 'BizPay: B2B Commercial Invoicing & ATH Móvil Gateway',
       role: 'Lead Architect & Full-Stack Engineer: Fabián Vélez Vicente',
       lead: 'Architected a high-converting B2B commercial payment portal featuring multi-tier invoice routing, ATH Móvil Business API integration, real-time transaction fee calculation, and responsive mobile-first material UI.',
+      logoSvg: [
+        '<svg viewBox="0 0 100 100" class="nps-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">',
+        '  <defs>',
+        '    <linearGradient id="npsBizpayGrad" x1="0" y1="0" x2="1" y2="1">',
+        '      <stop offset="0%" stop-color="#ff671b"/>',
+        '      <stop offset="55%" stop-color="#f59e0b"/>',
+        '      <stop offset="100%" stop-color="#d4af37"/>',
+        '    </linearGradient>',
+        '  </defs>',
+        '  <rect width="100" height="100" rx="24" fill="#0c111d" stroke="url(#npsBizpayGrad)" stroke-width="2.5"/>',
+        '  <rect x="18" y="18" width="64" height="64" rx="16" fill="url(#npsBizpayGrad)"/>',
+        '  <path d="M 32,50 L 46,64 L 68,36" stroke="#ffffff" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>',
+        '  <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" stroke-dasharray="4 3"/>',
+        '</svg>'
+      ].join(''),
       metrics: [
         { num: '1.50%', label: 'Ultra-Low B2B Merchant Fee' },
         { num: 'Instant', label: 'ATH Móvil Settlement' },
@@ -49,12 +67,31 @@
     },
 
     picta: {
+      name: 'Picta',
       badge: 'ASSISTIVE COMPUTER VISION & DALTONIZATION',
       status: 'PRODUCTION // LIVE DEPLOYED',
       uptime: '60 FPS WEBRTC · ZERO CLOUD LATENCY',
+      accent: '#06b6d4',
+      accentGlow: 'rgba(6, 182, 212, 0.45)',
       title: 'Picta: Assistive Computer Vision & Daltonization Camera',
       role: 'Computer Vision & Systems Architect: Fabián Vélez Vicente',
       lead: 'Engineered an assistive computer vision camera application for individuals with Color Vision Deficiency (CVD). Implemented real-time Daltonization boost algorithms and color classification using client-side WebRTC and SVG/WebGL transformation matrices.',
+      logoSvg: [
+        '<svg viewBox="0 0 100 100" class="nps-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">',
+        '  <defs>',
+        '    <linearGradient id="npsPictaGrad" x1="0" y1="0" x2="1" y2="1">',
+        '      <stop offset="0%" stop-color="#4f46e5"/>',
+        '      <stop offset="50%" stop-color="#06b6d4"/>',
+        '      <stop offset="100%" stop-color="#ec4899"/>',
+        '    </linearGradient>',
+        '  </defs>',
+        '  <rect width="100" height="100" rx="24" fill="#090f1e" stroke="url(#npsPictaGrad)" stroke-width="2.5"/>',
+        '  <circle cx="50" cy="50" r="30" stroke="url(#npsPictaGrad)" stroke-width="3" fill="none"/>',
+        '  <circle cx="50" cy="50" r="14" fill="url(#npsPictaGrad)"/>',
+        '  <circle cx="50" cy="50" r="6" fill="#ffffff"/>',
+        '  <path d="M 50,12 L 50,22 M 50,78 L 50,88 M 12,50 L 22,50 M 78,50 L 88,50" stroke="#00cec9" stroke-width="2.5" stroke-linecap="round"/>',
+        '</svg>'
+      ].join(''),
       metrics: [
         { num: '60 FPS', label: 'Real-Time Daltonization Shaders' },
         { num: '6 Modes', label: 'Protanopia, Deuteranopia, Tritanopia' },
@@ -77,12 +114,31 @@
     },
 
     nfc: {
-      badge: 'EVENT ACCESS & NFC LOGISTICS',
+      name: 'Tocaito NFC',
+      badge: 'EVENT ACCESS & CONTACTLESS NFC',
       status: 'PRODUCTION // LIVE DEPLOYED',
       uptime: '100% PASS READ RATE · ZERO QUEUES',
+      accent: '#8b5cf6',
+      accentGlow: 'rgba(139, 92, 246, 0.45)',
       title: 'Tocaito: Cross-Platform NFC Event & Verification Platform',
       role: 'Systems & Mobile App Engineer: Fabián Vélez Vicente',
       lead: 'Developed a cross-platform event registration and verification application using Capacitor, Firebase, and Vite. Architected a custom Python automated verification suite to continuously test UI routing, state persistence, and generate real-time system health reports.',
+      logoSvg: [
+        '<svg viewBox="0 0 100 100" class="nps-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">',
+        '  <defs>',
+        '    <linearGradient id="npsNfcGrad" x1="0" y1="0" x2="1" y2="1">',
+        '      <stop offset="0%" stop-color="#8b5cf6"/>',
+        '      <stop offset="100%" stop-color="#00cec9"/>',
+        '    </linearGradient>',
+        '  </defs>',
+        '  <rect width="100" height="100" rx="24" fill="#090b14" stroke="url(#npsNfcGrad)" stroke-width="2.5"/>',
+        '  <circle cx="50" cy="46" r="10" fill="none" stroke="url(#npsNfcGrad)" stroke-width="3"/>',
+        '  <circle cx="50" cy="46" r="20" fill="none" stroke="url(#npsNfcGrad)" stroke-width="2" stroke-dasharray="3 3"/>',
+        '  <circle cx="50" cy="46" r="30" fill="none" stroke="url(#npsNfcGrad)" stroke-width="1.5" opacity="0.6"/>',
+        '  <circle cx="50" cy="46" r="4" fill="#00cec9"/>',
+        '  <text x="50" y="80" text-anchor="middle" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="12" font-weight="800" letter-spacing="0.12em">NFC</text>',
+        '</svg>'
+      ].join(''),
       metrics: [
         { num: '0.4s', label: 'Contactless Wristband Read Latency' },
         { num: '100%', label: 'Offline Ticket Verification Rate' },
@@ -105,12 +161,29 @@
     },
 
     hackea: {
-      badge: 'SOCIAL IMPACT HACKATHON WINNER',
+      name: 'Hackea por una Causa',
+      badge: 'CIVIC TECH & YOUTH MENTORSHIP',
       status: 'PRODUCTION // SOCIAL IMPACT',
       uptime: '120+ MENTOR HOURS · 6 CENTERS',
+      accent: '#ff4c1d',
+      accentGlow: 'rgba(255, 76, 29, 0.45)',
       title: 'Hackea por una Causa: Youth Mentorship & Scheduling Network',
       role: 'Lead Full-Stack Developer: Fabián Vélez Vicente',
       lead: 'Conceived and built during the Hackea por una Causa hackathon: an appointment scheduling and volunteer recruitment network connecting at-risk youth with professional mentors across Boys & Girls Clubs and community centers in Puerto Rico.',
+      logoSvg: [
+        '<svg viewBox="0 0 100 100" class="nps-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">',
+        '  <defs>',
+        '    <linearGradient id="npsHackeaGrad" x1="0" y1="0" x2="1" y2="1">',
+        '      <stop offset="0%" stop-color="#ff4c1d"/>',
+        '      <stop offset="50%" stop-color="#f59e0b"/>',
+        '      <stop offset="100%" stop-color="#10b981"/>',
+        '    </linearGradient>',
+        '  </defs>',
+        '  <rect width="100" height="100" rx="24" fill="#0a0f1d" stroke="url(#npsHackeaGrad)" stroke-width="2.5"/>',
+        '  <path d="M 50,18 C 60,30 70,42 66,58 C 62,72 44,76 38,66 C 34,60 38,54 42,50 C 44,47 45,43 44,38 C 47,40 50,30 50,18 Z" fill="url(#npsHackeaGrad)"/>',
+        '  <circle cx="50" cy="62" r="5" fill="#ffffff" opacity="0.95"/>',
+        '</svg>'
+      ].join(''),
       metrics: [
         { num: 'Winner', label: 'Social Impact Hackathon Award' },
         { num: '6 Centers', label: 'Active Partner Community Hubs' },
@@ -172,6 +245,182 @@
     '.np-btn-github:hover { color: #ffffff; border-color: rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.1); }',
     '.np-btn-home { color: #94a3b8; text-decoration: none; font-size: 11px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; transition: color 0.2s ease; }',
     '.np-btn-home:hover { color: #ffffff; background: rgba(255, 255, 255, 0.06); }',
+
+    /* ── Project Splash Screen Styles ── */
+    '#novu-project-splash {',
+    '  position: fixed;',
+    '  inset: 0;',
+    '  background: radial-gradient(ellipse at 50% 35%, rgba(12, 18, 34, 0.96) 0%, rgba(4, 7, 16, 0.99) 100%);',
+    '  backdrop-filter: blur(28px) saturate(190%);',
+    '  -webkit-backdrop-filter: blur(28px) saturate(190%);',
+    '  z-index: 10000000;',
+    '  display: flex;',
+    '  align-items: center;',
+    '  justify-content: center;',
+    '  padding: 24px 16px;',
+    '  box-sizing: border-box;',
+    '  font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Segoe UI", Roboto, sans-serif;',
+    '  opacity: 1;',
+    '  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);',
+    '}',
+    '#novu-project-splash.is-dismissing {',
+    '  opacity: 0;',
+    '  transform: scale(1.03);',
+    '  pointer-events: none;',
+    '}',
+    '.nps-ambient-glow {',
+    '  position: absolute;',
+    '  inset: 0;',
+    '  pointer-events: none;',
+    '  opacity: 0.65;',
+    '  filter: blur(48px);',
+    '}',
+    '.nps-card {',
+    '  position: relative;',
+    '  width: 100%;',
+    '  max-width: 440px;',
+    '  background: rgba(15, 22, 41, 0.85);',
+    '  border: 1px solid rgba(255, 255, 255, 0.12);',
+    '  border-top-color: rgba(255, 255, 255, 0.24);',
+    '  border-radius: 24px;',
+    '  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75), 0 0 40px rgba(0, 0, 0, 0.5);',
+    '  padding: 32px 28px 28px;',
+    '  box-sizing: border-box;',
+    '  text-align: center;',
+    '  display: flex;',
+    '  flex-direction: column;',
+    '  align-items: center;',
+    '}',
+    '.nps-top-badge {',
+    '  display: inline-flex;',
+    '  align-items: center;',
+    '  gap: 6px;',
+    '  padding: 4px 12px;',
+    '  border-radius: 999px;',
+    '  background: rgba(255, 255, 255, 0.04);',
+    '  border: 1px solid rgba(255, 255, 255, 0.08);',
+    '  margin-bottom: 22px;',
+    '}',
+    '.nps-badge-text {',
+    '  font-size: 10px;',
+    '  font-weight: 700;',
+    '  letter-spacing: 0.12em;',
+    '  color: #d4af37;',
+    '  text-transform: uppercase;',
+    '}',
+    '.nps-logo-wrapper {',
+    '  position: relative;',
+    '  width: 96px;',
+    '  height: 96px;',
+    '  margin-bottom: 18px;',
+    '  display: flex;',
+    '  align-items: center;',
+    '  justify-content: center;',
+    '}',
+    '.nps-logo-aura {',
+    '  position: absolute;',
+    '  inset: -12px;',
+    '  border-radius: 32px;',
+    '  background: radial-gradient(circle, ' + project.accentGlow + ' 0%, transparent 70%);',
+    '  filter: blur(14px);',
+    '  animation: npsAuraPulse 2.4s ease-in-out infinite alternate;',
+    '}',
+    '@keyframes npsAuraPulse {',
+    '  0% { transform: scale(0.9); opacity: 0.5; }',
+    '  100% { transform: scale(1.15); opacity: 0.95; }',
+    '}',
+    '.nps-logo-svg {',
+    '  position: relative;',
+    '  width: 96px;',
+    '  height: 96px;',
+    '  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));',
+    '  animation: npsLogoFloat 3s ease-in-out infinite alternate;',
+    '}',
+    '@keyframes npsLogoFloat {',
+    '  0% { transform: translateY(0); }',
+    '  100% { transform: translateY(-4px); }',
+    '}',
+    '.nps-title {',
+    '  font-size: 26px;',
+    '  font-weight: 800;',
+    '  color: #ffffff;',
+    '  letter-spacing: 0.06em;',
+    '  margin: 0 0 6px;',
+    '  text-transform: uppercase;',
+    '}',
+    '.nps-badge-pill {',
+    '  display: inline-block;',
+    '  font-size: 10.5px;',
+    '  font-weight: 700;',
+    '  color: #f5e6be;',
+    '  background: rgba(212, 175, 55, 0.12);',
+    '  border: 1px solid rgba(212, 175, 55, 0.3);',
+    '  padding: 4px 10px;',
+    '  border-radius: 999px;',
+    '  letter-spacing: 0.06em;',
+    '  margin-bottom: 8px;',
+    '  text-transform: uppercase;',
+    '}',
+    '.nps-author {',
+    '  font-size: 11.5px;',
+    '  color: #94a3b8;',
+    '  margin: 0 0 20px;',
+    '  font-weight: 500;',
+    '}',
+    '.nps-progress-container {',
+    '  width: 100%;',
+    '  height: 4px;',
+    '  background: rgba(255, 255, 255, 0.08);',
+    '  border-radius: 999px;',
+    '  overflow: hidden;',
+    '  margin-bottom: 10px;',
+    '  position: relative;',
+    '}',
+    '.nps-progress-bar {',
+    '  height: 100%;',
+    '  width: 0%;',
+    '  background: linear-gradient(90deg, #d4af37 0%, ' + project.accent + ' 100%);',
+    '  box-shadow: 0 0 12px ' + project.accent + ';',
+    '  border-radius: 999px;',
+    '  transition: width 0.08s linear;',
+    '}',
+    '.nps-telemetry-row {',
+    '  width: 100%;',
+    '  display: flex;',
+    '  align-items: center;',
+    '  justify-content: space-between;',
+    '  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;',
+    '  font-size: 10px;',
+    '  color: #94a3b8;',
+    '  margin-bottom: 18px;',
+    '  letter-spacing: 0.04em;',
+    '}',
+    '.nps-telemetry-pct {',
+    '  color: #f5e6be;',
+    '  font-weight: 700;',
+    '}',
+    '.nps-enter-btn {',
+    '  width: 100%;',
+    '  background: linear-gradient(135deg, rgba(212, 175, 55, 0.32) 0%, rgba(212, 175, 55, 0.12) 100%);',
+    '  border: 1px solid rgba(212, 175, 55, 0.6);',
+    '  color: #ffffff;',
+    '  font-size: 12.5px;',
+    '  font-weight: 700;',
+    '  padding: 10px 16px;',
+    '  border-radius: 999px;',
+    '  cursor: pointer;',
+    '  text-transform: uppercase;',
+    '  letter-spacing: 0.08em;',
+    '  transition: all 0.2s ease;',
+    '}',
+    '.nps-enter-btn:hover {',
+    '  background: linear-gradient(135deg, rgba(212, 175, 55, 0.5) 0%, rgba(212, 175, 55, 0.22) 100%);',
+    '  border-color: #d4af37;',
+    '  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);',
+    '  transform: translateY(-1px);',
+    '}',
+
+    /* ── Architecture Blueprint Modal Styles ── */
     '#novuintro-overlay {',
     '  position: fixed;',
     '  inset: 0;',
@@ -193,19 +442,17 @@
     '  max-width: 720px;',
     '  max-height: 92vh;',
     '  overflow-y: auto;',
-    '  scrollbar-width: thin;',
-    '  background: linear-gradient(145deg, rgba(22, 27, 44, 0.94) 0%, rgba(8, 12, 22, 0.98) 100%);',
+    '  background: rgba(15, 23, 42, 0.88);',
     '  border: 1px solid rgba(212, 175, 55, 0.35);',
-    '  border-radius: 24px;',
-    '  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.28), 0 32px 80px -10px rgba(0, 0, 0, 0.95), 0 0 50px rgba(212, 175, 55, 0.18);',
-    '  color: #f1f5f9;',
-    '  padding: clamp(20px, 3vw, 28px);',
+    '  border-top-color: rgba(212, 175, 55, 0.65);',
+    '  border-radius: 20px;',
+    '  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 175, 55, 0.15);',
+    '  padding: clamp(20px, 3vw, 32px);',
     '  box-sizing: border-box;',
-    '  animation: introPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);',
+    '  color: #f8fafc;',
     '}',
-    '@keyframes introPop { 0% { opacity: 0; transform: scale(0.96) translateY(12px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }',
-    '.novuintro-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); flex-wrap: wrap; gap: 8px; }',
-    '.novuintro-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35); color: #d4af37; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.1em; }',
+    '.novuintro-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }',
+    '.novuintro-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.35); padding: 4px 10px; border-radius: 999px; font-size: 10.5px; font-weight: 700; color: #f5e6be; text-transform: uppercase; letter-spacing: 0.08em; }',
     '.novuintro-uptime { font-size: 9.5px; font-family: monospace; color: #10b981; letter-spacing: 0.08em; text-transform: uppercase; }',
     '.novuintro-close-btn { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.14); color: #94a3b8; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }',
     '.novuintro-close-btn:hover { background: rgba(255, 255, 255, 0.15); color: #ffffff; }',
@@ -309,10 +556,112 @@
 
   document.getElementById('np-btn-open-blueprint').addEventListener('click', showBlueprintModal);
 
-  // Auto-display initial page with all the info unless closed in this session
-  var sessionKey = 'seen_subdomain_intro_' + projectId;
-  if (!sessionStorage.getItem(sessionKey)) {
-    try { sessionStorage.setItem(sessionKey, '1'); } catch (_) {}
-    showBlueprintModal();
+  // 5. Project Splash Screen (Animated Entrance with Logo, Name & Telemetry)
+  function showProjectSplashScreen(onComplete) {
+    if (document.getElementById('novu-project-splash')) return;
+
+    var splash = document.createElement('div');
+    splash.id = 'novu-project-splash';
+    splash.setAttribute('role', 'dialog');
+    splash.setAttribute('aria-modal', 'true');
+    splash.setAttribute('aria-label', project.name + ' Launch Splash Screen');
+
+    splash.innerHTML = [
+      '<div class="nps-ambient-glow"></div>',
+      '<div class="nps-card">',
+      '  <div class="nps-top-badge">',
+      '    <span class="np-dot"></span>',
+      '    <span class="nps-badge-text">NOVU.WORKS // THE RARE HYBRID · SUBSYSTEM</span>',
+      '  </div>',
+      '  <div class="nps-logo-wrapper">',
+      '    <div class="nps-logo-aura"></div>',
+      '    ' + project.logoSvg,
+      '  </div>',
+      '  <h1 class="nps-title">' + project.name.toUpperCase() + '</h1>',
+      '  <div class="nps-badge-pill">' + project.badge + '</div>',
+      '  <p class="nps-author">Architected &amp; Engineered by Fabián Vélez Vicente</p>',
+      '  <div class="nps-progress-container">',
+      '    <div class="nps-progress-bar" id="nps-bar"></div>',
+      '  </div>',
+      '  <div class="nps-telemetry-row">',
+      '    <span class="nps-telemetry-text" id="nps-telemetry">AUTHENTICATING SECURE EDGE GATEWAY...</span>',
+      '    <span class="nps-telemetry-pct" id="nps-pct">0%</span>',
+      '  </div>',
+      '  <button type="button" class="nps-enter-btn" id="nps-btn-enter">',
+      '    <span>Enter Application &rarr;</span>',
+      '  </button>',
+      '</div>'
+    ].join('');
+
+    document.body.appendChild(splash);
+
+    var bar = splash.querySelector('#nps-bar');
+    var telemetry = splash.querySelector('#nps-telemetry');
+    var pct = splash.querySelector('#nps-pct');
+    var enterBtn = splash.querySelector('#nps-btn-enter');
+
+    var duration = overrideDuration || 2100;
+    var startTime = performance.now();
+    var isDone = false;
+
+    function dismiss() {
+      if (isDone) return;
+      isDone = true;
+      splash.classList.add('is-dismissing');
+      setTimeout(function () {
+        if (splash.parentNode) splash.parentNode.removeChild(splash);
+        if (typeof onComplete === 'function') onComplete();
+      }, 420);
+    }
+
+    enterBtn.addEventListener('click', dismiss);
+    splash.addEventListener('click', function (e) {
+      if (e.target === splash || e.target === enterBtn || e.target.closest('#nps-btn-enter')) {
+        dismiss();
+      }
+    });
+
+    function tick(now) {
+      if (isDone) return;
+      var elapsed = now - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+
+      if (bar) bar.style.width = (progress * 100) + '%';
+      if (pct) pct.textContent = Math.round(progress * 100) + '%';
+
+      if (telemetry) {
+        if (progress < 0.28) {
+          telemetry.textContent = 'CALIBRATING PRODUCTION CLOUD CLUSTER...';
+        } else if (progress < 0.65) {
+          telemetry.textContent = 'INITIALIZING HIGH-PRECISION RUNTIME & DATA FLOWS...';
+        } else if (progress < 0.92) {
+          telemetry.textContent = 'VERIFYING SUBSYSTEM ARCHITECTURE SPECIFICATIONS...';
+        } else {
+          telemetry.textContent = '✦ SYSTEM READY // LAUNCHING ' + project.name.toUpperCase();
+        }
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        setTimeout(dismiss, 350);
+      }
+    }
+
+    requestAnimationFrame(tick);
   }
+
+  // Expose global methods for testing & re-launch
+  window.showNovuProjectSplash = showProjectSplashScreen;
+  window.showNovuBlueprintModal = showBlueprintModal;
+
+  // Execute Splash Screen, followed by Initial Blueprint Modal on first visit
+  showProjectSplashScreen(function () {
+    var sessionKey = 'seen_subdomain_intro_' + projectId;
+    if (!sessionStorage.getItem(sessionKey)) {
+      try { sessionStorage.setItem(sessionKey, '1'); } catch (_) {}
+      showBlueprintModal();
+    }
+  });
+
 })();
