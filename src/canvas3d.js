@@ -254,13 +254,15 @@ export class SpatialCanvas3D {
       uniforms: {
         uTime: { value: 0 },
         uPointer: { value: new THREE.Vector3(0, 0, 0) },
-        uOpacity: { value: 1.0 },
+        uOpacity: { value: this.currentTheme === 'light' ? 0.22 : 0.75 },
+        uIsLight: { value: this.currentTheme === 'light' ? 1.0 : 0.0 },
         uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) },
       },
       vertexShader: `
         uniform float uTime;
         uniform vec3 uPointer;
         uniform float uOpacity;
+        uniform float uIsLight;
         uniform float uPixelRatio;
 
         attribute vec3 color;
@@ -271,26 +273,34 @@ export class SpatialCanvas3D {
         varying float vAlpha;
 
         void main() {
-          vColor = color;
+          // Minimalist theme adaptation: soft platinum/champagne in light mode
+          vec3 baseColor = color;
+          if (uIsLight > 0.5) {
+            vec3 lightGold = vec3(0.77, 0.66, 0.50);
+            vec3 lightPlatinum = vec3(0.58, 0.64, 0.72);
+            baseColor = mix(lightPlatinum, lightGold, rand);
+          }
+          vColor = baseColor;
           vec3 p = position;
 
           // Gentle organic luxury breathing
-          p.x += sin(uTime * 1.2 + rand * 6.28) * 0.28;
-          p.y += cos(uTime * 1.5 + rand * 6.28) * 0.28;
-          p.z += sin(uTime * 1.0 + rand * 6.28) * 0.35;
+          p.x += sin(uTime * 1.0 + rand * 6.28) * 0.22;
+          p.y += cos(uTime * 1.2 + rand * 6.28) * 0.22;
+          p.z += sin(uTime * 0.8 + rand * 6.28) * 0.25;
 
           // Responsive cursor repulsion
           vec3 toPointer = p - uPointer;
           float dist = length(toPointer);
           if (dist < 10.0) {
             float force = (1.0 - dist / 10.0);
-            p += normalize(toPointer + 0.001) * force * 3.2;
+            p += normalize(toPointer + 0.001) * force * 2.5;
           }
 
           vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
           gl_Position = projectionMatrix * mvPosition;
 
-          gl_PointSize = size * uPixelRatio * (360.0 / -mvPosition.z);
+          float pSize = uIsLight > 0.5 ? size * 0.85 : size;
+          gl_PointSize = pSize * uPixelRatio * (340.0 / -mvPosition.z);
           vAlpha = smoothstep(95.0, 18.0, -mvPosition.z) * uOpacity * (0.8 + 0.2 * sin(uTime * 2.2 + rand * 8.0));
         }
       `,
@@ -536,23 +546,23 @@ export class SpatialCanvas3D {
       group.position.set(x, y, z);
 
       // Delicate gold & titanium ambient pearl bead (purely ambient, zero text overlap)
-      const beadGeo = new THREE.SphereGeometry(0.32, 16, 16);
+      const beadGeo = new THREE.SphereGeometry(0.18, 12, 12);
       const beadMat = new THREE.MeshStandardMaterial({
         color: 0xd4af37,
         metalness: 0.95,
         roughness: 0.25,
         emissive: 0x221808,
-        emissiveIntensity: 0.35,
+        emissiveIntensity: 0.2,
       });
       const pearl = new THREE.Mesh(beadGeo, beadMat);
       group.add(pearl);
 
       // Outer delicate hairline halo
-      const haloGeo = new THREE.TorusGeometry(0.55, 0.018, 12, 32);
+      const haloGeo = new THREE.TorusGeometry(0.36, 0.012, 10, 24);
       const haloMat = new THREE.MeshBasicMaterial({
         color: 0xfff0c8,
         transparent: true,
-        opacity: 0.3,
+        opacity: 0.2,
       });
       const halo = new THREE.Mesh(haloGeo, haloMat);
       halo.rotation.x = Math.PI / 2;
@@ -592,8 +602,8 @@ export class SpatialCanvas3D {
       this.targetRootScale.set(s, s, s);
     } else if (isDesktop) {
       // Offset 3D sculpture to the open right half on desktop to frame the hero section without text collision
-      this.targetRootPosition.set(7.5, 0.5, -2.0);
-      this.targetRootScale.set(1.05, 1.05, 1.05);
+      this.targetRootPosition.set(11.5, 0.2, -7.0);
+      this.targetRootScale.set(0.92, 0.92, 0.92);
     } else {
       // Centered and monumentally scaled on mobile/tablet for rich dynamic particle immersion
       this.targetRootPosition.set(0, -0.6, -4.5);
@@ -944,12 +954,32 @@ export class SpatialCanvas3D {
     if (this.dustMesh && this.dustMesh.material) {
       this.dustMesh.material.blending = isLight ? THREE.NormalBlending : THREE.AdditiveBlending;
       this.dustMesh.material.color.setHex(isLight ? 0x946800 : 0xd4af37);
-      this.dustMesh.material.opacity = isLight ? 0.45 : 0.35;
+      this.dustMesh.material.opacity = isLight ? 0.20 : 0.35;
       this.dustMesh.material.needsUpdate = true;
     }
     if (this.monogramMesh && this.monogramMesh.material) {
+      if (this.monogramMesh.material.uniforms?.uOpacity) {
+        this.monogramMesh.material.uniforms.uOpacity.value = isLight ? 0.22 : 0.75;
+      }
+      if (this.monogramMesh.material.uniforms?.uIsLight) {
+        this.monogramMesh.material.uniforms.uIsLight.value = isLight ? 1.0 : 0.0;
+      }
       this.monogramMesh.material.blending = isLight ? THREE.NormalBlending : THREE.AdditiveBlending;
       this.monogramMesh.material.needsUpdate = true;
+    }
+    if (this.orbitRing && this.orbitRing.material) {
+      this.orbitRing.material.opacity = isLight ? 0.12 : 0.24;
+      this.orbitRing.material.needsUpdate = true;
+    }
+    if (this.pillarNodes) {
+      this.pillarNodes.forEach((node) => {
+        if (node.pearl?.material) {
+          node.pearl.material.opacity = isLight ? 0.35 : 0.9;
+        }
+        if (node.halo?.material) {
+          node.halo.material.opacity = isLight ? 0.12 : 0.3;
+        }
+      });
     }
   }
 

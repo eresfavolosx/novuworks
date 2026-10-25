@@ -23,6 +23,7 @@ import { audio } from './audio.js';
 import { DISCIPLINES, PROFILE } from './data.js';
 import { getLanguage, resolveInitialLanguage, switchLanguage, updateDomTranslations, updateProfileDataForLanguage } from './i18n.js';
 import { renderSubdomainLandingHtml, bindSubdomainLandingEvents } from './subdomain-landings.js';
+import { renderExecutiveSignatureBlock, initExecutiveSignature } from './executive-signature.js';
 
 class FabianPortfolioApp {
   constructor() {
@@ -42,6 +43,7 @@ class FabianPortfolioApp {
       featuredSubdomainsMount: document.getElementById('featured-subdomains-mount'),
       aiLabMount: document.getElementById('ai-lab-mount'),
       competencyMatrixMount: document.getElementById('competency-matrix-mount'),
+      executiveSignatureMount: document.getElementById('executive-signature-mount'),
       companyLogoStripMount: document.getElementById('company-logo-strip-mount'),
       recModalLogosMount: document.getElementById('rec-modal-logos-mount'),
       dossierTagMount: document.getElementById('dossier-tag-mount'),
@@ -121,6 +123,7 @@ class FabianPortfolioApp {
 
     // 2. Render all dynamic content FIRST to guarantee DOM readiness
     try {
+      this.renderExecutiveSignature();
       this.renderCaseStudies();
       this.renderCompetencyMatrix();
       this.renderCompanyLogos();
@@ -1005,6 +1008,16 @@ class FabianPortfolioApp {
     observeElements();
     window.addEventListener('novu:view-changed', () => setTimeout(observeElements, 60));
     window.addEventListener('novu:lang-changed', () => setTimeout(observeElements, 60));
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // Executive Signature & Certified Identity Block
+  // ─────────────────────────────────────────────────────────────
+  renderExecutiveSignature() {
+    const mount = this.dom.executiveSignatureMount || document.getElementById('executive-signature-mount');
+    if (!mount) return;
+    mount.innerHTML = renderExecutiveSignatureBlock();
+    initExecutiveSignature();
   }
 
   // ─────────────────────────────────────────────────────────────

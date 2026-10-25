@@ -150,7 +150,7 @@
 
 html, body {
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw;
   min-height: 100%;
   min-height: 100dvh;
   overflow-x: hidden;
@@ -217,7 +217,8 @@ body::after {
   flex-direction: column;
   position: relative;
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
   overflow-x: hidden;
   box-sizing: border-box;
   opacity: 1;
@@ -850,7 +851,8 @@ body.visualizer-mode .webgl-canvas-layer:active {
   padding-bottom: 80px;
   min-height: 100vh;
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
   overflow-x: hidden;
   box-sizing: border-box;
 }
@@ -974,6 +976,408 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .pr-flag-inline {
   font-size: 13px;
   line-height: 1;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Executive Signature & Certified Identity Showcase
+   Authentic Vector Handwritten Signature & Dynamic Calligraphy
+   ───────────────────────────────────────────────────────────── */
+.executive-signature-mount {
+  width: 100%;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 5;
+}
+
+.executive-signature-card {
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  background: linear-gradient(135deg, rgba(20, 24, 38, 0.72) 0%, rgba(10, 14, 24, 0.85) 100%);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 20px;
+  padding: 22px 28px;
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
+    0 16px 48px -8px rgba(0, 0, 0, 0.65),
+    0 0 32px rgba(212, 175, 55, 0.08);
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: border-color var(--duration-fast) var(--ease-luxury), box-shadow var(--duration-fast) var(--ease-luxury);
+}
+
+.executive-signature-card:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.3),
+    0 20px 56px -6px rgba(0, 0, 0, 0.75),
+    0 0 40px rgba(212, 175, 55, 0.15);
+}
+
+.sig-card-glass-glow {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(24px);
+}
+
+.sig-content-row {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  align-items: center;
+  gap: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Left Column: Certified Identity */
+.sig-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sig-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sig-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulseSubtle 2.2s infinite ease-in-out;
+}
+
+.sig-kicker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--gold-primary);
+  text-transform: uppercase;
+}
+
+.sig-geo {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  padding: 2px 7px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.sig-name-wrap {
+  position: relative;
+  display: inline-block;
+  margin: 2px 0;
+}
+
+.sig-name {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3.2vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sig-first {
+  color: var(--titanium-white);
+}
+
+.sig-gold-part {
+  background: linear-gradient(135deg, #f5e6be 0%, #d4af37 60%, #e0566a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #d4af37;
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+.sig-underline-bar {
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #d4af37 0%, #f5e6be 60%, transparent 100%);
+  border-radius: 2px;
+  margin-top: 4px;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.executive-signature-card.is-animating .sig-underline-bar {
+  width: 75%;
+}
+
+.sig-title {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.sig-credentials-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.sig-cred-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+/* Right Column: Authentic Vector Signature Stage */
+.sig-draw-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.signature-stage {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+.sig-vector-svg {
+  width: 100%;
+  height: 100%;
+  max-height: 140px;
+  overflow: visible;
+  filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.28));
+}
+
+.sig-ink-path {
+  fill: url(#sigInkGrad);
+  transition: opacity 0.3s ease;
+  clip-path: inset(0 100% 0 0);
+  opacity: 0.15;
+}
+
+/* Dynamic Calligraphic Wipe Reveal Animation */
+.executive-signature-card.is-animating .sig-ink-path {
+  animation: sigCalligraphyReveal 1.6s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+
+@keyframes sigCalligraphyReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.2;
+    filter: brightness(1.6);
+  }
+  30% {
+    opacity: 0.9;
+  }
+  100% {
+    clip-path: inset(0 0% 0 0);
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
+/* Luminous Gold Pen Nib Sparkle */
+.sig-nib-sparkle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #f5e6be 40%, rgba(212, 175, 55, 0) 75%);
+  box-shadow: 0 0 16px 4px rgba(212, 175, 55, 0.85);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+
+.executive-signature-card.is-animating .sig-nib-sparkle {
+  animation: sigNibTravel 1.6s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+}
+
+@keyframes sigNibTravel {
+  0% {
+    left: 8%;
+    top: 25%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  40% {
+    left: 45%;
+    top: 55%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  80% {
+    left: 85%;
+    top: 40%;
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    left: 96%;
+    top: 45%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+}
+
+/* Replay Button & Verified Badge */
+.sig-actions-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 380px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sig-replay-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: var(--radius-pill);
+  padding: 4px 10px;
+  color: var(--gold-light);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-luxury);
+}
+
+.sig-replay-btn:hover {
+  background: rgba(212, 175, 55, 0.18);
+  border-color: var(--gold-primary);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+}
+
+.sig-replay-btn:active {
+  transform: translateY(0);
+}
+
+.sig-verified-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  color: #10b981;
+  text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Light Mode Overrides for Signature Card
+   ───────────────────────────────────────────────────────────── */
+:root[data-theme="light"] .executive-signature-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .executive-signature-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 250, 252, 0.95) 100%);
+  border-color: rgba(148, 104, 0, 0.28);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 1),
+    0 16px 40px -10px rgba(15, 23, 42, 0.1),
+    0 0 28px rgba(212, 175, 55, 0.08);
+}
+
+:root[data-theme="light"] .sig-first,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sig-first {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .sig-gold-part,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sig-gold-part {
+  background: linear-gradient(135deg, #92400e 0%, #b45309 60%, #991b1b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #92400e;
+}
+
+:root[data-theme="light"] .sig-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sig-title {
+  color: #475569;
+}
+
+:root[data-theme="light"] .sig-geo,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sig-geo {
+  background: rgba(15, 23, 42, 0.05);
+  color: #64748b;
+}
+
+:root[data-theme="light"] .sig-cred-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sig-cred-pill {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.1);
+  color: #475569;
+}
+
+:root[data-theme="light"] .sig-actions-bottom,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sig-actions-bottom {
+  border-top-color: rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .sig-replay-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sig-replay-btn {
+  background: rgba(148, 104, 0, 0.08);
+  border-color: rgba(148, 104, 0, 0.3);
+  color: #92400e;
+}
+
+:root[data-theme="light"] .sig-vector-svg,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sig-vector-svg {
+  filter: drop-shadow(0 4px 10px rgba(148, 104, 0, 0.22));
+}
+
+@media (max-width: 820px) {
+  .sig-content-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .executive-signature-card {
+    padding: 18px 18px;
+  }
+  .signature-stage {
+    max-width: 100%;
+    height: 120px;
+  }
+  .sig-actions-bottom {
+    max-width: 100%;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -3423,9 +3827,17 @@ body.tesla-mode .hud-action-btn {
   }
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1560px) {
+  #btn-pr-roots,
+  #btn-toggle-visualizer {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1400px) {
   .availability-pill,
-  #btn-pr-roots {
+  #btn-visitor-tools,
+  #btn-tailor-experience {
     display: none !important;
   }
   .header-center-nav .nav-tab {
@@ -3433,29 +3845,24 @@ body.tesla-mode .hud-action-btn {
     font-size: 11.5px;
   }
   .app-header {
-    padding: 0 14px;
-    gap: 8px;
+    padding: 0 12px;
+    gap: 6px;
   }
 }
 
-@media (max-width: 1280px) {
-  .availability-pill .status-label {
+@media (max-width: 1220px) {
+  .header-center-nav {
     display: none !important;
   }
-  #btn-tesla-mode .btn-text {
-    display: none !important;
+  .mobile-menu-toggle-btn {
+    display: inline-flex !important;
   }
-  .cmd-trigger,
-  #btn-toggle-visualizer {
+  .cmd-trigger {
     display: none !important;
   }
 }
 
 @media (max-width: 1140px) {
-  .header-center-nav {
-    display: none !important;
-  }
-
   .main-viewport {
     padding-bottom: 30px;
   }
@@ -10476,6 +10883,8 @@ body.visualizer-mode #toast-banner {
   position: fixed;
   bottom: 24px;
   right: 24px;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
   z-index: 85;
   display: flex;
   align-items: center;
@@ -12493,11 +12902,17 @@ body.tesla-cockpit-active {
   transform: translateY(-1px);
 }
 
-/* Menu Toggle Button styling (Always accessible for executive top navigation) */
+/* Menu Toggle Button styling (Accessible for executive top navigation when central nav collapses) */
 .mobile-menu-toggle-btn {
-  display: inline-flex !important;
+  display: none;
   align-items: center;
   gap: 7px;
+}
+
+@media (max-width: 1220px) {
+  .mobile-menu-toggle-btn {
+    display: inline-flex !important;
+  }
 }
 
 .menu-icon-bars {
