@@ -2,215 +2,232 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="BizPay: System Architecture, ATH Móvil API Integration & Merchant Invoicing Help">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <link rel="icon" href="../images/athmovil-logo.png">
-    <title>BizPay · System Architecture & Help</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="BizPay: System Architecture, ATH Móvil Business Test API Sandbox & Merchant Fee Calculator">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="icon" href="../images/athmovil-logo.png">
+  <title>BizPay · ATH Móvil Test API &amp; Architecture Guide</title>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.grey-deep_orange.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.min.css">
-    <link rel="stylesheet" href="../Assets/CSS/bootstrap.css">
-    <link rel="stylesheet" href="../styles.css">
-
-    <style>
-        .help-card {
-            background: #ffffff;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-        .help-badge {
-            display: inline-block;
-            background: #ffefe6;
-            color: #ff671b;
-            font-weight: 700;
-            font-size: 11px;
-            padding: 4px 10px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
-        }
-        .calc-input-box {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin: 16px 0;
-            flex-wrap: wrap;
-        }
-        .calc-input {
-            font-size: 18px;
-            font-weight: 700;
-            padding: 8px 14px;
-            border: 2px solid #ff671b;
-            border-radius: 6px;
-            width: 160px;
-            color: #1a1a1a;
-        }
-        .calc-result-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 14px;
-            margin-top: 16px;
-        }
-        .calc-stat-cell {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 14px;
-        }
-        .calc-stat-label {
-            font-size: 11px;
-            color: #64748b;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .calc-stat-value {
-            font-size: 22px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-top: 4px;
-        }
-        .faq-item {
-            border-bottom: 1px solid #e2e8f0;
-            padding: 14px 0;
-        }
-        .faq-q {
-            font-size: 15px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-        .faq-a {
-            font-size: 13.5px;
-            color: #475569;
-            line-height: 1.55;
-            margin: 0;
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title nav-title">Help &amp; Architecture Guide</span>
-                <div class="mdl-layout-spacer"></div>
-                <a href="https://novu.works?skipIntro=1#projects" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent np-btn-home" style="text-transform: none; font-weight: 600;">
-                    &larr; Return to novu.works
-                </a>
-            </div>
-        </header>
+  <div class="bp-shell">
+    <div class="bp-sidebar-backdrop" aria-hidden="true"></div>
 
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">
-                <img src="../images/Logo.png" alt="" class="navbar-profile img-circle"/>
-                <img src="../images/athmovil-logo.png" alt="ath-movil" class="ath-movil" />
-                <br>
-                dliber@corporate.edu
-            </span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="../index.html"><i class="material-icons nav-icon" role="presentation">home</i>Home</a>
-                <a class="mdl-navigation__link" href="Payments.html"><i class="material-icons nav-icon" role="presentation">payment</i>Payments</a>
-                <a class="mdl-navigation__link" href="Payroll.html"><i class="material-icons nav-icon" role="presentation">people</i>Pay-Roll</a>
-                <a class="mdl-navigation__link is-active" href="History.html"><i class="material-icons nav-icon" role="presentation">help</i>Help</a>
-            </nav>
+    <!-- Sidebar Navigation -->
+    <aside class="bp-sidebar" aria-label="BizPay Navigation">
+      <div>
+        <div class="bp-sidebar-brand">
+          <div class="bp-brand-row">
+            <img src="../images/Logo.png" alt="BizPay Logo" class="bp-brand-logo" />
+            <div class="bp-brand-text">
+              <div class="bp-brand-title">
+                <span>BizPay</span>
+                <span class="bp-brand-tag">B2B</span>
+              </div>
+              <div class="bp-brand-merchant">dliber@corporate.edu</div>
+            </div>
+          </div>
+
+          <div class="bp-athm-pill" title="Official ATH Móvil Business Sandbox Active (publicToken: dummy)">
+            <img src="../images/athmovil-logo.png" alt="ATH Móvil" />
+            <span class="bp-status-dot">Sandbox API Ready</span>
+          </div>
         </div>
 
-        <main class="mdl-layout__content">
-            <div class="page-content">
-                <div class="container" style="max-width: 960px; padding: 24px 16px;">
-                    
-                    <!-- Overview Card -->
-                    <div class="help-card mdl-shadow--2dp">
-                        <span class="help-badge">Fintech Architecture Overview</span>
-                        <h2 style="font-size: 24px; font-weight: 800; color: #0f172a; margin: 4px 0 12px 0;">BizPay Commercial Platform &amp; ATH Móvil Integration</h2>
-                        <p style="font-size: 14px; line-height: 1.6; color: #475569;">
-                            BizPay was architected by <strong>Fabián Vélez Vicente</strong> to streamline commercial invoicing, payment routing, and real-time merchant fee calculations for B2B enterprises in Puerto Rico. The platform integrates directly with the ATH Móvil Business API to enable instantaneous, zero-slippage checkouts without paper invoicing delays.
-                        </p>
-                    </div>
+        <nav class="bp-nav">
+          <div class="bp-nav-section-label">Merchant Ledger</div>
+          <a class="bp-nav-link" href="../index.html">
+            <i class="material-icons" role="presentation">dashboard</i>
+            <span>Overview</span>
+          </a>
+          <a class="bp-nav-link" href="Payments.html">
+            <i class="material-icons" role="presentation">payments</i>
+            <span>Payments</span>
+            <span class="bp-nav-badge" id="bp-nav-unpaid-badge">3 due</span>
+          </a>
+          <a class="bp-nav-link" href="Payroll.html">
+            <i class="material-icons" role="presentation">groups</i>
+            <span>Pay-Roll</span>
+            <span class="bp-nav-badge" id="bp-nav-payroll-badge">4 pending</span>
+          </a>
+          <a class="bp-nav-link" href="Fulltime-details.html">
+            <i class="material-icons" role="presentation">badge</i>
+            <span>Full-Time Ledger</span>
+          </a>
 
-                    <!-- Interactive Fee Calculator -->
-                    <div class="help-card mdl-shadow--2dp">
-                        <span class="help-badge">Interactive Simulator</span>
-                        <h3 style="font-size: 18px; font-weight: 800; color: #0f172a; margin: 4px 0 6px 0;">Live Transaction Fee &amp; Payout Calculator</h3>
-                        <p style="font-size: 13px; color: #64748b; margin-bottom: 12px;">
-                            Simulate real-time merchant fee calculations based on standard commercial gateway processing rates (2.25% + $0.25 flat transaction fee).
-                        </p>
+          <div class="bp-nav-section-label" style="margin-top:8px;">Developer &amp; Rates</div>
+          <a class="bp-nav-link is-active" href="History.html">
+            <i class="material-icons" role="presentation">terminal</i>
+            <span>ATHM API &amp; Help</span>
+          </a>
+        </nav>
+      </div>
 
-                        <div class="calc-input-box">
-                            <label for="invoice-amount" style="font-size: 14px; font-weight: 700; color: #334155;">Invoice Amount ($):</label>
-                            <input type="number" id="invoice-amount" class="calc-input" value="350.00" min="1" step="10" />
-                            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn-recalc" style="background: #ff671b; color: white;">Calculate</button>
-                        </div>
+      <div class="bp-sidebar-footer">
+        <div class="bp-sandbox-card">
+          Gateway Token: <code>publicToken: "dummy"</code><br>
+          Test Line: <code>787-555-0199</code>
+        </div>
+        <button type="button" class="bp-btn bp-btn-sm bp-btn-ghost" data-reset-demo="1" style="width:100%">
+          <span class="material-icons">restart_alt</span>
+          <span>Reset Sandbox Ledger</span>
+        </button>
+      </div>
+    </aside>
 
-                        <div class="calc-result-grid">
-                            <div class="calc-stat-cell">
-                                <div class="calc-stat-label">Gross Transaction</div>
-                                <div class="calc-stat-value" id="calc-gross">$350.00</div>
-                            </div>
-                            <div class="calc-stat-cell">
-                                <div class="calc-stat-label">Processing Fee (2.25% + $0.25)</div>
-                                <div class="calc-stat-value" id="calc-fee" style="color: #ef4444;">$8.13</div>
-                            </div>
-                            <div class="calc-stat-cell">
-                                <div class="calc-stat-label">Net Merchant Settlement</div>
-                                <div class="calc-stat-value" id="calc-net" style="color: #10b981;">$341.87</div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Main Viewport -->
+    <div class="bp-main">
+      <header class="bp-topbar">
+        <div class="bp-topbar-left">
+          <button type="button" class="bp-menu-toggle" id="bp-menu-toggle" aria-label="Toggle Menu">
+            <span class="material-icons">menu</span>
+          </button>
+          <div>
+            <h1 class="bp-page-title">ATH Móvil Business Test API &amp; Architecture</h1>
+            <p class="bp-page-subtitle">Interactive sandbox payload tester (publicToken: "dummy"), merchant fee simulator, and technical docs</p>
+          </div>
+        </div>
 
-                    <!-- Architecture FAQs -->
-                    <div class="help-card mdl-shadow--2dp">
-                        <span class="help-badge">Frequently Asked Questions</span>
-                        <h3 style="font-size: 18px; font-weight: 800; color: #0f172a; margin: 4px 0 16px 0;">Technical Implementation Details</h3>
+        <div class="bp-topbar-actions">
+          <button type="button" class="bp-btn bp-btn-athm" data-test-athm-sandbox="1">
+            <span class="material-icons">bolt</span>
+            <span>Fire Test ATH Móvil API Call</span>
+          </button>
+        </div>
+      </header>
 
-                        <div class="faq-item">
-                            <div class="faq-q">How does the ATH Móvil modal handoff work?</div>
-                            <p class="faq-a">
-                                When a user initiates checkout, BizPay bundles the order payload with merchant credentials and launches the ATH Móvil transaction iframe or mobile deep-link, ensuring full PCI-DSS tokenization without exposing sensitive card credentials to merchant servers.
-                            </p>
-                        </div>
-
-                        <div class="faq-item">
-                            <div class="faq-q">How does ledger reconciliation operate?</div>
-                            <p class="faq-a">
-                                Completed payments emit an asynchronous webhook notification containing the transaction token, settling the invoice status from "Unpaid" to "Paid" in real time while recalculating the commercial cash-flow chart.
-                            </p>
-                        </div>
-
-                        <div class="faq-item">
-                            <div class="faq-q">Where can I review the source code?</div>
-                            <p class="faq-a">
-                                The open-source code and architectural documentation are available on <a href="https://github.com/eresfavolosx/BizPay" target="_blank" rel="noopener noreferrer">GitHub (eresfavolosx/BizPay)</a>.
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
+      <main class="bp-content">
+        <div class="bp-split-grid" style="margin-bottom:24px;">
+          <!-- Interactive ATH Móvil Test API Playground -->
+          <div class="bp-card">
+            <div class="bp-card-header">
+              <h3 class="bp-card-title"><span class="material-icons">terminal</span>ATH Móvil Business Sandbox Playground</h3>
+              <span class="bp-badge bp-badge-paid">publicToken: "dummy"</span>
             </div>
-        </main>
-    </div>
+            <div class="bp-card-body">
+              <p style="font-size:13.5px;color:var(--bp-text-secondary);margin-top:0;">
+                BizPay implements Evertec's official <strong>ATH Móvil Business Checkout SDK</strong> contract using the public sandbox token <code>publicToken: "dummy"</code>. Click below to trigger a live sandbox transaction and inspect the full JSON webhook response.
+              </p>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;">
+                <button type="button" class="bp-btn bp-btn-athm" data-test-athm-sandbox="1">
+                  <span class="material-icons">play_arrow</span>
+                  <span>Execute Test Payment ($125.00)</span>
+                </button>
+                <a href="Payments.html" class="bp-btn">
+                  <span class="material-icons">payments</span>
+                  <span>Go to Live Invoices</span>
+                </a>
+              </div>
+              <div class="bp-form-label">Last Sandbox Webhook Response</div>
+              <pre class="bp-api-log" id="bp-sandbox-playground-output">{
+  "env": "sandbox",
+  "publicToken": "dummy",
+  "endpoint": "https://www.athmovil.com/api/business-transaction/ecommerce/payment",
+  "status": "READY_FOR_TEST_TRANSACTION",
+  "testPhoneNumber": "787-555-0199"
+}</pre>
+            </div>
+          </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.min.js"></script>
-    <script>
-        function updateCalc() {
-            var raw = parseFloat(document.getElementById('invoice-amount').value) || 0;
-            if (raw <= 0) raw = 1;
-            var fee = (raw * 0.0225) + 0.25;
-            var net = raw - fee;
-            document.getElementById('calc-gross').textContent = '$' + raw.toFixed(2);
-            document.getElementById('calc-fee').textContent = '$' + fee.toFixed(2);
-            document.getElementById('calc-net').textContent = '$' + net.toFixed(2);
-        }
-        document.getElementById('invoice-amount').addEventListener('input', updateCalc);
-        document.getElementById('btn-recalc').addEventListener('click', updateCalc);
-    </script>
-    <script src="../novu-intro.js" data-project="bizpay" defer></script>
+          <!-- Interactive Merchant Fee & Payout Calculator -->
+          <div class="bp-card">
+            <div class="bp-card-header">
+              <h3 class="bp-card-title"><span class="material-icons">calculate</span>Live Merchant Fee &amp; Payout Calculator</h3>
+              <span class="bp-section-pill">2.25% + $0.25 Rate</span>
+            </div>
+            <div class="bp-card-body">
+              <p style="font-size:13.5px;color:var(--bp-text-secondary);margin-top:0;">
+                Simulate real-time commercial gateway processing fees, PR IVU tax breakdown (11.5%), and net merchant settlement.
+              </p>
+
+              <div class="bp-form-group" style="margin-top:14px;">
+                <label class="bp-form-label" for="invoice-amount">Gross Transaction Amount (USD)</label>
+                <div style="display:flex;gap:10px;">
+                  <input type="number" id="invoice-amount" class="bp-form-input" value="350.00" min="1" step="10" />
+                  <button type="button" class="bp-btn bp-btn-athm" id="btn-recalc">Calculate</button>
+                </div>
+              </div>
+
+              <div class="bp-kpi-grid" style="margin-bottom:0;margin-top:16px;">
+                <div class="bp-kpi-card">
+                  <div class="bp-kpi-label">Gross Charge</div>
+                  <div class="bp-kpi-value" id="calc-gross" style="font-size:20px;">$350.00</div>
+                </div>
+                <div class="bp-kpi-card kpi-warning">
+                  <div class="bp-kpi-label">Gateway Fee (2.25% + $0.25)</div>
+                  <div class="bp-kpi-value" id="calc-fee" style="font-size:20px;color:var(--bp-danger);">$8.13</div>
+                </div>
+                <div class="bp-kpi-card kpi-success">
+                  <div class="bp-kpi-label">Net Merchant Payout</div>
+                  <div class="bp-kpi-value" id="calc-net" style="font-size:20px;color:var(--bp-success);">$341.87</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architecture Overview & Technical FAQ -->
+        <div class="bp-card">
+          <div class="bp-card-header">
+            <h3 class="bp-card-title"><span class="material-icons">architecture</span>Fintech Architecture &amp; Technical Implementation Details</h3>
+            <a href="https://github.com/eresfavolosx/BizPay" target="_blank" rel="noopener noreferrer" class="bp-btn bp-btn-sm">
+              <span class="material-icons">open_in_new</span>GitHub Repository
+            </a>
+          </div>
+          <div class="bp-card-body">
+            <p style="font-size:14px;color:var(--bp-text-secondary);line-height:1.65;margin-top:0;">
+              <strong>BizPay</strong> was architected by <strong>Fabián Vélez Vicente</strong> at HackPR to streamline B2B commercial invoicing, POS QR collections, and multi-tier employee payroll disbursements in Puerto Rico using the ATH Móvil Business network.
+            </p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px;">
+              <div class="bp-athm-summary-box" style="margin-bottom:0;">
+                <h4 style="margin:0 0 6px;font-size:14px;color:var(--bp-text);">1. Tokenized ATHM_Checkout Handshake</h4>
+                <p style="margin:0;font-size:13px;color:var(--bp-text-muted);line-height:1.55;">
+                  When an invoice or payroll batch is initiated, BizPay populates <code>window.ATHM_Checkout</code> with <code>publicToken: "dummy"</code>, itemized metadata, and PR IVU tax breakdown before calling the ATH Móvil Business eCommerce endpoint.
+                </p>
+              </div>
+              <div class="bp-athm-summary-box" style="margin-bottom:0;">
+                <h4 style="margin:0 0 6px;font-size:14px;color:var(--bp-text);">2. Real-Time Ledger &amp; Chart Sync</h4>
+                <p style="margin:0;font-size:13px;color:var(--bp-text-muted);line-height:1.55;">
+                  Completed payments emit a verified transaction reference (<code>ATHM-SANDBOX-...</code>) that transitions invoices from <code>Unpaid</code> to <code>Paid</code> and dynamically recalculates the SVG cash-flow charts across all views.
+                </p>
+              </div>
+              <div class="bp-athm-summary-box" style="margin-bottom:0;">
+                <h4 style="margin:0 0 6px;font-size:14px;color:var(--bp-text);">3. Direct-to-Debit Payroll</h4>
+                <p style="margin:0;font-size:13px;color:var(--bp-text-muted);line-height:1.55;">
+                  Supports instant single-employee or batch department payroll disbursements across Full-Time, Part-Time, At-Will, and Leased classifications with editable timecard hours.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../Assets/JS/bizpay-app.js"></script>
+  <script>
+    function updateCalc() {
+      var input = document.getElementById('invoice-amount');
+      if (!input) return;
+      var raw = parseFloat(input.value) || 0;
+      if (raw <= 0) raw = 1;
+      var fee = (raw * 0.0225) + 0.25;
+      var net = raw - fee;
+      document.getElementById('calc-gross').textContent = '$' + raw.toFixed(2);
+      document.getElementById('calc-fee').textContent = '$' + fee.toFixed(2);
+      document.getElementById('calc-net').textContent = '$' + net.toFixed(2);
+    }
+    document.getElementById('invoice-amount').addEventListener('input', updateCalc);
+    document.getElementById('btn-recalc').addEventListener('click', updateCalc);
+  </script>
+  <script src="../novu-intro.js" data-project="bizpay" defer></script>
 </body>
+
 </html>
