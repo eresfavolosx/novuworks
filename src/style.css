@@ -6867,6 +6867,349 @@ body.tesla-mode .hud-action-btn {
 }
 
 /* ─────────────────────────────────────────────────────────────
+   Comprehensive Light Mode Overrides for Intel Feed & Industry Radar
+   ───────────────────────────────────────────────────────────── */
+:root[data-theme="light"] .feed-kicker,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .feed-kicker,
+:root[data-theme="light"] .lk-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lk-title,
+:root[data-theme="light"] .pulse-label,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .pulse-label,
+:root[data-theme="light"] .post-employer-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-employer-pill,
+:root[data-theme="light"] .post-toggle-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-toggle-btn,
+:root[data-theme="light"] .r-news-source,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .r-news-source,
+:root[data-theme="light"] .nl-kicker,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .nl-kicker {
+  color: #785300;
+}
+
+:root[data-theme="light"] .feed-live-badge,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .feed-live-badge {
+  background: rgba(5, 150, 105, 0.1);
+  border-color: rgba(5, 150, 105, 0.3);
+  color: #047857;
+}
+
+:root[data-theme="light"] .feed-main-heading,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .feed-main-heading,
+:root[data-theme="light"] .post-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-title,
+:root[data-theme="light"] .post-expanded-content h4,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-expanded-content h4,
+:root[data-theme="light"] .radar-heading,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .radar-heading,
+:root[data-theme="light"] .radar-sub-heading,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .radar-sub-heading,
+:root[data-theme="light"] .r-news-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .r-news-title,
+:root[data-theme="light"] .nl-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .nl-title,
+:root[data-theme="light"] .empty-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .empty-title {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .post-title:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-title:hover {
+  color: #785300;
+}
+
+:root[data-theme="light"] .r-news-title:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .r-news-title:hover {
+  color: #0284c7;
+}
+
+:root[data-theme="light"] .feed-main-sub,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .feed-main-sub,
+:root[data-theme="light"] .lk-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lk-pill,
+:root[data-theme="light"] .post-author-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-author-title,
+:root[data-theme="light"] .r-news-summary,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .r-news-summary,
+:root[data-theme="light"] .nl-desc,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .nl-desc,
+:root[data-theme="light"] .empty-desc,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .empty-desc {
+  color: #475569;
+}
+
+:root[data-theme="light"] .lk-pill strong,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lk-pill strong {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .linkedin-killer-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .linkedin-killer-card,
+:root[data-theme="light"] .radar-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .radar-card {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+}
+
+:root[data-theme="light"] .lk-header,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lk-header,
+:root[data-theme="light"] .radar-card-header,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .radar-card-header,
+:root[data-theme="light"] .post-tags-row,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-tags-row,
+:root[data-theme="light"] .radar-news-item,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .radar-news-item,
+:root[data-theme="light"] .sla-row,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sla-row {
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .lk-tag,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .lk-tag {
+  background: #f1f5f9;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .industry-pulse-ticker,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .industry-pulse-ticker {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+:root[data-theme="light"] .pulse-chip,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .pulse-chip {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+:root[data-theme="light"] .chip-name,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .chip-name {
+  color: #334155;
+  font-weight: 600;
+}
+
+:root[data-theme="light"] .pulse-chip:nth-child(1) .chip-val,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .pulse-chip:nth-child(1) .chip-val {
+  color: #047857 !important;
+}
+
+:root[data-theme="light"] .pulse-chip:nth-child(2) .chip-val,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .pulse-chip:nth-child(2) .chip-val {
+  color: #0284c7 !important;
+}
+
+:root[data-theme="light"] .pulse-chip:nth-child(3) .chip-val,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .pulse-chip:nth-child(3) .chip-val {
+  color: #785300 !important;
+}
+
+:root[data-theme="light"] .pulse-chip:nth-child(4) .chip-val,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .pulse-chip:nth-child(4) .chip-val {
+  color: #6d28d9 !important;
+}
+
+:root[data-theme="light"] .chip-status,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .chip-status,
+:root[data-theme="light"] .post-timestamp-group,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-timestamp-group,
+:root[data-theme="light"] .radar-sync-time,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .radar-sync-time,
+:root[data-theme="light"] .r-news-time,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .r-news-time,
+:root[data-theme="light"] .r-news-cat,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .r-news-cat {
+  color: #64748b;
+}
+
+:root[data-theme="light"] .filter-chip,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .filter-chip {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #475569;
+}
+
+:root[data-theme="light"] .filter-chip:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .filter-chip:hover {
+  background: rgba(148, 104, 0, 0.08);
+  border-color: var(--gold-primary);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .filter-chip.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .filter-chip.active {
+  background: rgba(148, 104, 0, 0.14);
+  border-color: var(--gold-primary);
+  color: #785300;
+  box-shadow: 0 2px 8px rgba(148, 104, 0, 0.12);
+}
+
+:root[data-theme="light"] .feed-search-box,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .feed-search-box {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.14);
+  color: #475569;
+}
+
+:root[data-theme="light"] .feed-search-input,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .feed-search-input {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .feed-search-input::placeholder,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .feed-search-input::placeholder {
+  color: #64748b;
+}
+
+:root[data-theme="light"] .post-nw-dot,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-nw-dot {
+  border-color: #ffffff;
+}
+
+:root[data-theme="light"] .post-tag,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-tag {
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.08);
+}
+
+:root[data-theme="light"] .post-metric-badge,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-metric-badge {
+  color: #047857;
+  background: rgba(5, 150, 105, 0.1);
+  border-color: rgba(5, 150, 105, 0.28);
+}
+
+:root[data-theme="light"] .post-summary,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-summary,
+:root[data-theme="light"] .post-expanded-content,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-expanded-content,
+:root[data-theme="light"] .ih-text,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .ih-text,
+:root[data-theme="light"] .sla-name,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sla-name {
+  color: #334155;
+  border-top-color: rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .post-expanded-content pre,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-expanded-content pre {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .intel-highlight-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .intel-highlight-card {
+  background: rgba(148, 104, 0, 0.06);
+  border-color: rgba(148, 104, 0, 0.25);
+}
+
+:root[data-theme="light"] .intel-takeaway,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .intel-takeaway {
+  background: #f8fafc;
+  border-left-color: #946800;
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .post-footer,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-footer {
+  border-top-color: rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .reaction-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .reaction-btn,
+:root[data-theme="light"] .post-action-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-action-btn {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #475569;
+}
+
+:root[data-theme="light"] .reaction-btn:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .reaction-btn:hover,
+:root[data-theme="light"] .post-action-btn:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-action-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: rgba(148, 104, 0, 0.35);
+}
+
+:root[data-theme="light"] .reaction-btn.reacted,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .reaction-btn.reacted {
+  color: #785300;
+  border-color: #946800;
+  background: rgba(148, 104, 0, 0.1);
+}
+
+:root[data-theme="light"] .post-action-btn.discuss-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-action-btn.discuss-btn {
+  background: rgba(148, 104, 0, 0.1);
+  border-color: rgba(148, 104, 0, 0.3);
+  color: #785300;
+}
+
+:root[data-theme="light"] .post-action-btn.discuss-btn:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-action-btn.discuss-btn:hover {
+  background: rgba(148, 104, 0, 0.18);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .post-linkedin-pill,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-linkedin-pill,
+:root[data-theme="light"] .llm-sync-status,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .llm-sync-status {
+  background: rgba(10, 102, 194, 0.08);
+  border-color: rgba(10, 102, 194, 0.28);
+  color: #0a66c2;
+}
+
+:root[data-theme="light"] .post-action-linkedin,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .post-action-linkedin {
+  color: #0a66c2 !important;
+  border-color: rgba(10, 102, 194, 0.28) !important;
+}
+
+:root[data-theme="light"] .radar-badge,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .radar-badge,
+:root[data-theme="light"] .sla-metric,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sla-metric {
+  color: #047857;
+}
+
+:root[data-theme="light"] .radar-refresh-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .radar-refresh-btn {
+  background: #f8fafc;
+  border-color: rgba(148, 104, 0, 0.3);
+  color: #785300;
+}
+
+:root[data-theme="light"] .radar-refresh-btn:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .radar-refresh-btn:hover {
+  background: rgba(148, 104, 0, 0.1);
+  border-color: #946800;
+}
+
+:root[data-theme="light"] .nl-input,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .nl-input {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.15);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .nl-linkedin-link,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .nl-linkedin-link {
+  color: #0a66c2;
+}
+
+:root[data-theme="light"] .feed-empty-state,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .feed-empty-state {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.15);
+  color: #475569;
+}
+
+/* ─────────────────────────────────────────────────────────────
    Live RevOps & Big Data Query Terminal
    ───────────────────────────────────────────────────────────── */
 .revops-terminal-layout-container {
@@ -7758,8 +8101,8 @@ body.tesla-mode .hud-action-btn {
 .pulse-ticker-inner {
   display: flex;
   align-items: center;
-  gap: 18px;
-  white-space: nowrap;
+  gap: 12px 16px;
+  flex-wrap: wrap;
 }
 
 .pulse-label {
@@ -7775,7 +8118,8 @@ body.tesla-mode .hud-action-btn {
 .pulse-chips-row {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px 12px;
+  flex-wrap: wrap;
 }
 
 .pulse-chip {
@@ -7861,7 +8205,9 @@ body.tesla-mode .hud-action-btn {
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 20px;
   padding: 6px 14px;
-  min-width: 240px;
+  min-width: 285px;
+  flex: 1 1 285px;
+  max-width: 360px;
 }
 
 .feed-search-input {
