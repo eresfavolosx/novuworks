@@ -2321,8 +2321,14 @@ EDUCATION & CERTIFICATIONS
 
     const meta = document.querySelector('meta[name="color-scheme"]');
     if (meta) meta.content = theme;
+    const themeColorMeta = document.getElementById('meta-theme-color') || document.querySelector('meta[name="theme-color"]');
+    if (themeColorMeta) themeColorMeta.content = theme === 'light' ? '#f8fafc' : '#050507';
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.classList.toggle('light-theme', theme === 'light');
+    document.documentElement.style.backgroundColor = theme === 'light' ? '#f8fafc' : '#050507';
+    if (document.body) {
+      document.body.style.backgroundColor = theme === 'light' ? '#f8fafc' : '#050507';
+    }
 
     this.updateThemeButton(theme, false);
     if (this.canvas3d) this.canvas3d.setTheme(theme);

@@ -882,6 +882,19 @@ html, body {
 :root[data-theme="light"] .cvd-info-card strong, html.light-theme .cvd-info-card strong {
   color: #1d4ed8;
 }
+:root[data-theme="light"] .camera-status-overlay, html.light-theme .camera-status-overlay {
+  background: rgba(248, 250, 252, 0.96);
+}
+:root[data-theme="light"] .camera-status-overlay h3, html.light-theme .camera-status-overlay h3 {
+  color: #0f172a;
+}
+:root[data-theme="light"] .camera-status-overlay p, html.light-theme .camera-status-overlay p {
+  color: #475569;
+}
+:root[data-theme="light"] .picta-app-container, html.light-theme .picta-app-container,
+:root[data-theme="light"] .picta-viewport, html.light-theme .picta-viewport {
+  background: #f1f5f9;
+}
 
 /* ─────────────────────────────────────────────────────────────
    Picta Mobile Viewport & Touch Ergonomics

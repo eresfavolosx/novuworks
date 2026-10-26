@@ -80,18 +80,18 @@
    ───────────────────────────────────────────────────────────── */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]):not(:has(> head > meta[name="color-scheme"][content="dark"])) {
-    --bg-canvas: #f8f9fb;
-    --bg-canvas-end: #edf1f7;
+    --bg-canvas: #f8fafc;
+    --bg-canvas-end: #f8fafc;
     --bg-card: #ffffff;
     --bg-card-elevated: #f1f4f9;
-    --bg-glass: rgba(255, 255, 255, 0.94);
-    --bg-glass-elevated: rgba(248, 250, 252, 0.97);
+    --bg-glass: rgba(255, 255, 255, 0.96);
+    --bg-glass-elevated: rgba(248, 250, 252, 0.98);
 
     --gold-primary: #946800;
     --gold-light: #6b4b00;
     --gold-dark: #b8860b;
     --gold-muted: #785b24;
-    --gold-glow: rgba(148, 104, 0, 0.12);
+    --gold-glow: rgba(148, 104, 0, 0.04);
 
     --platinum: #0f172a;
     --platinum-dark: #1e293b;
@@ -105,25 +105,26 @@
     --hairline: rgba(15, 23, 42, 0.09);
     --hairline-gold: rgba(148, 104, 0, 0.28);
     --hairline-hover: rgba(15, 23, 42, 0.2);
-    --scrim-hero-bg: radial-gradient(ellipse at 18% 35%, rgba(248, 249, 251, 0.88) 0%, rgba(248, 249, 251, 0.55) 55%, transparent 92%);
+    --scrim-hero-bg: none;
     --modal-backdrop: rgba(15, 23, 42, 0.45);
   }
 }
 
 :root[data-theme="light"],
+html.light-theme,
 :root:has(> head > meta[name="color-scheme"][content="light"]) {
-  --bg-canvas: #f8f9fb;
-  --bg-canvas-end: #edf1f7;
+  --bg-canvas: #f8fafc;
+  --bg-canvas-end: #f8fafc;
   --bg-card: #ffffff;
   --bg-card-elevated: #f1f4f9;
-  --bg-glass: rgba(255, 255, 255, 0.94);
-  --bg-glass-elevated: rgba(248, 250, 252, 0.97);
+  --bg-glass: rgba(255, 255, 255, 0.96);
+  --bg-glass-elevated: rgba(248, 250, 252, 0.98);
 
   --gold-primary: #946800;
   --gold-light: #6b4b00;
   --gold-dark: #b8860b;
   --gold-muted: #785b24;
-  --gold-glow: rgba(148, 104, 0, 0.12);
+  --gold-glow: rgba(148, 104, 0, 0.04);
 
   --platinum: #0f172a;
   --platinum-dark: #1e293b;
@@ -137,7 +138,7 @@
   --hairline: rgba(15, 23, 42, 0.09);
   --hairline-gold: rgba(148, 104, 0, 0.28);
   --hairline-hover: rgba(15, 23, 42, 0.2);
-  --scrim-hero-bg: radial-gradient(ellipse at 18% 35%, rgba(248, 249, 251, 0.88) 0%, rgba(248, 249, 251, 0.55) 55%, transparent 92%);
+  --scrim-hero-bg: none;
   --modal-backdrop: rgba(15, 23, 42, 0.45);
 }
 
@@ -148,12 +149,9 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
+html {
   width: 100%;
-  max-width: 100vw;
   min-height: 100%;
-  min-height: 100dvh;
-  overflow-x: hidden;
   background-color: var(--bg-canvas);
   color: var(--text-body);
   font-family: var(--font-sans);
@@ -161,6 +159,24 @@ html, body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100%;
+  min-height: 100dvh;
+  overflow-x: clip;
+  background-color: var(--bg-canvas);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  isolation: isolate;
 }
 
 /* Universal display utilities */
@@ -184,28 +200,40 @@ html, body {
   outline-offset: 3px !important;
 }
 
-/* Subtle luxury ambient vignette */
+/* Subtle luxury ambient vignette (Dark Mode only; pure uniform surface in Light Mode for 100% Safari/Chrome/Firefox parity) */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background: 
-    radial-gradient(circle at 50% 0%, var(--gold-glow) 0%, transparent 60%),
-    radial-gradient(circle at 90% 90%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.14) 0%, rgba(5, 5, 7, 0) 60%),
     linear-gradient(180deg, var(--bg-canvas) 0%, var(--bg-canvas-end) 100%);
   pointer-events: none;
   z-index: -2;
 }
 
-/* Dynamic cursor glow spotlight */
+/* Dynamic cursor glow spotlight (Dark Mode only) */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background: radial-gradient(700px circle at var(--mouse-x, 50vw) var(--mouse-y, 30vh), rgba(212, 175, 55, 0.045), transparent 70%);
+  background: radial-gradient(700px circle at var(--mouse-x, 50vw) var(--mouse-y, 30vh), rgba(212, 175, 55, 0.04), rgba(5, 5, 7, 0) 70%);
   pointer-events: none;
   z-index: -1;
   transition: opacity 0.5s ease;
+}
+
+:root[data-theme="light"] body::before,
+html.light-theme body::before,
+:root:has(> head > meta[name="color-scheme"][content="light"]) body::before {
+  background: #f8fafc !important;
+}
+
+:root[data-theme="light"] body::after,
+html.light-theme body::after,
+:root:has(> head > meta[name="color-scheme"][content="light"]) body::after {
+  opacity: 0 !important;
+  display: none !important;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -9938,18 +9966,6 @@ body.tesla-mode .hud-action-btn {
    Eco Power & Low-End Device Performance Mode
    (Protects Budget Hardware, Older Mobile Devices & Battery Life)
    ───────────────────────────────────────────────────────────── */
-html.device-eco-power .webgl-canvas-layer,
-html.low-spec-device .webgl-canvas-layer {
-  opacity: 0.55;
-}
-
-html.device-eco-power *,
-html.low-spec-device * {
-  /* Alleviate GPU composite & framebuffer texture readbacks on low-end chips */
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-}
-
 html.device-eco-power * {
   animation-duration: 0.001s !important;
   transition-duration: 0.001s !important;
@@ -15485,4 +15501,331 @@ body.tesla-cockpit-active {
 
 :root[data-theme="light"] .ep-canvas-hint {
   color: rgba(100, 116, 139, 0.8);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Universal Cross-Browser (Safari / Chrome / Firefox / Edge)
+   Light Mode Surface, Shadow & Modal Parity Overrides
+   ───────────────────────────────────────────────────────────── */
+:root[data-theme="light"] .dossier-container,
+html.light-theme .dossier-container,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .dossier-container,
+:root[data-theme="light"] .planner-card,
+html.light-theme .planner-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .planner-card,
+:root[data-theme="light"] .ai-lab-card,
+html.light-theme .ai-lab-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .ai-lab-card,
+:root[data-theme="light"] .revops-terminal-card,
+html.light-theme .revops-terminal-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .revops-terminal-card {
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.09) !important;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05) !important;
+}
+
+:root[data-theme="light"] .company-logo-strip,
+html.light-theme .company-logo-strip,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .company-logo-strip,
+:root[data-theme="light"] .luxury-metrics-ribbon,
+html.light-theme .luxury-metrics-ribbon,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .luxury-metrics-ribbon,
+:root[data-theme="light"] .hero-hybrid-bar,
+html.light-theme .hero-hybrid-bar,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .hero-hybrid-bar,
+:root[data-theme="light"] .standalone-project-card,
+html.light-theme .standalone-project-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .standalone-project-card,
+:root[data-theme="light"] .case-card,
+html.light-theme .case-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .case-card,
+:root[data-theme="light"] .executive-signature-card,
+html.light-theme .executive-signature-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .executive-signature-card,
+:root[data-theme="light"] .secondary-3d-portal-card,
+html.light-theme .secondary-3d-portal-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .secondary-3d-portal-card {
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+:root[data-theme="light"] .app-header,
+html.light-theme .app-header,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .app-header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(15, 23, 42, 0.09) !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06) !important;
+}
+
+:root[data-theme="light"] .dossier-nw-badge,
+html.light-theme .dossier-nw-badge {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+}
+
+:root[data-theme="light"] .dossier-avatar-box,
+html.light-theme .dossier-avatar-box {
+  box-shadow: 0 8px 24px rgba(139, 82, 200, 0.22);
+}
+
+/* Resume & Dossier Bottom CTA Card in Light Mode */
+:root[data-theme="light"] .resume-cta-card,
+html.light-theme .resume-cta-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .resume-cta-card {
+  background: linear-gradient(135deg, #fffbeb 0%, #f8fafc 100%) !important;
+  border-color: rgba(148, 104, 0, 0.35) !important;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06) !important;
+}
+
+:root[data-theme="light"] .resume-cta-card .cta-badge,
+html.light-theme .resume-cta-card .cta-badge {
+  color: #92400e !important;
+}
+
+:root[data-theme="light"] .resume-cta-card .cta-heading,
+html.light-theme .resume-cta-card .cta-heading {
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .resume-cta-card .cta-description,
+html.light-theme .resume-cta-card .cta-description {
+  color: #334155 !important;
+}
+
+/* Architecture Blueprint & AI Output Terminals in Light Mode */
+:root[data-theme="light"] .blueprint-section,
+html.light-theme .blueprint-section,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .blueprint-section,
+:root[data-theme="light"] .ai-output-terminal,
+html.light-theme .ai-output-terminal,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .ai-output-terminal {
+  background: #f8fafc !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 6px 20px rgba(15, 23, 42, 0.04) !important;
+}
+
+:root[data-theme="light"] .blueprint-header,
+html.light-theme .blueprint-header,
+:root[data-theme="light"] .terminal-bar,
+html.light-theme .terminal-bar {
+  background: #f1f5f9 !important;
+  border-bottom-color: rgba(15, 23, 42, 0.09) !important;
+}
+
+:root[data-theme="light"] .blueprint-title,
+html.light-theme .blueprint-title {
+  color: #78350f !important;
+}
+
+:root[data-theme="light"] .action-btn.copy-btn,
+html.light-theme .action-btn.copy-btn {
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
+  color: #1e293b !important;
+}
+
+:root[data-theme="light"] .action-btn.copy-btn:hover,
+html.light-theme .action-btn.copy-btn:hover {
+  background: rgba(148, 104, 0, 0.1) !important;
+  border-color: var(--gold-primary) !important;
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .blueprint-display,
+html.light-theme .blueprint-display,
+:root[data-theme="light"] .terminal-body,
+html.light-theme .terminal-body {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .blueprint-display pre,
+html.light-theme .blueprint-display pre {
+  color: #0369a1 !important;
+}
+
+/* Subdomain Platform Landing Dialog & Interactive Testbench in Light Mode */
+:root[data-theme="light"] .platform-landing-dialog,
+html.light-theme .platform-landing-dialog,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .platform-landing-dialog {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.16), 0 0 32px rgba(148, 104, 0, 0.08) !important;
+  color: #1e293b !important;
+}
+
+:root[data-theme="light"] .pl-header,
+html.light-theme .pl-header,
+:root[data-theme="light"] .pl-tags-row,
+html.light-theme .pl-tags-row,
+:root[data-theme="light"] .pl-tb-header,
+html.light-theme .pl-tb-header,
+:root[data-theme="light"] .pl-launch-strip,
+html.light-theme .pl-launch-strip,
+:root[data-theme="light"] .tb-score-banner,
+html.light-theme .tb-score-banner,
+:root[data-theme="light"] .tb-json-preview,
+html.light-theme .tb-json-preview {
+  border-color: rgba(15, 23, 42, 0.09) !important;
+}
+
+:root[data-theme="light"] .pl-title,
+html.light-theme .pl-title {
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .pl-lead,
+html.light-theme .pl-lead,
+:root[data-theme="light"] .pl-objective-prose p,
+html.light-theme .pl-objective-prose p,
+:root[data-theme="light"] .pl-arch-list li,
+html.light-theme .pl-arch-list li {
+  color: #334155 !important;
+}
+
+:root[data-theme="light"] .pl-badge-strip,
+html.light-theme .pl-badge-strip {
+  background: rgba(148, 104, 0, 0.1) !important;
+  border-color: rgba(148, 104, 0, 0.3) !important;
+  color: #78350f !important;
+}
+
+:root[data-theme="light"] .pl-close-btn,
+html.light-theme .pl-close-btn {
+  background: #f1f5f9 !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #334155 !important;
+}
+
+:root[data-theme="light"] .pl-close-btn:hover,
+html.light-theme .pl-close-btn:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .pl-metric-cell,
+html.light-theme .pl-metric-cell,
+:root[data-theme="light"] .pl-objective-card,
+html.light-theme .pl-objective-card,
+:root[data-theme="light"] .pl-architecture-card,
+html.light-theme .pl-architecture-card,
+:root[data-theme="light"] .pl-testbench-card,
+html.light-theme .pl-testbench-card {
+  background: #f8fafc !important;
+  border-color: rgba(15, 23, 42, 0.09) !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03) !important;
+}
+
+:root[data-theme="light"] .pl-metric-num,
+html.light-theme .pl-metric-num,
+:root[data-theme="light"] .liza-num,
+html.light-theme .liza-num,
+:root[data-theme="light"] .tb-score-val,
+html.light-theme .tb-score-val {
+  color: #92400e !important;
+}
+
+:root[data-theme="light"] .pl-tech-tag,
+html.light-theme .pl-tech-tag,
+:root[data-theme="light"] .tb-chip,
+html.light-theme .tb-chip {
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #334155 !important;
+}
+
+:root[data-theme="light"] .tb-chip.active,
+html.light-theme .tb-chip.active {
+  background: rgba(148, 104, 0, 0.14) !important;
+  border-color: var(--gold-primary) !important;
+  color: #78350f !important;
+}
+
+:root[data-theme="light"] .tb-select,
+html.light-theme .tb-select,
+:root[data-theme="light"] .tb-input,
+html.light-theme .tb-input {
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.16) !important;
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .tb-btn,
+html.light-theme .tb-btn,
+:root[data-theme="light"] .pl-primary-launch-btn,
+html.light-theme .pl-primary-launch-btn {
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%) !important;
+  border-color: #946800 !important;
+  color: #ffffff !important;
+}
+
+:root[data-theme="light"] .pl-secondary-code-btn,
+html.light-theme .pl-secondary-code-btn {
+  background: #f1f5f9 !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .tb-output-panel,
+html.light-theme .tb-output-panel,
+:root[data-theme="light"] .tb-calc-grid,
+html.light-theme .tb-calc-grid,
+:root[data-theme="light"] .tb-eyedropper-box,
+html.light-theme .tb-eyedropper-box,
+:root[data-theme="light"] .tb-slot-card,
+html.light-theme .tb-slot-card,
+:root[data-theme="light"] .tb-liza-stat,
+html.light-theme .tb-liza-stat {
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, 0.09) !important;
+  color: #1e293b !important;
+}
+
+:root[data-theme="light"] .tb-json-preview pre,
+html.light-theme .tb-json-preview pre {
+  background: #f1f5f9 !important;
+  color: #0369a1 !important;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme="light"] .top-nav-subdomains-bar,
+html.light-theme .top-nav-subdomains-bar {
+  border-top-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+:root[data-theme="light"] .t-sub-chip,
+html.light-theme .t-sub-chip {
+  background: #f8fafc !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #1e293b !important;
+}
+
+:root[data-theme="light"] .t-sub-chip:hover,
+html.light-theme .t-sub-chip:hover {
+  background: rgba(148, 104, 0, 0.12) !important;
+  border-color: var(--gold-primary) !important;
+  color: #0f172a !important;
+}
+
+/* Mobile Responsive refinements for Platform Landing Modal across small viewports (320px-640px) */
+@media (max-width: 640px) {
+  .platform-landing-content {
+    padding: 20px 16px;
+  }
+  .pl-header {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+  .pl-close-btn {
+    align-self: flex-end;
+  }
+  .pl-title {
+    font-size: 20px;
+  }
+  .pl-metrics-ribbon {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .pl-launch-strip {
+    flex-direction: column;
+  }
 }

@@ -5,39 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!-- MANDATORY: Declare support for both light and dark themes (modern-web-guidance) -->
     <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#050507" id="meta-theme-color" />
     <script>
       (function() {
+        var theme = "dark";
         try {
-          // 1. Check URL parameters first (Highest priority for cross-domain / subdomain return transitions)
+          var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          theme = isDark ? "dark" : "light";
           var params = new URLSearchParams(window.location.search);
           var urlTheme = params.get('theme');
-          var saved = (urlTheme === 'light' || urlTheme === 'dark') ? urlTheme : localStorage.getItem("color-scheme");
-          
-          // 2. Check document.cookie fallback
+          var saved = null;
+          if (urlTheme === 'light' || urlTheme === 'dark') {
+            saved = urlTheme;
+          } else {
+            try { saved = localStorage.getItem("color-scheme"); } catch (_) {}
+          }
           if (!saved) {
-            var match = document.cookie.match(/(?:^|; )color-scheme=([^;]+)/);
-            if (match && (match[1] === 'light' || match[1] === 'dark')) {
-              saved = match[1];
+            try {
+              var match = document.cookie.match(/(?:^|; )color-scheme=([^;]+)/);
+              if (match && (match[1] === 'light' || match[1] === 'dark')) {
+                saved = match[1];
+              }
+            } catch (_) {}
+          }
+          if (saved === "light" || saved === "dark") {
+            theme = saved;
+          }
+          try { localStorage.setItem("color-scheme", theme); } catch (_) {}
+          try {
+            document.cookie = "color-scheme=" + theme + "; path=/; max-age=31536000; SameSite=Lax";
+            if (location.hostname.endsWith('novu.works')) {
+              document.cookie = "color-scheme=" + theme + "; path=/; domain=.novu.works; max-age=31536000; SameSite=Lax";
             }
-          }
-
-          var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var theme = (saved === "light" || saved === "dark") ? saved : (isDark ? "dark" : "light");
-
-          // 3. Persist resolved theme across storage and cookie
-          localStorage.setItem("color-scheme", theme);
-          document.cookie = "color-scheme=" + theme + "; path=/; max-age=31536000; SameSite=Lax";
-          if (location.hostname.endsWith('novu.works')) {
-            document.cookie = "color-scheme=" + theme + "; path=/; domain=.novu.works; max-age=31536000; SameSite=Lax";
-          }
-
-          var meta = document.querySelector('meta[name="color-scheme"]');
-          if (meta) {
-            meta.content = theme;
-          }
-          document.documentElement.setAttribute('data-theme', theme);
-          document.documentElement.classList.toggle('light-theme', theme === 'light');
+          } catch (_) {}
         } catch (e) {}
+
+        var meta = document.querySelector('meta[name="color-scheme"]');
+        if (meta) meta.content = theme;
+        var themeColorMeta = document.getElementById('meta-theme-color');
+        if (themeColorMeta) themeColorMeta.content = theme === 'light' ? '#f8fafc' : '#050507';
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.classList.toggle('light-theme', theme === 'light');
+        document.documentElement.style.backgroundColor = theme === 'light' ? '#f8fafc' : '#050507';
       })();
     </script>
     <title>Fabián Vélez Vicente — Growth & Revenue Operations Analytics Lead · Computer Engineering</title>

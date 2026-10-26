@@ -65,12 +65,12 @@ export class SpatialCanvas3D {
   detectDeviceTier() {
     if (typeof window === 'undefined') return { isLowEnd: false, isMobile: false, maxFps: 60, dpr: 1.5 };
     const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    const cores = navigator.hardwareConcurrency || 4;
+    const cores = navigator.hardwareConcurrency || 8;
     const memory = navigator.deviceMemory || 8;
     const isSaveData = Boolean(navigator.connection?.saveData);
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const isLowEnd = cores <= 4 || memory <= 4 || isSaveData || prefersReducedMotion;
+    const isLowEnd = cores <= 2 || memory <= 2 || isSaveData || prefersReducedMotion;
     if (isLowEnd && document.documentElement) {
       document.documentElement.classList.add('low-spec-device');
     }
