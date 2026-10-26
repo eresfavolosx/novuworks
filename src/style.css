@@ -3108,15 +3108,16 @@ pre, code {
 }
 
 .stat-title {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 13.5px;
+  font-weight: 700;
   color: var(--platinum);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .stat-desc {
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.55;
   color: var(--text-muted);
 }
 
@@ -5724,10 +5725,93 @@ body.tesla-mode .hud-action-btn {
 :root[data-theme="light"] .phil-card,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .phil-card,
 :root[data-theme="light"] .edu-card,
-:root:has(> head > meta[name="color-scheme"][content="light"]) .edu-card {
+:root:has(> head > meta[name="color-scheme"][content="light"]) .edu-card,
+:root[data-theme="light"] .award-card,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .award-card {
   background: #f8fafc;
   border-color: rgba(15, 23, 42, 0.1);
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+:root[data-theme="light"] .stat-card .stat-number,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stat-card .stat-number,
+:root[data-theme="light"] .gold-num,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .gold-num {
+  color: #785300;
+}
+
+:root[data-theme="light"] .stat-card .stat-title,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stat-card .stat-title {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .stat-card .stat-desc,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .stat-card .stat-desc {
+  color: #475569;
+}
+
+:root[data-theme="light"] .dossier-role-lens-bar,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .dossier-role-lens-bar {
+  background: #f8fafc;
+  border-color: rgba(148, 104, 0, 0.24);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+:root[data-theme="light"] .role-lens-label,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .role-lens-label {
+  color: #785300;
+}
+
+:root[data-theme="light"] .role-lens-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .role-lens-btn,
+:root[data-theme="light"] .modal-lens-btn,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .modal-lens-btn {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #475569;
+}
+
+:root[data-theme="light"] .role-lens-btn:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .role-lens-btn:hover,
+:root[data-theme="light"] .modal-lens-btn:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .modal-lens-btn:hover {
+  background: rgba(148, 104, 0, 0.08);
+  border-color: var(--gold-primary);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .role-lens-btn.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .role-lens-btn.active,
+:root[data-theme="light"] .modal-lens-btn.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .modal-lens-btn.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(107, 82, 174, 0.12) 100%);
+  border-color: var(--gold-primary);
+  color: #0f172a;
+  box-shadow: 0 2px 10px rgba(148, 104, 0, 0.14);
+}
+
+:root[data-theme="light"] .award-year,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .award-year {
+  color: #785300;
+}
+
+:root[data-theme="light"] .award-org,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .award-org {
+  color: #0284c7;
+}
+
+:root[data-theme="light"] .exp-type-pill.pill-fulltime,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .exp-type-pill.pill-fulltime {
+  background: rgba(5, 150, 105, 0.1);
+  color: #047857;
+  border-color: rgba(5, 150, 105, 0.3);
+}
+
+:root[data-theme="light"] .exp-type-pill.pill-founder,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .exp-type-pill.pill-founder {
+  background: rgba(148, 104, 0, 0.1);
+  color: #785300;
+  border-color: rgba(148, 104, 0, 0.3);
 }
 
 :root[data-theme="light"] .matrix-table th,

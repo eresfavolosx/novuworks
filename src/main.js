@@ -737,11 +737,12 @@ class FabianPortfolioApp {
             </div>
             <ul class="exp-bullet-list">
               ${exp.bullets.map((b) => {
+                const formatBold = (text) => text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
                 const parts = b.split(': ');
                 if (parts.length > 1) {
-                  return `<li><strong>${parts[0]}:</strong> ${parts.slice(1).join(': ')}</li>`;
+                  return `<li><strong>${formatBold(parts[0])}:</strong> ${formatBold(parts.slice(1).join(': '))}</li>`;
                 }
-                return `<li>${b}</li>`;
+                return `<li>${formatBold(b)}</li>`;
               }).join('')}
             </ul>
           </div>
