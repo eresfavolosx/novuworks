@@ -569,6 +569,9 @@ class FabianPortfolioApp {
           <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (Co-Founder · 100+ Relational Databases) — Visit Official Site (linkpuertorico.org)">
             ${LOGOS.linkPR}
           </a>
+          <div class="logo-badge-item" title="NovuWorks (Founder & Technical Consultant · Enterprise AI & Cloud Systems)">
+            ${LOGOS.novuWorks}
+          </div>
           <div class="logo-badge-item" title="Stanford University (Innovation Fellow · Design Thinking & Strategy)">
             ${LOGOS.stanford}
           </div>
@@ -591,6 +594,7 @@ class FabianPortfolioApp {
           <div class="modal-logo-cell" title="edX Platform (Full-Time)">${LOGOS.edx}</div>
           <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Viva Advertising (Founder)">${LOGOS.vivaAdvertising}</a>
           <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="modal-logo-cell is-link" title="Link Puerto Rico (Co-Founder)">${LOGOS.linkPR}</a>
+          <div class="modal-logo-cell" title="NovuWorks (Founder)">${LOGOS.novuWorks}</div>
           <div class="modal-logo-cell" title="Stanford University (Fellow)">${LOGOS.stanford}</div>
           <div class="modal-logo-cell" title="Universidad Politécnica de PR (B.S. 4.0 GPA)">${LOGOS.politecnica}</div>
         </div>
@@ -699,11 +703,13 @@ class FabianPortfolioApp {
         'Money Group (Full-Time)': LOGOS.moneyGroup,
         'Red Ventures': LOGOS.redVentures,
         'Red Ventures (Full-Time)': LOGOS.redVentures,
+        'Red Ventures / edX': `${LOGOS.redVentures} ${LOGOS.edx}`,
         'Viva Advertising': LOGOS.vivaAdvertising,
         'Viva Advertising (My Company / Founder)': LOGOS.vivaAdvertising,
         'Link Puerto Rico': LOGOS.linkPR,
         'Link Puerto Rico (My Company / Co-Founder)': LOGOS.linkPR,
         'Novu Works': LOGOS.novuWorks,
+        'NovuWorks': LOGOS.novuWorks,
       };
 
       this.dom.dossierExperienceMount.innerHTML = variant.experiences.map((exp) => {
@@ -816,6 +822,7 @@ class FabianPortfolioApp {
             <div class="logo-badge-item" title="ATH Móvil Business">${LOGOS.athMovil}</div>
             <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (My Company / Founder · $10M+ Pipeline) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
             <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site">${LOGOS.linkPR}</a>
+            <div class="logo-badge-item" title="NovuWorks (Founder & Technical Consultant)">${LOGOS.novuWorks}</div>
             <div class="logo-badge-item" title="IBM">${LOGOS.ibm}</div>
             <div class="logo-badge-item" title="Google">${LOGOS.google}</div>
             <div class="logo-badge-item" title="AWS">${LOGOS.aws}</div>

@@ -29,7 +29,10 @@ export function renderExecutiveSignatureBlock() {
           <div class="sig-credentials-row">
             <span class="sig-cred-pill">Stanford Innovation Fellow</span>
             <span class="sig-cred-pill">Money Group &amp; Red Ventures Alum</span>
-            <span class="sig-cred-pill">Novu Works Founder</span>
+            <span class="sig-cred-pill" style="display:inline-flex;align-items:center;gap:6px;">
+              <img src="/assets/nw-mark-transparent.png" alt="NW" width="18" height="9" style="object-fit:contain;" />
+              <span>NovuWorks Founder</span>
+            </span>
           </div>
         </div>
 
@@ -38,11 +41,11 @@ export function renderExecutiveSignatureBlock() {
             <!-- Authentic Vector Handwritten Signature with Dynamic Calligraphic Reveal -->
             <svg class="sig-vector-svg" viewBox="10 32 725 655" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Authentic handwritten signature of Fabián Vélez Vicente">
               <defs>
-                <linearGradient id="sigInkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#f5e6be" />
-                  <stop offset="35%" stop-color="#d4af37" />
-                  <stop offset="75%" stop-color="#e0566a" />
-                  <stop offset="100%" stop-color="#8b52c8" />
+                <linearGradient id="sigInkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#df635e" />
+                  <stop offset="33%" stop-color="#a45b83" />
+                  <stop offset="66%" stop-color="#6b52ae" />
+                  <stop offset="100%" stop-color="#2557e5" />
                 </linearGradient>
                 <linearGradient id="sigShimmerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stop-color="transparent" />

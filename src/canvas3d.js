@@ -119,6 +119,7 @@ export class SpatialCanvas3D {
         powerPreference: 'default',
         antialias: !this.deviceTier.isLowEnd,
         alpha: true,
+        preserveDrawingBuffer: true,
         failIfMajorPerformanceCaveat: false,
       });
       this.renderer.setSize(this.width, this.height);
@@ -165,11 +166,192 @@ export class SpatialCanvas3D {
       // 7. Start Render Loop
       this.animate();
     } catch (err) {
-      console.warn('WebGL initialization fallback:', err);
+      console.warn('WebGL initialization fallback (activating 2D Canvas 3D-Projection Engine):', err);
       this.initError = { message: err.message, stack: err.stack };
-      this.isAvailable = false;
-      this.container.style.display = 'none';
+      this.init2DFallback();
     }
+  }
+
+  init2DFallback() {
+    this.isAvailable = true;
+    this.is2DFallback = true;
+    this.container.style.display = '';
+    const canvas = document.createElement('canvas');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = this.width * dpr;
+    canvas.height = this.height * dpr;
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.display = 'block';
+    this.container.innerHTML = '';
+    this.container.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+
+    // Generate 3D points for 01: NW Monogram, 02: Möbius Torus Knot, 03: Quantum AI Prism
+    const COUNT = 950;
+    const pts = [];
+    const cCoral = [223, 99, 94];
+    const cMauve = [164, 91, 131];
+    const cViolet = [107, 82, 174];
+    const cBlue = [37, 87, 229];
+    const lerpC = (a, b, t) => [
+      Math.round(a[0] + (b[0] - a[0]) * t),
+      Math.round(a[1] + (b[1] - a[1]) * t),
+      Math.round(a[2] + (b[2] - a[2]) * t)
+    ];
+
+    for (let i = 0; i < COUNT; i++) {
+      const t = i / COUNT;
+      // Mode 0: NW Monogram
+      let mx = 0, my = 0, mz = (Math.random() - 0.5) * 3.0;
+      if (t < 0.44) {
+        const sub = t / 0.44;
+        if (sub < 0.33) { mx = -13 + (Math.random() - 0.5) * 1.1; my = -9 + (sub / 0.33) * 18; }
+        else if (sub < 0.66) { const s = (sub - 0.33) / 0.33; mx = -13 + s * 9; my = 9 - s * 18; }
+        else { mx = -4 + (Math.random() - 0.5) * 1.1; my = -9 + ((sub - 0.66) / 0.34) * 18; }
+      } else if (t < 0.92) {
+        const sub = (t - 0.44) / 0.48;
+        if (sub < 0.25) { const s = sub / 0.25; mx = 2 + s * 3.5; my = 9 - s * 18; }
+        else if (sub < 0.50) { const s = (sub - 0.25) / 0.25; mx = 5.5 + s * 3.5; my = -9 + s * 13; }
+        else if (sub < 0.75) { const s = (sub - 0.50) / 0.25; mx = 9 + s * 3.5; my = 4 - s * 13; }
+        else { const s = (sub - 0.75) / 0.25; mx = 12.5 + s * 3.5; my = -9 + s * 18; }
+        mx += (Math.random() - 0.5) * 0.9;
+        my += (Math.random() - 0.5) * 0.9;
+      } else {
+        const ang = Math.random() * Math.PI * 2;
+        const rad = 14 + Math.random() * 6;
+        mx = Math.cos(ang) * rad; my = Math.sin(ang) * (rad * 0.65); mz = (Math.random() - 0.5) * 6;
+      }
+
+      // Mode 1: Möbius Torus Knot (p=2, q=3)
+      const u = t * Math.PI * 2 * 3;
+      const rKnot = 7.5 + 2.2 * Math.cos(3 * u);
+      const kx = rKnot * Math.cos(2 * u) + (Math.random() - 0.5) * 0.8;
+      const ky = rKnot * Math.sin(2 * u) + (Math.random() - 0.5) * 0.8;
+      const kz = 3.2 * Math.sin(3 * u) + (Math.random() - 0.5) * 0.8;
+
+      // Mode 2: Octahedral AI Prism
+      const phi = Math.acos(1 - 2 * t);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+      const pr = 9.5;
+      const px = pr * Math.sin(phi) * Math.cos(theta);
+      const py = pr * Math.cos(phi) * 1.25;
+      const pz = pr * Math.sin(phi) * Math.sin(theta);
+
+      const gradT = Math.max(0, Math.min(1, (mx + 14) / 29));
+      let rgb;
+      if (gradT < 0.33) rgb = lerpC(cCoral, cMauve, gradT / 0.33);
+      else if (gradT < 0.66) rgb = lerpC(cMauve, cViolet, (gradT - 0.33) / 0.33);
+      else rgb = lerpC(cViolet, cBlue, (gradT - 0.66) / 0.34);
+
+      pts.push({
+        m0: [mx, -my, mz],
+        m1: [kx, ky, kz],
+        m2: [px, py, pz],
+        rgb,
+        size: 1.5 + Math.random() * 1.8,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+
+    this.bindEvents();
+    window.addEventListener('resize', () => {
+      this.width = window.innerWidth || 1440;
+      this.height = window.innerHeight || 900;
+      canvas.width = this.width * dpr;
+      canvas.height = this.height * dpr;
+    });
+
+    const render2D = () => {
+      requestAnimationFrame(render2D);
+      if (this.isPaused || (!this.isVisualizerMode && !this.isInitialLoading)) return;
+      const now = performance.now() * 0.001;
+      if (!this.isDragging) {
+        this.targetWorldRotation.y += 0.0045;
+      }
+      this.worldRotation.y += (this.targetWorldRotation.y - this.worldRotation.y) * 0.06;
+      this.worldRotation.x += (this.targetWorldRotation.x - this.worldRotation.x) * 0.06;
+
+      ctx.save();
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, this.width, this.height);
+
+      const cx = this.width / 2;
+      const cy = this.height / 2;
+      const fov = Math.min(this.width, this.height) * 0.72;
+      const camZ = this.targetCameraZ || 42;
+      const cosY = Math.cos(this.worldRotation.y);
+      const sinY = Math.sin(this.worldRotation.y);
+      const cosX = Math.cos(this.worldRotation.x);
+      const sinX = Math.sin(this.worldRotation.x);
+
+      const mode = this.activeMode || 0;
+      const projected = [];
+
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i];
+        const src = mode === 1 ? p.m1 : (mode === 2 ? p.m2 : p.m0);
+        const x0 = src[0] + Math.sin(now * 1.2 + p.phase) * 0.22;
+        const y0 = src[1] + Math.cos(now * 1.3 + p.phase) * 0.22;
+        const z0 = src[2] + Math.sin(now * 0.9 + p.phase) * 0.22;
+
+        // Rotate Y then X
+        const x1 = x0 * cosY - z0 * sinY;
+        const z1 = z0 * cosY + x0 * sinY;
+        const y2 = y0 * cosX - z1 * sinX;
+        const z2 = z1 * cosX + y0 * sinX + camZ;
+
+        if (z2 > 5) {
+          const scale = fov / z2;
+          projected.push({
+            sx: cx + x1 * scale,
+            sy: cy + y2 * scale,
+            r: Math.max(1.2, p.size * (scale / 16)),
+            z: z2,
+            rgb: p.rgb
+          });
+        }
+      }
+
+      projected.sort((a, b) => b.z - a.z);
+
+      // Subtle filament lines for nearby points
+      ctx.lineWidth = 0.65;
+      for (let i = 0; i < projected.length; i += 3) {
+        const a = projected[i];
+        for (let j = i + 1; j < Math.min(projected.length, i + 10); j++) {
+          const b = projected[j];
+          const dx = a.sx - b.sx;
+          const dy = a.sy - b.sy;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < 1100) {
+            const alpha = (1 - d2 / 1100) * 0.22;
+            ctx.strokeStyle = `rgba(${a.rgb[0]}, ${a.rgb[1]}, ${a.rgb[2]}, ${alpha.toFixed(3)})`;
+            ctx.beginPath();
+            ctx.moveTo(a.sx, a.sy);
+            ctx.lineTo(b.sx, b.sy);
+            ctx.stroke();
+          }
+        }
+      }
+
+      for (let i = 0; i < projected.length; i++) {
+        const pt = projected[i];
+        const [r, g, b] = pt.rgb;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.22)`;
+        ctx.beginPath();
+        ctx.arc(pt.sx, pt.sy, pt.r * 2.1, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.92)`;
+        ctx.beginPath();
+        ctx.arc(pt.sx, pt.sy, pt.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    };
+    requestAnimationFrame(render2D);
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -238,20 +420,21 @@ export class SpatialCanvas3D {
       positions[i * 3 + 1] = y;
       positions[i * 3 + 2] = z;
 
-      // Color gradation across monogram: Novu Works signature gradient (coral -> violet -> blue) fused with gold
-      const nwCoral = new THREE.Color('#e0566a');
-      const nwViolet = new THREE.Color('#8b52c8');
-      const nwBlue = new THREE.Color('#3d63e6');
-      const goldColor = new THREE.Color('#d4af37');
+      // Color gradation across monogram: Authentic 4-stop NovuWorks brand gradient from nw-mark.png / novuworks-logo.jpg
+      // Coral Red (#df635e) -> Mauve Rose (#a45b83) -> Violet Indigo (#6b52ae) -> Royal Blue (#2557e5)
+      const nwCoral = new THREE.Color('#df635e');
+      const nwMauve = new THREE.Color('#a45b83');
+      const nwViolet = new THREE.Color('#6b52ae');
+      const nwBlue = new THREE.Color('#2557e5');
 
       const pColor = new THREE.Color();
-      const gradT = THREE.MathUtils.clamp((x + 14) / 28, 0, 1);
-      if (gradT < 0.4) {
-        pColor.lerpColors(nwCoral, nwViolet, gradT / 0.4);
-      } else if (gradT < 0.75) {
-        pColor.lerpColors(nwViolet, nwBlue, (gradT - 0.4) / 0.35);
+      const gradT = THREE.MathUtils.clamp((x + 14) / 29, 0, 1);
+      if (gradT < 0.33) {
+        pColor.lerpColors(nwCoral, nwMauve, gradT / 0.33);
+      } else if (gradT < 0.66) {
+        pColor.lerpColors(nwMauve, nwViolet, (gradT - 0.33) / 0.33);
       } else {
-        pColor.lerpColors(nwBlue, goldColor, (gradT - 0.75) / 0.25);
+        pColor.lerpColors(nwViolet, nwBlue, (gradT - 0.66) / 0.34);
       }
 
       colors[i * 3] = pColor.r;
@@ -269,7 +452,7 @@ export class SpatialCanvas3D {
       uniforms: {
         uTime: { value: 0 },
         uPointer: { value: new THREE.Vector3(0, 0, 0) },
-        uOpacity: { value: this.currentTheme === 'light' ? 0.22 : 0.75 },
+        uOpacity: { value: this.currentTheme === 'light' ? 0.82 : 0.92 },
         uIsLight: { value: this.currentTheme === 'light' ? 1.0 : 0.0 },
         uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) },
       },
@@ -288,14 +471,8 @@ export class SpatialCanvas3D {
         varying float vAlpha;
 
         void main() {
-          // Minimalist theme adaptation: soft platinum/champagne in light mode
-          vec3 baseColor = color;
-          if (uIsLight > 0.5) {
-            vec3 lightGold = vec3(0.77, 0.66, 0.50);
-            vec3 lightPlatinum = vec3(0.58, 0.64, 0.72);
-            baseColor = mix(lightPlatinum, lightGold, rand);
-          }
-          vColor = baseColor;
+          // Preserve authentic NovuWorks 4-stop gradient (Coral -> Mauve -> Violet -> Royal Blue) in both Dark & Light modes
+          vColor = color;
           vec3 p = position;
 
           // Gentle organic luxury breathing
@@ -314,9 +491,9 @@ export class SpatialCanvas3D {
           vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
           gl_Position = projectionMatrix * mvPosition;
 
-          float pSize = uIsLight > 0.5 ? size * 0.85 : size;
+          float pSize = uIsLight > 0.5 ? size * 0.92 : size;
           gl_PointSize = pSize * uPixelRatio * (340.0 / -mvPosition.z);
-          vAlpha = smoothstep(95.0, 18.0, -mvPosition.z) * uOpacity * (0.8 + 0.2 * sin(uTime * 2.2 + rand * 8.0));
+          vAlpha = smoothstep(95.0, 18.0, -mvPosition.z) * uOpacity * (0.82 + 0.18 * sin(uTime * 2.2 + rand * 8.0));
         }
       `,
       fragmentShader: `
@@ -328,15 +505,15 @@ export class SpatialCanvas3D {
           float d = length(coord);
           if (d > 0.5) discard;
 
-          // Soft luxury specular radial dropoff
-          float intensity = pow(1.0 - (d * 2.0), 1.6);
-          vec3 glow = vColor * (1.1 + 0.9 * intensity);
+          // Soft luxury radial dropoff preserving true NovuWorks hue saturation without white blowout
+          float intensity = pow(1.0 - (d * 2.0), 1.5);
+          vec3 glow = mix(vColor * 0.95, vColor * 1.22, intensity);
           gl_FragColor = vec4(glow, vAlpha * intensity);
         }
       `,
       transparent: true,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
     });
 
     this.monogramMesh = new THREE.Points(geometry, shaderMaterial);
@@ -475,32 +652,30 @@ export class SpatialCanvas3D {
     const speeds = new Float32Array(COUNT);
     const phases = new Float32Array(COUNT);
 
-    const gold = new THREE.Color('#d4af37');
-    const champagne = new THREE.Color('#f5e6be');
-    const sapphire = new THREE.Color('#38bdf8');
-    const violet = new THREE.Color('#8b52c8');
-    const coral = new THREE.Color('#e0566a');
+    const nwCoral = new THREE.Color('#df635e');
+    const nwMauve = new THREE.Color('#a45b83');
+    const nwViolet = new THREE.Color('#6b52ae');
+    const nwBlue = new THREE.Color('#2557e5');
 
     for (let i = 0; i < COUNT; i++) {
       // Gentle volumetric distribution enveloping mobile and desktop viewports
-      pos[i * 3] = (Math.random() - 0.5) * 80;
+      const px = (Math.random() - 0.5) * 80;
+      pos[i * 3] = px;
       pos[i * 3 + 1] = (Math.random() - 0.5) * 60;
       pos[i * 3 + 2] = -5.0 - Math.random() * 30.0;
 
       speeds[i] = 0.3 + Math.random() * 0.9;
       phases[i] = Math.random() * Math.PI * 2;
 
-      // Soft color variation across Novu Works palette
-      const r = Math.random();
+      // Authentic NovuWorks 4-stop horizontal color gradient across ambient field
+      const gradT = THREE.MathUtils.clamp((px + 40) / 80, 0, 1);
       const pColor = new THREE.Color();
-      if (r < 0.45) {
-        pColor.copy(gold).lerp(champagne, Math.random());
-      } else if (r < 0.72) {
-        pColor.copy(sapphire);
-      } else if (r < 0.88) {
-        pColor.copy(violet);
+      if (gradT < 0.33) {
+        pColor.lerpColors(nwCoral, nwMauve, gradT / 0.33);
+      } else if (gradT < 0.66) {
+        pColor.lerpColors(nwMauve, nwViolet, (gradT - 0.33) / 0.33);
       } else {
-        pColor.copy(coral);
+        pColor.lerpColors(nwViolet, nwBlue, (gradT - 0.66) / 0.34);
       }
 
       col[i * 3] = pColor.r;
@@ -516,11 +691,12 @@ export class SpatialCanvas3D {
 
     const mat = new THREE.PointsMaterial({
       vertexColors: true,
+      color: 0xffffff,
       map: circleTexture,
       size: 1.45,
       transparent: true,
-      opacity: 0.55,
-      blending: THREE.AdditiveBlending,
+      opacity: 0.62,
+      blending: THREE.NormalBlending,
       depthWrite: false,
     });
 
@@ -532,7 +708,7 @@ export class SpatialCanvas3D {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // 8 Architecture Pillars (Floating Gold Pearls on Orbit Ring)
+  // 8 Architecture Pillars (Floating NovuWorks Pearls on Orbit Ring)
   // Scaled & Offset Strictly to the Right Sector
   // ─────────────────────────────────────────────────────────────
   buildArchitecturePillars() {
@@ -540,16 +716,18 @@ export class SpatialCanvas3D {
     const count = DISCIPLINES.length;
     const radius = 10.5;
 
-    // Fine equatorial gold hairline ring
+    // Fine equatorial NovuWorks violet hairline ring
     const ringGeometry = new THREE.TorusGeometry(radius, 0.035, 16, 120);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xd4af37,
+      color: 0x795bad,
       transparent: true,
       opacity: 0.24,
     });
     this.orbitRing = new THREE.Mesh(ringGeometry, ringMat);
     this.orbitRing.rotation.x = Math.PI / 2.35;
     this.rootGroup.add(this.orbitRing);
+
+    const pearlColors = [0xdf635e, 0xc75c6e, 0xa45b83, 0x865ca2, 0x6b52ae, 0x505acc, 0x3b5be0, 0x2557e5];
 
     DISCIPLINES.forEach((disc, i) => {
       const angle = (i / count) * Math.PI * 2;
@@ -560,14 +738,16 @@ export class SpatialCanvas3D {
       const group = new THREE.Group();
       group.position.set(x, y, z);
 
-      // Delicate gold & titanium ambient pearl bead (purely ambient, zero text overlap)
+      const pHex = pearlColors[i % pearlColors.length];
+
+      // Delicate NovuWorks gradient pearl bead (purely ambient, zero text overlap)
       const beadGeo = new THREE.SphereGeometry(0.18, 12, 12);
       const beadMat = new THREE.MeshStandardMaterial({
-        color: 0xd4af37,
-        metalness: 0.95,
+        color: pHex,
+        metalness: 0.85,
         roughness: 0.25,
-        emissive: 0x221808,
-        emissiveIntensity: 0.2,
+        emissive: pHex,
+        emissiveIntensity: 0.35,
       });
       const pearl = new THREE.Mesh(beadGeo, beadMat);
       group.add(pearl);
@@ -575,9 +755,9 @@ export class SpatialCanvas3D {
       // Outer delicate hairline halo
       const haloGeo = new THREE.TorusGeometry(0.36, 0.012, 10, 24);
       const haloMat = new THREE.MeshBasicMaterial({
-        color: 0xfff0c8,
+        color: pHex,
         transparent: true,
-        opacity: 0.2,
+        opacity: 0.28,
       });
       const halo = new THREE.Mesh(haloGeo, haloMat);
       halo.rotation.x = Math.PI / 2;
@@ -843,7 +1023,8 @@ export class SpatialCanvas3D {
     if (this.monogramMesh && this.modeTransitions[0] > 0.005) {
       const u = this.monogramMesh.material.uniforms;
       u.uTime.value = elapsedTime;
-      u.uOpacity.value = this.modeTransitions[0];
+      const baseOp = this.currentTheme === 'light' ? 0.85 : 0.94;
+      u.uOpacity.value = this.modeTransitions[0] * baseOp;
       const gyroInfluenceX = (this.spatialTiltX || 0) * 12;
       const gyroInfluenceY = (this.spatialTiltY || 0) * 9;
       const combinedX = this.pointerTarget.x + gyroInfluenceX;
@@ -986,19 +1167,19 @@ export class SpatialCanvas3D {
       this.scene.fog.color.setHex(isLight ? 0xf8f9fb : 0x050507);
     }
     if (this.dustMesh && this.dustMesh.material) {
-      this.dustMesh.material.blending = isLight ? THREE.NormalBlending : THREE.AdditiveBlending;
-      this.dustMesh.material.color.setHex(isLight ? 0x946800 : 0xd4af37);
-      this.dustMesh.material.opacity = isLight ? 0.20 : 0.35;
+      this.dustMesh.material.blending = THREE.NormalBlending;
+      this.dustMesh.material.color.setHex(0xffffff);
+      this.dustMesh.material.opacity = isLight ? 0.52 : 0.65;
       this.dustMesh.material.needsUpdate = true;
     }
     if (this.monogramMesh && this.monogramMesh.material) {
       if (this.monogramMesh.material.uniforms?.uOpacity) {
-        this.monogramMesh.material.uniforms.uOpacity.value = isLight ? 0.22 : 0.75;
+        this.monogramMesh.material.uniforms.uOpacity.value = isLight ? 0.85 : 0.94;
       }
       if (this.monogramMesh.material.uniforms?.uIsLight) {
         this.monogramMesh.material.uniforms.uIsLight.value = isLight ? 1.0 : 0.0;
       }
-      this.monogramMesh.material.blending = isLight ? THREE.NormalBlending : THREE.AdditiveBlending;
+      this.monogramMesh.material.blending = THREE.NormalBlending;
       this.monogramMesh.material.needsUpdate = true;
     }
     if (this.orbitRing && this.orbitRing.material) {

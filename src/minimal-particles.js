@@ -58,76 +58,78 @@ export class MinimalParticleMatrix {
     const centerY = this.height / 2;
     const scale = Math.min(this.width * 0.44, this.height * 0.75);
 
-    // Generate coordinate targets along "N" and "W"
+    // Generate coordinate targets along "N" and "W" matching the NovuWorks NW monogram
+    const minMonogramX = centerX - scale * 0.48;
+    const maxMonogramX = centerX + scale * 0.56;
+    const totalMonogramWidth = Math.max(1, maxMonogramX - minMonogramX);
+
     for (let i = 0; i < count; i++) {
       const t = i / count;
       let targetX = 0;
       let targetY = 0;
-      let hueType = 'coral';
 
       if (t < 0.45) {
-        // "N" monogram stroke (left vertical, diagonal, right vertical)
+        // "N" monogram stroke (serif top-left lip, left vertical, diagonal, right vertical)
         const sub = t / 0.45;
         const nWidth = scale * 0.38;
         const nHeight = scale * 0.65;
         const leftX = centerX - scale * 0.45;
 
-        if (sub < 0.33) {
-          const s = sub / 0.33;
+        if (sub < 0.08) {
+          // Serif top-left curve of N
+          const s = sub / 0.08;
+          targetX = leftX - scale * 0.05 * (1 - s);
+          targetY = centerY - nHeight * 0.5 - scale * 0.02 * (1 - s);
+        } else if (sub < 0.36) {
+          const s = (sub - 0.08) / 0.28;
           targetX = leftX;
           targetY = centerY + nHeight * 0.5 - s * nHeight;
-          hueType = 'coral';
-        } else if (sub < 0.66) {
-          const s = (sub - 0.33) / 0.33;
+        } else if (sub < 0.68) {
+          const s = (sub - 0.36) / 0.32;
           targetX = leftX + s * nWidth;
           targetY = centerY - nHeight * 0.5 + s * nHeight;
-          hueType = 'violet';
         } else {
-          const s = (sub - 0.66) / 0.34;
+          const s = (sub - 0.68) / 0.32;
           targetX = leftX + nWidth;
           targetY = centerY + nHeight * 0.5 - s * nHeight;
-          hueType = 'violet';
         }
       } else if (t < 0.90) {
         // "W" monogram stroke (four angular legs)
         const sub = (t - 0.45) / 0.45;
         const wWidth = scale * 0.52;
-        const wHeight = scale * 0.65;
-        const leftX = centerX + scale * 0.04;
+        const wHeight = scale * 0.60;
+        const leftX = centerX + scale * 0.02;
 
         if (sub < 0.25) {
           const s = sub / 0.25;
           targetX = leftX + s * (wWidth * 0.25);
-          targetY = centerY - wHeight * 0.5 + s * wHeight;
-          hueType = 'blue';
+          targetY = centerY - wHeight * 0.48 + s * wHeight;
         } else if (sub < 0.50) {
           const s = (sub - 0.25) / 0.25;
           targetX = leftX + (wWidth * 0.25) + s * (wWidth * 0.25);
-          targetY = centerY + wHeight * 0.5 - s * (wHeight * 0.7);
-          hueType = 'blue';
+          targetY = centerY + wHeight * 0.52 - s * wHeight;
         } else if (sub < 0.75) {
           const s = (sub - 0.50) / 0.25;
           targetX = leftX + (wWidth * 0.50) + s * (wWidth * 0.25);
-          targetY = centerY - (wHeight * 0.2) + s * (wHeight * 0.7);
-          hueType = 'gold';
+          targetY = centerY - wHeight * 0.48 + s * wHeight;
         } else {
           const s = (sub - 0.75) / 0.25;
           targetX = leftX + (wWidth * 0.75) + s * (wWidth * 0.25);
-          targetY = centerY + wHeight * 0.5 - s * wHeight;
-          hueType = 'gold';
+          targetY = centerY + wHeight * 0.52 - s * wHeight;
         }
       } else {
         // Ambient orbit nodes surrounding the monogram
-        const angle = Math.random() * Math.PI * 2;
-        const dist = (scale * 0.45) + Math.random() * (scale * 0.25);
+        const angle = ((i - count * 0.90) / (count * 0.10)) * Math.PI * 2;
+        const dist = (scale * 0.48) + Math.random() * (scale * 0.18);
         targetX = centerX + Math.cos(angle) * dist;
-        targetY = centerY + Math.sin(angle) * (dist * 0.6);
-        hueType = 'gold';
+        targetY = centerY + Math.sin(angle) * (dist * 0.58);
       }
 
+      const gradT = Math.max(0, Math.min(1, (targetX - minMonogramX) / totalMonogramWidth));
+
       // Add controlled jitter
-      targetX += (Math.random() - 0.5) * 8;
-      targetY += (Math.random() - 0.5) * 8;
+      targetX += (Math.random() - 0.5) * 6;
+      targetY += (Math.random() - 0.5) * 6;
 
       this.particles.push({
         x: targetX + (Math.random() - 0.5) * 60,
@@ -136,12 +138,12 @@ export class MinimalParticleMatrix {
         originY: targetY,
         vx: 0,
         vy: 0,
-        radius: 1.5 + Math.random() * 1.8,
-        baseRadius: 1.5 + Math.random() * 1.8,
-        hueType,
+        radius: 1.6 + Math.random() * 1.8,
+        baseRadius: 1.6 + Math.random() * 1.8,
+        gradT,
         angle: Math.random() * Math.PI * 2,
         speed: 0.02 + Math.random() * 0.03,
-        amplitude: 2.5 + Math.random() * 3.5,
+        amplitude: 2.2 + Math.random() * 3.0,
       });
     }
   }
@@ -150,6 +152,9 @@ export class MinimalParticleMatrix {
     const centerX = this.width / 2;
     const centerY = this.height / 2;
     const scale = Math.min(this.width * 0.44, this.height * 0.75);
+    const minMonogramX = centerX - scale * 0.48;
+    const maxMonogramX = centerX + scale * 0.56;
+    const totalMonogramWidth = Math.max(1, maxMonogramX - minMonogramX);
 
     const count = this.particles.length;
     for (let i = 0; i < count; i++) {
@@ -162,52 +167,58 @@ export class MinimalParticleMatrix {
         const nHeight = scale * 0.65;
         const leftX = centerX - scale * 0.45;
 
-        if (sub < 0.33) {
-          const s = sub / 0.33;
+        if (sub < 0.08) {
+          const s = sub / 0.08;
+          p.originX = leftX - scale * 0.05 * (1 - s);
+          p.originY = centerY - nHeight * 0.5 - scale * 0.02 * (1 - s);
+        } else if (sub < 0.36) {
+          const s = (sub - 0.08) / 0.28;
           p.originX = leftX;
           p.originY = centerY + nHeight * 0.5 - s * nHeight;
-        } else if (sub < 0.66) {
-          const s = (sub - 0.33) / 0.33;
+        } else if (sub < 0.68) {
+          const s = (sub - 0.36) / 0.32;
           p.originX = leftX + s * nWidth;
           p.originY = centerY - nHeight * 0.5 + s * nHeight;
         } else {
-          const s = (sub - 0.66) / 0.34;
+          const s = (sub - 0.68) / 0.32;
           p.originX = leftX + nWidth;
           p.originY = centerY + nHeight * 0.5 - s * nHeight;
         }
       } else if (t < 0.90) {
         const sub = (t - 0.45) / 0.45;
         const wWidth = scale * 0.52;
-        const wHeight = scale * 0.65;
-        const leftX = centerX + scale * 0.04;
+        const wHeight = scale * 0.60;
+        const leftX = centerX + scale * 0.02;
 
         if (sub < 0.25) {
           const s = sub / 0.25;
           p.originX = leftX + s * (wWidth * 0.25);
-          p.originY = centerY - wHeight * 0.5 + s * wHeight;
+          p.originY = centerY - wHeight * 0.48 + s * wHeight;
         } else if (sub < 0.50) {
           const s = (sub - 0.25) / 0.25;
           p.originX = leftX + (wWidth * 0.25) + s * (wWidth * 0.25);
-          p.originY = centerY + wHeight * 0.5 - s * (wHeight * 0.7);
+          p.originY = centerY + wHeight * 0.52 - s * wHeight;
         } else if (sub < 0.75) {
           const s = (sub - 0.50) / 0.25;
           p.originX = leftX + (wWidth * 0.50) + s * (wWidth * 0.25);
-          p.originY = centerY - (wHeight * 0.2) + s * (wHeight * 0.7);
+          p.originY = centerY - wHeight * 0.48 + s * wHeight;
         } else {
           const s = (sub - 0.75) / 0.25;
           p.originX = leftX + (wWidth * 0.75) + s * (wWidth * 0.25);
-          p.originY = centerY + wHeight * 0.5 - s * wHeight;
+          p.originY = centerY + wHeight * 0.52 - s * wHeight;
         }
       } else {
-        const angle = (i / count) * Math.PI * 2;
-        const dist = (scale * 0.45);
+        const angle = ((i - count * 0.90) / (count * 0.10)) * Math.PI * 2;
+        const dist = (scale * 0.48);
         p.originX = centerX + Math.cos(angle) * dist;
-        p.originY = centerY + Math.sin(angle) * (dist * 0.6);
+        p.originY = centerY + Math.sin(angle) * (dist * 0.58);
       }
+
+      p.gradT = Math.max(0, Math.min(1, (p.originX - minMonogramX) / totalMonogramWidth));
     }
   }
 
-  getColor(hueType, alpha = 1) {
+  getColor(gradT = 0.5, alpha = 1) {
     const isLight = this.theme === 'light';
 
     if (this.paletteMode === 'gold') {
@@ -217,18 +228,30 @@ export class MinimalParticleMatrix {
       return isLight ? `rgba(5, 150, 105, ${alpha})` : `rgba(16, 185, 129, ${alpha})`;
     }
 
-    // Default 'novu' palette
-    switch (hueType) {
-      case 'coral':
-        return isLight ? `rgba(225, 29, 72, ${alpha})` : `rgba(224, 86, 106, ${alpha})`;
-      case 'violet':
-        return isLight ? `rgba(124, 58, 237, ${alpha})` : `rgba(139, 82, 200, ${alpha})`;
-      case 'blue':
-        return isLight ? `rgba(37, 99, 235, ${alpha})` : `rgba(61, 99, 230, ${alpha})`;
-      case 'gold':
-      default:
-        return isLight ? `rgba(180, 83, 9, ${alpha})` : `rgba(212, 175, 55, ${alpha})`;
+    // Authentic 4-stop horizontal NovuWorks brand gradient from nw-mark.png / novuworks-logo.jpg:
+    // Stop 0.00: Coral Red (#DF635E -> 223, 99, 94)
+    // Stop 0.33: Mauve Rose (#A45B83 -> 164, 91, 131)
+    // Stop 0.66: Violet Indigo (#6B52AE -> 107, 82, 174)
+    // Stop 1.00: Royal Blue (#2557E5 -> 37, 87, 229)
+    const t = typeof gradT === 'number' ? Math.max(0, Math.min(1, gradT)) : 0.5;
+    const stops = [
+      { r: 223, g: 99,  b: 94  }, // #DF635E Coral Red
+      { r: 164, g: 91,  b: 131 }, // #A45B83 Mauve Rose
+      { r: 107, g: 82,  b: 174 }, // #6B52AE Violet Indigo
+      { r: 37,  g: 87,  b: 229 }, // #2557E5 Royal Blue
+    ];
+    let c0, c1, localT;
+    if (t < 0.33) {
+      c0 = stops[0]; c1 = stops[1]; localT = t / 0.33;
+    } else if (t < 0.66) {
+      c0 = stops[1]; c1 = stops[2]; localT = (t - 0.33) / 0.33;
+    } else {
+      c0 = stops[2]; c1 = stops[3]; localT = (t - 0.66) / 0.34;
     }
+    const r = Math.round(c0.r + (c1.r - c0.r) * localT);
+    const g = Math.round(c0.g + (c1.g - c0.g) * localT);
+    const b = Math.round(c0.b + (c1.b - c0.b) * localT);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
   bindEvents() {
@@ -373,8 +396,8 @@ export class MinimalParticleMatrix {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < maxDist) {
-          const alpha = (1 - dist / maxDist) * (isLight ? 0.35 : 0.45);
-          this.ctx.strokeStyle = this.getColor(p1.hueType, alpha);
+          const alpha = (1 - dist / maxDist) * (isLight ? 0.42 : 0.52);
+          this.ctx.strokeStyle = this.getColor((p1.gradT + p2.gradT) * 0.5, alpha);
           this.ctx.beginPath();
           this.ctx.moveTo(p1.x, p1.y);
           this.ctx.lineTo(p2.x, p2.y);
@@ -388,13 +411,13 @@ export class MinimalParticleMatrix {
       const p = this.particles[i];
 
       // Soft outer aura
-      this.ctx.fillStyle = this.getColor(p.hueType, isLight ? 0.25 : 0.35);
+      this.ctx.fillStyle = this.getColor(p.gradT, isLight ? 0.28 : 0.38);
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, p.radius * 2.2, 0, Math.PI * 2);
       this.ctx.fill();
 
       // Sharp central particle core
-      this.ctx.fillStyle = this.getColor(p.hueType, isLight ? 0.85 : 0.95);
+      this.ctx.fillStyle = this.getColor(p.gradT, isLight ? 0.92 : 0.98);
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       this.ctx.fill();

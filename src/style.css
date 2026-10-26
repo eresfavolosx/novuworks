@@ -1114,11 +1114,11 @@ body.visualizer-mode .webgl-canvas-layer:active {
 }
 
 .sig-gold-part {
-  background: linear-gradient(135deg, #f5e6be 0%, #d4af37 60%, #e0566a 100%);
+  background: linear-gradient(90deg, #df635e 0%, #a45b83 35%, #6b52ae 68%, #2557e5 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: #d4af37;
+  color: #a45b83;
   font-style: italic;
   font-family: var(--font-serif);
 }
@@ -1126,7 +1126,7 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .sig-underline-bar {
   height: 2px;
   width: 0%;
-  background: linear-gradient(90deg, #d4af37 0%, #f5e6be 60%, transparent 100%);
+  background: linear-gradient(90deg, #df635e 0%, #a45b83 33%, #6b52ae 66%, #2557e5 92%, transparent 100%);
   border-radius: 2px;
   margin-top: 4px;
   transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1296,7 +1296,7 @@ body.visualizer-mode .webgl-canvas-layer:active {
   opacity: 1 !important;
 }
 
-/* Luminous Gold Pen Nib Sparkle */
+/* Luminous NovuWorks Pen Nib Sparkle */
 .sig-nib-sparkle {
   position: absolute;
   top: 50%;
@@ -1304,8 +1304,8 @@ body.visualizer-mode .webgl-canvas-layer:active {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: radial-gradient(circle, #ffffff 0%, #f5e6be 40%, rgba(212, 175, 55, 0) 75%);
-  box-shadow: 0 0 16px 4px rgba(212, 175, 55, 0.85);
+  background: radial-gradient(circle, #ffffff 0%, #a45b83 40%, rgba(107, 82, 174, 0) 75%);
+  box-shadow: 0 0 16px 4px rgba(107, 82, 174, 0.85);
   pointer-events: none;
   opacity: 0;
   transform: translate(-50%, -50%);
@@ -4382,9 +4382,15 @@ body.tesla-mode .hud-action-btn {
     pointer-events: none !important;
   }
 
-  body:not([data-view="core"]) .webgl-canvas-layer {
+  body:not([data-view="core"]):not(.visualizer-mode) .webgl-canvas-layer {
     opacity: 0 !important;
     pointer-events: none !important;
+  }
+
+  body.visualizer-mode .webgl-canvas-layer {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
   }
 
   /* 3. Hero & Overview */
@@ -5198,7 +5204,9 @@ body.tesla-mode .hud-action-btn {
 }
 
 :root[data-theme="light"] .comp-logo-svg.logo-invert-light,
-:root:has(> head > meta[name="color-scheme"][content="light"]) .comp-logo-svg.logo-invert-light {
+:root[data-theme="light"] .comp-logo-svg .logo-invert-light,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .comp-logo-svg.logo-invert-light,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .comp-logo-svg .logo-invert-light {
   filter: invert(1) brightness(0.18) !important;
 }
 
@@ -5206,7 +5214,8 @@ body.tesla-mode .hud-action-btn {
   :root:not([data-theme="dark"]) .comp-logo-svg {
     color: #0f172a;
   }
-  :root:not([data-theme="dark"]) .comp-logo-svg.logo-invert-light {
+  :root:not([data-theme="dark"]) .comp-logo-svg.logo-invert-light,
+  :root:not([data-theme="dark"]) .comp-logo-svg .logo-invert-light {
     filter: invert(1) brightness(0.18);
   }
 }
@@ -11017,10 +11026,24 @@ body.visualizer-mode #toast-banner {
   border: 1px solid rgba(37, 211, 102, 0.35);
 }
 
+:root[data-theme="light"] .wa-pill,
+html.light-theme .wa-pill {
+  background: rgba(16, 185, 129, 0.12);
+  color: #065f46;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
 .email-pill {
   background: rgba(212, 175, 55, 0.2);
   color: #fde68a;
   border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+:root[data-theme="light"] .email-pill,
+html.light-theme .email-pill {
+  background: rgba(212, 175, 55, 0.14);
+  color: #785300;
+  border-color: rgba(180, 130, 20, 0.4);
 }
 
 .channel-desc {
@@ -13156,11 +13179,11 @@ body.tesla-cockpit-active {
 .loading-bar-progress {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #d4af37, #fef08a, #d4af37);
-  background-size: 200% 100%;
+  background: linear-gradient(90deg, #df635e 0%, #a45b83 33%, #6b52ae 66%, #2557e5 100%);
+  background-size: 100% 100%;
   border-radius: 999px;
   transition: width 0.12s ease-out;
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.85);
+  box-shadow: 0 0 14px rgba(107, 82, 174, 0.85);
 }
 
 .loading-status-row {
