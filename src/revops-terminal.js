@@ -209,7 +209,7 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
             </div>
             <div class="wm-cell">
               <span class="wm-key">EXECUTION SPEED</span>
-              <span class="wm-val" style="color: #4ade80;">${current.metrics.duration}</span>
+              <span class="wm-val wm-val-emerald">${current.metrics.duration}</span>
             </div>
             <div class="wm-cell">
               <span class="wm-key">ACCURACY VERIFICATION</span>
@@ -222,12 +222,12 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
           </div>
 
           <!-- Execution Tabular Output -->
-          <div class="win-results-drawer" id="win-results-container">
-            <div class="res-drawer-header">
+          <div class="win-results-drawer win-output-console" id="win-results-container">
+            <div class="res-drawer-header win-output-title" id="revops-output-title">
               <span class="res-status-dot pulse"></span>
               <span class="res-drawer-title">Query Execution Output (Sample Telemetry)</span>
             </div>
-            <div class="res-table-wrap">
+            <div tabindex="0" role="region" aria-labelledby="revops-output-title" class="res-table-wrap win-output-table-wrap">
               ${this.renderResultTable(current)}
             </div>
           </div>
@@ -241,19 +241,19 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
   renderResultTable(current) {
     if (this.activeTab === 'attribution') {
       return `
-        <table class="term-data-table">
+        <table class="term-data-table win-output-table" style="--label-2: 'Reached Users'; --label-3: 'Attributed Revenue'; --label-4: 'Revenue / User';">
           <thead>
             <tr>
-              <th>Channel Grouping</th>
-              <th>Reached Users</th>
-              <th>Attributed Revenue</th>
-              <th>Revenue / User</th>
+              <th scope="col">Channel Grouping</th>
+              <th scope="col">Reached Users</th>
+              <th scope="col">Attributed Revenue</th>
+              <th scope="col">Revenue / User</th>
             </tr>
           </thead>
           <tbody>
             ${current.output.map((row) => `
               <tr>
-                <td><strong>${row.channel}</strong></td>
+                <th scope="row">${row.channel}</th>
                 <td>${row.users}</td>
                 <td class="td-gold">${row.revenue}</td>
                 <td>${row.rpu}</td>
@@ -264,20 +264,20 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
       `;
     } else if (this.activeTab === 'churn') {
       return `
-        <table class="term-data-table">
+        <table class="term-data-table win-output-table" style="--label-2: 'Health Risk Score'; --label-3: 'Renewal Horizon'; --label-4: 'Autonomous RevOps Action';">
           <thead>
             <tr>
-              <th>Commercial Account</th>
-              <th>Health Risk Score</th>
-              <th>Renewal Horizon</th>
-              <th>Autonomous RevOps Action</th>
+              <th scope="col">Commercial Account</th>
+              <th scope="col">Health Risk Score</th>
+              <th scope="col">Renewal Horizon</th>
+              <th scope="col">Autonomous RevOps Action</th>
             </tr>
           </thead>
           <tbody>
             ${current.output.map((row) => `
               <tr>
-                <td><strong>${row.account}</strong></td>
-                <td style="color: ${row.risk.includes('Low') ? '#4ade80' : '#ef4444'};">${row.risk}</td>
+                <th scope="row">${row.account}</th>
+                <td class="${row.risk.includes('Low') ? 'td-risk-low' : 'td-risk-high'}">${row.risk}</td>
                 <td>${row.renewal}</td>
                 <td>${row.action}</td>
               </tr>
@@ -287,19 +287,19 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
       `;
     } else {
       return `
-        <table class="term-data-table">
+        <table class="term-data-table win-output-table" style="--label-2: 'Status'; --label-3: 'Edge Latency'; --label-4: 'Automated Verdict & Impact';">
           <thead>
             <tr>
-              <th>Autonomous Agent</th>
-              <th>Status</th>
-              <th>Edge Latency</th>
-              <th>Automated Verdict & Impact</th>
+              <th scope="col">Autonomous Agent</th>
+              <th scope="col">Status</th>
+              <th scope="col">Edge Latency</th>
+              <th scope="col">Automated Verdict & Impact</th>
             </tr>
           </thead>
           <tbody>
             ${current.output.map((row) => `
               <tr>
-                <td><strong>${row.agent}</strong></td>
+                <th scope="row">${row.agent}</th>
                 <td><span class="agent-tag-active">${row.status}</span></td>
                 <td>${row.latency}</td>
                 <td>${row.verdict}</td>
