@@ -472,7 +472,7 @@ export const PROFILE = {
         },
       ],
       proofPoints: [
-        { metric: '100+ PCs', title: 'Crisis Procurement in <30 Days', sub: 'Link PR (My Company / Co-Founder, The Liza Project)', desc: 'Directed multi-site digital library initiative during peak global pandemic hardware shortages, sourcing 100+ PCs and 50+ tablets in under 30 days with satellite internet.' },
+        { metric: '100+ PCs', title: 'Crisis Procurement in <30 Days', sub: 'Link PR (My Company / Co-Founder, Puente a Puente — Loíza Municipality)', desc: 'Directed multi-site digital library initiative in the Loíza Municipality during peak global pandemic hardware shortages, sourcing 100+ PCs and 50+ tablets in under 30 days with satellite internet.' },
         { metric: '15 Directs', title: 'Cross-Functional Agile Leadership', sub: 'Viva Advertising (My Company / Founder, Operations)', desc: 'Directed a 15-person team of analysts, designers, and developers across 150+ commercial accounts by implementing centralized RACI governance that lifted delivery by 40%.' },
         { metric: 'Lean Six Sigma', title: 'Process Improvement & SLAs', sub: 'Accredited White Belt & UPPR PM', desc: 'Applied structured Agile & Waterfall delivery and vendor SLA negotiations, managing contracts across 5 operational verticals handling $100k+ direct spend.' },
         { metric: '100+ Platforms', title: 'Enterprise SDLC Deployments', sub: 'Link PR (My Company / Co-Founder, 30+ Orgs)', desc: 'Managed cross-functional teams to scope and deploy 100+ custom software platforms for 30+ businesses, managing vendor contracts driving over $3M in sales and funding.' }
@@ -562,18 +562,18 @@ export const PROFILE = {
     },
     {
       id: 'liza-project',
-      name: 'The Liza Project: Crisis IT Sourcing & Digital Libraries',
-      organization: 'Link Puerto Rico',
+      name: 'Puente a Puente (Project in the Loíza Municipality): Crisis IT Sourcing & Digital Libraries',
+      organization: 'Link Puerto Rico · Loíza Municipality',
       role: 'Project Director & Lead Systems Architect',
       period: '2020 – 2023',
-      metrics: '100+ PCs · 50+ Tablets · 3 Community Centers · 1,000+ Residents',
+      metrics: '100+ PCs · 50+ Tablets · 3 Loíza Community Centers · 1,000+ Residents',
       githubUrl: 'https://github.com/eresfavolosx/TokenFund',
       subdomainUrl: 'https://linkpuertorico.org',
       mirrorUrl: 'https://linkpuertorico.org',
       subdomainLabel: 'linkpuertorico.org',
       summary:
-        'During the height of the global supply chain crisis and school/workplace shutdowns, internationally sourced and procured over 100 computers and 50 tablets in under 30 days. Negotiated satellite internet connectivity for disconnected rural communities, deployed custom Mobile Device Management (MDM) software, configured firewalls and site-blocking protocols, and provided 3 years of daily ongoing technical support to transform 3 community centers into secure digital libraries.',
-      tags: ['Crisis Procurement', 'MDM Deployment', 'Network Security', 'Firewalls', 'Hardware Provisioning'],
+        'During the height of the global supply chain crisis and school/workplace shutdowns, internationally sourced and procured over 100 computers and 50 tablets in under 30 days for the Puente a Puente municipal initiative in Loíza, Puerto Rico. Negotiated satellite internet connectivity for disconnected communities, deployed custom Mobile Device Management (MDM) software, configured firewalls and site-blocking protocols, and provided 3 years of daily ongoing technical support to transform 3 community centers in the Loíza Municipality into secure digital libraries.',
+      tags: ['Crisis Procurement', 'Loíza Municipality', 'MDM Deployment', 'Network Security', 'Hardware Provisioning'],
     },
   ],
 

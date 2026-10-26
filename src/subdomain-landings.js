@@ -169,21 +169,21 @@ export const PLATFORM_LANDINGS = {
 
   'liza-project': {
     id: 'liza-project',
-    badge: 'CRISIS IT SOURCING & DIGITAL LIBRARIES',
+    badge: 'LOÍZA MUNICIPALITY · CRISIS IT SOURCING & DIGITAL LIBRARIES',
     status: 'PRODUCTION // INFRASTRUCTURE',
     uptime: '100+ PCS · 50+ TABLETS · 3 YEARS SLA',
-    title: 'The Liza Project: Crisis IT Sourcing & Digital Libraries',
-    lead: 'During the height of the global supply chain crisis and school/workplace shutdowns, internationally sourced and procured over 100 computers and 50 tablets in under 30 days. Transformed 3 community centers into secure digital libraries serving 1,000+ residents.',
+    title: 'Puente a Puente (Project in the Loíza Municipality): Crisis IT Sourcing & Digital Libraries',
+    lead: 'During the height of the global supply chain crisis and school/workplace shutdowns, internationally sourced and procured over 100 computers and 50 tablets in under 30 days. Transformed 3 community centers across the Loíza Municipality into secure digital libraries serving 1,000+ residents.',
     metrics: [
       { num: '< 30 Days', label: 'International Sourcing Turnaround' },
       { num: '150+ Devices', label: '100 PCs + 50 Tablets Deployed' },
-      { num: '3 Centers', label: 'Digital Libraries Operational' },
-      { num: '1,000+', label: 'Rural Residents Connected' }
+      { num: '3 Centers', label: 'Loíza Digital Libraries Operational' },
+      { num: '1,000+', label: 'Loíza Residents Connected' }
     ],
     objectiveTitle: 'Platform Objective & Mission',
     objectiveBody: `
-      <p><strong>The Core Challenge:</strong> When global supply chains froze during mandatory school lockdowns, disconnected mountain communities faced catastrophic educational disruptions without hardware or internet.</p>
-      <p><strong>How The Liza Project Worked Its Objective:</strong> Led international procurement negotiations with hardware suppliers across North America. Sourced 100 enterprise laptops and 50 tablets at non-profit concession pricing in under 30 days. Negotiated satellite connectivity, flashed custom Mobile Device Management (MDM) profiles with content filtering, and maintained daily technical support for 3 continuous years.</p>
+      <p><strong>The Core Challenge:</strong> When global supply chains froze during mandatory school lockdowns, underserved communities across the Loíza Municipality faced severe educational disruptions without hardware or broadband connectivity.</p>
+      <p><strong>How Puente a Puente Worked Its Objective:</strong> Led international procurement negotiations with hardware suppliers across North America. Sourced 100 enterprise laptops and 50 tablets at non-profit concession pricing in under 30 days. Negotiated satellite connectivity, flashed custom Mobile Device Management (MDM) profiles with content filtering, and maintained daily technical support across 3 Loíza sites for 3 continuous years.</p>
     `,
     architecture: [
       'Rapid Hardware Procurement & Global Supply Chain Logistics',
@@ -195,7 +195,7 @@ export const PLATFORM_LANDINGS = {
     liveUrl: 'https://linkpuertorico.org',
     mirrorUrl: 'https://linkpuertorico.org',
     githubUrl: 'https://github.com/eresfavolosx/TokenFund',
-    tags: ['Crisis Procurement', 'MDM Deployment', 'Network Security', 'Firewalls', 'Hardware Provisioning'],
+    tags: ['Crisis Procurement', 'Loíza Municipality', 'MDM Deployment', 'Network Security', 'Hardware Provisioning'],
     testBenchType: 'liza'
   }
 };
@@ -321,8 +321,8 @@ export const PROJECT_TRANSITIONS = {
     `
   },
   liza: {
-    name: 'LIZA & Link PR',
-    badge: 'COMMERCE & LOGISTICS ENGINE',
+    name: 'Puente a Puente · Loíza',
+    badge: 'LOÍZA MUNICIPAL INFRASTRUCTURE & DIGITAL LIBRARIES',
     accent: '#02b0f4',
     accentGlow: 'rgba(2, 176, 244, 0.45)',
     logoSvg: `
@@ -613,7 +613,7 @@ function renderTestBenchHtml(type) {
     `;
   }
 
-  // Fallback / Liza Project
+  // Fallback / Puente a Puente (Project in the Loíza Municipality)
   return `
     <div class="tb-module tb-liza">
       <div class="tb-liza-grid">
@@ -627,11 +627,11 @@ function renderTestBenchHtml(type) {
         </div>
         <div class="tb-liza-stat">
           <span class="liza-num">3</span>
-          <span class="liza-lbl">Rural Digital Libraries Established</span>
+          <span class="liza-lbl">Loíza Digital Libraries Established</span>
         </div>
         <div class="tb-liza-stat">
           <span class="liza-num">1,000+</span>
-          <span class="liza-lbl">Students &amp; Residents Supported Daily</span>
+          <span class="liza-lbl">Loíza Residents Supported Daily</span>
         </div>
       </div>
       <div class="tb-json-preview" style="margin-top: 12px;">

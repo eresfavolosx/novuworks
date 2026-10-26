@@ -635,18 +635,18 @@ export const PROFILE_ES = {
     },
     {
       id: 'liza-project',
-      name: 'El Proyecto Liza: Adquisición de TI en Crisis y Bibliotecas Digitales',
+      name: 'Puente a Puente (Proyecto en el Municipio de Loíza): Adquisición de TI en Crisis y Bibliotecas Digitales',
       role: 'Director de Proyecto y Arquitecto Líder de Sistemas',
-      organization: 'Link Puerto Rico · Apoyo en Crisis',
+      organization: 'Link Puerto Rico · Municipio de Loíza',
       period: '2020 – 2023',
-      metrics: '100+ PCs · 50+ Tabletas · 3 Centros Comunitarios · 1,000+ Residentes',
+      metrics: '100+ PCs · 50+ Tabletas · 3 Centros en Loíza · 1,000+ Residentes',
       githubUrl: 'https://github.com/eresfavolosx/TokenFund',
       subdomainUrl: 'https://linkpuertorico.org',
       mirrorUrl: 'https://linkpuertorico.org',
       subdomainLabel: 'linkpuertorico.org',
       summary:
-        'Durante la crisis global de suministros y cierres escolares, adquirió internacionalmente más de 100 computadoras y 50 tabletas en menos de 30 días. Negoció conectividad satelital para comunidades rurales desconectadas, desplegó software MDM personalizado, configuró firewalls y brindó 3 años de soporte técnico diario para transformar 3 centros comunitarios en bibliotecas digitales seguras.',
-      tags: ['Adquisición en Crisis', 'Despliegue MDM', 'Seguridad de Redes', 'Firewalls', 'Aprovisionamiento de Hardware']
+        'Durante la crisis global de suministros y cierres escolares, adquirió internacionalmente más de 100 computadoras y 50 tabletas en menos de 30 días para la iniciativa municipal Puente a Puente en el Municipio de Loíza. Negoció conectividad satelital para comunidades desconectadas, desplegó software MDM personalizado, configuró firewalls y brindó 3 años de soporte técnico diario para transformar 3 centros comunitarios en Loíza en bibliotecas digitales seguras.',
+      tags: ['Adquisición en Crisis', 'Municipio de Loíza', 'Despliegue MDM', 'Seguridad de Redes', 'Aprovisionamiento de Hardware']
     }
   ],
 
