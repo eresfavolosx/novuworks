@@ -1369,7 +1369,7 @@ class FabianPortfolioApp {
               ${cs.badge}
             </span>
           </div>
-          <h2 id="modal-disc-title" style="font-size: 26px; font-weight: 800; color: #ffffff; margin-top: 4px; line-height: 1.25;">
+          <h2 id="modal-disc-title" style="font-size: 26px; font-weight: 800; color: var(--titanium-white); margin-top: 4px; line-height: 1.25;">
             ${cs.title}
           </h2>
         </div>
@@ -1384,9 +1384,9 @@ class FabianPortfolioApp {
         </p>
 
         <!-- Key Metrics Row -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 28px;">
           ${Object.entries(cs.metrics).map(([k, val]) => `
-            <div style="background: #000000; border: 1px solid var(--hairline-gold); padding: 14px 18px; border-radius: var(--radius-sm);">
+            <div class="cs-modal-metric-box" style="border: 1px solid var(--hairline-gold); padding: 14px 18px; border-radius: var(--radius-sm);">
               <div style="font-size: 22px; font-weight: 800; color: var(--gold-light);">${val}</div>
               <div style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-top: 3px;">${k}</div>
             </div>
@@ -1395,24 +1395,24 @@ class FabianPortfolioApp {
 
         <!-- 4-Pillar Narrative Cadence -->
         <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px;">
-          <div style="background: rgba(0, 0, 0, 0.4); border-left: 3px solid #ff5f56; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
-            <strong style="color: #ff857f; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">1. Context & Scaling Friction:</strong>
-            <p style="font-size: 14px; color: #ffffff; line-height: 1.65;">${cs.challenge}</p>
+          <div class="cs-modal-narrative-box" style="border-left: 3px solid #ff5f56; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #e11d48; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">1. Context & Scaling Friction:</strong>
+            <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.challenge}</p>
           </div>
 
-          <div style="background: rgba(0, 0, 0, 0.4); border-left: 3px solid #ffbd2e; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
-            <strong style="color: #ffcf66; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">2. Strategic Hypothesis:</strong>
-            <p style="font-size: 14px; color: #ffffff; line-height: 1.65;">${cs.strategy}</p>
+          <div class="cs-modal-narrative-box" style="border-left: 3px solid #ffbd2e; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #d97706; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">2. Strategic Hypothesis:</strong>
+            <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.strategy}</p>
           </div>
 
-          <div style="background: rgba(0, 0, 0, 0.4); border-left: 3px solid #3b82f6; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
-            <strong style="color: #93c5fd; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">3. Dev & Cross-Functional Execution:</strong>
-            <p style="font-size: 14px; color: #ffffff; line-height: 1.65;">${cs.execution}</p>
+          <div class="cs-modal-narrative-box" style="border-left: 3px solid #3b82f6; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #2563eb; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">3. Dev & Cross-Functional Execution:</strong>
+            <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.execution}</p>
           </div>
 
-          <div style="background: rgba(0, 0, 0, 0.4); border-left: 3px solid #27c93f; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
-            <strong style="color: #6ee7b7; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">4. Bottom-Line Impact & Permanence:</strong>
-            <p style="font-size: 14px; color: #ffffff; line-height: 1.65;">${cs.impact}</p>
+          <div class="cs-modal-narrative-box" style="border-left: 3px solid #27c93f; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #059669; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">4. Bottom-Line Impact & Permanence:</strong>
+            <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.impact}</p>
           </div>
         </div>
 
@@ -1446,7 +1446,7 @@ class FabianPortfolioApp {
           <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light);">
             ${disc.number} · Architecture Discipline
           </span>
-          <h2 id="modal-disc-title" style="font-size: 26px; font-weight: 800; color: #ffffff; margin-top: 4px;">
+          <h2 id="modal-disc-title" style="font-size: 26px; font-weight: 800; color: var(--titanium-white); margin-top: 4px;">
             ${disc.title}
           </h2>
         </div>
@@ -1460,11 +1460,11 @@ class FabianPortfolioApp {
           ${disc.subtitle}
         </p>
 
-        <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--hairline); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 24px;">
+        <div class="cs-modal-narrative-box" style="border: 1px solid var(--hairline); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 24px;">
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 12px;">Key Engineering Deliverables:</h4>
           <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
             ${disc.deliverables.map((item) => `
-              <li style="display: flex; gap: 10px; font-size: 14px; color: #ffffff;">
+              <li style="display: flex; gap: 10px; font-size: 14px; color: var(--titanium-white);">
                 <span style="color: var(--gold-primary);">✓</span> ${item}
               </li>
             `).join('')}
@@ -1475,7 +1475,7 @@ class FabianPortfolioApp {
           <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;">Production Tech Stack:</h4>
           <div style="display: flex; flex-wrap: wrap; gap: 8px;">
             ${disc.tech.map((t) => `
-              <span style="font-family: var(--font-mono); font-size: 12px; padding: 6px 14px; background: rgba(255,255,255,0.04); border-radius: var(--radius-pill); border: 1px solid var(--hairline); color: #ffffff;">${t}</span>
+              <span class="cs-modal-metric-box" style="font-family: var(--font-mono); font-size: 12px; padding: 6px 14px; border-radius: var(--radius-pill); border: 1px solid var(--hairline); color: var(--titanium-white);">${t}</span>
             `).join('')}
           </div>
         </div>
