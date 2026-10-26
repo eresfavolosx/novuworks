@@ -575,6 +575,21 @@ export const PROFILE = {
         'During the height of the global supply chain crisis and school/workplace shutdowns, internationally sourced and procured over 100 computers and 50 tablets in under 30 days for the Puente a Puente municipal initiative in Loíza, Puerto Rico. Negotiated satellite internet connectivity for disconnected communities, deployed custom Mobile Device Management (MDM) software, configured firewalls and site-blocking protocols, and provided 3 years of daily ongoing technical support to transform 3 community centers in the Loíza Municipality into secure digital libraries.',
       tags: ['Crisis Procurement', 'Loíza Municipality', 'MDM Deployment', 'Network Security', 'Hardware Provisioning'],
     },
+    {
+      id: 'viva-advertising',
+      name: 'Viva Advertising: 360° Performance Marketing & Ad-Tech Agency Platform',
+      organization: 'Viva Advertising (My Company / Founder)',
+      role: 'Founder & Lead Growth Architect',
+      period: '2018 – Present',
+      metrics: '$10M+ Client Revenue · 150+ Accounts · 1B+ Impressions · -83% Churn',
+      githubUrl: null,
+      subdomainUrl: 'https://viva-advertising.com/',
+      mirrorUrl: 'https://viva-advertising.com/',
+      subdomainLabel: 'viva-advertising.com',
+      summary:
+        'Founded and scaled a high-converting digital marketing and ad-tech agency in Puerto Rico (viva-advertising.com) serving 150+ commercial accounts across healthcare, luxury real estate, automotive, and retail. Directed $100K+ in direct media buying generating 1B+ impressions and $10M+ in attributable client revenue, while architecting centralized Power BI/Looker telemetry and predictive account-health models that reduced agency client churn from 30% to 5% (-83%).',
+      tags: ['Performance Marketing', 'Meta & Google Ads', 'Power BI & Looker', 'Predictive Churn Modeling', 'viva-advertising.com'],
+    },
   ],
 
   // ─────────────────────────────────────────────────────────────

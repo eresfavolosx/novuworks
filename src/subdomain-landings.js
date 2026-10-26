@@ -197,6 +197,38 @@ export const PLATFORM_LANDINGS = {
     githubUrl: 'https://github.com/eresfavolosx/TokenFund',
     tags: ['Crisis Procurement', 'Loíza Municipality', 'MDM Deployment', 'Network Security', 'Hardware Provisioning'],
     testBenchType: 'liza'
+  },
+
+  'viva-advertising': {
+    id: 'viva-advertising',
+    badge: '360° PERFORMANCE MARKETING & AD-TECH AGENCY',
+    status: 'PRODUCTION // LIVE AGENCY PORTAL',
+    uptime: '$10M+ PIPELINE · 150+ ACCOUNTS · 1B+ IMPRESSIONS',
+    title: 'Viva Advertising: 360° Performance Marketing & Ad-Tech Agency Platform',
+    lead: 'Founded and scaled a full-service performance marketing and ad-tech agency in Puerto Rico (viva-advertising.com) serving 150+ commercial accounts across healthcare, luxury real estate, automotive, and retail with $10M+ in attributable client revenue.',
+    metrics: [
+      { num: '$10M+', label: 'Attributable Client Revenue' },
+      { num: '150+', label: 'Commercial Accounts Managed' },
+      { num: '1B+', label: 'Paid Media Impressions' },
+      { num: '-83%', label: 'Client Churn Reduction (30%→5%)' }
+    ],
+    objectiveTitle: 'Agency Platform Objective & Growth Architecture',
+    objectiveBody: `
+      <p><strong>The Core Challenge:</strong> Regional and enterprise brands across Puerto Rico lacked unified attribution between paid media spend (Meta Ads, Google Ads, Native) and downstream CRM pipeline revenue, leading to high agency churn and opaque ROI.</p>
+      <p><strong>How Viva Advertising Solved It:</strong> Architected a centralized BI and attribution engine combining server-side conversion tracking, automated Power BI &amp; Looker client warehouses, and a predictive account-health scoring model that proactively flagged campaign fatigue—slashing client churn from 30% to 5% while generating over $10M in direct client sales.</p>
+    `,
+    architecture: [
+      'Full-Funnel Paid Media Architecture (Meta Ads, Google Ads, Programmatic & Native)',
+      'Centralized Client Data Warehousing with Live Power BI & Looker Dashboards',
+      'Predictive Account-Health & Churn Prevention Telemetry (-83% Churn)',
+      'High-Converting Luxury Real Estate & Healthcare Lead Generation Funnels',
+      'RACI Agile Delivery Governance Across a 15-Person Cross-Functional Team'
+    ],
+    liveUrl: 'https://viva-advertising.com/',
+    mirrorUrl: 'https://viva-advertising.com/',
+    githubUrl: null,
+    tags: ['Performance Marketing', 'Meta & Google Ads', 'Power BI & Looker', 'Predictive Churn Modeling', 'viva-advertising.com'],
+    testBenchType: 'viva'
   }
 };
 
@@ -205,6 +237,7 @@ PLATFORM_LANDINGS['nfc'] = PLATFORM_LANDINGS['nfc-platform'];
 PLATFORM_LANDINGS['hackea'] = PLATFORM_LANDINGS['hackeaporunacausa'];
 PLATFORM_LANDINGS['liza'] = PLATFORM_LANDINGS['liza-project'];
 PLATFORM_LANDINGS['linkpr'] = PLATFORM_LANDINGS['liza-project'];
+PLATFORM_LANDINGS['viva'] = PLATFORM_LANDINGS['viva-advertising'];
 
 export const PROJECT_TRANSITIONS = {
   bizpay: {
@@ -333,11 +366,26 @@ export const PROJECT_TRANSITIONS = {
       </svg>
     `
   },
-  'liza-project': null
+  'liza-project': null,
+  viva: {
+    name: 'Viva Advertising',
+    badge: '360° PERFORMANCE MARKETING & AD-TECH AGENCY',
+    accent: '#e11d48',
+    accentGlow: 'rgba(225, 29, 72, 0.45)',
+    logoSvg: `
+      <svg viewBox="0 0 100 100" class="pts-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" rx="24" fill="#1f0913" stroke="#e11d48" stroke-width="2.5"/>
+        <path d="M 26,30 L 50,74 L 74,30" stroke="#e11d48" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="50" cy="26" r="5" fill="#fb7185"/>
+      </svg>
+    `
+  },
+  'viva-advertising': null
 };
 PROJECT_TRANSITIONS['nfc-platform'] = PROJECT_TRANSITIONS.nfc;
 PROJECT_TRANSITIONS.hackeaporunacausa = PROJECT_TRANSITIONS.hackea;
 PROJECT_TRANSITIONS['liza-project'] = PROJECT_TRANSITIONS.liza;
+PROJECT_TRANSITIONS['viva-advertising'] = PROJECT_TRANSITIONS.viva;
 
 export function renderSubdomainLandingHtml(projectId) {
   const data = PLATFORM_LANDINGS[projectId] || PLATFORM_LANDINGS.jobhelper;
@@ -608,6 +656,39 @@ function renderTestBenchHtml(type) {
         </button>
         <div class="tb-sim-badge hidden" id="tb-mentor-confirmed">
           🤝 MENTORSHIP SESSION RESERVED: NOTIFICATION DISPATCHED TO COMMUNITY DIRECTOR
+        </div>
+      </div>
+    `;
+  }
+
+  if (type === 'viva') {
+    return `
+      <div class="tb-module tb-liza">
+        <div class="tb-liza-grid">
+          <div class="tb-liza-stat">
+            <span class="liza-num">$10M+</span>
+            <span class="liza-lbl">Attributable Client Revenue</span>
+          </div>
+          <div class="tb-liza-stat">
+            <span class="liza-num">150+</span>
+            <span class="liza-lbl">Commercial Accounts Managed</span>
+          </div>
+          <div class="tb-liza-stat">
+            <span class="liza-num">1B+</span>
+            <span class="liza-lbl">Meta, Google &amp; Native Impressions</span>
+          </div>
+          <div class="tb-liza-stat">
+            <span class="liza-num">-83%</span>
+            <span class="liza-lbl">Agency Churn Reduction (30% → 5%)</span>
+          </div>
+        </div>
+        <div class="tb-json-preview" style="margin-top: 12px;">
+          <span class="tb-json-tag">VIVA ADVERTISING REVOPS TELEMETRY:</span>
+          <pre><code>{
+  "agency_domain": "https://viva-advertising.com/",
+  "attribution_warehouse": "POWER_BI_AND_LOOKER_SYNCED",
+  "churn_prediction_model": "ACTIVE · 95% RETENTION SLA"
+}</code></pre>
         </div>
       </div>
     `;

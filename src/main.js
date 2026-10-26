@@ -848,10 +848,17 @@ class FabianPortfolioApp {
   // ─────────────────────────────────────────────────────────────
   renderProjectCards(projects, containerEl) {
     if (!containerEl || !projects) return;
+    const projectLogoMap = {
+      jobhelper: LOGOS.jobhelper,
+      bizpay: LOGOS.bizpay,
+      picta: LOGOS.picta,
+      'nfc-platform': LOGOS.nfcPlatform,
+      hackeaporunacausa: LOGOS.hackea,
+      'liza-project': LOGOS.linkPR,
+      'viva-advertising': LOGOS.vivaAdvertising,
+    };
     containerEl.innerHTML = projects.map((p) => {
-      let projLogo = '';
-      if (p.id === 'bizpay' || p.id === 'jobhelper' || p.id === 'picta') projLogo = LOGOS.novuWorks;
-      else if (p.id === 'nfc-platform' || p.id === 'liza-project' || p.id === 'hackeaporunacausa') projLogo = LOGOS.linkPR;
+      const projLogo = projectLogoMap[p.id] || LOGOS.novuWorks;
 
       let subUrl = p.subdomainUrl;
       if (subUrl) {

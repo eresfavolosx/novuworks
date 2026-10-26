@@ -647,6 +647,21 @@ export const PROFILE_ES = {
       summary:
         'Durante la crisis global de suministros y cierres escolares, adquirió internacionalmente más de 100 computadoras y 50 tabletas en menos de 30 días para la iniciativa municipal Puente a Puente en el Municipio de Loíza. Negoció conectividad satelital para comunidades desconectadas, desplegó software MDM personalizado, configuró firewalls y brindó 3 años de soporte técnico diario para transformar 3 centros comunitarios en Loíza en bibliotecas digitales seguras.',
       tags: ['Adquisición en Crisis', 'Municipio de Loíza', 'Despliegue MDM', 'Seguridad de Redes', 'Aprovisionamiento de Hardware']
+    },
+    {
+      id: 'viva-advertising',
+      name: 'Viva Advertising: Plataforma de Agencia de Mercadeo de Rendimiento 360° y Ad-Tech',
+      role: 'Fundador y Arquitecto Líder de Crecimiento',
+      organization: 'Viva Advertising (Mi Empresa / Fundador)',
+      period: '2018 – Presente',
+      metrics: '$10M+ Ingresos de Clientes · 150+ Cuentas · 1B+ Impresiones · -83% Retención',
+      githubUrl: null,
+      subdomainUrl: 'https://viva-advertising.com/',
+      mirrorUrl: 'https://viva-advertising.com/',
+      subdomainLabel: 'viva-advertising.com',
+      summary:
+        'Fundó y escaló una agencia de mercadeo digital de alto rendimiento y tecnología publicitaria en Puerto Rico (viva-advertising.com) atendiendo a más de 150 cuentas comerciales en salud, bienes raíces de lujo, automotriz y comercio. Dirigió más de $100K en compra directa de medios generando más de 1B de impresiones y $10M+ en ingresos atribuibles, implementando paneles en Power BI/Looker y modelos predictivos que redujeron la deserción del 30% al 5% (-83%).',
+      tags: ['Mercadeo de Rendimiento', 'Meta y Google Ads', 'Power BI y Looker', 'Modelado Predictivo', 'viva-advertising.com']
     }
   ],
 

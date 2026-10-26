@@ -293,6 +293,89 @@ export const LOGOS = {
       <text x="36" y="36" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="8" letter-spacing="0.12em" fill="currentColor" opacity="0.6">DATA MODELING</text>
     </svg>
   `,
+
+  // 24. JobHelper AI — Unique Project Brand Mark
+  jobhelper: `
+    <svg class="comp-logo-svg" viewBox="0 0 186 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="JobHelper AI Logo">
+      <defs>
+        <linearGradient id="jhLogoGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#10b981"/>
+          <stop offset="100%" stop-color="#06b6d4"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="4" width="36" height="36" rx="10" fill="#062019" stroke="url(#jhLogoGrad)" stroke-width="2"/>
+      <polygon points="20,10 30,16 30,28 20,34 10,28 10,16" fill="none" stroke="url(#jhLogoGrad)" stroke-width="2"/>
+      <circle cx="20" cy="22" r="4.5" fill="url(#jhLogoGrad)"/>
+      <text x="46" y="24" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="15" fill="currentColor">JobHelper <tspan fill="#10b981">AI</tspan></text>
+      <text x="46" y="35" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="7.5" letter-spacing="0.12em" fill="#06b6d4">LLM SCORING AGENT</text>
+    </svg>
+  `,
+
+  // 25. BizPay — Unique Project Brand Mark
+  bizpay: `
+    <svg class="comp-logo-svg" viewBox="0 0 165 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BizPay Commercial Gateway Logo">
+      <defs>
+        <linearGradient id="bpLogoGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ff671b"/>
+          <stop offset="100%" stop-color="#f59e0b"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="4" width="36" height="36" rx="10" fill="url(#bpLogoGrad)"/>
+      <path d="M 11,13 L 11,31 L 29,31" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 15,26 L 21,19 L 25,22 L 30,14" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="46" y="24" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="16" fill="currentColor">Biz<tspan fill="#ff671b">Pay</tspan></text>
+      <text x="46" y="35" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="7.5" letter-spacing="0.12em" fill="#ff671b">ATH MÓVIL B2B</text>
+    </svg>
+  `,
+
+  // 26. Picta — Unique Assistive Color Vision Project Brand Mark
+  picta: `
+    <svg class="comp-logo-svg" viewBox="0 0 165 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Picta Assistive Vision Logo">
+      <rect x="2" y="4" width="36" height="36" rx="10" fill="#0d1326" stroke="#38bdf8" stroke-width="2"/>
+      <circle cx="17" cy="20" r="6.5" fill="#f43f5e" fill-opacity="0.85"/>
+      <circle cx="23" cy="20" r="6.5" fill="#38bdf8" fill-opacity="0.85"/>
+      <circle cx="20" cy="25" r="6.5" fill="#10b981" fill-opacity="0.85"/>
+      <circle cx="20" cy="21.5" r="2.5" fill="#ffffff"/>
+      <text x="46" y="24" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="16" fill="currentColor">Pic<tspan fill="#38bdf8">ta</tspan></text>
+      <text x="46" y="35" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="7.5" letter-spacing="0.12em" fill="#a855f7">CVD VISION ENGINE</text>
+    </svg>
+  `,
+
+  // 27. NFC Event & Verification Platform — Unique Project Brand Mark
+  nfcPlatform: `
+    <svg class="comp-logo-svg" viewBox="0 0 175 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NFC Verification Platform Logo">
+      <defs>
+        <linearGradient id="nfcLogoGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#a855f7"/>
+          <stop offset="100%" stop-color="#ec4899"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="4" width="36" height="36" rx="10" fill="#170d2a" stroke="url(#nfcLogoGrad)" stroke-width="2"/>
+      <circle cx="20" cy="22" r="3" fill="#ffffff"/>
+      <path d="M 14,16 A 8.5,8.5 0 0 1 26,16" stroke="url(#nfcLogoGrad)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      <path d="M 10.5,12.5 A 13.5,13.5 0 0 1 29.5,12.5" stroke="url(#nfcLogoGrad)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/>
+      <path d="M 26,28 A 8.5,8.5 0 0 1 14,28" stroke="#06b6d4" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      <text x="46" y="24" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="15.5" fill="currentColor">NFC <tspan fill="#a855f7">Pass</tspan></text>
+      <text x="46" y="35" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="7.5" letter-spacing="0.12em" fill="#ec4899">CRYPTO TELEMETRY</text>
+    </svg>
+  `,
+
+  // 28. Hackea por una Causa — Unique Project Brand Mark
+  hackea: `
+    <svg class="comp-logo-svg" viewBox="0 0 175 44" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hackea por una Causa Logo">
+      <defs>
+        <linearGradient id="hkLogoGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ff4c1d"/>
+          <stop offset="100%" stop-color="#f59e0b"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="4" width="36" height="36" rx="10" fill="#1f100d" stroke="url(#hkLogoGrad)" stroke-width="2"/>
+      <path d="M 20,10 C 25,16 30,22 27.5,29 C 25.5,35 16.5,36 14,31.5 C 12,28 14,25 16,23 C 17,21.5 17.5,19.5 17,17 C 18.5,18 20,14 20,10 Z" fill="url(#hkLogoGrad)"/>
+      <circle cx="20" cy="29.5" r="2.5" fill="#ffffff"/>
+      <text x="46" y="24" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="15.5" fill="currentColor">Hackea <tspan fill="#ff4c1d">PR</tspan></text>
+      <text x="46" y="35" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="7.5" letter-spacing="0.1em" fill="#f59e0b">YOUTH MENTORSHIP</text>
+    </svg>
+  `,
 };
 
 // Aliases for compatibility
