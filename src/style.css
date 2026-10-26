@@ -14678,6 +14678,7 @@ body.tesla-cockpit-active {
   border: 1px solid var(--hairline-gold);
   border-radius: var(--radius-lg);
   padding: clamp(18px, 3vw, 26px);
+  margin-top: 32px;
   margin-bottom: 32px;
   position: relative;
   overflow: hidden;
@@ -14692,8 +14693,8 @@ body.tesla-cockpit-active {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #e0566a, #8b52c8, #3d63e6, #d4af37);
-  opacity: 0.85;
+  background: linear-gradient(90deg, #df635e, #a45b83, #6b52ae, #2557e5);
+  opacity: 0.9;
 }
 
 :root[data-theme="light"] .engineering-particle-showcase-card,
