@@ -346,7 +346,8 @@ body.visualizer-mode .webgl-canvas-layer:active {
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   z-index: 100;
   transition: all var(--duration-smooth) var(--ease-luxury);
-  gap: 12px;
+  gap: 10px;
+  overflow: hidden;
 }
 
 .header-left {
@@ -591,6 +592,10 @@ body.visualizer-mode .webgl-canvas-layer:active {
 }
 
 /* Base header button compactness: redundant text labels hidden across all screens to guarantee 0 overflow */
+.brand-role,
+.header-center-nav .tab-index,
+#btn-pr-roots,
+#btn-toggle-visualizer,
 #btn-theme-toggle .theme-btn-label,
 #btn-tesla-mode .btn-text,
 #btn-toggle-visualizer .visualizer-btn-label,
@@ -598,8 +603,22 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .persona-lens-pill .persona-tag,
 .tools-trigger-btn .tools-btn-label,
 .spatial-gyro-btn .spatial-gyro-label,
-.pr-roots-btn .pr-geo-coords {
+.pr-roots-btn .pr-geo-coords,
+.pr-roots-btn .pr-loc-label {
   display: none !important;
+}
+
+.header-center-nav .nav-tab {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.header-right {
+  gap: 6px;
+}
+
+.hud-action-btn {
+  padding: 6px 10px;
 }
 
 /* Puerto Rico Cultural Roots Micro-Badge */
@@ -8349,8 +8368,8 @@ body.tesla-mode .hud-action-btn {
   font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
+  gap: 4px;
+  padding: 6px 10px;
   border-radius: var(--radius-pill);
   transition: all var(--duration-fast) var(--ease-luxury);
   white-space: nowrap;
