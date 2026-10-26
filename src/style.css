@@ -1232,17 +1232,20 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .sig-ink-path {
   fill: url(#sigInkGrad);
   transition: opacity 0.3s ease;
+  -webkit-clip-path: inset(0 100% 0 0);
   clip-path: inset(0 100% 0 0);
   opacity: 0.15;
 }
 
 /* Dynamic Calligraphic Wipe Reveal Animation (1.6s snappy pacing) */
 .executive-signature-card.is-animating .sig-ink-path {
+  -webkit-animation: sigCalligraphyReveal 1.6s cubic-bezier(0.28, 0.12, 0.28, 1) forwards;
   animation: sigCalligraphyReveal 1.6s cubic-bezier(0.28, 0.12, 0.28, 1) forwards;
 }
 
 @keyframes sigCalligraphyReveal {
   0% {
+    -webkit-clip-path: inset(0 100% 0 0);
     clip-path: inset(0 100% 0 0);
     opacity: 0.1;
     filter: brightness(1.8) drop-shadow(0 0 16px rgba(212, 175, 55, 0.9));
@@ -1255,10 +1258,42 @@ body.visualizer-mode .webgl-canvas-layer:active {
     filter: brightness(1.2) drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
   }
   100% {
+    -webkit-clip-path: inset(0 0% 0 0);
     clip-path: inset(0 0% 0 0);
     opacity: 1;
     filter: brightness(1) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
   }
+}
+
+@-webkit-keyframes sigCalligraphyReveal {
+  0% {
+    -webkit-clip-path: inset(0 100% 0 0);
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.1;
+    filter: brightness(1.8) drop-shadow(0 0 16px rgba(212, 175, 55, 0.9));
+  }
+  15% {
+    opacity: 0.75;
+  }
+  80% {
+    opacity: 1;
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+  }
+  100% {
+    -webkit-clip-path: inset(0 0% 0 0);
+    clip-path: inset(0 0% 0 0);
+    opacity: 1;
+    filter: brightness(1) drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
+  }
+}
+
+/* Gracefully unclip on WebKit when ready or not animating */
+.particle-loading-screen.is-ready .sig-ink-path,
+.executive-signature-card.is-ready .sig-ink-path,
+.executive-signature-card:not(.is-animating) .sig-ink-path {
+  -webkit-clip-path: none !important;
+  clip-path: none !important;
+  opacity: 1 !important;
 }
 
 /* Luminous Gold Pen Nib Sparkle */
@@ -12955,6 +12990,15 @@ body.tesla-cockpit-active {
 .particle-loading-screen {
   position: fixed;
   inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  height: -webkit-fill-available;
   overflow: hidden;
   z-index: 99999;
   background: radial-gradient(ellipse at 50% 45%, rgba(10, 14, 26, 0.72) 0%, rgba(3, 5, 12, 0.94) 100%);

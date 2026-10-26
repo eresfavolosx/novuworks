@@ -19,12 +19,85 @@
       --accent-green: #10b981;
       --accent-blue: #0284c7;
     }
+    /* Light Mode Theme Compatibility */
+    :root[data-theme="light"], html.light-theme,
+    :root[data-theme="light"] body, html.light-theme body {
+      --bg: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --card-border: rgba(15, 23, 42, 0.14);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      background: #f8fafc !important;
+      color: #0f172a !important;
+    }
+    :root[data-theme="light"] header, html.light-theme header {
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom-color: rgba(15, 23, 42, 0.1);
+    }
+    :root[data-theme="light"] .nav-btn, html.light-theme .nav-btn {
+      background: rgba(15, 23, 42, 0.05) !important;
+      border-color: rgba(15, 23, 42, 0.16) !important;
+      color: #1e293b !important;
+    }
+    :root[data-theme="light"] .nav-btn:hover, html.light-theme .nav-btn:hover {
+      background: rgba(15, 23, 42, 0.1) !important;
+      color: #0f172a !important;
+    }
+    :root[data-theme="light"] .nav-btn.active, html.light-theme .nav-btn.active {
+      background: rgba(255, 76, 29, 0.14) !important;
+      border-color: rgba(255, 76, 29, 0.5) !important;
+      color: #d93810 !important;
+    }
+    :root[data-theme="light"] .team-pill, html.light-theme .team-pill {
+      background: rgba(15, 23, 42, 0.06) !important;
+      border-color: rgba(15, 23, 42, 0.14) !important;
+      color: #334155 !important;
+    }
+    :root[data-theme="light"] .card, html.light-theme .card,
+    :root[data-theme="light"] .inst-card, html.light-theme .inst-card {
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+      color: #0f172a;
+    }
+    :root[data-theme="light"] .logo-title, html.light-theme .logo-title,
+    :root[data-theme="light"] .card-title, html.light-theme .card-title,
+    :root[data-theme="light"] .inst-title, html.light-theme .inst-title,
+    :root[data-theme="light"] h1, html.light-theme h1,
+    :root[data-theme="light"] h2, html.light-theme h2,
+    :root[data-theme="light"] h3, html.light-theme h3 {
+      color: #0f172a !important;
+    }
+    :root[data-theme="light"] .hero-banner, html.light-theme .hero-banner {
+      background: linear-gradient(135deg, rgba(255, 76, 29, 0.09) 0%, rgba(2, 132, 199, 0.07) 100%);
+      border-color: rgba(255, 76, 29, 0.3);
+    }
+    :root[data-theme="light"] .hero-tag, html.light-theme .hero-tag,
+    :root[data-theme="light"] .card-date, html.light-theme .card-date {
+      color: #d93810 !important;
+    }
+    :root[data-theme="light"] .inst-card div[style*="color:#cbd5e1"],
+    html.light-theme .inst-card div[style*="color:#cbd5e1"] {
+      color: #475569 !important;
+    }
+    :root[data-theme="light"] .status-confirmed, html.light-theme .status-confirmed {
+      background: rgba(16, 185, 129, 0.15);
+      color: #059669;
+    }
+    :root[data-theme="light"] .status-pending, html.light-theme .status-pending {
+      background: rgba(245, 158, 11, 0.18);
+      color: #b45309;
+    }
+    :root[data-theme="light"] .inst-badge, html.light-theme .inst-badge {
+      color: #0284c7;
+      background: rgba(2, 132, 199, 0.1);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: var(--bg);
       color: var(--text-main);
       font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
@@ -32,14 +105,17 @@
     header {
       background: rgba(11, 15, 25, 0.85);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--card-border);
       position: sticky;
-      top: 0;
+      top: 42px;
       z-index: 100;
-      padding: 16px 24px;
+      padding: 14px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .logo-area { display: flex; align-items: center; gap: 12px; }
     .logo-badge {
@@ -192,6 +268,64 @@
     }
     .footer-links { display: flex; gap: 16px; }
     .footer-links a { color: #ff6b42; text-decoration: none; font-weight: 600; }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 640px) {
+      header {
+        top: 38px;
+        padding: 12px 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .nav-links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        width: 100%;
+      }
+      .nav-btn {
+        text-align: center;
+        justify-content: center;
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+      main {
+        padding: 20px 14px;
+        gap: 24px;
+      }
+      .hero-banner {
+        padding: 22px 18px;
+        border-radius: 16px;
+        gap: 10px;
+      }
+      .hero-banner h1 {
+        font-size: clamp(20px, 5.5vw, 26px);
+      }
+      .hero-banner p {
+        font-size: 13.5px;
+      }
+      .grid-cards {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .card, .inst-card {
+        padding: 18px;
+      }
+      #tab-citas > div:first-child {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 6px;
+      }
+      footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -204,10 +338,10 @@
       </div>
     </div>
     <nav class="nav-links">
-      <button class="nav-btn active" onclick="switchTab('citas')">📅 Sesiones</button>
-      <button class="nav-btn" onclick="switchTab('instituciones')">🏛️ Instituciones</button>
-      <button class="nav-btn" onclick="switchTab('perfil')">👤 Mentor</button>
-      <a href="https://novu.works" class="nav-btn" style="border-color: rgba(255,255,255,0.25);">← Novu Works</a>
+      <button class="nav-btn active" onclick="switchTab('citas', this)">📅 Sesiones</button>
+      <button class="nav-btn" onclick="switchTab('instituciones', this)">🏛️ Instituciones</button>
+      <button class="nav-btn" onclick="switchTab('perfil', this)">👤 Mentor</button>
+      <a href="https://novu.works?skipIntro=1#projects" class="nav-btn np-btn-home" style="border-color: rgba(255,255,255,0.25);">← Novu Works</a>
     </nav>
   </header>
 
@@ -355,12 +489,12 @@
   </footer>
 
   <script>
-    function switchTab(name) {
+    function switchTab(name, btnEl) {
       document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       const target = document.getElementById('tab-' + name);
       if (target) target.classList.add('active');
-      event.target.classList.add('active');
+      if (btnEl) btnEl.classList.add('active');
     }
   </script>
   <script src="novu-intro.js" data-project="hackea" defer></script>

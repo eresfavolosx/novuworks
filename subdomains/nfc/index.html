@@ -22,6 +22,42 @@
   <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg" />
   <script type="module" crossorigin src="./assets/index-Bdd-8HFH.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/index-giz6pNY_.css">
+  <style>
+    /* Ensure fixed sidebar and sticky headers respect the 42px Novu Platform Topbar */
+    .sidebar {
+      top: 42px !important;
+      height: calc(100vh - 42px) !important;
+      height: calc(100dvh - 42px) !important;
+    }
+    .page-header {
+      top: 42px !important;
+    }
+    .hamburger-btn {
+      top: calc(42px + 12px) !important;
+    }
+    @media (max-width: 600px) {
+      .sidebar {
+        top: 38px !important;
+        height: calc(100vh - 38px) !important;
+        height: calc(100dvh - 38px) !important;
+      }
+      .page-header {
+        top: 38px !important;
+      }
+      .hamburger-btn {
+        top: calc(38px + 10px) !important;
+      }
+      .bottom-nav {
+        bottom: max(12px, env(safe-area-inset-bottom)) !important;
+        left: 12px !important;
+        right: 12px !important;
+        height: 66px !important;
+      }
+      .login-card {
+        padding: 24px 18px !important;
+      }
+    }
+  </style>
 </head>
 
 <body>

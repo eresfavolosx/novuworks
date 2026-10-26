@@ -266,3 +266,170 @@ main {
 .timespan {
     padding-left: 140px !important;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   BizPay Dark Mode & Universal Topbar Offset
+   ───────────────────────────────────────────────────────────── */
+.mdl-layout__container {
+  top: 42px !important;
+  height: calc(100% - 42px) !important;
+}
+:root[data-theme="dark"] main,
+html.dark-theme main,
+:root[data-theme="dark"] .page-content,
+html.dark-theme .page-content {
+  background-color: #0b0f19 !important;
+  color: #f8fafc !important;
+}
+:root[data-theme="dark"] .Home-title,
+html.dark-theme .Home-title {
+  color: #f8fafc !important;
+}
+:root[data-theme="dark"] .mdl-data-table,
+html.dark-theme .mdl-data-table,
+:root[data-theme="dark"] .graff2,
+html.dark-theme .graff2,
+:root[data-theme="dark"] .help-card,
+html.dark-theme .help-card {
+  background-color: #161d2f !important;
+  color: #e2e8f0 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+:root[data-theme="dark"] .mdl-data-table th,
+html.dark-theme .mdl-data-table th {
+  color: #94a3b8 !important;
+}
+:root[data-theme="dark"] .mdl-data-table td,
+html.dark-theme .mdl-data-table td {
+  color: #f1f5f9 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+:root[data-theme="dark"] .mdl-data-table tbody tr:hover,
+html.dark-theme .mdl-data-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+:root[data-theme="dark"] .mdl-layout__drawer,
+html.dark-theme .mdl-layout__drawer {
+  background-color: #111827 !important;
+  border-right-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f8fafc !important;
+}
+:root[data-theme="dark"] .mdl-layout__drawer .mdl-navigation .mdl-navigation__link,
+html.dark-theme .mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  color: #cbd5e1 !important;
+}
+:root[data-theme="dark"] .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover,
+:root[data-theme="dark"] .mdl-layout__drawer .mdl-navigation .mdl-navigation__link.is-active,
+html.dark-theme .mdl-layout__drawer .mdl-navigation .mdl-navigation__link:hover,
+html.dark-theme .mdl-layout__drawer .mdl-navigation .mdl-navigation__link.is-active {
+  background-color: rgba(255, 103, 27, 0.15) !important;
+  color: #ff671b !important;
+}
+:root[data-theme="dark"] .help-card h2,
+:root[data-theme="dark"] .help-card h3,
+:root[data-theme="dark"] .faq-q,
+:root[data-theme="dark"] .calc-stat-value,
+html.dark-theme .help-card h2,
+html.dark-theme .help-card h3,
+html.dark-theme .faq-q,
+html.dark-theme .calc-stat-value {
+  color: #f8fafc !important;
+}
+:root[data-theme="dark"] .help-card p,
+:root[data-theme="dark"] .faq-a,
+html.dark-theme .help-card p,
+html.dark-theme .faq-a {
+  color: #cbd5e1 !important;
+}
+:root[data-theme="dark"] .calc-stat-cell,
+html.dark-theme .calc-stat-cell {
+  background: #0f172a !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BizPay Mobile Responsive & Touch Optimizations
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .mdl-layout__container {
+    top: 38px !important;
+    height: calc(100% - 38px) !important;
+  }
+  .page-content {
+    margin-top: 10px;
+    padding: 0 8px;
+  }
+  .container {
+    width: 100% !important;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+  .row {
+    padding-bottom: 16px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .col-md-4, .col-md-8, .col-md-12 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+  }
+  .payments-table, .payroll-table, .mdl-data-table {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    box-sizing: border-box;
+  }
+  .graff {
+    height: auto !important;
+    max-height: 200px !important;
+    width: 100% !important;
+    object-fit: contain !important;
+  }
+  .graff2 {
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 12px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    width: 100% !important;
+  }
+  .Home-title {
+    font-size: 19px !important;
+    line-height: 26px !important;
+    margin-bottom: 8px;
+  }
+  .sample-profile {
+    width: 32px !important;
+    height: 32px !important;
+    margin-right: 8px;
+  }
+  .timespan {
+    padding-left: 10px !important;
+  }
+  .mdl-layout__header-row {
+    padding: 0 12px 0 56px !important;
+  }
+  .mdl-layout__header-row .mdl-button {
+    font-size: 11px !important;
+    padding: 0 8px !important;
+    height: 30px !important;
+    line-height: 30px !important;
+    white-space: nowrap;
+  }
+  .nav-title {
+    font-size: 15px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 190px;
+  }
+  .view-source {
+    margin-right: 16px !important;
+    margin-bottom: 16px !important;
+  }
+}

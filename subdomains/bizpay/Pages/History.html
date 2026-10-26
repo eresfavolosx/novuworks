@@ -101,7 +101,7 @@
             <div class="mdl-layout__header-row">
                 <span class="mdl-layout-title nav-title">Help &amp; Architecture Guide</span>
                 <div class="mdl-layout-spacer"></div>
-                <a href="https://novu.works" target="_blank" rel="noopener noreferrer" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" style="text-transform: none; font-weight: 600;">
+                <a href="https://novu.works?skipIntro=1#projects" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent np-btn-home" style="text-transform: none; font-weight: 600;">
                     &larr; Return to novu.works
                 </a>
             </div>
@@ -211,5 +211,6 @@
         document.getElementById('invoice-amount').addEventListener('input', updateCalc);
         document.getElementById('btn-recalc').addEventListener('click', updateCalc);
     </script>
+    <script src="../novu-intro.js" data-project="bizpay" defer></script>
 </body>
 </html>

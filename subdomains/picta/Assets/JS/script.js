@@ -638,8 +638,19 @@
     }
 
     // Sample test plate button
+    const btnUseSamplePlate = document.getElementById('btn-use-sample-plate');
+    if (btnUseSamplePlate) {
+      btnUseSamplePlate.addEventListener('click', () => {
+        if (cameraStatusOverlay) cameraStatusOverlay.style.display = 'none';
+        stopCamera();
+        drawIshiharaTestPlate();
+        showToast('Loaded Ishihara Test Plate Demo #74');
+      });
+    }
+
     if (btnSampleImage) {
       btnSampleImage.addEventListener('click', () => {
+        if (cameraStatusOverlay) cameraStatusOverlay.style.display = 'none';
         stopCamera();
         drawIshiharaTestPlate();
         showToast('Loaded Ishihara Test Plate #74');

@@ -61,6 +61,17 @@
       if (location.hostname.endsWith('novu.works')) {
         document.cookie = 'color-scheme=' + theme + '; path=/; domain=.novu.works; max-age=31536000; SameSite=Lax';
       }
+      // Update internal relative page links to preserve current theme
+      var internalLinks = document.querySelectorAll('a[href$=".html"]');
+      internalLinks.forEach(function (link) {
+        try {
+          var rawHref = link.getAttribute('href');
+          if (rawHref && rawHref.indexOf('http') !== 0) {
+            var baseHref = rawHref.split('?')[0];
+            link.setAttribute('href', baseHref + '?theme=' + theme);
+          }
+        } catch (_) {}
+      });
     } catch (_) {}
 
     document.documentElement.setAttribute('data-theme', theme);
@@ -802,8 +813,39 @@
     '.novuintro-btn-secondary:hover { background: rgba(255, 255, 255, 0.12); color: #ffffff; border-color: rgba(255, 255, 255, 0.3); }',
     ':root[data-theme="light"] .novuintro-btn-secondary, html.light-theme .novuintro-btn-secondary { background: rgba(15, 23, 42, 0.05) !important; border-color: rgba(15, 23, 42, 0.15) !important; color: #334155 !important; }',
     '@media (max-width: 600px) {',
+    '  #novu-platform-topbar { padding: 0 8px; font-size: 10px; height: 38px; max-width: 100vw; overflow: hidden; }',
+    '  body { margin-top: 38px !important; }',
+    '  .np-left { flex: 1; min-width: 0; overflow: hidden; margin-right: 4px; }',
+    '  .np-right { flex-shrink: 0; gap: 4px; }',
     '  .np-name { display: none; }',
-    '  .novuintro-metrics-grid, .nps-metrics-grid { grid-template-columns: repeat(2, 1fr); }',
+    '  .np-btn-blueprint { display: none; }',
+    '  .np-btn-github { display: none; }',
+    '  .np-btn-home { font-size: 10px; padding: 3px 6px; white-space: nowrap; }',
+    '  .np-theme-toggle-btn { padding: 3px 7px; font-size: 9.5px; white-space: nowrap; }',
+    '  .np-badge { font-size: 8.5px; letter-spacing: 0.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }',
+    '  .np-dot { flex-shrink: 0; }',
+    '  .novuintro-card, .nps-card, #novuintro-card {',
+    '    max-height: 88dvh !important;',
+    '    max-height: 88vh !important;',
+    '    overflow-y: auto !important;',
+    '    -webkit-overflow-scrolling: touch !important;',
+    '    padding: 16px 14px 14px !important;',
+    '    margin: 8px !important;',
+    '    border-radius: 18px !important;',
+    '  }',
+    '  .nps-header-bar { margin-bottom: 10px; }',
+    '  .nps-title { font-size: 16px; margin-bottom: 4px; }',
+    '  .nps-role { font-size: 10.5px; margin-bottom: 10px; }',
+    '  .nps-brief-box { padding: 8px 10px; margin-bottom: 10px; }',
+    '  .nps-brief-text { font-size: 11px; line-height: 1.45; }',
+    '  .novuintro-metrics-grid, .nps-metrics-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; margin-bottom: 10px !important; }',
+    '  .nps-metric-pill { padding: 6px 4px !important; }',
+    '  .nps-metric-num { font-size: 12px !important; }',
+    '  .nps-metric-label { font-size: 8.5px !important; }',
+    '  .nps-progress-container { margin-bottom: 6px !important; }',
+    '  .nps-telemetry-row { margin-bottom: 10px !important; font-size: 8.5px !important; }',
+    '  .nps-enter-btn { padding: 10px 14px; font-size: 11.5px; }',
+    '  .nps-blueprint-btn { padding: 8px 12px; font-size: 10.5px; }',
     '  .novuintro-actions { flex-direction: column; }',
     '}'
   ].join('\n');
@@ -1051,7 +1093,18 @@
   window.applyNovuTheme = applyNovuTheme;
   window.toggleNovuTheme = toggleNovuTheme;
 
-  // Execute Splash Screen on entrance (cleanly dismissible with zero blocking)
-  showProjectSplashScreen();
+  // Execute Splash Screen on entrance (once per session per project so internal multi-page navigation doesn't re-trigger)
+  var splashSessionKey = 'novu_splash_seen_' + projectId;
+  var forceSplash = urlParams.get('splash') === '1';
+  var hasSeenSplash = false;
+  try {
+    hasSeenSplash = sessionStorage.getItem(splashSessionKey) === '1';
+  } catch (_) {}
+
+  if (!hasSeenSplash || forceSplash) {
+    showProjectSplashScreen(function () {
+      try { sessionStorage.setItem(splashSessionKey, '1'); } catch (_) {}
+    });
+  }
 
 })();

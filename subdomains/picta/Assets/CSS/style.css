@@ -45,8 +45,8 @@ html, body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  height: calc(100vh - 42px);
+  height: calc(100dvh - 42px);
   position: relative;
   overflow: hidden;
   background: #000;
@@ -615,13 +615,14 @@ html, body {
 
 .picta-page-container {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: calc(100vh - 42px);
+  height: calc(100dvh - 42px);
   background: var(--picta-bg);
   color: var(--picta-text);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .page-header {
@@ -830,3 +831,101 @@ html, body {
 .cvd-info-card strong {
   color: #60a5fa;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Picta Light Mode Theme Support
+   ───────────────────────────────────────────────────────────── */
+:root[data-theme="light"], html.light-theme {
+  --picta-bg: #f8fafc;
+  --picta-surface: #ffffff;
+  --picta-card-bg: rgba(255, 255, 255, 0.92);
+  --picta-border: rgba(15, 23, 42, 0.14);
+  --picta-text: #0f172a;
+  --picta-text-muted: #475569;
+}
+:root[data-theme="light"] .picta-header, html.light-theme .picta-header,
+:root[data-theme="light"] .page-header, html.light-theme .page-header,
+:root[data-theme="light"] .filter-carousel-wrapper, html.light-theme .filter-carousel-wrapper,
+:root[data-theme="light"] .picta-bottom-bar, html.light-theme .picta-bottom-bar {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(15, 23, 42, 0.12);
+}
+:root[data-theme="light"] .brand-name, html.light-theme .brand-name,
+:root[data-theme="light"] .color-name, html.light-theme .color-name,
+:root[data-theme="light"] .setting-info h4, html.light-theme .setting-info h4,
+:root[data-theme="light"] .snapshot-color-chip, html.light-theme .snapshot-color-chip {
+  color: #0f172a;
+}
+:root[data-theme="light"] .icon-btn, html.light-theme .icon-btn {
+  background: rgba(15, 23, 42, 0.05);
+  border-color: rgba(15, 23, 42, 0.15);
+  color: #1e293b;
+}
+:root[data-theme="light"] .spec-pill, html.light-theme .spec-pill {
+  background: rgba(15, 23, 42, 0.06);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #334155;
+}
+:root[data-theme="light"] .filter-pill:not(.active), html.light-theme .filter-pill:not(.active) {
+  background: rgba(15, 23, 42, 0.05);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #334155;
+}
+:root[data-theme="light"] .nav-tab-btn.active, html.light-theme .nav-tab-btn.active,
+:root[data-theme="light"] .nav-tab-btn:hover, html.light-theme .nav-tab-btn:hover {
+  color: #2563eb;
+}
+:root[data-theme="light"] .cvd-info-card, html.light-theme .cvd-info-card {
+  color: #334155;
+  background: rgba(59, 130, 246, 0.06);
+}
+:root[data-theme="light"] .cvd-info-card strong, html.light-theme .cvd-info-card strong {
+  color: #1d4ed8;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Picta Mobile Viewport & Touch Ergonomics
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .picta-app-container, .picta-page-container {
+    height: calc(100vh - 38px);
+    height: calc(100dvh - 38px);
+  }
+  .color-inspector-card {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    gap: 10px;
+    max-width: calc(100% - 16px);
+  }
+  .swatch-circle {
+    width: 38px;
+    height: 38px;
+  }
+  .color-name {
+    font-size: 14px;
+  }
+  .spec-pill {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  .picta-bottom-bar {
+    height: 68px;
+    padding: 0 16px;
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+  }
+  .shutter-btn {
+    width: 56px;
+    height: 56px;
+  }
+  .shutter-inner {
+    width: 44px;
+    height: 44px;
+  }
+  .filter-carousel-wrapper {
+    bottom: 74px;
+  }
+}
+

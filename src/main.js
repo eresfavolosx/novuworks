@@ -427,10 +427,16 @@ class FabianPortfolioApp {
 
     this.dismissLoadingScreen = dismiss;
 
-    // Check if returning from a subdomain or skipIntro requested
+    // Check if skipIntro was explicitly requested in URL query
     try {
       const p = new URLSearchParams(window.location.search);
-      if (p.get('skipIntro') === '1' || window.location.hash.includes('projects')) {
+      if (p.get('skipIntro') === '1') {
+        p.delete('skipIntro');
+        const cleanQuery = p.toString() ? '?' + p.toString() : '';
+        const cleanUrl = window.location.pathname + cleanQuery + window.location.hash;
+        try {
+          window.history.replaceState({}, '', cleanUrl);
+        } catch (_) {}
         dismiss();
         return;
       }
@@ -462,14 +468,14 @@ class FabianPortfolioApp {
       }
     };
 
-    // Snappy, cinematic progress counter (~2400ms) showcasing identity & vector signature sign-off
+    // Cinematic progress counter (~2600ms) showcasing identity & vector signature sign-off
     const startTime = performance.now();
-    const duration = 2400;
+    const duration = 2600;
 
     // Safety timeout ensures dismissal even if RAF is throttled or suspended
     this.loadingSafetyTimer = setTimeout(() => {
       dismiss();
-    }, 6000);
+    }, 7000);
 
     const steps = [
       { at: 0.05, text: 'QUANTUM PARTICLES // NOVUWORKS MATRIX' },
@@ -501,10 +507,10 @@ class FabianPortfolioApp {
         if (percentage) percentage.textContent = '100%';
         loadingScreen.classList.add('is-ready');
 
-        // Snappy dwell time (900ms) before smooth auto-dismissal into portfolio
+        // Snappy dwell time (1200ms) before smooth auto-dismissal into portfolio
         this.loadingAutoDismissTimer = setTimeout(() => {
           dismiss();
-        }, 900);
+        }, 1200);
       }
     };
 
