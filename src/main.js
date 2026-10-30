@@ -1801,6 +1801,8 @@ EDUCATION & CERTIFICATIONS
     });
 
     // Live Subdomain Outbound Triggers (Splash Transition on Click with Dynamic Theme Preservation)
+    // FIX (mobile): window.open() fired after the async splash animation was blocked by
+    // mobile Safari's popup policy, so project links appeared to do nothing on phones.
     document.addEventListener('click', (e) => {
       const subBtn = e.target.closest('.subdomain-btn');
       if (subBtn) {
@@ -1812,8 +1814,29 @@ EDUCATION & CERTIFICATIONS
         } catch (_) {}
         const projId = subBtn.dataset.projectId || 'bizpay';
         e.preventDefault();
+        // Strategy:
+        //   • Touch / small screens → play splash, then navigate in the SAME tab
+        //     (never blocked; Back returns to the portfolio).  Pre-opening a blank tab
+        //     is not viable on iOS: the new tab steals focus and the backgrounded
+        //     opener's rAF-driven splash never completes, leaving a blank page.
+        //   • Desktop → play splash, then open a new tab; if the browser blocks it
+        //     (e.g. Safari's ~1s user-activation window), fall back to same-tab navigation.
+        const isTouchOrSmall =
+          window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 768;
         this.triggerProjectTransitionSplash(projId, { isLiveOutbound: true }, () => {
-          window.open(href, '_blank', 'noopener,noreferrer');
+          if (isTouchOrSmall) {
+            window.location.assign(href);
+            return;
+          }
+          // 'noopener' is omitted on purpose: it forces a null return value, which
+          // would make a blocked popup indistinguishable from a successful one.
+          // The opener reference is severed manually for the same security outcome.
+          const newWin = window.open(href, '_blank');
+          if (newWin) {
+            try { newWin.opener = null; } catch (_) {}
+          } else {
+            window.location.assign(href);
+          }
         });
       }
     });

@@ -75,7 +75,9 @@ export class SpatialCanvas3D {
       document.documentElement.classList.add('low-spec-device');
     }
 
-    const dpr = isLowEnd ? 1.0 : (isMobile ? Math.min(window.devicePixelRatio || 1, 1.25) : Math.min(window.devicePixelRatio || 1, 1.75));
+    // Mobile DPR raised to 1.5 (was 1.25) — improves crispness on Retina iOS without overloading the GPU.
+    // Desktop stays at 1.75 for high-fidelity rendering on HiDPI monitors.
+    const dpr = isLowEnd ? 1.0 : (isMobile ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(window.devicePixelRatio || 1, 1.75));
     const maxFps = isLowEnd ? 30 : 60;
 
     return {
@@ -119,7 +121,9 @@ export class SpatialCanvas3D {
         powerPreference: 'default',
         antialias: !this.deviceTier.isLowEnd,
         alpha: true,
-        preserveDrawingBuffer: true,
+        // preserveDrawingBuffer disabled — not needed (no toDataURL/screenshot usage).
+        // Keeping it true forces Safari into a slow compositing path that blurs the WebGL layer.
+        preserveDrawingBuffer: false,
         failIfMajorPerformanceCaveat: false,
       });
       this.renderer.setSize(this.width, this.height);
@@ -454,7 +458,10 @@ export class SpatialCanvas3D {
         uPointer: { value: new THREE.Vector3(0, 0, 0) },
         uOpacity: { value: this.currentTheme === 'light' ? 0.82 : 0.92 },
         uIsLight: { value: this.currentTheme === 'light' ? 1.0 : 0.0 },
-        uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) },
+        // uPixelRatio must match the renderer's pixel ratio exactly so particle sizes
+        // are correct at every DPR level.  Using the same deviceTier.dpr avoids the
+        // shader/renderer mismatch that caused blurry particles on Retina mobile Safari.
+        uPixelRatio: { value: this.deviceTier.dpr },
       },
       vertexShader: `
         uniform float uTime;
@@ -506,8 +513,14 @@ export class SpatialCanvas3D {
           if (d > 0.5) discard;
 
           // Soft luxury radial dropoff preserving true NovuWorks hue saturation without white blowout
-          float intensity = pow(1.0 - (d * 2.0), 1.5);
-          vec3 glow = mix(vColor * 0.95, vColor * 1.22, intensity);
+          // Crisp anti-aliased core + faint outer halo.  The previous pure radial
+          // falloff made every particle a fuzzy blob, which read as "blurry" on
+          // small high-DPR screens (notably mobile Safari).
+          float edgeAA = fwidth(d) * 1.5;
+          float core = 1.0 - smoothstep(0.30 - edgeAA, 0.30 + edgeAA, d);
+          float halo = pow(1.0 - (d * 2.0), 2.0) * 0.38;
+          float intensity = max(core, halo);
+          vec3 glow = mix(vColor * 0.95, vColor * 1.18, core);
           gl_FragColor = vec4(glow, vAlpha * intensity);
         }
       `,
@@ -876,6 +889,12 @@ export class SpatialCanvas3D {
       this.camera.aspect = this.width / this.height;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(this.width, this.height);
+      // Recalculate DPR on every resize (handles device rotation where the
+      // effective pixel density can change on some iOS devices).
+      const isMobileNow = this.width <= 768;
+      this.deviceTier.dpr = this.deviceTier.isLowEnd
+        ? 1.0
+        : Math.min(window.devicePixelRatio || 1, isMobileNow ? 1.5 : 1.75);
       this.renderer.setPixelRatio(this.deviceTier.dpr);
       this.updateRootGroupPosition();
       if (this.monogramMesh) {
