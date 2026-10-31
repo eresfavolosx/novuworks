@@ -405,16 +405,19 @@ body.visualizer-mode .webgl-canvas-layer:active {
 
 .brand-avatar-box {
   position: relative;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  padding: 2.2px;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  max-width: 38px;
+  border-radius: 50% !important;
+  padding: 2px;
   background: var(--nw-gradient);
   box-shadow: 0 0 16px rgba(139, 82, 200, 0.45), 0 2px 8px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
+  aspect-ratio: 1 / 1;
   transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
 }
 
@@ -423,30 +426,57 @@ body.visualizer-mode .webgl-canvas-layer:active {
   box-shadow: 0 0 24px rgba(224, 86, 106, 0.6);
 }
 
-.brand-avatar-img {
+.brand-avatar-frame {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  background: var(--bg-card);
+}
+
+.brand-avatar-img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
 }
 
 .brand-nw-badge {
   position: absolute;
   bottom: -2px;
   right: -2px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(139, 82, 200, 0.35) 0%, rgba(10, 12, 18, 0.85) 100%);
-  border: 1.5px solid rgba(224, 86, 106, 0.65);
+  width: 15px;
+  height: 15px;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, rgba(139, 82, 200, 0.45) 0%, rgba(10, 12, 18, 0.95) 100%);
+  border: 1.5px solid rgba(224, 86, 106, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 2px 8px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  overflow: hidden;
+  overflow: hidden !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+}
+
+.brand-nw-badge img {
+  width: 9px !important;
+  height: 5px !important;
+  object-fit: contain !important;
+  display: block !important;
 }
 
 .brand-nw-badge svg {
@@ -491,28 +521,37 @@ body.visualizer-mode .webgl-canvas-layer:active {
   align-items: center;
   gap: 3px;
   background: rgba(0, 0, 0, 0.45);
-  padding: 3px;
+  padding: 2px 3px;
+  height: 34px;
+  min-height: 34px;
+  max-height: 34px;
   border-radius: var(--radius-pill);
   border: 1px solid rgba(255, 255, 255, 0.05);
   flex-shrink: 1;
+  box-sizing: border-box;
 }
 
 .nav-tab {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 12px;
+  height: 28px;
+  min-height: 28px;
+  max-height: 28px;
+  padding: 0 11px;
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   border-radius: var(--radius-pill);
   color: var(--text-muted);
   font-family: var(--font-sans);
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 500;
+  line-height: 26px;
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-luxury);
   white-space: nowrap !important;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .nav-tab .tab-index {
@@ -543,20 +582,26 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0 !important;
 }
 
 .availability-pill {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
+  justify-content: center;
+  gap: 7px;
+  height: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  padding: 0 12px;
   background: rgba(74, 222, 128, 0.08);
   border: 1px solid rgba(74, 222, 128, 0.25);
   border-radius: var(--radius-pill);
   white-space: nowrap !important;
   flex-shrink: 0 !important;
+  box-sizing: border-box;
+  font-size: 11.5px;
 }
 
 .status-pulse-dot {
@@ -586,8 +631,12 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .hud-action-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 8px 14px;
+  height: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  padding: 0 12px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -601,6 +650,9 @@ body.visualizer-mode .webgl-canvas-layer:active {
   cursor: pointer;
   white-space: nowrap !important;
   flex-shrink: 0 !important;
+  box-sizing: border-box;
+  vertical-align: middle;
+  line-height: 1;
   transition: all var(--duration-fast) var(--ease-luxury);
 }
 
@@ -659,9 +711,14 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .persona-lens-pill .persona-tag {
   color: var(--gold-light);
   font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.05em;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill) !important;
+  background: rgba(212, 160, 23, 0.18);
+  border: 1px solid rgba(212, 160, 23, 0.35);
+  font-weight: 700;
 }
 
 .cmd-trigger .cmd-text-label {
@@ -671,10 +728,10 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .cmd-trigger .cmd-label {
   font-family: var(--font-mono);
   font-size: 10px;
-  padding: 1px 5px;
+  padding: 2px 7px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
+  border-radius: var(--radius-pill) !important;
   color: var(--gold-light);
   margin-left: 2px;
 }
@@ -3049,22 +3106,43 @@ pre, code {
   position: relative;
   width: 104px;
   height: 104px;
-  border-radius: 50%;
+  min-width: 104px;
+  max-width: 104px;
+  border-radius: 50% !important;
   padding: 3.5px;
   background: var(--nw-gradient);
   box-shadow: 0 0 32px rgba(139, 82, 200, 0.45), 0 8px 24px rgba(0, 0, 0, 0.6);
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.dossier-avatar {
+.dossier-avatar-frame {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  background: var(--bg-card);
+}
+
+.dossier-avatar {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
 }
 
 .dossier-nw-badge {
@@ -3073,14 +3151,16 @@ pre, code {
   right: 0px;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
+  border-radius: 50% !important;
   background: #07070a;
   border: 2px solid var(--nw-violet);
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.85);
-  overflow: hidden;
+  overflow: hidden !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
 }
 
 .dossier-nw-badge img {
@@ -4348,18 +4428,31 @@ body.tesla-mode .hud-action-btn {
   }
 
   .brand-avatar-box {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    padding: 1.5px;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    padding: 1.5px !important;
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1 !important;
     flex-shrink: 0 !important;
   }
 
   .brand-nw-badge {
-    width: 11px;
-    height: 11px;
-    bottom: -1px;
-    right: -1px;
+    width: 13px !important;
+    height: 13px !important;
+    bottom: -1px !important;
+    right: -1px !important;
+    border-radius: 50% !important;
+    clip-path: circle(50%) !important;
+    -webkit-clip-path: circle(50%) !important;
+  }
+
+  .brand-nw-badge img {
+    width: 8px !important;
+    height: 4px !important;
   }
 
   .brand-text-group {
@@ -4387,7 +4480,7 @@ body.tesla-mode .hud-action-btn {
   }
 
   .header-right {
-    gap: 4px;
+    gap: 5px;
     flex-shrink: 0 !important;
     display: flex;
     align-items: center;
@@ -4416,41 +4509,48 @@ body.tesla-mode .hud-action-btn {
   #btn-theme-toggle,
   .theme-toggle-btn,
   #btn-audio-toggle,
-  .audio-btn {
-    width: 28px !important;
-    height: 28px !important;
-    min-width: 28px !important;
-    max-width: 28px !important;
+  .audio-btn,
+  #btn-lang-toggle,
+  .lang-toggle-btn {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     padding: 0 !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     border-radius: 50% !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
+    aspect-ratio: 1 / 1 !important;
     flex-shrink: 0 !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
 
-  .theme-toggle-btn .theme-btn-label {
+  /* Hide textual labels from circular 32px icon buttons on mobile */
+  .theme-toggle-btn .theme-btn-label,
+  .audio-btn .audio-btn-label {
     display: none !important;
   }
 
-  #btn-lang-toggle,
-  .lang-toggle-btn {
-    width: 28px !important;
-    height: 28px !important;
-    min-width: 28px !important;
-    max-width: 28px !important;
-    padding: 0 !important;
-    font-size: 10px !important;
-    font-weight: 700 !important;
-    border-radius: 50% !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-sizing: border-box;
-    flex-shrink: 0 !important;
+  #btn-theme-toggle svg,
+  .theme-toggle-btn svg,
+  #btn-audio-toggle svg,
+  .audio-btn svg {
+    margin: auto !important;
+    display: block !important;
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  #btn-theme-toggle svg.hidden,
+  .theme-toggle-btn svg.hidden,
+  #btn-audio-toggle svg.hidden,
+  .audio-btn svg.hidden {
+    display: none !important;
   }
 
   #btn-lang-toggle .lang-icon,
@@ -4458,6 +4558,27 @@ body.tesla-mode .hud-action-btn {
   #btn-lang-toggle .lang-code-en:not(.active),
   #btn-lang-toggle .lang-code-es:not(.active) {
     display: none !important;
+  }
+
+  #btn-lang-toggle .lang-code-en.active,
+  #btn-lang-toggle .lang-code-es.active {
+    display: inline-block !important;
+    font-family: var(--font-mono) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+
+  .mobile-menu-toggle-btn {
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    padding: 0 11px !important;
+    border-radius: var(--radius-pill) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
   }
 
   @media (max-width: 480px) {
@@ -8109,10 +8230,16 @@ body.tesla-mode .hud-action-btn {
 .scorecard-avatar {
   width: 64px;
   height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
+  min-width: 64px;
+  max-width: 64px;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: cover !important;
   border: 2px solid transparent;
   background: linear-gradient(#111, #111) padding-box, linear-gradient(135deg, #e0566a, #8b52c8, #3d63e6) border-box;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  overflow: hidden !important;
 }
 
 .scorecard-name {
@@ -8735,12 +8862,16 @@ body.tesla-mode .hud-action-btn {
 }
 
 .post-author-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: cover !important;
   border: 1.5px solid transparent;
   background: linear-gradient(#111, #111) padding-box, linear-gradient(135deg, #e0566a, #8b52c8, #3d63e6) border-box;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  overflow: hidden !important;
 }
 
 .post-nw-dot {
@@ -9374,8 +9505,9 @@ body.tesla-mode .hud-action-btn {
   max-width: 56px;
   min-height: 56px;
   max-height: 56px;
-  border-radius: 50%;
-  flex-shrink: 0;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1 !important;
+  flex-shrink: 0 !important;
 }
 
 .llm-avatar {
@@ -9384,10 +9516,14 @@ body.tesla-mode .hud-action-btn {
   max-width: 56px !important;
   max-height: 56px !important;
   border-radius: 50% !important;
+  aspect-ratio: 1 / 1 !important;
   object-fit: cover !important;
   display: block !important;
   border: 2px solid #0a66c2;
   box-shadow: 0 0 16px rgba(10, 102, 194, 0.4);
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  overflow: hidden !important;
 }
 
 .llm-in-badge {
@@ -9590,8 +9726,8 @@ body.tesla-mode .hud-action-btn {
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill) !important;
   background: rgba(212, 160, 23, 0.22);
   color: var(--gold-light);
   font-weight: 700;
@@ -11848,18 +11984,28 @@ body.visualizer-mode #toast-banner {
   position: relative;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
+  min-width: 48px;
+  max-width: 48px;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1 !important;
   padding: 2px;
   background: linear-gradient(135deg, #25D366 0%, #128C7E 50%, var(--gold-primary) 100%);
   box-shadow: 0 0 16px rgba(37, 211, 102, 0.35);
+  flex-shrink: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chat-avatar-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  overflow: hidden !important;
 }
 
 .chat-online-dot {
@@ -13454,16 +13600,25 @@ body.tesla-cockpit-active {
 .bio-avatar-box {
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
+  min-width: 44px;
+  max-width: 44px;
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1 !important;
+  overflow: hidden !important;
   border: 2px solid rgba(56, 189, 248, 0.4);
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
 }
 
 .bio-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  clip-path: circle(50%) !important;
+  -webkit-clip-path: circle(50%) !important;
+  display: block !important;
 }
 
 .bio-text-meta {
@@ -13964,15 +14119,21 @@ body.tesla-cockpit-active {
   }
 
   .brand-avatar-box {
-    width: 24px !important;
-    height: 24px !important;
-    min-width: 24px !important;
+    width: 26px !important;
+    height: 26px !important;
+    min-width: 26px !important;
+    max-width: 26px !important;
+    min-height: 26px !important;
+    max-height: 26px !important;
     padding: 1px !important;
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1 !important;
   }
 
   .brand-name {
     font-size: 10px !important;
     letter-spacing: -0.03em !important;
+    max-width: 105px !important;
   }
 
   .header-right {
@@ -13996,13 +14157,28 @@ body.tesla-cockpit-active {
     height: 26px !important;
     min-width: 26px !important;
     max-width: 26px !important;
+    min-height: 26px !important;
+    max-height: 26px !important;
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1 !important;
     flex-shrink: 0 !important;
     display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
   }
 
   #btn-lang-toggle,
   .lang-toggle-btn {
     font-size: 9.5px !important;
+  }
+
+  .mobile-menu-toggle-btn {
+    height: 26px !important;
+    min-height: 26px !important;
+    max-height: 26px !important;
+    padding: 0 8px !important;
+    border-radius: var(--radius-pill) !important;
   }
 }
 
