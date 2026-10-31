@@ -331,24 +331,28 @@ export class SpatialImmersionEngine {
   // ─────────────────────────────────────────────────────────────
   hapticTick() {
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      if (navigator.userActivation && !navigator.userActivation.hasBeenActive) return;
       try { navigator.vibrate(4); } catch (e) {}
     }
   }
 
   hapticClick() {
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      if (navigator.userActivation && !navigator.userActivation.hasBeenActive) return;
       try { navigator.vibrate(8); } catch (e) {}
     }
   }
 
   hapticSuccess() {
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      if (navigator.userActivation && !navigator.userActivation.hasBeenActive) return;
       try { navigator.vibrate([10, 30, 15]); } catch (e) {}
     }
   }
 
   hapticChime() {
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      if (navigator.userActivation && !navigator.userActivation.hasBeenActive) return;
       try { navigator.vibrate([12, 40, 16]); } catch (e) {}
     }
   }

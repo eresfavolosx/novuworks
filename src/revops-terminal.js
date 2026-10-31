@@ -163,7 +163,7 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
         <div class="revops-header">
           <div class="revops-title-group">
             <span class="revops-kicker">ENGINEERING ARTIFACT · BIG DATA & REVOPS</span>
-            <h3 class="revops-heading">Live RevOps & Telemetry Query Terminal</h3>
+            <h2 class="revops-heading">Live RevOps & Telemetry Query Terminal</h2>
             <p class="revops-sub">
               Execute live production models engineered by Fabián across Databricks, BigQuery, and enterprise AI agents.
             </p>

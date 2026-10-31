@@ -1,0 +1,27 @@
+{
+  "name": "Fabián Vélez Vicente — NovuWorks",
+  "short_name": "NovuWorks",
+  "description": "Executive portfolio and verified case studies of Fabián Vélez Vicente. Growth & Revenue Operations Analytics Lead.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050507",
+  "theme_color": "#050507",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

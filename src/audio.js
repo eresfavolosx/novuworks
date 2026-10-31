@@ -52,6 +52,7 @@ export class ExecutiveAudio {
 
   triggerHaptic(pattern = 6) {
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      if (navigator.userActivation && !navigator.userActivation.hasBeenActive) return;
       try { navigator.vibrate(pattern); } catch (e) {}
     }
   }
