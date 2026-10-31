@@ -80,6 +80,7 @@ class FabianPortfolioApp {
       ptsStatusText: document.getElementById('pts-status-text'),
       ptsStatusPct: document.getElementById('pts-status-pct'),
       topNavDrawer: document.getElementById('top-navigation-drawer'),
+      topDrawerBackdrop: document.getElementById('top-drawer-backdrop'),
       mobileMenuToggleBtn: document.getElementById('btn-mobile-menu-toggle'),
       resumeModal: document.getElementById('resume-export-modal'),
       recruiterModal: document.getElementById('recruiter-fasttrack-modal'),
@@ -1057,6 +1058,10 @@ class FabianPortfolioApp {
     if (this.dom.topNavDrawer) {
       this.dom.topNavDrawer.classList.remove('is-open');
     }
+    const backdrop = this.dom.topDrawerBackdrop || document.getElementById('top-drawer-backdrop');
+    if (backdrop) {
+      backdrop.classList.remove('is-open');
+    }
     if (this.dom.mobileMenuToggleBtn) {
       this.dom.mobileMenuToggleBtn.setAttribute('aria-expanded', 'false');
     }
@@ -1770,15 +1775,26 @@ EDUCATION & CERTIFICATIONS
       });
     });
 
-    // Mobile Top Navigation Menu Toggle (Appears smoothly from top)
+    // Mobile Top Navigation Menu Toggle (Appears smoothly from top with Frosted Backdrop Scrim)
     const mobileMenuBtn = document.getElementById('btn-mobile-menu-toggle');
     const topNavDrawer = document.getElementById('top-navigation-drawer');
+    const topDrawerBackdrop = document.getElementById('top-drawer-backdrop');
     if (mobileMenuBtn && topNavDrawer) {
       mobileMenuBtn.addEventListener('click', () => {
         const isOpen = topNavDrawer.classList.toggle('is-open');
+        if (topDrawerBackdrop) {
+          topDrawerBackdrop.classList.toggle('is-open', isOpen);
+        }
         mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
         try { audio.playClick(); } catch (_) {}
       });
+
+      if (topDrawerBackdrop) {
+        topDrawerBackdrop.addEventListener('click', () => {
+          this.closeTopNavDrawer();
+          try { audio.playClick(); } catch (_) {}
+        });
+      }
 
       window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && topNavDrawer.classList.contains('is-open')) {
@@ -1853,7 +1869,9 @@ EDUCATION & CERTIFICATIONS
       } else if (hash === 'menu' || hash === 'navigation') {
         const topNavDrawer = document.getElementById('top-navigation-drawer');
         const mobileMenuBtn = document.getElementById('btn-mobile-menu-toggle');
+        const topDrawerBackdrop = document.getElementById('top-drawer-backdrop');
         topNavDrawer?.classList.add('is-open');
+        topDrawerBackdrop?.classList.add('is-open');
         mobileMenuBtn?.setAttribute('aria-expanded', 'true');
       }
     };

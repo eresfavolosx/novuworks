@@ -4250,6 +4250,19 @@ body.tesla-mode .hud-action-btn {
     overflow: hidden !important;
     max-width: calc(100vw - 16px) !important;
     box-sizing: border-box !important;
+    background: rgba(7, 9, 14, 0.96) !important;
+    backdrop-filter: blur(32px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(190%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important;
+  }
+
+  :root[data-theme="light"] .app-header,
+  html.light-theme .app-header,
+  :root:has(> head > meta[name="color-scheme"][content="light"]) .app-header {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border: 1px solid rgba(15, 23, 42, 0.12) !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08) !important;
   }
 
   .header-left {
@@ -14216,6 +14229,36 @@ body.tesla-cockpit-active {
 
 
 /* ─────────────────────────────────────────────────────────────
+   Backdrop Scrim for Top Navigation Drawer (Deep frosted glass focus)
+   ───────────────────────────────────────────────────────────── */
+.top-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 6, 10, 0.78);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  z-index: 98;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.top-drawer-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+:root[data-theme="light"] .top-drawer-backdrop,
+html.light-theme .top-drawer-backdrop,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .top-drawer-backdrop {
+  background: rgba(15, 23, 42, 0.62);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+}
+
+/* ─────────────────────────────────────────────────────────────
    Liquid Glass Navigation Drawer (Slides Down Elegantly From Top Header)
    ───────────────────────────────────────────────────────────── */
 .top-navigation-drawer {
@@ -14226,12 +14269,12 @@ body.tesla-cockpit-active {
   max-width: 1560px;
   margin: 0 auto;
   z-index: 99;
-  background: rgba(10, 12, 18, 0.88);
-  backdrop-filter: blur(36px) saturate(190%);
-  -webkit-backdrop-filter: blur(36px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(11, 15, 23, 0.96);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(212, 175, 55, 0.28);
   border-radius: 24px;
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), 0 24px 60px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), 0 24px 60px rgba(0, 0, 0, 0.85);
   transform: translateY(-24px) scale(0.98);
   opacity: 0;
   visibility: hidden;
@@ -14248,10 +14291,24 @@ body.tesla-cockpit-active {
 
 @media (max-width: 768px) {
   .top-navigation-drawer {
-    top: 68px;
-    left: 12px;
-    right: 12px;
+    top: 66px;
+    left: 10px;
+    right: 10px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     border-radius: 20px;
+    background: #0b0f17 !important;
+    border: 1px solid rgba(212, 175, 55, 0.4) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95) !important;
+  }
+
+  :root[data-theme="light"] .top-navigation-drawer,
+  html.light-theme .top-navigation-drawer,
+  :root:has(> head > meta[name="color-scheme"][content="light"]) .top-navigation-drawer {
+    background: #ffffff !important;
+    border: 1px solid rgba(212, 175, 55, 0.45) !important;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25) !important;
   }
 }
 
@@ -14284,29 +14341,30 @@ body.tesla-cockpit-active {
   flex-direction: column;
   align-items: flex-start;
   padding: 12px 14px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
-  color: var(--text-body);
+  border-radius: 14px;
+  background: #141b26;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(20, 27, 38, 0.96) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 4px 12px rgba(0, 0, 0, 0.35);
+  color: #f8fafc;
   cursor: pointer;
   text-align: left;
   transition: all 0.25s var(--ease-luxury);
 }
 
 .top-nav-tab:hover {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
-  border-color: rgba(212, 175, 55, 0.35);
-  color: var(--titanium-white);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(20, 27, 38, 0.98) 100%);
+  border-color: rgba(212, 175, 55, 0.5);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.22), 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .top-nav-tab.active {
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(255, 255, 255, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.24) 0%, rgba(20, 27, 38, 0.98) 100%);
   border-color: var(--gold-primary);
   color: var(--gold-light);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(212, 175, 55, 0.2);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .top-nav-tab .t-index {
@@ -14322,14 +14380,15 @@ body.tesla-cockpit-active {
   font-family: var(--font-sans);
   font-size: 13.5px;
   font-weight: 700;
-  color: inherit;
+  color: #ffffff;
   margin-bottom: 2px;
 }
 
 .top-nav-tab .t-desc {
-  font-size: 10.5px;
-  color: var(--text-muted);
-  line-height: 1.25;
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
 .top-nav-subdomains-bar {
@@ -14358,11 +14417,12 @@ body.tesla-cockpit-active {
 }
 
 .t-sub-chip {
-  padding: 5px 12px;
+  padding: 6px 13px;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--titanium-white);
+  background: #141b26;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f1f5f9;
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
@@ -14370,7 +14430,7 @@ body.tesla-cockpit-active {
 }
 
 .t-sub-chip:hover {
-  background: rgba(212, 175, 55, 0.16);
+  background: rgba(212, 175, 55, 0.2);
   border-color: var(--gold-primary);
   color: #ffffff;
   transform: translateY(-1px);
@@ -14414,28 +14474,71 @@ body.tesla-cockpit-active {
 }
 
 :root[data-theme="light"] .top-navigation-drawer,
+html.light-theme .top-navigation-drawer,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .top-navigation-drawer {
-  background: rgba(255, 255, 255, 0.94);
-  border-color: rgba(15, 23, 42, 0.12);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 1), 0 20px 48px rgba(15, 23, 42, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 1), 0 20px 48px rgba(15, 23, 42, 0.18);
 }
 
 :root[data-theme="light"] .top-nav-tab,
+html.light-theme .top-nav-tab,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .top-nav-tab {
-  background: rgba(15, 23, 42, 0.03);
-  border-color: rgba(15, 23, 42, 0.08);
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .top-nav-tab .t-name,
+html.light-theme .top-nav-tab .t-name,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .top-nav-tab .t-name {
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .top-nav-tab .t-desc,
+html.light-theme .top-nav-tab .t-desc,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .top-nav-tab .t-desc {
+  color: #475569;
 }
 
 :root[data-theme="light"] .top-nav-tab:hover,
+html.light-theme .top-nav-tab:hover,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .top-nav-tab:hover {
-  background: rgba(148, 104, 0, 0.08);
-  border-color: rgba(148, 104, 0, 0.3);
+  background: #ffffff;
+  border-color: var(--gold-primary);
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.2);
 }
 
 :root[data-theme="light"] .top-nav-tab.active,
+html.light-theme .top-nav-tab.active,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .top-nav-tab.active {
-  background: rgba(148, 104, 0, 0.12);
+  background: #fffdf7;
   border-color: var(--gold-primary);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
+  color: #92400e;
+}
+
+:root[data-theme="light"] .top-nav-tab.active .t-name,
+html.light-theme .top-nav-tab.active .t-name,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .top-nav-tab.active .t-name {
+  color: #92400e;
+}
+
+:root[data-theme="light"] .t-sub-chip,
+html.light-theme .t-sub-chip,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .t-sub-chip {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .t-sub-chip:hover,
+html.light-theme .t-sub-chip:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .t-sub-chip:hover {
+  background: #e2e8f0;
+  border-color: var(--gold-primary);
+  color: #0f172a;
 }
 
 /* ─────────────────────────────────────────────────────────────
