@@ -44,7 +44,7 @@
   --platinum-dark: #d8d8de;
   --titanium-white: #ffffff;
   --text-body: #ebebf0;
-  --text-muted: #9a9aa5;
+  --text-muted: #94a3b8;
   --text-dim: #6e6e78;
 
   --accent-green: #4ade80;
@@ -197,6 +197,12 @@ body {
 /* Accessibility Focus Indicators (WCAG 2.4.7 Focus Visible) */
 :focus-visible {
   outline: 2px solid var(--gold-primary) !important;
+  outline-offset: 3px !important;
+}
+
+:root[data-theme="light"] :focus-visible,
+:root:has(> head > meta[name="color-scheme"][content="light"]) :focus-visible {
+  outline: 2px solid #0f172a !important;
   outline-offset: 3px !important;
 }
 
@@ -7863,7 +7869,7 @@ body.tesla-mode .hud-action-btn {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
   text-transform: uppercase;
 }
 
@@ -8107,7 +8113,7 @@ body.tesla-mode .hud-action-btn {
 .scorecard-contact {
   font-family: var(--font-mono, monospace);
   font-size: 11.5px;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
   margin-top: 3px;
 }
 
@@ -8583,7 +8589,7 @@ body.tesla-mode .hud-action-btn {
 
 .chip-status {
   font-size: 10.5px;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
   font-family: var(--font-mono, monospace);
 }
 
@@ -8664,7 +8670,7 @@ body.tesla-mode .hud-action-btn {
 }
 
 .feed-search-input::placeholder {
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
 }
 
 /* Post Cards */
@@ -8764,7 +8770,7 @@ body.tesla-mode .hud-action-btn {
 
 .post-timestamp-group {
   font-size: 11.5px;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
   white-space: nowrap;
 }
 
@@ -9068,7 +9074,7 @@ body.tesla-mode .hud-action-btn {
 .radar-sync-time {
   font-family: var(--font-mono, monospace);
   font-size: 10px;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
 }
 
 .radar-refresh-btn {
@@ -9131,7 +9137,7 @@ body.tesla-mode .hud-action-btn {
 }
 
 .r-news-time {
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
 }
 
 .r-news-title {
@@ -9160,7 +9166,7 @@ body.tesla-mode .hud-action-btn {
 .r-news-cat {
   font-family: var(--font-mono, monospace);
   font-size: 10px;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
   margin-top: 4px;
   display: inline-block;
 }
@@ -9288,7 +9294,7 @@ body.tesla-mode .hud-action-btn {
   background: rgba(14, 15, 22, 0.5);
   border: 1px dashed rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
 }
 
 .empty-title {
@@ -10095,7 +10101,7 @@ body.tesla-mode .hud-action-btn {
 
 .rmi-sub {
   font-size: 10.5px;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
 }
 
 .roas-copy-plan-btn {
@@ -10298,7 +10304,7 @@ body.tesla-mode .hud-action-btn {
 
 .tcm-sub {
   font-size: 10px;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
 }
 
 /* Light Mode Overrides for Telemetry */
@@ -10535,7 +10541,7 @@ html.device-eco-power * {
   font-family: var(--font-mono);
   font-size: 9.5px;
   font-weight: 600;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1px 6px;
   border-radius: 10px;
@@ -10554,7 +10560,7 @@ html.device-eco-power * {
   align-items: center;
   gap: 12px;
   font-size: 11px;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
   flex-wrap: wrap;
   padding-top: 6px;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
@@ -10841,7 +10847,7 @@ html.device-eco-power * {
   font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
   text-transform: uppercase;
 }
 
@@ -11052,7 +11058,7 @@ html.device-eco-power * {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #71717a;
+  color: var(--text-muted, #94a3b8);
   text-transform: uppercase;
 }
 

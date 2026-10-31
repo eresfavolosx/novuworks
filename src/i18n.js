@@ -1377,7 +1377,7 @@ export function updateDomTranslations(lang) {
       }
     }
     btnToggle.setAttribute('title', dict.lang_btn_title || 'Switch language / Cambiar idioma (EN / ES)');
-    btnToggle.setAttribute('aria-label', `Current language: ${lang === 'es' ? 'Español' : 'English'}. Click to switch.`);
+    btnToggle.setAttribute('aria-label', `EN / ES · ${lang === 'es' ? 'Idioma: Español. Clic para cambiar a Inglés' : 'Switch Language (Current: English)'}`);
   }
 }
 

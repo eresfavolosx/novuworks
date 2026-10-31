@@ -1063,7 +1063,7 @@ export const INTEL_POSTS = [
   <div class="ih-text">Automated agentic workflows deployed using Anthropic Claude, eliminating attribution loss and optimizing partner unit rates from $25 to $35.</div>
 </div>
 
-<h4>1. The Multi-Channel Discrepancy Trap</h4>
+<h3>1. The Multi-Channel Discrepancy Trap</h3>
 <p>When you rely on client-side pixels, iOS ATT and browser partitioning silently drop up to 35% of downstream events. If your bidding algorithm optimizes against incomplete signals, CAC inflates exponentially. We implemented server-side Conversions API (CAPI) paired with an automated divergence detection rule:</p>
 
 <pre><code class="language-typescript">// Automated CAPI / Pixel Divergence Sentinel
@@ -1073,7 +1073,7 @@ if (variance > 0.05) {
   await recalculatePartnerUnitPayout({ min: 25, target: 35 });
 }</code></pre>
 
-<h4>2. Prompt Engineering as a Media Buying Force-Multiplier</h4>
+<h3>2. Prompt Engineering as a Media Buying Force-Multiplier</h3>
 <p>Rather than waiting 2 weeks for copy revisions, we deployed custom prompt engineering frameworks mapped directly to psychological buying triggers (Problem-Aware, Solution-Aware, Risk-Averse). This <strong>tripled creative testing velocity (3x)</strong> and cut cycle time to under 4 hours.</p>
 
 <p class="intel-takeaway"><strong>Key Takeaway:</strong> Modern media buyers are not ad-click managers; they are revenue system engineers who connect server telemetry directly to product unit economics.</p>
@@ -1103,7 +1103,7 @@ if (variance > 0.05) {
     content: `
 <p>At <strong>Red Ventures (Full-Time)</strong>, analyzing organic search, content performance, and conversions across the multi-million-page <strong>edX platform</strong> required grappling with enormous, raw, imperfect telemetry datasets: <strong>over 40,000,000 user sessions</strong>.</p>
 
-<h4>The Fundamental Flaw in Out-of-the-Box GA4</h4>
+<h3>The Fundamental Flaw in Out-of-the-Box GA4</h3>
 <p>Standard analytics platforms struggle with multi-touch customer lifecycles spanning weeks between initial course research, syllabus download, and enrolled conversion. GA4 defaults to last-non-direct click, which drastically undervalues upper-funnel high-intent search content.</p>
 
 <div class="intel-highlight-card">
@@ -1111,7 +1111,7 @@ if (variance > 0.05) {
   <div class="ih-text">Baseline search lift and +19% YoY conversion gain across 1,250+ priority consolidated course pages.</div>
 </div>
 
-<h4>The Databricks SQL Touchpoint Ordering Engine</h4>
+<h3>The Databricks SQL Touchpoint Ordering Engine</h3>
 <p>We wrote custom SQL pipelines in Databricks that normalized raw event streams from scratch, building a weighted first-last touch model that properly distributed revenue attribution back into content prioritization:</p>
 
 <pre><code class="language-sql">WITH ordered_touches AS (
@@ -1150,7 +1150,7 @@ if (variance > 0.05) {
     content: `
 <p>As Founder at <strong>Viva Advertising (My Company)</strong>, managing over $2,000,000 in direct advertising spend and 4 Billion+ impressions across 150+ commercial accounts, retention was our highest-leverage growth lever. When client churn stood at a baseline of 30%, conventional advice was to "do more check-ins."</p>
 
-<h4>Detecting Buying-Committee Decay 45 Days Early</h4>
+<h3>Detecting Buying-Committee Decay 45 Days Early</h3>
 <p>B2B accounts don't churn abruptly; their buying committee quietly stops logging in, stops clicking weekly BI dashboards, and stops attending performance syncs. We united Salesforce, HubSpot, and Power BI data into a unified lakehouse and trained an account-health risk model in PySpark:</p>
 
 <pre><code class="language-python"># PySpark Buying-Committee Telemetry Decay Classifier
@@ -1194,7 +1194,7 @@ feature_matrix = account_df.join(telemetry_df, on="account_id").withColumn(
     content: `
 <p>The single greatest bottleneck in paid media scaling is creative fatigue. Winning ad hooks typically experience decay within 14–21 days on Meta and TikTok. Handing copywriters a blank brief yields 2–3 variants after a week. That tempo cannot sustain multi-million dollar annual pacing.</p>
 
-<h4>The 3-Tier Customer Awareness Prompt Architecture</h4>
+<h3>The 3-Tier Customer Awareness Prompt Architecture</h3>
 <p>We designed structured prompt frameworks that feed customer review mining, competitor angles, and target ICP objections into an automated generation pipeline:</p>
 
 <ul>
@@ -1232,7 +1232,7 @@ feature_matrix = account_df.join(telemetry_df, on="account_id").withColumn(
     content: `
 <p>At <strong>Link Puerto Rico (My Company)</strong>, powering 50+ industry workshops and 4 major conferences with over 5,000 participants and 2,000 community members, raw attendee badge scans routinely resulted in cold outreach failure. B2B sponsors demand verified decision-maker density.</p>
 
-<h4>Engineering the Event Data Layer</h4>
+<h3>Engineering the Event Data Layer</h3>
 <p>We directed a 10+ person engineering and analytics team to build, normalize, and govern <strong>100+ relational databases</strong> across 80+ partner organizations. We matched attendee registration profiles against company firmographics, funding stages, and buying committee roles.</p>
 
 <div class="intel-highlight-card">

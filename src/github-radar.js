@@ -194,7 +194,7 @@ export class GitHubRadar {
               <div class="gh-card-header">
                 <div class="gh-card-title-row">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                  <h4 class="gh-repo-name">${this.escapeHtml(repo.name)}</h4>
+                  <h3 class="gh-repo-name">${this.escapeHtml(repo.name)}</h3>
                 </div>
                 <span class="gh-badge-public">Public</span>
               </div>

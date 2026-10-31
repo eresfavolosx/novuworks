@@ -721,7 +721,7 @@ class FabianPortfolioApp {
               <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
                 ${logoSvg ? `<div class="exp-company-logo-slot">${logoSvg}</div>` : ''}
                 <div>
-                  <h4 class="exp-role">${exp.role}</h4>
+                  <h3 class="exp-role">${exp.role}</h3>
                   <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 3px;">
                     <span class="exp-company">${exp.company}</span>
                     ${exp.employmentType ? `<span class="exp-type-pill ${exp.employmentType.includes('Full-Time') || exp.employmentType.includes('Tiempo Completo') ? 'pill-fulltime' : 'pill-founder'}">${exp.employmentType}</span>` : ''}
@@ -762,7 +762,7 @@ class FabianPortfolioApp {
       this.dom.dossierEducationMount.innerHTML = `
         <div class="edu-card">
           <div style="margin-bottom: 8px;">${LOGOS.politecnica}</div>
-          <h4 class="edu-degree">${edu.degree}</h4>
+          <h3 class="edu-degree">${edu.degree}</h3>
           <span class="edu-school">${edu.institution} · ${edu.status}</span>
           <p class="edu-desc"><strong>Coursework:</strong> ${edu.coursework}</p>
         </div>
@@ -771,7 +771,7 @@ class FabianPortfolioApp {
           <div style="margin-bottom: 8px; display: flex; gap: 10px; flex-wrap: wrap;">
             ${LOGOS.powerbi}
           </div>
-          <h4 class="edu-degree">Professional Certifications & Badges</h4>
+          <h3 class="edu-degree">Professional Certifications & Badges</h3>
           <span class="edu-school">Microsoft · CompTIA · Lean Six Sigma · UPPR</span>
           <ul style="list-style: none; padding: 0; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; color: var(--text-body);">
             ${PROFILE.certifications.map((c) => `
@@ -785,7 +785,7 @@ class FabianPortfolioApp {
 
         <div class="edu-card">
           <div style="margin-bottom: 8px;">${LOGOS.stanford}</div>
-          <h4 class="edu-degree">Fellowships & Institutional Governance</h4>
+          <h3 class="edu-degree">Fellowships & Institutional Governance</h3>
           <span class="edu-school">Stanford University & UPR</span>
           <p class="edu-desc">
             <strong>Stanford University Innovation Fellows:</strong> Selected for elite design thinking and higher education innovation fellowship.<br/>
@@ -801,7 +801,7 @@ class FabianPortfolioApp {
       this.dom.dossierAwardsMount.innerHTML = PROFILE.awards.map((a) => `
         <div class="award-card">
           <div class="award-head">
-            <h4 class="award-title">${a.title}</h4>
+            <h3 class="award-title">${a.title}</h3>
             <span class="award-year">${a.year}</span>
           </div>
           <div class="award-org">${a.organization}</div>
@@ -875,7 +875,7 @@ class FabianPortfolioApp {
         <div class="proj-top-row">
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
             ${projLogo ? `<div style="height: 20px; display: inline-flex; align-items: center;">${projLogo}</div>` : ''}
-            <h4 class="proj-name">${p.name}</h4>
+            <h3 class="proj-name">${p.name}</h3>
             ${p.subdomainUrl ? `
               <span class="proj-live-badge">
                 <span class="proj-live-dot"></span>

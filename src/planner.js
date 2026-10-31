@@ -82,7 +82,7 @@ export class ArchitecturePlanner {
       <div class="planner-card glass-panel">
         <div class="planner-header">
           <div class="planner-badge">Executive Utility</div>
-          <h2 class="planner-title">System Architecture & ROI Planner</h2>
+          <h1 class="planner-title">System Architecture & ROI Planner</h1>
           <p class="planner-desc">Configure your engineering goals to calculate architectural topology, delivery velocity, and operational cost savings.</p>
         </div>
 

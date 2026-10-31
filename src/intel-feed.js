@@ -79,7 +79,7 @@ export class IntelFeed {
                 <span>Live Feed Active</span>
               </span>
             </div>
-            <h2 class="feed-main-heading">Thought Leadership & Live Industry Radar</h2>
+            <h1 class="feed-main-heading">Thought Leadership & Live Industry Radar</h1>
             <p class="feed-main-sub">
               An unconstrained, high-signal stream of growth engineering playbooks, RevOps telemetry analyses, applied AI frameworks, and real-time MarTech/AdTech industry news.
             </p>
@@ -115,7 +115,7 @@ export class IntelFeed {
           <div class="industry-pulse-ticker">
             <div class="pulse-ticker-inner">
               <span class="pulse-label">LIVE AUCTION & MARTECH TELEMETRY:</span>
-              <div class="pulse-chips-row">
+              <div class="pulse-chips-row" tabindex="0" role="region" aria-label="Live Auction and MarTech Telemetry">
                 ${INDUSTRY_PULSE_METRICS.map(
                   (m) => `
                   <div class="pulse-chip">
@@ -203,7 +203,7 @@ export class IntelFeed {
                     <span class="live-dot green"></span>
                     <span>LIVE INDUSTRY RADAR</span>
                   </span>
-                  <h3 class="radar-heading">MarTech & AdTech Stream</h3>
+                  <h2 class="radar-heading">MarTech & AdTech Stream</h2>
                   <span class="radar-sync-time">Synced: ${this.lastLiveSync}</span>
                 </div>
                 <button type="button" class="radar-refresh-btn ${this.isFetchingLiveNews ? 'spinning' : ''}" id="btn-refresh-radar" title="Fetch Latest Live News & AdTech Updates">
@@ -232,7 +232,7 @@ export class IntelFeed {
                   <span class="live-dot blue"></span>
                   <span>INFRASTRUCTURE TELEMETRY</span>
                 </span>
-                <h4 class="radar-sub-heading">MarTech & Data Stack SLA</h4>
+                <h3 class="radar-sub-heading">MarTech & Data Stack SLA</h3>
               </div>
               <div class="platform-sla-list">
                 <div class="sla-row">
@@ -276,7 +276,7 @@ export class IntelFeed {
             <!-- Executive Newsletter & Direct Connect Card -->
             <div class="radar-card newsletter-cta-card">
               <div class="nl-kicker">MONTHLY STRATEGIC BRIEFING</div>
-              <h4 class="nl-title">The Growth Engineering Memo</h4>
+              <h3 class="nl-title">The Growth Engineering Memo</h3>
               <p class="nl-desc">
                 High-leverage RevOps architectures, prompt engineering templates, and algorithmic media buying case studies sent once a month.
               </p>
@@ -328,7 +328,7 @@ export class IntelFeed {
               </div>
               <div class="post-author-meta">
                 <div class="post-author-name-row">
-                  <h3 class="post-author-name">${post.author.name}</h3>
+                  <span class="post-author-name">${post.author.name}</span>
                   <span class="post-verified-badge" title="Verified Track Record">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="#38bdf8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                   </span>
@@ -357,7 +357,7 @@ export class IntelFeed {
 
           <!-- Post Content -->
           <div class="post-body">
-            <h4 class="post-title" data-action="toggle-expand">${post.title}</h4>
+            <h2 class="post-title" data-action="toggle-expand">${post.title}</h2>
             <p class="post-summary">${post.summary}</p>
 
             ${

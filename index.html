@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <!-- MANDATORY: Declare support for both light and dark themes (modern-web-guidance) -->
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#050507" id="meta-theme-color" />
@@ -150,10 +150,10 @@
   </head>
   <body>
     <!-- Accessibility Skip Link for Keyboard & Assistive Tech Navigation (WCAG 2.4.1) -->
-    <a href="#view-core" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- 3D WebGL Canvas Layer (Direct Body Child for Seamless Stacking & Visualizer Mode) -->
-    <div id="webgl-container" class="webgl-canvas-layer"></div>
+    <div id="webgl-container" class="webgl-canvas-layer" aria-hidden="true"></div>
 
     <!-- Epic Cinematic Intro & Executive Signature Sign-Off Screen -->
     <div id="particle-loading-screen" class="particle-loading-screen epic-intro-screen" role="dialog" aria-modal="true" aria-label="Fabián Vélez Vicente Executive Intro and Sign-Off">
@@ -164,7 +164,7 @@
           <!-- Top Telemetry Header -->
           <div class="intro-telemetry-header">
             <div class="loading-brand-badge">
-              <img src="/assets/nw-mark-transparent.png" alt="NW" class="intro-nw-icon" width="22" height="11" style="object-fit: contain;" />
+              <img src="/assets/nw-mark-transparent.png" alt="" aria-hidden="true" class="intro-nw-icon" width="22" height="11" style="object-fit: contain;" />
               <span class="loading-badge-dot"></span>
               <span class="loading-badge-text">NOVU.WORKS // THE RARE HYBRID</span>
             </div>
@@ -188,7 +188,7 @@
 
           <!-- Epic Enter Button -->
           <div class="intro-action-container">
-            <button type="button" class="epic-enter-btn" id="loading-skip-btn" aria-label="Enter Novu Works Portfolio">
+            <button type="button" class="epic-enter-btn" id="loading-skip-btn" aria-label="Enter Experience · Novu Works Portfolio">
               <span class="epic-btn-glow"></span>
               <span class="epic-btn-content">
                 <span class="epic-btn-text" data-i18n="intro_enter_btn">ENTER EXPERIENCE</span>
@@ -209,7 +209,7 @@
       <div class="pts-container">
         <div class="pts-top-telemetry">
           <div class="loading-brand-badge">
-            <img src="/assets/nw-mark-transparent.png" alt="NW" class="intro-nw-icon" width="22" height="11" style="object-fit: contain;" />
+            <img src="/assets/nw-mark-transparent.png" alt="" aria-hidden="true" class="intro-nw-icon" width="22" height="11" style="object-fit: contain;" />
             <span class="loading-badge-dot"></span>
             <span class="loading-badge-text">NOVU.WORKS // SUBSYSTEM TRANSITION</span>
           </div>
@@ -241,9 +241,9 @@
         <div class="header-left">
           <a href="#" class="brand-link" id="brand-home" aria-label="Fabián Vélez Vicente Home">
             <div class="brand-avatar-box">
-              <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="brand-avatar-img" width="38" height="38" />
-              <span class="brand-nw-badge" title="NovuWorks Founder" aria-label="NovuWorks Emblem">
-                <img src="/assets/nw-mark-transparent.png" alt="NW" width="14" height="7" style="object-fit: contain;" />
+              <img src="/assets/fabian-velez.jpg" alt="" aria-hidden="true" class="brand-avatar-img" width="38" height="38" />
+              <span class="brand-nw-badge" title="NovuWorks Founder" aria-hidden="true">
+                <img src="/assets/nw-mark-transparent.png" alt="" width="14" height="7" style="object-fit: contain;" />
               </span>
             </div>
             <div class="brand-text-group">
@@ -284,14 +284,14 @@
         <!-- Right Quick Controls -->
         <div class="header-right">
           <!-- Tailored Experience Lens Indicator & Trigger -->
-          <button type="button" class="hud-action-btn persona-lens-pill" id="btn-tailor-experience" title="Tailor portfolio experience by area of interest (Click to change)" aria-label="Tailor Experience by Area of Interest">
+          <button type="button" class="hud-action-btn persona-lens-pill" id="btn-tailor-experience" title="Tailor portfolio experience by area of interest (Click to change)" aria-label="Tailor Experience: All-Round Master">
             <span class="persona-dot" aria-hidden="true">✨</span>
             <span class="persona-label">All-Round Master</span>
             <span class="persona-tag" data-i18n="tailor_tag">Tailor</span>
           </button>
 
           <!-- Executive Visitor Utilities Trigger -->
-          <button type="button" class="hud-action-btn tools-trigger-btn" id="btn-visitor-tools" title="Open Visitor Growth & Engineering Utilities (Meta CAPI, ROAS Calculator, ATS Resume Export)" aria-label="Open Visitor Utilities">
+          <button type="button" class="hud-action-btn tools-trigger-btn" id="btn-visitor-tools" title="Open Visitor Growth & Engineering Utilities (Meta CAPI, ROAS Calculator, ATS Resume Export)" aria-label="Tools · Open Visitor Growth & Engineering Utilities">
             <span class="tools-btn-icon" aria-hidden="true">🛠️</span>
             <span class="tools-btn-label" data-i18n="tools_label">Tools</span>
           </button>
@@ -303,20 +303,20 @@
           </div>
 
           <!-- Puerto Rico Cultural Roots & Live Open-Meteo Weather Badge -->
-          <button type="button" class="hud-action-btn pr-roots-btn" id="btn-pr-roots" title="San Juan, Puerto Rico (18.4655° N, 66.1057° W) · Click for Coquí chime & live atmospheric report" aria-label="San Juan, Puerto Rico Roots · Click for Coquí chime">
+          <button type="button" class="hud-action-btn pr-roots-btn" id="btn-pr-roots" title="San Juan, Puerto Rico (18.4655° N, 66.1057° W) · Click for Coquí chime & live atmospheric report" aria-label="San Juan, PR · Puerto Rico Heritage (Click for Coquí chime)">
             <span class="pr-flag-emoji" aria-hidden="true">🇵🇷</span>
             <span class="pr-loc-label" data-i18n="pr_roots_label">San Juan, PR</span>
             <span class="pr-geo-coords" id="pr-weather-badge">18°N 66°W</span>
           </button>
 
           <!-- Background 3D Visualizer Mode Toggle Button -->
-          <button type="button" class="hud-action-btn visualizer-btn" id="btn-toggle-visualizer" title="View 3D Background Visualization (Zen Mode · Press ESC to exit)" aria-label="View 3D Background Visualization">
+          <button type="button" class="hud-action-btn visualizer-btn" id="btn-toggle-visualizer" title="View 3D Background Visualization (Zen Mode · Press ESC to exit)" aria-label="View 3D · Background Visualization">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
             <span class="visualizer-btn-label" data-i18n="visualizer_label">View 3D</span>
           </button>
 
           <!-- Bilingual Language Switcher (EN / ES Toggle · English Default) -->
-          <button type="button" class="hud-action-btn lang-toggle-btn" id="btn-lang-toggle" title="Switch language / Cambiar idioma (EN / ES)" aria-label="Switch language (Current: English)">
+          <button type="button" class="hud-action-btn lang-toggle-btn" id="btn-lang-toggle" title="Switch language / Cambiar idioma (EN / ES)" aria-label="EN / ES · Switch Language (Current: English)">
             <span class="lang-icon" aria-hidden="true">🌐</span>
             <span class="lang-code-en active">EN</span>
             <span class="lang-sep">/</span>
@@ -324,28 +324,28 @@
           </button>
 
           <!-- Theme Switcher (Dark / Light Mode) -->
-          <button type="button" class="hud-action-btn theme-toggle-btn" id="btn-theme-toggle" title="Switch Theme (Dark / Light)" aria-label="Toggle Dark and Light Mode">
+          <button type="button" class="hud-action-btn theme-toggle-btn" id="btn-theme-toggle" title="Switch Theme (Dark / Light)" aria-label="Theme · Toggle Dark and Light Mode">
             <svg class="icon-theme-sun hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
             <svg class="icon-theme-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             <span class="theme-btn-label" data-i18n="theme_label">Theme</span>
           </button>
 
           <!-- Command Palette Trigger -->
-          <button type="button" class="hud-action-btn cmd-trigger" id="btn-cmd-palette" aria-label="Open Command Palette (Cmd + K)">
+          <button type="button" class="hud-action-btn cmd-trigger" id="btn-cmd-palette" aria-label="Search ⌘K · Open Command Palette">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             <span class="cmd-text-label" data-i18n="cmd_text_label">Search</span>
             <span class="cmd-label">⌘K</span>
           </button>
 
           <!-- Audio Controls (Muted by Default) -->
-          <button type="button" class="hud-action-btn audio-btn" id="btn-audio-toggle" title="Unmute Tactile Audio (Muted by Default)" aria-label="Toggle Audio">
+          <button type="button" class="hud-action-btn audio-btn" id="btn-audio-toggle" title="Unmute Tactile Audio (Muted by Default)" aria-label="Sound · Toggle Tactile Audio Effects">
             <svg class="icon-sound-on hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
             <svg class="icon-sound-off" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
             <span class="audio-btn-label" data-i18n="audio_label">Sound</span>
           </button>
 
           <!-- Mobile Menu Trigger Button (Menu Appears From The Top) -->
-          <button type="button" class="hud-action-btn mobile-menu-toggle-btn" id="btn-mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false" title="Open Navigation Menu">
+          <button type="button" class="hud-action-btn mobile-menu-toggle-btn" id="btn-mobile-menu-toggle" aria-label="Menu · Toggle Navigation Drawer" aria-expanded="false" title="Open Navigation Menu">
             <span class="menu-icon-bars" aria-hidden="true">
               <span class="bar bar-1"></span>
               <span class="bar bar-2"></span>
@@ -434,7 +434,7 @@
       </nav>
 
       <!-- Main Interactive Viewport Container -->
-      <main class="main-viewport">
+      <main class="main-viewport" id="main-content" tabindex="-1">
 
         <!-- View 1: Luxury Editorial Overview -->
         <section id="view-core" class="viewport-view active">
@@ -579,7 +579,7 @@
           <div class="case-studies-container">
             <div class="catalog-header">
               <span class="catalog-kicker" data-i18n="catalog_kicker">VERIFIED MILESTONES & ARCHITECTURE</span>
-              <h2 class="catalog-title" data-i18n="catalog_title">Business Engineering Case Studies</h2>
+              <h1 class="catalog-title" data-i18n="catalog_title">Business Engineering Case Studies</h1>
               <p class="catalog-sub" data-i18n="catalog_sub">Not static ad creatives—quantitative systems engineered to suppress CAC, accelerate iteration velocity, and scale revenue predictably.</p>
             </div>
             <div class="case-studies-grid" id="case-studies-mount"></div>
@@ -591,7 +591,7 @@
           <div class="case-studies-container">
             <div class="catalog-header">
               <span class="catalog-kicker" data-i18n="projects_kicker">VERIFIED PRODUCTION CODEBASES & CLOUD DEPLOYMENTS</span>
-              <h2 class="catalog-title" data-i18n="projects_title">Shipped Systems & Live Subdomains</h2>
+              <h1 class="catalog-title" data-i18n="projects_title">Shipped Systems & Live Subdomains</h1>
               <p class="catalog-sub" data-i18n="projects_sub">Production-deployed systems engineered and architected by Fabián—running live on *.novu.works with direct open-source GitHub repositories.</p>
             </div>
 
@@ -649,7 +649,7 @@
               </div>
               <div class="dossier-meta">
                 <div class="dossier-tag" id="dossier-tag-mount">Technical Product Manager & Performance Marketing Lead</div>
-                <h2 class="dossier-name">Fabián Vélez Vicente</h2>
+                <h1 class="dossier-name">Fabián Vélez Vicente</h1>
                 <p class="dossier-tagline" id="dossier-summary-mount">
                   8+ years sitting at the intersection of ad-tech infrastructure, AI automation, and high-ROI media buying. Proven track record directing Agile teams, querying 40M+ sessions in Databricks SQL, and scaling agentic workflows across a $1B+ portfolio.
                 </p>
@@ -707,7 +707,7 @@
 
             <!-- Verified Professional Experience Timeline (Dynamically lenses) -->
             <div class="dossier-section">
-              <h3 class="section-heading" data-i18n="section_exp_heading">Verified Professional Experience</h3>
+              <h2 class="section-heading" data-i18n="section_exp_heading">Verified Professional Experience</h2>
               <div class="experience-timeline" id="dossier-experience-mount"></div>
             </div>
 
@@ -715,7 +715,7 @@
             <div class="dossier-section">
               <div class="section-title-row">
                 <div>
-                  <h3 class="section-heading" data-i18n="section_proj_heading">Verified Signature Engineering & Crisis Impact Projects</h3>
+                  <h2 class="section-heading" data-i18n="section_proj_heading">Verified Signature Engineering & Crisis Impact Projects</h2>
                   <p class="section-subheading">Production cloud architectures, WebRTC Daltonization, B2B fintech, and contactless NFC systems.</p>
                 </div>
                 <button type="button" class="action-pill-btn" id="btn-dossier-particle-showcase" title="Inspect Interactive NovuWorks Particle Matrix & 3D Visualizer">
@@ -729,7 +729,7 @@
             <div class="dossier-section github-radar-section">
               <div class="section-title-row">
                 <div>
-                  <h3 class="section-heading" data-i18n="section_github_heading">Live GitHub Codebase Radar & Open Source Telemetry</h3>
+                  <h2 class="section-heading" data-i18n="section_github_heading">Live GitHub Codebase Radar & Open Source Telemetry</h2>
                   <p class="section-subheading" data-i18n="section_github_sub" data-i18n-html="true">Live REST sync via GitHub API (<code>@eresfavolosx</code>) · Real-time repository tracking, commit activity & open-source code.</p>
                 </div>
                 <a href="https://github.com/eresfavolosx" target="_blank" rel="noopener noreferrer" class="action-pill-btn" title="View Fabian's full GitHub profile">
@@ -742,19 +742,19 @@
 
             <!-- Education & Accredited Certifications -->
             <div class="dossier-section">
-              <h3 class="section-heading" data-i18n="section_edu_heading">Education & Accredited Certifications</h3>
+              <h2 class="section-heading" data-i18n="section_edu_heading">Education & Accredited Certifications</h2>
               <div class="education-grid" id="dossier-education-mount"></div>
             </div>
 
             <!-- Honors, Awards & Civic Leadership -->
             <div class="dossier-section">
-              <h3 class="section-heading" data-i18n="section_awards_heading">Honors, Awards & Civic Leadership</h3>
+              <h2 class="section-heading" data-i18n="section_awards_heading">Honors, Awards & Civic Leadership</h2>
               <div class="awards-grid" id="dossier-awards-mount"></div>
             </div>
 
             <!-- Core Competency Matrix -->
             <div class="dossier-section">
-              <h3 class="section-heading" data-i18n="section_matrix_heading">Core Competency Matrix</h3>
+              <h2 class="section-heading" data-i18n="section_matrix_heading">Core Competency Matrix</h2>
               <div class="competency-table-wrapper" id="competency-matrix-mount"></div>
             </div>
 
@@ -1281,7 +1281,7 @@
 
       <!-- Persistent Floating WhatsApp Concierge Pill -->
       <aside class="floating-whatsapp-badge" id="floating-whatsapp-badge" role="complementary" aria-label="Direct WhatsApp Concierge">
-        <button type="button" class="f-wa-btn" id="btn-floating-wa" title="Chat directly with Fabián on WhatsApp" aria-label="Chat directly on WhatsApp">
+        <button type="button" class="f-wa-btn" id="btn-floating-wa" title="Chat directly with Fabián on WhatsApp">
           <span class="f-wa-pulse-ring" aria-hidden="true"></span>
           <svg class="f-wa-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
