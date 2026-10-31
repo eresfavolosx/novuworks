@@ -4783,19 +4783,90 @@ body.tesla-mode .hud-action-btn {
     height: 16px;
   }
 
-  /* 7. Executive Modals Responsive Polish */
+  /* 7. Executive Modals Responsive Polish & Readability Across All Dialogs */
+  .executive-dialog,
   .resume-modal,
-  .recruiter-modal {
-    width: 96vw;
-    max-height: 95vh;
-    border-radius: 16px;
+  .recruiter-modal,
+  .platform-landing-dialog,
+  .survey-modal,
+  .tools-modal,
+  .chat-modal {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    max-height: 94vh !important;
+    height: auto !important;
+    border-radius: 20px !important;
+    margin: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
   }
 
   .resume-modal-header {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 14px 16px;
-    gap: 10px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 14px 16px 10px !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-title-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-title-group .modal-kicker {
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    margin-bottom: 2px;
+  }
+
+  .modal-title-group .modal-heading {
+    font-size: 16px;
+    line-height: 1.25;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+    word-break: break-word;
+  }
+
+  .modal-lens-selector {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none;
+    gap: 6px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-top: 4px !important;
+    padding: 2px 2px 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  .modal-lens-selector::-webkit-scrollbar {
+    display: none;
+  }
+
+  .modal-lens-btn {
+    flex: 0 0 auto;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    line-height: 1.2;
   }
 
   .resume-modal-actions {
@@ -4803,28 +4874,280 @@ body.tesla-mode .hud-action-btn {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    gap: 6px;
+    gap: 8px;
+    box-sizing: border-box;
   }
 
   .resume-modal-actions .action-pill-btn {
     flex: 1;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    padding: 8px 10px;
+    gap: 6px;
+    padding: 8px 12px;
     font-size: 11px;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    text-decoration: none !important;
+    text-align: center;
+    box-sizing: border-box;
+    white-space: nowrap;
   }
 
-  .modal-lens-selector {
+  .resume-modal-actions .dialog-close-btn {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
     display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    width: 100%;
-    margin-top: 6px;
+    align-items: center;
+    justify-content: center;
   }
 
-  .modal-lens-btn {
+  .dialog-header {
+    padding: 14px 16px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .resume-modal-scrollable,
+  .dialog-body,
+  .platform-landing-content,
+  .survey-modal-body,
+  .chat-modal-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding: 16px 14px !important;
+    max-height: none !important;
+    box-sizing: border-box;
+  }
+
+  /* Recruiter 60s Scorecard Mobile Adaptations */
+  .scorecard-top-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  .scorecard-avatar-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .scorecard-avatar {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    border-radius: 50%;
+  }
+
+  .scorecard-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .scorecard-name {
+    font-size: 19px;
+    line-height: 1.2;
+    margin-bottom: 3px;
+    text-align: center;
+  }
+
+  .scorecard-roles {
+    font-size: 12px;
+    line-height: 1.35;
+    margin-top: 2px;
+    text-align: center;
+  }
+
+  .scorecard-contact {
+    font-size: 11px;
+    line-height: 1.45;
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    word-break: break-word;
+    text-align: center;
+  }
+
+  .scorecard-workauth-badge {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
     font-size: 10.5px;
-    padding: 4px 8px;
+    line-height: 1.45;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-align: center;
+    white-space: normal;
+    word-break: normal;
+  }
+
+  .scorecard-badge-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  :root[data-theme="light"] .scorecard-badge-box,
+  html.light-theme .scorecard-badge-box,
+  :root:has(> head > meta[name="color-scheme"][content="light"]) .scorecard-badge-box {
+    background: #fdfbf7;
+    border-color: rgba(148, 104, 0, 0.25);
+  }
+
+  .scorecard-verdict {
+    font-size: 11px;
+    padding: 0;
+    background: none;
+    border: none;
+    font-weight: 800;
+  }
+
+  .scorecard-grade {
+    font-size: 11.5px;
+    font-weight: 700;
+  }
+
+  .recruiter-modal-logos {
+    padding: 10px 0;
+  }
+
+  .modal-logos-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px;
+    padding: 4px 2px;
+  }
+
+  .modal-logos-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .modal-logo-cell {
     flex: 0 0 auto;
+    padding: 6px 10px;
+  }
+
+  .scorecard-proofs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 14px 0;
+  }
+
+  .score-proof-card {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .score-metric {
+    font-size: 26px;
+    font-weight: 900;
+  }
+
+  .score-title {
+    font-size: 13.5px;
+    margin-top: 4px;
+  }
+
+  .score-desc {
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+
+  .scorecard-checklist-box {
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+  }
+
+  .checklist-title {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .checklist-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-item {
+    font-size: 11px;
+    line-height: 1.4;
+    gap: 6px;
+  }
+
+  .scorecard-footer-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 8px;
+    padding-top: 10px;
+  }
+
+  .scorecard-footer-cta .luxury-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 12.5px;
+    border-radius: var(--radius-pill);
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  /* Platform Landing Dialog Mobile Adaptations */
+  .pl-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding-bottom: 16px;
+  }
+
+  .pl-title {
+    font-size: 20px;
+    line-height: 1.25;
+  }
+
+  .pl-actions-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .pl-actions-row .luxury-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
   }
 }
 
