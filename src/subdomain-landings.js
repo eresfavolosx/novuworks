@@ -486,7 +486,7 @@ function renderTestBenchHtml(type) {
     return `
       <div class="tb-module tb-jobhelper">
         <label class="tb-label" for="tb-jd-select">Select Technical Target Job Description:</label>
-        <select id="tb-jd-select" class="tb-select">
+        <select id="tb-jd-select" class="tb-select" aria-label="Select Technical Target Job Description">
           <option value="lead">Senior AI & Performance Marketing Automation Engineer (Money Group)</option>
           <option value="seo">Growth & Revenue Analytics Lead · edX Platform (Red Ventures)</option>
           <option value="architect">Autonomous Systems & Enterprise SDLC Architect</option>
@@ -496,20 +496,20 @@ function renderTestBenchHtml(type) {
           <button type="button" class="tb-btn" id="btn-run-jobhelper-eval">Run 100-Point Rubric Evaluation</button>
         </div>
 
-        <div class="tb-output-panel" id="tb-jobhelper-output">
+        <div class="tb-output-panel" id="tb-jobhelper-output" aria-live="polite">
           <div class="tb-score-banner">
             <span class="tb-score-label">MATCH SCORE:</span>
-            <span class="tb-score-val" id="jh-score-val">96 / 100 [GRADE A+]</span>
+            <span class="tb-score-val" id="jh-score-val">96.5 / 100 [GRADE A+ · STRONG FIT]</span>
           </div>
-          <div class="tb-rubric-breakdown">
-            <div class="tb-rubric-row"><span>Technical Core & APIs:</span><strong>35 / 35 pts (100%)</strong></div>
-            <div class="tb-rubric-row"><span>Scale (40M+ sessions, $10M+ pipeline):</span><strong>25 / 25 pts (100%)</strong></div>
-            <div class="tb-rubric-row"><span>Autonomous Agent Workflows (20+ skills):</span><strong>20 / 20 pts (100%)</strong></div>
-            <div class="tb-rubric-row"><span>Leadership & Degrees (Stanford / 4.0 GPA):</span><strong>16 / 20 pts (80%)</strong></div>
+          <div class="tb-rubric-breakdown" id="jh-breakdown">
+            <div class="tb-rubric-row"><span>Technical Core & APIs:</span><strong id="jh-score-tech">35 / 35 pts (100%)</strong></div>
+            <div class="tb-rubric-row"><span>Scale (40M+ sessions, $10M+ pipeline):</span><strong id="jh-score-scale">25 / 25 pts (100%)</strong></div>
+            <div class="tb-rubric-row"><span>Autonomous Agent Workflows (20+ skills):</span><strong id="jh-score-agents">20 / 20 pts (100%)</strong></div>
+            <div class="tb-rubric-row"><span>Leadership & Degrees (Stanford / 4.0 GPA):</span><strong id="jh-score-leadership">16.5 / 20 pts (82.5%)</strong></div>
           </div>
           <div class="tb-json-preview">
             <span class="tb-json-tag">STRUCTURED JSON FEEDBACK:</span>
-            <pre><code>{
+            <pre><code id="jh-json-code">{
   "status": "APPROVED_HIGH_FIT",
   "match_score": 96.5,
   "telemetry_verification": "100% RECONCILED",
@@ -751,16 +751,97 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
 
   // JobHelper Evaluator
   const runJhBtn = modalEl.querySelector('#btn-run-jobhelper-eval');
-  if (runJhBtn) {
+  const jdSelect = modalEl.querySelector('#tb-jd-select');
+  if (runJhBtn && jdSelect) {
+    const JOB_PROFILES = {
+      lead: {
+        score: '96.5 / 100 [GRADE A+ · STRONG FIT]',
+        tech: '35 / 35 pts (100%)',
+        scale: '25 / 25 pts (100%)',
+        agents: '20 / 20 pts (100%)',
+        leadership: '16.5 / 20 pts (82.5%)',
+        json: {
+          role: 'Senior AI & Performance Marketing Automation Engineer',
+          status: 'APPROVED_HIGH_FIT',
+          match_score: 96.5,
+          telemetry_verification: '100% RECONCILED',
+          key_alignments: [
+            'Meta Conversions API & autonomous server-side tracking',
+            'Multi-model LLM evaluation rubrics & API pipelines',
+            'High-volume data transformation & attribution modeling'
+          ],
+          recommended_action: 'FAST_TRACK_OFFER'
+        }
+      },
+      seo: {
+        score: '98.0 / 100 [GRADE A+ · EXCEPTIONAL FIT]',
+        tech: '34 / 35 pts (97.1%)',
+        scale: '25 / 25 pts (100%)',
+        agents: '19 / 20 pts (95%)',
+        leadership: '20 / 20 pts (100%)',
+        json: {
+          role: 'Growth & Revenue Analytics Lead · edX Platform',
+          status: 'APPROVED_EXCEPTIONAL_FIT',
+          match_score: 98.0,
+          telemetry_verification: '100% RECONCILED',
+          key_alignments: [
+            '40M+ organic sessions & enterprise revenue operations',
+            'Cross-functional executive stakeholder management',
+            'Algorithmic content modeling & technical SEO architecture'
+          ],
+          recommended_action: 'IMMEDIATE_EXECUTIVE_INTERVIEW'
+        }
+      },
+      architect: {
+        score: '95.0 / 100 [GRADE A · STRONG FIT]',
+        tech: '35 / 35 pts (100%)',
+        scale: '23 / 25 pts (92%)',
+        agents: '20 / 20 pts (100%)',
+        leadership: '17 / 20 pts (85%)',
+        json: {
+          role: 'Autonomous Systems & Enterprise SDLC Architect',
+          status: 'APPROVED_HIGH_FIT',
+          match_score: 95.0,
+          telemetry_verification: '100% RECONCILED',
+          key_alignments: [
+            'Deterministic scoring scaffolds & agentic pair programming',
+            'Cross-platform Vite/Three.js/Firebase real-time systems',
+            'Stanford CS credentialing & full-stack lifecycle ownership'
+          ],
+          recommended_action: 'FAST_TRACK_OFFER'
+        }
+      }
+    };
+
+    const updateJobHelper = () => {
+      const selectedKey = jdSelect.value || 'lead';
+      const data = JOB_PROFILES[selectedKey] || JOB_PROFILES.lead;
+      const scoreVal = modalEl.querySelector('#jh-score-val');
+      const scoreTech = modalEl.querySelector('#jh-score-tech');
+      const scoreScale = modalEl.querySelector('#jh-score-scale');
+      const scoreAgents = modalEl.querySelector('#jh-score-agents');
+      const scoreLeadership = modalEl.querySelector('#jh-score-leadership');
+      const jsonCode = modalEl.querySelector('#jh-json-code');
+
+      if (scoreVal) scoreVal.textContent = 'EVALUATING 100-PT RUBRIC...';
+      setTimeout(() => {
+        if (scoreVal) scoreVal.textContent = data.score;
+        if (scoreTech) scoreTech.textContent = data.tech;
+        if (scoreScale) scoreScale.textContent = data.scale;
+        if (scoreAgents) scoreAgents.textContent = data.agents;
+        if (scoreLeadership) scoreLeadership.textContent = data.leadership;
+        if (jsonCode) jsonCode.textContent = JSON.stringify(data.json, null, 2);
+      }, 250);
+    };
+
     runJhBtn.addEventListener('click', () => {
       try { audio.playClick(); } catch (_) {}
-      const scoreVal = modalEl.querySelector('#jh-score-val');
-      if (scoreVal) {
-        scoreVal.textContent = 'EVALUATING 100-PT RUBRIC...';
-        setTimeout(() => {
-          scoreVal.textContent = '96 / 100 [GRADE A+ · STRONG FIT]';
-        }, 350);
-      }
+      updateJobHelper();
+    });
+
+    jdSelect.addEventListener('change', () => {
+      try { audio.playClick(); } catch (_) {}
+      updateJobHelper();
     });
   }
 
