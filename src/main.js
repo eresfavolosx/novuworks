@@ -1280,7 +1280,7 @@ class FabianPortfolioApp {
     this.dom.caseStudiesMount.innerHTML = PROFILE.caseStudies.map((cs) => {
       let logoSvg = LOGOS.novuWorks;
       if (cs.company.includes('Money Group')) logoSvg = LOGOS.moneyGroup;
-      else if (cs.company.includes('Red Ventures')) logoSvg = `${LOGOS.redVentures}`;
+      else if (cs.company.includes('Red Ventures')) logoSvg = `${LOGOS.redVentures} ${LOGOS.edx}`;
       else if (cs.company.includes('Viva Advertising')) logoSvg = LOGOS.vivaAdvertising;
       else if (cs.company.includes('Link Puerto Rico')) logoSvg = LOGOS.linkPR;
 
@@ -1372,7 +1372,7 @@ class FabianPortfolioApp {
       <div class="dialog-header">
         <div>
           <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
-            <div style="height: 28px;">${logoSvg}</div>
+            <div style="height: 28px; display: flex; align-items: center; gap: 10px;">${logoSvg}</div>
             <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-light);">
               ${cs.badge}
             </span>

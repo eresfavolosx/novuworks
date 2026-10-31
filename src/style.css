@@ -2252,15 +2252,17 @@ body.visualizer-mode .webgl-canvas-layer:active {
 .case-card-logo {
   display: flex;
   align-items: center;
+  gap: 10px;
   height: 28px;
-  max-width: 140px;
+  max-width: 240px;
 }
 
 .case-card-logo svg {
   height: 22px;
   width: auto;
-  max-width: 130px;
+  max-width: 110px;
   display: block;
+  flex-shrink: 0;
 }
 
 .case-pill {
@@ -4607,9 +4609,14 @@ body.tesla-mode .hud-action-btn {
     margin-bottom: 14px;
   }
 
+  .case-card-logo {
+    gap: 8px;
+    max-width: 200px;
+  }
+
   .case-card-logo svg {
     height: 20px;
-    max-width: 110px;
+    max-width: 95px;
   }
 
   .case-pill {
