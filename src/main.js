@@ -1801,6 +1801,25 @@ EDUCATION & CERTIFICATIONS
           this.closeTopNavDrawer();
         }
       });
+
+      // Drawer Executive Utilities & Settings Triggers
+      document.getElementById('drawer-btn-tailor')?.addEventListener('click', () => {
+        this.closeTopNavDrawer();
+        this.dom.btnTailorExperience?.click();
+      });
+      document.getElementById('drawer-btn-tools')?.addEventListener('click', () => {
+        this.closeTopNavDrawer();
+        this.dom.btnVisitorTools?.click();
+      });
+      document.getElementById('drawer-btn-theme')?.addEventListener('click', () => {
+        this.toggleTheme();
+      });
+      document.getElementById('drawer-btn-audio')?.addEventListener('click', () => {
+        this.toggleAudio();
+      });
+      document.getElementById('drawer-btn-lang')?.addEventListener('click', () => {
+        this.toggleLanguage();
+      });
     }
 
     // Platform Landing Triggers (from Top Drawer, Project Cards, and Direct Clicks)

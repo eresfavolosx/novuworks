@@ -333,6 +333,7 @@
           <!-- Command Palette Trigger -->
           <button type="button" class="hud-action-btn cmd-trigger" id="btn-cmd-palette" aria-label="Open Command Palette (Cmd + K)">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span class="cmd-text-label" data-i18n="cmd_text_label">Search</span>
             <span class="cmd-label">⌘K</span>
           </button>
 
@@ -340,6 +341,7 @@
           <button type="button" class="hud-action-btn audio-btn" id="btn-audio-toggle" title="Unmute Tactile Audio (Muted by Default)" aria-label="Toggle Audio">
             <svg class="icon-sound-on hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
             <svg class="icon-sound-off" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+            <span class="audio-btn-label" data-i18n="audio_label">Sound</span>
           </button>
 
           <!-- Mobile Menu Trigger Button (Menu Appears From The Top) -->
@@ -348,7 +350,7 @@
               <span class="bar bar-1"></span>
               <span class="bar bar-2"></span>
             </span>
-            <span class="menu-btn-label">Menu</span>
+            <span class="menu-btn-label" data-i18n="menu_label">Menu</span>
           </button>
         </div>
       </header>
@@ -391,6 +393,29 @@
               <span class="t-desc">Real-Time Market Pulse</span>
             </button>
           </div>
+
+          <!-- Executive Controls & Utilities Strip (Mobile Drawer) -->
+          <div class="top-nav-utilities-bar">
+            <span class="t-sub-title" data-i18n="nav_drawer_controls">EXECUTIVE UTILITIES &amp; SETTINGS:</span>
+            <div class="t-sub-links t-util-links">
+              <button type="button" class="t-sub-chip t-util-chip" id="drawer-btn-tailor" title="Tailor portfolio experience by area of interest">
+                <span>✨</span> <span data-i18n="tailor_tag">Tailor Experience</span>
+              </button>
+              <button type="button" class="t-sub-chip t-util-chip" id="drawer-btn-tools" title="Open Visitor Utilities (Meta CAPI, ROAS Calculator, ATS Resume Export)">
+                <span>🛠️</span> <span data-i18n="tools_label">Tools &amp; Calculators</span>
+              </button>
+              <button type="button" class="t-sub-chip t-util-chip" id="drawer-btn-theme" title="Switch Theme (Dark / Light)">
+                <span>🌓</span> <span data-i18n="theme_label">Theme Mode</span>
+              </button>
+              <button type="button" class="t-sub-chip t-util-chip" id="drawer-btn-audio" title="Toggle Tactile Audio">
+                <span>🔈</span> <span data-i18n="audio_label">Tactile Sound</span>
+              </button>
+              <button type="button" class="t-sub-chip t-util-chip" id="drawer-btn-lang" title="Switch language (EN / ES)">
+                <span>🌐</span> <span>Idioma (EN / ES)</span>
+              </button>
+            </div>
+          </div>
+
           <div class="top-nav-subdomains-bar">
             <span class="t-sub-title">LAUNCH PLATFORM SHOWCASES:</span>
             <div class="t-sub-links">

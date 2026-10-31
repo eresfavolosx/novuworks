@@ -831,6 +831,10 @@ export const I18N_STRINGS = {
     spatial_gyro_label: 'Spatial Gyro',
     visualizer_label: 'View 3D',
     theme_label: 'Theme',
+    audio_label: 'Sound',
+    cmd_text_label: 'Search',
+    menu_label: 'Menu',
+    nav_drawer_controls: 'EXECUTIVE UTILITIES & SETTINGS:',
     tesla_label: 'Tesla HUD',
     lang_btn_title: 'Switch language / Cambiar idioma (EN / ES)',
 
@@ -1053,6 +1057,10 @@ export const I18N_STRINGS = {
     spatial_gyro_label: 'Giroscopio',
     visualizer_label: 'Ver 3D',
     theme_label: 'Tema',
+    audio_label: 'Sonido',
+    cmd_text_label: 'Buscar',
+    menu_label: 'Menú',
+    nav_drawer_controls: 'UTILIDADES Y CONFIGURACIÓN:',
     tesla_label: 'HUD Tesla',
     lang_btn_title: 'Cambiar idioma / Switch language (ES / EN)',
 

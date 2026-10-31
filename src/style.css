@@ -619,21 +619,82 @@ body.visualizer-mode .webgl-canvas-layer:active {
   color: var(--gold-muted);
 }
 
-/* Base header button compactness: redundant text labels hidden across all screens to guarantee 0 overflow */
+/* Secondary non-essential items hidden by default in header */
 .brand-role,
 .header-center-nav .tab-index,
 #btn-pr-roots,
 #btn-toggle-visualizer,
-#btn-theme-toggle .theme-btn-label,
 #btn-tesla-mode .btn-text,
 #btn-toggle-visualizer .visualizer-btn-label,
 .persona-lens-pill .persona-label,
-.persona-lens-pill .persona-tag,
-.tools-trigger-btn .tools-btn-label,
 .spatial-gyro-btn .spatial-gyro-label,
 .pr-roots-btn .pr-geo-coords,
 .pr-roots-btn .pr-loc-label {
   display: none !important;
+}
+
+/* Header button text labels: clearly show what each button is */
+.persona-lens-pill .persona-tag,
+.tools-trigger-btn .tools-btn-label,
+.theme-toggle-btn .theme-btn-label,
+.cmd-trigger .cmd-text-label,
+.audio-btn .audio-btn-label,
+.mobile-menu-toggle-btn .menu-btn-label {
+  display: inline-block !important;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--text-body);
+  transition: color var(--duration-fast) var(--ease-luxury);
+}
+
+.persona-lens-pill .persona-tag {
+  color: var(--gold-light);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cmd-trigger .cmd-text-label {
+  color: var(--text-muted);
+}
+
+.cmd-trigger .cmd-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 1px 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  color: var(--gold-light);
+  margin-left: 2px;
+}
+
+:root[data-theme="light"] .cmd-trigger .cmd-label {
+  background: rgba(15, 23, 42, 0.06);
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #946800;
+}
+
+.hud-action-btn:hover .persona-tag,
+.hud-action-btn:hover .tools-btn-label,
+.hud-action-btn:hover .theme-btn-label,
+.hud-action-btn:hover .cmd-text-label,
+.hud-action-btn:hover .audio-btn-label,
+.hud-action-btn:hover .menu-btn-label {
+  color: var(--titanium-white);
+}
+
+:root[data-theme="light"] .hud-action-btn:hover .persona-tag,
+:root[data-theme="light"] .hud-action-btn:hover .tools-btn-label,
+:root[data-theme="light"] .hud-action-btn:hover .theme-btn-label,
+:root[data-theme="light"] .hud-action-btn:hover .cmd-text-label,
+:root[data-theme="light"] .hud-action-btn:hover .audio-btn-label,
+:root[data-theme="light"] .hud-action-btn:hover .menu-btn-label {
+  color: #0f172a;
 }
 
 .header-center-nav .nav-tab {
@@ -4153,8 +4214,6 @@ body.tesla-mode .hud-action-btn {
   }
   .spatial-gyro-btn .spatial-gyro-label,
   .visualizer-btn .visualizer-btn-label,
-  .tools-trigger-btn .tools-btn-label,
-  #btn-theme-toggle .theme-btn-label,
   #btn-tesla-mode .btn-text,
   .pr-roots-btn .pr-geo-coords,
   .pr-roots-btn .pr-loc-label {
@@ -4186,9 +4245,7 @@ body.tesla-mode .hud-action-btn {
 }
 
 @media (max-width: 1400px) {
-  .availability-pill,
-  #btn-visitor-tools,
-  #btn-tailor-experience {
+  .availability-pill {
     display: none !important;
   }
   .header-center-nav .nav-tab {
@@ -14714,14 +14771,28 @@ html.light-theme .top-drawer-backdrop,
   line-height: 1.3;
 }
 
+.top-nav-utilities-bar,
 .top-nav-subdomains-bar {
-  margin-top: 18px;
-  padding-top: 16px;
+  margin-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+:root[data-theme="light"] .top-nav-utilities-bar,
+html.light-theme .top-nav-utilities-bar {
+  border-top-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.t-util-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .t-sub-title {
