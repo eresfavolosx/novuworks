@@ -574,14 +574,21 @@ export class ExecutiveChatManager {
     this.modal.classList.add('active');
     document.body.classList.add('modal-open');
 
-    // Focus active channel's primary input
-    setTimeout(() => {
-      if (this.activeChannel === 'whatsapp') {
-        this.modal.querySelector('#custom-chat-message')?.focus();
-      } else {
-        this.modal.querySelector('#custom-email-body')?.focus();
-      }
-    }, 150);
+    // Reset scroll position to top
+    const modalBody = this.modal.querySelector('.chat-modal-body');
+    if (modalBody) modalBody.scrollTop = 0;
+
+    // Focus active channel's primary input only on desktop (avoids viewport shift / keyboard popup on mobile)
+    const isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
+    if (!isMobile) {
+      setTimeout(() => {
+        if (this.activeChannel === 'whatsapp') {
+          this.modal.querySelector('#custom-chat-message')?.focus();
+        } else {
+          this.modal.querySelector('#custom-email-body')?.focus();
+        }
+      }, 150);
+    }
 
     logCandidateEvent('executive_chat_modal_opened', { source, channel });
   }

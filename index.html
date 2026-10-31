@@ -76,9 +76,11 @@
     <meta property="og:url" content="https://novu.works" />
     <meta property="og:image" content="/assets/novuworks-logo.jpg" />
 
-    <!-- Favicon & Touch Icons -->
-    <link rel="icon" type="image/png" href="/assets/nw-mark.png" />
-    <link rel="apple-touch-icon" href="/assets/nw-mark.png" />
+    <!-- Favicon & Touch Icons (Circular Transparent High-Res PNG) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png" />
 
     <!-- High-Performance Luxury Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -504,7 +506,7 @@
               </div>
               <div class="metric-divider"></div>
               <div class="metric-cell">
-                <span class="m-number" data-target="200" data-prefix="+" data-suffix="%" style="color: #38bdf8;">+200%</span>
+                <span class="m-number" data-target="200" data-prefix="+" data-suffix="%" style="color: #7dd3fc;">+200%</span>
                 <span class="m-label" data-i18n="metric_2_label">AI-Driven Lead Lift</span>
                 <span class="m-detail" data-i18n="metric_2_detail">Red Ventures (Full-Time, edX)</span>
               </div>
@@ -516,7 +518,7 @@
               </div>
               <div class="metric-divider"></div>
               <div class="metric-cell">
-                <span class="m-number" data-target="83" data-prefix="-" data-suffix="%" style="color: #4ade80;">-83%</span>
+                <span class="m-number" data-target="83" data-prefix="-" data-suffix="%" style="color: #86efac;">-83%</span>
                 <span class="m-label" data-i18n="metric_4_label">Client Churn Suppression</span>
                 <span class="m-detail" data-i18n="metric_4_detail">Reduced Churn from 30% to 5%</span>
               </div>
@@ -542,7 +544,7 @@
                 </div>
                 <div class="portal-body-row">
                   <div class="portal-copy">
-                    <h3 class="portal-title">NovuWorks 3D Sculpture Studio</h3>
+                    <h2 class="portal-title">NovuWorks 3D Sculpture Studio</h2>
                     <p class="portal-desc">Separated from the reading experience into a dedicated full-screen interactive space. 360° orbit rotation, 3D particle monogram morphing, and tactile audio chime.</p>
                   </div>
                   <button type="button" class="luxury-btn primary-gold portal-launch-btn" id="btn-dock-view-canvas">
@@ -1103,8 +1105,8 @@
                 </div>
               </div>
             </div>
-            <button type="button" class="modal-close-btn" id="btn-close-chat-modal" aria-label="Close Chat Dialog">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <button type="button" class="dialog-close-btn modal-close-btn" id="btn-close-chat-modal" aria-label="Close Chat Dialog" title="Close (ESC)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
 
@@ -1291,7 +1293,9 @@
             <span class="f-wa-sub" data-i18n="chat_floating_sub">WhatsApp Direct</span>
           </div>
         </button>
-        <button type="button" class="f-wa-close" aria-label="Dismiss chat concierge" title="Dismiss">✕</button>
+        <button type="button" class="f-wa-close" id="btn-floating-wa-close" aria-label="Dismiss chat concierge" title="Dismiss">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </aside>
 
       <!-- Tesla Fullscreen Cockpit & Real-Time Intelligence Dashboard -->
