@@ -1150,12 +1150,12 @@ class FabianPortfolioApp {
 
     // Dynamic Quantitative Proof Cards (All 4 cards tailored per specialty)
     if (this.dom.scorecardProofsMount && variant.proofPoints) {
-      const metricColors = ['gold-num', '#38bdf8', '#4ade80', '#d4af37'];
+      const metricClasses = ['gold-num', 'cyan-num', 'emerald-num', 'gold-num'];
       this.dom.scorecardProofsMount.innerHTML = variant.proofPoints.map((p, idx) => {
-        const colorStyle = idx === 0 ? 'class="score-metric gold-num"' : `class="score-metric" style="color: ${metricColors[idx % metricColors.length]};"`;
+        const colorClass = metricClasses[idx % metricClasses.length];
         return `
           <div class="score-proof-card">
-            <div ${colorStyle}>${p.metric}</div>
+            <div class="score-metric ${colorClass}">${p.metric}</div>
             <div class="score-title">${p.title}</div>
             <div class="score-sub">${p.sub}</div>
             <p class="score-desc">${p.desc}</p>

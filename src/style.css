@@ -4212,20 +4212,17 @@ body.tesla-mode .hud-action-btn {
    Responsive Breakpoints
    ───────────────────────────────────────────────────────────── */
 @media (max-width: 1680px) {
-  .brand-role {
-    display: none !important;
-  }
+  .brand-role,
+  .availability-pill,
   .spatial-gyro-btn .spatial-gyro-label,
   .visualizer-btn .visualizer-btn-label,
-  #btn-tesla-mode .btn-text,
+  #btn-tesla-mode,
   .pr-roots-btn .pr-geo-coords,
-  .pr-roots-btn .pr-loc-label {
-    display: none !important;
-  }
-  .persona-lens-pill .persona-label {
-    display: none !important;
-  }
-  .header-center-nav .tab-index {
+  .pr-roots-btn .pr-loc-label,
+  .persona-lens-pill .persona-label,
+  .header-center-nav .tab-index,
+  .theme-btn-label,
+  .audio-btn-label {
     display: none !important;
   }
   .header-center-nav .nav-tab {
@@ -4247,8 +4244,8 @@ body.tesla-mode .hud-action-btn {
   }
 }
 
-@media (max-width: 1400px) {
-  .availability-pill {
+@media (max-width: 1460px) {
+  .cmd-trigger .cmd-kbd {
     display: none !important;
   }
   .header-center-nav .nav-tab {
@@ -4935,6 +4932,8 @@ body.tesla-mode .hud-action-btn {
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
+    flex: 0 0 auto !important;
+    height: auto !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -4985,38 +4984,45 @@ body.tesla-mode .hud-action-btn {
   }
 
   .resume-modal-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 8px;
-    box-sizing: border-box;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 6px !important;
+    box-sizing: border-box !important;
   }
 
   .resume-modal-actions .action-pill-btn {
-    flex: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 8px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    border-radius: var(--radius-pill);
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    padding: 6px 9px !important;
+    font-size: 10.5px !important;
+    font-weight: 600 !important;
+    border-radius: var(--radius-pill) !important;
     text-decoration: none !important;
-    text-align: center;
-    box-sizing: border-box;
-    white-space: nowrap;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
   }
 
   .resume-modal-actions .dialog-close-btn {
-    flex: 0 0 34px;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    max-width: 30px !important;
+    padding: 0 !important;
+    margin-left: auto !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .dialog-header {
@@ -5279,6 +5285,15 @@ body.tesla-mode .hud-action-btn {
   border: 1px solid var(--hairline-gold);
   border-radius: var(--radius-lg);
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(212, 175, 55, 0.12);
+  overflow: hidden;
+}
+
+.resume-modal[open],
+.recruiter-modal[open] {
+  display: flex;
+  flex-direction: column;
+  max-height: 92vh;
+  overflow: hidden;
 }
 
 .resume-modal::backdrop {
@@ -5289,17 +5304,22 @@ body.tesla-mode .hud-action-btn {
 
 .resume-modal-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 32px;
+  gap: 12px 16px;
+  padding: 18px 28px;
   background: var(--bg-card-elevated);
   border-bottom: 1px solid var(--hairline);
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .modal-title-group {
   display: flex;
   flex-direction: column;
+  flex: 1 1 100%;
+  min-width: 0;
 }
 
 .modal-kicker {
@@ -5320,15 +5340,20 @@ body.tesla-mode .hud-action-btn {
 
 .resume-modal-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 0 0 auto;
+  margin-left: auto;
 }
 
 .action-pill-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 8px 16px;
+  padding: 8px 14px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--hairline);
   border-radius: var(--radius-pill);
@@ -5336,8 +5361,24 @@ body.tesla-mode .hud-action-btn {
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
+  white-space: nowrap !important;
+  flex: 0 0 auto !important;
+  text-decoration: none;
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-luxury);
+}
+
+.resume-modal-actions .dialog-close-btn {
+  flex: 0 0 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  max-width: 36px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .action-pill-btn:hover {
@@ -5358,10 +5399,13 @@ body.tesla-mode .hud-action-btn {
 }
 
 .resume-modal-scrollable {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
-  max-height: calc(92vh - 84px);
-  padding: 36px 48px;
+  max-height: none;
+  padding: 28px 36px;
   background: var(--bg-card);
+  box-sizing: border-box;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -8236,9 +8280,10 @@ body.tesla-mode .hud-action-btn {
 
 .scorecard-badge-box {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .scorecard-verdict {
@@ -16751,4 +16796,203 @@ html.light-theme .triad-tech {
 html.light-theme .triad-impact {
   color: #065f46 !important;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Universal Light Mode Visibility & Non-Truncation Guarantees
+   Fixes gradient text (20+), SVG currentColor logos, scorecard metrics,
+   and pillar chips across all views and modals.
+   ───────────────────────────────────────────────────────────── */
+.score-metric.gold-num {
+  color: #d4af37;
+}
+.score-metric.cyan-num {
+  color: #38bdf8;
+}
+.score-metric.emerald-num {
+  color: #4ade80;
+}
+
+:root[data-theme="light"] .m-number.gold-num,
+html.light-theme .m-number.gold-num,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .m-number.gold-num,
+:root[data-theme="light"] .gold-num,
+html.light-theme .gold-num,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .gold-num,
+:root[data-theme="light"] .score-metric.gold-num,
+html.light-theme .score-metric.gold-num,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .score-metric.gold-num,
+:root[data-theme="light"] .intro-gradient-text,
+html.light-theme .intro-gradient-text,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .intro-gradient-text,
+:root[data-theme="light"] .text-gradient,
+html.light-theme .text-gradient,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .text-gradient,
+:root[data-theme="light"] .sig-gold-part,
+html.light-theme .sig-gold-part,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .sig-gold-part,
+:root[data-theme="light"] .editorial-serif,
+html.light-theme .editorial-serif,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .editorial-serif {
+  background: none !important;
+  background-image: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: #92400e !important;
+  color: #92400e !important;
+}
+
+:root[data-theme="light"] .cyan-num,
+html.light-theme .cyan-num,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cyan-num,
+:root[data-theme="light"] .score-metric.cyan-num,
+html.light-theme .score-metric.cyan-num,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .score-metric.cyan-num {
+  background: none !important;
+  -webkit-text-fill-color: #0369a1 !important;
+  color: #0369a1 !important;
+}
+
+:root[data-theme="light"] .emerald-num,
+html.light-theme .emerald-num,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .emerald-num,
+:root[data-theme="light"] .green-num,
+html.light-theme .green-num,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .green-num,
+:root[data-theme="light"] .score-metric.emerald-num,
+html.light-theme .score-metric.emerald-num,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .score-metric.emerald-num {
+  background: none !important;
+  -webkit-text-fill-color: #047857 !important;
+  color: #047857 !important;
+}
+
+/* Ensure all SVG brand and project logos using currentColor or white text are crisp in Light Mode */
+:root[data-theme="light"] .comp-logo-svg,
+html.light-theme .comp-logo-svg,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .comp-logo-svg,
+:root[data-theme="light"] .proj-logo-slot,
+html.light-theme .proj-logo-slot,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .proj-logo-slot,
+:root[data-theme="light"] .modal-logo-cell,
+html.light-theme .modal-logo-cell,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .modal-logo-cell,
+:root[data-theme="light"] .cs-logo-badge,
+html.light-theme .cs-logo-badge,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cs-logo-badge,
+:root[data-theme="light"] .exp-company-logo-slot,
+html.light-theme .exp-company-logo-slot,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .exp-company-logo-slot,
+:root[data-theme="light"] .res-exp-logo,
+html.light-theme .res-exp-logo,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .res-exp-logo,
+:root[data-theme="light"] .cert-logo-badge,
+html.light-theme .cert-logo-badge,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cert-logo-badge,
+:root[data-theme="light"] .award-logo-badge,
+html.light-theme .award-logo-badge,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .award-logo-badge,
+:root[data-theme="light"] .edu-logo-badge,
+html.light-theme .edu-logo-badge,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .edu-logo-badge {
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .comp-logo-svg text[fill="#ffffff"],
+html.light-theme .comp-logo-svg text[fill="#ffffff"],
+:root[data-theme="light"] .comp-logo-svg text[fill="#fff"],
+html.light-theme .comp-logo-svg text[fill="#fff"],
+:root[data-theme="light"] .comp-logo-svg path[fill="#ffffff"]:not([stroke]),
+html.light-theme .comp-logo-svg path[fill="#ffffff"]:not([stroke]) {
+  fill: #0f172a !important;
+}
+
+:root[data-theme="light"] .logo-invert-light,
+html.light-theme .logo-invert-light,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .logo-invert-light {
+  filter: invert(1) hue-rotate(180deg) brightness(0.35) contrast(1.4) !important;
+}
+
+/* 60s Recruiter Scorecard & Resume Modal Light Mode Contrast */
+:root[data-theme="light"] .scorecard-top-bar,
+html.light-theme .scorecard-top-bar,
+:root[data-theme="light"] .recruiter-modal-logos,
+html.light-theme .recruiter-modal-logos {
+  border-bottom-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+:root[data-theme="light"] .modal-logo-cell,
+html.light-theme .modal-logo-cell {
+  background: #f8fafc !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+:root[data-theme="light"] .scorecard-roles,
+html.light-theme .scorecard-roles {
+  color: #334155 !important;
+}
+
+:root[data-theme="light"] .scorecard-roles strong,
+html.light-theme .scorecard-roles strong {
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .scorecard-contact,
+html.light-theme .scorecard-contact {
+  color: #475569 !important;
+}
+
+:root[data-theme="light"] .scorecard-contact .rec-link,
+html.light-theme .scorecard-contact .rec-link {
+  color: #92400e !important;
+  font-weight: 600;
+}
+
+:root[data-theme="light"] .scorecard-verdict,
+html.light-theme .scorecard-verdict {
+  color: #78350f !important;
+  background: #fef3c7 !important;
+  border: 1px solid rgba(146, 64, 14, 0.35) !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+}
+
+:root[data-theme="light"] .scorecard-grade,
+html.light-theme .scorecard-grade,
+:root[data-theme="light"] .check-icon,
+html.light-theme .check-icon {
+  color: #047857 !important;
+}
+
+:root[data-theme="light"] .action-pill-btn:not(.gold),
+html.light-theme .action-pill-btn:not(.gold) {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: rgba(15, 23, 42, 0.18) !important;
+}
+
+:root[data-theme="light"] .action-pill-btn.gold,
+html.light-theme .action-pill-btn.gold {
+  background: linear-gradient(135deg, #d4af37 0%, #b45309 100%) !important;
+  color: #ffffff !important;
+  border-color: #92400e !important;
+  box-shadow: 0 2px 10px rgba(180, 83, 9, 0.25) !important;
+}
+
+:root[data-theme="light"] .proj-live-badge,
+html.light-theme .proj-live-badge,
+:root[data-theme="light"] .proj-impact-pill,
+html.light-theme .proj-impact-pill {
+  color: #065f46 !important;
+  background: #ecfdf5 !important;
+  border-color: rgba(5, 150, 105, 0.3) !important;
+}
+
+/* Prevent Pillar Chip text truncation in System Scoper */
+.pillar-chip .chip-name {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  line-height: 1.3 !important;
+}
+
 

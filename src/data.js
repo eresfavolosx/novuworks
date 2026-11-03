@@ -1052,7 +1052,7 @@ export const DISCIPLINES = [
     number: '02',
     title: 'Behavioral Synthesis & Data Canvas',
     subtitle: 'Distilling 40M+ raw human interaction sessions into clear, empathetic product stories.',
-    color: '#f5e6be',
+    color: '#f59e0b',
     deliverables: [
       'SQL & PySpark Behavioral Synthesis',
       'Databricks Lakehouse Normalization (40M+ sessions)',
@@ -1122,7 +1122,7 @@ export const DISCIPLINES = [
     number: '07',
     title: 'Universal Accessibility & Craft',
     subtitle: 'Designing inclusive, WCAG AAA experiences and resilient civic infrastructure that works for everyone.',
-    color: '#e2e8f0',
+    color: '#14b8a6',
     deliverables: [
       'WCAG 2.2 AAA Universal Accessibility Parity',
       'Color Vision Deficiency Assistive Algorithms',
