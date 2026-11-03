@@ -7585,7 +7585,7 @@ body.tesla-mode .hud-action-btn {
 
 :root[data-theme="light"] .pulse-chip:nth-child(2) .chip-val,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .pulse-chip:nth-child(2) .chip-val {
-  color: #0284c7 !important;
+  color: #075985 !important;
 }
 
 :root[data-theme="light"] .pulse-chip:nth-child(3) .chip-val,
@@ -16695,3 +16695,158 @@ html.light-theme .t-sub-chip:hover {
     flex-direction: column;
   }
 }
+
+/* ─────────────────────────────────────────────────────────────
+   WCAG 2.2 AA/AAA Light Mode Contrast Enhancements (4.5:1+ normal, 3:1+ large)
+   ───────────────────────────────────────────────────────────── */
+:root[data-theme="light"] .persona-tag,
+html.light-theme .persona-tag {
+  color: #5c3d00 !important;
+  background: rgba(148, 104, 0, 0.14) !important;
+}
+
+:root[data-theme="light"] .status-label,
+html.light-theme .status-label {
+  color: #065f46 !important;
+}
+
+:root[data-theme="light"] .lang-code-es,
+html.light-theme .lang-code-es,
+:root[data-theme="light"] .lang-code-en,
+html.light-theme .lang-code-en,
+:root[data-theme="light"] .lang-toggle-btn .lang-code-en:not(.active),
+html.light-theme .lang-toggle-btn .lang-code-en:not(.active),
+:root[data-theme="light"] .lang-toggle-btn .lang-code-es:not(.active),
+html.light-theme .lang-toggle-btn .lang-code-es:not(.active) {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+
+:root[data-theme="light"] .lang-code-en.active,
+html.light-theme .lang-code-en.active,
+:root[data-theme="light"] .lang-code-es.active,
+html.light-theme .lang-code-es.active {
+  color: #5c3d00 !important;
+  opacity: 1 !important;
+}
+
+:root[data-theme="light"] .cmd-label,
+html.light-theme .cmd-label {
+  color: #5c3d00 !important;
+}
+
+:root[data-theme="light"] .pr-kicker-pill,
+html.light-theme .pr-kicker-pill,
+:root[data-theme="light"] .pr-kicker-pill span,
+html.light-theme .pr-kicker-pill span {
+  color: #0f172a !important;
+  background: rgba(15, 23, 42, 0.06) !important;
+  border-color: rgba(15, 23, 42, 0.16) !important;
+}
+
+:root[data-theme="light"] .luxury-metrics-ribbon .m-number.cyan-num,
+html.light-theme .luxury-metrics-ribbon .m-number.cyan-num {
+  color: #0369a1 !important;
+}
+
+:root[data-theme="light"] .luxury-metrics-ribbon .m-number.emerald-num,
+html.light-theme .luxury-metrics-ribbon .m-number.emerald-num {
+  color: #065f46 !important;
+}
+
+:root[data-theme="light"] .logo-strip-label,
+html.light-theme .logo-strip-label {
+  color: #78350f !important;
+}
+
+:root[data-theme="light"] .subdomains-kicker-badge,
+html.light-theme .subdomains-kicker-badge,
+:root[data-theme="light"] [data-i18n="featured_subdomains_kicker"],
+html.light-theme [data-i18n="featured_subdomains_kicker"] {
+  color: #075985 !important;
+  background: rgba(2, 132, 199, 0.08) !important;
+  border-color: rgba(2, 132, 199, 0.28) !important;
+}
+
+:root[data-theme="light"] .f-wa-sub,
+html.light-theme .f-wa-sub,
+:root[data-theme="light"] .wm-val-emerald,
+html.light-theme .wm-val-emerald,
+:root[data-theme="light"] .res-drawer-title,
+html.light-theme .res-drawer-title {
+  color: #065f46 !important;
+}
+
+:root[data-theme="light"] .roots-chime-hint,
+html.light-theme .roots-chime-hint {
+  color: #5c3d00 !important;
+  opacity: 1 !important;
+}
+
+:root[data-theme="light"] .gh-telemetry-bar,
+html.light-theme .gh-telemetry-bar,
+:root[data-theme="light"] .gh-repo-card,
+html.light-theme .gh-repo-card {
+  background: #ffffff !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+:root[data-theme="light"] .gh-handle,
+html.light-theme .gh-handle,
+:root[data-theme="light"] .gh-repo-name,
+html.light-theme .gh-repo-name {
+  color: #0f172a !important;
+}
+
+:root[data-theme="light"] .gh-verified-tag,
+html.light-theme .gh-verified-tag,
+:root[data-theme="light"] .post-tag,
+html.light-theme .post-tag,
+:root[data-theme="light"] .pulse-chip .chip-val,
+html.light-theme .pulse-chip .chip-val {
+  color: #075985 !important;
+}
+
+:root[data-theme="light"] .gh-stat-pill,
+html.light-theme .gh-stat-pill,
+:root[data-theme="light"] .gh-stat-pill strong,
+html.light-theme .gh-stat-pill strong,
+:root[data-theme="light"] .gh-repo-desc,
+html.light-theme .gh-repo-desc,
+:root[data-theme="light"] .gh-lang-tag,
+html.light-theme .gh-lang-tag,
+:root[data-theme="light"] .gh-updated-time,
+html.light-theme .gh-updated-time {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+
+:root[data-theme="light"] .gh-badge-public,
+html.light-theme .gh-badge-public {
+  color: #065f46 !important;
+  background: rgba(5, 150, 105, 0.1) !important;
+  border-color: rgba(5, 150, 105, 0.28) !important;
+}
+
+:root[data-theme="light"] .gh-view-all-link,
+html.light-theme .gh-view-all-link,
+:root[data-theme="light"] .gh-metric-tag,
+html.light-theme .gh-metric-tag {
+  color: #78350f !important;
+}
+
+:root[data-theme="light"] .triad-concept,
+html.light-theme .triad-concept {
+  color: #78350f !important;
+}
+
+:root[data-theme="light"] .triad-tech,
+html.light-theme .triad-tech {
+  color: #075985 !important;
+}
+
+:root[data-theme="light"] .triad-impact,
+html.light-theme .triad-impact {
+  color: #065f46 !important;
+}
+

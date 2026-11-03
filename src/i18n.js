@@ -862,7 +862,7 @@ export const I18N_STRINGS = {
 
     // Header controls
     tailor_tag: 'Tailor',
-    tools_label: 'Sandbox',
+    tools_label: 'Tools',
     status_available: 'Available',
     pr_roots_label: 'San Juan, PR',
     spatial_gyro_label: 'Spatial Gyro',

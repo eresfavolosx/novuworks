@@ -875,7 +875,7 @@ class FabianPortfolioApp {
         <div class="proj-top-row">
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
             ${projLogo ? `<div style="height: 20px; display: inline-flex; align-items: center;">${projLogo}</div>` : ''}
-            <h3 class="proj-name">${p.name}</h3>
+            <h2 class="proj-name">${p.name}</h2>
             ${p.subdomainUrl ? `
               <span class="proj-live-badge">
                 <span class="proj-live-dot"></span>
@@ -889,9 +889,9 @@ class FabianPortfolioApp {
         <span class="proj-metric-pill">${p.metrics}</span>
         ${p.concept && p.technology && p.impact ? `
           <div class="proj-summary proj-triad-list" style="display: flex; flex-direction: column; gap: 8px; text-align: left;">
-            <div><strong style="color: var(--gold-light);">The Concept:</strong> ${p.concept}</div>
-            <div><strong style="color: #38bdf8;">The Technology:</strong> ${p.technology}</div>
-            <div><strong style="color: #4ade80;">The Impact:</strong> ${p.impact}</div>
+            <div><strong class="triad-concept" style="color: var(--gold-light);">The Concept:</strong> ${p.concept}</div>
+            <div><strong class="triad-tech" style="color: #38bdf8;">The Technology:</strong> ${p.technology}</div>
+            <div><strong class="triad-impact" style="color: #4ade80;">The Impact:</strong> ${p.impact}</div>
           </div>
         ` : `<p class="proj-summary">${p.summary}</p>`}
         <div class="proj-tags-row">
@@ -1037,6 +1037,7 @@ class FabianPortfolioApp {
     if (targetId === 'nfc') targetId = 'nfc-platform';
     if (targetId === 'hackea') targetId = 'hackeaporunacausa';
     if (targetId === 'liza' || targetId === 'linkpr') targetId = 'liza-project';
+    if (targetId === 'viva') targetId = 'viva-advertising';
 
     if (!skipSplash) {
       this.triggerProjectTransitionSplash(targetId, {}, () => {
@@ -1049,8 +1050,10 @@ class FabianPortfolioApp {
     bindSubdomainLandingEvents(targetId, this.dom.platformModal);
 
     try {
-      this.dom.platformModal.showModal();
-      audio.playClick();
+      if (!this.dom.platformModal.open) {
+        this.dom.platformModal.showModal();
+      }
+      audio.click(900);
     } catch (_) {
       this.dom.platformModal.setAttribute('open', '');
     }
@@ -1310,12 +1313,12 @@ class FabianPortfolioApp {
               ` : ''}
             </div>
           </div>
-          <h3 class="case-title">${cs.title}</h3>
+          <h2 class="case-title">${cs.title}</h2>
           ${cs.concept && cs.technology && cs.impact ? `
             <div class="case-summary proj-triad-list" style="display: flex; flex-direction: column; gap: 8px; text-align: left; margin-bottom: 16px;">
-              <div><strong style="color: var(--gold-light);">The Concept:</strong> ${cs.concept}</div>
-              <div><strong style="color: #38bdf8;">The Technology:</strong> ${cs.technology}</div>
-              <div><strong style="color: #4ade80;">The Impact:</strong> ${cs.impact}</div>
+              <div><strong class="triad-concept" style="color: var(--gold-light);">The Concept:</strong> ${cs.concept}</div>
+              <div><strong class="triad-tech" style="color: #38bdf8;">The Technology:</strong> ${cs.technology}</div>
+              <div><strong class="triad-impact" style="color: #4ade80;">The Impact:</strong> ${cs.impact}</div>
             </div>
           ` : `<p class="case-summary">${cs.summary}</p>`}
 
@@ -1892,11 +1895,12 @@ EDUCATION & CERTIFICATIONS
     const checkHashRoute = () => {
       const hash = window.location.hash.toLowerCase().replace('#', '');
       if (!hash) return;
+      const skipSplash = window.location.search.includes('skipIntro=1');
       if (hash.startsWith('project-')) {
         const id = hash.replace('project-', '');
-        this.openSubdomainLanding(id);
-      } else if (['jobhelper', 'bizpay', 'picta', 'nfc', 'nfc-platform', 'hackea', 'hackeaporunacausa', 'liza', 'linkpr', 'liza-project'].includes(hash)) {
-        this.openSubdomainLanding(hash);
+        this.openSubdomainLanding(id, skipSplash);
+      } else if (['jobhelper', 'bizpay', 'picta', 'nfc', 'nfc-platform', 'hackea', 'hackeaporunacausa', 'liza', 'linkpr', 'liza-project', 'viva', 'viva-advertising'].includes(hash)) {
+        this.openSubdomainLanding(hash, skipSplash);
       } else if (hash === 'menu' || hash === 'navigation') {
         const topNavDrawer = document.getElementById('top-navigation-drawer');
         const mobileMenuBtn = document.getElementById('btn-mobile-menu-toggle');
