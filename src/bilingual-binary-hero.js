@@ -10,49 +10,49 @@ import { logCandidateEvent } from './firebase.js';
 
 export const DISCIPLINE_DATA = {
   en: {
-    badge_title: 'BEYOND CODE · THE TRIFECTA OF MASTERY',
-    badge_subtitle: 'A software engineer with exceptional design taste and multi-million dollar marketing instincts.',
+    badge_title: 'BEYOND CODE · THE HYBRID MAKER',
+    badge_subtitle: 'A creative technologist and computer engineer turning open-ended questions into working prototypes, interactive experiences, and human stories.',
     disciplines: {
       all: {
         id: 'all',
         icon: '✨',
-        pillLabel: 'The Unified Hybrid',
-        headline: 'Where Engineering Rigor Meets World-Class Design & Commercial Marketing',
-        body: 'Most engineers write code without aesthetic empathy or commercial focus. Most marketers lack the technical depth to build proprietary ad-tech and autonomous AI systems. Fabián bridges the gap — uniting a 4.0 GPA in Computer Engineering, high-end product design sensibility, and a proven track record driving $10M+ in verified commercial pipelines.',
+        pillLabel: 'The Unified Hybrid Maker',
+        headline: 'Where Storytelling, Human-Centric Design & Frontier Engineering Meet',
+        body: 'Great creative technology requires more than isolated code or static mockups—it demands someone who can ask an open-ended question, design an emotionally resonant interaction, and engineer the frontier model orchestration or WebGL shaders to make it real. Fabián bridges all three with a 4.0 GPA in Computer Engineering, a Stanford University Innovation Fellowship, and 110+ shipped prototypes.',
         tags: [
-          'The Rare Hybrid',
-          'Design Craftsmanship',
-          'Conversion Architecture',
-          'Multi-Channel Growth',
-          'Scale Infrastructure'
+          'The Hybrid Maker',
+          'Human-Centric Design',
+          'Frontier Models',
+          'Interactive Experiences',
+          'Generative Prototypes'
         ]
       },
       design: {
         id: 'design',
         icon: '🎨',
-        pillLabel: 'Product & Experience Design',
-        headline: 'Obsessive Craft, Editorial Polish & Conversion-First User Psychology',
-        body: 'Crafting luxury, high-conversion interfaces where every micro-interaction and typographic hierarchy reinforces brand equity. Proven experience leading product design sprints, creating scalable Figma design systems, and conducting real-time CRO tests that drive quantifiable retention.',
+        pillLabel: 'Human-Centric & Sensory Design',
+        headline: 'Tactile Craft, Assistive Accessibility & 60 FPS Sensory Interfaces',
+        body: 'Crafting warm, accessible interfaces where every shader, haptics pulse, and typographic detail invites human participation. From 60 FPS WebRTC Daltonization lenses for color-blindness (Picta) to Three.js particle physics and NTAG215 Web NFC physical tokens (Tocaito).',
         tags: [
-          'Design Systems (Figma)',
-          'Editorial Typography',
-          'User Psychology & CRO',
-          'Interactive 3D / WebGL',
-          'Accessibility (A11y)'
+          'Human-Centric Design',
+          '60 FPS WebGL / WebRTC',
+          'Assistive Accessibility',
+          'Web NFC Physical Tech',
+          'Editorial Typography'
         ]
       },
       marketing: {
         id: 'marketing',
-        icon: '📈',
-        pillLabel: 'Growth & Performance Marketing',
-        headline: 'Driving $10M+ Enterprise Pipelines & Quantitative Programmatic Media',
-        body: 'Architecting multi-channel paid acquisition (Meta, Google, Programmatic), Server-Side CAPI attribution, funnel optimization, and CAC/LTV economic models. 150+ client accounts directed and $10M+ in verified commercial B2B pipeline generated.',
+        icon: '📖',
+        pillLabel: 'Interactive Storytelling & Synthesis',
+        headline: 'Turning Complex Systems into Optimistic, Participatory Stories',
+        body: 'Synthesizing 40M+ longitudinal learning journeys in Databricks SQL at Red Ventures (edX) to power +200% generative discovery, and directing 150+ bilingual interactive storytelling experiences through Viva Studio with humor, emotional depth, and optimism.',
         tags: [
-          '$10M+ Verified Pipeline',
-          'High-ROI Media Buying',
-          '-83% Churn Reduction',
-          'CAC / LTV Modeling',
-          'Ad-Tech Infrastructure'
+          '40M+ Journeys Synthesized',
+          '+200% Discovery Lift',
+          'Narrative Synthesis',
+          'Bilingual Cultural Craft',
+          'Participatory Stories'
         ]
       },
       engineering: {
@@ -60,75 +60,75 @@ export const DISCIPLINE_DATA = {
         icon: '⚡',
         pillLabel: 'Computer Engineering (4.0 GPA)',
         headline: 'Stanford Innovation Fellow · 4.0 GPA Computer Engineering & Agentic AI',
-        body: 'Stanford Innovation Fellow with a 4.0 GPA in Computer Engineering. Building scalable distributed architectures, 20+ automated agentic AI workflows (Claude / OpenAI), and Databricks data normalization across 40M+ telemetry sessions with zero technical debt.',
+        body: 'Stanford Innovation Fellow with a 4.0 GPA in Computer Engineering. Engineering 20+ autonomous agentic tool-calling workflows (OpenAI / Claude / Python / Docker), real-time telemetry synthesis, and resilient full-stack architectures.',
         tags: [
           'Computer Engineering (4.0 GPA)',
-          'Agentic AI Workflows',
+          'Agentic Tool-Calling',
           'Python / SQL / Databricks',
-          'Full-Stack Cloud',
-          'Zero-Debt Architecture'
+          'Docker & Cloud',
+          'Frontier Orchestration'
         ]
       }
     }
   },
   es: {
-    badge_title: 'MÁS ALLÁ DEL CÓDIGO · LA TRIFECTA DE MAESTRÍA',
-    badge_subtitle: 'Un ingeniero de software con gusto excepcional por el diseño e instinto comercial multimillonario.',
+    badge_title: 'MÁS ALLÁ DEL CÓDIGO · EL CREADOR HÍBRIDO',
+    badge_subtitle: 'Un tecnólogo creativo e ingeniero de computadoras transformando preguntas abiertas en prototipos funcionales, experiencias interactivas e historias humanas.',
     disciplines: {
       all: {
         id: 'all',
         icon: '✨',
-        pillLabel: 'El Híbrido Unificado',
-        headline: 'Donde el Rigor de Ingeniería se Une al Diseño de Clase Mundial y el Mercadeo Comercial',
-        body: 'La mayoría de los ingenieros programan sin empatía estética ni enfoque comercial. La mayoría de los mercadólogos carecen de la profundidad técnica para construir tecnología publicitaria propietaria y flujos agénticos de IA. Fabián une ambos mundos: 4.0 GPA en Ingeniería de Computadoras, sensibilidad de diseño de producto y un récord comprobado generando más de $10M en pipelines comerciales verificados.',
+        pillLabel: 'El Creador Híbrido Unificado',
+        headline: 'Donde la Narrativa, el Diseño Humano y la Ingeniería de Frontera se Unen',
+        body: 'La gran tecnología creativa requiere más que código aislado o bocetos estáticos: exige a alguien capaz de formular una pregunta abierta, diseñar una interacción emocionalmente resonante y programar la orquestación de modelos de frontera o shaders WebGL para hacerla realidad. Fabián une los tres mundos con un GPA de 4.0 en Ingeniería de Computadoras, un Stanford Innovation Fellowship y más de 110 prototipos lanzados.',
         tags: [
-          'El Híbrido Raro',
-          'Artesanía de Diseño',
-          'Arquitectura de Conversión',
-          'Crecimiento Multicanal',
-          'Infraestructura a Escala'
+          'El Creador Híbrido',
+          'Diseño Centrado en el Humano',
+          'Modelos de Frontera',
+          'Experiencias Interactivas',
+          'Prototipos Generativos'
         ]
       },
       design: {
         id: 'design',
         icon: '🎨',
-        pillLabel: 'Diseño de Producto y Experiencia',
-        headline: 'Artesanía Obsesiva, Pulido Editorial y Psicología de Usuario Enfocada en Conversión',
-        body: 'Diseñando interfaces de lujo y alta conversión donde cada micro-interacción y jerarquía tipográfica refuerza el valor de marca. Experiencia liderando sprints de diseño de producto, sistemas de diseño escalables en Figma y pruebas de CRO en tiempo real que impulsan retención cuantificable.',
+        pillLabel: 'Diseño Sensorial y Humano',
+        headline: 'Artesanía Táctil, Accesibilidad Asistiva e Interfaces Sensoriales a 60 FPS',
+        body: 'Diseñando interfaces cálidas y accesibles donde cada shader, pulso háptico y jerarquía tipográfica invita a participar. Desde lentes de Daltonización WebRTC a 60 FPS para daltonismo (Picta) hasta física de partículas en Three.js y hardware físico Web NFC (Tocaito).',
         tags: [
-          'Sistemas de Diseño (Figma)',
-          'Tipografía Editorial',
-          'Psicología de Usuario y CRO',
-          '3D Interactivo / WebGL',
-          'Accesibilidad (A11y)'
+          'Diseño Humano',
+          '60 FPS WebGL / WebRTC',
+          'Accesibilidad Asistiva',
+          'Hardware Físico Web NFC',
+          'Tipografía Editorial'
         ]
       },
       marketing: {
         id: 'marketing',
-        icon: '📈',
-        pillLabel: 'Mercadeo de Crecimiento y Rendimiento',
-        headline: 'Dirigiendo Pipelines de más de $10M y Compra Cuantitativa de Medios',
-        body: 'Arquitectando adquisición multicanal paga (Meta, Google, Programática), atribución Server-Side CAPI, optimización de embudos y modelos económicos de CAC/LTV. Más de 150 cuentas de clientes dirigidas y más de $10M en pipeline comercial B2B verificado.',
+        icon: '📖',
+        pillLabel: 'Narrativa Interactiva y Síntesis',
+        headline: 'Transformando Sistemas Complejos en Historias Participativas y Optimistas',
+        body: 'Sintetizando más de 40M de trayectorias de aprendizaje en Databricks SQL en Red Ventures (edX) para impulsar +200% en descubrimiento generativo, y dirigiendo más de 150 experiencias narrativas bilingües en Viva Studio con humor, profundidad emocional y optimismo.',
         tags: [
-          'Pipeline Verificado $10M+',
-          'Compra de Medios de Alto Rendimiento',
-          '-83% Reducción de Deserción',
-          'Modelado CAC / LTV',
-          'Tecnología Publicitaria'
+          '40M+ Trayectorias Sintetizadas',
+          '+200% Descubrimiento Generativo',
+          'Síntesis Narrativa',
+          'Cultura Bilingüe',
+          'Historias Participativas'
         ]
       },
       engineering: {
         id: 'engineering',
         icon: '⚡',
         pillLabel: 'Ingeniería de Computadoras (4.0 GPA)',
-        headline: 'Ingeniería de Computadoras (4.0 GPA) y Sistemas de IA Agéntica',
-        body: 'Stanford Innovation Fellow con 4.0 GPA en Ingeniería de Computadoras. Desarrollando arquitecturas distribuidas escalables, más de 20 flujos agénticos automatizados de IA (Claude / OpenAI) y analítica de más de 40M de sesiones en edX con cero deuda técnica.',
+        headline: 'Stanford Innovation Fellow · Ingeniería de Computadoras (4.0 GPA) e IA Agéntica',
+        body: 'Stanford Innovation Fellow con 4.0 GPA en Ingeniería de Computadoras. Desarrollando más de 20 flujos agénticos autónomos con tool-calling (OpenAI / Claude / Python / Docker), síntesis de telemetría en tiempo real y arquitecturas en la nube.',
         tags: [
           'Ingeniería de Computadoras (4.0 GPA)',
-          'Flujos de IA Agéntica',
+          'Tool-Calling Agéntico',
           'Python / SQL / Databricks',
-          'Nube Full-Stack',
-          'Arquitectura Sin Deuda'
+          'Docker y Nube',
+          'Orquestación de Frontera'
         ]
       }
     }

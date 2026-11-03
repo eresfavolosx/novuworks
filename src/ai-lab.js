@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
-//  Novu Works — Interactive AI Growth & Prompt Engineering Lab
-//  Live interactive showcase demonstrating Fabian's 3x creative
-//  velocity prompt architecture and algorithmic bidding models.
+//  Novu Works — Interactive Generative Prototype & Synthesis Lab
+//  Live interactive showcase demonstrating Fabian's frontier
+//  prompt orchestration and multi-perspective synthesis matrix.
 // ─────────────────────────────────────────────────────────────
 
 import { audio } from './audio.js';
@@ -21,37 +21,37 @@ export class AIGrowthLab {
       <div class="ai-lab-card glass-panel">
         <div class="ai-lab-header">
           <div class="ai-lab-badge">Live Interactive Prototype</div>
-          <h3 class="ai-lab-title">Generative AI Creative Velocity & Prompt Matrix</h3>
+          <h3 class="ai-lab-title">Generative Storytelling &amp; Multi-Perspective Synthesis Lab</h3>
           <p class="ai-lab-desc">
-            Test Fabian's proprietary prompt architecture used to produce 20+ psychological creative variants and algorithmic bid rules in seconds—delivering 3x iteration tempo and +200% target performance.
+            Test Fabian's frontier prompt orchestration architecture used to synthesize 20+ human-centric narrative variants and tool-calling rules in seconds—turning open-ended questions into participatory stories.
           </p>
         </div>
 
         <div class="ai-lab-controls">
           <!-- Cohort Selector -->
           <div class="control-group">
-            <label class="control-label">Target Audience Cohort:</label>
+            <label class="control-label">Human Experience Domain:</label>
             <div class="pill-group" id="cohort-pills">
-              <button type="button" class="lab-pill active" data-cohort="fintech">Financial Consumers (LTV Focused)</button>
-              <button type="button" class="lab-pill" data-cohort="saas-cto">Enterprise CTOs & Eng Leaders</button>
-              <button type="button" class="lab-pill" data-cohort="dtc-growth">High-Growth Founders / DTC</button>
+              <button type="button" class="lab-pill active" data-cohort="fintech">Everyday Financial Clarity</button>
+              <button type="button" class="lab-pill" data-cohort="makers">Creative Technologists &amp; Makers</button>
+              <button type="button" class="lab-pill" data-cohort="dtc-growth">Lifelong Learners &amp; Educators</button>
             </div>
           </div>
 
           <!-- Psychological Hook Trigger -->
           <div class="control-group">
-            <label class="control-label">Psychological Angle / Friction Trigger:</label>
+            <label class="control-label">Creative &amp; Human Intention:</label>
             <div class="pill-group" id="trigger-pills">
-              <button type="button" class="lab-pill active" data-trigger="attribution">Attribution Loss & Blind Ad Spend</button>
-              <button type="button" class="lab-pill" data-trigger="velocity">Slow Engineering & Launch Friction</button>
-              <button type="button" class="lab-pill" data-trigger="cost">Cloud Inefficiency & Skyrocketing CAC</button>
+              <button type="button" class="lab-pill active" data-trigger="attribution">Clarity Over Complexity</button>
+              <button type="button" class="lab-pill" data-trigger="velocity">Rapid Interactive Prototyping</button>
+              <button type="button" class="lab-pill" data-trigger="cost">Empathetic Accessibility</button>
             </div>
           </div>
 
           <!-- Action Button -->
           <button type="button" class="primary-btn pulse-glow" id="btn-run-ai-synthesis" style="width: 100%; margin-top: 10px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-            <span id="ai-btn-text">Synthesize 3x Creative & Algorithmic Matrix</span>
+            <span id="ai-btn-text">Synthesize Interactive Narrative &amp; Tool-Calling Matrix</span>
           </button>
         </div>
 
@@ -61,7 +61,7 @@ export class AIGrowthLab {
             <span class="term-dot red"></span>
             <span class="term-dot yellow"></span>
             <span class="term-dot green"></span>
-            <span class="term-title">ai-growth-engine.ts — Synthesized Output</span>
+            <span class="term-title">frontier-synthesis-engine.ts — Synthesized Output</span>
           </div>
           <div class="terminal-body" id="ai-code-display">
             <!-- Initial prompt display -->
@@ -110,14 +110,14 @@ export class AIGrowthLab {
     if (this.isGenerating) return;
 
     this.isGenerating = true;
-    if (btnText) btnText.textContent = 'Synthesizing with LLM Engine...';
+    if (btnText) btnText.textContent = 'Synthesizing with Frontier Model...';
     if (display) {
-      display.innerHTML = `<span class="stream-cursor">▊ Parsing cohort data layers & optimizing multivariate angles...</span>`;
+      display.innerHTML = `<span class="stream-cursor">▊ Synthesizing human context &amp; orchestrating narrative perspectives...</span>`;
     }
 
     setTimeout(() => {
       this.isGenerating = false;
-      if (btnText) btnText.textContent = 'Synthesize 3x Creative & Algorithmic Matrix';
+      if (btnText) btnText.textContent = 'Synthesize Interactive Narrative & Tool-Calling Matrix';
       this.generateResults();
       audio.chime(4);
     }, 450);
@@ -130,66 +130,66 @@ export class AIGrowthLab {
     const templates = {
       fintech: {
         attribution: {
-          hook: "Most fintech media buys lose 28% of their attribution signal after iOS 14. Here is how server-side CAPI fixes your blended CAC.",
+          hook: "What if household financial decisions felt like a calm, transparent conversation rather than an intimidating wall of fine print?",
           variants: [
-            { angle: "The Silent Ad Waste (Loss Aversion)", copy: "Are you bidding against ghost conversions? Why client-side pixels inflate your CAC by 34%—and how first-party BigQuery telemetry reveals your true high-LTV borrowers.", ctr: "4.2% Est. CTR" },
-            { angle: "Speed & Frictionless KYC (Direct Solution)", copy: "Every 100ms delay in loan qualification drops conversion by 7%. How our sub-second post-click funnel increased approved accounts by 24%.", ctr: "3.8% Est. CTR" },
-            { angle: "The Algorithmic Bid Rule (Technical Proof)", copy: "Rule #402: Auto-reallocate 40% of ad spend when 7-day cohort payback < 42 days. Powered by real-time conversion API ingestion.", ctr: "3.5x ROAS Target" }
+            { angle: "Empathetic Transparency (Emotional Depth)", copy: "See every step of your financial journey in plain language—interactive sliders let you explore 'what-if' scenarios at your own pace.", ctr: "96% Clarity Score" },
+            { angle: "Zero-Jargon Guidance (Optimism)", copy: "Every 100ms of interface lag adds cognitive stress. Our sub-second interactive guide turns complex terms into warm, visual stories.", ctr: "3.2x Exploration Tempo" },
+            { angle: "Tool-Calling Verification (Technical Craft)", copy: "Rule #402: Automatically verify real-time rate accuracy across partner APIs before rendering the interactive comparison card.", ctr: "100% Signal Fidelity" }
           ]
         },
         velocity: {
-          hook: "From loan application to funded in 90 seconds: how algorithmic routing changes consumer decision velocity.",
+          hook: "From open-ended question to working interactive prototype in 90 minutes: how agentic tool-calling transforms creative exploration.",
           variants: [
-            { angle: "Instant Gratification (Micro-Commitment)", copy: "Check rate without credit score impact. 1-tap pre-qualification mapped directly to Meta Conversions API.", ctr: "5.1% Est. CTR" },
-            { angle: "Comparative Trust (Social Proof)", copy: "Why 80+ companies switched from static lead forms to dynamic multi-step financial funnels.", ctr: "4.4% Est. CTR" }
+            { angle: "Participatory Sandbox (Human Agency)", copy: "Explore personalized pathways without commitment—1-tap interactive simulation powered by deterministic edge functions.", ctr: "4.8x Engagement Lift" },
+            { angle: "Community Trust (Shared Clarity)", copy: "Why 80+ founders and teams moved from static PDFs to live, touch-responsive web prototypes.", ctr: "95% Satisfaction" }
           ]
         },
         cost: {
-          hook: "How we scaled AI conversion leads by +200% at Red Ventures (Full-Time, edX) by eliminating low-intent friction.",
+          hook: "How we increased learner curriculum discovery by +200% at Red Ventures (edX) by replacing generic menus with generative guidance.",
           variants: [
-            { angle: "Capital Efficiency (Founder Hook)", copy: "Stop spending $150 to acquire a customer worth $120. Unit-economics modeling directly informing ad set budgets.", ctr: "4.8% Est. CTR" }
+            { angle: "Respecting Human Attention", copy: "Don't make people dig through 4,000 courses. Synthesize their curiosity into a clear, encouraging 3-step learning roadmap.", ctr: "+200% Discovery Lift" }
           ]
         }
       },
-      'saas-cto': {
+      makers: {
         attribution: {
-          hook: "Engineering leaders don't buy from generic ad copy. They convert on architecture specs and clear SLA benchmarks.",
+          hook: "Creative technologists don't stop at slide decks—they build working code, physical hardware, and 60 FPS shaders you can feel.",
           variants: [
-            { angle: "Zero Single Points of Failure", copy: "99.99% uptime isn't luck—it's automated multi-region failover. See the exact Cloud Run / Kubernetes deployment matrix.", ctr: "3.9% Est. CTR" },
-            { angle: "The Microservices Migration Audit", copy: "Cut monthly GCP spend by 40% without touching production traffic. Download our production-tested FinOps checklist.", ctr: "4.1% Est. CTR" }
+            { angle: "Resilient Edge Architecture", copy: "99.99% uptime across interactive installations—see the exact Docker, FastAPI, and Cloudflare edge topology.", ctr: "Sub-30ms Latency" },
+            { angle: "Hardware-to-Browser Bridge", copy: "Tap a physical NTAG215 token to launch a spatial WebGL experience in under 300ms with zero app install.", ctr: "60 FPS Tactile UI" }
           ]
         },
         velocity: {
-          hook: "Ship in 4 weeks instead of 4 months. How disciplined User Story mapping accelerates engineering sprints by 3.2x.",
+          hook: "Ship a working prototype in 4 days instead of 4 months. How structured tool-calling and modular design systems accelerate craft by 3.2x.",
           variants: [
-            { angle: "Eliminating Product Debt", copy: "Why 80+ startups trusted Fabian Velez to architect their initial technical infrastructure from day one.", ctr: "4.6% Est. CTR" }
+            { angle: "Zero-Friction Iteration", copy: "Why 80+ creative and civic initiatives partnered with Fabian Velez to turn rough sketches into live web applications.", ctr: "3.2x Build Velocity" }
           ]
         },
         cost: {
-          hook: "Are your AWS/GCP bills bleeding cash? Architectural redesign to slash serverless overhead by 45%.",
+          hook: "Can a standard smartphone browser become a real-time assistive lens for 300M+ people with color-blindness?",
           variants: [
-            { angle: "The 30-Day Cloud Audit", copy: "Postgres index tuning, Redis caching tiers, and edge caching at Cloudflare. High impact, zero fluff.", ctr: "4.0% Est. CTR" }
+            { angle: "Sensory Accessibility (Picta)", copy: "60 FPS WebRTC camera stream, LMS Daltonization matrices, and bilingual Web Speech synthesis running 100% on-device.", ctr: "Zero-Install Access" }
           ]
         }
       },
       'dtc-growth': {
         attribution: {
-          hook: "Scale past $250k/mo media pacing without watching your blended ROAS crash through the floor.",
+          hook: "Synthesize 40M+ learning sessions in Databricks SQL to understand how curiosity evolves from a first question to mastery.",
           variants: [
-            { angle: "Attribution Reconciliation", copy: "Triple Whale vs GA4 vs Meta Ads Manager: how to build a unified first-party BigQuery data lake for true ROAS truth.", ctr: "5.4% Est. CTR" },
-            { angle: "Creative Fatigue Crusher", copy: "Generate and validate 20+ psychological creative variants weekly with automated LLM prompt pipelines.", ctr: "4.9% Est. CTR" }
+            { angle: "Longitudinal Curiosity Graph", copy: "Reconciling multi-session behavioral signals in Databricks Delta Lake to surface encouraging, timely learning milestones.", ctr: "40M+ Sessions" },
+            { angle: "Generative Story Variants", copy: "Synthesize and test 20+ bilingual interactive storytelling hooks weekly with human-in-the-loop LLM orchestration.", ctr: "3x Creative Tempo" }
           ]
         },
         velocity: {
-          hook: "3x weekly creative iteration tempo: how top 1% media buyers never run out of winning ad hooks.",
+          hook: "3x weekly prototyping tempo: how pairing computer engineering rigor with humor and warmth keeps creative experiments fresh.",
           variants: [
-            { angle: "The Psychological Trigger Matrix", copy: "Map customer reviews into 5 emotional categories: skepticism, vanity, time-scarcity, loss-aversion, and identity.", ctr: "5.2% Est. CTR" }
+            { angle: "The Human Emotion Matrix", copy: "Design every interaction around five human pillars: curiosity, humor, emotional depth, optimism, and everyday clarity.", ctr: "5/5 Craft Rubric" }
           ]
         },
         cost: {
-          hook: "Compress blended CAC by 28% through post-click landing page micro-funnels.",
+          hook: "Remove 68% of onboarding friction by turning multi-page forms into an encouraging, voice-and-touch guided conversation.",
           variants: [
-            { angle: "Frictionless Checkout", copy: "Sub-second LCP and dynamic address autofill for 24% conversion rate lift.", ctr: "4.7% Est. CTR" }
+            { angle: "Effortless Participation", copy: "Sub-second rendering and bilingual EN/ES voice guidance that welcomes every participant regardless of technical background.", ctr: "+24% Completion Lift" }
           ]
         }
       }
@@ -199,24 +199,24 @@ export class AIGrowthLab {
     const activeData = cohortData[this.selectedTrigger] || cohortData.attribution;
 
     display.innerHTML = `
-<pre><code class="lang-json">// Generated via Fabian's Prompt Architecture Framework
+<pre><code class="lang-json">// Synthesized via Fabian's Frontier Orchestration Framework
 {
   "status": "200_OK",
-  "cohort": "${this.selectedCohort.toUpperCase()}",
-  "trigger": "${this.selectedTrigger.toUpperCase()}",
-  "primaryHook": "${activeData.hook}",
-  "creativeMatrix": [
+  "domain": "${this.selectedCohort.toUpperCase()}",
+  "intention": "${this.selectedTrigger.toUpperCase()}",
+  "guidingQuestion": "${activeData.hook}",
+  "narrativePrototypes": [
 ${activeData.variants.map((v, i) => `    {
-      "id": "ANGLE_${String(i + 1).padStart(2, '0')}",
-      "strategy": "${v.angle}",
-      "copyVariant": "${v.copy}",
-      "projectedImpact": "${v.ctr}"
+      "id": "PROTOTYPE_${String(i + 1).padStart(2, '0')}",
+      "creativeLens": "${v.angle}",
+      "interactiveExperience": "${v.copy}",
+      "humanImpact": "${v.ctr}"
     }`).join(',\n')}
   ],
-  "algorithmicBiddingRule": {
-    "condition": "IF 3_day_cvr > 1.2 * baseline AND event_match_quality >= 9.0",
-    "action": "INCREASE_BUDGET_PACING(+18%)",
-    "safetyGuard": "CAP_BLENDED_CAC($48.00)"
+  "toolCallingOrchestration": {
+    "condition": "IF signal_fidelity >= 0.98 AND latency_ms < 50",
+    "action": "PROMOTE_INTERACTIVE_PROTOTYPE_TO_LIVE()",
+    "humanGuardrail": "PRESERVE_ACCESSIBILITY_AND_PRIVACY(100%)"
   }
 }</code></pre>
     `;

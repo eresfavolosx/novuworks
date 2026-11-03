@@ -110,148 +110,148 @@ export class VisitorTools {
       <!-- Navigation Tabs -->
       <div class="tools-tabs-bar" role="tablist">
         <button type="button" class="tools-tab-btn active" data-tool="capi-builder" role="tab">
-          <span>🎯</span> Meta CAPI & UTM Builder
+          <span>🎯</span> Event Deduplication &amp; URL Lab
         </button>
         <button type="button" class="tools-tab-btn" data-tool="roas-calc" role="tab">
-          <span>📈</span> ROAS & Break-Even Model
+          <span>✨</span> Prototype Velocity &amp; Impact Modeler
         </button>
         <button type="button" class="tools-tab-btn" data-tool="ats-export" role="tab">
-          <span>📄</span> Recruiter ATS JSON Export
+          <span>📄</span> Maker JSON Resume Export
         </button>
         <button type="button" class="tools-tab-btn" data-tool="edge-telemetry" role="tab">
-          <span>🛰️</span> Edge, Hardware & Firebase Telemetry
+          <span>🛰️</span> Edge, Hardware &amp; Sensor Telemetry
         </button>
       </div>
 
       <!-- Tab Content Body -->
       <div class="dialog-body tools-modal-body">
-        <!-- Tab 1: Meta CAPI & UTM Builder -->
+        <!-- Tab 1: Event Deduplication & Clean URL Lab -->
         <div class="tool-tab-panel active" id="tool-panel-capi-builder">
           <div class="tool-intro">
-            <h4>Server-Side Meta Conversions API (CAPI) & Clean UTM Tag Generator</h4>
-            <p>Generate production-ready Meta CAPI JSON payloads with deduplication tokens (<code>event_id</code>) and clean tracking URLs for your growth stack.</p>
+            <h4>First-Party Event Deduplication &amp; Clean Experiment URL Generator</h4>
+            <p>Generate deterministic event payloads with cryptographic deduplication IDs (<code>event_id</code>) and clean shareable URLs for interactive web experiments.</p>
           </div>
 
           <div class="tool-two-col">
             <div class="tool-form-col">
               <div class="tool-field-group">
-                <label for="capi-input-url">Destination Landing Page URL</label>
-                <input type="url" id="capi-input-url" class="tool-text-input" value="https://novu.works" placeholder="https://yourbrand.com/landing" />
+                <label for="capi-input-url">Prototype Destination URL</label>
+                <input type="url" id="capi-input-url" class="tool-text-input" value="https://novu.works" placeholder="https://yourprototype.com/experiment" />
               </div>
 
               <div class="tool-field-row">
                 <div class="tool-field-group">
-                  <label for="capi-input-source">UTM Source</label>
-                  <input type="text" id="capi-input-source" class="tool-text-input" value="facebook" placeholder="facebook, linkedin, google" />
+                  <label for="capi-input-source">Channel Source</label>
+                  <input type="text" id="capi-input-source" class="tool-text-input" value="openai_experiments" placeholder="github, openai, newsletter" />
                 </div>
                 <div class="tool-field-group">
-                  <label for="capi-input-medium">UTM Medium</label>
-                  <input type="text" id="capi-input-medium" class="tool-text-input" value="paid_social" placeholder="paid_social, cpc, email" />
+                  <label for="capi-input-medium">Interaction Medium</label>
+                  <input type="text" id="capi-input-medium" class="tool-text-input" value="interactive_prototype" placeholder="interactive_prototype, nfc_tap" />
                 </div>
               </div>
 
               <div class="tool-field-row">
                 <div class="tool-field-group">
-                  <label for="capi-input-campaign">Campaign Name</label>
-                  <input type="text" id="capi-input-campaign" class="tool-text-input" value="q4_ai_growth_scale" placeholder="black_friday_2026" />
+                  <label for="capi-input-campaign">Experiment Name</label>
+                  <input type="text" id="capi-input-campaign" class="tool-text-input" value="frontier_creative_lab" placeholder="picta_vision_v2" />
                 </div>
                 <div class="tool-field-group">
-                  <label for="capi-input-event">Conversion Event</label>
+                  <label for="capi-input-event">Telemetry Event</label>
                   <select id="capi-input-event" class="tool-select-input">
-                    <option value="Lead" selected>Lead (Form Submission)</option>
-                    <option value="Purchase">Purchase (Ecommerce Conversion)</option>
-                    <option value="Schedule">Schedule (Strategy Call Booked)</option>
-                    <option value="CompleteRegistration">CompleteRegistration</option>
-                    <option value="PageView">PageView</option>
+                    <option value="PrototypeLaunched" selected>PrototypeLaunched (Interactive Session)</option>
+                    <option value="ToolCallCompleted">ToolCallCompleted (Agent Synthesis)</option>
+                    <option value="ShaderCalibrated">ShaderCalibrated (60 FPS WebGL/WebRTC)</option>
+                    <option value="NfcTagBridged">NfcTagBridged (Physical Hardware Tap)</option>
+                    <option value="StoryShared">StoryShared (Community Participation)</option>
                   </select>
                 </div>
               </div>
 
               <div class="tool-field-group">
-                <label for="capi-input-value">Event Conversion Value ($ USD)</label>
-                <input type="number" id="capi-input-value" class="tool-text-input" value="450.00" step="10" />
+                <label for="capi-input-value">Session Engagement Depth Score</label>
+                <input type="number" id="capi-input-value" class="tool-text-input" value="98.5" step="1" />
               </div>
             </div>
 
             <div class="tool-output-col">
               <div class="output-block">
                 <div class="output-header">
-                  <span class="output-label">CLEAN UTM DESTINATION URL</span>
+                  <span class="output-label">CLEAN EXPERIMENT SHARE URL</span>
                   <button type="button" class="output-copy-btn" id="btn-copy-utm-url" title="Copy clean tagged URL">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     <span>Copy URL</span>
                   </button>
                 </div>
-                <div class="output-code-box" id="capi-output-url">https://novu.works?utm_source=facebook&utm_medium=paid_social&utm_campaign=q4_ai_growth_scale</div>
+                <div class="output-code-box" id="capi-output-url">https://novu.works?utm_source=openai_experiments&amp;utm_medium=interactive_prototype&amp;utm_campaign=frontier_creative_lab</div>
               </div>
 
               <div class="output-block" style="margin-top: 14px;">
                 <div class="output-header">
-                  <span class="output-label">SERVER-SIDE META CAPI PAYLOAD (POST /events)</span>
+                  <span class="output-label">DETERMINISTIC TELEMETRY PAYLOAD (POST /events)</span>
                   <button type="button" class="output-copy-btn" id="btn-copy-capi-json" title="Copy Server-Side JSON payload">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <span>Copy CAPI JSON</span>
+                    <span>Copy Event JSON</span>
                   </button>
                 </div>
-                <pre class="output-code-pre" id="capi-output-json">Loading CAPI specification...</pre>
+                <pre class="output-code-pre" id="capi-output-json">Loading event specification...</pre>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Tab 2: ROAS & Break-Even Model -->
+        <!-- Tab 2: Prototype Velocity & Impact Modeler -->
         <div class="tool-tab-panel" id="tool-panel-roas-calc">
           <div class="tool-intro">
-            <h4>Paid Acquisition Break-Even & Profit Contribution Modeler</h4>
-            <p>Calculate your target CAC, margin threshold, and Marketing Efficiency Ratio (MER) before spending on paid traffic.</p>
+            <h4>Interactive Prototype Velocity &amp; Human Synthesis Modeler</h4>
+            <p>Simulate how agentic tool-calling and modular design systems compress time-to-prototype and expand human exploration depth.</p>
           </div>
 
           <div class="tool-two-col">
             <div class="tool-form-col">
               <div class="tool-field-group">
-                <label for="roas-input-margin">Gross Profit Margin (%)</label>
-                <input type="range" id="roas-input-margin" min="10" max="95" value="70" class="tool-range-slider" />
-                <span class="slider-val-readout" id="roas-margin-readout">70%</span>
+                <label for="roas-input-margin">Agentic Tool-Calling Coverage (%)</label>
+                <input type="range" id="roas-input-margin" min="10" max="95" value="75" class="tool-range-slider" />
+                <span class="slider-val-readout" id="roas-margin-readout">75%</span>
               </div>
 
               <div class="tool-field-group">
-                <label for="roas-input-aov">Average Order Value / Deal Size ($)</label>
-                <input type="number" id="roas-input-aov" class="tool-text-input" value="1200" step="50" />
+                <label for="roas-input-aov">Monthly Active Prototype Explorers</label>
+                <input type="number" id="roas-input-aov" class="tool-text-input" value="12000" step="500" />
               </div>
 
               <div class="tool-field-group">
-                <label for="roas-input-cac">Current Blended CAC ($)</label>
-                <input type="number" id="roas-input-cac" class="tool-text-input" value="350" step="25" />
+                <label for="roas-input-cac">Baseline Engineering Hours per Iteration</label>
+                <input type="number" id="roas-input-cac" class="tool-text-input" value="40" step="5" />
               </div>
             </div>
 
             <div class="tool-output-col">
               <div class="roas-metrics-card">
                 <div class="roas-metric-item highlight">
-                  <span class="rmi-label">BREAK-EVEN ROAS</span>
-                  <span class="rmi-value gold-num" id="roas-out-breakeven">1.43x</span>
-                  <span class="rmi-sub">Minimum ROAS needed to avoid losing money</span>
+                  <span class="rmi-label">ITERATION VELOCITY MULTIPLIER</span>
+                  <span class="rmi-value gold-num" id="roas-out-breakeven">3.40x</span>
+                  <span class="rmi-sub">Speedup from concept question to playable build</span>
                 </div>
                 <div class="roas-metric-item">
-                  <span class="rmi-label">ACTIVE CAMPAIGN ROAS</span>
-                  <span class="rmi-value" id="roas-out-current">3.43x</span>
-                  <span class="rmi-sub">Revenue / Ad Spend ratio</span>
+                  <span class="rmi-label">PARTICIPATION LIFT</span>
+                  <span class="rmi-value" id="roas-out-current">+200%</span>
+                  <span class="rmi-sub">Increase in interactive session depth</span>
                 </div>
                 <div class="roas-metric-item">
-                  <span class="rmi-label">NET PROFIT PER CONVERSION</span>
-                  <span class="rmi-value green-num" id="roas-out-profit">+$490.00</span>
-                  <span class="rmi-sub">Margin dollars after paying ad cost</span>
+                  <span class="rmi-label">ENGINEERING HOURS RECLAIMED</span>
+                  <span class="rmi-value green-num" id="roas-out-profit">+30.0 hrs/wk</span>
+                  <span class="rmi-sub">Saved from repetitive boilerplate for creative craft</span>
                 </div>
                 <div class="roas-metric-item">
-                  <span class="rmi-label">MAX ALLOWABLE CAC</span>
-                  <span class="rmi-value" id="roas-out-maxcac">$840.00</span>
-                  <span class="rmi-sub">Ceiling CAC before hitting negative margin</span>
+                  <span class="rmi-label">SYNTHESIZED JOURNEY CAPACITY</span>
+                  <span class="rmi-value" id="roas-out-maxcac">9,000+ paths</span>
+                  <span class="rmi-sub">Personalized human-centric exploration states</span>
                 </div>
               </div>
 
               <button type="button" class="luxury-btn outline-platinum roas-copy-plan-btn" id="btn-copy-roas-plan">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                <span>Copy Unit Economics Summary</span>
+                <span>Copy Prototype Velocity Summary</span>
               </button>
             </div>
           </div>
@@ -360,30 +360,30 @@ export class VisitorTools {
   }
 
   updateRoasPreview() {
-    const margin = parseFloat(document.getElementById('roas-input-margin')?.value || '70') / 100;
-    const aov = parseFloat(document.getElementById('roas-input-aov')?.value || '1200');
-    const cac = parseFloat(document.getElementById('roas-input-cac')?.value || '350');
+    const coverage = parseFloat(document.getElementById('roas-input-margin')?.value || '75') / 100;
+    const explorers = parseFloat(document.getElementById('roas-input-aov')?.value || '12000');
+    const baseHours = parseFloat(document.getElementById('roas-input-cac')?.value || '40');
 
     const marginReadout = document.getElementById('roas-margin-readout');
-    if (marginReadout) marginReadout.textContent = `${Math.round(margin * 100)}%`;
+    if (marginReadout) marginReadout.textContent = `${Math.round(coverage * 100)}%`;
 
-    const breakevenRoas = margin > 0 ? (1 / margin).toFixed(2) + 'x' : 'N/A';
-    const currentRoas = cac > 0 ? (aov / cac).toFixed(2) + 'x' : 'N/A';
-    const profitPerConv = (aov * margin) - cac;
-    const maxAllowableCac = aov * margin;
+    const velocityMultiplier = (1 + coverage * 3.2).toFixed(2) + 'x';
+    const participationLift = '+' + Math.round(coverage * 265) + '%';
+    const reclaimedHours = (baseHours * coverage).toFixed(1);
+    const synthesizedPaths = Math.round(explorers * coverage).toLocaleString() + '+ paths';
 
     const beEl = document.getElementById('roas-out-breakeven');
     const curEl = document.getElementById('roas-out-current');
     const profEl = document.getElementById('roas-out-profit');
     const maxEl = document.getElementById('roas-out-maxcac');
 
-    if (beEl) beEl.textContent = breakevenRoas;
-    if (curEl) curEl.textContent = currentRoas;
+    if (beEl) beEl.textContent = velocityMultiplier;
+    if (curEl) curEl.textContent = participationLift;
     if (profEl) {
-      profEl.textContent = (profitPerConv >= 0 ? '+' : '') + '$' + profitPerConv.toFixed(2);
-      profEl.className = 'rmi-value ' + (profitPerConv >= 0 ? 'green-num' : 'red-num');
+      profEl.textContent = `+${reclaimedHours} hrs/wk`;
+      profEl.className = 'rmi-value green-num';
     }
-    if (maxEl) maxEl.textContent = '$' + maxAllowableCac.toFixed(2);
+    if (maxEl) maxEl.textContent = synthesizedPaths;
   }
 
   getAtsJsonResume() {
@@ -745,16 +745,16 @@ export class VisitorTools {
       const prof = document.getElementById('roas-out-profit')?.textContent;
       const maxCac = document.getElementById('roas-out-maxcac')?.textContent;
 
-      const summary = `PAID MEDIA UNIT ECONOMICS MODEL
-• Break-Even ROAS: ${be}
-• Active ROAS: ${cur}
-• Net Profit per Conversion: ${prof}
-• Maximum Allowable CAC: ${maxCac}
-Calculated via Novu Works Executive Toolkit (https://novu.works)`;
+      const summary = `PROTOTYPE VELOCITY & SYNTHESIS MODEL
+• Iteration Velocity Multiplier: ${be}
+• Participation Lift: ${cur}
+• Engineering Hours Reclaimed: ${prof}
+• Synthesized Journey Capacity: ${maxCac}
+Calculated via Novu Works Creative Toolkit (https://novu.works)`;
 
       navigator.clipboard.writeText(summary).then(() => {
         audio.confirm();
-        this.options.showToast && this.options.showToast('ROAS & Unit Economics Model copied');
+        this.options.showToast && this.options.showToast('Prototype Velocity Model copied');
       });
     });
 

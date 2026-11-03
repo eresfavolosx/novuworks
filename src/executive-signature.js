@@ -25,7 +25,7 @@ export function renderExecutiveSignatureBlock() {
             </h2>
             <div class="sig-underline-bar"></div>
           </div>
-          <p class="sig-title">Growth &amp; RevOps Analytics Lead · Computer Engineering (4.0 GPA)</p>
+          <p class="sig-title">Creative Technologist · Computer Engineering (4.0 GPA)</p>
           <div class="sig-credentials-row">
             <span class="sig-cred-pill">Stanford Innovation Fellow</span>
             <span class="sig-cred-pill">Money Group &amp; Red Ventures Alum</span>

@@ -48,11 +48,11 @@ export class CyberArcadeGame {
 
     // Milestone career gates (Loop into endless timeline eras)
     this.checkpoints = [
-      { id: 'mg', z: -900, name: 'Money Group (Full-Time)', metric: '20+ Automated Agentic Workflows ($1B+ Portfolio Scope)' },
-      { id: 'rv', z: -2100, name: 'Red Ventures / edX (Full-Time)', metric: '40M+ Databricks SQL Sessions Normalized & Scaled' },
-      { id: 'va', z: -3400, name: 'Viva Advertising (My Company / Founder)', metric: '$10M+ B2B Revenue Pipeline & -83% Churn Reduction' },
-      { id: 'lp', z: -4800, name: 'Link Puerto Rico (My Company / Co-Founder)', metric: '100+ Relational Databases & Crisis IT Restored' },
-      { id: 'st', z: -6200, name: 'Stanford University', metric: 'Stanford Innovation Fellows Graduate Honor' },
+      { id: 'mg', z: -900, name: 'Money Group (Full-Time)', metric: '20+ Frontier AI & Tool-Calling Prototypes Shipped' },
+      { id: 'rv', z: -2100, name: 'Red Ventures / edX (Full-Time)', metric: '40M+ Human Learning Journeys Synthesized in Databricks' },
+      { id: 'va', z: -3400, name: 'Viva Advertising (My Company / Founder)', metric: '150+ Interactive Stories & Creative Systems Shipped' },
+      { id: 'lp', z: -4800, name: 'Link Puerto Rico (My Company / Co-Founder)', metric: '100+ Community Systems & Satellite Networks Restored' },
+      { id: 'st', z: -6200, name: 'Stanford University', metric: 'Stanford University Innovation Fellow (Design Thinking)' },
       { id: 'up', z: -7600, name: 'Univ. Politécnica PR', metric: 'B.S. Computer Engineering (Summa Cum Laude 4.0 GPA)' },
     ];
 
@@ -112,12 +112,12 @@ export class CyberArcadeGame {
               <span class="as-value text-speed" id="arc-speed">50.0 MPH</span>
             </div>
             <div class="arcade-stat-box">
-              <span class="as-label">PIPELINE ATTRIBUTED</span>
-              <span class="as-value text-gold" id="arc-score">$000,000</span>
+              <span class="as-label">EXPERIENCES SYNTHESIZED</span>
+              <span class="as-value text-gold" id="arc-score">000,000</span>
             </div>
             <div class="arcade-stat-box">
-              <span class="as-label">GROWTH PACING</span>
-              <span class="as-value" style="color: #4ade80;" id="arc-pacing">+200% ROAS</span>
+              <span class="as-label">CREATIVE VELOCITY</span>
+              <span class="as-value" style="color: #4ade80;" id="arc-pacing">+200% FLOW</span>
             </div>
             <div class="arcade-stat-box">
               <span class="as-label">CHRONO SHIELDS</span>
@@ -171,12 +171,12 @@ export class CyberArcadeGame {
 
             <div class="am-score-grid">
               <div class="am-score-cell">
-                <span class="am-key">TOTAL PIPELINE ATTRIBUTED</span>
-                <span class="am-val text-gold" id="am-final-score">$0</span>
+                <span class="am-key">TOTAL EXPERIENCES SYNTHESIZED</span>
+                <span class="am-val text-gold" id="am-final-score">0</span>
               </div>
               <div class="am-score-cell">
-                <span class="am-key">CANDIDATE CLASSIFICATION</span>
-                <span class="am-val" style="color: #38bdf8;">Elite 1% AI & Growth Engineer</span>
+                <span class="am-key">MAKER CLASSIFICATION</span>
+                <span class="am-val" style="color: #38bdf8;">Creative Technologist · Frontier Prototyper</span>
               </div>
             </div>
 

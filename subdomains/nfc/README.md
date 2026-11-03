@@ -1,84 +1,32 @@
-# Tocaito: Smart NFC Hardware Platform & Dynamic Link Management PWA
+# NFC Physical-to-Digital Studio (`nfc.novu.works`) — Tactile Hardware & Spatial Identity
 
-[![Live Demo](https://img.shields.io/badge/Live_Production-nfc.novu.works-orange?style=for-the-badge&logo=google-chrome)](https://nfc.novu.works)
-[![PWA](https://img.shields.io/badge/PWA-Installable_Offline_Ready-success?style=for-the-badge&logo=pwa)](https://nfc.novu.works)
-[![Hardware](https://img.shields.io/badge/Hardware-Web_NFC_NDEF-blueviolet?style=for-the-badge)](https://nfc.novu.works)
+> *"What if a physical ring, vinyl record, or studio badge could act as a living portal to an interactive story with a single tap?"*
 
-**Tocaito** is a progressive web application and IoT hardware management platform engineered by **Fabián Vélez Vicente**. Designed to bridge physical-to-digital interactions across events, luxury hospitality, and enterprise credentials, Tocaito provides an end-to-end suite for programming, provisioning, and dynamically routing contactless NFC wearables, cards, and smart tags without needing to re-write physical chips.
-
----
-
-## ⚡ Architectural Highlights & Capabilities
-
-### 1. Web NFC API Hardware Programmer
-- **In-Browser NDEF Reading & Writing:** Employs the modern `window.NDEFReader` standard on Android/Chromium devices to scan, inspect, lock, and program physical NTAG213, NTAG215, and NTAG216 microchips in real-time.
-- **Fail-Safe Write Queue:** Validates payload sizes and prevents corrupted records before issuing cryptographic write commands to physical tags.
-- **Dynamic Link Redirection Layer:** Programmable shortlinks (`/redirect.html?id=...`) allow event organizers to change destinations dynamically on the fly without re-flashing hardware bracelets.
-
-### 2. Progressive Web Application (PWA) Architecture
-- **Offline Reliability:** Service Worker (`sw.js`) and Cache Storage API ensure seamless field operation even in underground venues, festival tents, or disconnected cellular dead-zones.
-- **Native-Like App Experience:** Standalone window display, custom splash screens, iOS `apple-mobile-web-app-capable` status bar translucency, and adaptive light/dark theming.
-- **Integrated QR Fallback Generator:** Automatically computes high-contrast vector QR codes for iOS devices and older smartphones lacking background NFC tag reading.
-
-### 3. Real-Time Telemetry & Tag Fleet Analytics
-- **Tap Engagement Metrics:** Real-time logging of scans, unique visitors, browser user-agents, and timestamp heatmaps.
-- **Fleet Grouping & Batch Provisioning:** Manage hundreds of wristbands categorized by VIP tier, press passes, vendor credentials, or guest passes.
+**Live Interactive Prototype:** [https://nfc.novu.works](https://nfc.novu.works) · [Explore on Novu Works](https://novu.works/#nfc-platform)  
+**Author:** **Fabián Vélez Vicente** (`@eresfavolosx`)
 
 ---
 
-## 🛠️ Technology Stack
+## ✨ The Concept
+Digital connection has become trapped behind screens, search bars, and awkward QR codes. This creative technology experiment explores the tactile magic of physical objects—asking how a simple tap of an NFC-enabled ring, wooden token, or event badge can spark an immediate, memorable human encounter.
 
-| Layer | Technologies |
-| :--- | :--- |
-| **Frontend Framework** | Modern TypeScript, Component-Driven SPA, Vite Build Pipeline |
-| **Hardware Standards** | Web NFC API (`NDEFReader`, `NDEFRecord`), ISO/IEC 14443 Type A |
-| **PWA Infrastructure** | Service Workers, Web App Manifest, Cache API |
-| **Design System** | Custom Amber/Obsidian Glassmorphism, CSS Variables, System Theme Detection |
-| **Hosting & CI/CD** | Firebase Hosting Multi-Site Edge (`nfc.novu.works`), Cloudflare CDN |
+Whether an artist is embedding a secret audio story into a physical sculpture or two makers are exchanging contact cards at a workshop, **NFC Studio** makes bridging atoms and bits feel effortless and playful.
+
+## ⚙️ The Technology
+Engineered with zero external dependencies using modern hardware-to-browser web standards:
+- **Chrome Web NFC API (`NDEFReader`):** Reads and flashes physical **NTAG213, NTAG215, and NTAG216** microchips directly from mobile Chrome without requiring a native app.
+- **Binary NDEF & RFC 6350 vCard 3.0 Serialization:** Compiles structured identity metadata, deep links, and cryptographic hashes into byte-aligned NDEF records with real-time storage capacity gauges (144B / 504B / 888B).
+- **6DoF Holographic Card Physics:** Responds to device gyroscope orientation and pointer movement with spring-damped 3D tilt, specular foil shaders, and **Navigator Vibration API** (`navigator.vibrate`) haptic confirmation pulses.
+
+## 🌱 The Impact
+- Empowers independent artists, educators, and makers to program physical artifacts straight from a mobile browser.
+- Replaces disposable paper business cards and clunky native utilities with a warm, tactile, and reusable physical-to-digital ritual.
 
 ---
 
-## 📁 Repository Structure
+## 🚀 Running the Experiment Locally
 
-```text
-subdomains/nfc/
-├── index.html              # Main NFC provisioning & administrative dashboard
-├── redirect.html           # Ultra-fast client-side redirection gateway
-├── manifest.json           # PWA metadata, icons, and display configurations
-├── sw.js                   # Service Worker offline asset & route caching
-├── assets/                 # Minified production script & stylesheet bundles
-├── icons/                  # Multi-resolution iOS & Android adaptive icons
-└── novu-intro.js           # Seamless NovuWorks platform integration overlay
+```bash
+npx serve .
 ```
-
----
-
-## 🚀 Local Development & Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/eresfavolosx/NFC.git
-   cd NFC
-   ```
-
-2. **Run locally over HTTPS (Required for Web NFC):**
-   > [!NOTE]
-   > The Web NFC API requires a secure HTTPS context or `localhost` to access hardware radio interfaces.
-   ```bash
-   # Using Node.js:
-   npx serve .
-   ```
-
-3. **Open on an NFC-capable mobile device:**
-   ```text
-   http://localhost:3000
-   ```
-
----
-
-## 👨‍💻 Author & Engineering Credits
-
-- **Fabián Vélez Vicente** — *Cloud & Enterprise Architecture Lead / Founder*
-  - Portfolio: [novu.works](https://novu.works)
-  - GitHub: [@eresfavolosx](https://github.com/eresfavolosx)
-  - Email: `fabianvvicente1@gmail.com`
+Open on Android Chrome with NFC enabled to flash physical NTAG chips, or explore on any desktop/mobile browser using the interactive NDEF byte inspector and 3D holographic card studio.

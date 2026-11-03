@@ -1,31 +1,53 @@
 // ─────────────────────────────────────────────────────────────
-//  Novu Works — Live GitHub Codebase Radar & Open Source Telemetry
+//  Novu Works — Live GitHub Codebase Radar & Creative Tech Experiments
 //  Queries GitHub REST API live for @eresfavolosx
 // ─────────────────────────────────────────────────────────────
+
+const CREATIVE_REPO_DESCRIPTIONS = {
+  JobHelper:
+    'Interactive career synthesis prototype using frontier model orchestration (OpenAI, Claude, Gemini), deterministic tool-calling, a 100-point JSON rubric, and a 1-click Chrome Extension to replace resume anxiety with clarity.',
+  BizPay:
+    'Human-centric local payment & instant settlement prototype for independent creators in Puerto Rico—pairing ATH Móvil API handshakes with real-time fee-split mathematics for 1.2s payouts.',
+  Picta:
+    'Assistive 60 FPS WebRTC computer vision camera applying mathematical Daltonization shaders, Euclidean Delta-E pixel sampling, and Web Speech synthesis so 300M+ people with color blindness can see and hear color.',
+  NFC:
+    'Tocaito: Physical-to-digital Web NFC hardware programmer and progressive web prototype that turns a 0.4s tap of a wristband into a living, over-the-air updatable community pass, verified by a Python QA suite.',
+  hackeaporunacausa:
+    'Civic hackathon winner: an inviting youth mentorship discovery and scheduling prototype connecting underserved students at Boys & Girls Clubs in Puerto Rico with engineers, scientists, and artists.',
+  TokenFund:
+    'Puente a Puente & Civic Relief: Open-source community relief and digital library infrastructure connecting 1,000+ citizens across Puerto Rico.',
+  FavoBot:
+    'Conversational pocket companion built in Python using frontier model tool-calling and asynchronous webhooks to turn system orchestration and creative brainstorming into a natural Telegram chat.',
+  novuworks:
+    'Fabián Vélez Vicente — Creative Technologist Atelier & Interactive Playground. Three.js WebGL shaders, 60 FPS procedural particle physics, 6DoF gyroscope, and live frontier AI prototypes.',
+  Helpr:
+    'Community mentorship coordination prototype built for Hackea por una Causa: pairing curious island youth with volunteer creative technologists.',
+  'taller-git':
+    'Open-source interactive workshop curriculum and hands-on exercises crafted to teach Git & collaborative software making to 5,000+ students in Puerto Rico.',
+  CIESESE:
+    'Interactive research and fellowship portal connecting Hispanic engineering students with clean-energy and environmental science laboratories.',
+  dLiber:
+    'Early mobile-first peer-to-peer campus delivery experiment built by students, for students during university hackathon sprints.',
+  'HackTurabo-s-Website':
+    'Interactive registration and maker hub built with Node.js and Express for the HackTurabo university invention marathon.',
+  eresfavolosx:
+    'Fabián Vélez Vicente — Creative Technologist, Storytelling Designer & Frontier Systems Maker (Computer Engineering 4.0 GPA · Stanford Innovation Fellow).',
+};
 
 const FALLBACK_REPOS = [
   {
     name: 'JobHelper',
     html_url: 'https://github.com/eresfavolosx/JobHelper',
-    description: 'Autonomous multi-model LLM job evaluation, triage agent & scoring scaffold mapped to API specifications.',
+    description: CREATIVE_REPO_DESCRIPTIONS.JobHelper,
     language: 'Python',
     stargazers_count: 5,
     forks_count: 1,
     updated_at: '2026-10-24T17:33:00Z',
   },
   {
-    name: 'BizPay',
-    html_url: 'https://github.com/eresfavolosx/BizPay',
-    description: 'B2B commercial payments, invoice routing, ATH Móvil Business integration & real-time fee calculator.',
-    language: 'JavaScript',
-    stargazers_count: 4,
-    forks_count: 0,
-    updated_at: '2026-10-24T17:33:45Z',
-  },
-  {
     name: 'Picta',
     html_url: 'https://github.com/eresfavolosx/Picta',
-    description: 'Interactive visual documentation suite with tabbed history, client-side caching & Material Design Lite.',
+    description: CREATIVE_REPO_DESCRIPTIONS.Picta,
     language: 'JavaScript',
     stargazers_count: 3,
     forks_count: 0,
@@ -34,17 +56,26 @@ const FALLBACK_REPOS = [
   {
     name: 'NFC',
     html_url: 'https://github.com/eresfavolosx/NFC',
-    description: 'Cross-platform mobile event registration & NFC verification platform with automated Python QA suite.',
-    language: 'JavaScript / Vite',
+    description: CREATIVE_REPO_DESCRIPTIONS.NFC,
+    language: 'TypeScript',
     stargazers_count: 4,
     forks_count: 0,
     updated_at: '2026-10-24T17:33:37Z',
   },
   {
+    name: 'BizPay',
+    html_url: 'https://github.com/eresfavolosx/BizPay',
+    description: CREATIVE_REPO_DESCRIPTIONS.BizPay,
+    language: 'JavaScript',
+    stargazers_count: 4,
+    forks_count: 0,
+    updated_at: '2026-10-24T17:33:45Z',
+  },
+  {
     name: 'hackeaporunacausa',
     html_url: 'https://github.com/eresfavolosx/hackeaporunacausa',
-    description: 'Social impact youth mentorship scheduling & community partner network for Boys & Girls Clubs of PR.',
-    language: 'JavaScript / React',
+    description: CREATIVE_REPO_DESCRIPTIONS.hackeaporunacausa,
+    language: 'JavaScript',
     stargazers_count: 4,
     forks_count: 1,
     updated_at: '2026-10-24T17:33:55Z',
@@ -52,7 +83,7 @@ const FALLBACK_REPOS = [
   {
     name: 'novuworks',
     html_url: 'https://github.com/eresfavolosx/novuworks',
-    description: 'Fabián Vélez Vicente — Executive Portfolio & Interactive Atelier. Growth & Revenue Operations Analytics Lead.',
+    description: CREATIVE_REPO_DESCRIPTIONS.novuworks,
     language: 'JavaScript',
     stargazers_count: 6,
     forks_count: 1,
@@ -101,7 +132,10 @@ export class GitHubRadar {
       if (reposRes.ok) {
         const data = await reposRes.json();
         if (Array.isArray(data) && data.length > 0) {
-          this.repos = data;
+          this.repos = data.map((r) => ({
+            ...r,
+            description: CREATIVE_REPO_DESCRIPTIONS[r.name] || r.description || 'Open-source creative technology experiment and working prototype.',
+          }));
         } else {
           this.repos = FALLBACK_REPOS;
         }
@@ -174,14 +208,14 @@ export class GitHubRadar {
           <div class="gh-user-badge">
             <span class="gh-dot-live"></span>
             <span class="gh-handle">GitHub Live: @eresfavolosx</span>
-            <span class="gh-verified-tag">Open Source Contributor</span>
+            <span class="gh-verified-tag">Open-Source Creative Technologist</span>
           </div>
           <div class="gh-stats-cluster">
-            <span class="gh-stat-pill"><strong>${publicReposCount}</strong> Repositories</span>
+            <span class="gh-stat-pill"><strong>${publicReposCount}</strong> Experiments &amp; Repos</span>
             <span class="gh-stat-pill"><strong>${followers}</strong> Followers</span>
-            <span class="gh-stat-pill"><strong>Puerto Rico</strong> Base</span>
+            <span class="gh-stat-pill"><strong>Puerto Rico</strong> Maker Lab</span>
             <a href="https://github.com/eresfavolosx" target="_blank" rel="noopener noreferrer" class="gh-view-all-link">
-              <span>View Full Codebase</span>
+              <span>Explore All Open-Source Experiments</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
           </div>
@@ -190,15 +224,15 @@ export class GitHubRadar {
         <!-- Repository Grid -->
         <div class="gh-repos-grid">
           ${this.repos.map((repo) => `
-            <a href="${this.sanitizeGithubUrl(repo.html_url)}" target="_blank" rel="noopener noreferrer" class="gh-repo-card" title="Open repository ${this.escapeHtml(repo.name)} on GitHub">
+            <a href="${this.sanitizeGithubUrl(repo.html_url)}" target="_blank" rel="noopener noreferrer" class="gh-repo-card" title="Open creative experiment ${this.escapeHtml(repo.name)} on GitHub">
               <div class="gh-card-header">
                 <div class="gh-card-title-row">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                   <h3 class="gh-repo-name">${this.escapeHtml(repo.name)}</h3>
                 </div>
-                <span class="gh-badge-public">Public</span>
+                <span class="gh-badge-public">Open Experiment</span>
               </div>
-              <p class="gh-repo-desc">${this.escapeHtml(repo.description || 'Verified production engineering repository.')}</p>
+              <p class="gh-repo-desc">${this.escapeHtml(CREATIVE_REPO_DESCRIPTIONS[repo.name] || repo.description || 'Open-source creative technology experiment and working prototype.')}</p>
               <div class="gh-card-footer">
                 <div class="gh-lang-tag">
                   <span class="gh-lang-dot" style="background: ${this.getLangColor(repo.language || 'JavaScript')}"></span>

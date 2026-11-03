@@ -555,22 +555,22 @@ class FabianPortfolioApp {
       <div class="logo-strip-inner">
         <span class="logo-strip-label">COMPANIES & INSTITUTIONS STUDIED OR WORKED AT:</span>
         <div class="logo-strip-row">
-          <div class="logo-badge-item" title="Money Group (Media Buyer, Full-Time · $1B+ Scope)">
+          <div class="logo-badge-item" title="Money Group (Creative Technologist & Frontier AI Prototyper, Full-Time)">
             ${LOGOS.moneyGroup}
           </div>
-          <div class="logo-badge-item" title="Red Ventures (Growth / SEO Analyst, Full-Time · edX)">
+          <div class="logo-badge-item" title="Red Ventures (Interactive Discovery & Behavioral Synthesis Lead, Full-Time · edX)">
             ${LOGOS.redVentures}
           </div>
-          <div class="logo-badge-item" title="edX Platform (Red Ventures, Full-Time · 40M+ Sessions)">
+          <div class="logo-badge-item" title="edX Platform (Red Ventures, Full-Time · 40M+ Learning Journeys)">
             ${LOGOS.edx}
           </div>
-          <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (Founder · $10M+ Pipeline) — Visit Official Site (viva-advertising.com)">
+          <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Creative Studio (Founder · 150+ Collaborations & 1B+ Views) — Visit Official Site (viva-advertising.com)">
             ${LOGOS.vivaAdvertising}
           </a>
-          <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (Co-Founder · 100+ Relational Databases) — Visit Official Site (linkpuertorico.org)">
+          <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (Co-Founder · 110+ Civic & Community Platforms) — Visit Official Site (linkpuertorico.org)">
             ${LOGOS.linkPR}
           </a>
-          <div class="logo-badge-item" title="NovuWorks (Founder & Technical Consultant · Enterprise AI & Cloud Systems)">
+          <div class="logo-badge-item" title="NovuWorks (Founder & Creative Technologist · Frontier AI & Interactive Systems)">
             ${LOGOS.novuWorks}
           </div>
           <div class="logo-badge-item" title="Stanford University (Innovation Fellow · Design Thinking & Strategy)">
@@ -822,9 +822,9 @@ class FabianPortfolioApp {
             <div class="logo-badge-item" title="Databricks Lakehouse">${LOGOS.databricks}</div>
             <div class="logo-badge-item" title="Anthropic Claude">${LOGOS.claude}</div>
             <div class="logo-badge-item" title="ATH Móvil Business">${LOGOS.athMovil}</div>
-            <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Advertising (My Company / Founder · $10M+ Pipeline) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
-            <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 100+ Relational Databases) — Visit Official Site">${LOGOS.linkPR}</a>
-            <div class="logo-badge-item" title="NovuWorks (Founder & Technical Consultant)">${LOGOS.novuWorks}</div>
+            <a href="https://viva-advertising.com/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Viva Creative Studio (My Company / Founder · 150+ Collaborations) — Visit Official Site">${LOGOS.vivaAdvertising}</a>
+            <a href="https://linkpuertorico.org/" target="_blank" rel="noopener noreferrer" class="logo-badge-item is-link" title="Link Puerto Rico (My Company / Co-Founder · 110+ Civic Prototypes) — Visit Official Site">${LOGOS.linkPR}</a>
+            <div class="logo-badge-item" title="NovuWorks (Founder & Creative Technologist)">${LOGOS.novuWorks}</div>
             <div class="logo-badge-item" title="IBM">${LOGOS.ibm}</div>
             <div class="logo-badge-item" title="Google">${LOGOS.google}</div>
             <div class="logo-badge-item" title="AWS">${LOGOS.aws}</div>
@@ -887,7 +887,13 @@ class FabianPortfolioApp {
         </div>
         <div class="proj-meta">${p.role} · ${p.organization}</div>
         <span class="proj-metric-pill">${p.metrics}</span>
-        <p class="proj-summary">${p.summary}</p>
+        ${p.concept && p.technology && p.impact ? `
+          <div class="proj-summary proj-triad-list" style="display: flex; flex-direction: column; gap: 8px; text-align: left;">
+            <div><strong style="color: var(--gold-light);">The Concept:</strong> ${p.concept}</div>
+            <div><strong style="color: #38bdf8;">The Technology:</strong> ${p.technology}</div>
+            <div><strong style="color: #4ade80;">The Impact:</strong> ${p.impact}</div>
+          </div>
+        ` : `<p class="proj-summary">${p.summary}</p>`}
         <div class="proj-tags-row">
           ${p.tags.map((t) => `<span class="proj-tag-pill">${t}</span>`).join('')}
         </div>
@@ -1305,7 +1311,13 @@ class FabianPortfolioApp {
             </div>
           </div>
           <h3 class="case-title">${cs.title}</h3>
-          <p class="case-summary">${cs.summary}</p>
+          ${cs.concept && cs.technology && cs.impact ? `
+            <div class="case-summary proj-triad-list" style="display: flex; flex-direction: column; gap: 8px; text-align: left; margin-bottom: 16px;">
+              <div><strong style="color: var(--gold-light);">The Concept:</strong> ${cs.concept}</div>
+              <div><strong style="color: #38bdf8;">The Technology:</strong> ${cs.technology}</div>
+              <div><strong style="color: #4ade80;">The Impact:</strong> ${cs.impact}</div>
+            </div>
+          ` : `<p class="case-summary">${cs.summary}</p>`}
 
           <!-- 3 Executive Metrics -->
           <div class="case-metric-row">
@@ -1406,25 +1418,25 @@ class FabianPortfolioApp {
           `).join('')}
         </div>
 
-        <!-- 4-Pillar Narrative Cadence -->
+        <!-- Creative Experiments Triad + Execution Cadence -->
         <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px;">
-          <div class="cs-modal-narrative-box" style="border-left: 3px solid #ff5f56; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
-            <strong style="color: #e11d48; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">1. Context & Scaling Friction:</strong>
-            <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.challenge}</p>
+          <div class="cs-modal-narrative-box" style="border-left: 3px solid #d4af37; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: var(--gold-light); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">1. The Concept (Human &amp; Creative Intention):</strong>
+            <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.concept || cs.challenge}</p>
           </div>
 
-          <div class="cs-modal-narrative-box" style="border-left: 3px solid #ffbd2e; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
-            <strong style="color: #d97706; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">2. Strategic Hypothesis:</strong>
-            <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.strategy}</p>
+          <div class="cs-modal-narrative-box" style="border-left: 3px solid #38bdf8; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #38bdf8; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">2. The Technology (Engineering Canvas &amp; Orchestration):</strong>
+            <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.technology || cs.strategy}</p>
           </div>
 
-          <div class="cs-modal-narrative-box" style="border-left: 3px solid #3b82f6; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
-            <strong style="color: #2563eb; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">3. Dev & Cross-Functional Execution:</strong>
+          <div class="cs-modal-narrative-box" style="border-left: 3px solid #a855f7; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
+            <strong style="color: #c084fc; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">3. Prototyping &amp; Cross-Functional Craft:</strong>
             <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.execution}</p>
           </div>
 
           <div class="cs-modal-narrative-box" style="border-left: 3px solid #27c93f; padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;">
-            <strong style="color: #059669; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">4. Bottom-Line Impact & Permanence:</strong>
+            <strong style="color: #4ade80; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">4. The Impact (Everyday Human Uplift &amp; Clarity):</strong>
             <p style="font-size: 14px; color: var(--titanium-white); line-height: 1.65;">${cs.impact}</p>
           </div>
         </div>

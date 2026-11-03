@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
-//  Novu Works — Architectural ROI Planner & System Scoper
-//  A genuine executive productivity tool for founders, CTOs & hiring managers.
+//  Novu Works — Interactive Prototype & Architecture Scoper
+//  A creative technology scoping tool for makers, labs & teams.
 // ─────────────────────────────────────────────────────────────
 
 import { DISCIPLINES, ROI_PRESETS, PROFILE } from './data.js';
@@ -81,9 +81,9 @@ export class ArchitecturePlanner {
     this.container.innerHTML = `
       <div class="planner-card glass-panel">
         <div class="planner-header">
-          <div class="planner-badge">Executive Utility</div>
-          <h1 class="planner-title">System Architecture & ROI Planner</h1>
-          <p class="planner-desc">Configure your engineering goals to calculate architectural topology, delivery velocity, and operational cost savings.</p>
+          <div class="planner-badge">Creative Lab Scoper</div>
+          <h1 class="planner-title">Interactive Prototype &amp; Architecture Scoper</h1>
+          <p class="planner-desc">Configure your creative technology pillars to scope prototype topology, iteration velocity, and engineering orchestration.</p>
         </div>
 
         <!-- Presets Row -->
@@ -166,11 +166,11 @@ export class ArchitecturePlanner {
 
         <!-- CTA footer -->
         <div class="planner-footer">
-          <a href="mailto:${PROFILE.emails.primary}?subject=Executive%20ROI%20Architecture%20Inquiry%20-%20Fabian%20Velez" class="primary-btn pulse-glow">
-            <span>Execute This Architecture with Fabian</span>
+          <a href="mailto:${PROFILE.emails.primary}?subject=Creative%20Prototype%20Architecture%20Inquiry%20-%20Fabian%20Velez" class="primary-btn pulse-glow">
+            <span>Prototype This Architecture with Fabian</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
-          <span class="guarantee-note">8+ years · 80+ startups mentored · Puerto Rico & Remote</span>
+          <span class="guarantee-note">8+ years · 80+ founders mentored · San Juan, PR &amp; Remote</span>
         </div>
       </div>
     `;

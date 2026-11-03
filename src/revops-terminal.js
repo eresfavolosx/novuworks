@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
-//  Fabián Vélez Vicente — Live RevOps & Big Data Query Terminal
-//  Demonstrates 40M+ Databricks SQL, Attribution Modeling,
-//  and Predictive Churn Analytics with real execution output.
+//  Fabián Vélez Vicente — Live Behavioral Telemetry & Synthesis Terminal
+//  Demonstrates 40M+ Databricks SQL Synthesis, Collaborative Health Scoring,
+//  and Autonomous Tool-Calling Agents with real execution output.
 // ─────────────────────────────────────────────────────────────
 
 import { audio } from './audio.js';
@@ -17,138 +17,137 @@ export class RevOpsTerminal {
   getQueries() {
     return {
       attribution: {
-        title: 'Attribution_MultiTouch_Databricks.sql',
+        title: 'Curiosity_Journey_Synthesis_Databricks.sql',
         lang: 'sql',
-        badge: 'Red Ventures / edX (40M+ Sessions)',
-        code: `-- Multi-Touch Opportunity Attribution Model (Markov Chain / First-Last Touch)
--- Normalized across 40M+ user sessions reconciling GA4 with internal lakehouse
-WITH touchpoints AS (
+        badge: 'Red Ventures / edX (40M+ Learning Sessions)',
+        code: `-- Longitudinal Curiosity & Learning Journey Synthesis (Markov Graph)
+-- Normalized across 40M+ learner sessions in the Databricks Lakehouse
+WITH curiosity_touchpoints AS (
   SELECT
     session_id,
-    user_id,
-    channel_grouping,
-    campaign_id,
-    touchpoint_timestamp,
-    ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY touchpoint_timestamp ASC) AS touch_order,
-    COUNT(*) OVER (PARTITION BY user_id) AS total_touches
-  FROM delta.\`lakehouse.edx_growth_telemetry\`
+    learner_id,
+    discovery_pathway,
+    curriculum_topic,
+    interaction_timestamp,
+    ROW_NUMBER() OVER (PARTITION BY learner_id ORDER BY interaction_timestamp ASC) AS step_order,
+    COUNT(*) OVER (PARTITION BY learner_id) AS total_explorations
+  FROM delta.\`lakehouse.edx_learning_telemetry\`
   WHERE date_partition >= CURRENT_DATE() - INTERVAL 90 DAYS
 ),
-attributed_pipeline AS (
+synthesized_outcomes AS (
   SELECT
-    t.channel_grouping,
-    COUNT(DISTINCT t.user_id) AS reached_users,
-    SUM(CASE WHEN t.touch_order = 1 THEN 0.40
-             WHEN t.touch_order = t.total_touches THEN 0.40
-             ELSE 0.20 / NULLIF(t.total_touches - 2, 0) END * o.realized_mrr) AS attributed_revenue
-  FROM touchpoints t
-  INNER JOIN delta.\`lakehouse.sales_opportunities\` o ON t.user_id = o.user_id
-  WHERE o.stage = 'Closed-Won'
-  GROUP BY t.channel_grouping
+    t.discovery_pathway,
+    COUNT(DISTINCT t.learner_id) AS active_learners,
+    SUM(CASE WHEN t.step_order = 1 THEN 0.40
+             WHEN t.step_order = t.total_explorations THEN 0.40
+             ELSE 0.20 / NULLIF(t.total_explorations - 2, 0) END * o.completed_modules) AS synthesized_completions
+  FROM curiosity_touchpoints t
+  INNER JOIN delta.\`lakehouse.curriculum_milestones\` o ON t.learner_id = o.learner_id
+  WHERE o.milestone_state = 'Completed'
+  GROUP BY t.discovery_pathway
 )
 SELECT 
-  channel_grouping,
-  reached_users,
-  ROUND(attributed_revenue, 2) AS attributed_revenue,
-  ROUND(attributed_revenue / NULLIF(reached_users, 0), 2) AS revenue_per_user
-FROM attributed_pipeline
-ORDER BY attributed_revenue DESC;`,
+  discovery_pathway,
+  active_learners,
+  ROUND(synthesized_completions, 0) AS synthesized_completions,
+  ROUND(synthesized_completions / NULLIF(active_learners, 0), 2) AS modules_per_learner
+FROM synthesized_outcomes
+ORDER BY synthesized_completions DESC;`,
         metrics: {
-          scanned: '42.8M Rows Scanned',
+          scanned: '42.8M Sessions Scanned',
           duration: '142ms Execution',
           accuracy: '100% Reconciled',
-          roi: '+$2.4M Direct Attributed Pipeline',
+          impact: '+200% Discovery Engagement Lift',
         },
         output: [
-          { channel: 'Paid Search (High-Intent LLM/SEO)', users: '1,420,500', revenue: '$4,850,200', rpu: '$3.41' },
-          { channel: 'Programmatic Display & Paid Social', users: '2,890,100', revenue: '$3,180,400', rpu: '$1.10' },
-          { channel: 'Direct / First-Party Telemetry', users: '940,200', revenue: '$2,410,000', rpu: '$2.56' },
-          { channel: 'Email Nurture & Retention', users: '380,400', revenue: '$1,920,000', rpu: '$5.05' },
+          { channel: 'Generative AI Curriculum Guide', users: '1,420,500', revenue: '4,850,200 Modules', rpu: '3.41x Depth' },
+          { channel: 'Interactive Skill Pathway Explorer', users: '2,890,100', revenue: '3,180,400 Modules', rpu: '1.10x Depth' },
+          { channel: 'First-Party Behavioral Synthesis', users: '940,200', revenue: '2,410,000 Modules', rpu: '2.56x Depth' },
+          { channel: 'Longitudinal Milestone Coaching', users: '380,400', revenue: '1,920,000 Modules', rpu: '5.05x Depth' },
         ],
       },
 
       churn: {
-        title: 'Predictive_Account_Health_Scorer.py',
+        title: 'Empathetic_Collaboration_Health_Scorer.py',
         lang: 'python',
-        badge: 'Viva Advertising (-83% Churn Reduction)',
-        code: `# Predictive B2B Account Health & Churn Classifier
-# Normalized across Salesforce, HubSpot, and Power BI Lakehouse
+        badge: 'Viva Studio (83% Friction Reduction)',
+        code: `# Empathetic Collaboration Health & Friction Detector
+# Synthesizes multi-signal creative project telemetry in Python & Spark
 import pyspark.sql.functions as F
-from pyspark.ml.classification import GBTClassifier
 
-def compute_account_health(account_df, telemetry_df):
+def compute_collaboration_vitality(project_df, telemetry_df):
     """
-    Slashes client churn from 30% to 5% by detecting buying-committee 
-    telemetry decay 45 days prior to contract renewal.
+    Reduces creative collaboration drop-off from 30% to 5% by detecting
+    communication bottlenecks 45 days before a project milestone stalls.
     """
-    feature_matrix = account_df.join(
-        telemetry_df, on="account_id", how="inner"
-    ).groupBy("account_id", "renewal_date", "contract_value").agg(
-        F.avg("weekly_active_users").alias("avg_wau"),
-        F.countDistinct("contact_executive_role").alias("engaged_committee_members"),
-        F.sum("high_intent_event_signals").alias("telemetry_intensity")
+    vitality_matrix = project_df.join(
+        telemetry_df, on="project_id", how="inner"
+    ).groupBy("project_id", "milestone_date", "prototype_scope").agg(
+        F.avg("weekly_active_collaborators").alias("avg_collaborators"),
+        F.countDistinct("creative_discipline_role").alias("active_disciplines"),
+        F.sum("interactive_prototype_events").alias("synthesis_intensity")
     ).withColumn(
-        "health_risk_score",
-        F.when(F.col("engaged_committee_members") < 2, 0.85)
-         .when(F.col("telemetry_intensity") < 12, 0.65)
+        "friction_signal_score",
+        F.when(F.col("active_disciplines") < 2, 0.85)
+         .when(F.col("synthesis_intensity") < 12, 0.65)
          .otherwise(0.12)
     )
-    return feature_matrix.filter(F.col("health_risk_score") > 0.50)
+    return vitality_matrix.filter(F.col("friction_signal_score") > 0.50)
 
-# Scored over 150+ B2B commercial accounts managing $10M+ pipeline`,
+# Synthesized across 150+ creative technology collaborations`,
         metrics: {
-          scanned: '150+ B2B Accounts',
+          scanned: '150+ Studio Collaborations',
           duration: '98ms Execution',
-          accuracy: '83% Churn Reduction',
-          roi: '$10M+ Pipeline Preserved',
+          accuracy: '83% Friction Reduction',
+          impact: '95% Multi-Year Creative Retention',
         },
         output: [
-          { account: 'Global Commercial Corp (Tier 1)', risk: 'Low (0.12)', renewal: 'Q4 2026', action: 'Expansion Target (+$120k)' },
-          { account: 'Enterprise SaaS Holdings', risk: 'Low (0.18)', renewal: 'Q1 2027', action: 'Standard Multi-Year Renew' },
-          { account: 'Mid-Market Logistics Partner', risk: 'Flagged (0.68)', renewal: '30 Days', action: 'Automated RevOps Intercept Triggered' },
+          { account: 'Interactive Cultural Showcase (Tier 1)', risk: 'Low (0.12)', renewal: 'Q4 2026', action: 'New Generative Prototype Unlocked' },
+          { account: 'Bilingual Digital Experience Lab', risk: 'Low (0.18)', renewal: 'Q1 2027', action: 'Multi-Year Creative Partnership' },
+          { account: 'Regional Civic Platform Partner', risk: 'Flagged (0.68)', renewal: '30 Days', action: 'Proactive Design Sprint Scheduled' },
         ],
       },
 
       agents: {
-        title: 'Enterprise_LLM_Anomaly_Agent.ts',
+        title: 'Autonomous_Tool_Calling_Telemetry_Agent.ts',
         lang: 'typescript',
-        badge: 'Money Group (20+ Custom AI Telemetry Agents)',
-        code: `// Autonomous Enterprise Telemetry Anomaly Detection Agent
-// Normalizes partner data and maintains 100% reporting accuracy in <4 hours
+        badge: 'Money Group (20+ Frontier Tool-Calling Agents)',
+        code: `// Autonomous Frontier Model Telemetry & Synthesis Agent
+// Verifies multi-stream signal integrity and synthesizes human-readable diagnostics in <4h
 import { GoogleGenAI } from '@google/genai';
 
-export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) {
-  const anomalies = [];
+export async function synthesizeTelemetryStream(streamData: TelemetryPayload[]) {
+  const diagnostics = [];
   for (const event of streamData) {
-    const variance = Math.abs(event.clientConversions - event.serverCAPI) / event.serverCAPI;
+    const drift = Math.abs(event.clientBrowserSignal - event.edgeServerSignal) / event.edgeServerSignal;
     
-    // Flag CAPI / Pixel divergence exceeding 5% threshold
-    if (variance > 0.05) {
-      const remediationPrompt = \`
-        Event: \${event.verticalName} | Payout: $\${event.unitPayout}
-        Discrepancy: \${(variance * 100).toFixed(1)}% missing from client telemetry.
-        Recommend automatic unit payout recalculation between $125 and $250.
+    // Flag browser / edge signal divergence exceeding 5% threshold
+    if (drift > 0.05) {
+      const synthesisPrompt = \`
+        Experience Stream: \${event.experienceName} | Active Nodes: \${event.activeNodes}
+        Signal Drift: \${(drift * 100).toFixed(1)}% variance detected between client & edge.
+        Synthesize a clear, human-centric diagnostic and self-healing calibration step.
       \`;
       
       const diagnosis = await ai.models.generateContent({
         model: 'gemini-2.5-pro',
-        contents: remediationPrompt
+        contents: synthesisPrompt
       });
-      anomalies.push({ eventId: event.id, diagnosis: diagnosis.text });
+      diagnostics.push({ eventId: event.id, diagnosis: diagnosis.text });
     }
   }
-  return anomalies; // Delivers high-intent ROAS pacing with zero attribution loss
+  return diagnostics; // Keeps interactive experiences responsive with zero signal loss
 }`,
         metrics: {
           scanned: 'Continuous Live Stream',
           duration: '42ms Edge Response',
-          accuracy: '100% Reporting Accuracy',
-          roi: 'Attribution Loss Zeroed Out',
+          accuracy: '100% Signal Integrity',
+          impact: '20+ Autonomous Agents Active',
         },
         output: [
-          { agent: 'Agent-Attribution-01', status: 'ACTIVE', latency: '24ms', verdict: '5 Verticals Monitored · 0 Tracking Anomalies' },
-          { agent: 'Agent-Payout-Restructure', status: 'ACTIVE', latency: '36ms', verdict: 'Unit Rates Optimized from $25 to $35 (Verified Pacing)' },
-          { agent: 'Agent-Creative-Velocity', status: 'IDLE', latency: '18ms', verdict: '20+ Variant Hooks Generated (3x Tempo)' },
+          { agent: 'Agent-Signal-Synthesis-01', status: 'ACTIVE', latency: '24ms', verdict: '5 Interactive Streams Monitored · 0 Signal Anomalies' },
+          { agent: 'Agent-Adaptive-Calibration', status: 'ACTIVE', latency: '36ms', verdict: 'Real-Time Latency Balanced Across Edge Nodes' },
+          { agent: 'Agent-Narrative-Prototyper', status: 'IDLE', latency: '18ms', verdict: '20+ Interactive Story Variants Synthesized (3x Tempo)' },
         ],
       },
     };
@@ -162,24 +161,24 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
       <div class="revops-terminal-card">
         <div class="revops-header">
           <div class="revops-title-group">
-            <span class="revops-kicker">ENGINEERING ARTIFACT · BIG DATA & REVOPS</span>
-            <h2 class="revops-heading">Live RevOps & Telemetry Query Terminal</h2>
+            <span class="revops-kicker">ENGINEERING CANVAS · TELEMETRY &amp; AGENT ORCHESTRATION</span>
+            <h2 class="revops-heading">Live Behavioral Synthesis &amp; Agent Terminal</h2>
             <p class="revops-sub">
-              Execute live production models engineered by Fabián across Databricks, BigQuery, and enterprise AI agents.
+              Inspect and run the SQL synthesis queries, Python health models, and frontier tool-calling agents that power Fabián's interactive experiences.
             </p>
           </div>
           <div class="revops-tabs">
             <button type="button" class="rev-tab-btn ${this.activeTab === 'attribution' ? 'active' : ''}" data-tab="attribution">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-              <span>Attribution (Databricks)</span>
+              <span>Journey Synthesis (SQL)</span>
             </button>
             <button type="button" class="rev-tab-btn ${this.activeTab === 'churn' ? 'active' : ''}" data-tab="churn">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle></svg>
-              <span>Churn Scorer (PySpark)</span>
+              <span>Collaboration Vitality (Python)</span>
             </button>
             <button type="button" class="rev-tab-btn ${this.activeTab === 'agents' ? 'active' : ''}" data-tab="agents">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-              <span>AI Anomaly Agents</span>
+              <span>Tool-Calling Agents (TS)</span>
             </button>
           </div>
         </div>
@@ -195,7 +194,7 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
             <div class="win-title">${current.title} — ${current.badge}</div>
             <button type="button" class="win-run-btn" id="btn-run-query">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              <span>Run Execution</span>
+              <span>Run Synthesis</span>
             </button>
           </div>
 
@@ -212,12 +211,12 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
               <span class="wm-val wm-val-emerald">${current.metrics.duration}</span>
             </div>
             <div class="wm-cell">
-              <span class="wm-key">ACCURACY VERIFICATION</span>
+              <span class="wm-key">SIGNAL FIDELITY</span>
               <span class="wm-val">${current.metrics.accuracy}</span>
             </div>
             <div class="wm-cell">
-              <span class="wm-key">BOTTOM-LINE IMPACT</span>
-              <span class="wm-val text-gold">${current.metrics.roi}</span>
+              <span class="wm-key">HUMAN IMPACT</span>
+              <span class="wm-val text-gold">${current.metrics.impact}</span>
             </div>
           </div>
 
@@ -225,7 +224,7 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
           <div class="win-results-drawer win-output-console" id="win-results-container">
             <div class="res-drawer-header win-output-title" id="revops-output-title">
               <span class="res-status-dot pulse"></span>
-              <span class="res-drawer-title">Query Execution Output (Sample Telemetry)</span>
+              <span class="res-drawer-title">Live Synthesis Output (Sample Telemetry)</span>
             </div>
             <div tabindex="0" role="region" aria-labelledby="revops-output-title" class="res-table-wrap win-output-table-wrap">
               ${this.renderResultTable(current)}
@@ -241,13 +240,13 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
   renderResultTable(current) {
     if (this.activeTab === 'attribution') {
       return `
-        <table class="term-data-table win-output-table" style="--label-2: 'Reached Users'; --label-3: 'Attributed Revenue'; --label-4: 'Revenue / User';">
+        <table class="term-data-table win-output-table" style="--label-2: 'Active Learners'; --label-3: 'Synthesized Milestones'; --label-4: 'Exploration Depth';">
           <thead>
             <tr>
-              <th scope="col">Channel Grouping</th>
-              <th scope="col">Reached Users</th>
-              <th scope="col">Attributed Revenue</th>
-              <th scope="col">Revenue / User</th>
+              <th scope="col">Discovery Pathway</th>
+              <th scope="col">Active Learners</th>
+              <th scope="col">Synthesized Milestones</th>
+              <th scope="col">Exploration Depth</th>
             </tr>
           </thead>
           <tbody>
@@ -264,13 +263,13 @@ export async function detectAdTrackingAnomalies(streamData: TelemetryPayload[]) 
       `;
     } else if (this.activeTab === 'churn') {
       return `
-        <table class="term-data-table win-output-table" style="--label-2: 'Health Risk Score'; --label-3: 'Renewal Horizon'; --label-4: 'Autonomous RevOps Action';">
+        <table class="term-data-table win-output-table" style="--label-2: 'Friction Signal'; --label-3: 'Milestone Horizon'; --label-4: 'Empathetic Action';">
           <thead>
             <tr>
-              <th scope="col">Commercial Account</th>
-              <th scope="col">Health Risk Score</th>
-              <th scope="col">Renewal Horizon</th>
-              <th scope="col">Autonomous RevOps Action</th>
+              <th scope="col">Creative Collaboration</th>
+              <th scope="col">Friction Signal</th>
+              <th scope="col">Milestone Horizon</th>
+              <th scope="col">Empathetic Action</th>
             </tr>
           </thead>
           <tbody>

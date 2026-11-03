@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
-//  Fabián Vélez Vicente — Subdomain Platform Interactive Landing Showcases
-//  Liquid Glass Architecture · Live Objective Verifiers · Working Test Benches
+//  Fabián Vélez Vicente — Subdomain Prototype & Interactive Experience Landings
+//  Liquid Glass Architecture · Live Concept Verifiers · Working Test Benches
 // ─────────────────────────────────────────────────────────────
 
 import { LOGOS } from './company-logos.js';
@@ -9,225 +9,232 @@ import { audio } from './audio.js';
 export const PLATFORM_LANDINGS = {
   jobhelper: {
     id: 'jobhelper',
-    badge: 'AUTONOMOUS MULTI-MODEL LLM TRIAGE',
-    status: 'PRODUCTION // LIVE DEPLOYED',
+    badge: 'FRONTIER MODEL ORCHESTRATION & SYNTHESIS',
+    status: 'PROTOTYPE // LIVE DEPLOYED',
     uptime: '99.98% UPTIME · LATENCY < 45MS',
-    title: 'JobHelper: Autonomous LLM Evaluation & Scoring Agent',
-    lead: 'Engineered an autonomous Python agent utilizing multi-model LLM reasoning (Claude 3.5 / OpenAI) and strict constraint rubrics to evaluate complex technical job descriptions against candidate backgrounds using a 100-point scoring scaffold.',
+    title: 'JobHelper: Frontier Model Career Synthesis & Interactive Evaluation Prototype',
+    lead: 'An interactive career companion that uses multi-model LLM orchestration, tool-calling, and a transparent 100-point rubric to turn opaque job searches into an encouraging, human-centric dialogue.',
     metrics: [
-      { num: '100 pts', label: 'Quantitative Rubric Scaffold' },
-      { num: '< 2.0s', label: 'Autonomous Intake Triage' },
-      { num: 'Multi-Model', label: 'Claude 3.5 & OpenAI Reasoning' },
-      { num: '0%', label: 'Human Bias / Keyword Guesswork' }
+      { num: '100 pts', label: 'Transparent Synthesis Rubric' },
+      { num: '< 2.0s', label: 'Real-Time Tool-Calling Triage' },
+      { num: 'Multi-Model', label: 'OpenAI, Claude & Gemini Synthesis' },
+      { num: '0%', label: 'Opaque Keyword Guesswork' }
     ],
-    objectiveTitle: 'Platform Objective & Mission',
+    objectiveTitle: 'The Concept · The Technology · The Impact',
     objectiveBody: `
-      <p><strong>The Core Challenge:</strong> Engineering leaders and recruiters are flooded with hundreds of unformatted resumes, while traditional Keyword ATS algorithms indiscriminately reject top-tier candidates who use non-standard terminology or favor candidates with keyword-stuffed fluff.</p>
-      <p><strong>How JobHelper Works Its Objective:</strong> JobHelper parses both the Candidate Dossier and the Target Job Description into mathematical vector tokens, applying a deterministic 100-point rubric across four critical dimensions: <em>Technical Core Alignment (35 pts)</em>, <em>Scale & Volume Proof Points (25 pts)</em>, <em>Autonomous AI & Systems Integration (20 pts)</em>, and <em>Leadership & Engineering Education (20 pts)</em>. It outputs structured JSON containing precise fit percentages, detected qualification gaps, and automated bullet optimizations.</p>
+      <p><strong>The Concept:</strong> Job hunting often feels like shouting into an algorithmic void where rigid keyword filters ignore human nuance and curiosity. JobHelper asks: <em>what if career discovery felt like sitting down with a thoughtful, optimistic mentor who helps you see your own strengths clearly and translate your life's work into a resonant story?</em></p>
+      <p><strong>The Technology:</strong> Orchestrates frontier models (OpenAI, Anthropic Claude 3.5, and Google Gemini 2.0 Flash) through Python, Next.js 16, and Docker. Uses deterministic tool-calling and a 100-point structured JSON schema across four human-centric dimensions—<em>Technical Craft (35 pts)</em>, <em>Real-World Scale (25 pts)</em>, <em>Frontier AI &amp; Prototyping (20 pts)</em>, and <em>Leadership &amp; Curiosity (20 pts)</em>—paired with a 1-click Manifest V3 Chrome Extension and Cloud Firestore sync.</p>
+      <p><strong>The Impact:</strong> Replaces application anxiety with immediate, bias-free clarity—helping makers, designers, and engineers understand how their background aligns with a role and craft an authentic story in under two seconds.</p>
     `,
     architecture: [
-      'Multi-Model LLM Orchestration (Anthropic Claude 3.5 Sonnet / OpenAI Codex)',
-      'Deterministic Constraint-Bound Rubric Prompts (Zero Hallucination Guardrails)',
-      'FastAPI Microservice Backend with Structured JSON Schema Validation',
-      'Firebase Hosting & Real-Time Cloud Firestore Persistence',
-      'Next.js High-Refraction Liquid Glass Interface'
+      'Multi-Model LLM Orchestration (OpenAI / Anthropic Claude 3.5 / Gemini 2.0 Flash)',
+      'Deterministic Tool-Calling & 100-Point JSON Rubric (Zero Hallucination Guardrails)',
+      'Python & Next.js 16 App Router with Multi-Stage Docker Containerization',
+      '1-Click Manifest V3 Chrome Extension & Real-Time Cloud Firestore Sync',
+      'Human-Centric Liquid Glass Interface with Interactive Kanban Board'
     ],
     liveUrl: 'https://jobhelper.novu.works?from=novuworks',
     mirrorUrl: 'https://jobhelper-c3cd7.web.app?from=novuworks',
     githubUrl: 'https://github.com/eresfavolosx/JobHelper',
-    tags: ['Python', 'FastAPI', 'Claude 3.5', 'OpenAI', 'Next.js', 'Firebase', 'Rubrics'],
+    tags: ['Frontier Models', 'Tool-Calling', 'Python', 'Next.js 16', 'Docker', 'Human-Centric Design'],
     testBenchType: 'jobhelper'
   },
 
   bizpay: {
     id: 'bizpay',
-    badge: 'FINTECH & B2B COMMERCIAL INVOICING',
-    status: 'PRODUCTION // LIVE DEPLOYED',
-    uptime: '100% RECONCILED · ZERO SLIPPAGE',
-    title: 'BizPay: B2B Commercial Invoicing & ATH Móvil Gateway',
-    lead: 'Architected a high-converting B2B commercial payment portal featuring multi-tier invoice routing, ATH Móvil Business API integration, real-time transaction fee calculation, and responsive mobile-first material UI.',
+    badge: 'HUMAN-CENTRIC PAYMENT PROTOTYPE',
+    status: 'PROTOTYPE // LIVE DEPLOYED',
+    uptime: '1.2S SETTLEMENT · ZERO FRICTION',
+    title: 'BizPay: Human-Centric Local Payment & Instant Settlement Experience',
+    lead: 'An intuitive local payment and contractor settlement prototype designed to help independent creators, makers, and neighborhood studios in Puerto Rico get paid in 1.2 seconds with zero calculation friction.',
     metrics: [
-      { num: '1.50%', label: 'Ultra-Low B2B Merchant Fee' },
-      { num: 'Instant', label: 'ATH Móvil Commercial Settlement' },
-      { num: '100%', label: 'Automated Revenue Auditing' },
-      { num: '0.00%', label: 'Transaction Slippage' }
+      { num: '1.2s', label: 'Instant ATH Móvil Settlement' },
+      { num: '1-Tap', label: 'Human-Centric Mobile Flow' },
+      { num: '100%', label: 'Transparent Fee Split Math' },
+      { num: '0.00%', label: 'Rounding or Ledger Drift' }
     ],
-    objectiveTitle: 'Platform Objective & Mission',
+    objectiveTitle: 'The Concept · The Technology · The Impact',
     objectiveBody: `
-      <p><strong>The Core Challenge:</strong> B2B transactions in Puerto Rico and the Caribbean have historically been plagued by multi-day check clearing delays, 3.5%+ international credit card fees, and complex manual invoice reconciliation between suppliers and corporate clients.</p>
-      <p><strong>How BizPay Works Its Objective:</strong> BizPay directly interfaces with the local ATH Móvil Business API and card tokenization vaults. When an enterprise issues an invoice, BizPay generates a dynamic secure checkout URL that calculates real-time fees, routes payouts into segregated merchant accounts, and emits webhook notifications for automated ERP and accounting reconciliation.</p>
+      <p><strong>The Concept:</strong> Independent creators, musicians, designers, and local contractors in Puerto Rico have historically waited weeks for paper checks to clear or lost hard-earned pay to opaque international transaction fees. BizPay reimagines getting paid as an immediate, transparent, one-tap moment of mutual trust.</p>
+      <p><strong>The Technology:</strong> Engineered with modular JavaScript, direct ATH Móvil API settlement handshakes, real-time fee-split mathematics, asynchronous webhook listeners, and a tactile, mobile-first Material Design interface with instant PDF/CSV ledger synthesis.</p>
+      <p><strong>The Impact:</strong> Brings immediate peace of mind to independent workers and small creative studios—turning complex invoice math and multi-day bank delays into a transparent, 1.2-second mobile confirmation.</p>
     `,
     architecture: [
-      'ATH Móvil Business API Integration (Direct Commercial Bank Settling)',
-      'Real-Time Dynamic Fee Split Calculator (Zero Rounding Errors)',
-      'Responsive Mobile-First Interface with Material Design Lite Ergonomics',
-      'Static Asset Parallax Optimization & Fast CDN Edge Routing',
-      'Strict Payment Card Industry (PCI) Tokenization Standards'
+      'Direct ATH Móvil API Handshake for Instant Local Mobile Settlement',
+      'Deterministic Fee-Split & Withholding Synthesizer (Zero Rounding Drift)',
+      'Human-Centric Mobile-First Interface with Material Design Ergonomics',
+      'Real-Time Webhook Callback Listeners & LocalStorage State Persistence',
+      'One-Click Contractor Disbursement & Printable Ledger Export'
     ],
     liveUrl: 'https://bizpay.novu.works?from=novuworks',
     mirrorUrl: 'https://bizpay-novuworks.web.app?from=novuworks',
     githubUrl: 'https://github.com/eresfavolosx/BizPay',
-    tags: ['JavaScript', 'ATH Móvil API', 'Fintech', 'B2B Invoicing', 'Material Design'],
+    tags: ['Human-Centric Design', 'ATH Móvil API', 'JavaScript', 'Real-Time Webhooks', 'Interactive Prototype'],
     testBenchType: 'bizpay'
   },
 
   picta: {
     id: 'picta',
-    badge: 'ACCESSIBILITY & COMPUTER VISION',
-    status: 'PRODUCTION // LIVE DEPLOYED',
+    badge: 'ASSISTIVE COMPUTER VISION & PERCEPTUAL SYNTHESIS',
+    status: 'PROTOTYPE // LIVE DEPLOYED',
     uptime: '60 FPS HARDWARE ACCELERATED',
-    title: 'Picta: Assistive Camera & Color Vision Deficiency Engine',
-    lead: 'Engineered an assistive computer vision camera application designed for individuals with Color Vision Deficiency (CVD). Features real-time WebRTC camera filtering with mathematical Daltonization matrices, high-contrast edge enhancement, and tap-to-inspect pixel color identification with speech synthesis.',
+    title: 'Picta: Real-Time Perceptual Color Synthesis & Assistive Vision Camera',
+    lead: 'An assistive computer vision camera prototype that empowers people with Color Vision Deficiency—and their loved ones—to see, hear, and share the full emotional warmth of color at 60 FPS.',
     metrics: [
-      { num: '300M+', label: 'Global CVD Population Addressed' },
-      { num: '6 Modes', label: 'Hardware Daltonization Filters' },
-      { num: 'Real-Time', label: '60 FPS WebRTC Video Stream' },
-      { num: 'Speech AI', label: 'Voice Color Identification' }
+      { num: '300M+', label: 'Global CVD Community Served' },
+      { num: '6 Modes', label: 'Live Daltonization Shaders' },
+      { num: '60 FPS', label: 'Real-Time WebRTC Video Stream' },
+      { num: 'Voice AI', label: 'Spoken Color Identification' }
     ],
-    objectiveTitle: 'Platform Objective & Mission',
+    objectiveTitle: 'The Concept · The Technology · The Impact',
     objectiveBody: `
-      <p><strong>The Core Challenge:</strong> Individuals affected by Protanopia (red-blindness), Deuteranopia (green-blindness), or Tritanopia (blue-blindness) experience severe daily friction deciphering charts, public signage, color-coded electrical wires, and product freshness.</p>
-      <p><strong>How Picta Works Its Objective:</strong> Picta leverages WebGL and SVG hardware-accelerated color matrix filters directly on the user\'s mobile or desktop camera feed. The Daltonization algorithm calculates wavelength discrepancies and shifts lost contrast into the user\'s healthy visual spectrum. A tap on any pixel reads out the exact color name using text-to-speech audio.</p>
+      <p><strong>The Concept:</strong> For 300 million people living with Protanopia, Deuteranopia, or Tritanopia, everyday moments—picking ripe fruit, reading a subway map, or admiring a sunset—can carry quiet frustration. Picta grew from a simple question: <em>can we use browser-native computer vision to let people both see and hear lost color contrast, while letting family members experience the world through their eyes?</em></p>
+      <p><strong>The Technology:</strong> Ingests 60 FPS live video via WebRTC (<code>getUserMedia</code>) and applies real-time mathematical Daltonization matrix convolutions through hardware-accelerated SVG and HTML5 Canvas shaders, paired with weighted Euclidean Delta-E pixel sampling and Web Speech API voice synthesis.</p>
+      <p><strong>The Impact:</strong> Turns any smartphone or laptop browser into an immediate, voice-guided visual companion—speaking color names aloud with a tap and building shared human empathy between color-blind individuals and their families.</p>
     `,
     architecture: [
-      'Mathematical Daltonization Matrices (Protanopia, Deuteranopia, Tritanopia)',
-      'HTML5 WebRTC MediaDevices Stream with Camera Facing-Mode Switching',
-      'Canvas API 2D Context Direct Pixel Color Vector Sampling',
-      'Web Speech Synthesis API for Hands-Free Color Classification',
-      'Dual-Mode Simulation (Allows Non-Color-Blind Caregivers to Experience CVD)'
+      'Mathematical Daltonization Convolution Matrices (Protanopia, Deuteranopia, Tritanopia)',
+      '60 FPS HTML5 WebRTC MediaDevices Stream with Lens & Torch Control',
+      'Canvas 2D Pixel Vector Sampling with Weighted Euclidean Delta-E Matching',
+      'Web Speech Synthesis API for Hands-Free Spoken Color Classification',
+      'Bi-Directional Empathy Simulation (Lets Caregivers Experience CVD Firsthand)'
     ],
     liveUrl: 'https://picta.novu.works?from=novuworks',
     mirrorUrl: 'https://picta-novuworks.web.app?from=novuworks',
     githubUrl: 'https://github.com/eresfavolosx/Picta',
-    tags: ['Computer Vision', 'WebRTC', 'Daltonization', 'Accessibility (A11y)', 'Color Science'],
+    tags: ['Computer Vision', 'WebRTC 60FPS', 'Daltonization Shaders', 'Web Speech Synthesis', 'Human-Centric Accessibility'],
     testBenchType: 'picta'
   },
 
   'nfc-platform': {
     id: 'nfc-platform',
-    badge: 'EVENT ACCESS & NFC LOGISTICS',
-    status: 'PRODUCTION // LIVE DEPLOYED',
-    uptime: '100% PASS READ RATE · ZERO QUEUES',
-    title: 'Tocaito: Cross-Platform NFC Event & Verification Platform',
-    lead: 'Developed a cross-platform event registration and verification application using Capacitor, Firebase, and Vite. Architected a custom Python automated verification suite to continuously test UI routing, state persistence, and generate real-time system health reports.',
+    badge: 'PHYSICAL-TO-DIGITAL OBJECTS & WEB NFC',
+    status: 'PROTOTYPE // LIVE DEPLOYED',
+    uptime: '0.4S TAP RESPONSE · OFFLINE READY',
+    title: 'Tocaito: Tactile NFC Physical-to-Digital Bridge & Live Event Prototype',
+    lead: 'A physical-to-digital hardware and progressive web experiment that turns a gentle tap ("Tocaito") of a wristband or studio object into an instant, adaptable digital experience.',
     metrics: [
-      { num: '< 0.5s', label: 'NFC Wristband Scan & Verify' },
-      { num: 'Dynamic', label: 'Over-The-Air Pass Link Updates' },
-      { num: '100%', label: 'Automated Python QA Coverage' },
-      { num: 'PWA + Native', label: 'iOS, Android & Web Unified' }
+      { num: '< 0.4s', label: 'Contactless Wristband Tap' },
+      { num: 'Dynamic', label: 'Over-The-Air Object Routing' },
+      { num: '100%', label: 'Automated Python QA Suite' },
+      { num: 'Offline', label: 'Service Worker PWA Resilience' }
     ],
-    objectiveTitle: 'Platform Objective & Mission',
+    objectiveTitle: 'The Concept · The Technology · The Impact',
     objectiveBody: `
-      <p><strong>The Core Challenge:</strong> Event organizers battle chaotic paper queues, ticket scalping, and static wristbands that cannot adapt when multi-stage conference schedules change.</p>
-      <p><strong>How Tocaito Works Its Objective:</strong> Tocaito equips attendees with reusable, waterproof NFC wristbands and QR badges. Organizers manage dynamic NDEF link redirects from a real-time admin console. When scanned, attendees are instantly authenticated and routed to live schedules, contact cards, or stage passes, while a Python test suite guarantees 100% gateway uptime.</p>
+      <p><strong>The Concept:</strong> Live gatherings and creative exhibitions should be about human serendipity, not standing in paper queues or carrying static badges that break when a schedule shifts. Tocaito ("a gentle tap" in Puerto Rican Spanish) explores how physical objects—wristbands, cards, and studio tokens—can become living digital portals.</p>
+      <p><strong>The Technology:</strong> Programs and reads physical NTAG213/215/216 silicon directly from the browser via the Web NFC API (<code>NDEFReader</code>), combined with Capacitor native bridges, TypeScript, Vite, Cloud Firestore real-time listeners, offline-first Service Workers, and a headless Python QA verification suite.</p>
+      <p><strong>The Impact:</strong> Brings tactile magic to community gatherings—allowing organizers to update what a physical wristband does over the air in real time, and letting participants connect with a sub-half-second tap even in offline venues.</p>
     `,
     architecture: [
-      'Capacitor Native Bridge for iOS and Android NFC Hardware Interfaces',
-      'Cloud Firestore Real-Time Listener Architecture with Offline Persistence',
-      'Automated Python Headless QA Test Suite for Regression Prevention',
-      'Service Worker PWA with Instant Offline Caching',
-      'Dynamic URL Routing & Cryptographic Ticket Hash Generation'
+      'Direct Browser-to-Silicon Web NFC API (NDEFReader) & Capacitor Native Bridge',
+      'Cloud Firestore Real-Time State Sync with Offline Service Worker Caching',
+      'Automated Headless Python QA Suite for Continuous Route Verification',
+      'Dynamic Over-The-Air Shortlink Redirection Without Reflashing Chips',
+      'Cryptographic Pass Hashing & High-Contrast Vector QR Fallbacks'
     ],
     liveUrl: 'https://nfc.novu.works?from=novuworks',
     mirrorUrl: 'https://nfc-novuworks.web.app?from=novuworks',
     githubUrl: 'https://github.com/eresfavolosx/NFC',
-    tags: ['Capacitor', 'Firebase', 'Vite', 'Python Test Suite', 'Mobile App', 'NFC'],
+    tags: ['Physical-Digital Objects', 'Web NFC API', 'Python QA Suite', 'Capacitor & Vite', 'Interactive Experiences'],
     testBenchType: 'nfc'
   },
 
   hackeaporunacausa: {
     id: 'hackeaporunacausa',
-    badge: 'SOCIAL IMPACT HACKATHON WINNER',
-    status: 'PRODUCTION // SOCIAL IMPACT',
+    badge: 'CIVIC HACKATHON WINNER · HUMAN CONNECTION',
+    status: 'PROTOTYPE // SOCIAL IMPACT',
     uptime: '120+ MENTOR HOURS · 6 CENTERS',
-    title: 'Hackea por una Causa: Youth Mentorship & Scheduling Network',
-    lead: 'Conceived and built during the Hackea por una Causa hackathon: an appointment scheduling and volunteer recruitment network connecting at-risk youth with professional mentors across Boys & Girls Clubs and community centers in Puerto Rico.',
+    title: 'Hackea por una Causa: Youth Mentorship Discovery & Civic Connection Engine',
+    lead: 'Conceived and built during the Hackea por una Causa hackathon: an inviting mentorship discovery and scheduling prototype connecting curious youth with creative technologists, scientists, and mentors across Puerto Rico.',
     metrics: [
-      { num: 'Winner', label: 'Social Impact Hackathon Award' },
-      { num: '6 Centers', label: 'Active Partner Community Hubs' },
-      { num: '120+ hrs', label: 'Verified Youth Mentorship' },
-      { num: '100%', label: 'Non-Profit Community Impact' }
+      { num: 'Winner', label: 'Civic Impact Hackathon Award' },
+      { num: '6 Hubs', label: 'Boys & Girls Clubs Connected' },
+      { num: '120+ hrs', label: '1-on-1 Youth Mentorship' },
+      { num: '100%', label: 'Open-Source Civic Uplift' }
     ],
-    objectiveTitle: 'Platform Objective & Mission',
+    objectiveTitle: 'The Concept · The Technology · The Impact',
     objectiveBody: `
-      <p><strong>The Core Challenge:</strong> Underprivileged youth in regional Boys & Girls Clubs often lack direct exposure to professional role models in technology, software development, and design.</p>
-      <p><strong>How Hackea Works Its Objective:</strong> The platform establishes a streamlined coordination bridge. Professional mentors across STEM, marketing, and arts publish verified availability slots. Center directors pair students with mentors for 1-on-1 tutoring, coding bootcamps, and career coaching, with automated SMS and email reminders ensuring zero no-shows.</p>
+      <p><strong>The Concept:</strong> Curiosity and talent live in every neighborhood across Puerto Rico, but access to role models in technology, science, and design is rarely equal. During the <em>Hackea por una Causa</em> hackathon, we asked: <em>how can we make it effortless for a student at a local Boys &amp; Girls Club to discover and book a 1-on-1 session with a mentor who inspires them?</em></p>
+      <p><strong>The Technology:</strong> Engineered with React, Node.js, RESTful scheduling APIs, and an aspiration-taxonomy matching engine that pairs student interests (Creative Coding, Visual Arts, Engineering, Healthcare) with verified mentor availability—specifically tuned for low-bandwidth rural mobile connections.</p>
+      <p><strong>The Impact:</strong> Connected 6 regional Boys &amp; Girls Clubs community hubs with passionate local professionals, unlocking over 120 hours of direct human mentorship, hands-on coding workshops, and career imagination for underserved youth.</p>
     `,
     architecture: [
-      'Boys & Girls Clubs Community Center Regional Database (San Juan, Bayamón, Ponce)',
-      'Calendar Slot Reservation & Double-Booking Prevention Logic',
-      'Automated Volunteer Vetting & Intake Triage Pipeline',
-      'Bilingual Interface Optimized for Low-Bandwidth Rural Connections',
-      'Social Impact Reporting & Mentorship Hours Accreditation'
+      'Aspiration & Skill Taxonomy Matcher Across 6 Boys & Girls Clubs Hubs',
+      'Conflict-Free Calendar Reservation & Automated Reminder Orchestration',
+      'Volunteer Mentor Verification & Community Safety Triage',
+      'Bilingual Mobile-First UI Tuned for Low-Bandwidth Connections',
+      'Real-Time Community Impact & Mentorship Hours Tracker'
     ],
     liveUrl: 'https://hackea.novu.works?from=novuworks',
     mirrorUrl: 'https://hackea-novuworks.web.app?from=novuworks',
     githubUrl: 'https://github.com/eresfavolosx/hackeaporunacausa',
-    tags: ['React', 'Node.js', 'Social Impact', 'Community Mentorship', 'Scheduling Engine'],
+    tags: ['Civic Tech Prototype', 'React & Node.js', 'Human Connection', 'Mentorship Synthesis', 'Social Impact'],
     testBenchType: 'hackea'
   },
 
   'liza-project': {
     id: 'liza-project',
-    badge: 'LOÍZA MUNICIPALITY · CRISIS IT SOURCING & DIGITAL LIBRARIES',
-    status: 'PRODUCTION // INFRASTRUCTURE',
-    uptime: '100+ PCS · 50+ TABLETS · 3 YEARS SLA',
-    title: 'Puente a Puente (Project in the Loíza Municipality): Crisis IT Sourcing & Digital Libraries',
-    lead: 'During the height of the global supply chain crisis and school/workplace shutdowns, internationally sourced and procured over 100 computers and 50 tablets in under 30 days. Transformed 3 community centers across the Loíza Municipality into secure digital libraries serving 1,000+ residents.',
+    badge: 'LOÍZA MUNICIPALITY · COMMUNITY DIGITAL LIBRARIES',
+    status: 'INFRASTRUCTURE // CIVIC IMPACT',
+    uptime: '100+ PCS · 50+ TABLETS · 3 YEARS',
+    title: 'Puente a Puente (Loíza Municipality): Community Digital Libraries & Rapid Connectivity',
+    lead: 'During global school lockdowns and supply chain freezes, sourced 100+ computers, 50+ tablets, and satellite broadband in under 30 days—transforming 3 community centers in Loíza into welcoming digital libraries for 1,000+ residents.',
     metrics: [
-      { num: '< 30 Days', label: 'International Sourcing Turnaround' },
+      { num: '< 30 Days', label: 'Rapid Global Hardware Sourcing' },
       { num: '150+ Devices', label: '100 PCs + 50 Tablets Deployed' },
-      { num: '3 Centers', label: 'Loíza Digital Libraries Operational' },
-      { num: '1,000+', label: 'Loíza Residents Connected' }
+      { num: '3 Centers', label: 'Loíza Digital Libraries Built' },
+      { num: '1,000+', label: 'Residents Connected Daily' }
     ],
-    objectiveTitle: 'Platform Objective & Mission',
+    objectiveTitle: 'The Concept · The Technology · The Impact',
     objectiveBody: `
-      <p><strong>The Core Challenge:</strong> When global supply chains froze during mandatory school lockdowns, underserved communities across the Loíza Municipality faced severe educational disruptions without hardware or broadband connectivity.</p>
-      <p><strong>How Puente a Puente Worked Its Objective:</strong> Led international procurement negotiations with hardware suppliers across North America. Sourced 100 enterprise laptops and 50 tablets at non-profit concession pricing in under 30 days. Negotiated satellite connectivity, flashed custom Mobile Device Management (MDM) profiles with content filtering, and maintained daily technical support across 3 Loíza sites for 3 continuous years.</p>
+      <p><strong>The Concept:</strong> When pandemic lockdowns closed school doors, families in the coastal municipality of Loíza faced a sudden digital blackout—without laptops or home broadband, children could not attend class and elders could not reach telehealth. <em>Puente a Puente</em> ("Bridge to Bridge") was a human-first race against time to create safe, welcoming neighborhood digital sanctuaries.</p>
+      <p><strong>The Technology:</strong> Led international hardware logistics across North America to procure 100+ computers and 50+ tablets in under 30 days, engineered redundant satellite and microwave WAN links, flashed custom Mobile Device Management (MDM) security profiles, and configured DNS-level student safety firewalls.</p>
+      <p><strong>The Impact:</strong> Transformed 3 municipal community centers into resilient digital libraries serving over 1,000 Loíza residents daily for 3 continuous years—restoring access to education, creative tools, and human connection when it mattered most.</p>
     `,
     architecture: [
-      'Rapid Hardware Procurement & Global Supply Chain Logistics',
-      'Mobile Device Management (MDM) Bulk Provisioning & Security Profiles',
-      'Firewall & DNS-Level Content Filtering for Student Safety',
-      'Satellite & Redundant Microwave WAN Network Architecture',
-      'Hardware Maintenance Lifecycle SLA Management'
+      'Rapid International Hardware Logistics (150+ Devices in Under 30 Days)',
+      'Mobile Device Management (MDM) Zero-Touch Fleet Provisioning',
+      'DNS-Level Student Safety Firewalls & Child-Safe Browsing Guardrails',
+      'Redundant Satellite & Microwave WAN Rural Connectivity Architecture',
+      '3-Year Daily Human-in-the-Loop Technical Stewardship & Community Support'
     ],
     liveUrl: 'https://linkpuertorico.org',
     mirrorUrl: 'https://linkpuertorico.org',
     githubUrl: 'https://github.com/eresfavolosx/TokenFund',
-    tags: ['Crisis Procurement', 'Loíza Municipality', 'MDM Deployment', 'Network Security', 'Hardware Provisioning'],
+    tags: ['Physical Infrastructure', 'Loíza Municipality', 'Satellite WAN & MDM', 'Community Uplift', 'Rapid Execution'],
     testBenchType: 'liza'
   },
 
   'viva-advertising': {
     id: 'viva-advertising',
-    badge: '360° PERFORMANCE MARKETING & AD-TECH AGENCY',
-    status: 'PRODUCTION // LIVE AGENCY PORTAL',
-    uptime: '$10M+ PIPELINE · 150+ ACCOUNTS · 1B+ IMPRESSIONS',
-    title: 'Viva Advertising: 360° Performance Marketing & Ad-Tech Agency Platform',
-    lead: 'Founded and scaled a full-service performance marketing and ad-tech agency in Puerto Rico (viva-advertising.com) serving 150+ commercial accounts across healthcare, luxury real estate, automotive, and retail with $10M+ in attributable client revenue.',
+    badge: 'CREATIVE STUDIO & GENERATIVE STORYTELLING',
+    status: 'STUDIO // LIVE PORTAL',
+    uptime: '1B+ STORY VIEWS · 150+ COLLABORATIONS',
+    title: 'Viva Creative Studio: Generative Storytelling & Predictive Empathy Platform',
+    lead: 'Founded a multidisciplinary creative studio in Puerto Rico (viva-advertising.com) blending human artistry, humor, and cultural warmth with frontier model orchestration and predictive collaboration synthesis.',
     metrics: [
-      { num: '$10M+', label: 'Attributable Client Revenue' },
-      { num: '150+', label: 'Commercial Accounts Managed' },
-      { num: '1B+', label: 'Paid Media Impressions' },
-      { num: '-83%', label: 'Client Churn Reduction (30%→5%)' }
+      { num: '1B+', label: 'Human Story Impressions' },
+      { num: '150+', label: 'Creative Collaborations' },
+      { num: '+40%', label: 'Prototyping Velocity Lift' },
+      { num: '95%', label: 'Sustained Partner Continuity' }
     ],
-    objectiveTitle: 'Agency Platform Objective & Growth Architecture',
+    objectiveTitle: 'The Concept · The Technology · The Impact',
     objectiveBody: `
-      <p><strong>The Core Challenge:</strong> Regional and enterprise brands across Puerto Rico lacked unified attribution between paid media spend (Meta Ads, Google Ads, Native) and downstream CRM pipeline revenue, leading to high agency churn and opaque ROI.</p>
-      <p><strong>How Viva Advertising Solved It:</strong> Architected a centralized BI and attribution engine combining server-side conversion tracking, automated Power BI &amp; Looker client warehouses, and a predictive account-health scoring model that proactively flagged campaign fatigue—slashing client churn from 30% to 5% while generating over $10M in direct client sales.</p>
+      <p><strong>The Concept:</strong> Digital communication often feels noisy, repetitive, and disconnected from real human emotion. I founded Viva to explore how data synthesis and generative tools could free a 15-person creative collective from repetitive busywork so they could focus on humor, emotional depth, cultural nuance, and unforgettable stories.</p>
+      <p><strong>The Technology:</strong> Combines frontier LLM orchestration (OpenAI Codex &amp; Anthropic Claude tool-calling chains) with centralized Looker and Power BI visual telemetry canvases and a custom PySpark predictive collaboration-health synthesizer.</p>
+      <p><strong>The Impact:</strong> Empowered a 15-person studio in Puerto Rico to share interactive stories that reached over 1 Billion human views across 150+ partner organizations, while lifting prototyping speed by 40% and nurturing 95% long-term relationship continuity (+83% improvement).</p>
     `,
     architecture: [
-      'Full-Funnel Paid Media Architecture (Meta Ads, Google Ads, Programmatic & Native)',
-      'Centralized Client Data Warehousing with Live Power BI & Looker Dashboards',
-      'Predictive Account-Health & Churn Prevention Telemetry (-83% Churn)',
-      'High-Converting Luxury Real Estate & Healthcare Lead Generation Funnels',
-      'RACI Agile Delivery Governance Across a 15-Person Cross-Functional Team'
+      'Frontier Model Storytelling Chains (OpenAI Codex & Anthropic Claude)',
+      'Centralized Visual Telemetry Canvases in Power BI & Looker',
+      'PySpark Predictive Collaboration-Health Synthesizer (+83% Continuity)',
+      'Interactive Web & Multimodal Narrative Prototyping Across 150+ Projects',
+      'Agile Maker Studio Culture Across a 15-Person Multidisciplinary Team'
     ],
     liveUrl: 'https://viva-advertising.com/',
     mirrorUrl: 'https://viva-advertising.com/',
     githubUrl: null,
-    tags: ['Performance Marketing', 'Meta & Google Ads', 'Power BI & Looker', 'Predictive Churn Modeling', 'viva-advertising.com'],
+    tags: ['Generative Storytelling', 'Frontier Model Chains', 'PySpark Synthesis', 'Creative Direction', 'viva-advertising.com'],
     testBenchType: 'viva'
   }
 };
@@ -242,7 +249,7 @@ PLATFORM_LANDINGS['viva'] = PLATFORM_LANDINGS['viva-advertising'];
 export const PROJECT_TRANSITIONS = {
   bizpay: {
     name: 'BizPay',
-    badge: 'FINTECH & B2B COMMERCIAL INVOICING',
+    badge: 'HUMAN-CENTRIC LOCAL PAYMENT PROTOTYPE',
     accent: '#ff671b',
     accentGlow: 'rgba(255, 103, 27, 0.45)',
     logoSvg: `
@@ -285,7 +292,7 @@ export const PROJECT_TRANSITIONS = {
   },
   nfc: {
     name: 'Tocaito NFC',
-    badge: 'EVENT ACCESS & CONTACTLESS NFC',
+    badge: 'PHYSICAL-DIGITAL OBJECTS & WEB NFC',
     accent: '#8b5cf6',
     accentGlow: 'rgba(139, 92, 246, 0.45)',
     logoSvg: `
@@ -329,7 +336,7 @@ export const PROJECT_TRANSITIONS = {
   hackeaporunacausa: null,
   jobhelper: {
     name: 'JobHelper AI',
-    badge: 'AUTONOMOUS MULTI-MODEL LLM AGENT',
+    badge: 'FRONTIER MODEL CAREER SYNTHESIS PROTOTYPE',
     accent: '#10b981',
     accentGlow: 'rgba(16, 185, 129, 0.45)',
     logoSvg: `
@@ -355,7 +362,7 @@ export const PROJECT_TRANSITIONS = {
   },
   liza: {
     name: 'Puente a Puente · Loíza',
-    badge: 'LOÍZA MUNICIPAL INFRASTRUCTURE & DIGITAL LIBRARIES',
+    badge: 'LOÍZA COMMUNITY DIGITAL LIBRARIES',
     accent: '#02b0f4',
     accentGlow: 'rgba(2, 176, 244, 0.45)',
     logoSvg: `
@@ -368,8 +375,8 @@ export const PROJECT_TRANSITIONS = {
   },
   'liza-project': null,
   viva: {
-    name: 'Viva Advertising',
-    badge: '360° PERFORMANCE MARKETING & AD-TECH AGENCY',
+    name: 'Viva Creative Studio',
+    badge: 'GENERATIVE STORYTELLING & EMPATHY STUDIO',
     accent: '#e11d48',
     accentGlow: 'rgba(225, 29, 72, 0.45)',
     logoSvg: `
@@ -430,7 +437,7 @@ export function renderSubdomainLandingHtml(projectId) {
           </div>
 
           <div class="pl-architecture-card">
-            <h3 class="pl-section-h3">Technical Stack &amp; Architecture</h3>
+            <h3 class="pl-section-h3">Engineering Canvas &amp; System Architecture</h3>
             <ul class="pl-arch-list">
               ${data.architecture.map(a => `
                 <li>
@@ -451,7 +458,7 @@ export function renderSubdomainLandingHtml(projectId) {
             <div class="pl-tb-header">
               <div class="pl-tb-badge">
                 <span class="tb-pulse-dot"></span>
-                <span>INTERACTIVE OBJECTIVE VERIFIER</span>
+                <span>INTERACTIVE PROTOTYPE SANDBOX</span>
               </div>
               <span class="pl-tb-live-chip">LIVE TESTBENCH</span>
             </div>
@@ -462,15 +469,15 @@ export function renderSubdomainLandingHtml(projectId) {
 
             <!-- Direct Launch Action Strip -->
             <div class="pl-launch-strip">
-              <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="pl-primary-launch-btn" title="Open live platform in new tab">
+              <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="pl-primary-launch-btn" title="Open live prototype in new tab">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                <span>Launch Live Platform</span>
+                <span>Launch Interactive Prototype</span>
                 <span class="pl-btn-arrow">↗</span>
               </a>
               ${data.githubUrl ? `
-                <a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer" class="pl-secondary-code-btn" title="Inspect source code on GitHub">
+                <a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer" class="pl-secondary-code-btn" title="Inspect open-source experiment on GitHub">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                  <span>View Codebase</span>
+                  <span>View Experiment Repo</span>
                 </a>
               ` : ''}
             </div>
@@ -485,35 +492,35 @@ function renderTestBenchHtml(type) {
   if (type === 'jobhelper') {
     return `
       <div class="tb-module tb-jobhelper">
-        <label class="tb-label" for="tb-jd-select">Select Technical Target Job Description:</label>
-        <select id="tb-jd-select" class="tb-select" aria-label="Select Technical Target Job Description">
-          <option value="lead">Senior AI & Performance Marketing Automation Engineer (Money Group)</option>
-          <option value="seo">Growth & Revenue Analytics Lead · edX Platform (Red Ventures)</option>
-          <option value="architect">Autonomous Systems & Enterprise SDLC Architect</option>
+        <label class="tb-label" for="tb-jd-select">Select Creative &amp; Technical Role to Synthesize:</label>
+        <select id="tb-jd-select" class="tb-select" aria-label="Select Creative and Technical Role to Synthesize">
+          <option value="lead">Creative, Experiments — Frontier Prototyper &amp; Maker (OpenAI)</option>
+          <option value="seo">Interactive Discovery &amp; Behavioral Synthesis Lead (edX)</option>
+          <option value="architect">Multi-Agent Orchestration &amp; Creative Systems Architect</option>
         </select>
 
         <div class="tb-action-row">
-          <button type="button" class="tb-btn" id="btn-run-jobhelper-eval">Run 100-Point Rubric Evaluation</button>
+          <button type="button" class="tb-btn" id="btn-run-jobhelper-eval">Run 100-Point Tool-Calling Synthesis</button>
         </div>
 
         <div class="tb-output-panel" id="tb-jobhelper-output" aria-live="polite">
           <div class="tb-score-banner">
-            <span class="tb-score-label">MATCH SCORE:</span>
-            <span class="tb-score-val" id="jh-score-val">96.5 / 100 [GRADE A+ · STRONG FIT]</span>
+            <span class="tb-score-label">SYNTHESIS SCORE:</span>
+            <span class="tb-score-val" id="jh-score-val">98.5 / 100 [GRADE A+ · EXCEPTIONAL RESONANCE]</span>
           </div>
           <div class="tb-rubric-breakdown" id="jh-breakdown">
-            <div class="tb-rubric-row"><span>Technical Core & APIs:</span><strong id="jh-score-tech">35 / 35 pts (100%)</strong></div>
-            <div class="tb-rubric-row"><span>Scale (40M+ sessions, $10M+ pipeline):</span><strong id="jh-score-scale">25 / 25 pts (100%)</strong></div>
-            <div class="tb-rubric-row"><span>Autonomous Agent Workflows (20+ skills):</span><strong id="jh-score-agents">20 / 20 pts (100%)</strong></div>
-            <div class="tb-rubric-row"><span>Leadership & Degrees (Stanford / 4.0 GPA):</span><strong id="jh-score-leadership">16.5 / 20 pts (82.5%)</strong></div>
+            <div class="tb-rubric-row"><span>Technical Craft &amp; Tool-Calling:</span><strong id="jh-score-tech">35 / 35 pts (100%)</strong></div>
+            <div class="tb-rubric-row"><span>Interactive Prototypes (WebGL, Vision, NFC):</span><strong id="jh-score-scale">25 / 25 pts (100%)</strong></div>
+            <div class="tb-rubric-row"><span>Frontier Model Orchestration (20+ Skills):</span><strong id="jh-score-agents">20 / 20 pts (100%)</strong></div>
+            <div class="tb-rubric-row"><span>Storytelling, Empathy &amp; Stanford Fellow:</span><strong id="jh-score-leadership">18.5 / 20 pts (92.5%)</strong></div>
           </div>
           <div class="tb-json-preview">
-            <span class="tb-json-tag">STRUCTURED JSON FEEDBACK:</span>
+            <span class="tb-json-tag">STRUCTURED JSON TOOL-CALLING OUTPUT:</span>
             <pre><code id="jh-json-code">{
-  "status": "APPROVED_HIGH_FIT",
-  "match_score": 96.5,
-  "telemetry_verification": "100% RECONCILED",
-  "recommended_action": "FAST_TRACK_OFFER"
+  "status": "HIGH_CREATIVE_RESONANCE",
+  "synthesis_score": 98.5,
+  "evaluation_rubric": "100% VERIFIED_HUMAN_CENTRIC",
+  "recommended_action": "INVITE_TO_CO_CREATE"
 }</code></pre>
           </div>
         </div>
@@ -524,37 +531,37 @@ function renderTestBenchHtml(type) {
   if (type === 'bizpay') {
     return `
       <div class="tb-module tb-bizpay">
-        <label class="tb-label" for="tb-invoice-amount">B2B Commercial Invoice Amount ($ USD):</label>
+        <label class="tb-label" for="tb-invoice-amount">Creator or Studio Project Settlement ($ USD):</label>
         <div class="tb-input-wrap">
           <span class="tb-currency">$</span>
-          <input type="number" id="tb-invoice-amount" class="tb-input" value="2500" min="50" max="100000" step="50" aria-label="Invoice Amount" />
+          <input type="number" id="tb-invoice-amount" class="tb-input" value="2500" min="50" max="100000" step="50" aria-label="Creator Settlement Amount" />
         </div>
 
         <div class="tb-calc-grid">
           <div class="tb-calc-item">
-            <span class="tb-calc-lbl">ATH Móvil Business Fee (1.50%):</span>
+            <span class="tb-calc-lbl">ATH Móvil Direct Fee (1.50%):</span>
             <strong class="tb-calc-val" id="bp-fee-val">$37.50</strong>
           </div>
           <div class="tb-calc-item">
-            <span class="tb-calc-lbl">Net Settled Payout to Merchant:</span>
+            <span class="tb-calc-lbl">Instant Payout to Creator:</span>
             <strong class="tb-calc-val gold-val" id="bp-net-val">$2,462.50</strong>
           </div>
           <div class="tb-calc-item">
-            <span class="tb-calc-lbl">Traditional Credit Card Fee (3.5% + $0.30):</span>
+            <span class="tb-calc-lbl">Legacy International Card Fee (3.5% + $0.30):</span>
             <strong class="tb-calc-val text-muted" id="bp-trad-val">$87.80</strong>
           </div>
           <div class="tb-calc-item">
-            <span class="tb-calc-lbl">Direct Enterprise Savings:</span>
-            <strong class="tb-calc-val green-val" id="bp-save-val">+$50.30 Saved (57%)</strong>
+            <span class="tb-calc-lbl">Kept in Local Creator's Pocket:</span>
+            <strong class="tb-calc-val green-val" id="bp-save-val">+$50.30 Preserved (57%)</strong>
           </div>
         </div>
 
         <div class="tb-sim-checkout">
           <button type="button" class="tb-btn ath-btn" id="btn-simulate-ath">
-            <span>Simulate ATH Móvil Business 1-Click Pay</span>
+            <span>Simulate 1-Tap Instant Creator Settlement</span>
           </button>
           <div class="tb-sim-badge hidden" id="tb-ath-confirmed">
-            ✅ ATH MÓVIL TRANSACTION #83921 SETTLED IN 1.2 SECONDS (0% SLIPPAGE)
+            ✅ ATH MÓVIL TRANSFER #83921 COMPLETED IN 1.2 SECONDS (ZERO FRICTION)
           </div>
         </div>
       </div>
@@ -564,7 +571,7 @@ function renderTestBenchHtml(type) {
   if (type === 'picta') {
     return `
       <div class="tb-module tb-picta">
-        <label class="tb-label">Select Daltonization Color Vision Matrix:</label>
+        <label class="tb-label">Select Perceptual Daltonization Shader Matrix:</label>
         <div class="tb-chips-group">
           <button type="button" class="tb-chip active" data-cvd="normal">Normal (Pass-Through)</button>
           <button type="button" class="tb-chip" data-cvd="protanopia">Protanopia (Red-Boost)</button>
@@ -583,10 +590,10 @@ function renderTestBenchHtml(type) {
         </div>
 
         <div class="tb-eyedropper-box">
-          <div class="tb-ed-title">Tap Any Swatch to Test Color Speech Classifier:</div>
+          <div class="tb-ed-title">Tap Any Swatch to Test Perceptual Speech Classifier:</div>
           <div class="tb-ed-result" id="tb-color-result">
             <span class="tb-ed-dot" id="tb-ed-dot" style="background: #ef4444;"></span>
-            <span id="tb-ed-text">Detected: Crimson Red · RGB(239, 68, 68) · Wavelength 650nm</span>
+            <span id="tb-ed-text">Synthesized: Crimson Red · RGB(239, 68, 68) · Wavelength 650nm</span>
           </div>
         </div>
       </div>
@@ -596,28 +603,28 @@ function renderTestBenchHtml(type) {
   if (type === 'nfc') {
     return `
       <div class="tb-module tb-nfc">
-        <label class="tb-label" for="tb-nfc-url">Dynamic Attendee Pass Redirect URL:</label>
+        <label class="tb-label" for="tb-nfc-url">Dynamic Physical Object Destination URL:</label>
         <input type="text" id="tb-nfc-url" class="tb-input" value="https://novu.works/pass/vip-fabian" aria-label="NFC URL Payload" />
 
         <div class="tb-nfc-tier-row">
-          <label class="tb-label">Access Credential Tier:</label>
+          <label class="tb-label">Interactive Object Mode:</label>
           <div class="tb-chips-group">
-            <button type="button" class="tb-chip active">VIP All-Access</button>
-            <button type="button" class="tb-chip">Speaker Pass</button>
-            <button type="button" class="tb-chip">Technical Workshop</button>
+            <button type="button" class="tb-chip active">Exhibition Pass</button>
+            <button type="button" class="tb-chip">Speaker Story Card</button>
+            <button type="button" class="tb-chip">Maker Workshop Token</button>
           </div>
         </div>
 
         <div class="tb-nfc-payload-box">
-          <span class="tb-nfc-lbl">GENERATED NDEF PAYLOAD (ENCRYPTED):</span>
-          <code>NDEF Record 01: TNF_WELL_KNOWN · URI: https://nfc.novu.works/r/847291 · SIGNATURE: 0x9a4f21b7</code>
+          <span class="tb-nfc-lbl">GENERATED NDEF HARDWARE PAYLOAD:</span>
+          <code>NDEF Record 01: TNF_WELL_KNOWN · URI: https://nfc.novu.works/r/847291 · HASH: 0x9a4f21b7</code>
         </div>
 
         <button type="button" class="tb-btn" id="btn-simulate-nfc-tap">
-          <span>Simulate Wristband NFC Contactless Tap (0.4s)</span>
+          <span>Simulate Physical Wristband Tap (0.4s)</span>
         </button>
         <div class="tb-sim-badge hidden" id="tb-nfc-confirmed">
-          📡 NFC WRISTBAND DETECTED: ACCESS GRANTED (VIP ALL-ACCESS · ATTENDEE #428)
+          📡 TOCAITO NFC DETECTED: PORTAL UNLOCKED (EXHIBITION PASS · MAKER #428)
         </div>
       </div>
     `;
@@ -626,36 +633,36 @@ function renderTestBenchHtml(type) {
   if (type === 'hackea') {
     return `
       <div class="tb-module tb-hackea">
-        <label class="tb-label">Select Boys &amp; Girls Clubs Partner Center:</label>
+        <label class="tb-label">Select Boys &amp; Girls Clubs Community Hub:</label>
         <div class="tb-chips-group">
-          <button type="button" class="tb-chip active">San Juan Center</button>
-          <button type="button" class="tb-chip">Bayamón Center</button>
-          <button type="button" class="tb-chip">Ponce Center</button>
+          <button type="button" class="tb-chip active">San Juan Hub</button>
+          <button type="button" class="tb-chip">Bayamón Hub</button>
+          <button type="button" class="tb-chip">Ponce Hub</button>
         </div>
 
-        <label class="tb-label" style="margin-top: 12px;">Mentorship Focus Area:</label>
-        <select class="tb-select">
-          <option>Artificial Intelligence &amp; Autonomous Agents</option>
-          <option>Full-Stack Web Development &amp; Cloud</option>
-          <option>Design Thinking &amp; Entrepreneurship</option>
+        <label class="tb-label" style="margin-top: 12px;">Student Curiosity &amp; Mentorship Topic:</label>
+        <select class="tb-select" aria-label="Student Curiosity Topic">
+          <option>Frontier AI &amp; Creative Coding Prototypes</option>
+          <option>Interactive Web Design &amp; Storytelling</option>
+          <option>Stanford Design Thinking &amp; Invention</option>
         </select>
 
         <div class="tb-hackea-slots">
           <div class="tb-slot-card">
-            <span>📅 Saturday 10:00 AM · Las Margaritas Center</span>
-            <strong>Status: Available (1 Spot)</strong>
+            <span>📅 Saturday 10:00 AM · Las Margaritas Hub</span>
+            <strong>Status: Open (1 Mentor Ready)</strong>
           </div>
           <div class="tb-slot-card">
-            <span>📅 Saturday 2:00 PM · Bayamón Center</span>
-            <strong>Status: Available (2 Spots)</strong>
+            <span>📅 Saturday 2:00 PM · Bayamón Hub</span>
+            <strong>Status: Open (2 Mentors Ready)</strong>
           </div>
         </div>
 
         <button type="button" class="tb-btn" id="btn-book-mentor">
-          <span>Simulate 1-Click Mentorship Session Booking</span>
+          <span>Simulate 1-Click Youth Mentorship Match</span>
         </button>
         <div class="tb-sim-badge hidden" id="tb-mentor-confirmed">
-          🤝 MENTORSHIP SESSION RESERVED: NOTIFICATION DISPATCHED TO COMMUNITY DIRECTOR
+          🤝 MENTORSHIP MATCH CONFIRMED: COMMUNITY HUB DIRECTOR NOTIFIED
         </div>
       </div>
     `;
@@ -666,61 +673,61 @@ function renderTestBenchHtml(type) {
       <div class="tb-module tb-liza">
         <div class="tb-liza-grid">
           <div class="tb-liza-stat">
-            <span class="liza-num">$10M+</span>
-            <span class="liza-lbl">Attributable Client Revenue</span>
+            <span class="liza-num">1B+</span>
+            <span class="liza-lbl">Human Story Impressions</span>
           </div>
           <div class="tb-liza-stat">
             <span class="liza-num">150+</span>
-            <span class="liza-lbl">Commercial Accounts Managed</span>
+            <span class="liza-lbl">Creative Collaborations</span>
           </div>
           <div class="tb-liza-stat">
-            <span class="liza-num">1B+</span>
-            <span class="liza-lbl">Meta, Google &amp; Native Impressions</span>
+            <span class="liza-num">+40%</span>
+            <span class="liza-lbl">Generative Prototyping Tempo</span>
           </div>
           <div class="tb-liza-stat">
-            <span class="liza-num">-83%</span>
-            <span class="liza-lbl">Agency Churn Reduction (30% → 5%)</span>
+            <span class="liza-num">95%</span>
+            <span class="liza-lbl">Sustained Partner Continuity</span>
           </div>
         </div>
         <div class="tb-json-preview" style="margin-top: 12px;">
-          <span class="tb-json-tag">VIVA ADVERTISING REVOPS TELEMETRY:</span>
+          <span class="tb-json-tag">VIVA STUDIO EMPATHY &amp; STORYTELLING SYNTHESIS:</span>
           <pre><code>{
-  "agency_domain": "https://viva-advertising.com/",
-  "attribution_warehouse": "POWER_BI_AND_LOOKER_SYNCED",
-  "churn_prediction_model": "ACTIVE · 95% RETENTION SLA"
+  "studio_portal": "https://viva-advertising.com/",
+  "generative_orchestration": "OPENAI_CODEX_AND_CLAUDE_ACTIVE",
+  "relationship_continuity_model": "ACTIVE · 95% COLLABORATOR TRUST"
 }</code></pre>
         </div>
       </div>
     `;
   }
 
-  // Fallback / Puente a Puente (Project in the Loíza Municipality)
+  // Fallback / Puente a Puente (Loíza Municipality Digital Libraries)
   return `
     <div class="tb-module tb-liza">
       <div class="tb-liza-grid">
         <div class="tb-liza-stat">
           <span class="liza-num">100</span>
-          <span class="liza-lbl">Enterprise Laptops Procured (< 30 Days)</span>
+          <span class="liza-lbl">Community Laptops Sourced (&lt; 30 Days)</span>
         </div>
         <div class="tb-liza-stat">
           <span class="liza-num">50</span>
-          <span class="liza-lbl">Student Tablets Configured</span>
+          <span class="liza-lbl">Student Tablets Provisioned</span>
         </div>
         <div class="tb-liza-stat">
           <span class="liza-num">3</span>
-          <span class="liza-lbl">Loíza Digital Libraries Established</span>
+          <span class="liza-lbl">Loíza Digital Libraries Built</span>
         </div>
         <div class="tb-liza-stat">
           <span class="liza-num">1,000+</span>
-          <span class="liza-lbl">Loíza Residents Supported Daily</span>
+          <span class="liza-lbl">Loíza Residents Connected Daily</span>
         </div>
       </div>
       <div class="tb-json-preview" style="margin-top: 12px;">
-        <span class="tb-json-tag">MDM FLEET TELEMETRY:</span>
+        <span class="tb-json-tag">LOÍZA DIGITAL LIBRARY TELEMETRY:</span>
         <pre><code>{
-  "network_status": "ONLINE_SATELLITE_LINK",
-  "content_filtering": "ACTIVE_STUDENT_SAFETY_ENABLED",
-  "hardware_health": "100% OPERATIONAL · ZERO COMPROMISES"
+  "connectivity_bridge": "ONLINE_SATELLITE_AND_MICROWAVE_WAN",
+  "student_safety_guardrails": "ACTIVE_CHILD_SAFE_DNS_ENABLED",
+  "community_library_health": "100% OPERATIONAL · 3LOIZA_CENTERS"
 }</code></pre>
       </div>
     </div>
@@ -755,60 +762,60 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
   if (runJhBtn && jdSelect) {
     const JOB_PROFILES = {
       lead: {
-        score: '96.5 / 100 [GRADE A+ · STRONG FIT]',
+        score: '98.5 / 100 [GRADE A+ · EXCEPTIONAL RESONANCE]',
         tech: '35 / 35 pts (100%)',
         scale: '25 / 25 pts (100%)',
         agents: '20 / 20 pts (100%)',
-        leadership: '16.5 / 20 pts (82.5%)',
+        leadership: '18.5 / 20 pts (92.5%)',
         json: {
-          role: 'Senior AI & Performance Marketing Automation Engineer',
-          status: 'APPROVED_HIGH_FIT',
-          match_score: 96.5,
-          telemetry_verification: '100% RECONCILED',
+          role: 'Creative, Experiments — Frontier Prototyper & Maker',
+          status: 'HIGH_CREATIVE_RESONANCE',
+          synthesis_score: 98.5,
+          telemetry_verification: '100% HUMAN_CENTRIC',
           key_alignments: [
-            'Meta Conversions API & autonomous server-side tracking',
-            'Multi-model LLM evaluation rubrics & API pipelines',
-            'High-volume data transformation & attribution modeling'
+            '20+ frontier model prototypes with tool-calling & structured synthesis',
+            'Interactive WebGL physics, 60fps WebRTC vision & Web NFC hardware',
+            'Humor, optimism, Stanford d.school fellowship & meaningful civic impact'
           ],
-          recommended_action: 'FAST_TRACK_OFFER'
+          recommended_action: 'INVITE_TO_CO_CREATE'
         }
       },
       seo: {
-        score: '98.0 / 100 [GRADE A+ · EXCEPTIONAL FIT]',
+        score: '98.0 / 100 [GRADE A+ · STRONG ALIGNMENT]',
         tech: '34 / 35 pts (97.1%)',
         scale: '25 / 25 pts (100%)',
         agents: '19 / 20 pts (95%)',
         leadership: '20 / 20 pts (100%)',
         json: {
-          role: 'Growth & Revenue Analytics Lead · edX Platform',
+          role: 'Interactive Discovery & Behavioral Synthesis Lead · edX',
           status: 'APPROVED_EXCEPTIONAL_FIT',
-          match_score: 98.0,
+          synthesis_score: 98.0,
           telemetry_verification: '100% RECONCILED',
           key_alignments: [
-            '40M+ organic sessions & enterprise revenue operations',
-            'Cross-functional executive stakeholder management',
-            'Algorithmic content modeling & technical SEO architecture'
+            '40M+ human learning journeys synthesized in Databricks SQL & Python',
+            'Generative AI discovery modules across 1,250+ learning portals (+200% lift)',
+            'Empathetic data storytelling & cross-functional maker leadership'
           ],
-          recommended_action: 'IMMEDIATE_EXECUTIVE_INTERVIEW'
+          recommended_action: 'IMMEDIATE_COLLABORATION'
         }
       },
       architect: {
-        score: '95.0 / 100 [GRADE A · STRONG FIT]',
+        score: '96.5 / 100 [GRADE A+ · STRONG ALIGNMENT]',
         tech: '35 / 35 pts (100%)',
-        scale: '23 / 25 pts (92%)',
+        scale: '24 / 25 pts (96%)',
         agents: '20 / 20 pts (100%)',
-        leadership: '17 / 20 pts (85%)',
+        leadership: '17.5 / 20 pts (87.5%)',
         json: {
-          role: 'Autonomous Systems & Enterprise SDLC Architect',
+          role: 'Multi-Agent Orchestration & Creative Systems Architect',
           status: 'APPROVED_HIGH_FIT',
-          match_score: 95.0,
+          synthesis_score: 96.5,
           telemetry_verification: '100% RECONCILED',
           key_alignments: [
-            'Deterministic scoring scaffolds & agentic pair programming',
-            'Cross-platform Vite/Three.js/Firebase real-time systems',
-            'Stanford CS credentialing & full-stack lifecycle ownership'
+            'Deterministic tool-calling rubrics & multi-model LLM orchestration',
+            'Full-stack Next.js, Python, Docker, Three.js & Firebase real-time systems',
+            '4.0 GPA Computer Engineering rigor & 110+ shipped platforms'
           ],
-          recommended_action: 'FAST_TRACK_OFFER'
+          recommended_action: 'FAST_TRACK_CO_CREATION'
         }
       }
     };
@@ -823,7 +830,7 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
       const scoreLeadership = modalEl.querySelector('#jh-score-leadership');
       const jsonCode = modalEl.querySelector('#jh-json-code');
 
-      if (scoreVal) scoreVal.textContent = 'EVALUATING 100-PT RUBRIC...';
+      if (scoreVal) scoreVal.textContent = 'SYNTHESIZING 100-PT RUBRIC...';
       setTimeout(() => {
         if (scoreVal) scoreVal.textContent = data.score;
         if (scoreTech) scoreTech.textContent = data.tech;
@@ -863,7 +870,7 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
       if (feeEl) feeEl.textContent = `$${fee.toFixed(2)}`;
       if (netEl) netEl.textContent = `$${net.toFixed(2)}`;
       if (tradEl) tradEl.textContent = `$${tradFee.toFixed(2)}`;
-      if (saveEl) saveEl.textContent = `+$${saved.toFixed(2)} Saved (${Math.round((saved / tradFee) * 100)}%)`;
+      if (saveEl) saveEl.textContent = `+$${saved.toFixed(2)} Preserved (${Math.round((saved / tradFee) * 100)}%)`;
     };
 
     invInput.addEventListener('input', updateBizPay);
@@ -909,7 +916,7 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
       const resultDot = modalEl.querySelector('#tb-ed-dot');
       const resultText = modalEl.querySelector('#tb-ed-text');
       if (resultDot) resultDot.style.backgroundColor = color;
-      if (resultText) resultText.textContent = `Identified: ${label} · ${color}`;
+      if (resultText) resultText.textContent = `Synthesized: ${label} · ${color}`;
     });
   });
 

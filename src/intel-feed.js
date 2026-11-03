@@ -73,40 +73,40 @@ export class IntelFeed {
         <header class="feed-top-header">
           <div class="feed-title-block">
             <div class="feed-kicker-row">
-              <span class="feed-kicker">EXECUTIVE THOUGHT LEADERSHIP & MARTECH RADAR</span>
+              <span class="feed-kicker">CREATIVE TECHNOLOGY LAB NOTES &amp; FRONTIER PULSE</span>
               <span class="feed-live-badge">
                 <span class="pulse-radar-dot"></span>
                 <span>Live Feed Active</span>
               </span>
             </div>
-            <h1 class="feed-main-heading">Thought Leadership & Live Industry Radar</h1>
+            <h1 class="feed-main-heading">Frontier Experiments &amp; Creative Tech Notes</h1>
             <p class="feed-main-sub">
-              An unconstrained, high-signal stream of growth engineering playbooks, RevOps telemetry analyses, applied AI frameworks, and real-time MarTech/AdTech industry news.
+              An open notebook of interactive prototyping playbooks, frontier model tool-calling architectures, sensory WebGL/WebRTC experiments, and live research signals.
             </p>
           </div>
 
           <!-- Why This Beats LinkedIn Value Matrix -->
           <div class="linkedin-killer-card">
             <div class="lk-header">
-              <span class="lk-title">THE HIGH-SIGNAL ADVANTAGE (VS. LINKEDIN)</span>
-              <span class="lk-tag">100% Signal · 0% Fluff</span>
+              <span class="lk-title">THE OPEN NOTEBOOK ADVANTAGE</span>
+              <span class="lk-tag">100% Craft · 0% Noise</span>
             </div>
             <div class="lk-grid">
               <div class="lk-pill">
                 <span class="lk-icon">⚡</span>
-                <span class="lk-text"><strong>Zero Algorithmic Throttling:</strong> Unfiltered technical frameworks without sponsored ads or clickbait engagement loops.</span>
+                <span class="lk-text"><strong>Working Prototypes First:</strong> Open-source architectures and interactive sandboxes instead of surface-level buzzwords.</span>
               </div>
               <div class="lk-pill">
                 <span class="lk-icon">📊</span>
-                <span class="lk-text"><strong>Executable Code & Telemetry:</strong> Real Databricks SQL, PySpark classifiers, and TypeScript AI agents rendered natively.</span>
+                <span class="lk-text"><strong>Executable Code &amp; Shaders:</strong> Real Databricks SQL synthesis, GLSL Daltonization matrices, and TypeScript agents rendered natively.</span>
               </div>
               <div class="lk-pill">
                 <span class="lk-icon">🔒</span>
-                <span class="lk-text"><strong>Direct Candidate Access:</strong> Instant collaboration and strategic scheduling with zero paywalled InMail barriers.</span>
+                <span class="lk-text"><strong>Direct Maker Access:</strong> Instant collaboration and creative brainstorming with zero gatekeeping.</span>
               </div>
               <div class="lk-pill">
                 <span class="lk-icon">🌐</span>
-                <span class="lk-text"><strong>Live Industry Feeds:</strong> Continuous telemetry monitoring across Google, Meta, Databricks, and global ad auctions.</span>
+                <span class="lk-text"><strong>Live Research Signals:</strong> Continuous telemetry across frontier LLMs, WebGPU/WebGL graphics, and assistive computing.</span>
               </div>
             </div>
           </div>
@@ -114,8 +114,8 @@ export class IntelFeed {
           <!-- Real-Time Industry Telemetry Ticker Ribbon -->
           <div class="industry-pulse-ticker">
             <div class="pulse-ticker-inner">
-              <span class="pulse-label">LIVE AUCTION & MARTECH TELEMETRY:</span>
-              <div class="pulse-chips-row" tabindex="0" role="region" aria-label="Live Auction and MarTech Telemetry">
+              <span class="pulse-label">LIVE FRONTIER PROTOTYPE TELEMETRY:</span>
+              <div class="pulse-chips-row" tabindex="0" role="region" aria-label="Live Frontier Prototype Telemetry">
                 ${INDUSTRY_PULSE_METRICS.map(
                   (m) => `
                   <div class="pulse-chip">
@@ -148,11 +148,11 @@ export class IntelFeed {
                     <span>Live LinkedIn Feed Mirror Active</span>
                   </span>
                 </div>
-                <div class="llm-headline">Performance Marketing Lead & Technical Product Manager · Level ICS4 · 8+ Years</div>
+                <div class="llm-headline">Creative Technologist · Frontier AI Prototypes &amp; Interactive Experiences · 8+ Years</div>
                 <div class="llm-meta-row">
-                  <span class="llm-stat"><strong>1,500+</strong> Network Connections</span>
+                  <span class="llm-stat"><strong>1,500+</strong> Maker &amp; Research Network</span>
                   <span class="llm-dot">·</span>
-                  <span class="llm-stat">Money Group (Full-Time) & Red Ventures (edX)</span>
+                  <span class="llm-stat">Money Group &amp; Red Ventures (edX)</span>
                   <span class="llm-dot">·</span>
                   <span class="llm-stat">San Juan, PR (US Remote)</span>
                 </div>
@@ -171,19 +171,19 @@ export class IntelFeed {
         <!-- Dual-Stream Layout: Main Playbooks (Left) + Live Radar (Right) -->
         <div class="feed-dual-layout">
           <!-- Left Stream: Fabián's Verified Playbooks -->
-          <section class="feed-main-stream" aria-label="Fabián's Growth Engineering Feed">
+          <section class="feed-main-stream" aria-label="Fabián's Creative Technology Feed">
             <!-- Filter & Search Controls -->
             <div class="feed-controls-bar">
               <div class="feed-filter-chips">
-                <button type="button" class="filter-chip ${this.activeFilter === 'all' ? 'active' : ''}" data-filter="all">All Playbooks (${INTEL_POSTS.length})</button>
-                <button type="button" class="filter-chip ${this.activeFilter === 'Growth Engineering' ? 'active' : ''}" data-filter="Growth Engineering">Growth Engineering</button>
-                <button type="button" class="filter-chip ${this.activeFilter === 'RevOps Analytics' ? 'active' : ''}" data-filter="RevOps Analytics">RevOps Analytics</button>
-                <button type="button" class="filter-chip ${this.activeFilter === 'Applied AI' ? 'active' : ''}" data-filter="Applied AI">Applied AI</button>
-                <button type="button" class="filter-chip ${this.activeFilter === 'AdTech / Attribution' ? 'active' : ''}" data-filter="AdTech / Attribution">AdTech & Attribution</button>
+                <button type="button" class="filter-chip ${this.activeFilter === 'all' ? 'active' : ''}" data-filter="all">All Lab Notes (${INTEL_POSTS.length})</button>
+                <button type="button" class="filter-chip ${this.activeFilter === 'Frontier Models' ? 'active' : ''}" data-filter="Frontier Models">Frontier Models</button>
+                <button type="button" class="filter-chip ${this.activeFilter === 'Human-Centric Design' ? 'active' : ''}" data-filter="Human-Centric Design">Human-Centric Design</button>
+                <button type="button" class="filter-chip ${this.activeFilter === 'Tool-Calling' ? 'active' : ''}" data-filter="Tool-Calling">Tool-Calling</button>
+                <button type="button" class="filter-chip ${this.activeFilter === 'Synthesis' ? 'active' : ''}" data-filter="Synthesis">Synthesis</button>
               </div>
               <div class="feed-search-box">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="feed-search-input" class="feed-search-input" placeholder="Search insights, SQL, PySpark, CAPI..." value="${this.escapeHtml(this.searchQuery)}" aria-label="Search intelligence insights, SQL, and case studies" />
+                <input type="text" id="feed-search-input" class="feed-search-input" placeholder="Search prototypes, shaders, SQL, agents..." value="${this.escapeHtml(this.searchQuery)}" aria-label="Search creative technology notes, SQL, and prototypes" />
               </div>
             </div>
 
@@ -193,20 +193,20 @@ export class IntelFeed {
             </div>
           </section>
 
-          <!-- Right Stream: Real-Time MarTech & AdTech Industry Radar -->
-          <aside class="feed-sidebar-radar" aria-label="Real-Time Industry News and Telemetry">
+          <!-- Right Stream: Real-Time Frontier AI & Creative Tech Radar -->
+          <aside class="feed-sidebar-radar" aria-label="Real-Time Creative Technology News and Telemetry">
             <!-- Live Industry News Widget -->
             <div class="radar-card">
               <div class="radar-card-header">
                 <div class="radar-title-group">
                   <span class="radar-badge">
                     <span class="live-dot green"></span>
-                    <span>LIVE INDUSTRY RADAR</span>
+                    <span>LIVE FRONTIER RADAR</span>
                   </span>
-                  <h2 class="radar-heading">MarTech & AdTech Stream</h2>
+                  <h2 class="radar-heading">Creative AI &amp; Systems Stream</h2>
                   <span class="radar-sync-time">Synced: ${this.lastLiveSync}</span>
                 </div>
-                <button type="button" class="radar-refresh-btn ${this.isFetchingLiveNews ? 'spinning' : ''}" id="btn-refresh-radar" title="Fetch Latest Live News & AdTech Updates">
+                <button type="button" class="radar-refresh-btn ${this.isFetchingLiveNews ? 'spinning' : ''}" id="btn-refresh-radar" title="Fetch Latest Live Frontier AI & Creative Tech Updates">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
                   <span>Sync API</span>
                 </button>
@@ -214,10 +214,10 @@ export class IntelFeed {
 
               <!-- Multi-Topic Real-Time Radar Switcher -->
               <div class="radar-topic-switcher" role="group" aria-label="Select News Feed Topic">
-                <button type="button" class="radar-topic-btn ${this.radarTopic === 'growth' ? 'active' : ''}" data-topic="growth">🚀 Growth</button>
-                <button type="button" class="radar-topic-btn ${this.radarTopic === 'ai' ? 'active' : ''}" data-topic="ai">🤖 AI</button>
-                <button type="button" class="radar-topic-btn ${this.radarTopic === 'data' ? 'active' : ''}" data-topic="data">📊 Big Data</button>
-                <button type="button" class="radar-topic-btn ${this.radarTopic === 'tech' ? 'active' : ''}" data-topic="tech">⚡ Startups</button>
+                <button type="button" class="radar-topic-btn ${this.radarTopic === 'growth' ? 'active' : ''}" data-topic="growth">🎨 Design</button>
+                <button type="button" class="radar-topic-btn ${this.radarTopic === 'ai' ? 'active' : ''}" data-topic="ai">🤖 Frontier AI</button>
+                <button type="button" class="radar-topic-btn ${this.radarTopic === 'data' ? 'active' : ''}" data-topic="data">📊 Synthesis</button>
+                <button type="button" class="radar-topic-btn ${this.radarTopic === 'tech' ? 'active' : ''}" data-topic="tech">⚡ WebGL/Code</button>
               </div>
 
               <div class="radar-news-list" id="radar-news-mount">
@@ -230,58 +230,58 @@ export class IntelFeed {
               <div class="radar-card-header">
                 <span class="radar-badge">
                   <span class="live-dot blue"></span>
-                  <span>INFRASTRUCTURE TELEMETRY</span>
+                  <span>PROTOTYPE TELEMETRY</span>
                 </span>
-                <h3 class="radar-sub-heading">MarTech & Data Stack SLA</h3>
+                <h3 class="radar-sub-heading">Creative Subdomains &amp; Runtime SLA</h3>
               </div>
               <div class="platform-sla-list">
                 <div class="sla-row">
                   <div class="sla-name">
                     <span class="sla-dot green"></span>
-                    <span>Google Ads & CAPI Gateway</span>
+                    <span>JobHelper LLM Rubric Engine</span>
                   </div>
                   <span class="sla-metric">99.98% · 24ms</span>
                 </div>
                 <div class="sla-row">
                   <div class="sla-name">
                     <span class="sla-dot green"></span>
-                    <span>Meta Graph API & Conversions API</span>
+                    <span>Picta 60 FPS WebRTC Shader Lens</span>
                   </div>
-                  <span class="sla-metric">99.95% · 36ms</span>
+                  <span class="sla-metric">60 FPS · On-Device</span>
                 </div>
                 <div class="sla-row">
                   <div class="sla-name">
                     <span class="sla-dot green"></span>
-                    <span>Databricks Delta Lake Cluster</span>
+                    <span>Databricks Delta Lake Synthesis</span>
                   </div>
                   <span class="sla-metric">142ms Execution</span>
                 </div>
                 <div class="sla-row">
                   <div class="sla-name">
                     <span class="sla-dot green"></span>
-                    <span>GA4 Measurement Protocol v2</span>
+                    <span>Tocaito Web NFC Hardware Bridge</span>
                   </div>
-                  <span class="sla-metric">100% Uptime</span>
+                  <span class="sla-metric">&lt;300ms Tap</span>
                 </div>
                 <div class="sla-row">
                   <div class="sla-name">
                     <span class="sla-dot green"></span>
-                    <span>Salesforce CRM Lakehouse Sync</span>
+                    <span>BizPay &amp; Hackea Cloud Run Nodes</span>
                   </div>
-                  <span class="sla-metric">Real-Time</span>
+                  <span class="sla-metric">100% Uptime</span>
                 </div>
               </div>
             </div>
 
             <!-- Executive Newsletter & Direct Connect Card -->
             <div class="radar-card newsletter-cta-card">
-              <div class="nl-kicker">MONTHLY STRATEGIC BRIEFING</div>
-              <h3 class="nl-title">The Growth Engineering Memo</h3>
+              <div class="nl-kicker">MONTHLY MAKER DISPATCH</div>
+              <h3 class="nl-title">The Creative Experiments Memo</h3>
               <p class="nl-desc">
-                High-leverage RevOps architectures, prompt engineering templates, and algorithmic media buying case studies sent once a month.
+                Open-source generative prototypes, tool-calling patterns, and human-centric interface experiments shared once a month.
               </p>
               <form class="nl-form" id="feed-newsletter-form">
-                <input type="email" class="nl-input" id="nl-email-input" placeholder="your.email@company.com" required aria-label="Email address for monthly RevOps insights" />
+                <input type="email" class="nl-input" id="nl-email-input" placeholder="your.email@domain.com" required aria-label="Email address for monthly creative tech notes" />
                 <button type="submit" class="nl-submit-btn">Subscribe</button>
               </form>
               <div class="nl-footer-links">
@@ -455,16 +455,16 @@ export class IntelFeed {
     if (refreshBtn) refreshBtn.classList.add('spinning');
 
     const topicQueries = {
-      growth: 'advertising+analytics+meta+attribution',
+      growth: 'interactive+design+webgl+accessibility',
       ai: 'claude+anthropic+openai+agentic',
-      data: 'databricks+pyspark+sql+analytics',
-      tech: 'startups+software+engineering',
+      data: 'databricks+pyspark+sql+synthesis',
+      tech: 'creative+coding+threejs+webrtc',
     };
     const topicLabels = {
-      growth: 'AdTech & Media Stream',
-      ai: 'Applied AI & Agents Stream',
-      data: 'Big Data & Telemetry Stream',
-      tech: 'Engineering & Startups Stream',
+      growth: 'Interactive Design Stream',
+      ai: 'Frontier AI & Agents Stream',
+      data: 'Behavioral Synthesis Stream',
+      tech: 'Creative Coding & WebGL Stream',
     };
 
     const query = topicQueries[topic] || topicQueries.growth;
@@ -511,7 +511,7 @@ export class IntelFeed {
 
       if (playAudio) {
         audio.confirm();
-        this.showToast('Live MarTech & AdTech radar synchronized');
+        this.showToast('Live Frontier AI & Creative Tech radar synchronized');
       }
     }
   }

@@ -13,38 +13,38 @@ import { getLanguage } from './i18n.js';
 export const CURATED_TESLA_NEWS = [
   {
     id: 't-news-1',
-    source: 'TechCrunch / Growth AI',
+    source: 'OpenAI & Frontier Research',
     time: '24m ago',
-    title: 'Autonomous AI Agents Take Over Enterprise Ad-Tech and B2B Pipeline Orchestration',
-    summary: 'How decision science teams are replacing legacy funnel dashboards with real-time multi-agent LLM systems that autonomously balance media spend.',
-    category: 'AI & Automation',
+    title: 'Autonomous Tool-Calling Agents Turn Open-Ended Questions into Working Prototypes',
+    summary: 'How hybrid makers are pairing structured LLM function-calling with interactive canvases to build participatory software experiences in hours.',
+    category: 'Frontier Models',
     url: 'https://news.ycombinator.com',
   },
   {
     id: 't-news-2',
-    source: 'MarTech Today',
+    source: 'Creative Applications',
     time: '42m ago',
-    title: 'Server-Side CAPI and First-Party Identity Resolution Become Table Stakes for Scale',
-    summary: 'Meta and Google conversion modeling show -38% CAC reduction when high-frequency event deduplication is deployed on custom cloud edge workers.',
-    category: 'Growth & AdTech',
+    title: 'WebGPU, WebRTC & Three.js Shaders Bring Tactile Physics and Assistive Vision to the Browser',
+    summary: 'Real-time 60 FPS Daltonization shaders and procedural spring physics transform standard web browsers into expressive sensory instruments.',
+    category: 'Interactive Experiences',
     url: 'https://news.ycombinator.com',
   },
   {
     id: 't-news-3',
     source: 'Hacker News Live',
     time: '1h ago',
-    title: 'Databricks and Lakehouse Architectures Powering Next-Gen Decision Science in RevOps',
-    summary: 'Normalization of 40M+ telemetry sessions allows quantitative product teams to predict user retention curves before day-7 activation.',
-    category: 'Big Data & RevOps',
+    title: 'Databricks Lakehouse Architectures Powering Human-Centric Behavioral Synthesis at Scale',
+    summary: 'Synthesizing 40M+ longitudinal learning journeys enables generative discovery systems that adapt empathetically to human curiosity.',
+    category: 'Behavioral Synthesis',
     url: 'https://news.ycombinator.com',
   },
   {
     id: 't-news-4',
-    source: 'VentureBeat',
+    source: 'Stanford d.school / UIF',
     time: '2h ago',
-    title: 'Stanford Innovation Fellows Highlight The Convergence of Software Engineering and Growth',
-    summary: 'Cross-functional technical product leaders who bridge high-performance code with ROI engineering outpace siloed marketing teams.',
-    category: 'Engineering & Leadership',
+    title: 'Stanford Innovation Fellows Champion the Hybrid Maker: Storytelling, Design & Code',
+    summary: 'Cross-functional creative technologists who bridge computer engineering rigor with humor, optimism, and emotional depth outpace siloed teams.',
+    category: 'Human-Centric Design',
     url: 'https://news.ycombinator.com',
   },
 ];
@@ -280,9 +280,9 @@ export class TeslaCockpitDashboard {
     if (spin) spin.classList.add('spinning');
 
     const topicQueries = {
-      all: 'artificial intelligence OR adtech OR growth engineering',
+      all: 'artificial intelligence OR creative coding OR webgl',
       ai: 'artificial intelligence OR LLM OR agents',
-      growth: 'growth marketing OR adtech OR conversion rate',
+      growth: 'interactive design OR accessibility OR storytelling',
       tech: 'software engineering OR typescript OR rust OR python',
     };
 
