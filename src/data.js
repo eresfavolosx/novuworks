@@ -133,12 +133,12 @@ export const PROFILE = {
       ],
       resumeProjects: [
         {
-          name: 'JobHelper (Frontier Model Career Synthesis Prototype)',
-          description: '**The Concept:** Job hunting often feels like shouting into an algorithmic void; JobHelper reimagines career discovery as a transparent, encouraging conversation between a human maker and an honest AI coach. **The Technology:** Built with **Python, Next.js 16, Docker, and multi-model LLM orchestration (OpenAI & Gemini/Claude)** using deterministic **tool-calling** and a **100-point structured JSON evaluation rubric** paired with a Manifest V3 Chrome Extension. **The Impact:** Replaces resume anxiety with instant, constructive clarity—helping candidates understand their true strengths and tailor their story in seconds.',
+          name: 'Procedural Physics Portfolio & NFC Physical-Digital Objects (novu.works & nfc.novu.works)',
+          description: 'Coded interactive procedural physics web experiences and prototyped a cross-platform mobile and physical NFC tap experience (**Capacitor, Firebase, Vite**) assisted by an **autonomous coding agent** to connect physical objects with digital play. **The Concept:** Turning static screens and physical tokens into tactile playgrounds of spatial motion and sub-0.4s contactless connection. **The Technology:** **Three.js WebGL shaders, 60 FPS spring-damped procedural particle physics, 6DoF gyroscope binding**, and a cross-platform **Capacitor 8, Firebase Firestore, and Vite Web NFC (`NDEFReader`)** architecture co-evolved with autonomous coding agents (`.Jules/bolt, palette, sentinel`) and Python Playwright verification. **The Impact:** Connects physical wristbands, rings, and studio artifacts with joyful, zero-install digital play.',
         },
         {
-          name: 'Picta (Real-Time Assistive Color Vision Camera)',
-          description: '**The Concept:** Inviting 300M+ people with Color Vision Deficiency—and their loved ones—to experience and share the emotional warmth of color in real time. **The Technology:** **60 FPS WebRTC video streams, mathematical Daltonization shader matrices, Euclidean Delta-E pixel sampling, and Web Speech synthesis**. **The Impact:** Transforms any browser into an immediate, voice-guided assistive lens with zero app install friction.',
+          name: 'JobHelper & FavoBot (https://github.com/eresfavolosx/JobHelper)',
+          description: 'Designed and engineered original **Python and LLM agent companions** exploring **autonomous reasoning, 100-point rubric critique, and everyday human-AI collaboration**. **The Concept:** Reimagining career discovery and daily technical orchestration as a warm, candid collaboration with frontier AI companions. **The Technology:** Built with **Python (`rubric_agent_companion.py`, `supra_engine.py`, `employer_brain.py`), Next.js 16, Go, Docker, Manifest V3 Chrome Extension, and multi-model LLM orchestration (OpenAI & Gemini 2.0 Flash)** with deterministic **0–100 JSON rubric scoring**. **The Impact:** Replaces resume anxiety and terminal toil with instant 100-point rubric critiques and mobile-first human-AI collaboration across web, Telegram, and Discord.',
         },
       ],
       proofPoints: [
@@ -224,12 +224,12 @@ export const PROFILE = {
       ],
       resumeProjects: [
         {
-          name: 'JobHelper (Frontier Model Career Synthesis Prototype)',
-          description: '**The Concept:** Turning opaque career evaluation into an optimistic, transparent dialogue between candidates and frontier intelligence. **The Technology:** Multi-model LLM orchestration, Python, Next.js 16, Docker, Manifest V3 Chrome Extension, and a deterministic 100-point JSON rubric via tool-calling. **The Impact:** Gives job seekers immediate, bias-free feedback and tailored storytelling in under 2 seconds.',
+          name: 'JobHelper & FavoBot (https://github.com/eresfavolosx/JobHelper)',
+          description: 'Designed and engineered original **Python and LLM agent companions** exploring **autonomous reasoning, 100-point rubric critique, and everyday human-AI collaboration**. **The Concept:** Turning opaque career evaluation and daily mission execution into an optimistic, transparent dialogue between humans and frontier intelligence. **The Technology:** Original **Python agent engines (`rubric_agent_companion.py`, `supra_engine.py`)**, **Next.js 16, Docker, Manifest V3 Chrome Extension**, and **OpenAI / Gemini 2.0 Flash tool-calling** with a deterministic **100-point JSON critique rubric**. **The Impact:** Gives makers immediate, bias-free 100-point feedback in under 2 seconds and conversational mission autonomy across web, Telegram, and Discord.',
         },
         {
-          name: 'Picta (Real-Time Assistive Color Vision Camera)',
-          description: '**The Concept:** Inviting people with Color Vision Deficiency—and their loved ones—to experience and share the full emotional warmth of color in real time. **The Technology:** 60 FPS WebRTC video streams, hardware-accelerated SVG/Canvas Daltonization matrices, Euclidean Delta-E pixel classification, and Web Speech synthesis. **The Impact:** Transforms any smartphone or laptop into an immediate, voice-guided visual aid for 300M+ people worldwide.',
+          name: 'Procedural Physics Portfolio & NFC Physical-Digital Objects (novu.works & nfc.novu.works)',
+          description: 'Coded interactive **procedural physics web experiences** and prototyped a cross-platform mobile and physical **NFC tap experience (Capacitor, Firebase, Vite)** assisted by an **autonomous coding agent** to connect physical objects with digital play. **The Concept:** Blending 60 FPS kinetic particle physics in the browser with physical NTAG microchips you can tap in the real world. **The Technology:** **Three.js WebGL custom shaders, spring-damped procedural particle physics, Capacitor 8, Firebase Firestore, Vite, Web NFC (`NDEFReader`)**, and autonomous coding agent workflows (`.Jules/`). **The Impact:** Bridges physical objects and digital play in under 0.4 seconds with zero native install friction.',
         },
       ],
       proofPoints: [
@@ -521,24 +521,24 @@ export const PROFILE = {
   standaloneProjects: [
     {
       id: 'jobhelper',
-      name: 'JobHelper: Frontier Model Career Synthesis & Interactive Evaluation Prototype',
-      organization: 'Open-Source Creative AI Experiment',
+      name: 'JobHelper & FavoBot: Python & LLM Agent Companions (100-Point Rubric Critique)',
+      organization: 'Open-Source Creative AI Experiments',
       role: 'Creator & Frontier Systems Maker',
-      period: '2026',
-      metrics: '100-Point Synthesis Rubric · Multi-Model Tool-Calling · Chrome Extension',
+      period: '2025 – 2026',
+      metrics: '100-Point Rubric Critique · Autonomous Reasoning · Python & LLM Companions',
       githubUrl: 'https://github.com/eresfavolosx/JobHelper',
       subdomainUrl: 'https://jobhelper.novu.works?from=novuworks',
       mirrorUrl: 'https://jobhelper-c3cd7.web.app?from=novuworks',
       subdomainLabel: 'jobhelper.novu.works',
       concept:
-        'Job hunting often feels like shouting into an algorithmic void where opaque keyword filters reject human nuance. JobHelper asks: what if career discovery felt like sitting down with an honest, optimistic mentor who helps you see your own strengths clearly and translate your life’s work into a compelling story?',
+        'Designed and engineered original Python and LLM agent companions (JobHelper & FavoBot) exploring autonomous reasoning, 100-point rubric critique, and everyday human-AI collaboration. Rather than shouting into an algorithmic void or babysitting a terminal, these companions turn career discovery and daily mission execution into an honest, optimistic dialogue.',
       technology:
-        'Orchestrates frontier models (OpenAI, Claude 3.5, and Gemini 2.0 Flash) via Python, Next.js 16, and Docker. Uses deterministic tool-calling, a 100-point structured JSON evaluation rubric, a Manifest V3 Chrome Extension for 1-click capture, and real-time Cloud Firestore state sync.',
+        'Combines original Python autonomous reasoning scripts (rubric_agent_companion.py, supra_engine.py, employer_brain.py) with Next.js 16, Go/Python Telegram & Discord bridges, Docker, a Manifest V3 Chrome Extension, and Gemini 2.0 Flash / OpenAI tool-calling enforcing a deterministic 0–100 JSON critique rubric.',
       impact:
-        'Transforms the lonely stress of job searching into an interactive, bias-free dialogue—giving makers and engineers immediate, constructive clarity and tailored storytelling in under two seconds.',
+        'Transforms resume anxiety and repetitive operational toil into transparent, 100-point rubric critiques in under two seconds and mobile-first human-AI collaboration across web, Telegram, and Discord.',
       summary:
-        'The Concept: Turns opaque career evaluation into an optimistic, transparent dialogue between human makers and frontier intelligence. The Technology: Multi-model LLM orchestration (OpenAI, Claude, Gemini), Python, Next.js 16, Docker, Manifest V3 Chrome Extension, and deterministic tool-calling with a 100-point JSON rubric. The Impact: Replaces application anxiety with instant, constructive clarity and tailored storytelling in under two seconds.',
-      tags: ['Frontier Models', 'Tool-Calling', 'Python & Next.js', 'Docker', 'Human-Centric Design', 'Generative Prototypes'],
+        'The Concept: Original Python and LLM agent companions (JobHelper & FavoBot) exploring autonomous reasoning, 100-point rubric critique, and everyday human-AI collaboration. The Technology: Python autonomous reasoning engines, Next.js 16, Docker, Manifest V3 Chrome Extension, and multi-model LLM orchestration (OpenAI, Claude, Gemini) with a deterministic 100-point JSON rubric. The Impact: Delivers transparent 100-point career critiques and conversational agent collaboration in under two seconds.',
+      tags: ['Python & LLM Companions', '100-Point Rubric Critique', 'Autonomous Reasoning', 'Human-AI Collaboration', 'Next.js & Docker'],
     },
     {
       id: 'picta',
@@ -563,24 +563,24 @@ export const PROFILE = {
     },
     {
       id: 'nfc-platform',
-      name: 'Tocaito: Tactile NFC Physical-to-Digital Bridge & Live Event Prototype',
-      organization: 'Link Puerto Rico · Physical-Digital Experiment',
+      name: 'Procedural Physics & Tocaito NFC: Connecting Physical Objects with Digital Play',
+      organization: 'Link Puerto Rico & Novu Works · Physical-Digital Experiment',
       role: 'Creator & Full-Stack Hardware Maker',
-      period: '2025',
-      metrics: '< 0.4s Contactless Tap · Web NFC Hardware API · Python Headless QA',
+      period: '2025 – 2026',
+      metrics: 'Capacitor · Firebase · Vite · Autonomous Coding Agent · 60 FPS Physics',
       githubUrl: 'https://github.com/eresfavolosx/NFC',
       subdomainUrl: 'https://nfc.novu.works?from=novuworks',
       mirrorUrl: 'https://nfc-novuworks.web.app?from=novuworks',
       subdomainLabel: 'nfc.novu.works',
       concept:
-        'Live community gatherings should be about human serendipity, not waiting in paper check-in lines or carrying static badges that go out of date the moment a schedule shifts. Tocaito ("a gentle tap" in Puerto Rican Spanish) explores how physical objects—wristbands, cards, and studio tokens—can become living digital portals.',
+        'Coded interactive procedural physics web experiences and prototyped a cross-platform mobile and physical NFC tap experience (Capacitor, Firebase, Vite) assisted by an autonomous coding agent to connect physical objects with digital play. Tocaito ("a gentle tap") turns physical wristbands, cards, and studio tokens into living digital portals.',
       technology:
-        'Interfaces directly with physical NTAG213/215/216 microchips in the browser using the Web NFC API (NDEFReader), Capacitor native bridges, TypeScript, Vite, and Cloud Firestore real-time listeners, guarded by an automated Python headless QA verification suite and offline Service Workers.',
+        'Combines Capacitor 8 native iOS/Android bridges, Firebase Firestore & Hosting, Vite, and the Web NFC API (NDEFReader) with 60 FPS procedural spring-physics and 6DoF spatial card shaders—iteratively built and verified alongside autonomous coding agents (.Jules/bolt, palette, sentinel) and a headless Python Playwright QA suite.',
       impact:
-        'Brings tactile magic to community gatherings—allowing organizers to reprogram physical wristbands over the air in real time and letting attendees connect or enter with a sub-half-second tap, even in offline festival venues.',
+        'Connects physical objects with responsive digital play in under 0.4 seconds—allowing makers and event hosts to reprogram physical NFC tokens over the air in real time without reflashing silicon.',
       summary:
-        'The Concept: Transforms physical wristbands and studio objects into living digital portals through a simple, joyful tap ("Tocaito"). The Technology: Web NFC hardware programming (NDEFReader), Capacitor, TypeScript, Vite, Cloud Firestore, offline Service Workers, and an automated Python QA suite. The Impact: Eliminates check-in friction and lets physical objects adapt dynamically in real time without reflashing silicon.',
-      tags: ['Physical-Digital Objects', 'Web NFC API', 'Python QA Suite', 'Capacitor & Vite', 'Interactive Experiences'],
+        'The Concept: Connects physical objects (NFC wristbands, rings, tokens) with interactive 60 FPS procedural physics and digital play through a single tap. The Technology: Cross-platform mobile and web NFC architecture (Capacitor 8, Firebase, Vite, NDEFReader) and Three.js/Canvas procedural physics co-built with an autonomous coding agent (.Jules) and Python QA suite. The Impact: Eliminates check-in friction and brings tactile physical-to-digital play to any mobile browser or native device in under 0.4s.',
+      tags: ['Capacitor, Firebase & Vite', 'NFC Physical-Digital Play', 'Procedural Physics', 'Autonomous Coding Agent', 'Web NFC API'],
     },
     {
       id: 'bizpay',

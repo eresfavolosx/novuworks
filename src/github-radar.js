@@ -5,21 +5,21 @@
 
 const CREATIVE_REPO_DESCRIPTIONS = {
   JobHelper:
-    'Interactive career synthesis prototype using frontier model orchestration (OpenAI, Claude, Gemini), deterministic tool-calling, a 100-point JSON rubric, and a 1-click Chrome Extension to replace resume anxiety with clarity.',
+    'JobHelper & FavoBot Companion: Original Python and LLM agent companions exploring autonomous reasoning, 100-point rubric critique, and everyday human-AI collaboration (Next.js 16, Python, Gemini/OpenAI, Docker).',
   BizPay:
     'Human-centric local payment & instant settlement prototype for independent creators in Puerto Rico—pairing ATH Móvil API handshakes with real-time fee-split mathematics for 1.2s payouts.',
   Picta:
     'Assistive 60 FPS WebRTC computer vision camera applying mathematical Daltonization shaders, Euclidean Delta-E pixel sampling, and Web Speech synthesis so 300M+ people with color blindness can see and hear color.',
   NFC:
-    'Tocaito: Physical-to-digital Web NFC hardware programmer and progressive web prototype that turns a 0.4s tap of a wristband into a living, over-the-air updatable community pass, verified by a Python QA suite.',
+    'Tocaito (NFC Physical-Digital Objects): Cross-platform mobile and physical NFC tap experience (Capacitor, Firebase, Vite) assisted by an autonomous coding agent (.Jules) to connect physical objects with digital play.',
   hackeaporunacausa:
     'Civic hackathon winner: an inviting youth mentorship discovery and scheduling prototype connecting underserved students at Boys & Girls Clubs in Puerto Rico with engineers, scientists, and artists.',
   TokenFund:
     'Puente a Puente & Civic Relief: Open-source community relief and digital library infrastructure connecting 1,000+ citizens across Puerto Rico.',
   FavoBot:
-    'Conversational pocket companion built in Python using frontier model tool-calling and asynchronous webhooks to turn system orchestration and creative brainstorming into a natural Telegram chat.',
+    'Original Python and LLM agent companion (Supra Bot) exploring autonomous reasoning, rubric-driven self-critique, tool smithing, and everyday human-AI collaboration across Telegram, Discord & Next.js.',
   novuworks:
-    'Fabián Vélez Vicente — Creative Technologist Atelier & Interactive Playground. Three.js WebGL shaders, 60 FPS procedural particle physics, 6DoF gyroscope, and live frontier AI prototypes.',
+    'Procedural Physics Portfolio & Creative Tech Atelier (novu.works): Interactive 60 FPS procedural physics web experiences, Three.js WebGL shaders, 6DoF gyroscope, and live frontier AI & physical-digital prototypes.',
   Helpr:
     'Community mentorship coordination prototype built for Hackea por una Causa: pairing curious island youth with volunteer creative technologists.',
   'taller-git':
@@ -31,7 +31,7 @@ const CREATIVE_REPO_DESCRIPTIONS = {
   'HackTurabo-s-Website':
     'Interactive registration and maker hub built with Node.js and Express for the HackTurabo university invention marathon.',
   eresfavolosx:
-    'Fabián Vélez Vicente — Creative Technologist, Storytelling Designer & Frontier Systems Maker (Computer Engineering 4.0 GPA · Stanford Innovation Fellow).',
+    'Fabián Vélez Vicente — Creative Technologist, AI Product Leader & Frontier Systems Maker (Computer Engineering 4.0 GPA · Stanford Innovation Fellow).',
 };
 
 const FALLBACK_REPOS = [

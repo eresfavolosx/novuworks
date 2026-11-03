@@ -9,34 +9,34 @@ import { audio } from './audio.js';
 export const PLATFORM_LANDINGS = {
   jobhelper: {
     id: 'jobhelper',
-    badge: 'FRONTIER MODEL ORCHESTRATION & SYNTHESIS',
+    badge: 'PYTHON & LLM AGENT COMPANIONS · 100-POINT RUBRIC CRITIQUE',
     status: 'PROTOTYPE // LIVE DEPLOYED',
     uptime: '99.98% UPTIME · LATENCY < 45MS',
-    title: 'JobHelper: Frontier Model Career Synthesis & Interactive Evaluation Prototype',
-    lead: 'An interactive career companion that uses multi-model LLM orchestration, tool-calling, and a transparent 100-point rubric to turn opaque job searches into an encouraging, human-centric dialogue.',
+    title: 'JobHelper & FavoBot: Original Python & LLM Agent Companions (100-Point Rubric Critique)',
+    lead: 'Designed and engineered original Python and LLM agent companions (JobHelper & FavoBot) exploring autonomous reasoning, 100-point rubric critique, and everyday human-AI collaboration.',
     metrics: [
-      { num: '100 pts', label: 'Transparent Synthesis Rubric' },
-      { num: '< 2.0s', label: 'Real-Time Tool-Calling Triage' },
-      { num: 'Multi-Model', label: 'OpenAI, Claude & Gemini Synthesis' },
+      { num: '100 pts', label: 'Deterministic Rubric Critique' },
+      { num: '< 2.0s', label: 'Autonomous Reasoning Trace' },
+      { num: 'Python+LLM', label: 'JobHelper & FavoBot Companions' },
       { num: '0%', label: 'Opaque Keyword Guesswork' }
     ],
     objectiveTitle: 'The Concept · The Technology · The Impact',
     objectiveBody: `
-      <p><strong>The Concept:</strong> Job hunting often feels like shouting into an algorithmic void where rigid keyword filters ignore human nuance and curiosity. JobHelper asks: <em>what if career discovery felt like sitting down with a thoughtful, optimistic mentor who helps you see your own strengths clearly and translate your life's work into a resonant story?</em></p>
-      <p><strong>The Technology:</strong> Orchestrates frontier models (OpenAI, Anthropic Claude 3.5, and Google Gemini 2.0 Flash) through Python, Next.js 16, and Docker. Uses deterministic tool-calling and a 100-point structured JSON schema across four human-centric dimensions—<em>Technical Craft (35 pts)</em>, <em>Real-World Scale (25 pts)</em>, <em>Frontier AI &amp; Prototyping (20 pts)</em>, and <em>Leadership &amp; Curiosity (20 pts)</em>—paired with a 1-click Manifest V3 Chrome Extension and Cloud Firestore sync.</p>
-      <p><strong>The Impact:</strong> Replaces application anxiety with immediate, bias-free clarity—helping makers, designers, and engineers understand how their background aligns with a role and craft an authentic story in under two seconds.</p>
+      <p><strong>The Concept:</strong> Job hunting and daily technical orchestration often feel like shouting into an algorithmic void or babysitting a terminal. Together with its sister pocket agent <strong>FavoBot</strong>, <strong>JobHelper</strong> was designed and engineered as an original <strong>Python and LLM agent companion</strong> exploring <strong>autonomous reasoning, 100-point rubric critique, and everyday human-AI collaboration</strong>.</p>
+      <p><strong>The Technology:</strong> Combines original Python autonomous reasoning scripts (<code>rubric_agent_companion.py</code>, <code>supra_engine.py</code>, <code>employer_brain.py</code>) with Next.js 16, Docker, and frontier models (OpenAI, Claude 3.5, and Gemini 2.0 Flash). Uses deterministic tool-calling and a 100-point structured JSON critique rubric across four human-centric dimensions—<em>Technical Craft (35 pts)</em>, <em>Real-World Scale (25 pts)</em>, <em>Frontier AI &amp; Prototyping (20 pts)</em>, and <em>Leadership &amp; Curiosity (20 pts)</em>—paired with a 1-click Manifest V3 Chrome Extension and Cloud Firestore sync.</p>
+      <p><strong>The Impact:</strong> Replaces application anxiety and repetitive operational toil with immediate, bias-free 100-point rubric critiques in under two seconds and mobile-first human-AI collaboration across web, Telegram, and Discord.</p>
     `,
     architecture: [
-      'Multi-Model LLM Orchestration (OpenAI / Anthropic Claude 3.5 / Gemini 2.0 Flash)',
-      'Deterministic Tool-Calling & 100-Point JSON Rubric (Zero Hallucination Guardrails)',
-      'Python & Next.js 16 App Router with Multi-Stage Docker Containerization',
+      'Original Python & LLM Agent Companions (JobHelper rubric_agent_companion.py & FavoBot supra_engine.py)',
+      'Deterministic 100-Point Rubric Critique & Multi-Step Autonomous Reasoning Trace',
+      'Next.js 16 App Router, Python/Go Messaging Bridges & Multi-Stage Docker Containerization',
       '1-Click Manifest V3 Chrome Extension & Real-Time Cloud Firestore Sync',
-      'Human-Centric Liquid Glass Interface with Interactive Kanban Board'
+      'Co-Evolved with Autonomous Coding Agents (.jules/bolt, palette, sentinel) for Security & Speed'
     ],
     liveUrl: 'https://jobhelper.novu.works?from=novuworks',
     mirrorUrl: 'https://jobhelper-c3cd7.web.app?from=novuworks',
     githubUrl: 'https://github.com/eresfavolosx/JobHelper',
-    tags: ['Frontier Models', 'Tool-Calling', 'Python', 'Next.js 16', 'Docker', 'Human-Centric Design'],
+    tags: ['Python & LLM Companions', '100-Point Rubric Critique', 'Autonomous Reasoning', 'Human-AI Collaboration', 'Next.js 16 & Docker'],
     testBenchType: 'jobhelper'
   },
 
@@ -108,34 +108,34 @@ export const PLATFORM_LANDINGS = {
 
   'nfc-platform': {
     id: 'nfc-platform',
-    badge: 'PHYSICAL-TO-DIGITAL OBJECTS & WEB NFC',
+    badge: 'PROCEDURAL PHYSICS & NFC PHYSICAL-DIGITAL PLAY (CAPACITOR · FIREBASE · VITE)',
     status: 'PROTOTYPE // LIVE DEPLOYED',
-    uptime: '0.4S TAP RESPONSE · OFFLINE READY',
-    title: 'Tocaito: Tactile NFC Physical-to-Digital Bridge & Live Event Prototype',
-    lead: 'A physical-to-digital hardware and progressive web experiment that turns a gentle tap ("Tocaito") of a wristband or studio object into an instant, adaptable digital experience.',
+    uptime: '0.4S TAP RESPONSE · AGENT-ASSISTED',
+    title: 'Procedural Physics Portfolio & Tocaito NFC: Connecting Physical Objects with Digital Play',
+    lead: 'Coded interactive procedural physics web experiences and prototyped a cross-platform mobile and physical NFC tap experience (Capacitor, Firebase, Vite) assisted by an autonomous coding agent to connect physical objects with digital play.',
     metrics: [
-      { num: '< 0.4s', label: 'Contactless Wristband Tap' },
-      { num: 'Dynamic', label: 'Over-The-Air Object Routing' },
-      { num: '100%', label: 'Automated Python QA Suite' },
-      { num: 'Offline', label: 'Service Worker PWA Resilience' }
+      { num: '< 0.4s', label: 'Contactless Physical-Digital Tap' },
+      { num: '60 FPS', label: 'Procedural Particle & Tilt Physics' },
+      { num: 'Capacitor 8', label: 'Cross-Platform Mobile + Vite + Firebase' },
+      { num: '.Jules AI', label: 'Autonomous Coding Agent Assisted' }
     ],
     objectiveTitle: 'The Concept · The Technology · The Impact',
     objectiveBody: `
-      <p><strong>The Concept:</strong> Live gatherings and creative exhibitions should be about human serendipity, not standing in paper queues or carrying static badges that break when a schedule shifts. Tocaito ("a gentle tap" in Puerto Rican Spanish) explores how physical objects—wristbands, cards, and studio tokens—can become living digital portals.</p>
-      <p><strong>The Technology:</strong> Programs and reads physical NTAG213/215/216 silicon directly from the browser via the Web NFC API (<code>NDEFReader</code>), combined with Capacitor native bridges, TypeScript, Vite, Cloud Firestore real-time listeners, offline-first Service Workers, and a headless Python QA verification suite.</p>
-      <p><strong>The Impact:</strong> Brings tactile magic to community gatherings—allowing organizers to update what a physical wristband does over the air in real time, and letting participants connect with a sub-half-second tap even in offline venues.</p>
+      <p><strong>The Concept:</strong> Digital play shouldn't be trapped behind flat glass. We coded interactive procedural physics web experiences on <code>novu.works</code> and prototyped <strong>Tocaito</strong>—a cross-platform mobile and physical NFC tap experience built to connect physical objects (wristbands, rings, badges, and studio tokens) with tactile digital play.</p>
+      <p><strong>The Technology:</strong> Built on a cross-platform <strong>Capacitor 8, Firebase (Firestore &amp; Hosting), and Vite</strong> architecture interfacing with physical NTAG213/215/216 microchips via the Web NFC API (<code>NDEFReader</code>) and native iOS bridges, paired with 60 FPS procedural spring-physics and 6DoF spatial shaders. Prototyped and iteratively hardened in collaboration with an <strong>autonomous coding agent (<code>.Jules/bolt, palette, sentinel</code>)</strong> and a headless Python Playwright verification suite (<code>verification.py</code>).</p>
+      <p><strong>The Impact:</strong> Connects physical objects with instant digital play in under 0.4 seconds—allowing makers, players, and event hosts to dynamically reprogram what a physical token does over the air in real time.</p>
     `,
     architecture: [
-      'Direct Browser-to-Silicon Web NFC API (NDEFReader) & Capacitor Native Bridge',
-      'Cloud Firestore Real-Time State Sync with Offline Service Worker Caching',
-      'Automated Headless Python QA Suite for Continuous Route Verification',
-      'Dynamic Over-The-Air Shortlink Redirection Without Reflashing Chips',
-      'Cryptographic Pass Hashing & High-Contrast Vector QR Fallbacks'
+      'Cross-Platform Mobile & Web NFC Stack (Capacitor 8, Firebase Firestore & Hosting, Vite)',
+      'Interactive 60 FPS Procedural Particle Physics, Spring Dynamics & 6DoF Spatial Card Shaders',
+      'Co-Prototyped with an Autonomous Coding Agent (.Jules/bolt, palette, sentinel) & Python Playwright QA',
+      'Direct Browser-to-Silicon Web NFC API (NDEFReader) & Dynamic Over-The-Air Object Routing',
+      'Offline-First Service Worker Resilience & High-Contrast Vector QR Fallbacks'
     ],
     liveUrl: 'https://nfc.novu.works?from=novuworks',
     mirrorUrl: 'https://nfc-novuworks.web.app?from=novuworks',
     githubUrl: 'https://github.com/eresfavolosx/NFC',
-    tags: ['Physical-Digital Objects', 'Web NFC API', 'Python QA Suite', 'Capacitor & Vite', 'Interactive Experiences'],
+    tags: ['Capacitor, Firebase & Vite', 'NFC Physical-Digital Play', 'Procedural Physics', 'Autonomous Coding Agent', 'Web NFC API'],
     testBenchType: 'nfc'
   },
 

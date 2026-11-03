@@ -28,25 +28,26 @@ Delivers an instant, joyful creative playground that runs at 60 FPS across mobil
 
 ---
 
-## 🔬 Featured Interactive Experiments & Open-Source Prototypes
+## 🔬 Featured Interactive Experiments & Substantiated Resume Prototypes
 
-### 1. **JobHelper** — *Empathetic Autonomous Career Co-Pilot* (`jobhelper.novu.works`)
-- **The Concept:** Job hunting often feels like shouting into an algorithmic void. JobHelper reimagines career discovery as an optimistic, human-centric co-pilot that reads between the lines of your life's work and helps you tell your story with confidence and warmth.
-- **The Technology:** Built in **Python** with **Frontier Models**, **Tool-Calling**, and multi-stage **Orchestration**. Combines semantic document parsing, headless **Playwright** browser exploration, and context-aware **Synthesis** inside a resilient **Docker** environment.
-- **The Impact:** Gives makers back their time and creative energy—replacing hours of repetitive form-filling with thoughtful, authentic career storytelling.
-- **Repository:** [`eresfavolosx/JobHelper`](https://github.com/eresfavolosx/JobHelper)
+### 1. **Procedural Physics Portfolio & NFC Physical-Digital Objects** (`novu.works` & `nfc.novu.works`)
+> **Substantiated Resume Claim:** *"Coded interactive procedural physics web experiences and prototyped a cross-platform mobile and physical NFC tap experience (Capacitor, Firebase, Vite) assisted by an autonomous coding agent to connect physical objects with digital play."*
+- **The Concept:** Digital connection shouldn't be trapped behind flat screens and static QR codes. We coded interactive 60 FPS procedural physics web experiences right on [`novu.works`](https://novu.works) and prototyped **Tocaito** (`nfc.novu.works`)—a cross-platform mobile and physical NFC tap experience designed to connect physical objects (wristbands, rings, badges, and studio tokens) with tactile digital play.
+- **The Technology:**
+  - **Procedural Physics Web Experiences (`novu.works`):** Custom **Three.js WebGL2 GLSL shaders**, **60 FPS spring-damped procedural particle physics** (`src/minimal-particle-matrix.js`, `src/sculpture.js`), **6DoF gyroscope spatial tilt**, and kinetic shockwave fields.
+  - **Cross-Platform Mobile & Physical NFC Tap (`Capacitor, Firebase, Vite`):** Built from a unified **Vite** codebase packaged for native mobile via **Capacitor 8** (`capacitor.config.json`, `ios/`) and the web via the **Chrome Web NFC API (`NDEFReader`)** backed by **Firebase Cloud Firestore & Hosting** (`firebase.json`).
+  - **Autonomous Coding Agent Collaboration (`.Jules/` & `verification.py`):** Iteratively prototyped and verified alongside autonomous coding agents (`.Jules/bolt.md`, `.Jules/palette.md`, `.Jules/sentinel.md`) and a headless Python Playwright QA suite.
+- **The Impact:** Connects physical artifacts with responsive digital play in under **0.4 seconds**—allowing creators, event hosts, and players to reprogram physical NFC tokens over the air in real time without reflashing silicon.
+- **Repositories:** [`eresfavolosx/novuworks`](https://github.com/eresfavolosx/novuworks) · [`eresfavolosx/NFC`](https://github.com/eresfavolosx/NFC)
 
-### 2. **Picta** — *Real-Time Perceptual Color & Voice Companion* (`picta.novu.works`)
-- **The Concept:** For 300 million people with Color Vision Deficiency, choosing an outfit, reading a subway map, or admiring a painting can carry quiet uncertainty. Picta asks: *what if your phone's camera could translate the emotional warmth and exact nuance of any color into a friendly voice and tactile visual overlay?*
-- **The Technology:** A zero-install Progressive Web App running a **60 FPS HTML5 WebRTC camera stream** and **Canvas 2D pixel shaders**. Applies **Machado/Viénot 3×3 LMS cone-response Daltonization matrices**, **Euclidean RGB Delta-E distance matching**, and **Web Speech API** voice synthesis entirely on-device.
-- **The Impact:** Turns any mobile or desktop browser into an immediate, dignified assistive lens—inviting color-blind users and their sighted friends to explore and share how they each perceive the world.
-- **Repository:** [`eresfavolosx/Picta`](https://github.com/eresfavolosx/Picta)
-
-### 3. **NFC Physical-to-Digital Studio** — *Tactile Hardware & Spatial Identity* (`nfc.novu.works`)
-- **The Concept:** Digital connection has become trapped behind screens and QR codes. This experiment explores the magic of physical objects—asking how a simple tap of a ring, badge, or vinyl record can spark an immediate, memorable human encounter.
-- **The Technology:** Bridges physical **NTAG213/215/216 microchips** directly to the browser via the **Chrome Web NFC API (`NDEFReader`)**, binary **NDEF payload serialization**, **RFC 6350 vCard 3.0 generation**, and a **6DoF device-orientation holographic card physics engine**.
-- **The Impact:** Empowers artists, educators, and makers to program physical artifacts straight from their phones—turning everyday objects into interactive portals of story and identity.
-- **Repository:** [`eresfavolosx/NFC`](https://github.com/eresfavolosx/NFC)
+### 2. **JobHelper & FavoBot** — *Original Python & LLM Agent Companions* (`jobhelper.novu.works`)
+> **Substantiated Resume Claim:** *"JobHelper & FavoBot (https://github.com/eresfavolosx/JobHelper): Designed and engineered original Python and LLM agent companions exploring autonomous reasoning, 100-point rubric critique, and everyday human-AI collaboration."*
+- **The Concept:** Job hunting and daily technical orchestration often feel like shouting into an algorithmic void or babysitting a terminal. **JobHelper** and its sister pocket companion **FavoBot** reimagine career discovery and daily mission execution as an optimistic, candid collaboration between humans and frontier AI companions.
+- **The Technology:**
+  - **100-Point Rubric Critique (`src/lib/job-service.js` & `scripts/rubric_agent_companion.py`):** Uses **Gemini 2.0 Flash / OpenAI** structured JSON reasoning to critique and score role alignment on a deterministic `0–100` rubric across four weighted dimensions, returning transparent reasoning traces.
+  - **Original Python & LLM Autonomous Reasoning (`scripts/rubric_agent_companion.py`, `supra_engine.py`, `employer_brain.py`, `reward_engine.py`):** Multi-step Python agent brains paired with **Next.js 16**, **Docker**, a **Manifest V3 Chrome Extension**, and **Telegram/Discord** bridges for everyday human-AI collaboration.
+- **The Impact:** Gives makers back their time and creative confidence—delivering transparent 100-point rubric critiques in under 2 seconds and conversational mission execution from anywhere.
+- **Repositories:** [`eresfavolosx/JobHelper`](https://github.com/eresfavolosx/JobHelper) · [`eresfavolosx/FavoBot`](https://github.com/eresfavolosx/FavoBot)
 
 ### 4. **BizPay** — *Playful Peer-to-Peer Community Micro-Economy* (`bizpay.novu.works`)
 - **The Concept:** Splitting a dinner bill, tipping a local street musician, or pooling funds for a neighborhood project shouldn't feel like filing taxes. BizPay reimagines local value exchange as an effortless, transparent, and celebratory social interaction.
