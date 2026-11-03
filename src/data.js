@@ -10,9 +10,9 @@ export { LOGOS };
 export const PROFILE = {
   fullName: 'Fabián Vélez Vicente',
   preferredName: 'Fabian Velez',
-  role: 'Creative Technologist & Frontier AI Systems Lead',
-  level: 'Level ICS4 Maker & Lead',
-  tenure: '8+ Years (Frontier Models, Interactive Experiences & Human-Centric Systems)',
+  role: 'Creative Technologist, AI Product Leader & Systems Architect',
+  level: 'Level ICS4 Lead & Maker',
+  tenure: '8+ Years (Frontier AI, Product Strategy, Decision Science & Full-Stack Systems)',
   location: 'San Juan, PR (US Remote / Worldwide)',
   phone: '+1 (347) 815-8054',
   workAuthorization: 'US Citizen (Born in Puerto Rico · No Visa Sponsorship Required)',
@@ -35,45 +35,143 @@ export const PROFILE = {
     },
   },
   summary:
-    'Hybrid creative technologist, storytelling designer, and hands-on systems maker with 8+ years of experience turning open-ended human questions into working generative prototypes, interactive experiences, and expressive tools powered by frontier models. Combines a 4.0 GPA in Computer Engineering and a Stanford University Innovation Fellowship with deep fluency in multi-model orchestration, tool-calling, real-time WebGL physics, and large-scale behavioral synthesis—making frontier intelligence feel grounded, optimistic, and unmistakably human.',
-  status: 'Open to Creative Technologist, Frontier Experiments, Interactive AI Prototyping, and Human-Centric Systems Roles.',
+    'Multidisciplinary AI Product Leader, Creative Technologist, Decision Scientist, and Full-Stack Systems Architect with 8+ years of experience turning complex product, data, and human questions into working generative prototypes, interactive experiences, and high-scale platforms. Combines a 4.0 GPA in Computer Engineering and a Stanford University Innovation Fellowship with deep fluency in frontier model orchestration, tool-calling, Databricks SQL/PySpark (40M+ sessions), and executive product delivery across Money Group, Red Ventures (edX), Viva Studio, and Link Puerto Rico.',
+  status: 'Open to Creative Technologist, AI Product Manager, Product Marketing & Growth Lead, Decision Science, and Full-Stack Systems Roles.',
 
   headlineStats: [
-    { label: 'Generative Prototypes Shipped', value: '20+', sub: 'Money Group (Full-Time) · Frontier Model Orchestration' },
-    { label: 'Discovery Synthesis Lift', value: '+200%', sub: 'Red Ventures (Full-Time, edX) · Human-Centric AI Interfaces' },
-    { label: 'Interactive Systems Built', value: '110+', sub: 'Link Puerto Rico & Viva Studio · Community & Creative Tech' },
-    { label: 'Relationship Continuity', value: '+83%', sub: 'Proactive human-in-the-loop signal synthesis across 150+ teams' },
-    { label: 'Learning Journeys Mapped', value: '40M+', sub: 'Databricks & Python behavioral synthesis on edX' },
+    { label: 'Frontier AI Workflows Shipped', value: '20+', sub: 'Money Group (Full-Time) · Tool-Calling & Orchestration' },
+    { label: 'Discovery & Inquiry Surge', value: '+200%', sub: 'Red Ventures (Full-Time, edX) · Generative AI & UX' },
+    { label: 'Platforms & Prototypes Built', value: '110+', sub: 'Link Puerto Rico & Viva Studio · Full-Stack & Civic Tech' },
+    { label: 'Partner Retention Continuity', value: '+83%', sub: 'Predictive Python/PySpark synthesis across 150+ organizations' },
+    { label: 'User Sessions Synthesized', value: '40M+', sub: 'Databricks SQL & Python Decision Science on edX' },
   ],
 
   // ─────────────────────────────────────────────────────────────
   // Dynamic Role Lenses / Target Personas
-  // Enables visitors to inspect tailored creative technology narratives
+  // Enables visitors to inspect tailored narratives across ALL target applications:
+  //   - master: 360° Executive, AI Product, Creative Tech & Systems Lead
+  //   - ai_engineering: OpenAI Creative, Experiments / Frontier AI Prototyping
+  //   - revops_analytics: Product Marketing, Growth Strategy & Storytelling
+  //   - data_governance: Decision Science, Behavioral Analytics & Telemetry
+  //   - tech_ops: Technical Product Manager (TPM), Cloud & Full-Stack Systems
   // ─────────────────────────────────────────────────────────────
   roleVariants: {
     master: {
       id: 'master',
-      label: '✨ Creative Technologist (Master)',
-      shortTitle: 'Creative Technologist & Frontier Prototyper',
-      headline: 'Creative Technologist, Storytelling Designer & Frontier Systems Maker',
+      label: '🚀 Executive & Creative Tech Master',
+      shortTitle: 'AI Product Leader, Creative Technologist & Systems Architect',
+      headline: 'Creative Technologist, AI Product Leader & Full-Stack Systems Architect',
       summary:
-        'Multidisciplinary Creative Technologist and Systems Architect with 8+ years of experience bridging human-centric design, frontier model orchestration, interactive WebGL/WebRTC experiments, and cloud engineering. Passionate about building expressive prototypes, physical-to-digital objects, and stories that invite people across education, civic life, and creative studios to participate, reflect, and imagine.',
+        'Hybrid AI Product Leader, Creative Technologist, and Systems Architect with 8+ years of experience bridging frontier model orchestration, human-centric design, decision science (40M+ Databricks sessions), and full-stack cloud engineering. Proven track record shipping working generative prototypes, interactive experiences, and high-velocity growth systems for global learning platforms (edX / Red Ventures), multi-domain consumer ecosystems (Money Group), and 150+ partner organizations.',
       skills: [
         {
-          title: 'Frontier Models & Agentic Orchestration',
-          items: 'Frontier Models (OpenAI GPT-4o / o3 / Codex, Anthropic Claude, Gemini) | Tool-Calling & Function Synthesis | Multi-Agent Orchestration | Structured Output Rubrics | Human-in-the-Loop Steering',
+          title: 'Frontier Models, AI Product & Agentic Orchestration',
+          items: 'Frontier Models (OpenAI GPT-4o / o3 / Codex, Anthropic Claude, Gemini) | Tool-Calling & Function Synthesis | Multi-Agent Orchestration | AI Product Strategy & Evaluation Rubrics | Human-in-the-Loop Steering',
         },
         {
-          title: 'Interactive Experiences & Creative Computing',
-          items: 'Three.js & WebGL Shaders | Procedural Particle Physics | WebRTC Real-Time Computer Vision | Web NFC Hardware Bridges | Web Audio & Speech Synthesis | WCAG AAA Accessible Design',
+          title: 'Interactive Experiences, Design & Creative Computing',
+          items: 'Three.js & WebGL Shaders | Procedural Particle Physics | WebRTC Real-Time Computer Vision | Web NFC Hardware Bridges | Web Audio & Speech Synthesis | WCAG AAA Accessible UX',
         },
         {
-          title: 'Full-Stack Prototyping & Data Synthesis',
-          items: 'Python & FastAPI | JavaScript & TypeScript (React, Next.js, Node.js, Vite) | Databricks & SQL Behavioral Synthesis | Cloud Run, Docker & Firebase | REST APIs',
+          title: 'Decision Science, Growth & Behavioral Synthesis',
+          items: 'Databricks & SQL (40M+ Sessions) | Python & PySpark | Power BI (Microsoft Certified), Looker & Tableau | Go-To-Market & Growth Experimentation (+200% Lift) | Predictive Retention Modeling (+83%)',
         },
         {
-          title: 'Storytelling, Community & Design Thinking',
-          items: 'Stanford University Innovation Fellow (d.school) | Interactive Narrative Design | Civic Hackathon Leadership | Bilingual Storytelling (English / Spanish)',
+          title: 'Full-Stack Engineering, Cloud & Leadership',
+          items: 'JavaScript & TypeScript (React, Next.js, Node.js, Vite) | FastAPI, Docker & Cloud Run | Firebase & Azure | Stanford University Innovation Fellow | Computer Engineering (4.0 GPA) | Bilingual (EN/ES)',
+        },
+      ],
+      experiences: [
+        {
+          company: 'Money Group',
+          employmentType: 'Full-Time',
+          role: 'AI Product, Creative Technology & Systems Lead — Full-Time',
+          period: 'March 2026 – October 2026',
+          bullets: [
+            'Generative Prototypes & Frontier Model Orchestration: Conceived and engineered **20+ interactive AI skills and autonomous workflows** using **frontier models, tool-calling, and structured synthesis**, compressing multi-day operational and analytical cycles into **sub-4-hour exploration** across a 100+ person organization.',
+            'Interactive Experience Builder & Product Delivery: Partnered with Software Engineering across **30+ rapid product sprints** to build an **AI-powered interactive web experience builder**, connecting **REST APIs and live tool-calling** across 5 consumer verticals.',
+            'Human-Centric Evaluation & Enablement: Designed rigorous **human-in-the-loop evaluation rubrics** for **100% ground-truth fidelity** and led hands-on **AI product workshops** that empowered a **15-person multidisciplinary team** to ship with frontier intelligence.',
+          ],
+        },
+        {
+          company: 'Red Ventures',
+          employmentType: 'Full-Time',
+          role: 'AI Discovery, Product Growth & Decision Science Lead (edX) — Full-Time',
+          period: 'August 2024 – January 2026',
+          bullets: [
+            'Generative Learning Discovery: Partnered with Product and Engineering to reimagine how 100M+ global learners discover courses on **edX**, deploying **generative AI synthesis and adaptive front-end experiences** across **1,250+ learning portals** to drive a **3x (+200%) surge in learner inquiries** and **+38.1% verification lift**.',
+            'Decision Science & Behavioral Synthesis: Analyzed **40 million+ user sessions** using **Python and SQL in Databricks**, transforming complex multi-touch clickstreams into **actionable product strategy and human-centric stories**.',
+            'Executive Observability & Visual Telemetry: Architected real-time **Looker and Tableau executive dashboards** that gave product managers, educators, and engineers immediate clarity into platform health (+19% YoY efficiency).',
+          ],
+        },
+        {
+          company: 'Viva Advertising',
+          employmentType: 'My Company / Founder',
+          url: 'https://viva-advertising.com/',
+          urlDisplay: 'viva-advertising.com',
+          role: 'Founder & Creative Technology Director — My Company / Founder',
+          period: 'January 2018 – Present',
+          bullets: [
+            'Interactive Storytelling & Growth at Scale: Founded a multidisciplinary digital studio crafting **interactive experiences, product launches, and brand stories** that generated **1 Billion+ audience views** across **150+ partner organizations**.',
+            'Generative Creative Workflows: Integrated **OpenAI Codex, frontier language models, and custom tool-calling** into daily production, enabling a **15-person team of designers, writers, and engineers** to prototype and ship **40% faster**.',
+            'Predictive Retention Synthesis: Built a **predictive relationship-health model** in Python and Power BI that surfaced collaborator friction 45 days early, sustaining **95% long-term partner retention (+83% continuity improvement)**.',
+          ],
+        },
+        {
+          company: 'Link Puerto Rico',
+          employmentType: 'My Company / Co-Founder',
+          url: 'https://linkpuertorico.org/',
+          urlDisplay: 'linkpuertorico.org',
+          role: 'Co-Founder & Lead Systems Architect — My Company / Co-Founder',
+          period: 'November 2017 – Present',
+          bullets: [
+            'Full-Stack Platforms & Cloud Orchestration: Directed a **10+ person engineering and maker team** to design and ship **100+ custom web applications, Dockerized cloud services, and relational databases** for **80+ organizations**, powering **50,000+ citizen interactions**.',
+            'Puente a Puente Digital Libraries (Loíza Municipality): Led a rapid civic hardware and connectivity intervention—sourcing **100+ computers and 50+ tablets in under 30 days**, deploying **satellite broadband**, and transforming **3 community centers into digital libraries for 1,000+ residents**.',
+            'Tech Ecosystem Leadership: Founded a **2,000+ member developer and creator collective**, hosting **50+ technical workshops for 5,000+ learners** and **4 island-wide hackathons (6,000+ hours of collaborative building)**.',
+          ],
+        },
+      ],
+      resumeProjects: [
+        {
+          name: 'JobHelper (Frontier Model Career Synthesis Prototype)',
+          description: '**The Concept:** Job hunting often feels like shouting into an algorithmic void; JobHelper reimagines career discovery as a transparent, encouraging conversation between a human maker and an honest AI coach. **The Technology:** Built with **Python, Next.js 16, Docker, and multi-model LLM orchestration (OpenAI & Gemini/Claude)** using deterministic **tool-calling** and a **100-point structured JSON evaluation rubric** paired with a Manifest V3 Chrome Extension. **The Impact:** Replaces resume anxiety with instant, constructive clarity—helping candidates understand their true strengths and tailor their story in seconds.',
+        },
+        {
+          name: 'Picta (Real-Time Assistive Color Vision Camera)',
+          description: '**The Concept:** Inviting 300M+ people with Color Vision Deficiency—and their loved ones—to experience and share the emotional warmth of color in real time. **The Technology:** **60 FPS WebRTC video streams, mathematical Daltonization shader matrices, Euclidean Delta-E pixel sampling, and Web Speech synthesis**. **The Impact:** Transforms any browser into an immediate, voice-guided assistive lens with zero app install friction.',
+        },
+      ],
+      proofPoints: [
+        { metric: '20+', title: 'Frontier AI Workflows Shipped', sub: 'Money Group (Multi-Agent Orchestration)', desc: 'Conceived and shipped 20+ interactive AI skills and tool-calling agents that turned multi-day workflows into sub-4-hour exploration.' },
+        { metric: '+200%', title: 'Discovery & Inquiry Surge', sub: 'Red Ventures (edX Learning Platform)', desc: 'Deployed generative AI discovery experiences across 1,250+ learning portals, inspiring a 3x (+200%) lift in learner inquiries.' },
+        { metric: '110+', title: 'Platforms & Prototypes Built', sub: 'Link Puerto Rico & Viva Studio', desc: 'Led multidisciplinary teams to ship 110+ web platforms, NFC hardware bridges, and accessible tools impacting 4,000+ lives.' },
+        { metric: '40M+', title: 'User Journeys Synthesized', sub: 'Databricks SQL & Python Analytics', desc: 'Translated 40M+ raw learning sessions into actionable product strategy and behavioral insights with 100% telemetry fidelity.' }
+      ]
+    },
+
+    ai_engineering: {
+      id: 'ai_engineering',
+      label: '🤖 Creative Tech & Frontier AI',
+      shortTitle: 'Creative Technologist & Frontier AI Prototyper',
+      headline: 'Creative Technologist, Frontier AI Prototyper & Interactive Systems Maker',
+      summary:
+        'Hybrid Creative Technologist and hands-on AI Prototyper with 8+ years of experience turning open-ended human questions into working generative prototypes, interactive experiences, physical objects, and stories that invite people to participate. Evaluated on humor, emotional depth, optimism, and meaningful impact—combining frontier model orchestration and tool-calling with real-time WebGL/WebRTC craft.',
+      skills: [
+        {
+          title: 'Frontier Models & Tool-Calling',
+          items: 'OpenAI API & Codex | Anthropic Claude | Google Gemini | Multi-Agent Orchestration | Function & Tool-Calling | Structured JSON Synthesis | Human-in-the-Loop Steering',
+        },
+        {
+          title: 'Interactive Experiences & Sensory Canvas',
+          items: 'Three.js & WebGL Shaders | 60 FPS Particle Physics | WebRTC Computer Vision | Web NFC Physical Hardware | Web Speech & Audio Synthesis | WCAG AAA Accessible Design',
+        },
+        {
+          title: 'Rapid Prototyping & Full-Stack Engineering',
+          items: 'Python & FastAPI | Next.js 16, React & TypeScript | Docker & Cloud Run | Firebase & Firestore | Automated Playwright & Python QA',
+        },
+        {
+          title: 'Storytelling, Optimism & Design Thinking',
+          items: 'Stanford University Innovation Fellow (d.school) | Computer Engineering (4.0 GPA) | Participatory Narrative Design | Bilingual (English / Spanish)',
         },
       ],
       experiences: [
@@ -83,108 +181,15 @@ export const PROFILE = {
           role: 'Creative Technologist & Frontier AI Prototyper — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
-            'Generative Prototypes & Frontier Model Orchestration: Conceived and engineered **20+ interactive AI skills and autonomous workflows** using **frontier models, tool-calling, and structured synthesis**, turning days of manual analysis into **intuitive, sub-4-hour creative exploration** for a 100+ person organization.',
-            'Interactive Experience Builder & API Synthesis: Partnered with Software Engineering across **30+ rapid prototyping sprints** to build an **AI-powered interactive web experience builder**, connecting **REST APIs and live tool-calling** across 5 consumer domains.',
-            'Human-Centric Evaluation & Enablement: Designed rigorous **human-in-the-loop evaluation rubrics** for **100% factual synthesis** and led hands-on **creative AI workshops** that empowered a **15-person multidisciplinary team** to co-create with frontier intelligence.',
-          ],
-        },
-        {
-          company: 'Red Ventures',
-          employmentType: 'Full-Time',
-          role: 'Interactive Discovery & Behavioral Synthesis Lead (edX) — Full-Time',
-          period: 'August 2024 – January 2026',
-          bullets: [
-            'Generative Learning Discovery: Partnered with Product and Engineering to reimagine how millions of curious learners discover knowledge across the global **edX platform**, deploying **generative AI synthesis and adaptive front-end experiences** across **1,250+ learning portals** to spark a **3x (+200%) surge in learner inquiries**.',
-            'Behavioral Telemetry Synthesis: Explored **40 million+ human learning sessions** using **Python and SQL in Databricks**, transforming fragmented clickstreams into **coherent, human-centric stories** of how people learn and progress.',
-            'Interactive Observability & Design Clarity: Crafted real-time **visual telemetry canvases** in Looker and Tableau that gave writers, educators, and engineers immediate clarity into learner curiosity and platform health.',
-          ],
-        },
-        {
-          company: 'Viva Advertising',
-          employmentType: 'My Company / Founder',
-          url: 'https://viva-advertising.com/',
-          urlDisplay: 'viva-advertising.com',
-          role: 'Founder & Creative Director (Interactive Storytelling & AI Studio) — My Company / Founder',
-          period: 'January 2018 – Present',
-          bullets: [
-            'Interactive Storytelling at Scale: Founded a creative studio crafting **expressive digital experiences, visual stories, and interactive campaigns** that reached **1 Billion+ human views** across **150+ partner organizations**.',
-            'Generative Creative Workflows: Integrated **OpenAI Codex, frontier language models, and custom tool-calling** into the studio’s daily craft, enabling a **15-person team of designers, writers, and coders** to prototype interactive concepts **40% faster**.',
-            'Empathy-Driven Signal Synthesis: Built a **predictive relationship-health synthesizer** in Python and Power BI that detected quiet moments of collaborator friction early, nurturing **95% long-term creative partnerships (+83% continuity improvement)**.',
-          ],
-        },
-        {
-          company: 'Link Puerto Rico',
-          employmentType: 'My Company / Co-Founder',
-          url: 'https://linkpuertorico.org/',
-          urlDisplay: 'linkpuertorico.org',
-          role: 'Co-Founder & Creative Technology Lead (Civic Prototypes & Maker Ecosystem) — My Company / Co-Founder',
-          period: 'November 2017 – Present',
-          bullets: [
-            'Civic Prototypes & Cloud Orchestration: Directed a **10+ person maker team** to design and ship **100+ custom interactive platforms, Dockerized cloud services, and accessible web tools** for **80+ community organizations**, empowering **50,000+ everyday citizen interactions**.',
-            'Puente a Puente Digital Libraries (Loíza Municipality): Led a rapid civic hardware and connectivity intervention during global lockdowns—sourcing **100+ computers and 50+ tablets in under 30 days**, establishing **satellite broadband**, and transforming **3 community centers into vibrant digital libraries for 1,000+ residents**.',
-            'Grassroots Maker Community: Founded a **2,000+ member developer and creator collective**, hosting **50+ open workshops for 5,000+ learners** and **4 island-wide civic hackathons (6,000+ hours of collaborative building)**.',
-          ],
-        },
-      ],
-      resumeProjects: [
-        {
-          name: 'JobHelper (Frontier Model Career Synthesis Prototype)',
-          description: '**The Concept:** Job hunting often feels like shouting into an algorithmic void; JobHelper reimagines career discovery as an transparent, encouraging conversation between a human maker and an honest AI coach. **The Technology:** Built with **Python, Next.js 16, Docker, and multi-model LLM orchestration (OpenAI & Gemini/Claude)** using deterministic **tool-calling** and a **100-point structured JSON evaluation rubric** paired with a Manifest V3 Chrome Extension. **The Impact:** Replaces resume anxiety with instant, constructive clarity—helping candidates understand their true strengths and tailor their story in seconds.',
-        },
-        {
-          name: 'FavoBot (Conversational Multi-Agent Pocket Companion)',
-          description: '**The Concept:** What if complex system orchestration and daily creative brainstorming felt as natural as texting a witty friend? **The Technology:** Engineered an autonomous Telegram-native agent in **Python** leveraging **frontier model tool-calling, asynchronous webhooks, and real-time event synthesis**. **The Impact:** Turns heavyweight terminal monitoring and ideation into an effortless, mobile-first conversational experience from anywhere.',
-        },
-      ],
-      proofPoints: [
-        { metric: '20+', title: 'Generative Prototypes Shipped', sub: 'Money Group (Frontier Model Orchestration)', desc: 'Conceived and shipped 20+ interactive AI skills and tool-calling agents that turned multi-day workflows into sub-4-hour creative exploration.' },
-        { metric: '+200%', title: 'Learner Discovery Surge', sub: 'Red Ventures (edX Learning Platform)', desc: 'Crafted generative AI discovery experiences across 1,250+ learning portals, inspiring a 3x (+200%) lift in prospective student curiosity.' },
-        { metric: '110+', title: 'Interactive Systems Built', sub: 'Link Puerto Rico & Civic Ecosystem', desc: 'Led multidisciplinary makers to ship 110+ web platforms, NFC physical-digital bridges, and accessible tools impacting 4,000+ lives.' },
-        { metric: '40M+', title: 'Human Journeys Synthesized', sub: 'Databricks & Python Behavioral Synthesis', desc: 'Translated 40M+ raw learning sessions into human-centric design insights with 100% telemetry fidelity.' }
-      ]
-    },
-
-    ai_engineering: {
-      id: 'ai_engineering',
-      label: '🤖 Frontier Models & Orchestration',
-      shortTitle: 'Frontier AI Prototyper & Orchestration Engineer',
-      headline: 'Frontier AI Prototyper, Multi-Agent Orchestration & Interactive Systems Engineer',
-      summary:
-        'Hands-on AI Prototyper and Creative Systems Engineer with 8+ years of experience turning frontier models into playful, reliable, human-centric interactive experiences. Specializes in multi-agent orchestration, deterministic tool-calling, real-time evaluation rubrics, and expressive front-end interfaces that make complex model capabilities feel intuitive and magical.',
-      skills: [
-        {
-          title: 'Frontier Models & Tool-Calling',
-          items: 'OpenAI API & Codex | Anthropic Claude | Google Gemini | Multi-Agent Orchestration | Function & Tool-Calling | Structured JSON Synthesis | System Prompt Architecture',
-        },
-        {
-          title: 'Interactive Prototyping & Creative Canvas',
-          items: 'Next.js & React | Three.js & WebGL Shaders | WebRTC Computer Vision | Web Speech & Audio Synthesis | Tailwind CSS & Liquid Glass UI',
-        },
-        {
-          title: 'Data Synthesis & Telemetry',
-          items: 'Python & PySpark | SQL & Databricks | Real-Time Stream Synthesis | Behavioral Pattern Recognition | Looker & Tableau Visual Storytelling',
-        },
-        {
-          title: 'Systems Architecture & Open Source',
-          items: 'FastAPI & Node.js | Docker & Cloud Run | Firebase & Firestore | Automated QA Suites | GitHub Actions CI/CD',
-        },
-      ],
-      experiences: [
-        {
-          company: 'Money Group',
-          employmentType: 'Full-Time',
-          role: 'Frontier AI Prototyper & Orchestration Lead — Full-Time',
-          period: 'March 2026 – October 2026',
-          bullets: [
             'Multi-Agent Orchestration: Engineered 20+ autonomous AI skills and generative prototypes using frontier LLM APIs and tool-calling, compressing complex synthesis cycles from days to under 4 hours.',
-            'Interactive Experience Tooling: Co-architected an internal AI-powered interactive web builder used across 5 consumer domains, enabling non-technical creators to launch working web prototypes rapidly.',
+            'Interactive Experience Builder: Co-architected an internal AI-powered interactive web builder used across 5 consumer domains, enabling non-technical creators to launch working web prototypes rapidly.',
             'Human-in-the-Loop Guardrails: Designed deterministic evaluation rubrics and tone guardrails across 20+ live interactive experiences, ensuring outputs remained helpful, grounded, and human-centric.',
           ],
         },
         {
           company: 'Red Ventures',
           employmentType: 'Full-Time',
-          role: 'Generative Discovery & Behavioral Synthesis Engineer (edX) — Full-Time',
+          role: 'Generative Discovery & Behavioral Synthesis Lead (edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
             'Generative UI Personalization: Deployed frontier AI synthesis and adaptive interface rules across 1,250+ educational portals on edX, sparking a +200% increase in learner exploration and +38.1% course verification.',
@@ -209,7 +214,7 @@ export const PROFILE = {
           employmentType: 'My Company / Co-Founder',
           url: 'https://linkpuertorico.org/',
           urlDisplay: 'linkpuertorico.org',
-          role: 'Co-Founder & Technical Lead — My Company / Co-Founder',
+          role: 'Co-Founder & Creative Technology Lead — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
             'Open-Source & Civic Prototyping: Directed a 10+ person engineering collective to launch 100+ web applications, real-time databases, and physical-to-digital NFC experiences.',
@@ -237,50 +242,50 @@ export const PROFILE = {
 
     revops_analytics: {
       id: 'revops_analytics',
-      label: '🎨 Interactive Storytelling & Synthesis',
-      shortTitle: 'Interactive Storytelling & Audience Synthesis Lead',
-      headline: 'Interactive Storytelling, Creative Experiments & Behavioral Synthesis Lead',
+      label: '📈 Product Marketing, Growth & Storytelling',
+      shortTitle: 'Product Marketing, Growth Strategy & Storytelling Lead',
+      headline: 'Product Marketing Leader, Growth Strategist & Interactive Storyteller',
       summary:
-        'Creative Strategist, Behavioral Data Synthesizer, and Technical Maker with 8+ years of experience connecting human curiosity with expressive digital experiences. Combines deep storytelling instincts with Python, Databricks SQL, and frontier model orchestration to understand what moves people and build interactive prototypes that resonate at scale.',
+        'Product Marketing Lead, Growth Strategist, and Creative Director with 8+ years of experience connecting human curiosity with high-converting digital experiences. Combines deep narrative and brand craft (1B+ impressions across 150+ organizations) with Python, Databricks SQL, and frontier AI orchestration to scale product adoption and long-term retention.',
       skills: [
         {
-          title: 'Interactive Storytelling & Creative Experiments',
-          items: 'Concept-to-Prototype Execution | Narrative Architecture | Multimodal Experimentation | Rapid Iteration | Audience Empathy Mapping',
+          title: 'Product Marketing, Go-To-Market & Storytelling',
+          items: 'Go-To-Market (GTM) Strategy | Narrative Positioning & Copywriting | Interactive Product Launches | Audience Empathy Mapping | Multimodal Experimentation',
         },
         {
-          title: 'Behavioral Synthesis & Data Canvas',
-          items: 'SQL & T-SQL | Databricks Lakehouse | Python & PySpark | Tableau, Looker & Power BI | Real-Time Engagement Telemetry',
+          title: 'Growth Architecture & Discovery Optimization',
+          items: 'Full-Funnel Discovery Optimization (+200% Lift) | A/B & Multivariate Testing | Organic & Paid Growth Strategy | Retention & Lifecycle Orchestration (+83%)',
         },
         {
-          title: 'Frontier AI & Creative Tooling',
-          items: 'Generative Copy & Visual Synthesis | Multi-Stage Prompt Orchestration | Internal AI Studio Platforms | REST APIs',
+          title: 'Frontier AI for Creative & Marketing Teams',
+          items: 'Generative Copy & Visual Synthesis | Multi-Stage Prompt Orchestration (3x Velocity) | Internal AI Studio Platforms (HeyMoney) | REST APIs',
         },
         {
-          title: 'Human-Centric Experience Design',
-          items: 'Interactive WebGL & Canvas | Mobile-First Ergonomics | Accessibility (WCAG AAA) | Bilingual Cultural Nuance (EN/ES)',
+          title: 'Analytics, Attribution & Bilingual Craft',
+          items: 'SQL & Databricks | Tableau, Looker & Power BI | Cross-Channel Telemetry | Bilingual Cultural Fluency (English / Spanish)',
         },
       ],
       experiences: [
         {
           company: 'Money Group',
           employmentType: 'Full-Time',
-          role: 'Creative Systems & AI Synthesis Lead — Full-Time',
+          role: 'AI Product Marketing & Growth Systems Lead — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
-            'Internal AI Studio Rollout: Engineered 20+ custom AI skills and led the creative rollout of HeyMoney, an internal AI synthesis platform, training a 15-person team to turn open-ended questions into interactive prototypes in hours.',
-            'Telemetry Truth & Signal Clarity: Partnered across Engineering and Operations to reconcile end-to-end user journey signals, ensuring 100% telemetry fidelity across 5 distinct consumer domains.',
-            'Cross-Functional Co-Creation: Acted as the bridge between designers, storytellers, and software engineers to scope and ship new interactive visual dashboards.',
+            'Internal AI Studio Rollout: Engineered 20+ custom AI skills and led the rollout of HeyMoney, an internal AI synthesis platform, training a 15-person marketing and creative team to launch interactive experiences in under 4 hours.',
+            'Full-Funnel Telemetry & Attribution Clarity: Partnered across Engineering and Operations to reconcile end-to-end user journey signals, ensuring 100% telemetry fidelity across 5 consumer verticals.',
+            'Interactive Landing Experience Builder: Bridged designers, copywriters, and software engineers across 30+ sprints to ship an AI-powered web experience builder.',
           ],
         },
         {
           company: 'Red Ventures',
           employmentType: 'Full-Time',
-          role: 'Audience Curiosity & Discovery Analyst (edX) — Full-Time',
+          role: 'Product Growth & Discovery Strategy Lead (edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
-            'Visual Curiosity Dashboards: Designed interactive Looker and Tableau canvases tracking how 100M+ global learners explore new subjects, improving discovery clarity by 19% YoY.',
-            'Generative Content Synthesis: Integrated frontier AI workflows to refresh and humanize 1,250+ educational portals, inspiring a 3x surge in learner inquiries.',
-            'Cross-Platform Journey Mapping: Reconciled 40M+ learning sessions across Databricks SQL and web telemetry so educators could see the complete human story behind every course enrollment.',
+            'Generative Discovery & Growth (+200% Lift): Integrated frontier AI workflows and adaptive UX across 1,250+ educational portals on edX, driving a 3x (+200%) surge in prospective student inquiries and +38.1% verified enrollment lift.',
+            'Executive Growth Dashboards: Designed interactive Looker and Tableau canvases tracking how 100M+ global learners discover courses, improving marketing and product decision velocity by 19% YoY.',
+            'Longitudinal Journey Attribution: Reconciled 40M+ learning sessions across Databricks SQL and web telemetry to map the complete user journey from first curiosity to enrollment.',
           ],
         },
         {
@@ -288,12 +293,12 @@ export const PROFILE = {
           employmentType: 'My Company / Founder',
           url: 'https://viva-advertising.com/',
           urlDisplay: 'viva-advertising.com',
-          role: 'Founder & Creative Director — My Company / Founder',
+          role: 'Founder & Chief Creative / Growth Strategist — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
-            'Expressive Digital Experiences: Directed storytelling and interactive media across 150+ brand collaborations, crafting campaigns that connected with over 1 Billion human impressions.',
-            'Live Telemetry Canvases: Built custom Looker and Power BI storytelling dashboards that turned complex audience data into clear, visual narratives for creative teams.',
-            'Proactive Relationship Synthesis: Designed a predictive health model that surfaced early signs of collaborator fatigue, strengthening long-term partnerships by 83%.',
+            'High-Impact Brand & Growth Campaigns: Directed product positioning, storytelling, and interactive media across 150+ client organizations, generating over 1 Billion audience impressions.',
+            'Live Executive Reporting Canvases: Built custom Looker and Power BI dashboards that translated complex campaign and audience telemetry into clear strategic roadmaps.',
+            'Predictive Retention & Partner Care: Designed a predictive health model that surfaced early signs of partner fatigue, increasing long-term client retention by 83% (95% sustained continuity).',
           ],
         },
         {
@@ -301,11 +306,11 @@ export const PROFILE = {
           employmentType: 'My Company / Co-Founder',
           url: 'https://linkpuertorico.org/',
           urlDisplay: 'linkpuertorico.org',
-          role: 'Co-Founder & Community Architecture Lead — My Company / Co-Founder',
+          role: 'Co-Founder & Ecosystem Growth Lead — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
-            'Sustainable Civic Innovation: Secured and stewarded a $100k+ Rotary Global Grant for community solar and digital infrastructure, uniting technology with grassroots resilience.',
-            'Collaborative Hackathons: Organized 4 major civic hackathons (6,000+ building hours) and 50+ workshops empowering 2,000+ local makers.',
+            'Community & Grant Mobilization: Secured and stewarded $100k+ in innovation grants (including a Rotary Global Grant) while growing a 2,000+ member technology and creator network.',
+            'Island-Wide Innovation Summits: Organized 4 major hackathons (6,000+ building hours) and 50+ workshops empowering 5,000+ local students, founders, and makers.',
           ],
         },
       ],
@@ -316,61 +321,61 @@ export const PROFILE = {
         },
         {
           name: 'Hackea por una Causa (Youth Mentorship Discovery Network)',
-          description: '**The Concept:** Every curious teenager deserves a mentor who looks like them and believes in their future; we built an inviting bridge between island youth and working creative technologists. **The Technology:** Conceived at the Hackea por una Causa hackathon using **React, Node.js, REST APIs, and an intelligent availability-matching engine** optimized for low-bandwidth mobile connections. **The Impact:** Connected 6 Boys & Girls Clubs community hubs and unlocked 120+ hours of 1-on-1 mentorship for underserved students.',
+          description: '**The Concept:** Every curious teenager deserves a mentor who believes in their future; we built an inviting bridge between island youth and working technologists. **The Technology:** Conceived at the Hackea por una Causa hackathon using **React, Node.js, REST APIs, and an intelligent availability-matching engine** optimized for low-bandwidth mobile connections. **The Impact:** Connected 6 Boys & Girls Clubs community hubs and unlocked 120+ hours of 1-on-1 mentorship for underserved students.',
         },
       ],
       proofPoints: [
-        { metric: '1B+ Views', title: 'Human-Centric Stories Shared', sub: 'Viva Creative Studio (150+ Collaborations)', desc: 'Crafted expressive digital narratives and interactive experiences that resonated across 1 Billion+ audience impressions.' },
-        { metric: '3x Velocity', title: 'Generative Ideation Tempo', sub: 'Frontier Prompt Orchestration', desc: 'Built multi-stage prompt synthesis chains that tripled creative exploration speed while preserving human warmth and humor.' },
-        { metric: '100%', title: 'Telemetry Synthesis Fidelity', sub: 'Money Group & Red Ventures', desc: 'Unified fragmented behavioral signals into crystal-clear visual stories with zero data loss.' },
-        { metric: '+83%', title: 'Long-Term Collaboration Health', sub: 'Predictive Signal Synthesis', desc: 'Used proactive behavioral modeling to nurture lasting, trust-filled creative relationships (reducing attrition from 30% to 5%).' }
+        { metric: '1B+ Views', title: 'Brand & Story Impressions', sub: 'Viva Studio (150+ Organizations)', desc: 'Directed positioning, digital narratives, and interactive experiences that resonated across 1 Billion+ audience impressions.' },
+        { metric: '+200%', title: 'Discovery & Inquiry Surge', sub: 'Red Ventures (edX 1,250+ Portals)', desc: 'Combined generative AI synthesis with conversion UX across 1,250+ pages to triple prospective learner inquiries.' },
+        { metric: '3x Velocity', title: 'AI Creative Production Tempo', sub: 'Frontier Prompt Orchestration', desc: 'Built multi-stage prompt synthesis chains that tripled creative and GTM iteration speed while preserving human warmth.' },
+        { metric: '+83%', title: 'Partner Retention Continuity', sub: 'Predictive Signal Synthesis', desc: 'Used proactive behavioral modeling to nurture 95% long-term partner retention (reducing attrition from 30% to 5%).' }
       ]
     },
 
     data_governance: {
       id: 'data_governance',
-      label: '📊 Behavioral Synthesis & Telemetry',
-      shortTitle: 'Behavioral Data Synthesis & Systems Lead',
-      headline: 'Behavioral Data Synthesis, Telemetry Architecture & Decision Science Lead',
+      label: '📊 Decision Science & Behavioral Analytics',
+      shortTitle: 'Decision Science, Behavioral Analytics & Telemetry Lead',
+      headline: 'Decision Science Lead, Behavioral Data Synthesizer & Analytics Architect',
       summary:
-        'Behavioral Data Synthesizer and Systems Architect with 8+ years of experience transforming massive, noisy event streams (40M+ sessions) into trustworthy, human-centered insights. Combines rigorous SQL/PySpark engineering in Databricks with frontier model anomaly detection to bring clarity and confidence to complex interactive systems.',
+        'Decision Scientist and Behavioral Data Architect with 8+ years of experience transforming massive, noisy event streams (40M+ sessions) into trustworthy product strategy and executive insights. Microsoft Certified Power BI Data Analyst Associate combining rigorous SQL/PySpark engineering in Databricks with frontier model anomaly detection.',
       skills: [
         {
-          title: 'Behavioral Synthesis & Integrity',
-          items: 'Event Stream Normalization | Schema Validation | Ground-Truth Reconciliation | Root Cause Synthesis | Dimensional Modeling',
+          title: 'Decision Science & Behavioral Synthesis',
+          items: 'Longitudinal Cohort & Funnel Analysis | Multi-Touch Journey Attribution | Statistical Hypothesis Testing | Predictive Churn & Retention Modeling (+83%)',
         },
         {
-          title: 'Data Engineering & Lakehouse Canvas',
-          items: 'Advanced SQL (CTEs, Window Functions) | Databricks Lakehouse | Python & PySpark | Power BI, Tableau & Looker | Relational Modeling',
+          title: 'Data Engineering & Lakehouse Architecture',
+          items: 'Advanced SQL (CTEs, Window Functions) | Databricks Lakehouse | Python & PySpark | Event Stream Normalization (40M+ Sessions) | Schema Governance',
         },
         {
-          title: 'Frontier Model Observability',
-          items: 'LLM Output Evaluation Rubrics | Automated Anomaly Sentinels | Structured JSON Validation | Human-in-the-Loop Verification',
+          title: 'Executive BI & Visual Storytelling',
+          items: 'Power BI (Microsoft Certified Associate) | Looker & LookML | Tableau | Automated Executive Scorecards | Ground-Truth Reconciliation (100% Parity)',
         },
         {
-          title: 'Civic & Regulated Systems',
-          items: 'Accessible Healthcare & Education Telemetry | Public Sector Transparency | Privacy-First Architecture',
+          title: 'Frontier Model Evaluation & Sentinels',
+          items: 'LLM Output Evaluation Rubrics | Automated Anomaly Sentinels | Structured JSON Validation | Healthcare & Education Telemetry',
         },
       ],
       experiences: [
         {
           company: 'Money Group',
           employmentType: 'Full-Time',
-          role: 'Telemetry Synthesis & AI Evaluation Lead — Full-Time',
+          role: 'Decision Science & AI Telemetry Lead — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
-            'Model Output Verification: Designed deterministic evaluation rubrics to verify frontier LLM outputs against ground-truth telemetry, ensuring 100% reliability across teams.',
-            'Real-Time Anomaly Sentinels: Engineered 20+ autonomous AI workflows that continuously inspected live API streams across 5 domains, turning multi-day debugging into sub-4-hour synthesis.',
+            'Ground-Truth Telemetry Verification: Designed deterministic evaluation rubrics to verify frontier LLM outputs and event streams against ground-truth database records, ensuring 100% reporting parity across 5 verticals.',
+            'Autonomous Anomaly Sentinels: Engineered 20+ autonomous AI workflows that continuously audited live API streams, compressing root-cause investigation from days to under 4 hours.',
           ],
         },
         {
           company: 'Red Ventures',
           employmentType: 'Full-Time',
-          role: 'Behavioral Data Synthesis Lead (edX) — Full-Time',
+          role: 'Senior Decision Science & Behavioral Analyst (edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
-            '40M+ Session Synthesis: Queried and normalized over 40 million human learning journeys in Databricks SQL and Python, resolving schema drift with 100% accuracy.',
-            'Human Journey Continuity: Analyzed raw server logs to reconstruct multi-week educational exploration paths across 1,250+ learning pages, lifting discovery performance by 50%+.',
+            '40M+ Session Synthesis in Databricks: Queried, cleaned, and normalized over 40 million user learning sessions using Databricks SQL and Python, resolving schema drift with 100% accuracy.',
+            'Executive BI & Discovery Lift: Built automated Looker and Tableau observability suites across 1,250+ course portals, uncovering behavioral bottlenecks to unlock a +50% organic discovery lift and +19% YoY reporting efficiency.',
           ],
         },
         {
@@ -378,11 +383,11 @@ export const PROFILE = {
           employmentType: 'My Company / Founder',
           url: 'https://viva-advertising.com/',
           urlDisplay: 'viva-advertising.com',
-          role: 'Founder & Chief Data Storyteller — My Company / Founder',
+          role: 'Founder & Chief Analytics Architect — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
-            'Unified Telemetry Canvases: Architected Looker and Power BI data ecosystems across 150+ partner organizations, translating raw behavioral signals into intuitive visual stories.',
-            'Predictive Continuity Models: Built PySpark and SQL health models that identified early engagement decay, preserving 95% partner continuity.',
+            'Unified BI Ecosystems: Architected centralized Looker and Power BI data warehouses across 150+ partner organizations, translating raw multi-channel signals into clear executive strategies.',
+            'Predictive Retention Modeling: Built PySpark and SQL health models that identified early engagement decay 45 days in advance, preserving 95% partner retention (+83% continuity).',
           ],
         },
         {
@@ -390,11 +395,11 @@ export const PROFILE = {
           employmentType: 'My Company / Co-Founder',
           url: 'https://linkpuertorico.org/',
           urlDisplay: 'linkpuertorico.org',
-          role: 'Co-Founder & Relational Architecture Lead — My Company / Co-Founder',
+          role: 'Co-Founder & Data Architecture Lead — My Company / Co-Founder',
           period: 'November 2017 – Present',
           bullets: [
-            '100+ Relational Architectures: Directed a 10+ person team to design and govern 100+ relational and cloud databases powering 50,000+ community and event interactions.',
-            'Open Data Literacy: Taught 50+ workshops on SQL, Python, and data storytelling for 5,000+ students and community builders.',
+            '100+ Relational & Cloud Databases: Directed a 10+ person team to design and govern 100+ SQL and Cloud Firestore databases powering 50,000+ community and event interactions.',
+            'Data & AI Literacy: Taught 50+ hands-on workshops on SQL, Python, Power BI, and data storytelling for 5,000+ students and professionals.',
           ],
         },
       ],
@@ -409,57 +414,57 @@ export const PROFILE = {
         },
       ],
       proofPoints: [
-        { metric: '40M+', title: 'Learning Journeys Synthesized', sub: 'Red Ventures (edX Lakehouse)', desc: 'Wrote advanced SQL and Python synthesis workflows in Databricks to reconstruct 40M+ human learning sessions with 100% fidelity.' },
-        { metric: '100%', title: 'Ground-Truth Evaluation Parity', sub: 'Money Group (Frontier Model Rubrics)', desc: 'Built automated verification agents that audited LLM outputs and API streams with zero unmitigated discrepancies.' },
-        { metric: '1,250+', title: 'Learning Portals Harmonized', sub: 'edX Global Discovery Catalog', desc: 'Synthesized server log telemetry across 1,250+ course portals to unlock a +50% discovery lift.' },
-        { metric: '100+ DBs', title: 'Community Data Architectures', sub: 'Link Puerto Rico (80+ Organizations)', desc: 'Architected 100+ relational and real-time database schemas supporting 50,000+ seamless human transactions.' }
+        { metric: '40M+', title: 'User Sessions Synthesized', sub: 'Red Ventures (edX Databricks Lakehouse)', desc: 'Wrote advanced SQL and Python synthesis workflows in Databricks to reconstruct 40M+ human learning sessions with 100% fidelity.' },
+        { metric: '100%', title: 'Ground-Truth Telemetry Parity', sub: 'Money Group (Automated Sentinels)', desc: 'Built automated verification agents that audited LLM outputs and API streams with zero unmitigated discrepancies.' },
+        { metric: '1,250+', title: 'Portals Harmonized (+50% Lift)', sub: 'edX Global Discovery Catalog', desc: 'Synthesized server log telemetry across 1,250+ course portals to unlock a +50% discovery lift and +38.1% verification surge.' },
+        { metric: '100+ DBs', title: 'Production Data Architectures', sub: 'Link Puerto Rico (80+ Organizations)', desc: 'Architected 100+ relational and real-time database schemas supporting 50,000+ seamless transactions.' }
       ]
     },
 
     tech_ops: {
       id: 'tech_ops',
-      label: '⚙️ Rapid Prototyping & Civic Hardware',
-      shortTitle: 'Creative Systems & Rapid Prototyping Lead',
-      headline: 'Creative Systems Architect, Rapid Prototyper & Physical-Digital Maker',
+      label: '⚙️ Technical PM, Cloud & Full-Stack Systems',
+      shortTitle: 'Technical Product Manager & Full-Stack Systems Architect',
+      headline: 'Technical Product Manager (TPM), Full-Stack Architect & Hardware-to-Web Maker',
       summary:
-        'Hands-on Systems Maker and Technical Program Lead with 8+ years of experience shipping working prototypes across software, cloud infrastructure, and physical hardware. From programming contactless NFC wearables to deploying 150+ computers and satellite internet for disconnected communities in under 30 days, I build technology that works where people actually live.',
+        'Technical Product Manager and Full-Stack Systems Architect with 8+ years of experience shipping resilient software, cloud infrastructure, and physical-digital hardware systems. Combines a 4.0 GPA in Computer Engineering and Lean Six Sigma discipline with hands-on leadership across 30+ agile engineering sprints, 110+ production deployments, and rapid crisis connectivity.',
       skills: [
         {
-          title: 'Physical-to-Digital & Rapid Prototyping',
-          items: 'Web NFC Hardware Programming (NTAG213/215/216) | WebRTC Camera Streams | 6DoF Device Orientation & Haptics | Mobile Device Management (MDM) | Satellite WAN Provisioning',
+          title: 'Technical Product Management & Agile Delivery',
+          items: 'End-to-End Product Roadmapping | Agile Sprint Orchestration (Jira, Asana) | Cross-Functional Engineering Leadership (15-Person Teams) | PRDs & API Specs | Lean Six Sigma',
         },
         {
-          title: 'Cloud & Container Orchestration',
-          items: 'Docker & Multi-Stage Builds | Microsoft Azure & Google Cloud | Firebase Hosting & Firestore | REST APIs & Webhooks | CI/CD Automation',
+          title: 'Full-Stack Web & Cloud Infrastructure',
+          items: 'TypeScript, JavaScript, Python | React, Next.js 16, Node.js, FastAPI, Vite | Docker & Multi-Stage Builds | Microsoft Azure, Google Cloud & Firebase | CI/CD & Headless Playwright QA',
+        },
+        {
+          title: 'Physical-to-Digital & Hardware Systems',
+          items: 'Web NFC Hardware Programming (NTAG213/215/216) | WebRTC 60 FPS Camera Streams | 6DoF Device Orientation & Haptics | Mobile Device Management (MDM) | Satellite WAN Provisioning',
         },
         {
           title: 'Frontier AI Workflow Engineering',
-          items: 'Autonomous Python Agents | Multi-Model LLM Tool-Calling | Headless QA Verification Suites | Prompt Rubrics',
-        },
-        {
-          title: 'Human-Centric Delivery & Leadership',
-          items: 'Stanford University Innovation Fellow | Lean Six Sigma White Belt | Cross-Functional Maker Leadership (15-Person Teams) | Crisis Hardware Logistics',
+          items: 'Autonomous Python & LLM Agents | Multi-Model Tool-Calling | Deterministic JSON Rubrics | Self-Healing Operational Sentinels',
         },
       ],
       experiences: [
         {
           company: 'Money Group',
           employmentType: 'Full-Time',
-          role: 'Systems Automation & AI Prototyping Lead — Full-Time',
+          role: 'Technical Product Manager & AI Systems Lead — Full-Time',
           period: 'March 2026 – October 2026',
           bullets: [
-            'Rapid Workflow Prototyping: Engineered 20+ autonomous AI workflows and Python automation scripts that compressed multi-day operational setups into under 4 hours.',
-            'Cross-Functional API Integration: Partnered across Engineering and Product to ship 30+ platform enhancements via REST APIs and tool-calling.',
+            'Cross-Functional Engineering Sprints: Orchestrated 30+ agile engineering sprints in Asana across Software Engineering, Design, and Operations to ship an internal AI web builder and 30+ platform capabilities.',
+            'Autonomous Workflow Architecture: Engineered 20+ self-healing AI and Python automation workflows via REST APIs and tool-calling, compressing multi-day setups into under 4 hours.',
           ],
         },
         {
           company: 'Red Ventures',
           employmentType: 'Full-Time',
-          role: 'Platform Architecture & Technical Delivery Lead (edX) — Full-Time',
+          role: 'Technical Delivery & Platform Architecture Lead (edX) — Full-Time',
           period: 'August 2024 – January 2026',
           bullets: [
-            'Global Platform Modernization: Coordinated cross-functional engineering sprints in Jira to deploy generative AI discovery modules across 1,250+ pages on edX.',
-            'Real-Time System Observability: Built automated telemetry monitors in Databricks and Looker across 40M+ user sessions.',
+            'Global Platform Modernization: Coordinated cross-functional product and engineering sprints in Jira to deploy generative AI discovery modules across 1,250+ pages on edX (+200% inquiry lift).',
+            'Real-Time System Observability: Built automated telemetry monitors in Databricks and Looker across 40M+ user sessions to guarantee platform reliability.',
           ],
         },
         {
@@ -470,7 +475,7 @@ export const PROFILE = {
           role: 'Founder & Technical Studio Director — My Company / Founder',
           period: 'January 2018 – Present',
           bullets: [
-            'Multidisciplinary Maker Leadership: Directed a 15-person team of developers, designers, and storytellers across 150+ interactive builds, lifting studio shipping velocity by 40%.',
+            'Multidisciplinary Engineering & Design Leadership: Directed a 15-person team of developers, designers, and storytellers across 150+ digital builds, lifting studio shipping velocity by 40%.',
             'Automated Health Telemetry: Designed proactive signal monitoring that kept 95% of studio collaborations thriving year over year.',
           ],
         },
@@ -483,7 +488,7 @@ export const PROFILE = {
           period: 'November 2017 – Present',
           bullets: [
             'Puente a Puente Hardware & Connectivity Deployment: Sourced 100+ computers and 50+ tablets in under 30 days during global supply lockups, deploying satellite internet and MDM security across 3 community libraries in Loíza.',
-            '100+ Full-Stack Deployments: Led a 10+ person engineering team to ship 100+ custom web and cloud platforms for 30+ organizations.',
+            '100+ Full-Stack Cloud Deployments: Led a 10+ person engineering team to architect and ship 100+ custom web, mobile, and cloud platforms for 80+ organizations.',
           ],
         },
       ],
