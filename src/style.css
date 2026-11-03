@@ -6072,7 +6072,7 @@ body.tesla-mode .hud-action-btn {
 
 :root[data-theme="light"] .wm-key,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .wm-key {
-  color: #64748b;
+  color: #475569;
 }
 
 :root[data-theme="light"] .wm-val,
@@ -6299,7 +6299,7 @@ body.tesla-mode .hud-action-btn {
 
 :root[data-theme="light"] .award-org,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .award-org {
-  color: #0284c7;
+  color: #0369a1;
 }
 
 :root[data-theme="light"] .exp-type-pill.pill-fulltime,
@@ -6610,7 +6610,7 @@ body.tesla-mode .hud-action-btn {
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: editorialGoldShimmer 8s linear infinite;
+  animation: none;
 }
 
 :root[data-theme="light"] .hero-lead,
@@ -6849,7 +6849,7 @@ body.tesla-mode .hud-action-btn {
 
 :root[data-theme="light"] .stage-btn span,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .stage-btn span {
-  color: #64748b;
+  color: #475569;
 }
 
 :root[data-theme="light"] .stage-btn:hover,
@@ -7363,9 +7363,9 @@ body.tesla-mode .hud-action-btn {
 
 :root[data-theme="light"] .radar-topic-btn.active,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .radar-topic-btn.active {
-  background: rgba(14, 116, 144, 0.1);
-  border-color: #0e7490;
-  color: #0e7490;
+  background: #ecfeff;
+  border-color: #155e75;
+  color: #155e75;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -7390,9 +7390,9 @@ body.tesla-mode .hud-action-btn {
 
 :root[data-theme="light"] .feed-live-badge,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .feed-live-badge {
-  background: rgba(5, 150, 105, 0.1);
-  border-color: rgba(5, 150, 105, 0.3);
-  color: #047857;
+  background: #ecfdf5;
+  border-color: rgba(5, 150, 105, 0.35);
+  color: #065f46;
 }
 
 :root[data-theme="light"] .feed-main-heading,
@@ -7541,9 +7541,9 @@ body.tesla-mode .hud-action-btn {
 
 :root[data-theme="light"] .filter-chip.active,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .filter-chip.active {
-  background: rgba(148, 104, 0, 0.14);
+  background: #fef3c7;
   border-color: var(--gold-primary);
-  color: #785300;
+  color: #78350f;
   box-shadow: 0 2px 8px rgba(148, 104, 0, 0.12);
 }
 
