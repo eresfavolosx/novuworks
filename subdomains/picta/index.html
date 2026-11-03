@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Picta: Assistive camera application with real-time Daltonization filters and color identification for color-blind individuals.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="theme-color" content="#1a237e">
     <title>Picta · Assistive Color Vision Camera</title>
 
@@ -127,7 +127,7 @@
                 <div class="brand-badge">
                     <i class="material-icons brand-icon">visibility</i>
                     <div class="brand-info">
-                        <span class="brand-name">Picta</span>
+                        <h1 class="brand-name" style="margin:0;">Picta</h1>
                         <span class="brand-tag">Assistive Vision</span>
                     </div>
                 </div>
@@ -163,10 +163,10 @@
             <!-- Permission / Fallback Notice Banner -->
             <div id="camera-status-overlay" class="camera-status-overlay" style="display:none;">
                 <i class="material-icons status-icon">videocam_off</i>
-                <h3 id="status-title">Camera Permission Needed</h3>
+                <h2 id="status-title">Camera Permission Needed</h2>
                 <p id="status-desc">Allow camera access to use the live Daltonization viewfinder, or upload a photo to test color filters.</p>
                 <div class="status-actions">
-                    <button id="btn-use-sample-plate" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="background: #3b82f6; color: #fff;">
+                    <button id="btn-use-sample-plate" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="background: #1d4ed8; color: #fff;">
                         Explore Test Plate Demo
                     </button>
                     <button id="btn-retry-camera" class="mdl-button mdl-js-button mdl-button--raised">
@@ -282,7 +282,7 @@
         </footer>
 
         <!-- Toast Notification Container -->
-        <div id="toast-container" class="toast-container"></div>
+        <div id="toast-container" class="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
 
         <!-- Hidden Canvas for Video Frame Extraction & Snapshot Daltonization -->
         <canvas id="hidden-capture-canvas" style="display:none;"></canvas>

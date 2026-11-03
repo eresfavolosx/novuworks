@@ -50,8 +50,7 @@
       savedTheme = cookieMatch[1];
     }
   }
-  var isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var currentTheme = (savedTheme === 'light' || savedTheme === 'dark') ? savedTheme : (isSystemDark ? 'dark' : 'light');
+  var currentTheme = (savedTheme === 'light' || savedTheme === 'dark') ? savedTheme : 'dark';
 
   function applyNovuTheme(theme) {
     currentTheme = theme;
@@ -107,14 +106,14 @@
   var PROJECTS = {
     bizpay: {
       name: 'BizPay',
-      badge: 'FINTECH & B2B COMMERCIAL INVOICING',
-      status: 'PRODUCTION // LIVE DEPLOYED',
-      uptime: '100% RECONCILED · ZERO SLIPPAGE',
+      badge: 'HUMAN-CENTRIC PAYMENT & INSTANT SETTLEMENT',
+      status: 'PROTOTYPE // LIVE DEPLOYED',
+      uptime: '1.2S SETTLEMENT · ZERO FRICTION',
       accent: '#ff671b',
       accentGlow: 'rgba(255, 103, 27, 0.45)',
-      title: 'BizPay: B2B Commercial Invoicing & ATH Móvil Gateway',
-      role: 'Lead Architect & Full-Stack Engineer: Fabián Vélez Vicente',
-      lead: 'High-converting B2B commercial invoicing platform directly integrating the ATH Móvil Business API with multi-tier merchant routing, dynamic 1.5% fee split, and automated ERP reconciliation to eliminate check-clearing delays and credit card fees.',
+      title: 'BizPay: Human-Centric Local Payment & Instant Settlement Experience',
+      role: 'Creative Technologist & Systems Architect: Fabián Vélez Vicente',
+      lead: 'An intuitive local payment and contractor settlement prototype designed to help independent creators, makers, and neighborhood studios in Puerto Rico get paid in 1.2 seconds with zero calculation friction.',
       logoSvg: [
         '<svg viewBox="0 0 100 100" class="nps-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">',
         '  <defs>',
@@ -131,21 +130,21 @@
         '</svg>'
       ].join(''),
       metrics: [
-        { num: '1.50%', label: 'Ultra-Low B2B Merchant Fee' },
-        { num: 'Instant', label: 'ATH Móvil Settlement' },
-        { num: '100%', label: 'Automated Revenue Auditing' },
-        { num: '0.00%', label: 'Transaction Slippage' }
+        { num: '1.2s', label: 'Instant ATH Móvil Settlement' },
+        { num: '1-Tap', label: 'Human-Centric Mobile Flow' },
+        { num: '100%', label: 'Transparent Fee Split Math' },
+        { num: '0.00%', label: 'Rounding or Ledger Drift' }
       ],
-      challengeTitle: 'The Core Business & Settlement Bottleneck',
-      challenge: 'B2B transactions in Puerto Rico and the Caribbean have historically been plagued by multi-day check clearing delays, 3.5%+ international credit card fees, and complex manual invoice reconciliation between suppliers and corporate clients.',
-      solutionTitle: 'Engineered Technical Solution',
-      solution: 'BizPay directly interfaces with the local ATH Móvil Business API and card tokenization vaults. When an enterprise issues an invoice, BizPay generates a dynamic secure checkout URL that calculates real-time fees, routes payouts into segregated merchant accounts, and emits webhook notifications for automated ERP and accounting reconciliation.',
+      challengeTitle: 'The Concept (Human-Centric Trust)',
+      challenge: 'Independent creators, musicians, designers, and local contractors in Puerto Rico have historically waited weeks for paper checks to clear or lost hard-earned pay to opaque transaction fees. BizPay reimagines getting paid as an immediate, transparent, one-tap moment of mutual trust.',
+      solutionTitle: 'The Technology & Human Impact',
+      solution: 'Engineered with modular JavaScript, direct ATH Móvil API settlement handshakes, real-time fee-split mathematics, asynchronous webhook listeners, and instant PDF/CSV ledger synthesis—bringing immediate peace of mind to independent workers.',
       architecture: [
-        'ATH Móvil Business API Webhook Dispatcher & IPN Listener',
-        'Real-Time Merchant Fee Dynamic Routing (1.5% Settlement vs 3.5% Card Gateways)',
-        'Firebase Cloud Firestore Transaction Audit Logs & Multi-Tier Routing',
-        'Material Design Responsive Front-End with Mobile-First Checkout Flow',
-        'Automated PDF Invoice Generator with QR Payment Payloads'
+        'ATH Móvil API Handshake & Real-Time Webhook Listener',
+        'Transparent Fee-Split Mathematics & Instant Creator Settlement',
+        'Firebase Cloud Firestore Ledger Sync & Multi-Tier Routing',
+        'Tactile Mobile-First Interface with 1-Tap QR Checkout Flow',
+        'Automated PDF/CSV Receipt Synthesis with QR Payloads'
       ],
       githubUrl: 'https://github.com/eresfavolosx/bizpay',
       portfolioUrl: 'https://novu.works#project-bizpay'
@@ -376,7 +375,7 @@
     '.np-btn-home { color: #94a3b8; text-decoration: none; font-size: 11px; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: 6px; transition: color 0.2s ease; }',
     '.np-btn-home:hover { color: #ffffff; background: rgba(255, 255, 255, 0.06); }',
     ':root[data-theme="light"] .np-btn-home, html.light-theme .np-btn-home {',
-    '  color: #64748b !important;',
+    '  color: #334155 !important;',
     '}',
     ':root[data-theme="light"] .np-btn-home:hover, html.light-theme .np-btn-home:hover {',
     '  color: #0f172a !important;',
@@ -849,15 +848,16 @@
   applyNovuTheme(currentTheme);
 
   // 5. Inject Top Bar
-  var topBar = document.createElement('div');
+  var topBar = document.createElement('nav');
   topBar.id = 'novu-platform-topbar';
+  topBar.setAttribute('aria-label', 'NovuWorks Platform Navigation');
   topBar.innerHTML = [
     '<div class="np-left">',
     '  <span class="np-badge"><img src="data:image/png;base64,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" alt="NW" style="height:10px;width:auto;object-fit:contain;" /><span class="np-dot"></span> NOVU.WORKS // ' + project.badge + '</span>',
     '  <span class="np-name">' + project.title + '</span>',
     '</div>',
     '<div class="np-right">',
-    '  <button type="button" class="np-theme-toggle-btn" id="np-btn-theme-topbar" aria-label="Toggle Theme">' + (currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode') + '</button>',
+    '  <button type="button" class="np-theme-toggle-btn" id="np-btn-theme-topbar">' + (currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode') + '</button>',
     '  <button type="button" class="np-btn-blueprint" id="np-btn-open-blueprint">ℹ️ <span class="np-bp-full">Architecture Blueprint &amp; </span>Info</button>',
     '  <a class="np-btn-github" href="' + project.githubUrl + '" target="_blank" rel="noopener">GitHub</a>',
     '  <a class="np-btn-home" href="' + getPortfolioBaseUrl() + '?theme=' + currentTheme + '&skipIntro=1#projects">&larr; Return to Portfolio</a>',
@@ -958,7 +958,7 @@
       '      <span class="np-dot"></span>',
       '      <span class="nps-badge-text">NOVU.WORKS // THE RARE HYBRID · SUBSYSTEM</span>',
       '    </div>',
-      '    <button type="button" class="np-theme-toggle-btn np-theme-toggle-splash" aria-label="Toggle Theme">' + (currentTheme === 'light' ? '🌙 Dark' : '☀️ Light') + '</button>',
+      '    <button type="button" class="np-theme-toggle-btn np-theme-toggle-splash">' + (currentTheme === 'light' ? '🌙 Dark' : '☀️ Light') + '</button>',
       '  </div>',
       '  <div class="nps-logo-wrapper">',
       '    <div class="nps-logo-aura"></div>',
