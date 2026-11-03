@@ -655,17 +655,6 @@ class FabianPortfolioApp {
       dlTools.setAttribute('download', resumeFilename);
     }
 
-    if (this.dom.dossierStatsMount) {
-      this.dom.dossierStatsMount.classList.remove('lens-animating');
-      void this.dom.dossierStatsMount.offsetWidth;
-      this.dom.dossierStatsMount.classList.add('lens-animating');
-    }
-    if (this.dom.scorecardProofsMount) {
-      this.dom.scorecardProofsMount.classList.remove('lens-animating');
-      void this.dom.scorecardProofsMount.offsetWidth;
-      this.dom.scorecardProofsMount.classList.add('lens-animating');
-    }
-
     audio.click(850);
     try {
       logCandidateEvent('role_lens_selected', { lens: lensId });
@@ -1093,13 +1082,6 @@ class FabianPortfolioApp {
   renderPrintableResume(lensId = this.activeRoleLens) {
     const variant = PROFILE.roleVariants[lensId] || PROFILE.roleVariants.master;
 
-    // Subtle re-render pulse animation for instant visual feedback on lens switch
-    if (this.dom.printableResume) {
-      this.dom.printableResume.classList.remove('lens-animating');
-      void this.dom.printableResume.offsetWidth; // trigger reflow
-      this.dom.printableResume.classList.add('lens-animating');
-    }
-
     // Summary (Full Verbatim Tailored Text)
     if (this.dom.resSummaryMount) {
       this.dom.resSummaryMount.textContent = variant.summary;
@@ -1191,11 +1173,14 @@ class FabianPortfolioApp {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Smooth Ease-Out-Expo Number Counter Animation
+  // Smooth Ease-Out-Expo Number Counter Animation (Runs Once, No Reset Blink)
   // ─────────────────────────────────────────────────────────────
   animateCounters() {
     const counterElements = document.querySelectorAll('.m-number[data-target]');
     counterElements.forEach((el) => {
+      if (el.dataset.counted === 'true') return;
+      el.dataset.counted = 'true';
+
       const target = parseFloat(el.dataset.target) || 0;
       const prefix = el.dataset.prefix || '';
       const suffix = el.dataset.suffix || '';
@@ -1222,58 +1207,16 @@ class FabianPortfolioApp {
   }
 
   // ─────────────────────────────────────────────────────────────
-  // Interactive Cursor Spotlight Glow Effect
+  // Card Surface & Scroll Stability (No backdrop-filter re-rasterization blink)
   // ─────────────────────────────────────────────────────────────
   initCardSpotlight() {
-    const selector =
-      '.standalone-project-card, .case-card, .proof-card, .cluster-item, .tesla-gauge-card, .edu-card, .award-card, .hero-metric-card, .scorecard-card';
-    const attachGlow = () => {
-      document.querySelectorAll(selector).forEach((card) => {
-        if (card.dataset.glowAttached) return;
-        card.dataset.glowAttached = 'true';
-        card.addEventListener('pointermove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty('--mouse-x', `${x}px`);
-          card.style.setProperty('--mouse-y', `${y}px`);
-        });
-      });
-    };
-    attachGlow();
-    window.addEventListener('novu:view-changed', () => setTimeout(attachGlow, 60));
-    window.addEventListener('novu:lang-changed', () => setTimeout(attachGlow, 60));
+    // Intentionally static to prevent pointermove inline-style mutations from
+    // triggering backdrop-filter re-rasterization flicker across glass cards.
   }
 
-  // ─────────────────────────────────────────────────────────────
-  // Smooth Scroll-Driven Entry Reveal Observers (Progressive Enhancement)
-  // ─────────────────────────────────────────────────────────────
   initScrollReveals() {
-    if (!('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
-    );
-
-    const observeElements = () => {
-      document
-        .querySelectorAll(
-          '.standalone-project-card, .case-card, .proof-card, .edu-card, .award-card, .hero-metric-card, .cluster-item, .scorecard-card'
-        )
-        .forEach((el) => {
-          el.classList.add('scroll-reveal-target');
-          observer.observe(el);
-        });
-    };
-    observeElements();
-    window.addEventListener('novu:view-changed', () => setTimeout(observeElements, 60));
-    window.addEventListener('novu:lang-changed', () => setTimeout(observeElements, 60));
+    // Cards render immediately at opacity: 1 to eliminate scroll-threshold
+    // and view-switch opacity blinking.
   }
 
   // ─────────────────────────────────────────────────────────────

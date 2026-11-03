@@ -152,24 +152,20 @@ export class SpatialImmersionEngine {
         this.canvas3d.setSpatialTilt(this.tiltX, this.tiltY);
       }
 
-      // 2. Set dynamic CSS specular & holographic reflection variables (throttled & delta-gated)
-      // Prevents hoarding CPU/GPU by eliminating continuous root DOM style recalculations
+      // 2. Scope --tilt-x strictly to the spatial gyro button instead of document.documentElement
+      // so root style inheritance never triggers full-DOM backdrop-filter recalculations on mousemove
       const now = performance.now();
       const dx = Math.abs(this.tiltX - (lastAppliedX ?? 999));
       const dy = Math.abs(this.tiltY - (lastAppliedY ?? 999));
 
-      if ((dx > 0.003 || dy > 0.003) && (now - lastDomWriteTime >= 33)) {
+      if ((dx > 0.005 || dy > 0.005) && (now - lastDomWriteTime >= 50)) {
         lastAppliedX = this.tiltX;
         lastAppliedY = this.tiltY;
         lastDomWriteTime = now;
 
-        const root = document.documentElement;
-        if (root) {
-          root.style.setProperty('--tilt-x', this.tiltX.toFixed(3));
-          root.style.setProperty('--tilt-y', this.tiltY.toFixed(3));
-          root.style.setProperty('--specular-x', `${(50 + this.tiltX * 35).toFixed(1)}%`);
-          root.style.setProperty('--specular-y', `${(50 + this.tiltY * 35).toFixed(1)}%`);
-          root.style.setProperty('--shimmer-angle', `${Math.round(135 + this.tiltX * 45)}deg`);
+        const gyroBtn = document.getElementById('btn-spatial-gyro');
+        if (gyroBtn) {
+          gyroBtn.style.setProperty('--tilt-x', this.tiltX.toFixed(3));
         }
       }
 

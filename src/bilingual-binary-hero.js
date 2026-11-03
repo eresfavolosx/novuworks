@@ -377,26 +377,20 @@ export class BilingualBinaryHero {
     const langData = DISCIPLINE_DATA[this.currentLang] || DISCIPLINE_DATA.en;
     const disc = langData.disciplines[this.currentDiscipline] || langData.disciplines.all;
 
-    // Smooth transition
-    this.dom.statementContainer.style.opacity = '0';
-    this.dom.statementContainer.style.transform = 'translateY(6px)';
+    const tagsHtml = disc.tags
+      .map((t) => `<span class="lens-tag">${t}</span>`)
+      .join('');
 
-    setTimeout(() => {
-      const tagsHtml = disc.tags
-        .map((t) => `<span class="lens-tag">${t}</span>`)
-        .join('');
+    this.dom.statementContainer.innerHTML = `
+      <div class="intro-statement-header">
+        <span class="statement-icon">${disc.icon}</span>
+        <h3 class="statement-headline">${disc.headline}</h3>
+      </div>
+      <p class="statement-body">${disc.body}</p>
+      <div class="statement-tags-row">${tagsHtml}</div>
+    `;
 
-      this.dom.statementContainer.innerHTML = `
-        <div class="intro-statement-header">
-          <span class="statement-icon">${disc.icon}</span>
-          <h3 class="statement-headline">${disc.headline}</h3>
-        </div>
-        <p class="statement-body">${disc.body}</p>
-        <div class="statement-tags-row">${tagsHtml}</div>
-      `;
-
-      this.dom.statementContainer.style.opacity = '1';
-      this.dom.statementContainer.style.transform = 'translateY(0)';
-    }, 100);
+    this.dom.statementContainer.style.opacity = '1';
+    this.dom.statementContainer.style.transform = 'translateY(0)';
   }
 }
