@@ -16971,11 +16971,99 @@ html.light-theme .action-pill-btn:not(.gold) {
 }
 
 :root[data-theme="light"] .action-pill-btn.gold,
-html.light-theme .action-pill-btn.gold {
-  background: linear-gradient(135deg, #d4af37 0%, #b45309 100%) !important;
+html.light-theme .action-pill-btn.gold,
+:root[data-theme="light"] .luxury-btn.primary-gold.llm-connect-btn,
+html.light-theme .luxury-btn.primary-gold.llm-connect-btn {
+  background-color: #92400e !important;
+  background-image: linear-gradient(135deg, #b45309 0%, #78350f 100%) !important;
   color: #ffffff !important;
-  border-color: #92400e !important;
-  box-shadow: 0 2px 10px rgba(180, 83, 9, 0.25) !important;
+  border-color: #78350f !important;
+  box-shadow: 0 2px 10px rgba(146, 64, 14, 0.25) !important;
+}
+
+/* Executive Resume Modal Headings & Section Titles Light Mode WCAG AA+ Contrast (6.4:1) */
+:root[data-theme="light"] .res-name,
+html.light-theme .res-name,
+:root[data-theme="light"] .res-section-title,
+html.light-theme .res-section-title {
+  color: #9a3412 !important;
+}
+
+/* Intel Feed Telemetry Chips, Highlights & Taíno Sun Logo Light Mode Contrast */
+:root[data-theme="light"] .pulse-chip .chip-val,
+html.light-theme .pulse-chip .chip-val,
+:root[data-theme="light"] .text-gold,
+html.light-theme .text-gold,
+:root[data-theme="light"] .ih-num,
+html.light-theme .ih-num {
+  color: #92400e !important;
+}
+
+:root[data-theme="light"] .taino-sun-svg text[fill="#f59e0b"],
+html.light-theme .taino-sun-svg text[fill="#f59e0b"] {
+  fill: #b45309 !important;
+}
+
+/* Cinematic Lens Discipline Badges (Dark & Light Mode) */
+.disc-badge.disc-badge-gold {
+  color: var(--gold-primary);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+.disc-badge.disc-badge-pink {
+  color: #ec4899;
+  border-color: rgba(236, 72, 153, 0.3);
+}
+.disc-badge.disc-badge-cyan {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+.disc-badge.disc-badge-emerald {
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+:root[data-theme="light"] .disc-badge.disc-badge-gold,
+html.light-theme .disc-badge.disc-badge-gold {
+  color: #92400e !important;
+  border-color: rgba(146, 64, 14, 0.35) !important;
+}
+:root[data-theme="light"] .disc-badge.disc-badge-pink,
+html.light-theme .disc-badge.disc-badge-pink {
+  color: #be185d !important;
+  border-color: rgba(190, 24, 93, 0.35) !important;
+}
+:root[data-theme="light"] .disc-badge.disc-badge-cyan,
+html.light-theme .disc-badge.disc-badge-cyan {
+  color: #0369a1 !important;
+  border-color: rgba(3, 105, 161, 0.35) !important;
+}
+:root[data-theme="light"] .disc-badge.disc-badge-emerald,
+html.light-theme .disc-badge.disc-badge-emerald {
+  color: #047857 !important;
+  border-color: rgba(4, 120, 87, 0.35) !important;
+}
+
+/* Modern Web Guidance: Typographic Rhythm & Anti-Runt Wrapping */
+h1,
+h2,
+h3,
+.modal-heading,
+.planner-title,
+.feed-main-heading,
+.case-title,
+.proj-title {
+  text-wrap: balance;
+}
+
+p,
+li,
+blockquote,
+.case-desc,
+.proj-summary,
+.score-desc,
+.check-item,
+.feed-main-sub {
+  text-wrap: pretty;
 }
 
 :root[data-theme="light"] .proj-live-badge,
