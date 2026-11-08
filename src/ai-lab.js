@@ -30,27 +30,27 @@ export class AIGrowthLab {
         <div class="ai-lab-controls">
           <!-- Cohort Selector -->
           <div class="control-group">
-            <label class="control-label">Human Experience Domain:</label>
-            <div class="pill-group" id="cohort-pills">
-              <button type="button" class="lab-pill active" data-cohort="fintech">Everyday Financial Clarity</button>
-              <button type="button" class="lab-pill" data-cohort="makers">Creative Technologists &amp; Makers</button>
-              <button type="button" class="lab-pill" data-cohort="dtc-growth">Lifelong Learners &amp; Educators</button>
+            <span class="control-label" id="label-cohort-pills">Human Experience Domain:</span>
+            <div class="pill-group" id="cohort-pills" role="group" aria-labelledby="label-cohort-pills">
+              <button type="button" class="lab-pill active" data-cohort="fintech" aria-pressed="true">Everyday Financial Clarity</button>
+              <button type="button" class="lab-pill" data-cohort="makers" aria-pressed="false">Creative Technologists &amp; Makers</button>
+              <button type="button" class="lab-pill" data-cohort="dtc-growth" aria-pressed="false">Lifelong Learners &amp; Educators</button>
             </div>
           </div>
 
           <!-- Psychological Hook Trigger -->
           <div class="control-group">
-            <label class="control-label">Creative &amp; Human Intention:</label>
-            <div class="pill-group" id="trigger-pills">
-              <button type="button" class="lab-pill active" data-trigger="attribution">Clarity Over Complexity</button>
-              <button type="button" class="lab-pill" data-trigger="velocity">Rapid Interactive Prototyping</button>
-              <button type="button" class="lab-pill" data-trigger="cost">Empathetic Accessibility</button>
+            <span class="control-label" id="label-trigger-pills">Creative &amp; Human Intention:</span>
+            <div class="pill-group" id="trigger-pills" role="group" aria-labelledby="label-trigger-pills">
+              <button type="button" class="lab-pill active" data-trigger="attribution" aria-pressed="true">Clarity Over Complexity</button>
+              <button type="button" class="lab-pill" data-trigger="velocity" aria-pressed="false">Rapid Interactive Prototyping</button>
+              <button type="button" class="lab-pill" data-trigger="cost" aria-pressed="false">Empathetic Accessibility</button>
             </div>
           </div>
 
           <!-- Action Button -->
           <button type="button" class="primary-btn pulse-glow" id="btn-run-ai-synthesis" style="width: 100%; margin-top: 10px;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
             <span id="ai-btn-text">Synthesize Interactive Narrative &amp; Tool-Calling Matrix</span>
           </button>
         </div>
@@ -63,7 +63,7 @@ export class AIGrowthLab {
             <span class="term-dot green"></span>
             <span class="term-title">frontier-synthesis-engine.ts — Synthesized Output</span>
           </div>
-          <div class="terminal-body" id="ai-code-display">
+          <div class="terminal-body" id="ai-code-display" aria-live="polite">
             <!-- Initial prompt display -->
           </div>
         </div>
@@ -77,8 +77,12 @@ export class AIGrowthLab {
   bindEvents() {
     this.container.querySelectorAll('#cohort-pills .lab-pill').forEach((btn) => {
       btn.addEventListener('click', () => {
-        this.container.querySelectorAll('#cohort-pills .lab-pill').forEach((b) => b.classList.remove('active'));
+        this.container.querySelectorAll('#cohort-pills .lab-pill').forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         this.selectedCohort = btn.dataset.cohort;
         audio.click(1200);
         this.generateResults();
@@ -87,8 +91,12 @@ export class AIGrowthLab {
 
     this.container.querySelectorAll('#trigger-pills .lab-pill').forEach((btn) => {
       btn.addEventListener('click', () => {
-        this.container.querySelectorAll('#trigger-pills .lab-pill').forEach((b) => b.classList.remove('active'));
+        this.container.querySelectorAll('#trigger-pills .lab-pill').forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         this.selectedTrigger = btn.dataset.trigger;
         audio.click(1400);
         this.generateResults();

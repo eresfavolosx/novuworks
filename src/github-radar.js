@@ -5,19 +5,19 @@
 
 const CREATIVE_REPO_DESCRIPTIONS = {
   JobHelper:
-    'JobHelper & FavoBot Companion: Original Python and LLM agent companions exploring autonomous reasoning, 100-point rubric critique, and everyday human-AI collaboration (Next.js 16, Python, Gemini/OpenAI, Docker).',
+    'JobHelper Career Co-Pilot: Multi-provider AI career command center (Gemini, Claude, OpenAI), MV3 Chrome Extension, 100-pt resume tailoring, and 5-daily-goal milestone celebrations (Next.js 16, React 19).',
   BizPay:
     'Human-centric local payment & instant settlement prototype for independent creators in Puerto Rico—pairing ATH Móvil API handshakes with real-time fee-split mathematics for 1.2s payouts.',
   Picta:
     'Assistive 60 FPS WebRTC computer vision camera applying mathematical Daltonization shaders, Euclidean Delta-E pixel sampling, and Web Speech synthesis so 300M+ people with color blindness can see and hear color.',
   NFC:
-    'Tocaito (NFC Physical-Digital Objects): Cross-platform mobile and physical NFC tap experience (Capacitor, Firebase, Vite) assisted by an autonomous coding agent (.Jules) to connect physical objects with digital play.',
+    'Tocaito (NFC Physical-Digital Objects): Cross-platform mobile and physical NFC tap experience (Capacitor, Firebase, Vite) with 0.4s contactless tap simulation and bilingual ES/EN parity.',
   hackeaporunacausa:
     'Civic hackathon winner: an inviting youth mentorship discovery and scheduling prototype connecting underserved students at Boys & Girls Clubs in Puerto Rico with engineers, scientists, and artists.',
   TokenFund:
-    'Puente a Puente & Civic Relief: Open-source community relief and digital library infrastructure connecting 1,000+ citizens across Puerto Rico.',
+    'Puente a Puente & Civic Relief: Open-source community relief and real-time multi-currency blockchain telemetry infrastructure connecting 1,000+ citizens across Puerto Rico.',
   FavoBot:
-    'Original Python and LLM agent companion (Supra Bot) exploring autonomous reasoning, rubric-driven self-critique, tool smithing, and everyday human-AI collaboration across Telegram, Discord & Next.js.',
+    'Supra Bot Autonomous AI Agent: Constitutional AI guardrails, 100-point rubric self-critique engine, Unix IPC daemon, and Next.js Mission Control telemetry across Telegram & Discord.',
   novuworks:
     'Procedural Physics Portfolio & Creative Tech Atelier (novu.works): Interactive 60 FPS procedural physics web experiences, Three.js WebGL shaders, 6DoF gyroscope, and live frontier AI & physical-digital prototypes.',
   Helpr:
@@ -39,10 +39,19 @@ const FALLBACK_REPOS = [
     name: 'JobHelper',
     html_url: 'https://github.com/eresfavolosx/JobHelper',
     description: CREATIVE_REPO_DESCRIPTIONS.JobHelper,
+    language: 'JavaScript',
+    stargazers_count: 5,
+    forks_count: 1,
+    updated_at: new Date().toISOString(),
+  },
+  {
+    name: 'FavoBot',
+    html_url: 'https://github.com/eresfavolosx/FavoBot',
+    description: CREATIVE_REPO_DESCRIPTIONS.FavoBot,
     language: 'Python',
     stargazers_count: 5,
     forks_count: 1,
-    updated_at: '2026-10-24T17:33:00Z',
+    updated_at: new Date().toISOString(),
   },
   {
     name: 'Picta',
@@ -51,16 +60,16 @@ const FALLBACK_REPOS = [
     language: 'JavaScript',
     stargazers_count: 3,
     forks_count: 0,
-    updated_at: '2026-10-24T17:28:00Z',
+    updated_at: new Date().toISOString(),
   },
   {
     name: 'NFC',
     html_url: 'https://github.com/eresfavolosx/NFC',
     description: CREATIVE_REPO_DESCRIPTIONS.NFC,
-    language: 'TypeScript',
+    language: 'JavaScript',
     stargazers_count: 4,
     forks_count: 0,
-    updated_at: '2026-10-24T17:33:37Z',
+    updated_at: new Date().toISOString(),
   },
   {
     name: 'BizPay',
@@ -70,15 +79,6 @@ const FALLBACK_REPOS = [
     stargazers_count: 4,
     forks_count: 0,
     updated_at: '2026-10-24T17:33:45Z',
-  },
-  {
-    name: 'hackeaporunacausa',
-    html_url: 'https://github.com/eresfavolosx/hackeaporunacausa',
-    description: CREATIVE_REPO_DESCRIPTIONS.hackeaporunacausa,
-    language: 'JavaScript',
-    stargazers_count: 4,
-    forks_count: 1,
-    updated_at: '2026-10-24T17:33:55Z',
   },
   {
     name: 'novuworks',
@@ -216,7 +216,7 @@ export class GitHubRadar {
             <span class="gh-stat-pill"><strong>Puerto Rico</strong> Maker Lab</span>
             <a href="https://github.com/eresfavolosx" target="_blank" rel="noopener noreferrer" class="gh-view-all-link">
               <span>Explore All Open-Source Experiments</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
           </div>
         </div>
@@ -227,7 +227,7 @@ export class GitHubRadar {
             <a href="${this.sanitizeGithubUrl(repo.html_url)}" target="_blank" rel="noopener noreferrer" class="gh-repo-card" title="Open creative experiment ${this.escapeHtml(repo.name)} on GitHub">
               <div class="gh-card-header">
                 <div class="gh-card-title-row">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                   <h3 class="gh-repo-name">${this.escapeHtml(repo.name)}</h3>
                 </div>
                 <span class="gh-badge-public">Open Experiment</span>
@@ -240,7 +240,7 @@ export class GitHubRadar {
                 </div>
                 ${Number(repo.stargazers_count) > 0 ? `
                   <span class="gh-metric-tag" title="${Number(repo.stargazers_count)} GitHub stars">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                     <span>${Number(repo.stargazers_count)}</span>
                   </span>
                 ` : ''}
