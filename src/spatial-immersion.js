@@ -138,7 +138,7 @@ export class SpatialImmersionEngine {
 
     const loop = () => {
       if (document.hidden) {
-        this.rafId = requestAnimationFrame(loop);
+        this.rafId = null;
         return;
       }
 
@@ -172,7 +172,19 @@ export class SpatialImmersionEngine {
       this.rafId = requestAnimationFrame(loop);
     };
 
-    this.rafId = requestAnimationFrame(loop);
+    const resumeLoop = () => {
+      if (!this.rafId && !document.hidden) {
+        this.rafId = requestAnimationFrame(loop);
+      }
+    };
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        resumeLoop();
+      }
+    });
+
+    resumeLoop();
   }
 
   updateHudGyroBadge() {

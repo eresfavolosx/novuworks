@@ -303,6 +303,11 @@ export class MinimalParticleMatrix {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           this.isVisible = entry.isIntersecting;
+          if (this.isVisible && this.isTabActive) {
+            this.start();
+          } else if (!this.isVisible) {
+            this.stop();
+          }
         });
       }, { threshold: 0.1 });
       observer.observe(this.canvas);
@@ -310,6 +315,11 @@ export class MinimalParticleMatrix {
 
     document.addEventListener('visibilitychange', () => {
       this.isTabActive = !document.hidden;
+      if (this.isVisible && this.isTabActive) {
+        this.start();
+      } else if (!this.isTabActive) {
+        this.stop();
+      }
     });
   }
 
@@ -425,12 +435,15 @@ export class MinimalParticleMatrix {
   }
 
   start() {
+    if (this.animFrameId) return;
     const loop = () => {
       if (this.isVisible && this.isTabActive) {
         this.update();
         this.draw();
+        this.animFrameId = requestAnimationFrame(loop);
+      } else {
+        this.animFrameId = null;
       }
-      this.animFrameId = requestAnimationFrame(loop);
     };
     this.animFrameId = requestAnimationFrame(loop);
   }

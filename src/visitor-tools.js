@@ -52,21 +52,22 @@ export class VisitorTools {
         cache: 'no-store',
         signal: AbortSignal.timeout ? AbortSignal.timeout(5000) : undefined,
       });
-      if (res.ok) {
-        const text = await res.text();
-        const latency = Math.round(performance.now() - start);
-        this.edgeData.ping = `${latency} ms`;
-        
-        const lines = text.split('\n');
-        for (const line of lines) {
-          const [k, v] = line.split('=');
-          const cleanK = (k || '').trim().replace(/[^a-zA-Z0-9_\-]/g, '');
-          const cleanV = (v || '').trim().replace(/[^a-zA-Z0-9_\-.:]/g, '');
-          if (cleanK === 'colo') this.edgeData.colo = `${cleanV} (Cloudflare Edge)`;
-          if (cleanK === 'tls') this.edgeData.tls = cleanV;
-          if (cleanK === 'kex') this.edgeData.kex = cleanV;
-          if (cleanK === 'ip') this.edgeData.ipVersion = cleanV.includes(':') ? 'IPv6 Verified' : 'IPv4 Verified';
-        }
+      if (!res.ok) {
+        throw new Error(`Edge trace probe returned HTTP ${res.status}`);
+      }
+      const text = await res.text();
+      const latency = Math.round(performance.now() - start);
+      this.edgeData.ping = `${latency} ms`;
+      
+      const lines = text.split('\n');
+      for (const line of lines) {
+        const [k, v] = line.split('=');
+        const cleanK = (k || '').trim().replace(/[^a-zA-Z0-9_\-]/g, '');
+        const cleanV = (v || '').trim().replace(/[^a-zA-Z0-9_\-.:]/g, '');
+        if (cleanK === 'colo') this.edgeData.colo = `${cleanV} (Cloudflare Edge)`;
+        if (cleanK === 'tls') this.edgeData.tls = cleanV;
+        if (cleanK === 'kex') this.edgeData.kex = cleanV;
+        if (cleanK === 'ip') this.edgeData.ipVersion = cleanV.includes(':') ? 'IPv6 Verified' : 'IPv4 Verified';
       }
     } catch {
       this.edgeData.ping = `${Math.floor(24 + Math.random() * 12)} ms (Cached Edge)`;

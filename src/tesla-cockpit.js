@@ -81,7 +81,6 @@ export class TeslaCockpitDashboard {
     if (!this.dom.container) return;
 
     this.bindEvents();
-    this.startClock();
     this.initBattery();
     this.renderNews();
     this.fetchLiveNews(false);
@@ -162,7 +161,7 @@ export class TeslaCockpitDashboard {
       }
     }
 
-    this.updateClock();
+    this.startClock();
     this.renderNews();
 
     // Auto-sync news every 60s while cockpit is open
@@ -193,6 +192,11 @@ export class TeslaCockpitDashboard {
       }
     } catch (e) {}
 
+    if (this.clockInterval) {
+      clearInterval(this.clockInterval);
+      this.clockInterval = null;
+    }
+
     if (this.newsSyncInterval) {
       clearInterval(this.newsSyncInterval);
       this.newsSyncInterval = null;
@@ -204,12 +208,17 @@ export class TeslaCockpitDashboard {
   }
 
   startClock() {
+    if (this.clockInterval) clearInterval(this.clockInterval);
     this.updateClock();
-    this.clockInterval = setInterval(() => this.updateClock(), 1000);
+    this.clockInterval = setInterval(() => {
+      if (this.isOpen) {
+        this.updateClock();
+      }
+    }, 1000);
   }
 
   updateClock() {
-    if (!this.dom.clockDisplay) return;
+    if (!this.dom.clockDisplay || !this.isOpen) return;
     const now = new Date();
     this.dom.clockDisplay.textContent = now.toLocaleTimeString('en-US', {
       hour: '2-digit',

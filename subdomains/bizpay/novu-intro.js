@@ -858,7 +858,7 @@
     '<div class="np-right">',
     '  <button type="button" class="np-theme-toggle-btn" id="np-btn-theme-topbar">' + (currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode') + '</button>',
     '  <button type="button" class="np-btn-blueprint" id="np-btn-open-blueprint">ℹ️ <span class="np-bp-full">Architecture Blueprint &amp; </span>Info</button>',
-    '  <a class="np-btn-github" href="' + project.githubUrl + '" target="_blank" rel="noopener">GitHub</a>',
+    '  <a class="np-btn-github" href="' + project.githubUrl + '" target="_blank" rel="noopener noreferrer">GitHub</a>',
     '  <a class="np-btn-home" href="' + getPortfolioBaseUrl() + '?theme=' + currentTheme + '&skipIntro=1#projects">&larr; Return to Portfolio</a>',
     '</div>'
   ].join('');
@@ -911,7 +911,7 @@
       '  </ul>',
       '  <div class="novuintro-actions">',
       '    <button type="button" class="novuintro-btn-primary" id="novuintro-btn-explore">🚀 Launch Interactive Application &rarr;</button>',
-      '    <a class="novuintro-btn-secondary" href="' + project.githubUrl + '" target="_blank" rel="noopener">GitHub Repository</a>',
+      '    <a class="novuintro-btn-secondary" href="' + project.githubUrl + '" target="_blank" rel="noopener noreferrer">GitHub Repository</a>',
       '    <a class="novuintro-btn-secondary novuintro-btn-home" href="' + getPortfolioBaseUrl() + '?theme=' + currentTheme + '&skipIntro=1#projects">&larr; Return to Portfolio</a>',
       '  </div>',
       '</div>'
