@@ -50,6 +50,10 @@
       savedTheme = cookieMatch[1];
     }
   }
+  if (!savedTheme) {
+    var isSystemLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    savedTheme = isSystemLight ? 'light' : 'dark';
+  }
   var currentTheme = (savedTheme === 'light' || savedTheme === 'dark') ? savedTheme : 'dark';
 
   function applyNovuTheme(theme) {

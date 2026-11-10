@@ -5,46 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <!-- MANDATORY: Declare support for both light and dark themes (modern-web-guidance) -->
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#050507" id="meta-theme-color" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f8fafc" id="meta-theme-color-light" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#050507" id="meta-theme-color-dark" />
     <script>
       (function() {
-        var theme = "dark";
+        var theme = null;
         try {
           var params = new URLSearchParams(window.location.search);
           var urlTheme = params.get('theme');
-          var saved = null;
           if (urlTheme === 'light' || urlTheme === 'dark') {
-            saved = urlTheme;
-          } else {
-            try { saved = localStorage.getItem("color-scheme"); } catch (_) {}
+            theme = urlTheme;
           }
-          if (!saved) {
+          if (!theme) {
+            var manual = null;
+            try { manual = localStorage.getItem("color-scheme-manual"); } catch (_) {}
+            if (manual === "true") {
+              var saved = null;
+              try { saved = localStorage.getItem("color-scheme"); } catch (_) {}
+              if (saved === 'light' || saved === 'dark') theme = saved;
+            }
+          }
+          if (!theme) {
             try {
               var match = document.cookie.match(/(?:^|; )color-scheme=([^;]+)/);
-              if (match && (match[1] === 'light' || match[1] === 'dark')) {
-                saved = match[1];
+              if (match && (match[1] === 'light' || match[1] === 'dark') && localStorage.getItem("color-scheme-manual") === "true") {
+                theme = match[1];
               }
             } catch (_) {}
           }
-          if (saved === "light" || saved === "dark") {
-            theme = saved;
-          }
-          try { localStorage.setItem("color-scheme", theme); } catch (_) {}
-          try {
-            document.cookie = "color-scheme=" + theme + "; path=/; max-age=31536000; SameSite=Lax";
-            if (location.hostname.endsWith('novu.works')) {
-              document.cookie = "color-scheme=" + theme + "; path=/; domain=.novu.works; max-age=31536000; SameSite=Lax";
-            }
-          } catch (_) {}
         } catch (e) {}
+
+        // Native Safari Adaptive Dark/Light Mode: follow device preference if not manually locked
+        if (!theme) {
+          var isSystemLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          theme = isSystemLight ? 'light' : 'dark';
+        }
 
         var meta = document.querySelector('meta[name="color-scheme"]');
         if (meta) meta.content = theme;
-        var themeColorMeta = document.getElementById('meta-theme-color');
-        if (themeColorMeta) themeColorMeta.content = theme === 'light' ? '#f8fafc' : '#050507';
+
+        var activeBg = theme === 'light' ? '#f8fafc' : '#050507';
+        var activeEnd = theme === 'light' ? '#f8fafc' : '#07070a';
+        var metaLight = document.getElementById('meta-theme-color-light');
+        var metaDark = document.getElementById('meta-theme-color-dark');
+        if (metaLight && theme === 'dark') metaLight.content = '#050507';
+        if (metaDark && theme === 'light') metaDark.content = '#f8fafc';
+
         document.documentElement.setAttribute('data-theme', theme);
         document.documentElement.classList.toggle('light-theme', theme === 'light');
-        document.documentElement.style.backgroundColor = theme === 'light' ? '#f8fafc' : '#050507';
+        document.documentElement.classList.toggle('dark-theme', theme === 'dark');
+        document.documentElement.style.setProperty('--bg-canvas', activeBg);
+        document.documentElement.style.setProperty('--bg-canvas-end', activeEnd);
+        document.documentElement.style.backgroundColor = activeBg;
       })();
     </script>
     <title>Fabián Vélez Vicente — Creative Technologist, AI Product Leader &amp; Systems Architect</title>

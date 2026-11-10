@@ -218,6 +218,7 @@ class FabianPortfolioApp {
         this.canvas3d = new SpatialCanvas3D(this.dom.webglContainer, (discipline) => {
           this.openDisciplineModal(discipline);
         });
+        this.canvas3d.setTheme(this.getCurrentResolvedTheme());
       }
     } catch (e) {
       console.warn('3D Canvas safely in fallback mode:', e);
@@ -2239,6 +2240,7 @@ EDUCATION & CERTIFICATIONS
 
   // ─────────────────────────────────────────────────────────────
   // Preferences & Toggles: Automatic Device & Cross-Domain Theme Sync
+  // Fully compliant with Safari Adaptive Dark Mode, iOS, and macOS Appearance
   // ─────────────────────────────────────────────────────────────
   initTheme() {
     // 1. Check URL parameters first (e.g. returning from subdomain with ?theme=dark|light)
@@ -2250,11 +2252,14 @@ EDUCATION & CERTIFICATIONS
       }
     } catch (_) {}
 
-    // 2. Read stored override from localStorage
+    // 2. Read stored override from localStorage only if user explicitly locked a manual preference
     if (!initialTheme) {
       try {
-        const saved = localStorage.getItem('color-scheme');
-        if (saved === 'light' || saved === 'dark') initialTheme = saved;
+        const manual = localStorage.getItem('color-scheme-manual');
+        if (manual === 'true') {
+          const saved = localStorage.getItem('color-scheme');
+          if (saved === 'light' || saved === 'dark') initialTheme = saved;
+        }
       } catch (_) {}
     }
 
@@ -2262,14 +2267,16 @@ EDUCATION & CERTIFICATIONS
     if (!initialTheme) {
       try {
         const match = document.cookie.match(/(?:^|; )color-scheme=([^;]+)/);
-        if (match && (match[1] === 'light' || match[1] === 'dark')) initialTheme = match[1];
+        if (match && (match[1] === 'light' || match[1] === 'dark') && localStorage.getItem('color-scheme-manual') === 'true') {
+          initialTheme = match[1];
+        }
       } catch (_) {}
     }
 
-    // 4. Resolve directly from device preference
+    // 4. Resolve directly from Safari / device preference (MANDATORY for adaptive dark mode!)
     if (!initialTheme) {
-      const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      initialTheme = isSystemDark ? 'dark' : 'light';
+      const isSystemLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      initialTheme = isSystemLight ? 'light' : 'dark';
     }
 
     this.applyTheme(initialTheme, false);
@@ -2284,17 +2291,16 @@ EDUCATION & CERTIFICATIONS
       }
     });
 
-    // System preference change listener
+    // Safari & System Adaptive Dark Mode Preference Listener
+    // Automatically flips the UI in real time when Safari, iOS, or macOS toggles light/dark mode
     if (window.matchMedia) {
       const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const handleDeviceThemeChange = (e) => {
-        const savedTheme = localStorage.getItem('color-scheme');
-        // Only adapt automatically if no explicit user override is locked
-        if (!savedTheme || savedTheme === 'system') {
-          const newSystemTheme = e.matches ? 'dark' : 'light';
-          this.applyTheme(newSystemTheme, false);
-          this.showToast(newSystemTheme === 'light' ? '☀️ Auto-switched to Device Light Mode' : '🌙 Auto-switched to Device Dark Mode');
-        }
+        // When device / Safari adaptive dark mode changes, adapt smoothly
+        const newSystemTheme = e.matches ? 'dark' : 'light';
+        try { localStorage.removeItem('color-scheme-manual'); } catch (_) {}
+        this.applyTheme(newSystemTheme, false);
+        this.showToast(newSystemTheme === 'light' ? '☀️ Safari Adaptive Light Mode Active' : '🌙 Safari Adaptive Dark Mode Active');
       };
 
       if (typeof darkQuery.addEventListener === 'function') {
@@ -2312,7 +2318,7 @@ EDUCATION & CERTIFICATIONS
     if (content === 'dark') return 'dark';
     const attr = document.documentElement.getAttribute('data-theme');
     if (attr === 'light' || attr === 'dark') return attr;
-    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
   }
 
   toggleTheme() {
@@ -2330,21 +2336,37 @@ EDUCATION & CERTIFICATIONS
     if (theme !== 'light' && theme !== 'dark') return;
     try {
       localStorage.setItem('color-scheme', theme);
+      if (isUserAction) {
+        localStorage.setItem('color-scheme-manual', 'true');
+      }
       document.cookie = `color-scheme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
       if (location.hostname.endsWith('novu.works')) {
         document.cookie = `color-scheme=${theme}; path=/; domain=.novu.works; max-age=31536000; SameSite=Lax`;
       }
     } catch (e) {}
 
+    const activeBg = theme === 'light' ? '#f8fafc' : '#050507';
+    const activeEnd = theme === 'light' ? '#f8fafc' : '#07070a';
+
     const meta = document.querySelector('meta[name="color-scheme"]');
     if (meta) meta.content = theme;
-    const themeColorMeta = document.getElementById('meta-theme-color') || document.querySelector('meta[name="theme-color"]');
-    if (themeColorMeta) themeColorMeta.content = theme === 'light' ? '#f8fafc' : '#050507';
+
+    // Synchronize Safari native adaptive theme-color headers
+    const metaLight = document.getElementById('meta-theme-color-light');
+    const metaDark = document.getElementById('meta-theme-color-dark');
+    const metaTheme = document.getElementById('meta-theme-color');
+    if (metaLight && theme === 'dark') metaLight.content = '#050507';
+    if (metaDark && theme === 'light') metaDark.content = '#f8fafc';
+    if (metaTheme) metaTheme.content = activeBg;
+
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.classList.toggle('light-theme', theme === 'light');
-    document.documentElement.style.backgroundColor = theme === 'light' ? '#f8fafc' : '#050507';
+    document.documentElement.classList.toggle('dark-theme', theme === 'dark');
+    document.documentElement.style.setProperty('--bg-canvas', activeBg);
+    document.documentElement.style.setProperty('--bg-canvas-end', activeEnd);
+    document.documentElement.style.backgroundColor = activeBg;
     if (document.body) {
-      document.body.style.backgroundColor = theme === 'light' ? '#f8fafc' : '#050507';
+      document.body.style.backgroundColor = activeBg;
     }
 
     this.updateThemeButton(theme, false);
