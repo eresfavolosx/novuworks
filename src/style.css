@@ -187,11 +187,16 @@ body {
 
 /* Accessibility: Honor User Preference for Reduced Motion (WCAG 2.3.3) */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  html {
     scroll-behavior: auto !important;
+  }
+
+  .gh-dot-live,
+  .radar-refresh-btn.spinning svg,
+  .status-pulse-dot,
+  .live-dot,
+  .nw-skeleton::after {
+    animation: none !important;
   }
 }
 
@@ -199,6 +204,13 @@ body {
 :focus-visible {
   outline: 2px solid var(--gold-primary) !important;
   outline-offset: 3px !important;
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 3px !important;
+  }
 }
 
 :root[data-theme="light"] :focus-visible,
@@ -10504,14 +10516,6 @@ html.device-eco-power * {
   transition-duration: 0.001s !important;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001s !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001s !important;
-  }
-}
-
 /* ─────────────────────────────────────────────────────────────
    Live GitHub Codebase Radar Section
    ───────────────────────────────────────────────────────────── */
@@ -10549,7 +10553,12 @@ html.device-eco-power * {
   border-radius: 50%;
   background: #22c55e;
   box-shadow: 0 0 8px #22c55e;
-  animation: pulseSubtle 2s infinite ease-in-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gh-dot-live {
+    animation: pulseSubtle 2s infinite ease-in-out;
+  }
 }
 
 .gh-handle {
@@ -17087,6 +17096,76 @@ html.light-theme .proj-impact-pill {
   overflow: visible !important;
   text-overflow: clip !important;
   line-height: 1.3 !important;
+}
+
+/* Modern Web Guidance: Accessible Visually Hidden Utility */
+.sr-only:where(:not(:focus-within, :active)),
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Modern Web Guidance: Compositor-Only Skeleton Loaders */
+.nw-skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="light"] .nw-skeleton,
+html.light-theme .nw-skeleton {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.nw-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.14) 50%, transparent 100%);
+}
+
+:root[data-theme="light"] .nw-skeleton::after,
+html.light-theme .nw-skeleton::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.65) 50%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nw-skeleton::after {
+    animation: nwSkeletonShimmer 1.45s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+}
+
+@keyframes nwSkeletonShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.gh-repo-card-skeleton {
+  min-height: 124px;
+  pointer-events: none;
+}
+
+.radar-news-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.radar-news-skeleton-item {
+  min-height: 88px;
 }
 
 

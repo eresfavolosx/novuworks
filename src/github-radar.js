@@ -105,10 +105,41 @@ export class GitHubRadar {
 
   renderLoading() {
     if (!this.mount) return;
+    this.mount.setAttribute('aria-busy', 'true');
+    const cardPlaceholders = Array.from({ length: 6 }, () => `
+      <div class="gh-repo-card gh-repo-card-skeleton">
+        <div class="gh-card-header">
+          <div class="nw-skeleton" style="height: 16px; width: 52%;"></div>
+          <div class="nw-skeleton" style="height: 18px; width: 76px; border-radius: 999px;"></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
+          <div class="nw-skeleton" style="height: 12px; width: 96%;"></div>
+          <div class="nw-skeleton" style="height: 12px; width: 74%;"></div>
+        </div>
+        <div class="gh-card-footer">
+          <div class="nw-skeleton" style="height: 12px; width: 68px;"></div>
+          <div class="nw-skeleton" style="height: 12px; width: 92px;"></div>
+        </div>
+      </div>
+    `).join('');
+
     this.mount.innerHTML = `
-      <div class="gh-radar-loading">
-        <span class="status-pulse-dot"></span>
-        <span>Connecting to GitHub REST API (<code>api.github.com/users/eresfavolosx</code>)...</span>
+      <div class="gh-radar-container gh-radar-skeleton" role="region" aria-label="Loading GitHub Codebase Radar">
+        <progress aria-label="Loading GitHub repositories and telemetry" class="sr-only"></progress>
+        <div aria-hidden="true" class="gh-telemetry-bar">
+          <div class="gh-user-badge">
+            <div class="nw-skeleton" style="width: 150px; height: 14px;"></div>
+            <div class="nw-skeleton" style="width: 140px; height: 18px;"></div>
+          </div>
+          <div class="gh-stats-cluster">
+            <div class="nw-skeleton" style="width: 110px; height: 14px;"></div>
+            <div class="nw-skeleton" style="width: 80px; height: 14px;"></div>
+            <div class="nw-skeleton" style="width: 130px; height: 14px;"></div>
+          </div>
+        </div>
+        <div aria-hidden="true" class="gh-repos-grid">
+          ${cardPlaceholders}
+        </div>
       </div>
     `;
   }
@@ -195,6 +226,7 @@ export class GitHubRadar {
 
   render() {
     if (!this.mount) return;
+    this.mount.removeAttribute('aria-busy');
 
     const rawRepos = Number(this.userData?.public_repos);
     const rawFollowers = Number(this.userData?.followers);

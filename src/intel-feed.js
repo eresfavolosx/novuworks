@@ -425,6 +425,28 @@ export class IntelFeed {
       .join('');
   }
 
+  renderNewsSkeletonHtml() {
+    const items = Array.from({ length: 4 }, () => `
+      <div class="radar-news-item radar-news-skeleton-item">
+        <div class="r-news-top">
+          <div class="nw-skeleton" style="width: 96px; height: 11px;"></div>
+          <div class="nw-skeleton" style="width: 48px; height: 11px;"></div>
+        </div>
+        <div class="nw-skeleton" style="width: 88%; height: 14px; margin: 6px 0;"></div>
+        <div class="nw-skeleton" style="width: 96%; height: 11px; margin-bottom: 4px;"></div>
+        <div class="nw-skeleton" style="width: 68%; height: 11px; margin-bottom: 8px;"></div>
+        <div class="nw-skeleton" style="width: 120px; height: 11px;"></div>
+      </div>
+    `).join('');
+
+    return `
+      <progress aria-label="Syncing Live Frontier AI and Creative Tech stream" class="sr-only"></progress>
+      <div aria-hidden="true" class="radar-news-skeleton">
+        ${items}
+      </div>
+    `;
+  }
+
   renderNewsHtml() {
     return this.newsItems
       .map(
@@ -453,6 +475,12 @@ export class IntelFeed {
 
     const refreshBtn = this.container.querySelector('#btn-refresh-radar');
     if (refreshBtn) refreshBtn.classList.add('spinning');
+
+    const loadingMount = this.container.querySelector('#radar-news-mount');
+    if (loadingMount) {
+      loadingMount.setAttribute('aria-busy', 'true');
+      loadingMount.innerHTML = this.renderNewsSkeletonHtml();
+    }
 
     const topicQueries = {
       growth: 'interactive+design+webgl+accessibility',
@@ -504,7 +532,10 @@ export class IntelFeed {
       if (refreshBtn) refreshBtn.classList.remove('spinning');
 
       const mount = this.container.querySelector('#radar-news-mount');
-      if (mount) mount.innerHTML = this.renderNewsHtml();
+      if (mount) {
+        mount.removeAttribute('aria-busy');
+        mount.innerHTML = this.renderNewsHtml();
+      }
 
       const timeEl = this.container.querySelector('.radar-sync-time');
       if (timeEl) timeEl.textContent = `Synced: ${this.lastLiveSync}`;

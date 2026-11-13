@@ -191,7 +191,8 @@
           <div id="executive-signature-mount" class="executive-signature-mount intro-signature-mount"></div>
 
           <!-- Loading Progress Bar Track -->
-          <div class="loading-bar-track">
+          <progress id="loading-semantic-progress" aria-label="Initializing Novu Works 3D portfolio experience" class="sr-only"></progress>
+          <div class="loading-bar-track" aria-hidden="true">
             <div class="loading-bar-progress" id="loading-bar-progress"></div>
           </div>
           <div class="loading-status-row">
@@ -754,7 +755,30 @@
                   <span>github.com/eresfavolosx</span>
                 </a>
               </div>
-              <div class="github-radar-mount" id="github-radar-mount"></div>
+              <div class="github-radar-mount" id="github-radar-mount" aria-busy="true">
+                <div class="gh-radar-container gh-radar-skeleton" role="region" aria-label="Loading GitHub Codebase Radar">
+                  <progress aria-label="Loading GitHub repositories and telemetry" class="sr-only"></progress>
+                  <div aria-hidden="true" class="gh-telemetry-bar">
+                    <div class="gh-user-badge">
+                      <div class="nw-skeleton" style="width: 150px; height: 14px;"></div>
+                      <div class="nw-skeleton" style="width: 140px; height: 18px;"></div>
+                    </div>
+                    <div class="gh-stats-cluster">
+                      <div class="nw-skeleton" style="width: 110px; height: 14px;"></div>
+                      <div class="nw-skeleton" style="width: 80px; height: 14px;"></div>
+                      <div class="nw-skeleton" style="width: 130px; height: 14px;"></div>
+                    </div>
+                  </div>
+                  <div aria-hidden="true" class="gh-repos-grid">
+                    <div class="gh-repo-card gh-repo-card-skeleton"><div class="nw-skeleton" style="height: 16px; width: 52%;"></div><div class="nw-skeleton" style="height: 12px; width: 92%;"></div><div class="nw-skeleton" style="height: 12px; width: 68%;"></div></div>
+                    <div class="gh-repo-card gh-repo-card-skeleton"><div class="nw-skeleton" style="height: 16px; width: 48%;"></div><div class="nw-skeleton" style="height: 12px; width: 88%;"></div><div class="nw-skeleton" style="height: 12px; width: 64%;"></div></div>
+                    <div class="gh-repo-card gh-repo-card-skeleton"><div class="nw-skeleton" style="height: 16px; width: 56%;"></div><div class="nw-skeleton" style="height: 12px; width: 94%;"></div><div class="nw-skeleton" style="height: 12px; width: 70%;"></div></div>
+                    <div class="gh-repo-card gh-repo-card-skeleton"><div class="nw-skeleton" style="height: 16px; width: 50%;"></div><div class="nw-skeleton" style="height: 12px; width: 90%;"></div><div class="nw-skeleton" style="height: 12px; width: 66%;"></div></div>
+                    <div class="gh-repo-card gh-repo-card-skeleton"><div class="nw-skeleton" style="height: 16px; width: 54%;"></div><div class="nw-skeleton" style="height: 12px; width: 91%;"></div><div class="nw-skeleton" style="height: 12px; width: 62%;"></div></div>
+                    <div class="gh-repo-card gh-repo-card-skeleton"><div class="nw-skeleton" style="height: 16px; width: 46%;"></div><div class="nw-skeleton" style="height: 12px; width: 86%;"></div><div class="nw-skeleton" style="height: 12px; width: 72%;"></div></div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <!-- Education & Accredited Certifications -->
