@@ -195,8 +195,15 @@ body {
   .radar-refresh-btn.spinning svg,
   .status-pulse-dot,
   .live-dot,
-  .nw-skeleton::after {
+  .nw-skeleton::after,
+  .loading-center-hud.epic-intro-hud,
+  .particle-loading-screen,
+  .particle-loading-screen.is-loaded,
+  .taino-glyph-box,
+  .project-transition-splash,
+  .cinematic-master-intro {
     animation: none !important;
+    transition: none !important;
   }
 }
 
@@ -1149,6 +1156,7 @@ body.visualizer-mode .webgl-canvas-layer:active {
 }
 
 .kicker-pill.pr-kicker-pill {
+  font-family: inherit;
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(2, 176, 244, 0.05) 100%);
   border-color: rgba(212, 175, 55, 0.35);
   box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16);
@@ -3529,6 +3537,11 @@ pre, code {
 
 /* Luxury Puerto Rico Cultural Colophon */
 .luxury-cultural-colophon {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
   margin-top: 40px;
   padding: 24px 30px;
   background: linear-gradient(135deg, rgba(18, 16, 12, 0.85) 0%, rgba(10, 10, 15, 0.95) 100%);
@@ -4093,6 +4106,15 @@ dialog[open] {
   display: block;
   visibility: visible;
   pointer-events: auto;
+}
+
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 dialog[open].resume-modal,
@@ -5848,6 +5870,8 @@ body.tesla-mode .hud-action-btn {
 }
 
 .logo-badge-item {
+  font: inherit;
+  color: inherit;
   display: inline-flex;
   align-items: center;
   padding: 8px 14px;
@@ -11426,27 +11450,32 @@ html.device-eco-power * {
    ───────────────────────────────────────────────────────────── */
 .cmd-palette-backdrop {
   position: fixed;
-  inset: 0;
+  width: calc(100% - 40px);
+  max-width: 640px;
+  margin: clamp(60px, 15vh, 120px) auto auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  overflow: visible;
+  z-index: 10000;
+}
+
+.cmd-palette-backdrop::backdrop {
   background: rgba(5, 5, 8, 0.78);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  z-index: 10000;
+}
+
+:root[data-theme="light"] .cmd-palette-backdrop::backdrop,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-palette-backdrop::backdrop {
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.cmd-palette-backdrop[open] {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: clamp(60px, 15vh, 120px);
-  padding-left: 20px;
-  padding-right: 20px;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition: opacity 0.22s var(--ease-luxury), visibility 0.22s var(--ease-luxury);
-}
-
-.cmd-palette-backdrop.visible {
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
 }
 
 .cmd-palette-window {

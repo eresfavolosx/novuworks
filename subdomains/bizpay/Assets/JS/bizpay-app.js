@@ -446,6 +446,15 @@
     modalEl.classList.remove('is-open');
   }
 
+  function escapeHtml(str) {
+    return String(str == null ? '' : str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function showToast(message) {
     var existing = document.getElementById('bp-live-toast');
     if (!existing) {
@@ -454,7 +463,7 @@
       existing.className = 'bp-toast';
       document.body.appendChild(existing);
     }
-    existing.innerHTML = '<span class="material-icons" style="color:var(--bp-accent)">bolt</span><span>' + message + '</span>';
+    existing.innerHTML = '<span class="material-icons" style="color:var(--bp-accent)">bolt</span><span>' + escapeHtml(message) + '</span>';
     existing.classList.add('is-visible');
     clearTimeout(existing._timer);
     existing._timer = setTimeout(function () {
@@ -482,7 +491,7 @@
       '<div class="bp-modal" role="dialog" aria-modal="true" aria-labelledby="bp-modal-heading">' +
         '<div class="bp-modal-header">' +
           '<div class="bp-modal-header-brand">' +
-            '<img src="' + logoPath + '" alt="ATH Móvil" />' +
+            '<img src="' + escapeHtml(logoPath) + '" alt="ATH Móvil" />' +
             '<div>' +
               '<h3 class="bp-modal-title" id="bp-modal-heading">' + (order.isPayroll ? 'ATH Móvil Direct Payroll Disbursement' : 'ATH Móvil Business Checkout') + '</h3>' +
               '<p class="bp-modal-sub">Official Sandbox API · publicToken: "dummy"</p>' +
@@ -494,27 +503,27 @@
         '</div>' +
         '<div class="bp-modal-body">' +
           '<div class="bp-athm-summary-box">' +
-            '<div class="bp-athm-row"><span>Reference ID</span><strong>' + order.id + '</strong></div>' +
-            '<div class="bp-athm-row"><span>' + (order.isPayroll ? 'Employee Recipient' : 'Client / Payer') + '</span><strong>' + order.customer + '</strong></div>' +
-            '<div class="bp-athm-row"><span>Concept</span><span>' + order.concept + '</span></div>' +
-            '<div class="bp-athm-row"><span>Subtotal</span><span>' + formatCurrency(checkoutConfig.subtotal) + '</span></div>' +
-            '<div class="bp-athm-row"><span>PR IVU Tax (' + (order.isPayroll ? '0% Payroll Exempt' : '11.5%') + ')</span><span>' + formatCurrency(checkoutConfig.tax) + '</span></div>' +
-            '<div class="bp-athm-row total"><span>Total Amount</span><span style="color:var(--bp-accent)">' + formatCurrency(checkoutConfig.total) + '</span></div>' +
+            '<div class="bp-athm-row"><span>Reference ID</span><strong>' + escapeHtml(order.id) + '</strong></div>' +
+            '<div class="bp-athm-row"><span>' + (order.isPayroll ? 'Employee Recipient' : 'Client / Payer') + '</span><strong>' + escapeHtml(order.customer) + '</strong></div>' +
+            '<div class="bp-athm-row"><span>Concept</span><span>' + escapeHtml(order.concept) + '</span></div>' +
+            '<div class="bp-athm-row"><span>Subtotal</span><span>' + escapeHtml(formatCurrency(checkoutConfig.subtotal)) + '</span></div>' +
+            '<div class="bp-athm-row"><span>PR IVU Tax (' + (order.isPayroll ? '0% Payroll Exempt' : '11.5%') + ')</span><span>' + escapeHtml(formatCurrency(checkoutConfig.tax)) + '</span></div>' +
+            '<div class="bp-athm-row total"><span>Total Amount</span><span style="color:var(--bp-accent)">' + escapeHtml(formatCurrency(checkoutConfig.total)) + '</span></div>' +
           '</div>' +
           '<div class="bp-form-group">' +
             '<label class="bp-form-label" for="bp-athm-phone">ATH Móvil Registered Phone Number (Sandbox Test Line)</label>' +
-            '<input type="tel" id="bp-athm-phone" class="bp-form-input" value="' + (order.phone || '787-555-0199') + '" placeholder="787-555-0199" />' +
+            '<input type="tel" id="bp-athm-phone" class="bp-form-input" value="' + escapeHtml(order.phone || '787-555-0199') + '" placeholder="787-555-0199" />' +
           '</div>' +
           '<details open>' +
             '<summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--bp-text-secondary);user-select:none;">Live ATHM_Checkout Test API Payload (publicToken: "dummy")</summary>' +
-            '<pre class="bp-api-log" id="bp-athm-live-log">' + JSON.stringify(requestPreview, null, 2) + '</pre>' +
+            '<pre class="bp-api-log" id="bp-athm-live-log">' + escapeHtml(JSON.stringify(requestPreview, null, 2)) + '</pre>' +
           '</details>' +
         '</div>' +
         '<div class="bp-modal-footer">' +
           '<button type="button" class="bp-btn bp-btn-ghost" id="bp-modal-cancel-btn">Cancel</button>' +
           '<button type="button" class="bp-btn bp-btn-athm" id="bp-modal-confirm-btn">' +
             '<span class="material-icons">bolt</span>' +
-            '<span>Authorize ' + formatCurrency(checkoutConfig.total) + ' via ATH Móvil API</span>' +
+            '<span>Authorize ' + escapeHtml(formatCurrency(checkoutConfig.total)) + ' via ATH Móvil API</span>' +
           '</button>' +
         '</div>' +
       '</div>';
@@ -540,7 +549,7 @@
       }
 
       confirmBtn.className = 'bp-btn bp-btn-success';
-      confirmBtn.innerHTML = '<span class="material-icons">check_circle</span><span>Approved · ' + result.response.referenceNumber + '</span>';
+      confirmBtn.innerHTML = '<span class="material-icons">check_circle</span><span>Approved · ' + escapeHtml(result.response.referenceNumber) + '</span>';
 
       setTimeout(function () {
         closeModal();
@@ -573,10 +582,10 @@
       '<div class="bp-modal" role="dialog" aria-modal="true">' +
         '<div class="bp-modal-header">' +
           '<div class="bp-modal-header-brand">' +
-            '<img src="' + logoPath + '" alt="ATH Móvil" />' +
+            '<img src="' + escapeHtml(logoPath) + '" alt="ATH Móvil" />' +
             '<div>' +
               '<h3 class="bp-modal-title">Verified ATH Móvil Sandbox Receipt</h3>' +
-              '<p class="bp-modal-sub">Reference: ' + receiptPayload.referenceNumber + '</p>' +
+              '<p class="bp-modal-sub">Reference: ' + escapeHtml(receiptPayload.referenceNumber) + '</p>' +
             '</div>' +
           '</div>' +
           '<button type="button" class="bp-modal-close" id="bp-modal-close-btn"><span class="material-icons">close</span></button>' +
@@ -584,14 +593,14 @@
         '<div class="bp-modal-body">' +
           '<div class="bp-athm-summary-box">' +
             '<div class="bp-athm-row"><span>Status</span><span class="bp-badge bp-badge-paid">SETTLED (200 OK)</span></div>' +
-            '<div class="bp-athm-row"><span>Record ID</span><strong>' + item.id + '</strong></div>' +
-            '<div class="bp-athm-row"><span>Counterparty</span><strong>' + receiptPayload.party + ' (' + receiptPayload.phone + ')</strong></div>' +
-            '<div class="bp-athm-row"><span>Gross Amount</span><strong>' + formatCurrency(amount) + '</strong></div>' +
-            '<div class="bp-athm-row"><span>Gateway Fee</span><span>' + formatCurrency(receiptPayload.gatewayFee) + '</span></div>' +
-            '<div class="bp-athm-row total"><span>Net Settlement</span><span style="color:var(--bp-success)">' + formatCurrency(receiptPayload.netSettlement) + '</span></div>' +
+            '<div class="bp-athm-row"><span>Record ID</span><strong>' + escapeHtml(item.id) + '</strong></div>' +
+            '<div class="bp-athm-row"><span>Counterparty</span><strong>' + escapeHtml(receiptPayload.party) + ' (' + escapeHtml(receiptPayload.phone) + ')</strong></div>' +
+            '<div class="bp-athm-row"><span>Gross Amount</span><strong>' + escapeHtml(formatCurrency(amount)) + '</strong></div>' +
+            '<div class="bp-athm-row"><span>Gateway Fee</span><span>' + escapeHtml(formatCurrency(receiptPayload.gatewayFee)) + '</span></div>' +
+            '<div class="bp-athm-row total"><span>Net Settlement</span><span style="color:var(--bp-success)">' + escapeHtml(formatCurrency(receiptPayload.netSettlement)) + '</span></div>' +
           '</div>' +
           '<div class="bp-form-label">Webhook Settlement Payload (JSON)</div>' +
-          '<pre class="bp-api-log">' + JSON.stringify(receiptPayload, null, 2) + '</pre>' +
+          '<pre class="bp-api-log">' + escapeHtml(JSON.stringify(receiptPayload, null, 2)) + '</pre>' +
         '</div>' +
         '<div class="bp-modal-footer">' +
           '<button type="button" class="bp-btn bp-btn-primary" id="bp-receipt-done-btn">Done</button>' +
@@ -1048,13 +1057,15 @@
 
     function renderCompactPaymentRows(items) {
       return items.slice(0, 5).map(function (inv) {
+        var safeId = escapeHtml(inv.id);
+        var safeAvatar = /^av-[a-z-]+$/.test(String(inv.avatarClass || '')) ? inv.avatarClass : 'av-blue';
         return '<tr>' +
           '<td class="cell-entity" data-label="Client">' +
             '<div class="bp-entity-cell">' +
-              '<span class="bp-avatar ' + inv.avatarClass + '">' + getInitials(inv.customer) + '</span>' +
+              '<span class="bp-avatar ' + safeAvatar + '">' + escapeHtml(getInitials(inv.customer)) + '</span>' +
               '<div class="bp-entity-info">' +
-                '<span class="bp-entity-name">' + inv.customer + '</span>' +
-                '<span class="bp-entity-sub">' + inv.id + ' · ' + inv.date + '</span>' +
+                '<span class="bp-entity-name">' + escapeHtml(inv.customer) + '</span>' +
+                '<span class="bp-entity-sub">' + safeId + ' · ' + escapeHtml(inv.date) + '</span>' +
               '</div>' +
             '</div>' +
           '</td>' +
@@ -1063,13 +1074,13 @@
               ? '<span class="bp-badge bp-badge-paid">Paid</span>'
               : '<span class="bp-badge bp-badge-unpaid">Unpaid</span>') +
           '</td>' +
-          '<td class="num" data-label="Amount">' + formatCurrency(inv.amount) + '</td>' +
+          '<td class="num" data-label="Amount">' + escapeHtml(formatCurrency(inv.amount)) + '</td>' +
           '<td class="num" data-label="ATH Móvil">' +
             (inv.status === 'Unpaid'
-              ? '<button type="button" class="bp-btn bp-btn-athm bp-btn-sm" data-pay-id="' + inv.id + '">' +
+              ? '<button type="button" class="bp-btn bp-btn-athm bp-btn-sm" data-pay-id="' + safeId + '">' +
                   '<span class="material-icons">bolt</span>Pay' +
                 '</button>'
-              : '<button type="button" class="bp-btn bp-btn-sm" data-receipt-id="' + inv.id + '">Receipt</button>') +
+              : '<button type="button" class="bp-btn bp-btn-sm" data-receipt-id="' + safeId + '">Receipt</button>') +
           '</td>' +
         '</tr>';
       }).join('');
@@ -1296,35 +1307,38 @@
     var onlineFiltered = filtered.filter(function (p) { return p.channel === 'Online'; });
 
     function buildFullPaymentTable(list, channelName) {
+      var safeChannel = escapeHtml(channelName);
       if (list.length === 0) {
-        return '<div style="padding:28px;text-align:center;color:var(--bp-text-muted);font-size:13.5px;">No ' + channelName + ' invoices match the active filter.</div>';
+        return '<div style="padding:28px;text-align:center;color:var(--bp-text-muted);font-size:13.5px;">No ' + safeChannel + ' invoices match the active filter.</div>';
       }
       var rows = list.map(function (inv) {
+        var safeId = escapeHtml(inv.id);
+        var safeAvatar = /^av-[a-z-]+$/.test(String(inv.avatarClass || '')) ? inv.avatarClass : 'av-blue';
         return '<tr>' +
           '<td class="cell-entity" data-label="Client">' +
             '<div class="bp-entity-cell">' +
-              '<span class="bp-avatar ' + inv.avatarClass + '">' + getInitials(inv.customer) + '</span>' +
+              '<span class="bp-avatar ' + safeAvatar + '">' + escapeHtml(getInitials(inv.customer)) + '</span>' +
               '<div class="bp-entity-info">' +
-                '<span class="bp-entity-name">' + inv.customer + '</span>' +
-                '<span class="bp-entity-sub">' + inv.phone + '</span>' +
+                '<span class="bp-entity-name">' + escapeHtml(inv.customer) + '</span>' +
+                '<span class="bp-entity-sub">' + escapeHtml(inv.phone) + '</span>' +
               '</div>' +
             '</div>' +
           '</td>' +
-          '<td data-label="Invoice ID"><code style="font-family:var(--bp-mono);font-size:12px;color:var(--bp-accent)">' + inv.id + '</code></td>' +
-          '<td data-label="Concept">' + inv.concept + '</td>' +
-          '<td data-label="Date">' + inv.date + '</td>' +
+          '<td data-label="Invoice ID"><code style="font-family:var(--bp-mono);font-size:12px;color:var(--bp-accent)">' + safeId + '</code></td>' +
+          '<td data-label="Concept">' + escapeHtml(inv.concept) + '</td>' +
+          '<td data-label="Date">' + escapeHtml(inv.date) + '</td>' +
           '<td data-label="Status">' +
             (inv.status === 'Paid'
               ? '<span class="bp-badge bp-badge-paid">Paid</span>'
               : '<span class="bp-badge bp-badge-unpaid">Unpaid</span>') +
           '</td>' +
-          '<td class="num" data-label="Amount">' + formatCurrency(inv.amount) + '</td>' +
+          '<td class="num" data-label="Amount">' + escapeHtml(formatCurrency(inv.amount)) + '</td>' +
           '<td class="num" data-label="ATH Móvil Action">' +
             (inv.status === 'Unpaid'
-              ? '<button type="button" class="bp-btn bp-btn-athm bp-btn-sm" data-pay-id="' + inv.id + '">' +
+              ? '<button type="button" class="bp-btn bp-btn-athm bp-btn-sm" data-pay-id="' + safeId + '">' +
                   '<span class="material-icons">bolt</span>Pay via ATH Móvil' +
                 '</button>'
-              : '<button type="button" class="bp-btn bp-btn-sm" data-receipt-id="' + inv.id + '">' +
+              : '<button type="button" class="bp-btn bp-btn-sm" data-receipt-id="' + safeId + '">' +
                   '<span class="material-icons">receipt</span>Receipt' +
                 '</button>') +
           '</td>' +
@@ -1340,8 +1354,8 @@
         '</table>' +
       '</div>' +
       '<div class="bp-card-footer">' +
-        '<span>Showing ' + list.length + ' ' + channelName + ' transactions</span>' +
-        '<strong style="font-size:15px;color:var(--bp-text)">Subtotal: ' + formatCurrency(sub) + '</strong>' +
+        '<span>Showing ' + list.length + ' ' + safeChannel + ' transactions</span>' +
+        '<strong style="font-size:15px;color:var(--bp-text)">Subtotal: ' + escapeHtml(formatCurrency(sub)) + '</strong>' +
       '</div>';
     }
 
@@ -1441,31 +1455,33 @@
 
       var rows = list.map(function (emp) {
         var gross = emp.hours * emp.rate;
+        var safeEmpId = escapeHtml(emp.id);
+        var safeAvatar = /^av-[a-z-]+$/.test(String(emp.avatarClass || '')) ? emp.avatarClass : 'av-blue';
         return '<tr>' +
           '<td class="cell-entity" data-label="Employee">' +
             '<div class="bp-entity-cell">' +
-              '<span class="bp-avatar ' + emp.avatarClass + '">' + getInitials(emp.name) + '</span>' +
+              '<span class="bp-avatar ' + safeAvatar + '">' + escapeHtml(getInitials(emp.name)) + '</span>' +
               '<div class="bp-entity-info">' +
-                '<span class="bp-entity-name">' + emp.name + '</span>' +
-                '<span class="bp-entity-sub">' + emp.role + ' · ' + emp.phone + '</span>' +
+                '<span class="bp-entity-name">' + escapeHtml(emp.name) + '</span>' +
+                '<span class="bp-entity-sub">' + escapeHtml(emp.role) + ' · ' + escapeHtml(emp.phone) + '</span>' +
               '</div>' +
             '</div>' +
           '</td>' +
-          '<td data-label="Last Disbursed">' + emp.lastPaid + '</td>' +
-          '<td class="num" data-label="Hours">' + emp.hours + ' hrs</td>' +
-          '<td class="num" data-label="Hourly Rate">' + formatCurrency(emp.rate) + '/hr</td>' +
+          '<td data-label="Last Disbursed">' + escapeHtml(emp.lastPaid) + '</td>' +
+          '<td class="num" data-label="Hours">' + escapeHtml(emp.hours) + ' hrs</td>' +
+          '<td class="num" data-label="Hourly Rate">' + escapeHtml(formatCurrency(emp.rate)) + '/hr</td>' +
           '<td data-label="Status">' +
             (emp.status === 'Disbursed'
               ? '<span class="bp-badge bp-badge-paid">Disbursed</span>'
               : '<span class="bp-badge bp-badge-unpaid">Pending</span>') +
           '</td>' +
-          '<td class="num" data-label="Gross Pay">' + formatCurrency(gross) + '</td>' +
+          '<td class="num" data-label="Gross Pay">' + escapeHtml(formatCurrency(gross)) + '</td>' +
           '<td class="num" data-label="ATH Móvil Payroll">' +
             (emp.status === 'Pending'
-              ? '<button type="button" class="bp-btn bp-btn-athm bp-btn-sm" data-disburse-id="' + emp.id + '">' +
+              ? '<button type="button" class="bp-btn bp-btn-athm bp-btn-sm" data-disburse-id="' + safeEmpId + '">' +
                   '<span class="material-icons">bolt</span>Disburse' +
                 '</button>'
-              : '<button type="button" class="bp-btn bp-btn-sm" data-emp-receipt-id="' + emp.id + '">' +
+              : '<button type="button" class="bp-btn bp-btn-sm" data-emp-receipt-id="' + safeEmpId + '">' +
                   '<span class="material-icons">receipt</span>Stub' +
                 '</button>') +
           '</td>' +
@@ -1539,24 +1555,26 @@
       var gross = emp.hours * emp.rate;
       var tax = gross * 0.145;
       var net = gross - tax;
+      var safeEmpId = escapeHtml(emp.id);
+      var safeAvatar = /^av-[a-z-]+$/.test(String(emp.avatarClass || '')) ? emp.avatarClass : 'av-blue';
       return '<tr>' +
         '<td class="cell-entity" data-label="Employee">' +
           '<div class="bp-entity-cell">' +
-            '<span class="bp-avatar ' + emp.avatarClass + '">' + getInitials(emp.name) + '</span>' +
+            '<span class="bp-avatar ' + safeAvatar + '">' + escapeHtml(getInitials(emp.name)) + '</span>' +
             '<div class="bp-entity-info">' +
-              '<span class="bp-entity-name">' + emp.name + '</span>' +
-              '<span class="bp-entity-sub">' + emp.id + ' · ' + emp.role + '</span>' +
+              '<span class="bp-entity-name">' + escapeHtml(emp.name) + '</span>' +
+              '<span class="bp-entity-sub">' + safeEmpId + ' · ' + escapeHtml(emp.role) + '</span>' +
             '</div>' +
           '</div>' +
         '</td>' +
-        '<td data-label="Last Paid">' + emp.lastPaid + '</td>' +
+        '<td data-label="Last Paid">' + escapeHtml(emp.lastPaid) + '</td>' +
         '<td class="num" data-label="Hours">' +
-          '<input type="number" class="bp-form-input" style="width:78px;padding:4px 8px;text-align:right;display:inline-block" value="' + emp.hours + '" min="1" max="120" data-edit-hours="' + emp.id + '" />' +
+          '<input type="number" class="bp-form-input" style="width:78px;padding:4px 8px;text-align:right;display:inline-block" value="' + escapeHtml(emp.hours) + '" min="1" max="120" data-edit-hours="' + safeEmpId + '" />' +
         '</td>' +
-        '<td class="num" data-label="Rate">' + formatCurrency(emp.rate) + '/hr</td>' +
-        '<td class="num" data-label="Gross">' + formatCurrency(gross) + '</td>' +
-        '<td class="num" data-label="PR/FICA Tax (14.5%)">-' + formatCurrency(tax) + '</td>' +
-        '<td class="num" data-label="Net Pay" style="color:var(--bp-success)">' + formatCurrency(net) + '</td>' +
+        '<td class="num" data-label="Rate">' + escapeHtml(formatCurrency(emp.rate)) + '/hr</td>' +
+        '<td class="num" data-label="Gross">' + escapeHtml(formatCurrency(gross)) + '</td>' +
+        '<td class="num" data-label="PR/FICA Tax (14.5%)">-' + escapeHtml(formatCurrency(tax)) + '</td>' +
+        '<td class="num" data-label="Net Pay" style="color:var(--bp-success)">' + escapeHtml(formatCurrency(net)) + '</td>' +
         '<td data-label="Status">' +
           (emp.status === 'Disbursed'
             ? '<span class="bp-badge bp-badge-paid">Disbursed</span>'
@@ -1564,8 +1582,8 @@
         '</td>' +
         '<td class="num" data-label="Action">' +
           (emp.status === 'Pending'
-            ? '<button type="button" class="bp-btn bp-btn-athm bp-btn-sm" data-disburse-id="' + emp.id + '"><span class="material-icons">bolt</span>Pay</button>'
-            : '<button type="button" class="bp-btn bp-btn-sm" data-emp-receipt-id="' + emp.id + '">Receipt</button>') +
+            ? '<button type="button" class="bp-btn bp-btn-athm bp-btn-sm" data-disburse-id="' + safeEmpId + '"><span class="material-icons">bolt</span>Pay</button>'
+            : '<button type="button" class="bp-btn bp-btn-sm" data-emp-receipt-id="' + safeEmpId + '">Receipt</button>') +
         '</td>' +
       '</tr>';
     }).join('');

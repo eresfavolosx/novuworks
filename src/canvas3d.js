@@ -59,7 +59,32 @@ export class SpatialCanvas3D {
     this.lastFpsUpdate = performance.now();
     this.drawCalls = 0;
 
+    this.viewportObserver = null;
+    this.isDisposed = false;
+    this.webglLost = false;
+    this.rafId = null;
+    this.fallbackRafId = null;
+    this.boundListeners = [];
+
     this.init();
+  }
+
+  trackListener(target, event, handler, options) {
+    if (!target || typeof target.addEventListener !== 'function') return;
+    target.addEventListener(event, handler, options);
+    this.boundListeners.push({ target, event, handler, options });
+  }
+
+  scheduleFrame() {
+    if (this.isDisposed || this.webglLost || !this.isAvailable || !this.renderer) return;
+    if (this.isPaused || !this.isVisibleInViewport || !this.isTabVisible) return;
+    if (!this.isVisualizerMode && !this.isInitialLoading) return;
+    if (!this.rafId) {
+      this.rafId = requestAnimationFrame(() => {
+        this.rafId = null;
+        this.animate();
+      });
+    }
   }
 
   detectDeviceTier() {
@@ -105,11 +130,17 @@ export class SpatialCanvas3D {
 
       // 3. Adaptive WebGL Renderer (Feature-detect to prevent console noise on non-GPU environments)
       const isWebGLAvailable = (() => {
+        let probeGl = null;
         try {
           const testCanvas = document.createElement('canvas');
-          return !!(window.WebGLRenderingContext && (testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl')));
+          probeGl = window.WebGLRenderingContext && (testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl'));
+          return !!probeGl;
         } catch (e) {
           return false;
+        } finally {
+          try {
+            probeGl?.getExtension('WEBGL_lose_context')?.loseContext();
+          } catch (_) {}
         }
       })();
 
@@ -133,6 +164,16 @@ export class SpatialCanvas3D {
       this.renderer.toneMappingExposure = 1.15;
       this.container.appendChild(this.renderer.domElement);
       this.isAvailable = true;
+
+      this.trackListener(this.renderer.domElement, 'webglcontextlost', (e) => {
+        e.preventDefault();
+        this.webglLost = true;
+        this.pause();
+      });
+      this.trackListener(this.renderer.domElement, 'webglcontextrestored', () => {
+        this.webglLost = false;
+        this.resume();
+      });
 
       // 4. Luxury Gallery Lighting (Warm Gold Key, Champagne Rim, Deep Obsidian Fill)
       const ambientLight = new THREE.AmbientLight(0xfff8ee, 0.65);
@@ -187,8 +228,7 @@ export class SpatialCanvas3D {
     canvas.style.width = '100%';
     canvas.style.height = '100%';
     canvas.style.display = 'block';
-    this.container.innerHTML = '';
-    this.container.appendChild(canvas);
+    this.container.replaceChildren(canvas);
     const ctx = canvas.getContext('2d');
 
     // Generate 3D points for 01: NW Monogram, 02: Möbius Torus Knot, 03: Quantum AI Prism
@@ -267,8 +307,11 @@ export class SpatialCanvas3D {
     });
 
     const render2D = () => {
-      requestAnimationFrame(render2D);
-      if (this.isPaused || (!this.isVisualizerMode && !this.isInitialLoading)) return;
+      this.fallbackRafId = null;
+      if (this.isDisposed || this.isPaused || !this.isVisibleInViewport || !this.isTabVisible || (!this.isVisualizerMode && !this.isInitialLoading)) {
+        return;
+      }
+      this.fallbackRafId = requestAnimationFrame(render2D);
       const now = performance.now() * 0.001;
       if (!this.isDragging) {
         this.targetWorldRotation.y += 0.0045;
@@ -355,7 +398,8 @@ export class SpatialCanvas3D {
 
       ctx.restore();
     };
-    requestAnimationFrame(render2D);
+    this.render2DFunction = render2D;
+    this.fallbackRafId = requestAnimationFrame(render2D);
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -761,6 +805,8 @@ export class SpatialCanvas3D {
         roughness: 0.25,
         emissive: pHex,
         emissiveIntensity: 0.35,
+        transparent: true,
+        opacity: this.currentTheme === 'light' ? 0.35 : 0.9,
       });
       const pearl = new THREE.Mesh(beadGeo, beadMat);
       group.add(pearl);
@@ -869,20 +915,20 @@ export class SpatialCanvas3D {
       }
     };
 
-    window.addEventListener('mousedown', onPointerDown);
-    window.addEventListener('touchstart', onPointerDown, { passive: true });
-    window.addEventListener('mousemove', onPointerMove, { passive: true });
-    window.addEventListener('touchmove', onPointerMove, { passive: true });
-    window.addEventListener('mouseup', onPointerUp);
-    window.addEventListener('touchend', onPointerUp);
+    this.trackListener(window, 'mousedown', onPointerDown);
+    this.trackListener(window, 'touchstart', onPointerDown, { passive: true });
+    this.trackListener(window, 'mousemove', onPointerMove, { passive: true });
+    this.trackListener(window, 'touchmove', onPointerMove, { passive: true });
+    this.trackListener(window, 'mouseup', onPointerUp);
+    this.trackListener(window, 'touchend', onPointerUp);
 
-    window.addEventListener('wheel', (e) => {
+    this.trackListener(window, 'wheel', (e) => {
       if (!this.isVisualizerMode) return;
       if (e.target && e.target.closest && e.target.closest('#visualizer-hud')) return;
       this.targetCameraZ = THREE.MathUtils.clamp((this.targetCameraZ || 46) + e.deltaY * 0.025, 24, 75);
     }, { passive: true });
 
-    window.addEventListener('resize', () => {
+    this.trackListener(window, 'resize', () => {
       if (!this.renderer || !this.camera) return;
       this.width = window.innerWidth;
       this.height = window.innerHeight;
@@ -903,7 +949,7 @@ export class SpatialCanvas3D {
     });
 
     // Resource Guard 1: Pause WebGL render loop when browser tab is hidden or minimized
-    document.addEventListener('visibilitychange', () => {
+    this.trackListener(document, 'visibilitychange', () => {
       this.isTabVisible = !document.hidden;
       if (document.hidden) {
         this.pause();
@@ -974,27 +1020,85 @@ export class SpatialCanvas3D {
 
   pause() {
     this.isPaused = true;
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
+    if (this.fallbackRafId) {
+      cancelAnimationFrame(this.fallbackRafId);
+      this.fallbackRafId = null;
+    }
   }
 
   resume() {
-    if (this.isPaused) {
-      this.isPaused = false;
+    this.isPaused = false;
+    if (this.is2DFallback && this.render2DFunction && !this.fallbackRafId) {
+      this.fallbackRafId = requestAnimationFrame(this.render2DFunction);
+    } else {
+      this.scheduleFrame();
     }
+  }
+
+  dispose() {
+    this.isDisposed = true;
+    this.pause();
+
+    if (this.viewportObserver) {
+      try { this.viewportObserver.disconnect(); } catch (_) {}
+      this.viewportObserver = null;
+    }
+
+    for (const { target, event, handler, options } of this.boundListeners) {
+      try { target.removeEventListener(event, handler, options); } catch (_) {}
+    }
+    this.boundListeners = [];
+
+    if (this.scene) {
+      this.scene.traverse((obj) => {
+        if (obj.geometry && typeof obj.geometry.dispose === 'function') {
+          obj.geometry.dispose();
+        }
+        const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+        for (const mat of mats) {
+          if (!mat) continue;
+          if (mat.map && typeof mat.map.dispose === 'function') mat.map.dispose();
+          if (typeof mat.dispose === 'function') mat.dispose();
+        }
+      });
+    }
+
+    if (this.renderer) {
+      try {
+        this.renderer.dispose();
+        this.renderer.forceContextLoss?.();
+        this.renderer.domElement?.remove();
+      } catch (_) {}
+      this.renderer = null;
+    }
+
+    this.scene = null;
+    this.camera = null;
+    this.isAvailable = false;
   }
 
   // ─────────────────────────────────────────────────────────────
   // Smooth Animation Frame Loop (Adaptive FPS Capped for Lower-End Devices)
   // ─────────────────────────────────────────────────────────────
   animate() {
-    if (!this.isAvailable || !this.renderer) return;
-    requestAnimationFrame(() => this.animate());
-    if (this.isPaused || !this.isVisibleInViewport || !this.isTabVisible) return;
-
-    // Background particles are strictly displayed on the Startup Screen or dedicated Secondary Screen (Visualizer Mode)
-    // When browsing the portfolio normally, stop rendering to guarantee 100% clean reading & zero battery drain
-    if (!this.isVisualizerMode && !this.isInitialLoading) {
+    if (this.isDisposed || this.webglLost || !this.isAvailable || !this.renderer) return;
+    if (this.isPaused || !this.isVisibleInViewport || !this.isTabVisible) {
+      this.rafId = null;
       return;
     }
+
+    // Background particles are strictly displayed on the Startup Screen or dedicated Secondary Screen (Visualizer Mode)
+    // When browsing the portfolio normally, stop scheduling rAF to guarantee 0% idle battery drain
+    if (!this.isVisualizerMode && !this.isInitialLoading) {
+      this.rafId = null;
+      return;
+    }
+
+    this.scheduleFrame();
 
     // Throttle rendering on lower-end devices or battery saving modes to prevent thermal throttling & hoarding
     const now = performance.now();

@@ -9,6 +9,7 @@
 import { audio } from './audio.js';
 import { logCandidateEvent } from './firebase.js';
 import { getLanguage } from './i18n.js';
+import { bindDialogLightDismissFallback, copyTextToClipboard } from './utils.js';
 
 export const WHATSAPP_PHONE = '13478158054';
 export const DISPLAY_PHONE = '+1 (347) 815-8054';
@@ -131,6 +132,13 @@ export class ExecutiveChatManager {
     this.modal = document.getElementById('executive-chat-modal');
     this.floatingBadge = document.getElementById('floating-whatsapp-badge');
 
+    // Respect previously dismissed floating concierge badge in sessionStorage
+    try {
+      if (this.floatingBadge && sessionStorage.getItem('fv_wa_badge_dismissed') === 'true') {
+        this.floatingBadge.style.display = 'none';
+      }
+    } catch (e) {}
+
     // Retrieve user's stored channel preference if available
     try {
       const stored = localStorage.getItem('fabian_preferred_chat_channel');
@@ -181,18 +189,11 @@ export class ExecutiveChatManager {
       this.close();
     });
 
-    // Backdrop click
-    this.modal.addEventListener('click', (e) => {
-      if (e.target === this.modal) {
-        this.close();
-      }
-    });
-
-    // Escape key
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.modal.classList.contains('active')) {
-        this.close();
-      }
+    // Outside-rect light-dismiss fallback & native close sync (no manual Escape handler)
+    bindDialogLightDismissFallback(this.modal, () => this.close());
+    this.modal.addEventListener('close', () => {
+      this.modal?.classList.remove('active');
+      document.body.classList.remove('modal-open');
     });
 
     // Channel Switcher Tabs
@@ -513,7 +514,7 @@ export class ExecutiveChatManager {
     const isEs = getLanguage() === 'es';
     const copiedText = isEs ? '✓ ¡Copiado!' : '✓ Copied!';
 
-    const updateLabels = () => {
+    const showFeedback = (copiedOk) => {
       this.modal?.querySelectorAll('#copy-email-label').forEach((lbl) => {
         const orig = lbl.getAttribute('data-orig') || lbl.textContent;
         lbl.setAttribute('data-orig', orig);
@@ -524,27 +525,15 @@ export class ExecutiveChatManager {
       });
 
       if (typeof this.app?.showToast === 'function') {
-        this.app.showToast(isEs ? '✓ Correo copiado al portapapeles' : '✓ Email address copied to clipboard');
+        this.app.showToast(
+          copiedOk
+            ? (isEs ? '✓ Correo copiado al portapapeles' : '✓ Email address copied to clipboard')
+            : PRIMARY_EMAIL
+        );
       }
     };
 
-    if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(PRIMARY_EMAIL).then(updateLabels).catch(() => {
-        try {
-          const ta = document.createElement('textarea');
-          ta.value = PRIMARY_EMAIL;
-          ta.style.position = 'fixed';
-          ta.style.opacity = '0';
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          document.body.removeChild(ta);
-        } catch (e) {}
-        updateLabels();
-      });
-    } else {
-      updateLabels();
-    }
+    copyTextToClipboard(PRIMARY_EMAIL).then(showFeedback);
   }
 
   /**

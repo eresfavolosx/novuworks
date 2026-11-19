@@ -6,6 +6,7 @@
 
 import { INTEL_POSTS, INDUSTRY_PULSE_METRICS, CURATED_INDUSTRY_NEWS } from './data.js';
 import { audio } from './audio.js';
+import { copyTextToClipboard } from './utils.js';
 
 export class IntelFeed {
   constructor(containerEl, showToastFn = null) {
@@ -17,6 +18,8 @@ export class IntelFeed {
     this.newsItems = [...CURATED_INDUSTRY_NEWS];
     this.radarTopic = 'growth';
     this.isFetchingLiveNews = false;
+    this.newsAbortController = null;
+    this.newsStatusNote = '';
     this.lastLiveSync = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     // Load stored reactions or initialize defaults
@@ -135,7 +138,7 @@ export class IntelFeed {
           <div class="llm-card">
             <div class="llm-left">
               <div class="llm-avatar-wrap">
-                <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="llm-avatar" />
+                <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="llm-avatar" width="44" height="44" loading="lazy" />
                 <span class="llm-in-badge" title="LinkedIn Verified Profile">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffffff"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </span>
@@ -323,7 +326,7 @@ export class IntelFeed {
           <div class="post-header-row">
             <div class="post-author-block">
               <div class="post-avatar-wrap">
-                <img src="${post.author.avatar}" alt="${post.author.name}" class="post-author-img" />
+                <img src="${post.author.avatar}" alt="${post.author.name}" class="post-author-img" width="44" height="44" loading="lazy" />
                 <span class="post-nw-dot" title="Novu Works Verified"></span>
               </div>
               <div class="post-author-meta">
@@ -448,7 +451,10 @@ export class IntelFeed {
   }
 
   renderNewsHtml() {
-    return this.newsItems
+    const statusBanner = this.newsStatusNote
+      ? `<div class="radar-news-status" style="font-size: 11px; color: var(--text-muted); padding: 6px 10px; margin-bottom: 8px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--hairline);">${this.escapeHtml(this.newsStatusNote)}</div>`
+      : '';
+    return statusBanner + this.newsItems
       .map(
         (news) => `
         <div class="radar-news-item">
@@ -469,7 +475,14 @@ export class IntelFeed {
   }
 
   async fetchLiveNews(playAudio = true, topic = this.radarTopic) {
-    if (this.isFetchingLiveNews) return;
+    if (this.newsAbortController) {
+      try {
+        this.newsAbortController.abort();
+      } catch (_) {}
+    }
+
+    const controller = new AbortController();
+    this.newsAbortController = controller;
     this.isFetchingLiveNews = true;
     if (playAudio) audio.click(1200);
 
@@ -483,10 +496,10 @@ export class IntelFeed {
     }
 
     const topicQueries = {
-      growth: 'interactive+design+webgl+accessibility',
-      ai: 'claude+anthropic+openai+agentic',
-      data: 'databricks+pyspark+sql+synthesis',
-      tech: 'creative+coding+threejs+webrtc',
+      growth: 'interactive design OR webgl OR accessibility',
+      ai: 'claude OR anthropic OR openai OR agentic',
+      data: 'databricks OR pyspark OR sql synthesis',
+      tech: 'creative coding OR threejs OR webrtc',
     };
     const topicLabels = {
       growth: 'Interactive Design Stream',
@@ -498,35 +511,58 @@ export class IntelFeed {
     const query = topicQueries[topic] || topicQueries.growth;
     const categoryLabel = topicLabels[topic] || 'Live Industry Stream';
 
+    let syncedLive = false;
+    let emptyLiveResult = false;
+    let timeoutId = null;
+
     try {
-      // Connect to Hacker News Algolia Search API dynamically with strict timeout
+      timeoutId = setTimeout(() => controller.abort(new Error('timeout')), 6000);
+      // Connect to Hacker News Algolia Search API dynamically with strict cancellation
       const res = await fetch(
         `https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(query)}&tags=story&hitsPerPage=6`,
-        { signal: AbortSignal.timeout ? AbortSignal.timeout(6000) : undefined }
+        { signal: controller.signal }
       );
       if (res.ok) {
         const data = await res.json();
-        if (data.hits && data.hits.length > 0) {
-          const liveArticles = data.hits
-            .filter((h) => h.title && (h.url || h.story_url))
-            .map((h, i) => ({
-              id: `live-${h.objectID || i}`,
-              source: h.author ? `HN / @${h.author}` : 'Hacker News Live',
-              time: this.formatRelativeTime(h.created_at_i),
-              title: h.title,
-              summary: `Live trending discussion with ${h.points || 0} points and ${h.num_comments || 0} engineer comments.`,
-              category: categoryLabel,
-              url: h.url || h.story_url || `https://news.ycombinator.com/item?id=${h.objectID}`,
-            }));
+        const liveArticles = Array.isArray(data.hits)
+          ? data.hits
+              .filter((h) => h.title && (h.url || h.story_url))
+              .map((h, i) => ({
+                id: `live-${h.objectID || i}`,
+                source: h.author ? `HN / @${h.author}` : 'Hacker News Live',
+                time: this.formatRelativeTime(h.created_at_i),
+                title: h.title,
+                summary: `Live trending discussion with ${h.points || 0} points and ${h.num_comments || 0} engineer comments.`,
+                category: categoryLabel,
+                url: h.url || h.story_url || `https://news.ycombinator.com/item?id=${h.objectID}`,
+              }))
+          : [];
 
-          if (liveArticles.length > 0) {
-            this.newsItems = [...liveArticles.slice(0, 4), ...CURATED_INDUSTRY_NEWS.slice(0, 2)];
-          }
+        if (liveArticles.length > 0) {
+          this.newsItems = [...liveArticles.slice(0, 4), ...CURATED_INDUSTRY_NEWS.slice(0, 2)];
+          this.newsStatusNote = '';
+          syncedLive = true;
+        } else {
+          emptyLiveResult = true;
+          this.newsItems = [...CURATED_INDUSTRY_NEWS];
+          this.newsStatusNote = `No live Algolia stories matched "${categoryLabel}" — showing curated signal archive.`;
         }
+      } else {
+        this.newsItems = [...CURATED_INDUSTRY_NEWS];
+        this.newsStatusNote = 'Live stream unavailable (HTTP ' + res.status + ') — showing curated signal archive.';
       }
     } catch (e) {
+      if (e?.name === 'AbortError' && this.newsAbortController !== controller) {
+        // Superseded by a newer topic selection or refresh
+        return;
+      }
+      this.newsItems = [...CURATED_INDUSTRY_NEWS];
+      this.newsStatusNote = 'Offline or API timeout — showing curated signal archive.';
       console.warn('Live API news fetch notice (using curated stream):', e);
     } finally {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (this.newsAbortController !== controller) return;
+
       this.isFetchingLiveNews = false;
       this.lastLiveSync = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       if (refreshBtn) refreshBtn.classList.remove('spinning');
@@ -538,11 +574,19 @@ export class IntelFeed {
       }
 
       const timeEl = this.container.querySelector('.radar-sync-time');
-      if (timeEl) timeEl.textContent = `Synced: ${this.lastLiveSync}`;
+      if (timeEl) {
+        timeEl.textContent = syncedLive ? `Synced: ${this.lastLiveSync}` : `Curated: ${this.lastLiveSync}`;
+      }
 
       if (playAudio) {
         audio.confirm();
-        this.showToast('Live Frontier AI & Creative Tech radar synchronized');
+        if (syncedLive) {
+          this.showToast('Live Frontier AI & Creative Tech radar synchronized');
+        } else if (emptyLiveResult) {
+          this.showToast('No live hits returned — displaying curated archive');
+        } else {
+          this.showToast('Live feed unreachable — displaying curated offline archive');
+        }
       }
     }
   }
@@ -616,9 +660,13 @@ export class IntelFeed {
           const post = INTEL_POSTS.find((p) => p.id === postId);
           if (post) {
             const cleanText = `${post.title.toUpperCase()}\nBy Fabián Vélez Vicente (${post.author.badge})\n\n${post.summary}\n\nRead more frameworks at https://novu.works`;
-            navigator.clipboard.writeText(cleanText).then(() => {
-              audio.confirm();
-              this.showToast('Playbook copied to clipboard');
+            copyTextToClipboard(cleanText).then((ok) => {
+              if (ok) {
+                audio.confirm();
+                this.showToast('Playbook copied to clipboard');
+              } else {
+                this.showToast('Clipboard permission unavailable in this browser context');
+              }
             });
           }
         }
@@ -663,15 +711,21 @@ export class IntelFeed {
       });
     }
 
-    // Newsletter Form
+    // Newsletter Form (static portfolio — direct email handoff instead of fake persistence)
     const nlForm = this.container.querySelector('#feed-newsletter-form');
     if (nlForm) {
       nlForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const emailInput = nlForm.querySelector('#nl-email-input');
-        if (emailInput && emailInput.value) {
+        const email = emailInput?.value?.trim();
+        if (email) {
           audio.confirm();
-          this.showToast(`Subscribed! Strategic Memo will be delivered to ${emailInput.value}`);
+          const subject = encodeURIComponent('Creative Experiments Memo Subscription Request');
+          const body = encodeURIComponent(`Hi Fabián,\n\nPlease add ${email} to the monthly Creative Experiments Memo.\n\nSent from novu.works`);
+          try {
+            window.location.href = `mailto:fabianvvicente1@gmail.com?subject=${subject}&body=${body}`;
+          } catch (_) {}
+          this.showToast(`Static preview: opening email client to request Memo delivery for ${email}`);
           emailInput.value = '';
         }
       });

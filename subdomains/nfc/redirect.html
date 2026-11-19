@@ -62,36 +62,62 @@
     <script>
         (function () {
             const params = new URLSearchParams(window.location.search);
-            const url = params.get('url');
+            const rawUrl = params.get('url');
             const id = params.get('id');
+            const container = document.querySelector('.container');
 
-            if (url) {
-                // Track tap if tracking is available
-                if (id) {
-                    try {
-                        const STORAGE_KEY = 'nfc_tag_manager';
-                        const raw = localStorage.getItem(STORAGE_KEY);
-                        if (raw) {
-                            const data = JSON.parse(raw);
-                            const link = data.links?.find(l => l.id === id);
-                            if (link) {
-                                link.clicks = (link.clicks || 0) + 1;
-                                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-                            }
-                        }
-                    } catch (e) {
-                        // Silent fail — redirect is more important
-                    }
-                }
-                window.location.replace(url);
-            } else {
-                document.querySelector('.container').innerHTML = `
-          <p>No redirect URL specified.</p>
-          <p style="margin-top: 1rem;">
-            <a href="/">Go to NFC Tag Manager</a>
-          </p>
-        `;
+            function showSafeFallback(message) {
+                if (!container) return;
+                const pMsg = document.createElement('p');
+                pMsg.textContent = message;
+                const pLink = document.createElement('p');
+                pLink.style.marginTop = '1rem';
+                const link = document.createElement('a');
+                link.href = '/';
+                link.textContent = 'Go to NFC Tag Manager';
+                pLink.appendChild(link);
+                container.replaceChildren(pMsg, pLink);
             }
+
+            if (!rawUrl) {
+                showSafeFallback('No redirect URL specified.');
+                return;
+            }
+
+            let parsed;
+            try {
+                parsed = new URL(rawUrl);
+            } catch (_) {
+                showSafeFallback('Blocked invalid redirect URL.');
+                return;
+            }
+
+            const hostname = parsed.hostname.toLowerCase();
+            const isAllowedHost = hostname === 'novu.works' || hostname.endsWith('.novu.works');
+            if (parsed.protocol !== 'https:' || !isAllowedHost) {
+                showSafeFallback('Blocked unsafe or off-domain redirect target.');
+                return;
+            }
+
+            // Track tap if tracking is available
+            if (id) {
+                try {
+                    const STORAGE_KEY = 'nfc_tag_manager';
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (raw) {
+                        const data = JSON.parse(raw);
+                        const link = data.links?.find(l => l.id === id);
+                        if (link) {
+                            link.clicks = (link.clicks || 0) + 1;
+                            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                        }
+                    }
+                } catch (e) {
+                    // Silent fail — redirect is more important
+                }
+            }
+
+            window.location.replace(parsed.toString());
         })();
     </script>
 </body>

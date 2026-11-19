@@ -5,6 +5,7 @@
 
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
+import { bindDialogLightDismissFallback } from './utils.js';
 
 export const PLATFORM_LANDINGS = {
   jobhelper: {
@@ -741,7 +742,7 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
   const closeBtn = modalEl.querySelector('#btn-close-platform-modal');
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {
-      try { audio.playClick(); } catch (_) {}
+      try { audio.click(); } catch (_) {}
       modalEl.close();
       if (window.location.hash.startsWith('#project-') || window.location.hash === `#${projectId}`) {
         history.replaceState(null, document.title, window.location.pathname + window.location.search);
@@ -749,12 +750,8 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
     });
   }
 
-  // Backdrop click dismiss
-  modalEl.addEventListener('click', (e) => {
-    if (e.target === modalEl) {
-      modalEl.close();
-    }
-  });
+  // Bind outside-rect light-dismiss fallback ONLY ONCE across repeated modal opens
+  bindDialogLightDismissFallback(modalEl);
 
   // JobHelper Evaluator
   const runJhBtn = modalEl.querySelector('#btn-run-jobhelper-eval');
@@ -879,7 +876,7 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
   const athSimBtn = modalEl.querySelector('#btn-simulate-ath');
   if (athSimBtn) {
     athSimBtn.addEventListener('click', () => {
-      try { audio.playClick(); } catch (_) {}
+      try { audio.click(); } catch (_) {}
       const badge = modalEl.querySelector('#tb-ath-confirmed');
       if (badge) badge.classList.remove('hidden');
     });
@@ -889,7 +886,7 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
   const chips = modalEl.querySelectorAll('.tb-chip[data-cvd]');
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
-      try { audio.playClick(); } catch (_) {}
+      try { audio.click(); } catch (_) {}
       chips.forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
 
@@ -900,6 +897,8 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
           box.style.filter = 'url(#filter-protanopia-boost)';
         } else if (cvd === 'deuteranopia') {
           box.style.filter = 'url(#filter-deuteranopia-boost)';
+        } else if (cvd === 'tritanopia') {
+          box.style.filter = 'url(#filter-tritanopia-boost)';
         } else {
           box.style.filter = 'none';
         }
@@ -910,7 +909,7 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
   const swatches = modalEl.querySelectorAll('.tb-swatch');
   swatches.forEach(swatch => {
     swatch.addEventListener('click', () => {
-      try { audio.playClick(); } catch (_) {}
+      try { audio.click(); } catch (_) {}
       const color = swatch.style.backgroundColor;
       const label = swatch.querySelector('span')?.textContent || 'Selected Color';
       const resultDot = modalEl.querySelector('#tb-ed-dot');
@@ -920,23 +919,77 @@ export function bindSubdomainLandingEvents(projectId, modalEl) {
     });
   });
 
-  // NFC Tap Sim
+  // NFC Tap Sim + Mode Chips & URL Hash Preview
+  const nfcUrlInput = modalEl.querySelector('#tb-nfc-url');
+  const nfcModeChips = modalEl.querySelectorAll('.tb-nfc .tb-chip');
+  const nfcPayloadCode = modalEl.querySelector('.tb-nfc-payload-box code');
+  const nfcConfirmedBadge = modalEl.querySelector('#tb-nfc-confirmed');
+  let activeNfcMode = modalEl.querySelector('.tb-nfc .tb-chip.active')?.textContent?.trim() || 'Exhibition Pass';
+
+  const updateNfcPayload = () => {
+    if (!nfcPayloadCode) return;
+    const rawUrl = (nfcUrlInput?.value || 'https://novu.works/pass/vip-fabian').trim();
+    let hashVal = 0x9a4f21b7;
+    const seed = `${activeNfcMode}:${rawUrl}`;
+    for (let i = 0; i < seed.length; i++) {
+      hashVal = ((hashVal * 31) + seed.charCodeAt(i)) >>> 0;
+    }
+    const hexHash = '0x' + hashVal.toString(16).padStart(8, '0');
+    const code = (hashVal % 900000) + 100000;
+    nfcPayloadCode.textContent = `NDEF Record 01: TNF_WELL_KNOWN (${activeNfcMode}) · URI: https://nfc.novu.works/r/${code} · HASH: ${hexHash}`;
+  };
+
+  nfcModeChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      try { audio.click(); } catch (_) {}
+      nfcModeChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeNfcMode = chip.textContent.trim();
+      updateNfcPayload();
+    });
+  });
+
+  if (nfcUrlInput) {
+    nfcUrlInput.addEventListener('input', updateNfcPayload);
+  }
+
   const nfcBtn = modalEl.querySelector('#btn-simulate-nfc-tap');
   if (nfcBtn) {
     nfcBtn.addEventListener('click', () => {
-      try { audio.playClick(); } catch (_) {}
-      const badge = modalEl.querySelector('#tb-nfc-confirmed');
-      if (badge) badge.classList.remove('hidden');
+      try { audio.click(); } catch (_) {}
+      updateNfcPayload();
+      if (nfcConfirmedBadge) {
+        const dest = (nfcUrlInput?.value || 'https://novu.works').trim();
+        nfcConfirmedBadge.textContent = `📡 TOCAITO NFC DETECTED: PORTAL UNLOCKED (${activeNfcMode.toUpperCase()} -> ${dest})`;
+        nfcConfirmedBadge.classList.remove('hidden');
+      }
     });
   }
 
-  // Hackea Booking Sim
+  // Hackea Booking Sim + Hub Chips & Topic Selection
+  const hackeaChips = modalEl.querySelectorAll('.tb-hackea .tb-chip');
+  const hackeaSelect = modalEl.querySelector('.tb-hackea .tb-select');
+  const hackeaBadge = modalEl.querySelector('#tb-mentor-confirmed');
+  let activeHackeaHub = modalEl.querySelector('.tb-hackea .tb-chip.active')?.textContent?.trim() || 'San Juan Hub';
+
+  hackeaChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      try { audio.click(); } catch (_) {}
+      hackeaChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeHackeaHub = chip.textContent.trim();
+    });
+  });
+
   const mentorBtn = modalEl.querySelector('#btn-book-mentor');
   if (mentorBtn) {
     mentorBtn.addEventListener('click', () => {
-      try { audio.playClick(); } catch (_) {}
-      const badge = modalEl.querySelector('#tb-mentor-confirmed');
-      if (badge) badge.classList.remove('hidden');
+      try { audio.click(); } catch (_) {}
+      const topic = hackeaSelect?.value || 'Frontier AI & Creative Coding Prototypes';
+      if (hackeaBadge) {
+        hackeaBadge.textContent = `🤝 MENTORSHIP MATCH CONFIRMED (${activeHackeaHub.toUpperCase()} · ${topic}): HUB DIRECTOR NOTIFIED`;
+        hackeaBadge.classList.remove('hidden');
+      }
     });
   }
 }

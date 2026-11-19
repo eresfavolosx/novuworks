@@ -186,21 +186,13 @@ export class BilingualBinaryHero {
       });
     }
 
-    // 3. Header nav "Tailor Experience" button opens this fullscreen cinematic modal
-    if (this.dom.btnTailorExperience) {
-      this.dom.btnTailorExperience.addEventListener('click', () => {
-        this.openIntro(false); // open without auto-timer so user can deliberate
-      });
-    }
-
-    // 4. Keyboard Shortcuts: Escape to close, 1-4 to select discipline
+    // 3. Click/Keyboard Shortcuts inside Cinematic Intro modal:
+    // Header button is wired cleanly in main.js; only Escape dismisses this modal so
+    // pressing Enter or Space on focused discipline cards or action controls doesn't close prematurely.
     document.addEventListener('keydown', (e) => {
       if (!this.isOpen) return;
 
       if (e.key === 'Escape') {
-        this.closeIntro();
-      } else if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
         this.closeIntro();
       } else if (e.key === '1') {
         this.selectDiscipline('all');
@@ -232,7 +224,7 @@ export class BilingualBinaryHero {
     this.dom.introOverlay.classList.add('is-visible');
 
     try {
-      audio.open();
+      audio.confirm();
     } catch (e) {}
 
     // Synchronize current role lens from app

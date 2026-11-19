@@ -64,10 +64,10 @@
     <meta name="keywords" content="Fabián Vélez Vicente, Fabian Velez, Novu Works, Creative Technologist, AI Product Manager, Frontier Models, Interactive Experiences, Generative Prototypes, Decision Science, Product Marketing, Orchestration, Tool-Calling, Synthesis, Computer Engineering, Stanford Innovation Fellow" />
 
     <!-- Security & HTTPS Policy Directives -->
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://api.github.com https://api.open-meteo.com https://hn.algolia.com https://www.cloudflare.com https://*.googleapis.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
 
-    <!-- Cache Invalidation Directives (Guarantees fresh production assets) -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <!-- Cache Invalidation Directives (Allows bfcache while revalidating HTML) -->
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <script>
@@ -84,7 +84,7 @@
     <meta property="og:description" content="Hybrid creative thinker and hands-on maker with 8+ years turning open-ended questions into working prototypes, interactive experiences, physical hardware, and human-centric stories. Stanford University Innovation Fellow &amp; Summa Cum Laude Computer Engineer (4.0 GPA)." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://novu.works" />
-    <meta property="og:image" content="/assets/novuworks-logo.jpg" />
+    <meta property="og:image" content="https://novu.works/assets/novuworks-logo.jpg" />
 
     <!-- Favicon & Touch Icons (Circular Transparent High-Res PNG) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
@@ -461,9 +461,9 @@
               <span class="kicker-pill">MONEY GROUP · RED VENTURES</span>
               <span class="kicker-pill" data-i18n="hero_kicker_degree">COMPUTER ENGINEERING (4.0 GPA)</span>
               <span class="kicker-pill" data-i18n="hero_kicker_fellow">STANFORD INNOVATION FELLOW</span>
-              <span class="kicker-pill pr-kicker-pill trigger-pr-coqui" title="Hecho en Puerto Rico (Click for Coquí chime)" role="button" tabindex="0">
+              <button type="button" class="kicker-pill pr-kicker-pill trigger-pr-coqui" title="Hecho en Puerto Rico (Click for Coquí chime)">
                 <span class="pr-flag-inline" aria-hidden="true">🇵🇷</span> <span data-i18n="hero_kicker_pr">SAN JUAN, PUERTO RICO</span>
-              </span>
+              </button>
               <span class="kicker-pill auth-pill" data-i18n="hero_kicker_auth">🇺🇸 US CITIZEN (NO SPONSORSHIP REQUIRED)</span>
             </div>
 
@@ -659,7 +659,7 @@
             <div class="dossier-hero">
               <div class="dossier-avatar-box">
                 <div class="dossier-avatar-frame">
-                  <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="dossier-avatar" />
+                  <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="dossier-avatar" width="104" height="104" loading="lazy" />
                 </div>
                 <span class="dossier-nw-badge" title="Founder, NovuWorks">
                   <img src="/assets/nw-mark-transparent.png" alt="NovuWorks" width="18" height="9" style="object-fit: contain;" />
@@ -697,11 +697,11 @@
                     <span data-i18n="dossier_download_pdf">Download Official PDF</span>
                   </a>
                 </div>
-                <div class="dossier-roots-badge trigger-pr-coqui" title="Puerto Rico Heritage · Click for Coquí chime" role="button" tabindex="0">
+                <button type="button" class="dossier-roots-badge trigger-pr-coqui" title="Puerto Rico Heritage · Click for Coquí chime">
                   <span class="pr-flag-emoji" aria-hidden="true">🇵🇷</span>
                   <span class="roots-badge-text" data-i18n="dossier_heritage_text">Puerto Rico Heritage · San Juan · 18.4655° N, 66.1057° W</span>
                   <span class="roots-chime-hint" data-i18n="dossier_chime_hint">(Chime Coquí)</span>
-                </div>
+                </button>
               </div>
             </div>
 
@@ -812,7 +812,7 @@
             </div>
 
             <!-- Luxury Puerto Rico Cultural Colophon -->
-            <div class="luxury-cultural-colophon trigger-pr-coqui" title="Sol de Jayuya · Click for Coquí chime" role="button" tabindex="0">
+            <button type="button" class="luxury-cultural-colophon trigger-pr-coqui" title="Sol de Jayuya · Click for Coquí chime">
               <div class="colophon-inner">
                 <span class="taino-glyph-box" aria-hidden="true">
                   <svg class="taino-sun-icon" viewBox="0 0 100 100" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -830,7 +830,7 @@
                   </p>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </section>
 
@@ -841,7 +841,7 @@
       </main>
 
       <!-- Dedicated Executive Resume Export Modal & Printable Composite Card -->
-      <dialog id="resume-export-modal" class="executive-dialog resume-modal" aria-labelledby="resume-modal-title">
+      <dialog id="resume-export-modal" class="executive-dialog resume-modal" closedby="any" aria-labelledby="resume-modal-title">
         <div class="resume-modal-header">
           <div class="modal-title-group">
             <span class="modal-kicker" data-i18n="res_kicker">EXECUTIVE &amp; CREATIVE TECHNOLOGIST COMPOSITE CARD</span>
@@ -925,7 +925,7 @@
       </dialog>
 
       <!-- Dedicated 60s Recruiter Fast-Track Scorecard Modal -->
-      <dialog id="recruiter-fasttrack-modal" class="executive-dialog recruiter-modal" aria-labelledby="recruiter-modal-title">
+      <dialog id="recruiter-fasttrack-modal" class="executive-dialog recruiter-modal" closedby="any" aria-labelledby="recruiter-modal-title">
         <div class="resume-modal-header">
           <div class="modal-title-group">
             <span class="modal-kicker" data-i18n="rec_kicker">EXECUTIVE &amp; CREATIVE TECHNOLOGIST FAST-TRACK</span>
@@ -958,7 +958,7 @@
             <!-- Top Scorecard Bar -->
             <div class="scorecard-top-bar">
               <div class="scorecard-avatar-row">
-                <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="scorecard-avatar" />
+                <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="scorecard-avatar" width="64" height="64" loading="lazy" />
                 <div class="scorecard-meta">
                   <h3 class="scorecard-name">Fabián Vélez Vicente</h3>
                   <div class="scorecard-roles" id="scorecard-roles-mount"><span data-i18n="rec_target_prefix">Target:</span> <strong>Creative Technologist · AI Product Leader · Product Marketing &amp; Growth · Decision Science · Full-Stack Systems</strong></div>
@@ -1015,22 +1015,22 @@
       </dialog>
 
       <!-- Dedicated Subdomain Platform Interactive Landing Page Showcase Modal -->
-      <dialog id="subdomain-platform-modal" class="executive-dialog platform-landing-dialog" aria-labelledby="platform-landing-title">
+      <dialog id="subdomain-platform-modal" class="executive-dialog platform-landing-dialog" closedby="any" aria-labelledby="platform-landing-title">
         <div class="dialog-content platform-landing-content" id="subdomain-platform-modal-body">
           <!-- Dynamically populated with complete interactive liquid glass landing page showcase -->
         </div>
       </dialog>
 
       <!-- Case Study / Discipline Modal Dialog -->
-      <dialog id="discipline-modal" class="executive-dialog" aria-labelledby="modal-disc-title">
+      <dialog id="discipline-modal" class="executive-dialog" closedby="any" aria-labelledby="modal-disc-title">
         <div class="dialog-content" id="dialog-content-body"></div>
       </dialog>
 
       <!-- Cyber Arcade 3D Easter Egg Game Dialog -->
-      <dialog id="cyber-arcade-modal" class="cyber-arcade-dialog" aria-label="Cyber Growth Racer Video Game"></dialog>
+      <dialog id="cyber-arcade-modal" class="cyber-arcade-dialog" closedby="any" aria-label="Cyber Growth Racer Video Game"></dialog>
 
       <!-- Visitor Area-of-Interest Onboarding Concierge Modal -->
-      <dialog id="visitor-survey-modal" class="executive-dialog survey-modal" aria-labelledby="survey-modal-title">
+      <dialog id="visitor-survey-modal" class="executive-dialog survey-modal" closedby="any" aria-labelledby="survey-modal-title">
         <div class="dialog-header survey-modal-header">
           <div class="survey-badge-row">
             <span class="modal-kicker" data-i18n="survey_kicker">EXECUTIVE CONCIERGE · TAILORED EXPERIENCE</span>
@@ -1122,10 +1122,10 @@
       </dialog>
 
       <!-- Visitor Utilities & Interactive Tools Modal Dialog -->
-      <dialog id="visitor-tools-modal" class="executive-dialog tools-modal" aria-labelledby="tools-modal-title"></dialog>
+      <dialog id="visitor-tools-modal" class="executive-dialog tools-modal" closedby="any" aria-labelledby="tools-modal-title"></dialog>
 
       <!-- Executive WhatsApp & Direct Communications Modal -->
-      <dialog id="executive-chat-modal" class="executive-dialog chat-modal" aria-labelledby="chat-modal-title">
+      <dialog id="executive-chat-modal" class="executive-dialog chat-modal" closedby="any" aria-labelledby="chat-modal-title">
         <div class="dialog-card chat-card-shell">
           <!-- Modal Header -->
           <div class="chat-modal-header">
@@ -1721,6 +1721,48 @@
       <!-- Toast Feedback Popup -->
       <div id="toast-banner" class="toast-popup" role="status" aria-live="polite"></div>
     </div>
+
+    <!-- Embedded SVG Filters for Picta Assistive CVD Simulator (Protanopia / Deuteranopia / Tritanopia) -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="filter-protanopia-boost">
+          <feColorMatrix type="matrix" values="
+            1.00  0.00  0.00  0 0
+            0.45  0.75  0.00  0 0
+            0.45  0.00  0.75  0 0
+            0     0     0     1 0" />
+          <feComponentTransfer>
+            <feFuncR type="linear" slope="1.15" />
+            <feFuncG type="linear" slope="1.1" />
+            <feFuncB type="linear" slope="1.0" />
+          </feComponentTransfer>
+        </filter>
+        <filter id="filter-deuteranopia-boost">
+          <feColorMatrix type="matrix" values="
+            0.75  0.45  0.00  0 0
+            0.00  1.00  0.00  0 0
+            0.00  0.45  0.75  0 0
+            0     0     0     1 0" />
+          <feComponentTransfer>
+            <feFuncR type="linear" slope="1.1" />
+            <feFuncG type="linear" slope="1.15" />
+            <feFuncB type="linear" slope="1.0" />
+          </feComponentTransfer>
+        </filter>
+        <filter id="filter-tritanopia-boost">
+          <feColorMatrix type="matrix" values="
+            1.00  0.00  0.50  0 0
+            0.00  1.00  0.50  0 0
+            0.00  0.00  0.50  0 0
+            0     0     0     1 0" />
+          <feComponentTransfer>
+            <feFuncR type="linear" slope="1.05" />
+            <feFuncG type="linear" slope="1.05" />
+            <feFuncB type="linear" slope="1.2" />
+          </feComponentTransfer>
+        </filter>
+      </defs>
+    </svg>
 
     <!-- Main JavaScript Entrypoint -->
     <script type="module" src="/src/main.js"></script>

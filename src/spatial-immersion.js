@@ -167,6 +167,12 @@ export class SpatialImmersionEngine {
         if (gyroBtn) {
           gyroBtn.style.setProperty('--tilt-x', this.tiltX.toFixed(3));
         }
+
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('novu:spatial-tilt', {
+            detail: { tiltX: this.tiltX, tiltY: this.tiltY }
+          }));
+        }
       }
 
       this.rafId = requestAnimationFrame(loop);

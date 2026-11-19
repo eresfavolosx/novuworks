@@ -4,6 +4,7 @@
 
 import { DISCIPLINES, PROFILE } from './data.js';
 import { audio } from './audio.js';
+import { bindDialogLightDismissFallback } from './utils.js';
 
 export class CommandPalette {
   constructor(options = {}) {
@@ -287,11 +288,10 @@ export class CommandPalette {
   render() {
     let modal = document.getElementById('command-palette-modal');
     if (!modal) {
-      modal = document.createElement('div');
+      modal = document.createElement('dialog');
       modal.id = 'command-palette-modal';
       modal.className = 'cmd-palette-backdrop';
-      modal.setAttribute('role', 'dialog');
-      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('closedby', 'any');
       modal.setAttribute('aria-label', 'Command Palette');
       modal.innerHTML = `
         <div class="cmd-palette-window glass-panel">
@@ -316,20 +316,20 @@ export class CommandPalette {
   }
 
   bindEvents() {
-    // Keyboard shortcut Cmd+K or Ctrl+K
+    // Keyboard shortcut Cmd+K or Ctrl+K + palette list navigation (native <dialog> handles Escape)
     window.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         this.toggle();
-      } else if (e.key === 'Escape' && this.isOpen) {
-        this.close();
       } else if (this.isOpen) {
         if (e.key === 'ArrowDown') {
           e.preventDefault();
+          if (this.filteredCommands.length === 0) return;
           this.selectedIndex = (this.selectedIndex + 1) % this.filteredCommands.length;
           this.renderList();
         } else if (e.key === 'ArrowUp') {
           e.preventDefault();
+          if (this.filteredCommands.length === 0) return;
           this.selectedIndex = (this.selectedIndex - 1 + this.filteredCommands.length) % this.filteredCommands.length;
           this.renderList();
         } else if (e.key === 'Enter') {
@@ -345,12 +345,17 @@ export class CommandPalette {
       this.filter();
     });
 
-    // Close on backdrop click
-    this.modal.addEventListener('click', (e) => {
-      if (e.target === this.modal) {
-        this.close();
+    // Sync state on native <dialog> close (Escape or light-dismiss)
+    this.modal.addEventListener('close', () => {
+      if (this.isOpen) {
+        this.isOpen = false;
+        this.modal.classList.remove('visible');
+        audio.click(800);
       }
     });
+
+    // Outside-rect fallback for browsers without native closedby="any"
+    bindDialogLightDismissFallback(this.modal, () => this.close());
   }
 
   filter() {
@@ -411,18 +416,38 @@ export class CommandPalette {
   }
 
   open() {
+    if (!this.modal) return;
     this.isOpen = true;
-    this.modal.classList.add('visible');
     this.input.value = '';
     this.query = '';
     this.filter();
+    if (typeof this.modal.showModal === 'function') {
+      try {
+        if (!this.modal.open) this.modal.showModal();
+      } catch (_) {
+        this.modal.setAttribute('open', '');
+      }
+    } else {
+      this.modal.setAttribute('open', '');
+    }
+    this.modal.classList.add('visible');
     audio.click(1400);
     setTimeout(() => this.input.focus(), 60);
   }
 
   close() {
+    if (!this.modal || !this.isOpen) return;
     this.isOpen = false;
     this.modal.classList.remove('visible');
+    if (typeof this.modal.close === 'function') {
+      try {
+        if (this.modal.open) this.modal.close();
+      } catch (_) {
+        this.modal.removeAttribute('open');
+      }
+    } else {
+      this.modal.removeAttribute('open');
+    }
     audio.click(800);
   }
 

@@ -7,7 +7,6 @@
 import { SpatialCanvas3D } from './canvas3d.js';
 import { ArchitecturePlanner } from './planner.js';
 import { CommandPalette } from './command-palette.js';
-import { AIGrowthLab } from './ai-lab.js';
 import { RevOpsTerminal } from './revops-terminal.js';
 import { IntelFeed } from './intel-feed.js';
 import { CyberArcadeGame } from './game-easter-egg.js';
@@ -20,11 +19,12 @@ import { TeslaCockpitDashboard } from './tesla-cockpit.js';
 import { initFirebase, logCandidateEvent } from './firebase.js';
 import { LOGOS } from './company-logos.js';
 import { audio } from './audio.js';
-import { DISCIPLINES, PROFILE } from './data.js';
-import { getLanguage, resolveInitialLanguage, switchLanguage, updateDomTranslations, updateProfileDataForLanguage } from './i18n.js';
+import { PROFILE } from './data.js';
+import { resolveInitialLanguage, switchLanguage, updateDomTranslations, updateProfileDataForLanguage } from './i18n.js';
 import { renderSubdomainLandingHtml, bindSubdomainLandingEvents, PROJECT_TRANSITIONS } from './subdomain-landings.js';
 import { renderExecutiveSignatureBlock, initExecutiveSignature } from './executive-signature.js';
 import { MinimalParticleMatrix } from './minimal-particles.js';
+import { bindDialogLightDismissFallback, copyTextToClipboard } from './utils.js';
 
 class FabianPortfolioApp {
   constructor() {
@@ -43,7 +43,6 @@ class FabianPortfolioApp {
       caseStudiesMount: document.getElementById('case-studies-mount'),
       projectsViewMount: document.getElementById('projects-view-mount'),
       featuredSubdomainsMount: document.getElementById('featured-subdomains-mount'),
-      aiLabMount: document.getElementById('ai-lab-mount'),
       competencyMatrixMount: document.getElementById('competency-matrix-mount'),
       executiveSignatureMount: document.getElementById('executive-signature-mount'),
       companyLogoStripMount: document.getElementById('company-logo-strip-mount'),
@@ -91,18 +90,15 @@ class FabianPortfolioApp {
       btnExitVisualizer: document.getElementById('btn-exit-visualizer'),
       btnVizAudio: document.getElementById('btn-viz-audio'),
       btnVizCoqui: document.getElementById('btn-viz-coqui'),
-      btnTeslaMode: document.getElementById('btn-tesla-mode'),
       btnThemeToggle: document.getElementById('btn-theme-toggle'),
       btnAudioToggle: document.getElementById('btn-audio-toggle'),
       btnPrRoots: document.getElementById('btn-pr-roots'),
       btnCmdPalette: document.getElementById('btn-cmd-palette'),
-      btnPrintResume: document.getElementById('btn-print-resume'),
       visitorSurveyModal: document.getElementById('visitor-survey-modal'),
       btnTailorExperience: document.getElementById('btn-tailor-experience'),
       btnCloseSurveyModal: document.getElementById('btn-close-survey-modal'),
       btnSurveyExploreAll: document.getElementById('btn-survey-explore-all'),
       btnVisitorTools: document.getElementById('btn-visitor-tools'),
-      btnSpatialGyro: document.getElementById('btn-spatial-gyro'),
       btnLangToggle: document.getElementById('btn-lang-toggle'),
       githubRadarMount: document.getElementById('github-radar-mount'),
       prWeatherBadge: document.getElementById('pr-weather-badge'),
@@ -117,30 +113,33 @@ class FabianPortfolioApp {
     // 0. Ensure root view dataset is set on body for CSS contextual styling
     document.body.dataset.view = 'core';
 
-    // 0b. Initialize Internationalization (Default: English)
+    // 0b. Resolve initial role lens & Internationalization before first DOM pass
     try {
+      const savedPersona = localStorage.getItem('fv_visitor_persona');
+      if (savedPersona && PROFILE.roleVariants[savedPersona]) {
+        this.activeRoleLens = savedPersona;
+      }
       updateProfileDataForLanguage(this.currentLang);
       updateDomTranslations(this.currentLang);
     } catch (e) {
       console.warn('i18n init error:', e);
     }
 
-    // 1. Dynamic Cursor Spotlight (Follows mouse/pointer coordinates smoothly)
+    // 1. Dynamic Cursor Spotlight (Dark Mode only — avoids full-DOM variable writes in Light Mode)
     window.addEventListener('pointermove', (e) => {
+      if (document.documentElement.getAttribute('data-theme') === 'light') return;
       document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
       document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
     }, { passive: true });
 
-    // 2. Render all dynamic content FIRST to guarantee DOM readiness
+    // 2. Render all dynamic content ONCE cleanly with resolved lens & language
     try {
       this.renderExecutiveSignature();
       this.renderCaseStudies();
       this.renderCompetencyMatrix();
       this.renderCompanyLogos();
-      this.renderDossier();
       this.renderProjects();
-      this.renderPrintableResume();
-      this.updateRecruiterScorecard();
+      this.setRoleLens(this.activeRoleLens, { silent: true });
     } catch (e) {
       console.error('Render error:', e);
     }
@@ -169,14 +168,6 @@ class FabianPortfolioApp {
       }
     } catch (e) {
       console.warn('RevOps terminal init caught:', e);
-    }
-
-    try {
-      if (this.dom.aiLabMount) {
-        this.aiLab = new AIGrowthLab(this.dom.aiLabMount);
-      }
-    } catch (e) {
-      console.warn('AI Lab init caught:', e);
     }
 
     try {
@@ -255,17 +246,8 @@ class FabianPortfolioApp {
     this.initTheme();
     if (this.isTeslaMode) {
       document.body.classList.add('tesla-mode');
-      this.updateTeslaButton(true);
     }
     this.syncAudioButton();
-
-    // 7b. Visitor Persona & Onboarding Concierge check
-    const savedPersona = localStorage.getItem('fv_visitor_persona');
-    if (savedPersona && PROFILE.roleVariants[savedPersona]) {
-      this.setRoleLens(savedPersona);
-    } else {
-      this.updateHeaderPersonaPill('master');
-    }
 
     // Do NOT auto-pop onboarding survey on load; keep page fluid and uninterrupted.
 
@@ -369,7 +351,7 @@ class FabianPortfolioApp {
         launch3dBtn.addEventListener('click', () => {
           this.enterVisualizerMode();
           if (this.canvas3d) {
-            this.canvas3d.switchMode(0); // 0 = Novu Monogram
+            this.canvas3d.setMorphState(0); // 0 = Novu Monogram
           }
         });
       }
@@ -393,7 +375,7 @@ class FabianPortfolioApp {
   // ─────────────────────────────────────────────────────────────
   // Cinematic Epic Intro & Executive Signature Sign-Off Screen
   // ─────────────────────────────────────────────────────────────
-  initLoadingScreen() {
+  initLoadingScreen(forceReplay = false) {
     const loadingScreen = document.getElementById('particle-loading-screen');
     if (!loadingScreen) return;
 
@@ -406,9 +388,14 @@ class FabianPortfolioApp {
     const skipBtn = document.getElementById('loading-skip-btn');
 
     let isDismissed = false;
+    let keyHandler = null;
     const dismiss = () => {
       if (isDismissed) return;
       isDismissed = true;
+      if (keyHandler) {
+        window.removeEventListener('keydown', keyHandler);
+        keyHandler = null;
+      }
       if (this.loadingSafetyTimer) clearTimeout(this.loadingSafetyTimer);
       if (this.loadingAutoDismissTimer) clearTimeout(this.loadingAutoDismissTimer);
 
@@ -416,31 +403,45 @@ class FabianPortfolioApp {
         this.canvas3d.finishInitialLoading();
       }
       loadingScreen.classList.add('is-loaded');
+      loadingScreen.setAttribute('aria-hidden', 'true');
       document.body.classList.add('loaded');
       try {
         sessionStorage.setItem('seen_portfolio_intro', '1');
       } catch (_) {}
-      try {
-        audio.playClick();
-      } catch (_) {}
+      if (forceReplay) {
+        try {
+          audio.click();
+        } catch (_) {}
+      }
     };
 
     this.dismissLoadingScreen = dismiss;
 
-    // Check if skipIntro was explicitly requested in URL query
+    // Session-gate and respect prefers-reduced-motion so repeat visits & initial LCP are instant
+    let seenBefore = false;
+    try {
+      seenBefore = sessionStorage.getItem('seen_portfolio_intro') === '1';
+    } catch (_) {}
+    const prefersReducedMotion = Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches);
+
+    let explicitSkip = false;
     try {
       const p = new URLSearchParams(window.location.search);
       if (p.get('skipIntro') === '1') {
+        explicitSkip = true;
         p.delete('skipIntro');
         const cleanQuery = p.toString() ? '?' + p.toString() : '';
         const cleanUrl = window.location.pathname + cleanQuery + window.location.hash;
         try {
           window.history.replaceState({}, '', cleanUrl);
         } catch (_) {}
-        dismiss();
-        return;
       }
     } catch (_) {}
+
+    if (!forceReplay && (explicitSkip || seenBefore || prefersReducedMotion)) {
+      dismiss();
+      return;
+    }
 
     if (skipBtn) {
       skipBtn.onclick = (e) => {
@@ -449,10 +450,9 @@ class FabianPortfolioApp {
       };
     }
 
-    const keyHandler = (e) => {
+    keyHandler = (e) => {
       if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
         dismiss();
-        window.removeEventListener('keydown', keyHandler);
       }
     };
     window.addEventListener('keydown', keyHandler);
@@ -461,21 +461,19 @@ class FabianPortfolioApp {
       if (e.target.closest('#btn-replay-signature')) {
         return;
       }
-      // On mobile and desktop, dismiss on general click ONLY once ready (100%),
-      // preventing accidental touch dismissal while the signature is animating!
       if (loadingScreen.classList.contains('is-ready')) {
         dismiss();
       }
     };
 
-    // Cinematic progress counter (~2600ms) showcasing identity & vector signature sign-off
+    // Keep initial cold-load splash <= 300ms to protect LCP; full showcase plays when user replays intro
     const startTime = performance.now();
-    const duration = 2600;
+    const duration = forceReplay ? 1800 : 280;
 
     // Safety timeout ensures dismissal even if RAF is throttled or suspended
     this.loadingSafetyTimer = setTimeout(() => {
       dismiss();
-    }, 7000);
+    }, forceReplay ? 5000 : 450);
 
     const steps = [
       { at: 0.05, text: 'QUANTUM PARTICLES // NOVUWORKS MATRIX' },
@@ -494,7 +492,7 @@ class FabianPortfolioApp {
       if (progressBar) progressBar.style.width = `${pct}%`;
       if (percentage) percentage.textContent = `${pct}%`;
 
-      const currentStep = steps.slice().reverse().find(s => progress >= s.at);
+      const currentStep = steps.findLast(s => progress >= s.at);
       if (currentStep && statusText) {
         statusText.textContent = currentStep.text;
       }
@@ -507,10 +505,9 @@ class FabianPortfolioApp {
         if (percentage) percentage.textContent = '100%';
         loadingScreen.classList.add('is-ready');
 
-        // Snappy dwell time (1200ms) before smooth auto-dismissal into portfolio
         this.loadingAutoDismissTimer = setTimeout(() => {
           dismiss();
-        }, 1200);
+        }, forceReplay ? 600 : 0);
       }
     };
 
@@ -525,6 +522,7 @@ class FabianPortfolioApp {
     if (this.loadingAutoDismissTimer) clearTimeout(this.loadingAutoDismissTimer);
 
     document.body.classList.remove('loaded');
+    loadingScreen.removeAttribute('aria-hidden');
     loadingScreen.classList.remove('is-loaded');
     loadingScreen.classList.remove('is-ready');
 
@@ -543,7 +541,7 @@ class FabianPortfolioApp {
     }
 
     initExecutiveSignature();
-    this.initLoadingScreen();
+    this.initLoadingScreen(true);
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -609,7 +607,7 @@ class FabianPortfolioApp {
   // ─────────────────────────────────────────────────────────────
   // Dynamic Role Lens / Persona Switcher
   // ─────────────────────────────────────────────────────────────
-  setRoleLens(lensId) {
+  setRoleLens(lensId, { silent = false } = {}) {
     if (!PROFILE.roleVariants[lensId]) return;
     this.activeRoleLens = lensId;
 
@@ -654,10 +652,12 @@ class FabianPortfolioApp {
       dlTools.setAttribute('download', resumeFilename);
     }
 
-    audio.click(850);
-    try {
-      logCandidateEvent('role_lens_selected', { lens: lensId });
-    } catch (e) {}
+    if (!silent) {
+      audio.click(850);
+      try {
+        logCandidateEvent('role_lens_selected', { lens: lensId });
+      } catch (e) {}
+    }
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -825,7 +825,7 @@ class FabianPortfolioApp {
             <div class="logo-badge-item" title="UPPR">${LOGOS.politecnica}</div>
             <div class="logo-badge-item" title="Grupo Guayacán">${LOGOS.guayacan}</div>
             <div class="logo-badge-item" title="Enactus">${LOGOS.enactus}</div>
-            <div class="logo-badge-item trigger-pr-coqui" title="Sol de Jayuya · Puerto Rico Heritage">${LOGOS.tainoSun}</div>
+            <button type="button" class="logo-badge-item trigger-pr-coqui" title="Sol de Jayuya · Puerto Rico Heritage">${LOGOS.tainoSun}</button>
           </div>
         </div>
       `;
@@ -1054,6 +1054,7 @@ class FabianPortfolioApp {
   closeTopNavDrawer() {
     if (this.dom.topNavDrawer) {
       this.dom.topNavDrawer.classList.remove('is-open');
+      this.dom.topNavDrawer.setAttribute('aria-hidden', 'true');
     }
     const backdrop = this.dom.topDrawerBackdrop || document.getElementById('top-drawer-backdrop');
     if (backdrop) {
@@ -1546,11 +1547,13 @@ KEY PROOF POINTS & METRICS:
 ${variant.proofPoints ? variant.proofPoints.map((p) => `• [${p.metric}] ${p.title} (${p.sub}): ${p.desc}`).join('\n') : ''}
 • Education & Credentials: B.S. Computer Engineering (4.0 GPA), Universidad Politécnica de PR; Microsoft Certified Power BI Data Analyst Associate; Stanford University Innovation Fellow; Lean Six Sigma White Belt; CompTIA ITF+.`;
 
-    navigator.clipboard.writeText(text).then(() => {
-      audio.confirm();
-      this.showToast(`Recruiter ATS Notes (${variant.shortTitle}) copied to clipboard`);
-    }).catch(() => {
-      this.showToast('Candidate notes copied to clipboard');
+    copyTextToClipboard(text).then((ok) => {
+      if (ok) {
+        audio.confirm();
+        this.showToast(`Recruiter ATS Notes (${variant.shortTitle}) copied to clipboard`);
+      } else {
+        this.showToast('Clipboard unavailable in this browser context');
+      }
     });
   }
 
@@ -1709,11 +1712,13 @@ EDUCATION & CERTIFICATIONS
 • Cloud, Analytics & IT Certifications: CompTIA IT Fundamentals+ (ITF+) | Data-driven Strategy: Planning, Reporting & Control with Power BI (UPPR) | Advanced Implementation of Data Analysis Tools with Power BI (UPPR) | Lean Six Sigma White Belt
 • Public Sector & Innovation Governance: Federal Funds Administration (UPR) | Project Management Practice Tools & Techniques (UPPR) | Stanford University Innovation Fellows`;
 
-    navigator.clipboard.writeText(text).then(() => {
-      audio.confirm();
-      this.showToast(`Executive Resume (${variant.shortTitle}) copied to clipboard`);
-    }).catch(() => {
-      this.showToast('Copied to clipboard');
+    copyTextToClipboard(text).then((ok) => {
+      if (ok) {
+        audio.confirm();
+        this.showToast(`Executive Resume (${variant.shortTitle}) copied to clipboard`);
+      } else {
+        this.showToast('Clipboard unavailable — use Print / Download PDF');
+      }
     });
   }
 
@@ -1739,17 +1744,18 @@ EDUCATION & CERTIFICATIONS
     if (mobileMenuBtn && topNavDrawer) {
       mobileMenuBtn.addEventListener('click', () => {
         const isOpen = topNavDrawer.classList.toggle('is-open');
+        topNavDrawer.setAttribute('aria-hidden', String(!isOpen));
         if (topDrawerBackdrop) {
           topDrawerBackdrop.classList.toggle('is-open', isOpen);
         }
         mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
-        try { audio.playClick(); } catch (_) {}
+        try { audio.click(); } catch (_) {}
       });
 
       if (topDrawerBackdrop) {
         topDrawerBackdrop.addEventListener('click', () => {
           this.closeTopNavDrawer();
-          try { audio.playClick(); } catch (_) {}
+          try { audio.click(); } catch (_) {}
         });
       }
 
@@ -1775,7 +1781,8 @@ EDUCATION & CERTIFICATIONS
         this.toggleAudio();
       });
       document.getElementById('drawer-btn-lang')?.addEventListener('click', () => {
-        this.toggleLanguage();
+        audio.click(1200);
+        this.setLanguage(this.currentLang === 'es' ? 'en' : 'es');
       });
     }
 
@@ -1848,6 +1855,7 @@ EDUCATION & CERTIFICATIONS
         const mobileMenuBtn = document.getElementById('btn-mobile-menu-toggle');
         const topDrawerBackdrop = document.getElementById('top-drawer-backdrop');
         topNavDrawer?.classList.add('is-open');
+        topNavDrawer?.setAttribute('aria-hidden', 'false');
         topDrawerBackdrop?.classList.add('is-open');
         mobileMenuBtn?.setAttribute('aria-expanded', 'true');
       }
@@ -1871,10 +1879,6 @@ EDUCATION & CERTIFICATIONS
     });
 
     document.getElementById('btn-view-all-projects')?.addEventListener('click', () => {
-      this.switchView('projects');
-    });
-
-    document.getElementById('btn-launch-ai-lab')?.addEventListener('click', () => {
       this.switchView('projects');
     });
 
@@ -1959,11 +1963,7 @@ EDUCATION & CERTIFICATIONS
       });
     });
 
-    this.dom.visitorSurveyModal?.addEventListener('click', (e) => {
-      if (e.target === this.dom.visitorSurveyModal) {
-        this.closeSurveyModal();
-      }
-    });
+    bindDialogLightDismissFallback(this.dom.visitorSurveyModal, () => this.closeSurveyModal());
 
     // Executive Visitor Utilities Trigger
     this.dom.btnVisitorTools?.addEventListener('click', () => {
@@ -2022,28 +2022,9 @@ EDUCATION & CERTIFICATIONS
       this.toggleTheme();
     });
 
-    // Tesla Mode Toggle
-    this.dom.btnTeslaMode?.addEventListener('click', () => {
-      this.toggleTeslaMode();
-    });
-
     // Audio Toggle
     this.dom.btnAudioToggle?.addEventListener('click', () => {
       this.toggleAudio();
-    });
-
-    // Spatial 6DoF Gyroscope Toggle / Permission Trigger
-    this.dom.btnSpatialGyro?.addEventListener('click', async () => {
-      audio.click();
-      if (this.spatial) {
-        const granted = await this.spatial.requestGyroPermission();
-        if (granted) {
-          this.showToast('🧭 6DoF Spatial Gyroscope & Inertial Parallax Active');
-          this.dom.btnSpatialGyro?.classList.add('active');
-        } else {
-          this.showToast('🧭 Spatial Parallax active in Desktop Cursor mode');
-        }
-      }
     });
 
     // Puerto Rico Cultural Roots & Coquí Sound Chime
@@ -2081,20 +2062,31 @@ EDUCATION & CERTIFICATIONS
       if (this.cmdPalette) this.cmdPalette.open();
     });
 
-    // Print Resume (Global Button)
-    this.dom.btnPrintResume?.addEventListener('click', () => {
-      this.openResumeModal();
-    });
+    const isAnyModalOrEditableActive = (target) => {
+      if (target) {
+        const tag = target.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target.isContentEditable) {
+          return true;
+        }
+      }
+      if (document.querySelector('dialog[open]')) return true;
+      if (document.getElementById('cinematic-master-intro')?.classList.contains('is-visible')) return true;
+      if (this.bilingualHero?.isOpen) return true;
+      if (this.cmdPalette?.isOpen) return true;
+      if (this.teslaCockpit?.isOpen) return true;
+      return false;
+    };
 
     // Keyboard Shortcuts (1-6 for Views, Esc to exit visualizer, Z to toggle visualizer)
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.isVisualizerMode) {
+      if (e.metaKey || e.ctrlKey || e.altKey || e.isComposing) return;
+      if (e.key === 'Escape' && this.isVisualizerMode && !document.querySelector('dialog[open]')) {
         e.preventDefault();
         this.exitVisualizerMode();
         return;
       }
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-      if ((e.key === 'z' || e.key === 'Z') && !e.metaKey && !e.ctrlKey) {
+      if (isAnyModalOrEditableActive(e.target)) return;
+      if (e.key === 'z' || e.key === 'Z') {
         e.preventDefault();
         this.toggleVisualizerMode();
         return;
@@ -2132,7 +2124,8 @@ EDUCATION & CERTIFICATIONS
     const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
     let konamiIndex = 0;
     window.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.metaKey || e.ctrlKey || e.altKey || e.isComposing) return;
+      if (isAnyModalOrEditableActive(e.target)) return;
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
       if (key === konamiSequence[konamiIndex].toLowerCase()) {
         konamiIndex++;
@@ -2146,30 +2139,11 @@ EDUCATION & CERTIFICATIONS
       }
     });
 
-    // Modal click-outside backdrop dismiss
-    this.dom.disciplineModal?.addEventListener('click', (e) => {
-      if (e.target === this.dom.disciplineModal) {
-        this.dom.disciplineModal.close();
-      }
-    });
-
-    this.dom.resumeModal?.addEventListener('click', (e) => {
-      if (e.target === this.dom.resumeModal) {
-        this.closeResumeModal();
-      }
-    });
-
-    this.dom.recruiterModal?.addEventListener('click', (e) => {
-      if (e.target === this.dom.recruiterModal) {
-        this.closeRecruiterModal();
-      }
-    });
-
-    this.dom.arcadeModal?.addEventListener('click', (e) => {
-      if (e.target === this.dom.arcadeModal) {
-        this.closeArcadeGame();
-      }
-    });
+    // Modal click-outside light-dismiss fallback (when native closedby="any" is unsupported)
+    bindDialogLightDismissFallback(this.dom.disciplineModal);
+    bindDialogLightDismissFallback(this.dom.resumeModal, () => this.closeResumeModal());
+    bindDialogLightDismissFallback(this.dom.recruiterModal, () => this.closeRecruiterModal());
+    bindDialogLightDismissFallback(this.dom.arcadeModal, () => this.closeArcadeGame());
 
     this.dom.arcadeModal?.addEventListener('cancel', (e) => {
       e.preventDefault();
@@ -2187,14 +2161,14 @@ EDUCATION & CERTIFICATIONS
     document.body.dataset.view = viewName;
     audio.click(1300);
 
-    // Update Nav buttons
-    document.querySelectorAll('.nav-tab, .dock-btn').forEach((btn) => {
+    // Update Nav buttons (header pills, drawer tabs, and mobile bottom dock)
+    document.querySelectorAll('.nav-tab, .top-nav-tab, .dock-btn').forEach((btn) => {
       const v = btn.dataset.view === 'ai-lab' ? 'projects' : btn.dataset.view;
       btn.classList.toggle('active', v === viewName);
     });
 
     // Fade and slide views
-    const views = ['core', 'case-studies', 'projects', 'ai-lab', 'planner', 'dossier', 'intel-feed'];
+    const views = ['core', 'case-studies', 'projects', 'planner', 'dossier', 'intel-feed'];
     views.forEach((v) => {
       const el = document.getElementById(`view-${v}`);
       if (el) {
@@ -2333,35 +2307,54 @@ EDUCATION & CERTIFICATIONS
   }
 
   applyTheme(theme, isUserAction = false) {
-    if (theme !== 'light' && theme !== 'dark') return;
-    try {
-      localStorage.setItem('color-scheme', theme);
-      if (isUserAction) {
-        localStorage.setItem('color-scheme-manual', 'true');
-      }
-      document.cookie = `color-scheme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
-      if (location.hostname.endsWith('novu.works')) {
-        document.cookie = `color-scheme=${theme}; path=/; domain=.novu.works; max-age=31536000; SameSite=Lax`;
-      }
-    } catch (e) {}
+    let isSystem = false;
+    let resolvedTheme = theme;
 
-    const activeBg = theme === 'light' ? '#f8fafc' : '#050507';
-    const activeEnd = theme === 'light' ? '#f8fafc' : '#07070a';
+    if (theme === 'system') {
+      isSystem = true;
+      const isDark = Boolean(window.matchMedia?.('(prefers-color-scheme: dark)')?.matches);
+      resolvedTheme = isDark ? 'dark' : 'light';
+      try {
+        localStorage.removeItem('color-scheme-manual');
+        localStorage.removeItem('color-scheme');
+        document.cookie = 'color-scheme=; path=/; max-age=0; SameSite=Lax';
+        if (location.hostname.endsWith('novu.works')) {
+          document.cookie = 'color-scheme=; path=/; domain=.novu.works; max-age=0; SameSite=Lax';
+        }
+      } catch (e) {}
+    } else if (theme !== 'light' && theme !== 'dark') {
+      return;
+    } else {
+      isSystem = !isUserAction && localStorage.getItem('color-scheme-manual') !== 'true';
+      try {
+        localStorage.setItem('color-scheme', resolvedTheme);
+        if (isUserAction) {
+          localStorage.setItem('color-scheme-manual', 'true');
+        }
+        document.cookie = `color-scheme=${resolvedTheme}; path=/; max-age=31536000; SameSite=Lax`;
+        if (location.hostname.endsWith('novu.works')) {
+          document.cookie = `color-scheme=${resolvedTheme}; path=/; domain=.novu.works; max-age=31536000; SameSite=Lax`;
+        }
+      } catch (e) {}
+    }
+
+    const activeBg = resolvedTheme === 'light' ? '#f8fafc' : '#050507';
+    const activeEnd = resolvedTheme === 'light' ? '#f8fafc' : '#07070a';
 
     const meta = document.querySelector('meta[name="color-scheme"]');
-    if (meta) meta.content = theme;
+    if (meta) meta.content = isSystem ? 'light dark' : resolvedTheme;
 
-    // Synchronize Safari native adaptive theme-color headers
+    // Synchronize Safari native adaptive theme-color headers cleanly in both directions
     const metaLight = document.getElementById('meta-theme-color-light');
     const metaDark = document.getElementById('meta-theme-color-dark');
     const metaTheme = document.getElementById('meta-theme-color');
-    if (metaLight && theme === 'dark') metaLight.content = '#050507';
-    if (metaDark && theme === 'light') metaDark.content = '#f8fafc';
+    if (metaLight) metaLight.content = isSystem ? '#f8fafc' : activeBg;
+    if (metaDark) metaDark.content = isSystem ? '#050507' : activeBg;
     if (metaTheme) metaTheme.content = activeBg;
 
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.classList.toggle('light-theme', theme === 'light');
-    document.documentElement.classList.toggle('dark-theme', theme === 'dark');
+    document.documentElement.setAttribute('data-theme', resolvedTheme);
+    document.documentElement.classList.toggle('light-theme', resolvedTheme === 'light');
+    document.documentElement.classList.toggle('dark-theme', resolvedTheme === 'dark');
     document.documentElement.style.setProperty('--bg-canvas', activeBg);
     document.documentElement.style.setProperty('--bg-canvas-end', activeEnd);
     document.documentElement.style.backgroundColor = activeBg;
@@ -2369,16 +2362,20 @@ EDUCATION & CERTIFICATIONS
       document.body.style.backgroundColor = activeBg;
     }
 
-    this.updateThemeButton(theme, false);
-    if (this.canvas3d) this.canvas3d.setTheme(theme);
-    if (this.minimalParticles) this.minimalParticles.setTheme(theme);
+    this.updateThemeButton(resolvedTheme, isSystem);
+    if (this.canvas3d) this.canvas3d.setTheme(resolvedTheme);
+    if (this.minimalParticles) this.minimalParticles.setTheme(resolvedTheme);
 
     // Keep all subdomain and external links synchronized with active theme!
-    this.syncSubdomainThemeLinks(theme);
+    this.syncSubdomainThemeLinks(resolvedTheme);
 
     if (isUserAction) {
-      audio.chime(theme === 'light' ? 2 : 0);
-      this.showToast(theme === 'light' ? '☀️ Light Theme Active' : '🌙 Dark Theme Active');
+      audio.chime(resolvedTheme === 'light' ? 2 : 0);
+      this.showToast(
+        isSystem
+          ? `🌓 Device Sync Theme Active (${resolvedTheme === 'light' ? 'Light' : 'Dark'})`
+          : (resolvedTheme === 'light' ? '☀️ Light Theme Active' : '🌙 Dark Theme Active')
+      );
     }
   }
 
@@ -2439,12 +2436,7 @@ EDUCATION & CERTIFICATIONS
   }
 
   updateTeslaButton(active) {
-    const btn = this.dom.btnTeslaMode;
-    if (btn) {
-      btn.classList.toggle('active', active);
-      const text = btn.querySelector('.btn-text');
-      if (text) text.textContent = active ? 'Tesla ON' : 'Tesla HUD';
-    }
+    document.body.dataset.teslaCockpit = active ? 'on' : 'off';
   }
 
   toggleAudio() {
@@ -2456,9 +2448,6 @@ EDUCATION & CERTIFICATIONS
   setLanguage(lang) {
     audio.confirm();
     this.currentLang = switchLanguage(lang, this, true);
-    if (this.bilingualHero && typeof this.bilingualHero.setLanguage === 'function') {
-      this.bilingualHero.setLanguage(lang);
-    }
   }
 
   getLanguage() {

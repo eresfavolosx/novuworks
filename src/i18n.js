@@ -4,21 +4,17 @@
 //  Authentic Creative Technologist Spanish: 'es' (San Juan, Puerto Rico)
 // ─────────────────────────────────────────────────────────────
 
-import { PROFILE, DISCIPLINES } from './data.js';
+import { PROFILE } from './data.js';
 
 export const SUPPORTED_LANGS = ['en', 'es'];
 export const DEFAULT_LANG = 'en';
 
-// Capture Pristine English Snapshots at module evaluation time
+// Capture Pristine English Snapshot at module evaluation time
 let PROFILE_EN = null;
-let DISCIPLINES_EN = null;
 
 function ensureSnapshots() {
   if (!PROFILE_EN) {
-    PROFILE_EN = JSON.parse(JSON.stringify(PROFILE));
-  }
-  if (!DISCIPLINES_EN) {
-    DISCIPLINES_EN = JSON.parse(JSON.stringify(DISCIPLINES));
+    PROFILE_EN = structuredClone(PROFILE);
   }
 }
 
@@ -1428,11 +1424,14 @@ export function switchLanguage(lang, appInstance, showNotification = true) {
     try {
       if (typeof appInstance.renderCaseStudies === 'function') appInstance.renderCaseStudies();
       if (typeof appInstance.renderCompetencyMatrix === 'function') appInstance.renderCompetencyMatrix();
-      if (typeof appInstance.renderDossier === 'function') appInstance.renderDossier();
       if (typeof appInstance.renderProjects === 'function') appInstance.renderProjects();
-      if (typeof appInstance.renderPrintableResume === 'function') appInstance.renderPrintableResume();
-      if (typeof appInstance.updateRecruiterScorecard === 'function') appInstance.updateRecruiterScorecard();
-      if (typeof appInstance.setRoleLens === 'function') appInstance.setRoleLens(appInstance.activeRoleLens || 'master');
+      if (typeof appInstance.setRoleLens === 'function') {
+        appInstance.setRoleLens(appInstance.activeRoleLens || 'master', { silent: true });
+      } else {
+        if (typeof appInstance.renderDossier === 'function') appInstance.renderDossier();
+        if (typeof appInstance.renderPrintableResume === 'function') appInstance.renderPrintableResume();
+        if (typeof appInstance.updateRecruiterScorecard === 'function') appInstance.updateRecruiterScorecard();
+      }
       if (appInstance.bilingualHero && typeof appInstance.bilingualHero.setLanguage === 'function') {
         appInstance.bilingualHero.setLanguage(lang);
       }

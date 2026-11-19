@@ -16,6 +16,8 @@ export class CyberArcadeGame {
     this.container = containerEl;
     this.onClose = onCloseCallback;
     this.isRunning = false;
+    this.isStopping = false;
+    this.webglReady = false;
     this.animationId = null;
 
     // Game state
@@ -68,15 +70,39 @@ export class CyberArcadeGame {
     this.bindEvents(); // Bind buttons & Escape key immediately after DOM injection
     try {
       this.initThree();
+      this.webglReady = true;
     } catch (e) {
+      this.webglReady = false;
       console.warn('CyberArcade 3D init caught:', e);
+      this.renderWebglFallback();
     }
     try {
       this.initAudioEngine();
     } catch (e) {
       console.warn('CyberArcade audio init caught:', e);
     }
-    this.start();
+    if (this.webglReady) {
+      this.start();
+    }
+  }
+
+  renderWebglFallback() {
+    const mount = this.container?.querySelector('#arcade-3d-mount');
+    if (!mount) return;
+    const notice = document.createElement('div');
+    notice.className = 'arcade-webgl-fallback';
+    notice.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:#ebebf0;background:radial-gradient(circle at 50% 40%, rgba(212,175,55,0.12), rgba(5,4,13,0.96));';
+
+    const title = document.createElement('h3');
+    title.style.cssText = 'margin:0 0 8px;color:#d4af37;font-size:1.25rem;';
+    title.textContent = 'WebGL Acceleration Unavailable';
+
+    const desc = document.createElement('p');
+    desc.style.cssText = 'margin:0;max-width:440px;color:#94a3b8;font-size:0.9rem;line-height:1.5;';
+    desc.textContent = 'Cyber Growth Racer 3D requires a hardware or software WebGL context. Enable WebGL in your browser settings or exit back to the portfolio.';
+
+    notice.append(title, desc);
+    mount.replaceChildren(notice);
   }
 
   renderHtml() {
@@ -654,6 +680,7 @@ export class CyberArcadeGame {
     bCtx.fill();
 
     const beamTex = new THREE.CanvasTexture(beamCanvas);
+    this.beamTex = beamTex;
     const beamMat = new THREE.MeshBasicMaterial({
       map: beamTex,
       transparent: true,
@@ -742,6 +769,7 @@ export class CyberArcadeGame {
     }
 
     const fireTex = new THREE.CanvasTexture(fireCanvas);
+    this.fireTex = fireTex;
     fireTex.wrapS = THREE.RepeatWrapping;
     fireTex.wrapT = THREE.RepeatWrapping;
 
@@ -1002,6 +1030,7 @@ export class CyberArcadeGame {
   }
 
   start() {
+    if (!this.webglReady || !this.renderer || !this.car) return;
     this.isRunning = true;
     audio.confirm();
     if (this.audioCtx && this.audioCtx.state === 'suspended') {
@@ -1014,6 +1043,7 @@ export class CyberArcadeGame {
     if (this.isStopping) return;
     this.isStopping = true;
     this.isRunning = false;
+    this.webglReady = false;
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
       this.animationId = null;
@@ -1031,20 +1061,50 @@ export class CyberArcadeGame {
       this.audioCtx = null;
     }
 
-    if (this.renderer && this.renderer.domElement) {
+    if (this.roadTex) {
+      try { this.roadTex.dispose(); } catch {}
+      this.roadTex = null;
+    }
+    if (this.beamTex) {
+      try { this.beamTex.dispose(); } catch {}
+      this.beamTex = null;
+    }
+    if (this.fireTex) {
+      try { this.fireTex.dispose(); } catch {}
+      this.fireTex = null;
+    }
+
+    if (this.scene) {
+      this.scene.traverse((obj) => {
+        if (obj.geometry && typeof obj.geometry.dispose === 'function') {
+          obj.geometry.dispose();
+        }
+        const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+        for (const mat of mats) {
+          if (!mat) continue;
+          if (mat.map && typeof mat.map.dispose === 'function') mat.map.dispose();
+          if (typeof mat.dispose === 'function') mat.dispose();
+        }
+      });
+      this.scene = null;
+    }
+
+    if (this.renderer) {
       try {
-        this.renderer.domElement.remove();
+        this.renderer.domElement?.remove();
+        this.renderer.forceContextLoss?.();
         this.renderer.dispose();
       } catch {}
       this.renderer = null;
     }
-    this.container.innerHTML = '';
+    this.container?.replaceChildren();
     const cb = this.onClose;
     this.onClose = null;
     if (cb) cb();
   }
 
   restart() {
+    if (!this.webglReady || !this.car) return;
     this.score = 0;
     this.speed = 50;
     this.carX = 0;
@@ -1095,7 +1155,7 @@ export class CyberArcadeGame {
   }
 
   loop() {
-    if (!this.isRunning) return;
+    if (!this.isRunning || !this.webglReady || !this.car || !this.renderer) return;
     this.animationId = requestAnimationFrame(() => this.loop());
 
     this.updatePhysics();

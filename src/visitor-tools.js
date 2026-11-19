@@ -7,6 +7,7 @@ import { PROFILE } from './data.js';
 import { audio } from './audio.js';
 import { TELEMETRY_STATE, logCandidateEvent } from './firebase.js';
 import { SAN_JUAN_COORDS } from './spatial-immersion.js';
+import { bindDialogLightDismissFallback, copyTextToClipboard } from './utils.js';
 
 export class VisitorTools {
   constructor(options = {}) {
@@ -30,9 +31,10 @@ export class VisitorTools {
   }
 
   getGpuRenderer() {
+    let gl = null;
     try {
       const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
       if (gl) {
         const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
         if (debugInfo) {
@@ -42,6 +44,10 @@ export class VisitorTools {
       return 'Hardware Accelerated';
     } catch {
       return 'Standard Display';
+    } finally {
+      try {
+        gl?.getExtension('WEBGL_lose_context')?.loseContext();
+      } catch (_) {}
     }
   }
 
@@ -100,7 +106,7 @@ export class VisitorTools {
       <div class="dialog-header tools-modal-header">
         <div class="tools-header-meta">
           <span class="modal-kicker">EXECUTIVE TOOLKIT · LIVE CLIENT UTILITIES</span>
-          <h3 class="tools-modal-title">Live Growth & Engineering Utilities</h3>
+          <h3 id="tools-modal-title" class="tools-modal-title">Live Growth & Engineering Utilities</h3>
           <p class="tools-modal-sub">Interactive APIs and production tools designed for founders, marketers, engineers & recruiters.</p>
         </div>
         <button type="button" class="dialog-close-btn" id="btn-close-tools-modal" aria-label="Close Utilities Modal">
@@ -109,17 +115,17 @@ export class VisitorTools {
       </div>
 
       <!-- Navigation Tabs -->
-      <div class="tools-tabs-bar" role="tablist">
-        <button type="button" class="tools-tab-btn active" data-tool="capi-builder" role="tab">
+      <div class="tools-tabs-bar" role="tablist" aria-label="Executive Toolkit Utilities">
+        <button type="button" class="tools-tab-btn active" id="tab-btn-capi-builder" data-tool="capi-builder" role="tab" aria-selected="true" aria-controls="tool-panel-capi-builder" tabindex="0">
           <span>🎯</span> Event Deduplication &amp; URL Lab
         </button>
-        <button type="button" class="tools-tab-btn" data-tool="roas-calc" role="tab">
+        <button type="button" class="tools-tab-btn" id="tab-btn-roas-calc" data-tool="roas-calc" role="tab" aria-selected="false" aria-controls="tool-panel-roas-calc" tabindex="-1">
           <span>✨</span> Prototype Velocity &amp; Impact Modeler
         </button>
-        <button type="button" class="tools-tab-btn" data-tool="ats-export" role="tab">
+        <button type="button" class="tools-tab-btn" id="tab-btn-ats-export" data-tool="ats-export" role="tab" aria-selected="false" aria-controls="tool-panel-ats-export" tabindex="-1">
           <span>📄</span> Maker JSON Resume Export
         </button>
-        <button type="button" class="tools-tab-btn" data-tool="edge-telemetry" role="tab">
+        <button type="button" class="tools-tab-btn" id="tab-btn-edge-telemetry" data-tool="edge-telemetry" role="tab" aria-selected="false" aria-controls="tool-panel-edge-telemetry" tabindex="-1">
           <span>🛰️</span> Edge, Hardware &amp; Sensor Telemetry
         </button>
       </div>
@@ -127,7 +133,7 @@ export class VisitorTools {
       <!-- Tab Content Body -->
       <div class="dialog-body tools-modal-body">
         <!-- Tab 1: Event Deduplication & Clean URL Lab -->
-        <div class="tool-tab-panel active" id="tool-panel-capi-builder">
+        <div class="tool-tab-panel active" id="tool-panel-capi-builder" role="tabpanel" aria-labelledby="tab-btn-capi-builder">
           <div class="tool-intro">
             <h4>First-Party Event Deduplication &amp; Clean Experiment URL Generator</h4>
             <p>Generate deterministic event payloads with cryptographic deduplication IDs (<code>event_id</code>) and clean shareable URLs for interactive web experiments.</p>
@@ -201,7 +207,7 @@ export class VisitorTools {
         </div>
 
         <!-- Tab 2: Prototype Velocity & Impact Modeler -->
-        <div class="tool-tab-panel" id="tool-panel-roas-calc">
+        <div class="tool-tab-panel" id="tool-panel-roas-calc" role="tabpanel" aria-labelledby="tab-btn-roas-calc" hidden>
           <div class="tool-intro">
             <h4>Interactive Prototype Velocity &amp; Human Synthesis Modeler</h4>
             <p>Simulate how agentic tool-calling and modular design systems compress time-to-prototype and expand human exploration depth.</p>
@@ -259,7 +265,7 @@ export class VisitorTools {
         </div>
 
         <!-- Tab 3: Recruiter ATS JSON-LD Export -->
-        <div class="tool-tab-panel" id="tool-panel-ats-export">
+        <div class="tool-tab-panel" id="tool-panel-ats-export" role="tabpanel" aria-labelledby="tab-btn-ats-export" hidden>
           <div class="tool-intro">
             <h4>Official ATS JSON Resume & schema.org/Person Feed</h4>
             <p>Direct structured data export formatted for instant ingestion into applicant tracking systems (Greenhouse, Lever, Ashby, Workday).</p>
@@ -284,7 +290,7 @@ export class VisitorTools {
         </div>
 
         <!-- Tab 4: Client Edge Telemetry -->
-        <div class="tool-tab-panel" id="tool-panel-edge-telemetry">
+        <div class="tool-tab-panel" id="tool-panel-edge-telemetry" role="tabpanel" aria-labelledby="tab-btn-edge-telemetry" hidden>
           <div class="tool-intro">
             <h4>Live Visitor Edge, Firebase Suite & Hardware Sensor Telemetry</h4>
             <p>Real-time edge roundtrip latency, Firebase enterprise session traces, high-precision GPS Great-Circle distance to San Juan HQ, 6DoF gyroscope motion parallax, and device environmental diagnostics.</p>
@@ -680,10 +686,15 @@ export class VisitorTools {
   switchTab(toolId) {
     this.activeTab = toolId;
     document.querySelectorAll('.tools-tab-btn').forEach((btn) => {
-      btn.classList.toggle('active', btn.dataset.tool === toolId);
+      const isActive = btn.dataset.tool === toolId;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+      btn.setAttribute('tabindex', isActive ? '0' : '-1');
     });
     document.querySelectorAll('.tool-tab-panel').forEach((panel) => {
-      panel.classList.toggle('active', panel.id === `tool-panel-${toolId}`);
+      const isActive = panel.id === `tool-panel-${toolId}`;
+      panel.classList.toggle('active', isActive);
+      panel.hidden = !isActive;
     });
     if (toolId === 'edge-telemetry') {
       this.updateTelemetryMount();
@@ -696,13 +707,26 @@ export class VisitorTools {
       this.close();
     });
 
-    this.modal?.addEventListener('click', (e) => {
-      if (e.target === this.modal) this.close();
-    });
+    bindDialogLightDismissFallback(this.modal, () => this.close());
 
-    document.querySelectorAll('.tools-tab-btn').forEach((btn) => {
+    const tabBtns = Array.from(document.querySelectorAll('.tools-tab-btn'));
+    tabBtns.forEach((btn, idx) => {
       btn.addEventListener('click', () => {
         this.switchTab(btn.dataset.tool);
+      });
+      btn.addEventListener('keydown', (e) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+        e.preventDefault();
+        let nextIdx = idx;
+        if (e.key === 'ArrowRight') nextIdx = (idx + 1) % tabBtns.length;
+        else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + tabBtns.length) % tabBtns.length;
+        else if (e.key === 'Home') nextIdx = 0;
+        else if (e.key === 'End') nextIdx = tabBtns.length - 1;
+        const targetBtn = tabBtns[nextIdx];
+        if (targetBtn) {
+          this.switchTab(targetBtn.dataset.tool);
+          targetBtn.focus();
+        }
       });
     });
 
@@ -713,23 +737,23 @@ export class VisitorTools {
       });
     });
 
-    document.getElementById('btn-copy-utm-url')?.addEventListener('click', () => {
+    document.getElementById('btn-copy-utm-url')?.addEventListener('click', async () => {
       const url = document.getElementById('capi-output-url')?.textContent;
-      if (url) {
-        navigator.clipboard.writeText(url).then(() => {
-          audio.confirm();
-          this.options.showToast && this.options.showToast('Clean UTM URL copied to clipboard');
-        });
+      if (url && await copyTextToClipboard(url)) {
+        audio.confirm();
+        this.options.showToast && this.options.showToast('Clean UTM URL copied to clipboard');
+      } else if (url) {
+        this.options.showToast && this.options.showToast('Clipboard blocked — copy URL manually from preview');
       }
     });
 
-    document.getElementById('btn-copy-capi-json')?.addEventListener('click', () => {
+    document.getElementById('btn-copy-capi-json')?.addEventListener('click', async () => {
       const json = document.getElementById('capi-output-json')?.textContent;
-      if (json) {
-        navigator.clipboard.writeText(json).then(() => {
-          audio.confirm();
-          this.options.showToast && this.options.showToast('Server-Side Meta CAPI JSON payload copied');
-        });
+      if (json && await copyTextToClipboard(json)) {
+        audio.confirm();
+        this.options.showToast && this.options.showToast('Server-Side Meta CAPI JSON payload copied');
+      } else if (json) {
+        this.options.showToast && this.options.showToast('Clipboard blocked — copy payload manually');
       }
     });
 
@@ -740,7 +764,7 @@ export class VisitorTools {
       });
     });
 
-    document.getElementById('btn-copy-roas-plan')?.addEventListener('click', () => {
+    document.getElementById('btn-copy-roas-plan')?.addEventListener('click', async () => {
       const be = document.getElementById('roas-out-breakeven')?.textContent;
       const cur = document.getElementById('roas-out-current')?.textContent;
       const prof = document.getElementById('roas-out-profit')?.textContent;
@@ -753,10 +777,12 @@ export class VisitorTools {
 • Synthesized Journey Capacity: ${maxCac}
 Calculated via Novu Works Creative Toolkit (https://novu.works)`;
 
-      navigator.clipboard.writeText(summary).then(() => {
+      if (await copyTextToClipboard(summary)) {
         audio.confirm();
         this.options.showToast && this.options.showToast('Prototype Velocity Model copied');
-      });
+      } else {
+        this.options.showToast && this.options.showToast('Clipboard unavailable in this browser context');
+      }
     });
 
     // ATS Resume Export
@@ -772,12 +798,14 @@ Calculated via Novu Works Creative Toolkit (https://novu.works)`;
       this.options.showToast && this.options.showToast('ATS JSON Resume downloaded (fabian-velez-resume.json)');
     });
 
-    document.getElementById('btn-copy-ats-json')?.addEventListener('click', () => {
+    document.getElementById('btn-copy-ats-json')?.addEventListener('click', async () => {
       const json = JSON.stringify(this.getAtsJsonResume(), null, 2);
-      navigator.clipboard.writeText(json).then(() => {
+      if (await copyTextToClipboard(json)) {
         audio.confirm();
         this.options.showToast && this.options.showToast('ATS-Ready JSON Resume copied to clipboard');
-      });
+      } else {
+        this.options.showToast && this.options.showToast('Clipboard unavailable — use Download JSON instead');
+      }
     });
   }
 }

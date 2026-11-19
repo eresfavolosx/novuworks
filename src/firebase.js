@@ -7,18 +7,20 @@
 
 import { initializeApp, getApps } from 'firebase/app';
 import { getAnalytics, isSupported as isAnalyticsSupported, logEvent } from 'firebase/analytics';
-import { getPerformance } from 'firebase/performance';
+import { getPerformance, trace as createPerfTrace } from 'firebase/performance';
+
+const env = (typeof import.meta !== 'undefined' && import.meta.env) || {};
 
 // Firebase client configuration loaded safely via Vite env variables or dynamic detection
 // Note: Never hardcode API keys in source repository.
 export const firebaseConfig = {
-  projectId: "novuworks",
-  appId: "1:907589381358:web:1f25bbc0f33d7c36e197ff",
-  storageBucket: "novuworks.firebasestorage.app",
-  apiKey: (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_API_KEY) || "",
-  authDomain: "novuworks.firebaseapp.com",
-  messagingSenderId: "907589381358",
-  projectNumber: "907589381358",
+  projectId: env.VITE_FIREBASE_PROJECT_ID || 'novuworks',
+  appId: env.VITE_FIREBASE_APP_ID || '1:907589381358:web:1f25bbc0f33d7c36e197ff',
+  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET || 'novuworks.firebasestorage.app',
+  apiKey: env.VITE_FIREBASE_API_KEY || '',
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN || 'novuworks.firebaseapp.com',
+  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID || '907589381358',
+  projectNumber: '907589381358',
 };
 
 let app = null;
@@ -126,13 +128,13 @@ export function logCandidateEvent(eventName, params = {}) {
  * @returns {{ stop: () => void }}
  */
 export function startPerfTrace(traceName) {
-  if (performance && typeof performance.trace === 'function') {
+  if (performance) {
     try {
-      const trace = performance.trace(traceName);
-      trace.start();
+      const perfTrace = createPerfTrace(performance, traceName);
+      perfTrace.start();
       return {
         stop: () => {
-          try { trace.stop(); } catch (e) {}
+          try { perfTrace.stop(); } catch (e) {}
         },
       };
     } catch (e) {}

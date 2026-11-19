@@ -843,6 +843,12 @@
     '  .nps-enter-btn { padding: 10px 14px; font-size: 11.5px; }',
     '  .nps-blueprint-btn { padding: 8px 12px; font-size: 10.5px; }',
     '  .novuintro-actions { flex-direction: column; }',
+    '}',
+    '@media (prefers-reduced-motion: reduce) {',
+    '  .nps-logo-svg, .np-dot, #nps-bar, #novu-project-splash, .novuintro-btn-primary {',
+    '    animation: none !important;',
+    '    transition: none !important;',
+    '  }',
     '}'
   ].join('\n');
   document.head.appendChild(style);
@@ -1026,7 +1032,8 @@
       });
     }
 
-    var duration = 2400;
+    var prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var duration = prefersReducedMotion ? 0 : 2400;
     var startTime = performance.now();
     var isDone = false;
 
@@ -1037,7 +1044,7 @@
       setTimeout(function () {
         if (splash.parentNode) splash.parentNode.removeChild(splash);
         if (typeof onComplete === 'function') onComplete();
-      }, 350);
+      }, prefersReducedMotion ? 0 : 350);
     }
 
     // Direct access to app
@@ -1054,7 +1061,7 @@
     function tick(now) {
       if (isDone) return;
       var elapsed = now - startTime;
-      var progress = Math.min(elapsed / duration, 1);
+      var progress = duration === 0 ? 1 : Math.min(elapsed / duration, 1);
 
       if (bar) bar.style.width = (progress * 100) + '%';
       if (pct) pct.textContent = Math.round(progress * 100) + '%';

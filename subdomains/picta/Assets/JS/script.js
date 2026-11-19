@@ -76,11 +76,22 @@
   ];
 
   // --- Application State ---
+  function readPictaPref(key, fallback = true) {
+    try {
+      const val = localStorage.getItem(key);
+      if (val === 'false') return false;
+      if (val === 'true') return true;
+    } catch (_) {}
+    return fallback;
+  }
+
   const state = {
     cameraStream: null,
     facingMode: 'environment', // 'environment' (back) or 'user' (selfie)
     currentFilter: 'normal',
-    isSpeechEnabled: true,
+    isSpeechEnabled: readPictaPref('picta_tts', true),
+    isHapticEnabled: readPictaPref('picta_haptic', true),
+    isHdEnabled: readPictaPref('picta_hd', true),
     activeSource: 'camera', // 'camera' or 'canvas'
     lastSampledColor: null,
     reticlePos: { x: 0.5, y: 0.5 }, // normalized 0..1
@@ -308,8 +319,8 @@
       const constraints = {
         video: {
           facingMode: { ideal: state.facingMode },
-          width: { ideal: 1920 },
-          height: { ideal: 1080 }
+          width: { ideal: state.isHdEnabled ? 1920 : 1280 },
+          height: { ideal: state.isHdEnabled ? 1080 : 720 }
         },
         audio: false
       };
@@ -475,7 +486,7 @@
   // --- Shutter Snapshot Processing ---
   function captureSnapshot() {
     playShutterSound();
-    if (navigator.vibrate) navigator.vibrate([40, 20, 60]);
+    if (state.isHapticEnabled && navigator.vibrate) navigator.vibrate([40, 20, 60]);
 
     // Flash animation
     if (cameraFlash) {
@@ -616,10 +627,16 @@
       });
     }
 
+    // Sync initial TTS icon state from localStorage preference
+    if (ttsIcon) {
+      ttsIcon.textContent = state.isSpeechEnabled ? 'volume_up' : 'volume_off';
+    }
+
     // TTS speech toggle
     if (btnTtsToggle) {
       btnTtsToggle.addEventListener('click', () => {
         state.isSpeechEnabled = !state.isSpeechEnabled;
+        try { localStorage.setItem('picta_tts', String(state.isSpeechEnabled)); } catch (_) {}
         if (ttsIcon) {
           ttsIcon.textContent = state.isSpeechEnabled ? 'volume_up' : 'volume_off';
         }
@@ -686,16 +703,43 @@
     // Tap on viewport
     if (viewport) {
       viewport.addEventListener('click', handleViewportTap);
-      // Support touch drag
+      // Support rAF-throttled touch drag
+      let touchSampleRaf = null;
+      let pendingTouch = null;
       viewport.addEventListener('touchmove', (e) => {
         if (e.touches && e.touches.length === 1) {
-          const rect = viewport.getBoundingClientRect();
-          const normX = Math.min(1, Math.max(0, (e.touches[0].clientX - rect.left) / rect.width));
-          const normY = Math.min(1, Math.max(0, (e.touches[0].clientY - rect.top) / rect.height));
-          samplePixelAt(normX, normY, false);
+          pendingTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+          if (!touchSampleRaf) {
+            touchSampleRaf = requestAnimationFrame(() => {
+              touchSampleRaf = null;
+              if (!pendingTouch) return;
+              const rect = viewport.getBoundingClientRect();
+              if (rect.width > 0 && rect.height > 0) {
+                const normX = Math.min(1, Math.max(0, (pendingTouch.x - rect.left) / rect.width));
+                const normY = Math.min(1, Math.max(0, (pendingTouch.y - rect.top) / rect.height));
+                samplePixelAt(normX, normY, false);
+              }
+            });
+          }
         }
       }, { passive: true });
     }
+
+    // Release camera hardware track on tab hide or page unload
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopCamera();
+      } else {
+        state.isSpeechEnabled = readPictaPref('picta_tts', true);
+        state.isHapticEnabled = readPictaPref('picta_haptic', true);
+        state.isHdEnabled = readPictaPref('picta_hd', true);
+        if (ttsIcon) ttsIcon.textContent = state.isSpeechEnabled ? 'volume_up' : 'volume_off';
+        if (state.activeSource === 'camera' && !state.cameraStream) {
+          startCamera();
+        }
+      }
+    });
+    window.addEventListener('pagehide', stopCamera);
   }
 
   // --- Bootstrap Application ---

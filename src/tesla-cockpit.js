@@ -155,7 +155,7 @@ export class TeslaCockpitDashboard {
 
     // Synchronize current weather and GPS if spatial engine is active
     if (this.app?.spatial) {
-      const geo = this.app.spatial.geodesic;
+      const geo = this.app.spatial.geodesicTelemetry;
       if (geo && this.dom.gpsDist) {
         this.dom.gpsDist.textContent = `${geo.distanceMiles} mi away (${geo.cardinal})`;
       }
@@ -225,6 +225,7 @@ export class TeslaCockpitDashboard {
       minute: '2-digit',
       second: '2-digit',
       hour12: true,
+      timeZone: 'America/Puerto_Rico',
     });
   }
 

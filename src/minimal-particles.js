@@ -20,6 +20,32 @@ export class MinimalParticleMatrix {
     this.animFrameId = null;
     this.isVisible = true;
     this.isTabActive = !document.hidden;
+    this.motionQuery = typeof window !== 'undefined' && window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)')
+      : null;
+    this.prefersReducedMotion = Boolean(this.motionQuery?.matches);
+    this.observer = null;
+    this.handleResize = () => {
+      this.resize();
+      if (this.prefersReducedMotion) this.draw();
+    };
+    this.handleVisibilityChange = () => {
+      this.isTabActive = !document.hidden;
+      if (this.isVisible && this.isTabActive && !this.prefersReducedMotion) {
+        this.start();
+      } else {
+        this.stop();
+      }
+    };
+    this.handleMotionChange = (e) => {
+      this.prefersReducedMotion = Boolean(e.matches);
+      if (this.prefersReducedMotion) {
+        this.stop();
+        this.draw();
+      } else if (this.isVisible && this.isTabActive) {
+        this.start();
+      }
+    };
 
     // Color palettes
     this.paletteMode = 'novu'; // 'novu', 'gold', 'emerald'
@@ -255,7 +281,7 @@ export class MinimalParticleMatrix {
   }
 
   bindEvents() {
-    window.addEventListener('resize', () => this.resize());
+    window.addEventListener('resize', this.handleResize);
 
     // Cursor tracking
     const updateMouse = (clientX, clientY) => {
@@ -300,27 +326,27 @@ export class MinimalParticleMatrix {
 
     // Visibility Observer (0% CPU when scrolled away)
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
+      this.observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           this.isVisible = entry.isIntersecting;
-          if (this.isVisible && this.isTabActive) {
+          if (this.isVisible && this.isTabActive && !this.prefersReducedMotion) {
             this.start();
           } else if (!this.isVisible) {
             this.stop();
           }
         });
       }, { threshold: 0.1 });
-      observer.observe(this.canvas);
+      this.observer.observe(this.canvas);
     }
 
-    document.addEventListener('visibilitychange', () => {
-      this.isTabActive = !document.hidden;
-      if (this.isVisible && this.isTabActive) {
-        this.start();
-      } else if (!this.isTabActive) {
-        this.stop();
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
+    if (this.motionQuery) {
+      if (typeof this.motionQuery.addEventListener === 'function') {
+        this.motionQuery.addEventListener('change', this.handleMotionChange);
+      } else if (typeof this.motionQuery.addListener === 'function') {
+        this.motionQuery.addListener(this.handleMotionChange);
       }
-    });
+    }
   }
 
   warp(originX, originY) {
@@ -435,9 +461,13 @@ export class MinimalParticleMatrix {
   }
 
   start() {
+    if (this.prefersReducedMotion) {
+      this.draw();
+      return;
+    }
     if (this.animFrameId) return;
     const loop = () => {
-      if (this.isVisible && this.isTabActive) {
+      if (this.isVisible && this.isTabActive && !this.prefersReducedMotion) {
         this.update();
         this.draw();
         this.animFrameId = requestAnimationFrame(loop);
@@ -452,6 +482,23 @@ export class MinimalParticleMatrix {
     if (this.animFrameId) {
       cancelAnimationFrame(this.animFrameId);
       this.animFrameId = null;
+    }
+  }
+
+  destroy() {
+    this.stop();
+    window.removeEventListener('resize', this.handleResize);
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+    if (this.motionQuery) {
+      if (typeof this.motionQuery.removeEventListener === 'function') {
+        this.motionQuery.removeEventListener('change', this.handleMotionChange);
+      } else if (typeof this.motionQuery.removeListener === 'function') {
+        this.motionQuery.removeListener(this.handleMotionChange);
+      }
+    }
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
     }
   }
 }
