@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build && cp -r subdomains dist/",
+    "build": "vite build && cp -r subdomains dist/ && rm -rf dist/subdomains/tailormetric",
     "preview": "vite preview --host",
     "test": "node --test tests/*.test.mjs",
     "deploy": "npm run build && firebase deploy --only hosting --project novuworks"

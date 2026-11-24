@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <title>Tailor Metric — Custom AI Infrastructure. Built, Integrated, and Managed.</title>
+  <meta name="description" content="Tailor Metric designs, deploys, and manages the exact AI architecture your business needs to scale—without ripping out the systems you already use.">
+  <meta name="theme-color" content="#090d16">
+
+  <!-- Instant Theme Initializer: Automatically Syncs with Device OS Appearance -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('tm-theme');
+        var systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = savedTheme ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        var metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) {
+          metaTheme.setAttribute('content', theme === 'dark' ? '#090d16' : '#f8fafc');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tailor Metric — Custom AI Infrastructure">
+  <meta property="og:description" content="The custom AI infrastructure you need. Built, integrated, and managed.">
+  <meta property="og:image" content="assets/tailor-metric-logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=2.1.0">
+</head>
+<body>
+  <!-- Skip to Main Content Link for Keyboard & Screen Reader Accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Header & Navigation -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-bar-container">
+      <a href="#hero" class="brand-link" aria-label="Tailor Metric Home">
+        <img src="assets/tm-logo-white.png" alt="Tailor Metric" class="brand-logo-img logo-dark-mode">
+        <img src="assets/tm-logo-horizontal.png" alt="Tailor Metric" class="brand-logo-img logo-light-mode">
+      </a>
+
+      <nav aria-label="Main Navigation" class="main-nav">
+        <ul class="nav-links">
+          <li><a href="#problem" data-i18n="nav_challenge">The Challenge</a></li>
+          <li><a href="#pillars" data-i18n="nav_solutions">Core Solutions</a></li>
+          <li><a href="#process" data-i18n="nav_process">How We Work</a></li>
+          <li><a href="#advantage" data-i18n="nav_advantage">The Advantage</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Language Switcher Toggle -->
+        <div class="lang-switch-wrap" role="group" aria-label="Language selector">
+          <button type="button" class="lang-btn active" id="langBtnEn" data-lang="en" aria-pressed="true" title="English">EN</button>
+          <span class="lang-divider" aria-hidden="true">/</span>
+          <button type="button" class="lang-btn" id="langBtnEs" data-lang="es" aria-pressed="false" title="Español">ES</button>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button type="button" class="theme-toggle-btn" id="themeToggle" aria-label="Toggle visual theme" title="Switch between Dark and Light mode">
+          <span class="theme-icon icon-sun" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </span>
+          <span class="theme-icon icon-moon" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+          <span class="theme-toggle-text" id="themeToggleText">Light</span>
+        </button>
+
+        <a href="#contact" class="btn btn-primary nav-btn-call cta-lead-link">
+          <span class="nav-call-full" data-i18n="nav_call_full">Book a Strategy Call</span>
+          <span class="nav-call-short" data-i18n="nav_call_short">Book Call</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <!-- 1. Hero Section -->
+    <section class="hero-section" id="hero">
+      <!-- Interactive AI Neural Synapse Canvas -->
+      <canvas id="heroNeuralCanvas" class="hero-neural-canvas" aria-hidden="true"></canvas>
+
+      <div class="container hero-grid">
+        <div class="hero-text-col">
+          <div class="hero-badge">
+            <span class="hero-badge-marker" data-i18n="hero_badge_marker">ARCHITECTURAL AI</span>
+            <span class="hero-badge-pulse" aria-hidden="true"></span>
+            <span class="hero-badge-text" data-i18n="hero_badge_text">Enterprise Integration &amp; Operations</span>
+          </div>
+
+          <h1 class="hero-title" data-i18n-html="hero_title">
+            The custom AI infrastructure you need. <span class="hero-title-highlight">Built, integrated, and managed.</span>
+          </h1>
+
+          <p class="hero-sub" data-i18n="hero_sub">
+            You know AI is the next step for your operation, but building an internal engineering team is too slow and off-the-shelf tools don't fit. Tailor Metric designs, deploys, and manages the exact AI architecture your business needs to scale—without ripping out the systems you already use.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="#contact" class="btn btn-primary cta-lead-link">
+              <span data-i18n="hero_cta_book">Book a Strategy Call</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#process" class="btn btn-secondary">
+              <span data-i18n-html="hero_cta_process">See how we build it &rarr;</span>
+            </a>
+          </div>
+
+          <div class="hero-specs-row">
+            <div class="spec-item">
+              <div class="spec-label" data-i18n="hero_spec1_label">ADOPTION FRICTION</div>
+              <div class="spec-val" data-i18n="hero_spec1_val">Zero System Migration</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label" data-i18n="hero_spec2_label">DATA GOVERNANCE</div>
+              <div class="spec-val" data-i18n="hero_spec2_val">100% Tenant Isolation</div>
+            </div>
+            <div class="spec-item">
+              <div class="spec-label" data-i18n="hero_spec3_label">EXECUTION MODEL</div>
+              <div class="spec-val" data-i18n="hero_spec3_val">Managed Backend Engineering</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Architectural Blueprint Mockup: Real Systems Pipeline -->
+        <div class="hero-mockup-wrap">
+          <div class="architecture-blueprint-card">
+            <div class="blueprint-header">
+              <div class="blueprint-meta">
+                <span class="blueprint-tag" data-i18n="bp_tag">SYSTEM TOPOLOGY // LIVE ROUTING</span>
+                <span class="blueprint-subtag" data-i18n="bp_subtag">Deterministic Orchestration Layer</span>
+              </div>
+              <div class="blueprint-actions">
+                <button type="button" class="btn-simulate-trace" id="simulateTraceBtn" aria-label="Simulate live AI pipeline execution trace">
+                  <span class="trace-pulse-dot" aria-hidden="true"></span>
+                  <span class="trace-btn-text" id="traceBtnText" data-i18n="bp_simulate_btn">Simulate AI Trace</span>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </button>
+                <div class="blueprint-status" id="pipelineStatusBadge">
+                  <span class="status-indicator"></span>
+                  <span id="pipelineStatusText" data-i18n="bp_system_active">SYSTEM ACTIVE</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="blueprint-body">
+              <!-- Interactive Pipeline Tab Selectors -->
+              <div class="blueprint-nav" role="tablist" aria-label="Interactive Systems Architecture Workflows">
+                <button type="button" class="bp-tab active" id="tab-intake" data-wf="intake" role="tab" aria-selected="true" aria-controls="schematic-panel" tabindex="0">
+                  <span class="bp-tab-num">01</span>
+                  <span data-i18n="bp_tab1_label">Omnichannel Intake &amp; CRM Sync</span>
+                </button>
+                <button type="button" class="bp-tab" id="tab-reconcile" data-wf="reconcile" role="tab" aria-selected="false" aria-controls="schematic-panel" tabindex="-1">
+                  <span class="bp-tab-num">02</span>
+                  <span data-i18n="bp_tab2_label">Ledger Reconciliation</span>
+                </button>
+                <button type="button" class="bp-tab" id="tab-waste" data-wf="waste" role="tab" aria-selected="false" aria-controls="schematic-panel" tabindex="-1">
+                  <span class="bp-tab-num">03</span>
+                  <span data-i18n="bp_tab3_label">Inventory &amp; Spend Guardrail</span>
+                </button>
+              </div>
+
+              <!-- Pipeline Architecture Flow Diagram -->
+              <div class="pipeline-schematic" role="tabpanel" id="schematic-panel" aria-labelledby="tab-intake" tabindex="0">
+                <!-- Source Tier -->
+                <div class="tier-col source-tier">
+                  <div class="tier-label" data-i18n="bp_tier1_label">1. EXISTING ENTERPRISE STACK</div>
+                  <div class="tier-box" id="node1Box">
+                    <div class="tier-box-title" id="node1Label">OMNICHANNEL INGESTION</div>
+                    <div class="tier-box-val" id="node1Val">Inbound Channels + Webhooks</div>
+                    <div class="tier-box-note" id="node1Note" data-i18n="bp_node1_note">Zero replacement of current software</div>
+                  </div>
+                </div>
+
+                <div class="tier-connector connector-1" id="connector1" aria-hidden="true">
+                  <div class="connector-track">
+                    <span class="connector-pulse" id="pulse1"></span>
+                  </div>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                    <polyline points="14 6 20 12 14 18"></polyline>
+                  </svg>
+                </div>
+
+                <!-- Orchestration Tier -->
+                <div class="tier-col tm-tier">
+                  <div class="tier-label" data-i18n="bp_tier2_label">2. TAILOR METRIC ENGINE</div>
+                  <div class="tier-box highlight-box" id="node2Box">
+                    <div class="scan-laser" id="engineScanLaser" aria-hidden="true"></div>
+                    <div class="tm-brand-flag">
+                      <img src="assets/tm-mark-sm.png" alt="TM" width="14" height="9">
+                      <span data-i18n="bp_tier2_flag">CUSTOM LAYER</span>
+                    </div>
+                    <div class="tier-box-title" id="node2Label">REASONING &amp; VALIDATION</div>
+                    <div class="tier-box-val" id="node2Val">Intent Scoring &amp; Schema Parser</div>
+                    <div class="tier-box-note" id="node2Note" data-i18n-html="bp_node2_note">Deterministic Guardrails &middot; Private Models</div>
+                  </div>
+                </div>
+
+                <div class="tier-connector connector-2" id="connector2" aria-hidden="true">
+                  <div class="connector-track">
+                    <span class="connector-pulse" id="pulse2"></span>
+                  </div>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                    <polyline points="14 6 20 12 14 18"></polyline>
+                  </svg>
+                </div>
+
+                <!-- Action Tier -->
+                <div class="tier-col dest-tier">
+                  <div class="tier-label" data-i18n="bp_tier3_label">3. COMMERCIAL EXECUTION</div>
+                  <div class="tier-box" id="node3Box">
+                    <div class="tier-box-title" id="node3Label">CORE BUSINESS IMPACT</div>
+                    <div class="tier-box-val" id="node3Val">Qualified Opportunity Committed to CRM</div>
+                    <div class="tier-box-note" id="node3Note" data-i18n-html="bp_node3_note">Direct writes &middot; Audit trail logged</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Execution Telemetry -->
+              <div class="blueprint-telemetry">
+                <div class="telemetry-bar">
+                  <span class="telemetry-chip" id="telemetryChip" data-i18n="bp_telemetry_chip">EVENT LOG</span>
+                  <span class="telemetry-msg" id="telemetryText">Inquiry ingested &lt;2s &middot; Auto-qualified intent &middot; Synchronized with core CRM</span>
+                </div>
+                <div class="telemetry-metrics">
+                  <span data-i18n-html="bp_latency_label">LATENCY: <strong id="telemetryLatency">142ms</strong></span>
+                  <span data-i18n-html="bp_encryption_label">ENCRYPTION: <strong>TLS 1.3 / AES-256</strong></span>
+                  <span data-i18n-html="bp_leakage_label">DATA LEAKAGE RISK: <strong>0.00%</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="blueprint-footer">
+              <div class="bp-footer-left">
+                <span data-i18n="bp_footer_arch">Architecture: Event-Driven Microservices</span>
+                <span class="bp-footer-dot" aria-hidden="true">&middot;</span>
+                <span data-i18n="bp_footer_iso">Tenant Isolation: Guaranteed</span>
+              </div>
+              <div class="bp-footer-right">
+                <span data-i18n="bp_footer_mgmt">Managed by Tailor Metric Engineering</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. The Problem / Agitation Section -->
+    <section class="section-problem" id="problem">
+      <div class="container">
+        <div class="problem-layout">
+          <div class="problem-content">
+            <span class="section-eyebrow" data-i18n="problem_eyebrow">THE CHALLENGE</span>
+            <h2 class="section-heading" data-i18n="problem_heading">
+              Stop trying to force generic AI into complex workflows.
+            </h2>
+            <p class="section-subtext" data-i18n="problem_subtext">
+              Most businesses face a wall when trying to adopt AI. Generic chatbots don't understand your proprietary data, and replacing your core software stack costs too much in downtime and training. The result? You buy AI tools your team never uses, or you remain stuck on manual processes.
+            </p>
+
+            <div class="takeaway-callout">
+              <div class="callout-tag" data-i18n="problem_callout_tag">KEY TAKEAWAY</div>
+              <p class="callout-text" data-i18n="problem_callout_text">
+                You don't need another software subscription. You need an orchestration layer built specifically for your operation.
+              </p>
+            </div>
+          </div>
+
+          <!-- Architectural Contrast Comparison Grid -->
+          <div class="contrast-grid">
+            <div class="contrast-panel panel-generic">
+              <div class="panel-header">
+                <span class="panel-badge-bad" data-i18n="problem_bad_badge">GENERIC AI SUBSCRIPTIONS</span>
+                <h3 class="panel-title" data-i18n="problem_bad_title">Why Off-the-Shelf Tools Stall</h3>
+              </div>
+              <ul class="panel-list">
+                <li>
+                  <span class="list-bullet bad">&times;</span>
+                  <span data-i18n-html="problem_bad_li1"><strong>Siloed Browser Windows:</strong> Chatbots sit in isolated tabs with zero access to your ERP, CRM, or live databases.</span>
+                </li>
+                <li>
+                  <span class="list-bullet bad">&times;</span>
+                  <span data-i18n-html="problem_bad_li2"><strong>Forced Employee Behavior Change:</strong> Staff must manually copy-paste data and write custom prompts, driving high churn.</span>
+                </li>
+                <li>
+                  <span class="list-bullet bad">&times;</span>
+                  <span data-i18n-html="problem_bad_li3"><strong>Proprietary Data Exposure:</strong> Generic vendors often utilize customer inputs to fine-tune shared foundation weights.</span>
+                </li>
+                <li>
+                  <span class="list-bullet bad">&times;</span>
+                  <span data-i18n-html="problem_bad_li4"><strong>No Operational Execution:</strong> Off-the-shelf bots can answer questions, but they cannot execute transactions inside your systems.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="contrast-panel panel-tailor">
+              <div class="panel-header">
+                <span class="panel-badge-good" data-i18n="problem_good_badge">TAILOR METRIC ARCHITECTURE</span>
+                <h3 class="panel-title" data-i18n="problem_good_title">The Bespoke Orchestration Model</h3>
+              </div>
+              <ul class="panel-list">
+                <li>
+                  <span class="list-bullet good">&check;</span>
+                  <span data-i18n-html="problem_good_li1"><strong>Zero System Migration:</strong> Hardwired directly into your existing software stack (Core ERPs, CRMs, Custom Databases &amp; Internal APIs).</span>
+                </li>
+                <li>
+                  <span class="list-bullet good">&check;</span>
+                  <span data-i18n-html="problem_good_li2"><strong>Invisible Output Adoption:</strong> Your team keeps using the software they already know; AI does the heavy lifting in the background.</span>
+                </li>
+                <li>
+                  <span class="list-bullet good">&check;</span>
+                  <span data-i18n-html="problem_good_li3"><strong>Complete Data Sovereignty:</strong> Dedicated VPC pipelines with strict zero-training policies on external LLMs.</span>
+                </li>
+                <li>
+                  <span class="list-bullet good">&check;</span>
+                  <span data-i18n-html="problem_good_li4"><strong>End-to-End Operational Execution:</strong> Fully manages transactions, reconciles ledgers, and writes clean data back automatically.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Core Solutions (Our Pillars) -->
+    <section class="section-solutions" id="pillars">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="section-eyebrow">OUR PILLARS</span>
+          <h2 class="section-heading">
+            End-to-End AI Engineering. <span class="heading-accent">From strategy to daily operation.</span>
+          </h2>
+          <p class="section-subtext">
+            We don't hand you software credentials and walk away. We analyze, engineer, deploy, and actively manage custom AI systems tailored to your unique operational footprint.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <!-- Pillar 1 -->
+          <article class="pillar-box">
+            <div class="pillar-box-top">
+              <span class="pillar-index">// 01 ARCHITECTURE</span>
+              <div class="pillar-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  <line x1="12" y1="10" x2="12" y2="14"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="pillar-category">AI Infrastructure Architecture</div>
+            <h3 class="pillar-title">Systems Architecture</h3>
+            <p class="pillar-body">
+              We don't guess. We analyze your existing tech stack, identify the bottlenecks, and design a custom AI architecture that securely leverages your proprietary data to drive efficiency.
+            </p>
+            <div class="pillar-spec-list">
+              <span class="spec-tag">Legacy Stack Audit</span>
+              <span class="spec-tag">Isolated VPC Pipeline</span>
+              <span class="spec-tag">Bidirectional API Connectors</span>
+            </div>
+          </article>
+
+          <!-- Pillar 2 -->
+          <article class="pillar-box">
+            <div class="pillar-box-top">
+              <span class="pillar-index">// 02 WORKFLOWS</span>
+              <div class="pillar-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="5" r="3"></circle>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="19" r="3"></circle>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="pillar-category">Custom Automation Workflows</div>
+            <h3 class="pillar-title">Custom Workflows</h3>
+            <p class="pillar-body">
+              We build the data pipelines and logic that connect your existing systems. From automated client onboarding to complex data reconciliation, we make your software talk to each other so your team doesn't have to.
+            </p>
+            <div class="pillar-spec-list">
+              <span class="spec-tag">Deterministic Automation</span>
+              <span class="spec-tag">Multi-System Reconciliation</span>
+              <span class="spec-tag">Exception Escalation</span>
+            </div>
+          </article>
+
+          <!-- Pillar 3 -->
+          <article class="pillar-box">
+            <div class="pillar-box-top">
+              <span class="pillar-index">// 03 DEPLOYMENT</span>
+              <div class="pillar-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <polyline points="9 12 11 14 15 10"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="pillar-category">Seamless Deployment &amp; Management</div>
+            <h3 class="pillar-title">Deployment &amp; Management</h3>
+            <p class="pillar-body">
+              We are your dedicated backend engineering team. We handle the deployment, maintain the integrations, and scale the infrastructure as your business grows. You get the results; we manage the code.
+            </p>
+            <div class="pillar-spec-list">
+              <span class="spec-tag">SLA Uptime Supervision</span>
+              <span class="spec-tag">Continuous Model Tuning</span>
+              <span class="spec-tag">Dedicated Engineering Desk</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. How We Work (The Process) -->
+    <section class="section-process" id="process">
+      <div class="container">
+        <div class="section-header-centered">
+          <span class="section-eyebrow" data-i18n="process_eyebrow">OUR PROCESS</span>
+          <h2 class="section-heading" data-i18n-html="process_heading">
+            Three steps to a scalable operation. <span class="heading-accent">Zero disruption.</span>
+          </h2>
+          <p class="section-subtext" data-i18n="process_subtext">
+            We implement with surgical engineering precision. No software overhauls, no business downtime, and zero guesswork.
+          </p>
+        </div>
+
+        <div class="process-sequence">
+          <!-- Step 01 -->
+          <div class="process-card">
+            <div class="process-card-header">
+              <span class="step-badge">PHASE 01</span>
+              <span class="step-timing" data-i18n="step1_timing">SCOPING &amp; AUDIT</span>
+            </div>
+            <h3 class="step-heading" data-i18n="step1_heading">01 | Strategy &amp; Scoping</h3>
+            <p class="step-description" data-i18n="step1_body">
+              We start by understanding your commercial goals. We map your current processes, audit your systems, and define exactly where AI will deliver the highest ROI.
+            </p>
+            <div class="step-deliverable-item">
+              <span class="deliverable-label" data-i18n="step_deliv_label">DELIVERABLE:</span>
+              <span data-i18n="step1_deliv_val">Systems architecture blueprint &amp; commercial ROI roadmap</span>
+            </div>
+          </div>
+
+          <!-- Step 02 -->
+          <div class="process-card">
+            <div class="process-card-header">
+              <span class="step-badge">PHASE 02</span>
+              <span class="step-timing" data-i18n="step2_timing">ENGINEERING &amp; SANDBOX</span>
+            </div>
+            <h3 class="step-heading" data-i18n="step2_heading">02 | Architecture &amp; Build</h3>
+            <p class="step-description" data-i18n="step2_body">
+              Our engineering team builds your custom orchestration layer. We integrate with your existing CRM, ERP, and communication tools. No migrations required.
+            </p>
+            <div class="step-deliverable-item">
+              <span class="deliverable-label" data-i18n="step_deliv_label">DELIVERABLE:</span>
+              <span data-i18n="step2_deliv_val">Production-ready connectors &amp; deterministic pipeline test suite</span>
+            </div>
+          </div>
+
+          <!-- Step 03 -->
+          <div class="process-card">
+            <div class="process-card-header">
+              <span class="step-badge">PHASE 03</span>
+              <span class="step-timing" data-i18n="step3_timing">PRODUCTION &amp; SCALING</span>
+            </div>
+            <h3 class="step-heading" data-i18n="step3_heading">03 | Deployment &amp; Optimization</h3>
+            <p class="step-description" data-i18n="step3_body">
+              We launch the system, train your team on the output, and actively manage the infrastructure to ensure it adapts and scales with your business.
+            </p>
+            <div class="step-deliverable-item">
+              <span class="deliverable-label" data-i18n="step_deliv_label">DELIVERABLE:</span>
+              <span data-i18n="step3_deliv_val">Zero-downtime production cutover &amp; continuous managed SLA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. The Tailor Metric Advantage (About Us) -->
+    <section class="section-advantage" id="advantage">
+      <div class="container">
+        <div class="advantage-block">
+          <div class="advantage-editorial-col">
+            <span class="section-eyebrow" data-i18n="adv_eyebrow">THE TAILOR METRIC ADVANTAGE</span>
+            <h2 class="advantage-heading" data-i18n="adv_heading">
+              The bridge between commercial strategy and deep engineering.
+            </h2>
+            <p class="advantage-lead" data-i18n="adv_lead">
+              Tailor Metric isn't just a consulting firm, and we aren't just a dev shop. We are a hybrid team built to bridge the gap. We combine elite, front-end business strategy with hardcore backend technical engineering. We understand how to position a business for growth, and we have the technical firepower to actually build the engine that makes it happen.
+            </p>
+
+            <div class="advantage-stats-strip">
+              <div class="stat-card">
+                <div class="stat-digit">0</div>
+                <div class="stat-caption" data-i18n="adv_stat1_caption">Software Migrations Required</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-digit">100%</div>
+                <div class="stat-caption" data-i18n="adv_stat2_caption">Proprietary Data Sovereignty</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-digit">24/7</div>
+                <div class="stat-caption" data-i18n="adv_stat3_caption">Dedicated Engineering Oversight</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="advantage-disciplines-col">
+            <div class="discipline-card">
+              <div class="discipline-header">
+                <span class="disc-num">01</span>
+                <div>
+                  <h4 class="disc-title" data-i18n="adv_d1_title">Commercial Business Strategy</h4>
+                  <span class="disc-sub" data-i18n="adv_d1_sub">REVENUE, MARGIN &amp; WORKFLOW POSITIONING</span>
+                </div>
+              </div>
+              <p class="disc-body" data-i18n="adv_d1_body">
+                We design architecture strictly anchored to economic outcomes: accelerating lead velocity, cutting media burn, and eliminating manual accounting overhead.
+              </p>
+            </div>
+
+            <div class="discipline-card">
+              <div class="discipline-header">
+                <span class="disc-num">02</span>
+                <div>
+                  <h4 class="disc-title" data-i18n="adv_d2_title">Deep Technical Engineering</h4>
+                  <span class="disc-sub" data-i18n="adv_d2_sub">SYSTEMS ARCHITECTURE &amp; PRODUCTION CODE</span>
+                </div>
+              </div>
+              <p class="disc-body" data-i18n="adv_d2_body">
+                We write production code, orchestrate custom API connectors, enforce deterministic business logic, and maintain low-latency infrastructure on managed SLAs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Final CTA Section -->
+    <section class="section-final-cta" id="contact">
+      <div class="container">
+        <div class="final-cta-container">
+          <div class="cta-text-header">
+            <span class="section-eyebrow" data-i18n="cta_eyebrow">TAKE THE FIRST STEP</span>
+            <h2 class="cta-title" data-i18n-html="cta_title">
+              Bring us your biggest operational bottleneck. <span class="heading-accent">We’ll show you how to automate it.</span>
+            </h2>
+            <p class="cta-subtitle" data-i18n="cta_subtitle">
+              Schedule a 30-minute scoping session. No sales deck, just a technical review of your workflows.
+            </p>
+          </div>
+
+          <!-- Inline Executive Lead Capture Form -->
+          <div class="lead-form-wrapper">
+            <form class="lead-capture-form" id="inlineLeadForm" action="https://formsubmit.co/laura@tailormetric.co" method="POST">
+              <input type="hidden" name="_subject" value="New Tailor Metric Scoping Request">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+
+              <div class="form-row-2col">
+                <div class="form-group">
+                  <label class="form-label" for="inlineName" data-i18n-html="form_name_label">FULL NAME <span class="req" aria-hidden="true">*</span></label>
+                  <input type="text" id="inlineName" name="name" class="form-input" placeholder="Your full name" required aria-required="true" autocomplete="name" data-i18n-ph="form_name_ph">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="inlineEmail" data-i18n-html="form_email_label">WORK EMAIL <span class="req" aria-hidden="true">*</span></label>
+                  <input type="email" id="inlineEmail" name="email" class="form-input" placeholder="name@company.com" required aria-required="true" autocomplete="email" data-i18n-ph="form_email_ph">
+                </div>
+              </div>
+
+              <div class="form-row-2col">
+                <div class="form-group">
+                  <label class="form-label" for="inlineCompany" data-i18n-html="form_company_label">COMPANY / ORGANIZATION <span class="req" aria-hidden="true">*</span></label>
+                  <input type="text" id="inlineCompany" name="company" class="form-input" placeholder="Company or organization name" required aria-required="true" autocomplete="organization" data-i18n-ph="form_company_ph">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="inlinePhone" data-i18n-html="form_phone_label">PHONE NUMBER <span class="opt">(OPTIONAL)</span></label>
+                  <input type="tel" id="inlinePhone" name="phone" class="form-input" placeholder="+1 (555) 000-0000" autocomplete="tel" data-i18n-ph="form_phone_ph">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inlineBottleneck" data-i18n-html="form_bottleneck_label">PRIMARY OPERATIONAL BOTTLENECK &amp; TECH STACK <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="inlineBottleneck" name="bottleneck" class="form-textarea" rows="3" placeholder="Describe the workflow: e.g. CRM synchronization, ERP data pipelines, automated document reconciliation, database integration..." required aria-required="true" data-i18n-ph="form_bottleneck_ph"></textarea>
+              </div>
+
+              <div class="form-action-row">
+                <button type="submit" class="btn btn-primary btn-submit-lead">
+                  <span data-i18n="form_submit_btn">Book a Strategy Call</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+                <div class="form-routing-note">
+                  <span class="routing-dot" aria-hidden="true"></span>
+                  <span data-i18n-html="form_routing_note">Direct routing: Form delivers securely to <strong>laura@tailormetric.co</strong>. Zero spam.</span>
+                </div>
+              </div>
+            </form>
+
+            <div class="form-feedback" id="inlineFeedback" role="status" aria-live="polite"></div>
+          </div>
+
+          <div class="direct-contacts-note" data-i18n-html="form_direct_pref">
+            Prefer direct contact? Email <a href="mailto:laura@tailormetric.co">laura@tailormetric.co</a> or call <a href="tel:+17872092244">+1 (787) 209-2244</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <img src="assets/tm-logo-white.png" alt="Tailor Metric" class="footer-logo-img logo-dark-mode">
+          <img src="assets/tm-logo-horizontal.png" alt="Tailor Metric" class="footer-logo-img logo-light-mode">
+          <p class="footer-desc" data-i18n="footer_desc">
+            The bridge between commercial strategy and deep engineering. Architecting, deploying, and managing bespoke AI infrastructure for high-growth operations.
+          </p>
+        </div>
+
+        <div class="footer-nav-col">
+          <div>
+            <div class="footer-col-title" data-i18n="footer_col_nav">Navigation</div>
+            <ul class="footer-menu">
+              <li><a href="#hero" data-i18n="footer_link_overview">Overview</a></li>
+              <li><a href="#problem" data-i18n="footer_link_challenge">The Challenge</a></li>
+              <li><a href="#pillars" data-i18n="footer_link_solutions">Core Solutions</a></li>
+              <li><a href="#process" data-i18n="footer_link_process">Our Process</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-col-title" data-i18n="footer_col_company">Company</div>
+            <ul class="footer-menu">
+              <li><a href="#advantage" data-i18n="footer_link_advantage">The TM Advantage</a></li>
+              <li><a href="#contact" class="cta-lead-link" data-i18n="footer_link_call">Strategy Call</a></li>
+              <li><a href="mailto:laura@tailormetric.co" data-i18n="footer_link_contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-col-title" data-i18n="footer_col_direct">Direct Inquiries</div>
+            <ul class="footer-menu">
+              <li><a href="mailto:laura@tailormetric.co">laura@tailormetric.co</a></li>
+              <li><a href="tel:+17872092244">+1 (787) 209-2244</a></li>
+              <li><span class="footer-location" data-i18n="footer_location">Guaynabo, PR</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div data-i18n-html="footer_copyright">Copyright &copy; 2026 Tailor Metric. All rights reserved. Guaynabo, Puerto Rico.</div>
+        <div class="footer-legal-links">
+          <button type="button" class="open-privacy-modal" data-i18n="footer_privacy">Privacy Policy</button>
+          <button type="button" class="open-terms-modal" data-i18n="footer_terms">Terms of Service</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 30-Minute Technical Scoping Booking Modal -->
+  <div class="modal-backdrop" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="modal-container">
+      <button type="button" class="modal-close-btn" aria-label="Close dialog">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-header">
+        <div class="status-badge" style="margin-bottom:10px;" data-i18n="modal_badge">TECHNICAL EVALUATION</div>
+        <h3 class="modal-title" id="bookingModalTitle" data-i18n="modal_title">Book a Strategy Call</h3>
+        <p class="modal-subtitle" data-i18n="modal_subtitle">
+          No sales decks. Tell us about your operational bottleneck and we will walk through the exact technical architecture needed to automate it.
+        </p>
+      </div>
+
+      <form class="modal-form" id="bookingForm" action="https://formsubmit.co/laura@tailormetric.co" method="POST">
+        <input type="hidden" name="_subject" value="New Tailor Metric Scoping Request (Modal)">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+
+        <div class="form-group">
+          <label class="form-label" for="clientName" data-i18n-html="form_name_label">FULL NAME <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="clientName" name="name" class="form-input" placeholder="Your full name" required aria-required="true" autocomplete="name" data-i18n-ph="form_name_ph">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientEmail" data-i18n-html="form_email_label">WORK EMAIL <span class="req" aria-hidden="true">*</span></label>
+          <input type="email" id="clientEmail" name="email" class="form-input" placeholder="name@company.com" required aria-required="true" autocomplete="email" data-i18n-ph="form_email_ph">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientCompany" data-i18n-html="form_company_label">COMPANY / ORGANIZATION <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="clientCompany" name="company" class="form-input" placeholder="Company or organization name" required aria-required="true" autocomplete="organization" data-i18n-ph="form_company_ph">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientPhone" data-i18n-html="form_phone_label">PHONE NUMBER <span class="opt">(OPTIONAL)</span></label>
+          <input type="tel" id="clientPhone" name="phone" class="form-input" placeholder="+1 (555) 000-0000" autocomplete="tel" data-i18n-ph="form_phone_ph">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="clientBottleneck" data-i18n-html="form_bottleneck_label">PRIMARY OPERATIONAL BOTTLENECK <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="clientBottleneck" name="bottleneck" class="form-textarea" placeholder="Describe the workflow: e.g. CRM synchronization, ERP data pipelines, automated document reconciliation, database integration..." required aria-required="true" data-i18n-ph="form_bottleneck_ph"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:6px;">
+          <span data-i18n="form_submit_btn">Book a Strategy Call</span>
+        </button>
+
+        <div class="form-routing-note" style="margin-top:8px;">
+          <span class="routing-dot" aria-hidden="true"></span>
+          <span data-i18n-html="modal_routing_note">Delivers securely to <strong>laura@tailormetric.co</strong></span>
+        </div>
+      </form>
+
+      <div class="form-feedback" id="bookingFeedback" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- Privacy Policy Modal -->
+  <div class="modal-backdrop" id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+    <div class="modal-container">
+      <button type="button" class="modal-close-btn" aria-label="Close dialog">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="modal-header">
+        <h3 class="modal-title" id="privacyTitle" data-i18n="privacy_title">Privacy Policy</h3>
+        <p class="modal-subtitle" data-i18n="privacy_subtitle">Last updated: November 2026</p>
+      </div>
+      <div class="modal-body-text">
+        <p data-i18n-html="privacy_p1"><strong>1. Data Sovereignty &amp; Privacy:</strong> Tailor Metric designs AI infrastructure under the strict premise that customer proprietary data remains the sole property of the client. At no point is client data used to train shared public foundation models.</p>
+        <p data-i18n-html="privacy_p2"><strong>2. Information Collection:</strong> When you submit a scoping request, we collect contact information solely to coordinate technical evaluations and direct consultation.</p>
+        <p data-i18n-html="privacy_p3"><strong>3. Security Standards:</strong> All integrations utilize enterprise-grade encryption (TLS 1.3 in transit, AES-256 at rest) with granular role-based access and zero-retention logging options.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms of Service Modal -->
+  <div class="modal-backdrop" id="termsModal" role="dialog" aria-modal="true" aria-labelledby="termsTitle">
+    <div class="modal-container">
+      <button type="button" class="modal-close-btn" aria-label="Close dialog">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="modal-header">
+        <h3 class="modal-title" id="termsTitle" data-i18n="terms_title">Terms of Service</h3>
+        <p class="modal-subtitle" data-i18n="terms_subtitle">Last updated: November 2026</p>
+      </div>
+      <div class="modal-body-text">
+        <p data-i18n-html="terms_p1"><strong>1. Services Engagement:</strong> Tailor Metric provides bespoke AI infrastructure architecture, deployment, and ongoing managed engineering services governed by tailored client service level agreements (SLAs).</p>
+        <p data-i18n-html="terms_p2"><strong>2. Intellectual Property:</strong> Custom workflow orchestrations and connectors developed for clients are provisioned under explicit client licensing frameworks agreed upon in formal statements of work.</p>
+        <p data-i18n-html="terms_p3"><strong>3. System Reliability:</strong> System uptime, monitoring, and integration maintenance are actively supervised under dedicated engineering support protocols.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js?v=2.1.0"></script>
+</body>
+</html>

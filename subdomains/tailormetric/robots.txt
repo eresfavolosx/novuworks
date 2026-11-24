@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tailormetric.novu.works/sitemap.xml

@@ -19,6 +19,9 @@
         ],
         "hackea": [
           "hackea-novuworks"
+        ],
+        "tailormetric": [
+          "tailormetric-novuworks"
         ]
       }
     }
