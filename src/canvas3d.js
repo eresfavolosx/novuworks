@@ -868,6 +868,16 @@ export class SpatialCanvas3D {
   finishInitialLoading() {
     this.isInitialLoading = false;
     this.updateRootGroupPosition();
+    if (!this.isVisualizerMode) {
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+        this.rafId = null;
+      }
+      if (this.fallbackRafId) {
+        cancelAnimationFrame(this.fallbackRafId);
+        this.fallbackRafId = null;
+      }
+    }
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -885,8 +895,11 @@ export class SpatialCanvas3D {
     };
 
     const onPointerMove = (e) => {
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      if (!this.isVisualizerMode && !this.isInitialLoading) return;
+      const touch = e.touches?.[0];
+      const clientX = touch ? touch.clientX : e.clientX;
+      const clientY = touch ? touch.clientY : e.clientY;
+      if (typeof clientX !== 'number' || typeof clientY !== 'number') return;
 
       this.pointer.x = (clientX / window.innerWidth) * 2 - 1;
       this.pointer.y = -(clientY / window.innerHeight) * 2 + 1;
@@ -1009,9 +1022,9 @@ export class SpatialCanvas3D {
     }
   }
 
-  setMorphState(stateIndex) {
+  setMorphState(stateIndex, silent = false) {
     this.activeMode = stateIndex;
-    audio.confirm();
+    if (!silent) audio.confirm();
   }
 
   checkRaycastClick() {

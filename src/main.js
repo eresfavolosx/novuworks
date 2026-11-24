@@ -349,10 +349,10 @@ class FabianPortfolioApp {
       const launch3dBtn = document.getElementById('ep-btn-launch-3d');
       if (launch3dBtn) {
         launch3dBtn.addEventListener('click', () => {
-          this.enterVisualizerMode();
           if (this.canvas3d) {
-            this.canvas3d.setMorphState(0); // 0 = Novu Monogram
+            this.canvas3d.setMorphState(0, true); // 0 = Novu Monogram
           }
+          this.enterVisualizerMode();
         });
       }
 
@@ -537,6 +537,7 @@ class FabianPortfolioApp {
       this.canvas3d.isInitialLoading = true;
       this.canvas3d.isPaused = false;
       this.canvas3d.isVisibleInViewport = true;
+      this.canvas3d.updateRootGroupPosition();
       this.canvas3d.resume();
     }
 
