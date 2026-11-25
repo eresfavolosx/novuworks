@@ -6118,8 +6118,8 @@ body.tesla-mode .hud-action-btn {
   color: #0f172a;
 }
 
-:root[data-theme="light"] .rev-tab-btn.active,
-:root:has(> head > meta[name="color-scheme"][content="light"]) .rev-tab-btn.active {
+:root[data-theme="light"] .rev-tab-btn[aria-selected="true"],
+:root:has(> head > meta[name="color-scheme"][content="light"]) .rev-tab-btn[aria-selected="true"] {
   background: rgba(148, 104, 0, 0.12);
   border-color: var(--gold-primary);
   color: #6b4b00;
@@ -6230,6 +6230,18 @@ body.tesla-mode .hud-action-btn {
   background: rgba(5, 150, 105, 0.12);
   border-color: rgba(5, 150, 105, 0.3);
   color: #047857;
+}
+
+:root[data-theme="light"] .agent-tag-idle,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .agent-tag-idle {
+  background: rgba(71, 85, 105, 0.1);
+  border-color: rgba(71, 85, 105, 0.3);
+  color: #334155;
+}
+
+:root[data-theme="light"] .win-results-drawer.flash-glow,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .win-results-drawer.flash-glow {
+  box-shadow: inset 0 2px 0 #059669, inset 0 0 20px rgba(5, 150, 105, 0.1);
 }
 
 :root[data-theme="light"] .ai-lab-card,
@@ -7853,11 +7865,28 @@ body.tesla-mode .hud-action-btn {
 
 .revops-tabs {
   display: flex;
+  flex-wrap: nowrap;
   gap: 8px;
-  flex-wrap: wrap;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: inline proximity;
+  scroll-padding-inline: 8px;
+  padding: 5px;
+  margin: -5px;
+}
+
+.revops-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .rev-tab-btn {
+  position: relative;
+  flex: none;
+  white-space: nowrap;
+  scroll-snap-align: start;
+  min-block-size: 36px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #a1a1aa;
@@ -7869,7 +7898,7 @@ body.tesla-mode .hud-action-btn {
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .rev-tab-btn:hover {
@@ -7878,11 +7907,30 @@ body.tesla-mode .hud-action-btn {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.rev-tab-btn.active {
+.rev-tab-btn[aria-selected="true"] {
   background: rgba(212, 175, 55, 0.15);
   border-color: #d4af37;
   color: #d4af37;
   box-shadow: 0 0 14px rgba(212, 175, 55, 0.2);
+}
+
+.rev-tab-btn[aria-selected="true"]::after {
+  content: '';
+  position: absolute;
+  inset: auto 10px 0;
+  border-block-end: 2px solid currentColor;
+  border-radius: 2px;
+}
+
+.revops-panels {
+  display: block;
+}
+
+.revops-tabpanel {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .revops-window {
@@ -7953,6 +8001,35 @@ body.tesla-mode .hud-action-btn {
 .win-run-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+}
+
+.win-run-btn[aria-disabled="true"] {
+  cursor: progress;
+  opacity: 0.85;
+  transform: none;
+  box-shadow: none;
+}
+
+.spinner-small {
+  width: 11px;
+  height: 11px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spinner-small {
+    animation: revopsSpin 0.65s linear infinite;
+  }
+}
+
+@keyframes revopsSpin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 600px) {
@@ -8028,6 +8105,10 @@ body.tesla-mode .hud-action-btn {
   padding: 20px 24px 24px;
   background: #050508;
   transition: opacity 0.25s ease;
+}
+
+.win-results-drawer.flash-glow {
+  box-shadow: inset 0 2px 0 #4ade80, inset 0 0 24px rgba(74, 222, 128, 0.12);
 }
 
 .win-output-title,
@@ -8138,6 +8219,18 @@ body.tesla-mode .hud-action-btn {
   background: rgba(74, 222, 128, 0.14);
   border: 1px solid rgba(74, 222, 128, 0.35);
   color: #4ade80;
+}
+
+.agent-tag-idle {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  background: rgba(148, 163, 184, 0.14);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: #cbd5e1;
 }
 
 @container (width < 600px) {
