@@ -12,6 +12,8 @@ export class CommandPalette {
     this.isOpen = false;
     this.selectedIndex = 0;
     this.query = '';
+    this._announceTimer = null;
+    this._lastPointer = { x: null, y: null };
 
     this.commands = [
       {
@@ -285,6 +287,16 @@ export class CommandPalette {
     this.bindEvents();
   }
 
+  escapeHtml(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
   render() {
     let modal = document.getElementById('command-palette-modal');
     if (!modal) {
@@ -296,11 +308,26 @@ export class CommandPalette {
       modal.innerHTML = `
         <div class="cmd-palette-window glass-panel">
           <div class="cmd-input-bar">
-            <svg class="cmd-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="cmd-input" placeholder="Type a command or search (e.g. 'hire', 'architecture', 'tesla')..." autocomplete="off" spellcheck="false" aria-label="Command search palette" />
-            <kbd class="cmd-esc-badge">ESC</kbd>
+            <svg class="cmd-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input
+              type="text"
+              id="cmd-input"
+              role="combobox"
+              aria-expanded="false"
+              aria-controls="cmd-results-list"
+              aria-autocomplete="list"
+              placeholder="Type a command or search (e.g. 'hire', 'architecture', 'tesla')..."
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Search commands"
+              autofocus
+            />
+            <button type="button" class="cmd-esc-badge" id="cmd-close-btn" aria-label="Close command palette (ESC)">
+              <kbd>ESC</kbd>
+            </button>
           </div>
-          <div class="cmd-results" id="cmd-results-list"></div>
+          <div class="cmd-results" id="cmd-results-list" role="listbox" aria-label="Available commands"></div>
+          <div id="cmd-live-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
           <div class="cmd-footer">
             <span><kbd>↑</kbd><kbd>↓</kbd> to navigate</span>
             <span><kbd>↵</kbd> to execute</span>
@@ -312,41 +339,81 @@ export class CommandPalette {
     }
     this.modal = modal;
     this.input = modal.querySelector('#cmd-input');
+    this.closeBtn = modal.querySelector('#cmd-close-btn');
     this.resultsList = modal.querySelector('#cmd-results-list');
+    this.liveStatus = modal.querySelector('#cmd-live-status');
   }
 
   bindEvents() {
-    // Keyboard shortcut Cmd+K or Ctrl+K + palette list navigation (native <dialog> handles Escape)
+    // Global Cmd+K / Ctrl+K toggle (native <dialog> handles Escape)
     window.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         this.toggle();
-      } else if (this.isOpen) {
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          if (this.filteredCommands.length === 0) return;
-          this.selectedIndex = (this.selectedIndex + 1) % this.filteredCommands.length;
-          this.renderList();
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          if (this.filteredCommands.length === 0) return;
-          this.selectedIndex = (this.selectedIndex - 1 + this.filteredCommands.length) % this.filteredCommands.length;
-          this.renderList();
-        } else if (e.key === 'Enter') {
-          e.preventDefault();
-          this.executeSelected();
-        }
+      }
+    });
+
+    // Scope listbox keyboard navigation to the combobox input so buttons inside the dialog keep native Enter behavior
+    this.input.addEventListener('keydown', (e) => {
+      if (!this.isOpen || e.isComposing) return;
+      const count = this.filteredCommands.length;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (count === 0) return;
+        this.setSelectedIndex((this.selectedIndex + 1) % count, { scroll: true });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (count === 0) return;
+        this.setSelectedIndex((this.selectedIndex - 1 + count) % count, { scroll: true });
+      } else if (e.key === 'PageDown') {
+        e.preventDefault();
+        if (count === 0) return;
+        this.setSelectedIndex(Math.min(count - 1, this.selectedIndex + 5), { scroll: true });
+      } else if (e.key === 'PageUp') {
+        e.preventDefault();
+        if (count === 0) return;
+        this.setSelectedIndex(Math.max(0, this.selectedIndex - 5), { scroll: true });
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        this.executeSelected();
+      }
+    });
+
+    this.closeBtn?.addEventListener('click', () => this.close());
+
+    // Delegated click & pointer tracking on listbox results
+    this.resultsList.addEventListener('click', (e) => {
+      const item = e.target.closest('.cmd-item[data-index]');
+      if (!item) return;
+      const idx = parseInt(item.dataset.index, 10);
+      if (Number.isNaN(idx)) return;
+      this.selectedIndex = idx;
+      this.executeSelected();
+    });
+
+    this.resultsList.addEventListener('pointermove', (e) => {
+      if (e.clientX === this._lastPointer.x && e.clientY === this._lastPointer.y) return;
+      this._lastPointer.x = e.clientX;
+      this._lastPointer.y = e.clientY;
+      const item = e.target.closest('.cmd-item[data-index]');
+      if (!item) return;
+      const idx = parseInt(item.dataset.index, 10);
+      if (!Number.isNaN(idx) && idx !== this.selectedIndex) {
+        this.setSelectedIndex(idx, { scroll: false });
       }
     });
 
     // Input filter
     this.input.addEventListener('input', (e) => {
       this.query = e.target.value.toLowerCase().trim();
-      this.filter();
+      this.filter({ announce: true });
     });
 
     // Sync state on native <dialog> close (Escape or light-dismiss)
     this.modal.addEventListener('close', () => {
+      this.clearLiveAnnouncement();
+      this.input?.setAttribute('aria-expanded', 'false');
+      this.input?.removeAttribute('aria-activedescendant');
       if (this.isOpen) {
         this.isOpen = false;
         this.modal.classList.remove('visible');
@@ -358,51 +425,102 @@ export class CommandPalette {
     bindDialogLightDismissFallback(this.modal, () => this.close());
   }
 
-  filter() {
-    if (!this.query) {
+  filter({ announce = false } = {}) {
+    const tokens = this.query.split(/\s+/).filter(Boolean);
+    if (tokens.length === 0) {
       this.filteredCommands = [...this.commands];
     } else {
-      this.filteredCommands = this.commands.filter(
-        (cmd) =>
-          cmd.title.toLowerCase().includes(this.query) ||
-          cmd.category.toLowerCase().includes(this.query) ||
-          (cmd.shortcut && cmd.shortcut.toLowerCase() === this.query)
-      );
+      this.filteredCommands = this.commands.filter((cmd) => {
+        const haystack = `${cmd.title} ${cmd.category} ${cmd.shortcut || ''}`.toLowerCase();
+        return tokens.every((token) => haystack.includes(token));
+      });
     }
     this.selectedIndex = 0;
     this.renderList();
+    if (announce) {
+      this.announceResults();
+    }
+  }
+
+  clearLiveAnnouncement() {
+    if (this._announceTimer) {
+      clearTimeout(this._announceTimer);
+      this._announceTimer = null;
+    }
+    if (this.liveStatus) {
+      this.liveStatus.textContent = '';
+    }
+  }
+
+  announceResults() {
+    clearTimeout(this._announceTimer);
+    this._announceTimer = setTimeout(() => {
+      this._announceTimer = null;
+      if (!this.isOpen || !this.liveStatus) return;
+      const count = this.filteredCommands.length;
+      if (count === 0) {
+        this.liveStatus.textContent = 'No matching commands found.';
+      } else if (count === 1) {
+        this.liveStatus.textContent = '1 command available.';
+      } else {
+        this.liveStatus.textContent = `${count} commands available.`;
+      }
+    }, 200);
   }
 
   renderList() {
     if (this.filteredCommands.length === 0) {
-      this.resultsList.innerHTML = `<div class="cmd-empty">No matching commands found.</div>`;
+      this.resultsList.innerHTML = `<div class="cmd-empty" role="presentation">No matching commands found.</div>`;
+      this.input?.removeAttribute('aria-activedescendant');
       return;
     }
 
     this.resultsList.innerHTML = this.filteredCommands
-      .map((cmd, i) => `
-        <div class="cmd-item ${i === this.selectedIndex ? 'active' : ''}" data-index="${i}">
+      .map((cmd, i) => {
+        const isActive = i === this.selectedIndex;
+        return `
+        <div class="cmd-item ${isActive ? 'active' : ''}" id="cmd-opt-${this.escapeHtml(cmd.id)}" role="option" aria-selected="${isActive ? 'true' : 'false'}" data-index="${i}">
           <div class="cmd-item-left">
-            <span class="cmd-category-tag">${cmd.category}</span>
-            <span class="cmd-item-title">${cmd.title}</span>
+            <span class="cmd-category-tag">${this.escapeHtml(cmd.category)}</span>
+            <span class="cmd-item-title">${this.escapeHtml(cmd.title)}</span>
           </div>
-          ${cmd.shortcut ? `<kbd class="cmd-shortcut">${cmd.shortcut}</kbd>` : ''}
+          ${cmd.shortcut ? `<kbd class="cmd-shortcut">${this.escapeHtml(cmd.shortcut)}</kbd>` : ''}
         </div>
-      `)
+      `;
+      })
       .join('');
 
-    // Click to select
-    this.resultsList.querySelectorAll('.cmd-item').forEach((item) => {
-      item.addEventListener('click', () => {
-        this.selectedIndex = parseInt(item.dataset.index, 10);
-        this.executeSelected();
-      });
+    this.updateActiveOption({ scroll: true });
+  }
+
+  setSelectedIndex(index, options = { scroll: true }) {
+    const count = this.filteredCommands.length;
+    if (count === 0) {
+      this.selectedIndex = 0;
+      this.input?.removeAttribute('aria-activedescendant');
+      return;
+    }
+    const clamped = Math.max(0, Math.min(index, count - 1));
+    this.selectedIndex = clamped;
+    this.updateActiveOption(options);
+  }
+
+  updateActiveOption({ scroll = true } = {}) {
+    this.resultsList.querySelectorAll('.cmd-item.active, .cmd-item[aria-selected="true"]').forEach((el) => {
+      el.classList.remove('active');
+      el.setAttribute('aria-selected', 'false');
     });
 
-    // Scroll active into view
-    const activeEl = this.resultsList.querySelector('.cmd-item.active');
+    const activeEl = this.resultsList.querySelector(`.cmd-item[data-index="${this.selectedIndex}"]`);
     if (activeEl) {
-      activeEl.scrollIntoView({ block: 'nearest' });
+      activeEl.classList.add('active');
+      activeEl.setAttribute('aria-selected', 'true');
+      this.input?.setAttribute('aria-activedescendant', activeEl.id);
+      if (scroll) {
+        activeEl.scrollIntoView({ block: 'nearest' });
+      }
+    } else {
+      this.input?.removeAttribute('aria-activedescendant');
     }
   }
 
@@ -417,10 +535,13 @@ export class CommandPalette {
 
   open() {
     if (!this.modal) return;
+    this.clearLiveAnnouncement();
+    this._lastPointer = { x: null, y: null };
     this.isOpen = true;
     this.input.value = '';
     this.query = '';
-    this.filter();
+    this.input.setAttribute('aria-expanded', 'true');
+    this.filter({ announce: false });
     if (typeof this.modal.showModal === 'function') {
       try {
         if (!this.modal.open) this.modal.showModal();
@@ -432,11 +553,16 @@ export class CommandPalette {
     }
     this.modal.classList.add('visible');
     audio.click(1400);
-    setTimeout(() => this.input.focus(), 60);
+    if (document.activeElement !== this.input) {
+      this.input.focus();
+    }
   }
 
   close() {
     if (!this.modal || !this.isOpen) return;
+    this.clearLiveAnnouncement();
+    this.input?.setAttribute('aria-expanded', 'false');
+    this.input?.removeAttribute('aria-activedescendant');
     this.isOpen = false;
     this.modal.classList.remove('visible');
     if (typeof this.modal.close === 'function') {

@@ -6461,11 +6461,15 @@ body.tesla-mode .hud-action-btn {
   border-color: rgba(15, 23, 42, 0.12);
 }
 
+:root[data-theme="light"] .cmd-palette-backdrop,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-palette-backdrop {
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.18), 0 0 32px rgba(148, 104, 0, 0.1);
+}
+
 :root[data-theme="light"] .cmd-palette-window,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-palette-window {
   background: #ffffff;
   border-color: rgba(148, 104, 0, 0.35);
-  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.18), 0 0 32px rgba(148, 104, 0, 0.1);
 }
 
 :root[data-theme="light"] .cmd-input-bar,
@@ -6479,16 +6483,58 @@ body.tesla-mode .hud-action-btn {
   color: #0f172a;
 }
 
+:root[data-theme="light"] .cmd-esc-badge,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-esc-badge {
+  background: rgba(15, 23, 42, 0.06);
+  border-color: rgba(15, 23, 42, 0.18);
+  color: #334155;
+}
+
+:root[data-theme="light"] .cmd-esc-badge:hover,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-esc-badge:hover {
+  background: rgba(148, 104, 0, 0.12);
+  border-color: rgba(148, 104, 0, 0.45);
+  color: #0f172a;
+}
+
+:root[data-theme="light"] .cmd-category-tag,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-category-tag {
+  background: rgba(148, 104, 0, 0.12);
+  color: #6b4b00;
+}
+
 :root[data-theme="light"] .cmd-item-title,
 :root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-item-title {
   color: #1e293b;
 }
 
-:root[data-theme="light"] .cmd-item:hover,
 :root[data-theme="light"] .cmd-item.active,
-:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-item:hover,
-:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-item.active {
-  background: rgba(148, 104, 0, 0.1);
+:root[data-theme="light"] .cmd-item[aria-selected="true"],
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-item.active,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-item[aria-selected="true"] {
+  background: rgba(148, 104, 0, 0.12);
+  box-shadow: inset 3px 0 0 #8a6000;
+}
+
+:root[data-theme="light"] .cmd-shortcut,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-shortcut {
+  background: rgba(15, 23, 42, 0.06);
+  border-color: rgba(15, 23, 42, 0.16);
+  color: #475569;
+}
+
+:root[data-theme="light"] .cmd-footer,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-footer {
+  background: #f8fafc;
+  border-top-color: rgba(15, 23, 42, 0.1);
+  color: #475569;
+}
+
+:root[data-theme="light"] .cmd-footer kbd,
+:root:has(> head > meta[name="color-scheme"][content="light"]) .cmd-footer kbd {
+  background: rgba(15, 23, 42, 0.07);
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  color: #1e293b;
 }
 
 :root[data-theme="light"] .resume-modal,
@@ -11548,9 +11594,11 @@ html.device-eco-power * {
   margin: clamp(60px, 15vh, 120px) auto auto;
   padding: 0;
   border: none;
+  border-radius: var(--radius-lg);
   background: transparent;
   color: inherit;
-  overflow: visible;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85), 0 0 32px rgba(212, 175, 55, 0.15);
   z-index: 10000;
 }
 
@@ -11577,7 +11625,6 @@ html.device-eco-power * {
   background: rgba(14, 14, 20, 0.96);
   border: 1px solid rgba(212, 175, 55, 0.35);
   border-radius: var(--radius-lg);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85), 0 0 32px rgba(212, 175, 55, 0.15);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -11592,6 +11639,11 @@ html.device-eco-power * {
   background: rgba(0, 0, 0, 0.3);
 }
 
+.cmd-input-bar:focus-within {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: -2px;
+}
+
 .cmd-search-icon {
   color: var(--gold-primary);
   flex-shrink: 0;
@@ -11599,6 +11651,7 @@ html.device-eco-power * {
 
 #cmd-input {
   flex: 1;
+  min-width: 0;
   background: transparent;
   border: none;
   outline: none;
@@ -11613,6 +11666,11 @@ html.device-eco-power * {
 }
 
 .cmd-esc-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 28px;
+  min-inline-size: 38px;
   font-family: var(--font-mono);
   font-size: 10px;
   padding: 3px 6px;
@@ -11620,11 +11678,34 @@ html.device-eco-power * {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--hairline);
   color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.cmd-esc-badge kbd {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.cmd-esc-badge:hover {
+  background: rgba(212, 175, 55, 0.14);
+  border-color: rgba(212, 175, 55, 0.45);
+  color: var(--gold-light);
+}
+
+.cmd-esc-badge:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
 }
 
 .cmd-results {
   max-height: 380px;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 8px;
 }
 
@@ -11632,21 +11713,25 @@ html.device-eco-power * {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  min-block-size: 40px;
   padding: 10px 14px;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.cmd-item:hover,
-.cmd-item.active {
-  background: rgba(212, 175, 55, 0.15);
+.cmd-item.active,
+.cmd-item[aria-selected="true"] {
+  background: rgba(212, 175, 55, 0.16);
+  box-shadow: inset 3px 0 0 var(--gold-primary);
 }
 
 .cmd-item-left {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .cmd-category-tag {
@@ -11658,6 +11743,7 @@ html.device-eco-power * {
   background: rgba(212, 175, 55, 0.1);
   padding: 2px 6px;
   border-radius: 3px;
+  flex-shrink: 0;
 }
 
 .cmd-item-title {
@@ -11675,6 +11761,7 @@ html.device-eco-power * {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--hairline);
   color: var(--gold-muted);
+  flex-shrink: 0;
 }
 
 .cmd-footer {
@@ -11703,6 +11790,36 @@ html.device-eco-power * {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--text-muted);
+}
+
+@media (forced-colors: active) {
+  .cmd-palette-window {
+    border: 1px solid CanvasText;
+  }
+
+  .cmd-input-bar:focus-within {
+    outline: 2px solid Highlight;
+  }
+
+  .cmd-esc-badge:focus-visible {
+    outline: 2px solid Highlight;
+  }
+
+  .cmd-item.active,
+  .cmd-item[aria-selected="true"] {
+    background: Highlight;
+    color: HighlightText;
+    outline: 2px solid Highlight;
+  }
+
+  .cmd-item.active .cmd-item-title,
+  .cmd-item.active .cmd-category-tag,
+  .cmd-item.active .cmd-shortcut,
+  .cmd-item[aria-selected="true"] .cmd-item-title,
+  .cmd-item[aria-selected="true"] .cmd-category-tag,
+  .cmd-item[aria-selected="true"] .cmd-shortcut {
+    color: HighlightText;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
