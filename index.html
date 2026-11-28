@@ -1347,9 +1347,11 @@
       </aside>
 
       <!-- Tesla Fullscreen Cockpit & Real-Time Intelligence Dashboard -->
-      <section id="tesla-cockpit-hud" class="tesla-cockpit-hud" hidden role="region" aria-label="Tesla In-Car Fullscreen Cockpit Dashboard">
+      <dialog id="tesla-cockpit-hud" class="tesla-cockpit-hud" closedby="any" aria-labelledby="tesla-cockpit-title">
+        <div id="tesla-status-live" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
         <!-- Top Cockpit Status & Telemetry Bar -->
         <header class="tesla-top-bar">
+          <h1 id="tesla-cockpit-title" class="sr-only">Tesla Executive Cockpit Dashboard</h1>
           <div class="tesla-status-left">
             <span class="tesla-t-logo" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -1359,7 +1361,7 @@
             <div class="tesla-model-info">
               <span class="tesla-os-tag">TELEMETRY OS · 2026</span>
               <span class="tesla-fsd-badge">
-                <span class="fsd-pulse-dot"></span>
+                <span class="fsd-pulse-dot" aria-hidden="true"></span>
                 <span class="fsd-label">EXECUTIVE HUD · LIVE</span>
               </span>
             </div>
@@ -1372,33 +1374,33 @@
               <span class="tesla-clock-zone">AST · San Juan, PR</span>
             </div>
 
-            <div class="tesla-stat-divider"></div>
+            <div class="tesla-stat-divider" aria-hidden="true"></div>
 
             <!-- Puerto Rico Atmospheric Weather -->
             <div class="tesla-weather-box">
-              <span class="t-weather-icon" id="tesla-weather-icon">☀️</span>
+              <span class="t-weather-icon" id="tesla-weather-icon" aria-hidden="true">☀️</span>
               <div class="t-weather-text">
                 <span class="t-weather-temp" id="tesla-weather-temp">30°C / 86°F</span>
                 <span class="t-weather-loc">San Juan, PR (HQ)</span>
               </div>
             </div>
 
-            <div class="tesla-stat-divider"></div>
+            <div class="tesla-stat-divider" aria-hidden="true"></div>
 
             <!-- GPS Geodesic & Latency -->
             <div class="tesla-gps-box">
-              <span class="t-gps-icon">📍</span>
+              <span class="t-gps-icon" aria-hidden="true">📍</span>
               <div class="t-gps-text">
                 <span class="t-gps-dist" id="tesla-gps-dist">0 mi away (HQ)</span>
                 <span class="t-gps-coords">18°28′N 66°06′W</span>
               </div>
             </div>
 
-            <div class="tesla-stat-divider"></div>
+            <div class="tesla-stat-divider" aria-hidden="true"></div>
 
             <!-- Battery State -->
             <div class="tesla-battery-box">
-              <span class="t-batt-icon">⚡</span>
+              <span class="t-batt-icon" aria-hidden="true">⚡</span>
               <div class="t-batt-text">
                 <span class="t-batt-level" id="tesla-batt-level">98% Charged</span>
                 <span class="t-batt-range">310 mi range</span>
@@ -1407,10 +1409,10 @@
           </div>
 
           <div class="tesla-actions-right">
-            <button type="button" class="tesla-close-btn" id="btn-exit-tesla-cockpit" title="Exit Tesla Fullscreen HUD (ESC)" aria-label="Exit Tesla Cockpit">
+            <button type="button" class="tesla-close-btn" id="btn-exit-tesla-cockpit" autofocus title="Exit Tesla Fullscreen HUD (ESC)" aria-label="Exit Cockpit (Tesla HUD)">
               <span class="close-txt">EXIT COCKPIT</span>
               <kbd class="close-kbd">ESC</kbd>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
         </header>
@@ -1418,11 +1420,11 @@
         <!-- Main Cockpit Dashboard Split Grid -->
         <div class="tesla-dashboard-grid">
           <!-- PANEL 1: EXECUTIVE INSTRUMENTATION & ABOUT FABIAN -->
-          <section class="tesla-panel tesla-about-panel" aria-label="Executive Profile & Proven Scale">
+          <section class="tesla-panel tesla-about-panel" aria-labelledby="tesla-panel-about-title">
             <div class="panel-header-strip">
               <div class="panel-title-wrap">
                 <span class="panel-num">01</span>
-                <h3 class="panel-title">EXECUTIVE TELEMETRY · FABIÁN VÉLEZ</h3>
+                <h2 id="tesla-panel-about-title" class="panel-title">EXECUTIVE TELEMETRY · FABIÁN VÉLEZ</h2>
               </div>
               <span class="panel-badge-pill">B.S. COMP ENG · 4.0 GPA</span>
             </div>
@@ -1471,9 +1473,9 @@
                   <img src="/assets/fabian-velez.jpg" alt="Fabián Vélez Vicente" class="bio-img" width="44" height="44" />
                 </div>
                 <div class="bio-text-meta">
-                  <h4 class="bio-name">Fabián Vélez Vicente</h4>
+                  <h3 class="bio-name">Fabián Vélez Vicente</h3>
                   <span class="bio-title">Creative Technologist · Frontier Prototypes · Interactive Experiences</span>
-                  <span class="bio-auth">🇺🇸 US Citizen (Born in Puerto Rico · No Visa Sponsorship Required)</span>
+                  <span class="bio-auth"><span aria-hidden="true">🇺🇸</span> US Citizen (Born in Puerto Rico · No Visa Sponsorship Required)</span>
                 </div>
               </div>
               <p class="bio-summary-p">
@@ -1484,35 +1486,35 @@
             <!-- Touch Action Pedals -->
             <div class="tesla-pedals-row">
               <button type="button" class="tesla-pedal-btn primary-red" id="btn-tesla-open-recruiter">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 <span>60s Maker Brief</span>
               </button>
               <button type="button" class="tesla-pedal-btn green-wa" id="btn-tesla-open-wa">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/>
                 </svg>
                 <span>WhatsApp Direct</span>
               </button>
               <a href="/assets/resumes/Fabian_Velez_Resume_Product_Marketing_AI.pdf" download class="tesla-pedal-btn outline-plat" id="btn-tesla-download-pdf">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 <span>Executive PDF</span>
               </a>
             </div>
           </section>
 
           <!-- PANEL 2: REAL-TIME SPATIAL HORIZON & VEHICLE MATRIX -->
-          <section class="tesla-panel tesla-spatial-panel" aria-label="6DoF Spatial Gyro Horizon & Systems">
+          <section class="tesla-panel tesla-spatial-panel" aria-labelledby="tesla-panel-spatial-title">
             <div class="panel-header-strip">
               <div class="panel-title-wrap">
                 <span class="panel-num">02</span>
-                <h3 class="panel-title">6DoF ARTIFICIAL HORIZON & DYNAMICS</h3>
+                <h2 id="tesla-panel-spatial-title" class="panel-title">6DoF ARTIFICIAL HORIZON &amp; DYNAMICS</h2>
               </div>
               <span class="panel-badge-pill" id="tesla-gyro-badge">GYRO ACTIVE</span>
             </div>
 
             <!-- Artificial Horizon Indicator -->
             <div class="horizon-wrapper">
-              <div class="horizon-ring" id="tesla-horizon-ring">
+              <div class="horizon-ring" id="tesla-horizon-ring" aria-hidden="true">
                 <div class="horizon-sky"></div>
                 <div class="horizon-ground"></div>
                 <div class="horizon-line"></div>
@@ -1541,28 +1543,28 @@
             <!-- Vehicle / Architecture Status Matrix -->
             <div class="tesla-systems-matrix">
               <div class="sys-item">
-                <span class="sys-dot online"></span>
+                <span class="sys-dot online" aria-hidden="true"></span>
                 <div class="sys-info">
                   <span class="sys-name">Databricks SQL Engine</span>
                   <span class="sys-status">40M+ Sessions Queryable · Operational</span>
                 </div>
               </div>
               <div class="sys-item">
-                <span class="sys-dot online"></span>
+                <span class="sys-dot online" aria-hidden="true"></span>
                 <div class="sys-info">
                   <span class="sys-name">Agentic Workflows (Claude/GPT)</span>
                   <span class="sys-status">20+ Tool-Calling Agents · Autonomous</span>
                 </div>
               </div>
               <div class="sys-item">
-                <span class="sys-dot online"></span>
+                <span class="sys-dot online" aria-hidden="true"></span>
                 <div class="sys-info">
                   <span class="sys-name">Sensory WebRTC &amp; Web NFC</span>
                   <span class="sys-status">60 FPS Shaders &amp; NTAG215 Hardware Active</span>
                 </div>
               </div>
               <div class="sys-item">
-                <span class="sys-dot online"></span>
+                <span class="sys-dot online" aria-hidden="true"></span>
                 <div class="sys-info">
                   <span class="sys-name">Bilingual Internationalization</span>
                   <span class="sys-status">EN &amp; ES Live · UTF-8 Binary Stream Active</span>
@@ -1572,33 +1574,33 @@
           </section>
 
           <!-- PANEL 3: REAL-TIME NEWS & INDUSTRY RADAR STREAM -->
-          <section class="tesla-panel tesla-news-panel" aria-label="Latest Industry News & Live Intelligence Stream">
+          <section class="tesla-panel tesla-news-panel" aria-labelledby="tesla-panel-news-title">
             <div class="panel-header-strip">
               <div class="panel-title-wrap">
                 <span class="panel-num">03</span>
-                <h3 class="panel-title">LIVE FRONTIER RADAR &amp; RESEARCH</h3>
+                <h2 id="tesla-panel-news-title" class="panel-title">LIVE FRONTIER RADAR &amp; RESEARCH</h2>
               </div>
               <button type="button" class="tesla-refresh-news-btn" id="btn-tesla-refresh-news" title="Refresh Live News Stream">
-                <span class="spin-icon">🔄</span>
+                <span class="spin-icon" aria-hidden="true">🔄</span>
                 <span id="tesla-news-sync-label">Sync</span>
               </button>
             </div>
 
-            <!-- News Filter Tabs -->
-            <div class="tesla-news-filters" role="tablist">
-              <button type="button" class="tesla-filter-chip active" data-topic="all">⚡ All Signals</button>
-              <button type="button" class="tesla-filter-chip" data-topic="ai">🤖 Frontier AI</button>
-              <button type="button" class="tesla-filter-chip" data-topic="growth">🎨 Interactive Design</button>
-              <button type="button" class="tesla-filter-chip" data-topic="tech">💻 Creative Code</button>
+            <!-- News Filter Tabs (Manual Activation: fetches live signal stream on activation) -->
+            <div class="tesla-news-filters" role="tablist" aria-label="Live Frontier Radar Topics">
+              <button type="button" class="tesla-filter-chip active" id="tesla-tab-all" role="tab" aria-selected="true" tabindex="0" data-topic="all"><span aria-hidden="true">⚡</span> All Signals</button>
+              <button type="button" class="tesla-filter-chip" id="tesla-tab-ai" role="tab" aria-selected="false" tabindex="-1" data-topic="ai"><span aria-hidden="true">🤖</span> Frontier AI</button>
+              <button type="button" class="tesla-filter-chip" id="tesla-tab-growth" role="tab" aria-selected="false" tabindex="-1" data-topic="growth"><span aria-hidden="true">🎨</span> Interactive Design</button>
+              <button type="button" class="tesla-filter-chip" id="tesla-tab-tech" role="tab" aria-selected="false" tabindex="-1" data-topic="tech"><span aria-hidden="true">💻</span> Creative Code</button>
             </div>
 
             <!-- News List Mount Point -->
-            <div class="tesla-news-list" id="tesla-news-mount">
+            <div class="tesla-news-list" id="tesla-news-mount" role="tabpanel" aria-labelledby="tesla-tab-all">
               <!-- Populated dynamically with live Hacker News + curated industry feeds -->
             </div>
           </section>
         </div>
-      </section>
+      </dialog>
 
       <!-- 3D Spatial Visualizer Mode HUD (Zen / Immersive Canvas Controls) -->
       <aside id="visualizer-hud" class="visualizer-hud" hidden aria-label="3D Background Visualization Controls">

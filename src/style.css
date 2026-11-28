@@ -13495,16 +13495,12 @@ html.light-theme .email-pill {
    Transforms the viewport into an edge-to-edge automotive HUD
    ───────────────────────────────────────────────────────────── */
 
-body.tesla-cockpit-active {
-  overflow: hidden !important;
-}
-
 .tesla-cockpit-hud {
   position: fixed;
-  inset: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  margin: auto;
+  padding: 0;
+  box-sizing: border-box;
   z-index: 100000;
   width: 92vw;
   max-width: 1040px;
@@ -13513,10 +13509,9 @@ body.tesla-cockpit-active {
   background: radial-gradient(circle at 50% 0%, #0f1524 0%, #07090f 50%, #030407 100%);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 20px;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 0 100vmax rgba(3, 5, 10, 0.78);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95);
   color: #e2e8f0;
-  display: flex;
-  flex-direction: column;
+  color-scheme: dark;
   overflow-y: auto;
   overflow-x: hidden;
   opacity: 0;
@@ -13526,13 +13521,17 @@ body.tesla-cockpit-active {
   -webkit-font-smoothing: antialiased;
 }
 
-.tesla-cockpit-hud.active {
+dialog[open].tesla-cockpit-hud {
+  display: flex;
+  flex-direction: column;
   opacity: 1;
   pointer-events: auto;
 }
 
-.tesla-cockpit-hud[hidden] {
-  display: none !important;
+.tesla-cockpit-hud::backdrop {
+  background: rgba(3, 5, 10, 0.78);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 /* Custom Cockpit Scrollbar */
@@ -13616,11 +13615,17 @@ body.tesla-cockpit-active {
   border-radius: 50%;
   background: #38bdf8;
   box-shadow: 0 0 8px #38bdf8;
-  animation: fsdPulse 1.8s infinite ease-in-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fsd-pulse-dot {
+    animation: fsdPulse 1.8s infinite ease-in-out;
+  }
 }
 
 @keyframes fsdPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.88); }
 }
 
 /* Center Telemetry Clusters */
@@ -13660,7 +13665,7 @@ body.tesla-cockpit-active {
 .tesla-clock-zone {
   font-family: var(--font-mono, "JetBrains Mono", monospace);
   font-size: 10px;
-  color: #64748b;
+  color: #94a3b8;
   letter-spacing: 0.04em;
 }
 
@@ -13699,7 +13704,7 @@ body.tesla-cockpit-active {
 .t-batt-range {
   font-family: var(--font-mono, "JetBrains Mono", monospace);
   font-size: 10px;
-  color: #64748b;
+  color: #94a3b8;
 }
 
 /* Close Cockpit Button */
@@ -13851,7 +13856,12 @@ body.tesla-cockpit-active {
   text-align: center;
   position: relative;
   background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
-  animation: gaugePulseSweep 4s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .radial-gauge-circle {
+    animation: gaugePulseSweep 4s ease-in-out infinite alternate;
+  }
 }
 
 @keyframes gaugePulseSweep {
@@ -13932,7 +13942,7 @@ body.tesla-cockpit-active {
 
 .cl-sub {
   font-size: 9.5px;
-  color: #64748b;
+  color: #94a3b8;
   font-family: var(--font-mono, "JetBrains Mono", monospace);
 }
 
@@ -14175,7 +14185,7 @@ body.tesla-cockpit-active {
 .hr-lbl {
   font-family: var(--font-mono, "JetBrains Mono", monospace);
   font-size: 9.5px;
-  color: #64748b;
+  color: #94a3b8;
   font-weight: 700;
 }
 
@@ -14230,7 +14240,7 @@ body.tesla-cockpit-active {
 
 .sys-status {
   font-size: 9.5px;
-  color: #64748b;
+  color: #94a3b8;
   font-family: var(--font-mono, "JetBrains Mono", monospace);
 }
 
@@ -14244,13 +14254,13 @@ body.tesla-cockpit-active {
   padding: 4px 10px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   color: #cbd5e1;
   font-family: var(--font-mono, "JetBrains Mono", monospace);
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .tesla-refresh-news-btn:hover {
@@ -14260,7 +14270,12 @@ body.tesla-cockpit-active {
 
 .spin-icon.spinning {
   display: inline-block;
-  animation: spinNews 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spin-icon.spinning {
+    animation: spinNews 1s linear infinite;
+  }
 }
 
 @keyframes spinNews {
@@ -14270,33 +14285,80 @@ body.tesla-cockpit-active {
 
 .tesla-news-filters {
   display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   gap: 6px;
-  flex-wrap: wrap;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  scroll-snap-type: inline proximity;
+}
+
+.tesla-news-filters::-webkit-scrollbar {
+  display: none;
 }
 
 .tesla-filter-chip {
-  padding: 5px 11px;
+  flex: none;
+  position: relative;
+  min-block-size: 28px;
+  scroll-snap-align: start;
+  padding: 5px 11px 7px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #cbd5e1;
   font-family: var(--font-mono, "JetBrains Mono", monospace);
   font-size: 10.5px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .tesla-filter-chip:hover {
   color: #f1f5f9;
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
+.tesla-filter-chip[aria-selected="true"],
 .tesla-filter-chip.active {
-  background: rgba(56, 189, 248, 0.14);
-  border-color: rgba(56, 189, 248, 0.5);
-  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.16);
+  border-color: rgba(56, 189, 248, 0.55);
+  color: #7dd3fc;
   box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+.tesla-filter-chip[aria-selected="true"]::after,
+.tesla-filter-chip.active::after {
+  content: "";
+  position: absolute;
+  inset: auto 12px 2px;
+  border-block-end: 2px solid currentColor;
+}
+
+.tesla-close-btn:focus-visible,
+.tesla-pedal-btn:focus-visible,
+.tesla-refresh-news-btn:focus-visible,
+.tesla-filter-chip:focus-visible,
+.tn-title-link:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .tesla-filter-chip,
+  .tesla-refresh-news-btn {
+    min-block-size: 40px;
+  }
+}
+
+.tesla-news-status {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 10.5px;
+  color: #cbd5e1;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tesla-news-list {
@@ -14324,7 +14386,7 @@ body.tesla-cockpit-active {
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .tesla-news-card:hover {
@@ -14347,7 +14409,7 @@ body.tesla-cockpit-active {
 }
 
 .tn-time {
-  color: #64748b;
+  color: #94a3b8;
 }
 
 .tn-title-link {
@@ -14393,9 +14455,24 @@ body.tesla-cockpit-active {
 }
 
 .tn-pulse-tag {
-  color: #10b981;
+  color: #34d399;
   font-weight: 700;
   letter-spacing: 0.05em;
+}
+
+.tn-pulse-tag.is-curated {
+  color: #cbd5e1;
+}
+
+@media (forced-colors: active) {
+  .tesla-cockpit-hud {
+    border: 2px solid CanvasText;
+  }
+
+  .tesla-filter-chip[aria-selected="true"]::after,
+  .tesla-filter-chip.active::after {
+    border-block-end-color: Highlight;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
